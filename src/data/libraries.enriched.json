@@ -1,0 +1,10 @@
+{
+  "_readme": [
+    "자동 생성 파일입니다. 직접 고치지 마세요 — 다음 실행 때 덮어씁니다.",
+    "생성: npm run enrich   (도서관 정보나루 인증키 필요)",
+    "API 에 없는 도서관은 libraries.manual.json 에 손으로 넣으세요. 그쪽이 우선합니다.",
+    "entries 가 비어 있으면 앱은 이름·지역·특화 태그만으로 동작합니다."
+  ],
+  "_generatedAt": null,
+  "entries": {}
+}

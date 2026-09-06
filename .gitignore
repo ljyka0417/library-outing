@@ -1,0 +1,23 @@
+node_modules/
+.expo/
+dist/
+web-build/
+*.log
+.DS_Store
+
+# 네이티브 빌드 산출물
+/ios
+/android
+
+# 생성물 (npm run qr / slice-mascot 으로 언제든 다시 만든다)
+qr-sheet.html
+assets/mascot/slices/
+assets/mascot/slices-preview.html
+
+# 환경변수 (API 키는 절대 커밋하지 않는다)
+.env
+.env.local
+.env.*.local
+assets/mascot/montage.png
+libraries.unmatched.csv
+google-play-key.json

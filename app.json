@@ -1,0 +1,78 @@
+{
+  "expo": {
+    "name": "전국 도서관 나들이",
+    "slug": "library-outing",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "//scheme": "책자 QR에 인코딩되는 딥링크 스킴. 예) libraryapp://library/seoul-music",
+    "scheme": "libraryapp",
+    "icon": "./assets/icon.png",
+    "//splash": "이미지는 npm run app-images 로 생성합니다. backgroundColor 는 splash.png 의 배경과 같아야 letterbox 이음매가 안 보입니다.",
+    "splash": {
+      "image": "./assets/splash.png",
+      "backgroundColor": "#FBF8F3",
+      "resizeMode": "contain"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.libraryouting.app",
+      "infoPlist": {
+        "//": "canOpenURL 로 지도앱 설치 여부를 확인하려면 iOS 는 반드시 화이트리스트 등록이 필요하다.",
+        "LSApplicationQueriesSchemes": [
+          "nmap",
+          "kakaomap"
+        ]
+      }
+    },
+    "android": {
+      "package": "com.libraryouting.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#E3F2EE"
+      },
+      "intentFilters": [
+        {
+          "//": "Universal / App Link. 앱 미설치 시 웹 랜딩페이지가 스토어로 유도한다.",
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "library-outing.kr",
+              "pathPrefix": "/library"
+            }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
+      ]
+    },
+    "web": {
+      "//": "웹은 개발 중 화면 확인용 프리뷰 surface 로만 쓴다. output:'static' 은 서버에서 미리 렌더링하는데, AsyncStorage 처럼 window 를 쓰는 모듈이 그 단계에서 터진다. SPA 모드가 맞다.",
+      "bundler": "metro",
+      "output": "single",
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-asset"
+    ],
+    "experiments": {
+      "//": "동적 라우트(/library/[id]) 문자열 조립이 잦아 타입드 라우트는 꺼 둔다.",
+      "typedRoutes": false
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "edf74ff0-fd4b-4caf-b544-258836c18f3d"
+      }
+    },
+    "owner": "ljyka0417"
+  }
+}

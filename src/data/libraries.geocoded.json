@@ -1,0 +1,1449 @@
+{
+  "_readme": [
+    "카카오 로컬 API 로 자동 수집한 좌표·주소·전화입니다. 직접 고치지 마세요.",
+    "생성: npm run geocode",
+    "우선순위: geocoded < enriched(정보나루) < manual(수동). 뒤쪽이 앞쪽을 덮습니다.",
+    "confidence 가 medium 인 곳은 다른 장소일 수 있으니 확인이 필요합니다."
+  ],
+  "_generatedAt": "2026-09-06T14:50:30.037Z",
+  "entries": {
+    "seoul-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "서울도서관",
+      "address": "서울 중구 세종대로 110",
+      "phone": "02-120",
+      "coords": {
+        "lat": 37.56625644205766,
+        "lng": 126.97792800671849
+      },
+      "placeUrl": "http://place.map.kakao.com/18411998"
+    },
+    "national-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "국립중앙도서관",
+      "address": "서울 서초구 반포대로 201",
+      "phone": "02-590-0500",
+      "coords": {
+        "lat": 37.4974228662228,
+        "lng": 127.00322746687533
+      },
+      "placeUrl": "http://place.map.kakao.com/8672722"
+    },
+    "assembly-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "국회도서관",
+      "address": "서울 영등포구 의사당대로 1",
+      "phone": "02-6788-4211",
+      "coords": {
+        "lat": 37.531234560707155,
+        "lng": 126.91701419112583
+      },
+      "placeUrl": "http://place.map.kakao.com/8702340"
+    },
+    "urisori-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "우리소리도서관",
+      "address": "서울 종로구 삼일대로30길 47",
+      "phone": "070-4550-5015",
+      "coords": {
+        "lat": 37.57455446423549,
+        "lng": 126.99020573976512
+      },
+      "placeUrl": "http://place.map.kakao.com/1521127229"
+    },
+    "national-children-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "국립어린이청소년도서관",
+      "address": "서울 강남구 테헤란로7길 21",
+      "phone": "02-3413-4800",
+      "coords": {
+        "lat": 37.5009321996311,
+        "lng": 127.029702227067
+      },
+      "placeUrl": "http://place.map.kakao.com/11474601"
+    },
+    "nonhyeon-maru": {
+      "source": "kakao",
+      "confidence": "medium",
+      "matchedName": "논현문화마루도서관",
+      "address": "서울 강남구 논현로131길 40",
+      "phone": "02-512-8580",
+      "coords": {
+        "lat": 37.5138469281521,
+        "lng": 127.02710580276
+      },
+      "placeUrl": "http://place.map.kakao.com/1703582456"
+    },
+    "cheongun-lit": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "청운문학도서관",
+      "address": "서울 종로구 자하문로36길 40",
+      "phone": "070-4680-4032",
+      "coords": {
+        "lat": 37.5904038281362,
+        "lng": 126.96590530631
+      },
+      "placeUrl": "http://place.map.kakao.com/26186384"
+    },
+    "songpa-kids-english": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "송파어린이영어도서관",
+      "address": "서울 송파구 오금로 1",
+      "phone": "02-415-3567",
+      "coords": {
+        "lat": 37.5225557025948,
+        "lng": 127.10192440151
+      },
+      "placeUrl": "http://place.map.kakao.com/18502744"
+    },
+    "brighton-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "여의도브라이튼도서관",
+      "address": "서울 영등포구 국제금융로 39",
+      "phone": "02-2125-4400",
+      "coords": {
+        "lat": 37.52394782000133,
+        "lng": 126.93043897489913
+      },
+      "placeUrl": "http://place.map.kakao.com/276973485"
+    },
+    "gyeonggi-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "경기도서관",
+      "address": "경기 수원시 영통구 도청로 40",
+      "phone": "031-8008-5300",
+      "coords": {
+        "lat": 37.28791415128679,
+        "lng": 127.05332510175714
+      },
+      "placeUrl": "http://place.map.kakao.com/2048042285"
+    },
+    "goyang-hwajeong": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "고양시립 화정도서관",
+      "address": "경기 고양시 덕양구 은빛로77번길 8",
+      "phone": "031-8075-9215",
+      "coords": {
+        "lat": 37.63779273439853,
+        "lng": 126.83704333577845
+      },
+      "placeUrl": "http://place.map.kakao.com/8193271"
+    },
+    "court-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "법원도서관",
+      "address": "경기 고양시 일산동구 호수로 550",
+      "phone": "031-920-3700",
+      "coords": {
+        "lat": 37.65203994945366,
+        "lng": 126.77227611152156
+      },
+      "placeUrl": "http://place.map.kakao.com/7896106"
+    },
+    "ansan-media": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "안산미디어도서관",
+      "address": "경기 안산시 단원구 광덕1로 198",
+      "phone": "031-481-3963",
+      "coords": {
+        "lat": 37.3073268396484,
+        "lng": 126.831264163621
+      },
+      "placeUrl": "http://place.map.kakao.com/27485863"
+    },
+    "leeseokyoung-media": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "이석영뉴미디어도서관",
+      "address": "경기 남양주시 화도읍 맷돌로 84",
+      "phone": "031-595-8390",
+      "coords": {
+        "lat": 37.6581512400093,
+        "lng": 127.299513659818
+      },
+      "placeUrl": "http://place.map.kakao.com/221495674"
+    },
+    "uijeongbu-english": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "의정부영어도서관",
+      "address": "경기 의정부시 회룡로 79",
+      "phone": "031-828-8710",
+      "coords": {
+        "lat": 37.7264745611682,
+        "lng": 127.042560099145
+      },
+      "placeUrl": "http://place.map.kakao.com/12456958"
+    },
+    "gwacheon-it": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "과천시정보과학도서관",
+      "address": "경기 과천시 중앙로 24",
+      "phone": "02-2150-3008",
+      "coords": {
+        "lat": 37.4188316358335,
+        "lng": 126.98960699425
+      },
+      "placeUrl": "http://place.map.kakao.com/15653638"
+    },
+    "juyeop-kids": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "고양시립 주엽어린이도서관",
+      "address": "경기 고양시 일산서구 주엽로 104",
+      "phone": "031-8075-9168",
+      "coords": {
+        "lat": 37.668413409368554,
+        "lng": 126.75646781577255
+      },
+      "placeUrl": "http://place.map.kakao.com/8091694"
+    },
+    "pangyo-kids": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "성남시판교어린이도서관",
+      "address": "경기 성남시 분당구 판교역로 75",
+      "phone": "031-729-8880",
+      "coords": {
+        "lat": 37.387449009163205,
+        "lng": 127.10785021058562
+      },
+      "placeUrl": "http://place.map.kakao.com/26573290"
+    },
+    "goyang-aramnuri": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "고양시립 아람누리도서관",
+      "address": "경기 고양시 일산동구 중앙로 1286",
+      "phone": "031-8075-9038",
+      "coords": {
+        "lat": 37.66130202018634,
+        "lng": 126.7732077575862
+      },
+      "placeUrl": "http://place.map.kakao.com/11317287"
+    },
+    "hwaseong-jinan": {
+      "source": "kakao",
+      "confidence": "medium",
+      "matchedName": "화성시진안도서관",
+      "address": "경기 화성시 병점구 병점중앙로 229",
+      "phone": "031-224-9977",
+      "coords": {
+        "lat": 37.21729569381584,
+        "lng": 127.03387986355226
+      },
+      "placeUrl": "http://place.map.kakao.com/170825185"
+    },
+    "incheon-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "인천도서관",
+      "address": "인천 남동구 인주대로776번길 53",
+      "phone": "032-462-3900",
+      "coords": {
+        "lat": 37.44706921682042,
+        "lng": 126.7251036985477
+      },
+      "placeUrl": "http://place.map.kakao.com/11176437"
+    },
+    "songdo-intl": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "송도국제도서관 본관",
+      "address": "인천 연수구 아카데미로 166",
+      "phone": "032-749-8270",
+      "coords": {
+        "lat": 37.380519265220634,
+        "lng": 126.63197065686147
+      },
+      "placeUrl": "http://place.map.kakao.com/1144170198"
+    },
+    "majeon-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "인천광역시마전도서관",
+      "address": "인천 검단구 원당대로 563",
+      "phone": "032-590-2800",
+      "coords": {
+        "lat": 37.59410597231336,
+        "lng": 126.66346403445051
+      },
+      "placeUrl": "http://place.map.kakao.com/1975380770"
+    },
+    "cheongna-intl": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "청라국제도서관",
+      "address": "인천 서해구 담지로 24",
+      "phone": "032-562-6823",
+      "coords": {
+        "lat": 37.5320942731113,
+        "lng": 126.660319324352
+      },
+      "placeUrl": "http://place.map.kakao.com/26609831"
+    },
+    "yeongjong-sky": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "영종하늘도서관",
+      "address": "인천 영종구 하늘중앙로 132",
+      "phone": "032-746-9143",
+      "coords": {
+        "lat": 37.494751544903835,
+        "lng": 126.56377710976236
+      },
+      "placeUrl": "http://place.map.kakao.com/26609824"
+    },
+    "yulmok-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "인천광역시 율목도서관",
+      "address": "인천 제물포구 답동로24번길 17",
+      "phone": "032-770-3800",
+      "coords": {
+        "lat": 37.46955898875735,
+        "lng": 126.63250109329951
+      },
+      "placeUrl": "http://place.map.kakao.com/14823208"
+    },
+    "dongchun-narae": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "동춘나래도서관",
+      "address": "인천 연수구 봉재산로54번길 30",
+      "phone": "032-749-8240",
+      "coords": {
+        "lat": 37.407888597339706,
+        "lng": 126.66406158247364
+      },
+      "placeUrl": "http://place.map.kakao.com/1556524765"
+    },
+    "songdo-kids": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "송도국제어린이도서관",
+      "address": "인천 연수구 컨벤시아대로 43",
+      "phone": "032-749-8220",
+      "coords": {
+        "lat": 37.3979942996296,
+        "lng": 126.653675015147
+      },
+      "placeUrl": "http://place.map.kakao.com/14663331"
+    },
+    "kkumdream-kids-english": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "꿈드림어린이영어도서관",
+      "address": "인천 제물포구 새천년로 93",
+      "phone": "032-766-0725",
+      "coords": {
+        "lat": 37.4764816424422,
+        "lng": 126.648266436268
+      },
+      "placeUrl": "http://place.map.kakao.com/836241159"
+    },
+    "cheongna-lake": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "청라호수도서관",
+      "address": "인천 서해구 크리스탈로 59",
+      "phone": "032-563-9579",
+      "coords": {
+        "lat": 37.53061354515628,
+        "lng": 126.63628705724524
+      },
+      "placeUrl": "http://place.map.kakao.com/25490116"
+    },
+    "seonhak-starlight": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "선학별빛도서관",
+      "address": "인천 연수구 넘말로 30",
+      "phone": "032-749-6710",
+      "coords": {
+        "lat": 37.4299069237678,
+        "lng": 126.697867342507
+      },
+      "placeUrl": "http://place.map.kakao.com/143965282"
+    },
+    "wonju-central": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "원주시립중앙도서관",
+      "address": "강원특별자치도 원주시 서원대로 472-12",
+      "phone": "033-737-4360",
+      "coords": {
+        "lat": 37.32653719541685,
+        "lng": 127.95384574198594
+      },
+      "placeUrl": "http://place.map.kakao.com/25642317"
+    },
+    "jungcheon-philosophy": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "중천철학도서관",
+      "address": "강원특별자치도 원주시 흥업면 남원로 105",
+      "phone": "033-737-4476",
+      "coords": {
+        "lat": 37.3055002116368,
+        "lng": 127.919985474974
+      },
+      "placeUrl": "http://place.map.kakao.com/26874075"
+    },
+    "gangneung-moru": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "강릉모루도서관",
+      "address": "강원특별자치도 강릉시 율곡로 2923-12",
+      "phone": "033-660-3252",
+      "coords": {
+        "lat": 37.7638115081649,
+        "lng": 128.891253077874
+      },
+      "placeUrl": "http://place.map.kakao.com/9772199"
+    },
+    "chuncheon-city": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "춘천시립도서관",
+      "address": "강원특별자치도 춘천시 우석로 100",
+      "phone": "033-245-5102",
+      "coords": {
+        "lat": 37.8619057507645,
+        "lng": 127.754889256022
+      },
+      "placeUrl": "http://place.map.kakao.com/17354768"
+    },
+    "sokcho-kids-english": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "속초어린이영어도서관",
+      "address": "강원특별자치도 속초시 엑스포로 132",
+      "phone": "033-635-0351",
+      "coords": {
+        "lat": 38.1959113343615,
+        "lng": 128.581962646798
+      },
+      "placeUrl": "http://place.map.kakao.com/2039318204"
+    },
+    "knu-future": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "강원대학교 KNU미래도서관",
+      "address": "강원특별자치도 춘천시 강원대학길 1",
+      "phone": "033-250-8019",
+      "coords": {
+        "lat": 37.86566632586433,
+        "lng": 127.74866698781702
+      },
+      "placeUrl": "http://place.map.kakao.com/641628185"
+    },
+    "inje-miracle": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "인제기적의도서관",
+      "address": "강원특별자치도 인제군 인제읍 인제로140번길 52-7",
+      "phone": "033-460-4321",
+      "coords": {
+        "lat": 38.06189296661534,
+        "lng": 128.17061210028479
+      },
+      "placeUrl": "http://place.map.kakao.com/1328393519"
+    },
+    "wondeok-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "삼척원덕도서관",
+      "address": "강원특별자치도 삼척시 원덕읍 삼척로 446-11",
+      "phone": "033-572-4819",
+      "coords": {
+        "lat": 37.1770262822373,
+        "lng": 129.334690989581
+      },
+      "placeUrl": "http://place.map.kakao.com/12463972"
+    },
+    "hanbat-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "대전광역시한밭도서관",
+      "address": "대전 중구 서문로 10",
+      "phone": "042-270-7420",
+      "coords": {
+        "lat": 36.3099240740116,
+        "lng": 127.40967685040877
+      },
+      "placeUrl": "http://place.map.kakao.com/7828973"
+    },
+    "dongdaejeon-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "동대전도서관",
+      "address": "대전 동구 우암로277번길 70",
+      "phone": "042-270-7590",
+      "coords": {
+        "lat": 36.34881948237355,
+        "lng": 127.4450387199465
+      },
+      "placeUrl": "http://place.map.kakao.com/1928779738"
+    },
+    "kids-english-village": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "유성구어린이영어마을도서관",
+      "address": "대전 유성구 지족동로 145",
+      "phone": "042-611-6962",
+      "coords": {
+        "lat": 36.38669425591786,
+        "lng": 127.30796379509574
+      },
+      "placeUrl": "http://place.map.kakao.com/26909459"
+    },
+    "munhak-village": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "문학마을도서관",
+      "address": "대전 유성구 어은로 22",
+      "phone": "070-4192-1677",
+      "coords": {
+        "lat": 36.36081327405634,
+        "lng": 127.35934051970712
+      },
+      "placeUrl": "http://place.map.kakao.com/243812364"
+    },
+    "byeoldongbyeol-science": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "별똥별과학도서관",
+      "address": "대전 유성구 죽동로 322",
+      "phone": "042-825-6987",
+      "coords": {
+        "lat": 36.3694279982242,
+        "lng": 127.335653169053
+      },
+      "placeUrl": "http://place.map.kakao.com/770053491"
+    },
+    "chungnam-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "충남도서관",
+      "address": "충남 홍성군 홍북읍 도청대로 577",
+      "phone": "041-635-8000",
+      "coords": {
+        "lat": 36.6558797517151,
+        "lng": 126.66980024996
+      },
+      "placeUrl": "http://place.map.kakao.com/455294827"
+    },
+    "baebang-library": {
+      "source": "kakao",
+      "confidence": "medium",
+      "matchedName": "아산시 배방도서관",
+      "address": "충남 아산시 배방읍 모산로 182-14",
+      "phone": "041-537-3956",
+      "coords": {
+        "lat": 36.77424564431117,
+        "lng": 127.06131114913794
+      },
+      "placeUrl": "http://place.map.kakao.com/24038434"
+    },
+    "asan-central": {
+      "source": "kakao",
+      "confidence": "medium",
+      "matchedName": "아산시중앙도서관",
+      "address": "충남 아산시 남부로 229",
+      "phone": "041-530-6600",
+      "coords": {
+        "lat": 36.7703910059806,
+        "lng": 127.00575725856518
+      },
+      "placeUrl": "http://place.map.kakao.com/136172702"
+    },
+    "cheongju-ochang-lake": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "청주오창호수도서관",
+      "address": "충북 청주시 청원구 오창읍 오창공원로 102",
+      "phone": "043-201-4096",
+      "coords": {
+        "lat": 36.7130317055849,
+        "lng": 127.423856674687
+      },
+      "placeUrl": "http://place.map.kakao.com/27286441"
+    },
+    "eumbong-eoulsaem": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "음봉어울샘도서관",
+      "address": "충남 아산시 음봉면 음봉로 515-36",
+      "phone": "041-530-6450",
+      "coords": {
+        "lat": 36.84371734479845,
+        "lng": 127.06859579070893
+      },
+      "placeUrl": "http://place.map.kakao.com/433089350"
+    },
+    "kkumsaem-kids": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "꿈샘어린이청소년도서관",
+      "address": "충남 아산시 시민로 500",
+      "phone": "041-530-6722",
+      "coords": {
+        "lat": 36.7933353146147,
+        "lng": 127.002883969199
+      },
+      "placeUrl": "http://place.map.kakao.com/303623013"
+    },
+    "chungju-city": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "충주시립도서관",
+      "address": "충북 충주시 예성로 207",
+      "phone": "043-850-3970",
+      "coords": {
+        "lat": 36.975240357227314,
+        "lng": 127.93420351047978
+      },
+      "placeUrl": "http://place.map.kakao.com/10838600"
+    },
+    "cheonan-jiksan": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "직산도서관",
+      "address": "충남 천안시 서북구 직산읍 삼은4길 12",
+      "phone": "041-521-3736",
+      "coords": {
+        "lat": 36.87887988088211,
+        "lng": 127.150191771287
+      },
+      "placeUrl": "http://place.map.kakao.com/1180258442"
+    },
+    "dunpo-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "아산시립 둔포도서관",
+      "address": "충남 아산시 둔포면 둔포중앙로161번길 27-6",
+      "phone": "041-536-8595",
+      "coords": {
+        "lat": 36.92643393989824,
+        "lng": 127.04090244922727
+      },
+      "placeUrl": "http://place.map.kakao.com/7992067"
+    },
+    "baebang-wolcheon": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "배방월천도서관",
+      "address": "충남 아산시 배방읍 월천5길 13",
+      "phone": "041-530-6380",
+      "coords": {
+        "lat": 36.770626710741,
+        "lng": 127.078288868392
+      },
+      "placeUrl": "http://place.map.kakao.com/1097947439"
+    },
+    "sejong-city-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "세종시립도서관",
+      "address": "세종특별자치시 세종로 1207",
+      "phone": "044-301-4300",
+      "coords": {
+        "lat": 36.51053125899817,
+        "lng": 127.24044686110923
+      },
+      "placeUrl": "http://place.map.kakao.com/1041350989"
+    },
+    "gyeongbuk-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "경북도서관",
+      "address": "경북 예천군 호명읍 도청대로 200",
+      "phone": "054-650-3900",
+      "coords": {
+        "lat": 36.574497665688746,
+        "lng": 128.487942801215
+      },
+      "placeUrl": "http://place.map.kakao.com/1553822017"
+    },
+    "gyeongnam-library": {
+      "source": "kakao",
+      "confidence": "medium",
+      "matchedName": "상남도서관",
+      "address": "경남 창원시 성산구 원이대로 810",
+      "phone": "055-225-7411",
+      "coords": {
+        "lat": 35.2141080216863,
+        "lng": 128.695262235356
+      },
+      "placeUrl": "http://place.map.kakao.com/12335192"
+    },
+    "gyeongju-city": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "경주시립도서관",
+      "address": "경북 경주시 원화로 431-12",
+      "phone": "054-779-8891",
+      "coords": {
+        "lat": 35.8597818801442,
+        "lng": 129.219191998787
+      },
+      "placeUrl": "http://place.map.kakao.com/11043459"
+    },
+    "poeun-heunghae": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "포은흥해도서관",
+      "address": "경북 포항시 북구 흥해읍 흥해로81번길 46",
+      "phone": "054-270-4390",
+      "coords": {
+        "lat": 36.1118144799,
+        "lng": 129.342802212628
+      },
+      "placeUrl": "http://place.map.kakao.com/1043124298"
+    },
+    "sangju-dodream": {
+      "source": "kakao",
+      "confidence": "medium",
+      "matchedName": "상주두드림시립도서관 전기차충전소",
+      "address": "경북 상주시 복룡2길 22",
+      "coords": {
+        "lat": 36.41692746578182,
+        "lng": 128.16970430852635
+      },
+      "placeUrl": "http://place.map.kakao.com/568819127"
+    },
+    "hadong-library": {
+      "source": "kakao",
+      "confidence": "medium",
+      "matchedName": "경상남도교육청 하동도서관",
+      "address": "경남 하동군 하동읍 경서대로 80",
+      "phone": "055-884-7981",
+      "coords": {
+        "lat": 35.0638042489287,
+        "lng": 127.744961530105
+      },
+      "placeUrl": "http://place.map.kakao.com/24516831"
+    },
+    "namhaegak-sea": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "남해각 바다도서관",
+      "address": "경남 남해군 설천면 남해대로 4216",
+      "coords": {
+        "lat": 34.940693546165,
+        "lng": 127.872471297263
+      },
+      "placeUrl": "http://place.map.kakao.com/598799677"
+    },
+    "kkumirang-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "꿈이랑도서관",
+      "address": "경남 통영시 산양읍 둔전길 155",
+      "phone": "055-650-2500",
+      "coords": {
+        "lat": 34.8028733328958,
+        "lng": 128.3934474799
+      },
+      "placeUrl": "http://place.map.kakao.com/2034143371"
+    },
+    "haman-library": {
+      "source": "kakao",
+      "confidence": "medium",
+      "matchedName": "경상남도교육청 함안도서관",
+      "address": "경남 함안군 가야읍 선왕길 16",
+      "phone": "055-583-6919",
+      "coords": {
+        "lat": 35.28477407435928,
+        "lng": 128.40189788049835
+      },
+      "placeUrl": "http://place.map.kakao.com/455179876"
+    },
+    "sancheong-jirisan": {
+      "source": "kakao",
+      "confidence": "medium",
+      "matchedName": "경상남도교육청 산청지리산도서관",
+      "address": "경남 산청군 신안면 원지강변로 101",
+      "phone": "055-974-1611",
+      "coords": {
+        "lat": 35.30119889868034,
+        "lng": 127.97439291176805
+      },
+      "placeUrl": "http://place.map.kakao.com/852517119"
+    },
+    "ulsan-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "울산도서관",
+      "address": "울산 남구 꽃대나리로 140",
+      "phone": "052-266-5670",
+      "coords": {
+        "lat": 35.5325402044851,
+        "lng": 129.344541263357
+      },
+      "placeUrl": "http://place.map.kakao.com/27416677"
+    },
+    "ulju-cheonsang": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "울주천상도서관",
+      "address": "울산 울주군 범서읍 천상길 60",
+      "phone": "052-243-9096",
+      "coords": {
+        "lat": 35.56106570593877,
+        "lng": 129.22507342482805
+      },
+      "placeUrl": "http://place.map.kakao.com/638128116"
+    },
+    "dosan-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "도산도서관",
+      "address": "울산 남구 번영로54번길 6",
+      "phone": "052-226-5710",
+      "coords": {
+        "lat": 35.53042686742546,
+        "lng": 129.33122576146573
+      },
+      "placeUrl": "http://place.map.kakao.com/11909776"
+    },
+    "sinbok-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "신복도서관",
+      "address": "울산 남구 신복로72번길 18-13",
+      "phone": "052-226-2360",
+      "coords": {
+        "lat": 35.5513594922291,
+        "lng": 129.255311975442
+      },
+      "placeUrl": "http://place.map.kakao.com/22282042"
+    },
+    "okhyeon-kids": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "옥현어린이도서관",
+      "address": "울산 남구 옥현로58번길 40",
+      "phone": "052-226-2370",
+      "coords": {
+        "lat": 35.5393220137509,
+        "lng": 129.265068688497
+      },
+      "placeUrl": "http://place.map.kakao.com/25588497"
+    },
+    "wolbong-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "월봉도서관",
+      "address": "울산 남구 돋질로139번길 23",
+      "phone": "052-226-2376",
+      "coords": {
+        "lat": 35.5422871553875,
+        "lng": 129.319896273084
+      },
+      "placeUrl": "http://place.map.kakao.com/11864620"
+    },
+    "cheolsae-village": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "철새마을도서관",
+      "address": "울산 남구 삼호로149번길 22",
+      "phone": "052-226-2387",
+      "coords": {
+        "lat": 35.5489190921785,
+        "lng": 129.280134018383
+      },
+      "placeUrl": "http://place.map.kakao.com/1719547021"
+    },
+    "sanjeon-comics": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "산전만화도서관",
+      "address": "울산 중구 산전6길 32-1",
+      "phone": "052-290-4859",
+      "coords": {
+        "lat": 35.57772102020477,
+        "lng": 129.34920535225933
+      },
+      "placeUrl": "http://place.map.kakao.com/494551574"
+    },
+    "ulsan-jonggatjip": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "울산종갓집도서관",
+      "address": "울산 중구 종가3길 29",
+      "phone": "052-700-5230",
+      "coords": {
+        "lat": 35.56036600243427,
+        "lng": 129.2980775746795
+      },
+      "placeUrl": "http://place.map.kakao.com/752685582"
+    },
+    "ulsan-kids-youth": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "울산어린이청소년도서관",
+      "address": "울산 남구 봉월로38번길 32",
+      "phone": "052-266-5990",
+      "coords": {
+        "lat": 35.5362444366603,
+        "lng": 129.309207685704
+      },
+      "placeUrl": "http://place.map.kakao.com/1997589818"
+    },
+    "gangdong-sea": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "강동바다도서관",
+      "address": "울산 북구 산하중앙3로 62",
+      "phone": "052-241-7480",
+      "coords": {
+        "lat": 35.6309092425056,
+        "lng": 129.436195741778
+      },
+      "placeUrl": "http://place.map.kakao.com/958895415"
+    },
+    "busan-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "부산도서관",
+      "address": "부산 사상구 사상로310번길 33",
+      "phone": "051-310-5400",
+      "coords": {
+        "lat": 35.17271782030469,
+        "lng": 128.98528865425354
+      },
+      "placeUrl": "http://place.map.kakao.com/1015809371"
+    },
+    "donggu-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "동구도서관",
+      "address": "부산 동구 성북로36번길 54",
+      "phone": "051-440-6411",
+      "coords": {
+        "lat": 35.1380427427071,
+        "lng": 129.052423521284
+      },
+      "placeUrl": "http://place.map.kakao.com/21430360"
+    },
+    "yeongdo-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "영도도서관",
+      "address": "부산 영도구 함지로79번길 6",
+      "phone": "051-419-4821",
+      "coords": {
+        "lat": 35.0756519284141,
+        "lng": 129.066486786574
+      },
+      "placeUrl": "http://place.map.kakao.com/8441034"
+    },
+    "busanjin-kids-youth": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "부산진구어린이청소년도서관",
+      "address": "부산 부산진구 백양순환로110번길 25",
+      "phone": "051-605-5801",
+      "coords": {
+        "lat": 35.1689929896598,
+        "lng": 129.039584010741
+      },
+      "placeUrl": "http://place.map.kakao.com/27383533"
+    },
+    "dongnae-eupseong": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "동래읍성도서관",
+      "address": "부산 동래구 동래로159번길 153",
+      "phone": "051-550-6901",
+      "coords": {
+        "lat": 35.2070878985886,
+        "lng": 129.094819906585
+      },
+      "placeUrl": "http://place.map.kakao.com/27224332"
+    },
+    "busan-namgu-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "부산남구도서관",
+      "address": "부산 남구 수영로267번길 61",
+      "phone": "051-621-8160",
+      "coords": {
+        "lat": 35.1377322721912,
+        "lng": 129.094567987732
+      },
+      "placeUrl": "http://place.map.kakao.com/18675409"
+    },
+    "mandeok-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "만덕도서관",
+      "address": "부산 북구 은행나무로 26",
+      "phone": "051-309-2097",
+      "coords": {
+        "lat": 35.20718871157484,
+        "lng": 129.03782048419401
+      },
+      "placeUrl": "http://place.map.kakao.com/11059221"
+    },
+    "haeundae-humanities": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "해운대인문학도서관",
+      "address": "부산 해운대구 반여로 132",
+      "phone": "051-749-6580",
+      "coords": {
+        "lat": 35.2022063841808,
+        "lng": 129.126291729541
+      },
+      "placeUrl": "http://place.map.kakao.com/1518965102"
+    },
+    "geumjeong-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "금정도서관",
+      "address": "부산 금정구 금정도서관로 33",
+      "phone": "051-519-5601",
+      "coords": {
+        "lat": 35.272747732267,
+        "lng": 129.096136109331
+      },
+      "placeUrl": "http://place.map.kakao.com/21223457"
+    },
+    "jeonggwan-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "정관도서관",
+      "address": "부산 기장군 정관읍 정관중앙로 100",
+      "phone": "051-709-3901",
+      "coords": {
+        "lat": 35.3252904091181,
+        "lng": 129.1815193726
+      },
+      "placeUrl": "http://place.map.kakao.com/26565325"
+    },
+    "seogu-ami-dream": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "서구아미드림도서관",
+      "address": "부산 서구 까치고개로80번길 10",
+      "phone": "051-290-5720",
+      "coords": {
+        "lat": 35.10373308157331,
+        "lng": 129.00931800176815
+      },
+      "placeUrl": "http://place.map.kakao.com/613701231"
+    },
+    "daegu-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "대구도서관",
+      "address": "대구 남구 중앙대로22길 26",
+      "phone": "053-803-8700",
+      "coords": {
+        "lat": 35.84245042672083,
+        "lng": 128.59187025293514
+      },
+      "placeUrl": "http://place.map.kakao.com/768302527"
+    },
+    "dalseong-gunlib": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "달성군립도서관",
+      "address": "대구 달성군 다사읍 달구벌대로174길 10-13",
+      "phone": "053-584-0011",
+      "coords": {
+        "lat": 35.85930835039412,
+        "lng": 128.46241636946166
+      },
+      "placeUrl": "http://place.map.kakao.com/23205085"
+    },
+    "suseongmot-picturebook": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "수성못그림책도서관",
+      "address": "대구 수성구 무학로 112",
+      "phone": "053-668-1770",
+      "coords": {
+        "lat": 35.8293693090051,
+        "lng": 128.620592356694
+      },
+      "placeUrl": "http://place.map.kakao.com/2077391607"
+    },
+    "daegu-seogu-english": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "서구영어도서관",
+      "address": "대구 서구 평리로35길 90-6",
+      "phone": "053-663-3861",
+      "coords": {
+        "lat": 35.8679132175835,
+        "lng": 128.54424081803
+      },
+      "placeUrl": "http://place.map.kakao.com/1869677896"
+    },
+    "daegu-seogu-kids-english": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "서구어린이영어도서관",
+      "address": "대구 서구 문화로 160",
+      "phone": "053-663-3951",
+      "coords": {
+        "lat": 35.8743419719251,
+        "lng": 128.550609164047
+      },
+      "placeUrl": "http://place.map.kakao.com/1217641644"
+    },
+    "dalseong-kids-forest": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "달성어린이숲도서관",
+      "address": "대구 달성군 현풍읍 테크노중앙대로 231",
+      "phone": "053-615-0011",
+      "coords": {
+        "lat": 35.6911010324615,
+        "lng": 128.457116352658
+      },
+      "placeUrl": "http://place.map.kakao.com/1074155819"
+    },
+    "dalseo-family": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "달서가족문화도서관",
+      "address": "대구 달서구 조암남로 137",
+      "phone": "053-667-4970",
+      "coords": {
+        "lat": 35.817479633974436,
+        "lng": 128.5191808980445
+      },
+      "placeUrl": "http://place.map.kakao.com/1746088753"
+    },
+    "gukchae-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "국채보상운동기념도서관",
+      "address": "대구 중구 공평로10길 25",
+      "phone": "053-231-2000",
+      "coords": {
+        "lat": 35.86844016932008,
+        "lng": 128.60171309093218
+      },
+      "placeUrl": "http://place.map.kakao.com/22851545"
+    },
+    "dowon-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "달서구립도원도서관",
+      "address": "대구 달서구 한실로 113",
+      "phone": "053-667-4840",
+      "coords": {
+        "lat": 35.8067837275909,
+        "lng": 128.539087022592
+      },
+      "placeUrl": "http://place.map.kakao.com/15280853"
+    },
+    "halla-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "한라도서관",
+      "address": "제주특별자치도 제주시 오남로 221",
+      "phone": "064-710-8666",
+      "coords": {
+        "lat": 33.4762014385315,
+        "lng": 126.51627353984
+      },
+      "placeUrl": "http://place.map.kakao.com/10951375"
+    },
+    "tamna-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "탐라도서관",
+      "address": "제주특별자치도 제주시 정원로 50",
+      "phone": "064-728-1506",
+      "coords": {
+        "lat": 33.4791838560417,
+        "lng": 126.477180593734
+      },
+      "placeUrl": "http://place.map.kakao.com/8508002"
+    },
+    "kimyoungsu-library": {
+      "source": "kakao",
+      "confidence": "medium",
+      "matchedName": "김영수도서관 마을도서관",
+      "address": "제주특별자치도 제주시 중앙로8길 18",
+      "phone": "064-717-3359",
+      "coords": {
+        "lat": 33.514761235251875,
+        "lng": 126.52197458078652
+      },
+      "placeUrl": "http://place.map.kakao.com/125774438"
+    },
+    "jeonbuk-provincial": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "전북특별자치도청 도서관",
+      "address": "전북특별자치도 전주시 완산구 효자로 225",
+      "phone": "063-280-2452",
+      "coords": {
+        "lat": 35.820218064381194,
+        "lng": 127.10889928057189
+      },
+      "placeUrl": "http://place.map.kakao.com/14600054"
+    },
+    "hanok-village-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "한옥마을도서관",
+      "address": "전북특별자치도 전주시 완산구 한지길 68-3",
+      "phone": "063-714-3531",
+      "coords": {
+        "lat": 35.8171593027398,
+        "lng": 127.153400318381
+      },
+      "placeUrl": "http://place.map.kakao.com/114934171"
+    },
+    "yeonhwajeong-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "연화정도서관",
+      "address": "전북특별자치도 전주시 덕진구 권삼득로 390-1",
+      "phone": "063-714-3527",
+      "coords": {
+        "lat": 35.849114565212865,
+        "lng": 127.12344032200373
+      },
+      "placeUrl": "http://place.map.kakao.com/392179500"
+    },
+    "gochang-hwangyunseok": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "고창황윤석도서관",
+      "address": "전북특별자치도 고창군 고창읍 중앙로 340",
+      "phone": "063-560-2420",
+      "coords": {
+        "lat": 35.434615593108035,
+        "lng": 126.71322968236656
+      },
+      "placeUrl": "http://place.map.kakao.com/1670784519"
+    },
+    "dongmun-usedbook": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "동문헌책도서관",
+      "address": "전북특별자치도 전주시 완산구 동문길 51",
+      "phone": "063-714-3529",
+      "coords": {
+        "lat": 35.8187194608965,
+        "lng": 127.151205680189
+      },
+      "placeUrl": "http://place.map.kakao.com/1006247347"
+    },
+    "galdaesup-small": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "갈대숲작은도서관",
+      "address": "전북특별자치도 부안군 줄포면 서빈1길 10-13",
+      "phone": "063-581-2336",
+      "coords": {
+        "lat": 35.5867580614413,
+        "lng": 126.675114342156
+      },
+      "placeUrl": "http://place.map.kakao.com/1520109340"
+    },
+    "muju-manna-small": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "무주만나작은도서관",
+      "address": "전북특별자치도 무주군 안성면 진성로 2393",
+      "phone": "070-8802-6000",
+      "coords": {
+        "lat": 35.8656235289057,
+        "lng": 127.628240718162
+      },
+      "placeUrl": "http://place.map.kakao.com/21814679"
+    },
+    "jeonnam-library": {
+      "source": "kakao",
+      "confidence": "medium",
+      "matchedName": "전남광주통합특별시 전남도서관",
+      "address": "전남광주통합특별시 무안군 삼향읍 남악로 210",
+      "phone": "061-288-5200",
+      "coords": {
+        "lat": 34.8049819194452,
+        "lng": 126.461470288977
+      },
+      "placeUrl": "http://place.map.kakao.com/15191202"
+    },
+    "jorye-lake": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "순천조례호수도서관",
+      "address": "전남광주통합특별시 순천시 조례2길 31",
+      "phone": "061-749-8891",
+      "coords": {
+        "lat": 34.9639175908604,
+        "lng": 127.524628265962
+      },
+      "placeUrl": "http://place.map.kakao.com/12383436"
+    },
+    "jindo-cheolma": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "진도철마도서관",
+      "address": "전남광주통합특별시 진도군 진도읍 철마길 25",
+      "phone": "061-540-3062",
+      "coords": {
+        "lat": 34.4869452187344,
+        "lng": 126.264246406481
+      },
+      "placeUrl": "http://place.map.kakao.com/14508515"
+    },
+    "mudeung-library": {
+      "source": "kakao",
+      "confidence": "medium",
+      "matchedName": "전남광주통합특별시립 무등도서관",
+      "address": "전남광주통합특별시 북구 면앙로 130",
+      "phone": "062-613-7753",
+      "coords": {
+        "lat": 35.1765366727578,
+        "lng": 126.925349934967
+      },
+      "placeUrl": "http://place.map.kakao.com/18445575"
+    },
+    "iyagikkot-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "이야기꽃도서관",
+      "address": "전남광주통합특별시 광산구 선운중앙로67번길 6",
+      "phone": "062-960-6818",
+      "coords": {
+        "lat": 35.148440169789616,
+        "lng": 126.77989769650522
+      },
+      "placeUrl": "http://place.map.kakao.com/1522681701"
+    },
+    "kids-eco-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "어린이생태학습도서관",
+      "address": "전남광주통합특별시 서구 풍암공원로 8",
+      "phone": "062-350-4584",
+      "coords": {
+        "lat": 35.12967818900524,
+        "lng": 126.88183525505188
+      },
+      "placeUrl": "http://place.map.kakao.com/13148975"
+    },
+    "chaekdori-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "책돌이도서관",
+      "address": "전남광주통합특별시 북구 우치로 235",
+      "phone": "062-266-7279",
+      "coords": {
+        "lat": 35.1858497159095,
+        "lng": 126.905078207744
+      },
+      "placeUrl": "http://place.map.kakao.com/21812842"
+    },
+    "unam-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "운암도서관",
+      "address": "전남광주통합특별시 북구 북문대로 118",
+      "phone": "062-410-6961",
+      "coords": {
+        "lat": 35.1802882159613,
+        "lng": 126.875126681468
+      },
+      "placeUrl": "http://place.map.kakao.com/17498225"
+    },
+    "jangdeok-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "장덕도서관",
+      "address": "전남광주통합특별시 광산구 풍영로 179",
+      "phone": "062-960-3997",
+      "coords": {
+        "lat": 35.1875529952491,
+        "lng": 126.813340963947
+      },
+      "placeUrl": "http://place.map.kakao.com/21076067"
+    },
+    "seochang-hanok": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "서창한옥작은도서관",
+      "address": "전남광주통합특별시 서구 세동1길 27-1",
+      "phone": "062-385-9073",
+      "coords": {
+        "lat": 35.1150580886606,
+        "lng": 126.830250569378
+      },
+      "placeUrl": "http://place.map.kakao.com/1483511325"
+    },
+    "gwangju-braille": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "전남광주통합특별시립 점자도서관",
+      "address": "전남광주통합특별시 남구 천변좌로370번길 3",
+      "phone": "062-672-9534",
+      "coords": {
+        "lat": 35.14536064183138,
+        "lng": 126.91217697996763
+      },
+      "placeUrl": "http://place.map.kakao.com/1144217502"
+    },
+    "unnam-kids": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "운남어린이도서관",
+      "address": "전남광주통합특별시 광산구 목련로217번길 10",
+      "phone": "062-960-8302",
+      "coords": {
+        "lat": 35.1729100002549,
+        "lng": 126.822002709385
+      },
+      "placeUrl": "http://place.map.kakao.com/8031342"
+    },
+    "pureungil-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "푸른길도서관",
+      "address": "전남광주통합특별시 남구 금당로 140",
+      "phone": "062-607-2538",
+      "coords": {
+        "lat": 35.1291749281828,
+        "lng": 126.895230092966
+      },
+      "placeUrl": "http://place.map.kakao.com/22099895"
+    },
+    "uknow-yunho": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "유노윤호 작은도서관",
+      "address": "전남광주통합특별시 광산구 소촌로85번길 14-9",
+      "phone": "062-960-3690",
+      "coords": {
+        "lat": 35.152133156819716,
+        "lng": 126.79116859141276
+      },
+      "placeUrl": "http://place.map.kakao.com/1413486317"
+    }
+  }
+}
