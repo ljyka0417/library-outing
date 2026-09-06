@@ -140,6 +140,8 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     borderRadius: radius.pill,
     alignSelf: 'flex-start',
+    minHeight: 24,
+    justifyContent: 'center',
   },
   badgeText: {
     ...typography.tiny,
@@ -197,6 +199,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surface,
     borderWidth: 1,
     borderColor: colors.border,
+    // 글자가 잘리지 않도록 최소 높이를 고정한다 (한글 대응)
+    minHeight: 38,
+    justifyContent: 'center',
   },
   chipSelected: {
     backgroundColor: colors.primary,

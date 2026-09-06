@@ -106,15 +106,23 @@ export const radius = {
   pill: 999,
 } as const;
 
+/**
+ * 타이포그래피.
+ *
+ * ⚠️ lineHeight 는 fontSize 의 1.5배 이상으로 잡는다.
+ * 한글은 받침 때문에 영문보다 세로 공간을 더 먹는데, iOS 는 지정한 lineHeight 로
+ * 글자를 정확히 잘라낸다. (웹·안드로이드는 알아서 늘려주므로 이 버그가 안 보인다)
+ * 1.45배로 잡았다가 아이폰에서 필터 칩 글자가 위아래로 잘렸다.
+ */
 export const typography = {
-  h1: { fontSize: 24, fontWeight: '700' as const, lineHeight: 33 },
-  h2: { fontSize: 20, fontWeight: '700' as const, lineHeight: 28 },
-  h3: { fontSize: 17, fontWeight: '700' as const, lineHeight: 24 },
-  body: { fontSize: 15, fontWeight: '400' as const, lineHeight: 22 },
-  bodyBold: { fontSize: 15, fontWeight: '600' as const, lineHeight: 22 },
-  caption: { fontSize: 13, fontWeight: '400' as const, lineHeight: 19 },
-  captionBold: { fontSize: 13, fontWeight: '600' as const, lineHeight: 19 },
-  tiny: { fontSize: 11, fontWeight: '500' as const, lineHeight: 16 },
+  h1: { fontSize: 24, fontWeight: '700' as const, lineHeight: 36 },
+  h2: { fontSize: 20, fontWeight: '700' as const, lineHeight: 30 },
+  h3: { fontSize: 17, fontWeight: '700' as const, lineHeight: 26 },
+  body: { fontSize: 15, fontWeight: '400' as const, lineHeight: 24 },
+  bodyBold: { fontSize: 15, fontWeight: '600' as const, lineHeight: 24 },
+  caption: { fontSize: 13, fontWeight: '400' as const, lineHeight: 20 },
+  captionBold: { fontSize: 13, fontWeight: '600' as const, lineHeight: 20 },
+  tiny: { fontSize: 11, fontWeight: '500' as const, lineHeight: 17 },
 } as const;
 
 /** 카드에 공통으로 쓰는 그림자. 안드로이드는 elevation 으로 대응. */

@@ -69,7 +69,7 @@ export default function SearchScreen() {
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.filterRow}
-        style={{ flexGrow: 0 }}
+        style={[{ flexGrow: 0, flexShrink: 0 }, styles.filterRowSpacing]}
       >
         <Chip
           label="전체 주제"
@@ -91,7 +91,7 @@ export default function SearchScreen() {
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.filterRow}
-        style={{ flexGrow: 0 }}
+        style={[{ flexGrow: 0, flexShrink: 0 }, styles.filterRowSpacing]}
       >
         <Chip label="지금 운영중" selected={openNow} onPress={() => setOpenNow(!openNow)} />
         <View style={styles.divider} />
@@ -162,8 +162,12 @@ const styles = StyleSheet.create({
   filterRow: {
     paddingHorizontal: spacing.xl,
     gap: spacing.sm,
-    paddingBottom: spacing.md,
+    // 칩이 잘리지 않도록 위아래 여유를 준다
+    paddingVertical: spacing.xs,
     alignItems: 'center',
+  },
+  filterRowSpacing: {
+    marginBottom: spacing.sm,
   },
   divider: {
     width: 1,
