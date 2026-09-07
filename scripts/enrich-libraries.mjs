@@ -21,46 +21,17 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { ROOT, requireEnv, readSeeds } from './lib/env.mjs';
+import { strip, regionMatches, pickBest } from './lib/match.mjs';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const KEY = requireEnv(
+  'DATA4LIBRARY_KEY',
+  `1) https://www.data4library.kr 에서 인증키를 발급받으세요 (무료, 승인 필요)
+2) .env 에  DATA4LIBRARY_KEY=발급받은키  한 줄 추가
+   (.env.example 을 복사해서 쓰시면 됩니다)`
+);
 
-/* ── 인증키 읽기 (.env) ─────────────────────────────────────── */
-function readEnvKey() {
-  if (process.env.EXPO_PUBLIC_DATA4LIBRARY_KEY) return process.env.EXPO_PUBLIC_DATA4LIBRARY_KEY;
-  const envPath = path.join(ROOT, '.env');
-  if (!fs.existsSync(envPath)) return '';
-  const m = fs.readFileSync(envPath, 'utf8').match(/^EXPO_PUBLIC_DATA4LIBRARY_KEY=(.*)$/m);
-  return m ? m[1].trim() : '';
-}
-
-const KEY = readEnvKey();
-if (!KEY) {
-  console.error(`
-인증키가 없습니다.
-
-  1) https://www.data4library.kr 에서 인증키를 발급받으세요 (무료, 승인 필요)
-  2) .env 파일을 만들고 아래 한 줄을 넣으세요
-
-     EXPO_PUBLIC_DATA4LIBRARY_KEY=발급받은키
-
-  (.env.example 을 복사해서 쓰시면 됩니다)
-`);
-  process.exit(1);
-}
-
-/* ── 우리 132곳 읽기 ───────────────────────────────────────── */
-const src = fs.readFileSync(path.join(ROOT, 'src/data/libraries.mock.ts'), 'utf8');
-const seeds = [
-  ...src.matchAll(
-    /\{ id: '([^']+)', name: '([^']+)', sido: '([^']+)'(?:, sigungu: '([^']+)')?/g
-  ),
-].map((m) => ({ id: m[1], name: m[2], sido: m[3], sigungu: m[4] }));
-
-if (seeds.length === 0) {
-  console.error('도서관 목록을 읽지 못했습니다. src/data/libraries.mock.ts 를 확인하세요.');
-  process.exit(1);
-}
+const seeds = readSeeds();
 console.log(`대상 ${seeds.length}곳\n`);
 
 /* ── 정보나루에서 전국 목록 받기 ───────────────────────────── */
@@ -96,58 +67,79 @@ async function fetchAllLibraries() {
   return all;
 }
 
-/* ── 이름 정규화 ────────────────────────────────────────────
-   "서울특별시립 강남도서관" 과 "강남도서관" 이 같은 곳으로 잡히도록
-   공백·괄호·행정 접두어를 걷어낸다. */
-function normalize(name) {
-  return name
-    .replace(/\(.*?\)/g, '')
-    .replace(/[\s·\-_]/g, '')
-    .replace(/(특별자치|광역)?시립|도립|군립|구립|공립|시|도|군|구청/g, '')
-    .toLowerCase();
-}
-
-/** 시도 표기를 우리 분류로 되돌린다 (정보나루는 "서울특별시" 식) */
-const SIDO_ALIAS = {
-  서울: '서울', 경기: '경기', 인천: '인천', 강원: '강원',
-  충북: '충청', 충남: '충청', 대전: '대전', 세종: '세종',
-  전북: '전라', 전남: '전라', 광주: '광주',
-  경북: '경상', 경남: '경상', 대구: '대구', 울산: '울산', 부산: '부산',
-  제주: '제주',
-};
-
-function sidoOf(address = '') {
-  for (const key of Object.keys(SIDO_ALIAS)) {
-    if (address.startsWith(key)) return SIDO_ALIAS[key];
-  }
-  // "서울특별시" / "전라북도" 처럼 긴 표기 대응
-  const long = {
-    서울특별시: '서울', 경기도: '경기', 인천광역시: '인천', 강원특별자치도: '강원', 강원도: '강원',
-    충청북도: '충청', 충청남도: '충청', 대전광역시: '대전', 세종특별자치시: '세종',
-    전북특별자치도: '전라', 전라북도: '전라', 전라남도: '전라', 광주광역시: '광주',
-    경상북도: '경상', 경상남도: '경상', 대구광역시: '대구', 울산광역시: '울산',
-    부산광역시: '부산', 제주특별자치도: '제주',
-  };
-  for (const [k, v] of Object.entries(long)) if (address.startsWith(k)) return v;
-  return '';
-}
+/**
+ * 이름 매칭은 geocode 와 같은 규칙(scripts/lib/match.mjs)을 쓴다.
+ * 처음엔 여기만 "이름 완전일치" 를 쓰다가 132곳 중 36곳밖에 못 잡았다.
+ */
 
 /* ── 운영시간 파싱 ──────────────────────────────────────────
-   정보나루의 operatingTime 은 자유 문자열이다. 흔한 패턴만 처리하고,
-   못 읽으면 label 만 남기고 byDay 는 비운다. 틀린 시간을 단정해 보여주느니
-   "운영중" 뱃지를 숨기는 편이 낫다. */
+   정보나루의 operatingTime 은 표준화되지 않은 자유 문자열이다.
+   "화~금 09:00~21:00 / 토,일 09:00~18:00" 처럼 평일과 주말이 다른 경우가 많아,
+   첫 시간대 하나만 읽으면 주말 마감 시각을 틀리게 말하게 된다.
+
+   그래서 (1) 평일/주말 구분이 보이면 나눠서 적용하고
+        (2) 시간대가 하나뿐이면 전 요일에 적용하고
+        (3) 그 외 애매하면 byDay 를 비워 "운영중" 판정을 포기한다.
+   틀린 시각을 단정하느니 뱃지를 숨기는 편이 낫다. */
+
+const WEEKDAY_HINT = /(평일|월~금|월-금|월~목|화~금|주중)/;
+const WEEKEND_HINT = /(주말|토~일|토,\s*일|토·일|토요일|일요일)/;
+
+/** "09:00~18:00" 같은 시간대를 모두 뽑는다 */
+function extractRanges(text) {
+  const re = /(\d{1,2})\s*:\s*(\d{2})\s*[~\-–]\s*(\d{1,2})\s*:\s*(\d{2})/g;
+  const out = [];
+  let m;
+  while ((m = re.exec(text)) !== null) {
+    const open = Number(m[1]) * 60 + Number(m[2]);
+    const close = Number(m[3]) * 60 + Number(m[4]);
+    if (close > open) out.push({ open, close, index: m.index });
+  }
+  return out;
+}
+
 function parseHours(raw) {
   if (!raw) return undefined;
   const label = raw.replace(/\s+/g, ' ').trim();
+  const ranges = extractRanges(label);
 
-  const m = label.match(/(\d{1,2})\s*:\s*(\d{2})\s*[~\-–]\s*(\d{1,2})\s*:\s*(\d{2})/);
-  if (!m) return { label, byDay: [] };
+  if (ranges.length === 0) return { label, byDay: [] };
 
-  const open = Number(m[1]) * 60 + Number(m[2]);
-  const close = Number(m[3]) * 60 + Number(m[4]);
-  if (close <= open) return { label, byDay: [] };
+  // 시간대가 하나뿐이면 전 요일 동일하다고 본다
+  if (ranges.length === 1) {
+    const { open, close } = ranges[0];
+    return { label, byDay: Array.from({ length: 7 }, () => ({ open, close })) };
+  }
 
-  return { label, byDay: Array.from({ length: 7 }, () => ({ open, close })) };
+  // 평일/주말 힌트가 둘 다 있으면, 각 힌트에 가장 가까운 시간대를 붙인다
+  const wdHint = label.search(WEEKDAY_HINT);
+  const weHint = label.search(WEEKEND_HINT);
+
+  if (wdHint >= 0 && weHint >= 0) {
+    const nearest = (pos) =>
+      ranges.reduce((best, r) =>
+        Math.abs(r.index - pos) < Math.abs(best.index - pos) ? r : best
+      );
+    const wd = nearest(wdHint);
+    const we = nearest(weHint);
+
+    if (wd !== we) {
+      // 0=일 ... 6=토
+      const byDay = [
+        { open: we.open, close: we.close }, // 일
+        { open: wd.open, close: wd.close },
+        { open: wd.open, close: wd.close },
+        { open: wd.open, close: wd.close },
+        { open: wd.open, close: wd.close },
+        { open: wd.open, close: wd.close }, // 금
+        { open: we.open, close: we.close }, // 토
+      ];
+      return { label, byDay };
+    }
+  }
+
+  // 시간대는 여럿인데 어느 요일인지 판단이 안 서면 포기한다
+  return { label, byDay: [] };
 }
 
 /** 휴관일 문구에서 쉬는 요일을 뽑아 byDay 에 반영 */
@@ -171,36 +163,56 @@ try {
 }
 console.log(`\n총 ${apiLibs.length}곳 수신\n`);
 
-// 정규화 이름 → 후보 목록
-const index = new Map();
-for (const lib of apiLibs) {
-  const key = normalize(lib.libName ?? '');
-  if (!key) continue;
-  if (!index.has(key)) index.set(key, []);
-  index.get(key).push(lib);
-}
+/**
+ * 자동 매칭을 아예 막을 도서관.
+ *
+ * 이름이 통째로 겹치는데 실제로는 다른 기관인 경우다. 규칙으로는 못 거르니
+ * 확인된 것만 명시적으로 빼고, 카카오 수집분 + 수동 입력으로 채운다.
+ */
+const KNOWN_MISMATCHES = {
+  // 대법원 산하 법원도서관(고양시 일산동구)인데 정보나루에는
+  // 파주 법원읍의 '파주시립법원도서관' 만 있어 그쪽에 붙는다.
+  'court-library': '파주시립법원도서관과 혼동됨',
+};
+
+/** 우리 132곳의 이름 집합 — 다른 도서관이 끼어드는 걸 막는 데 쓴다 */
+const seedNames = new Set(seeds.map((s) => strip(s.name)));
+
+/** 후보 목록을 매처가 이해하는 모양으로 */
+const candidates = apiLibs
+  .filter((lib) => lib.libName)
+  .map((lib) => ({ name: lib.libName, address: lib.address ?? '', raw: lib }));
 
 const entries = {};
 const unmatched = [];
-const ambiguous = [];
+const lowConfidence = [];
+const review = [];
 
 for (const seed of seeds) {
-  const key = normalize(seed.name);
-  let candidates = index.get(key) ?? [];
-
-  // 지역이 다르면 후보에서 뺀다 (같은 이름의 도서관이 여러 지역에 있다)
-  if (candidates.length > 1) {
-    const sameRegion = candidates.filter((c) => sidoOf(c.address ?? '') === seed.sido);
-    if (sameRegion.length > 0) candidates = sameRegion;
-  }
-
-  if (candidates.length === 0) {
+  if (KNOWN_MISMATCHES[seed.id]) {
     unmatched.push(seed);
     continue;
   }
-  if (candidates.length > 1) ambiguous.push({ seed, count: candidates.length });
 
-  const lib = candidates[0];
+  // 지역이 맞는 후보로 먼저 좁힌다 (전국 1600곳을 매번 다 볼 필요 없다)
+  const pool = candidates.filter((c) => regionMatches(c.address, seed.sido));
+  const { picked, best } = pickBest(pool.length > 0 ? pool : candidates, seed, seedNames);
+
+  if (!picked) {
+    if (best && best.similarity >= 0.45) {
+      lowConfidence.push({ seed, guess: best.cand.name, addr: best.cand.address, s: best.score });
+    } else {
+      unmatched.push(seed);
+    }
+    continue;
+  }
+
+  // 이름이 완전히 같지 않은 매칭은 나중에 사람이 훑어볼 수 있게 남긴다
+  if (picked.similarity < 0.9) {
+    review.push({ seed, matched: picked.cand.name, sim: picked.similarity });
+  }
+
+  const lib = picked.cand.raw;
   const lat = Number(lib.latitude);
   const lng = Number(lib.longitude);
 
@@ -236,10 +248,11 @@ fs.writeFileSync(
   'utf8'
 );
 
-if (unmatched.length > 0) {
+const needManual = [...unmatched, ...lowConfidence.map((l) => l.seed)];
+if (needManual.length > 0) {
   const csv = [
     'id,name,sido,sigungu,address,phone,homepage,operatingTime,closedDays',
-    ...unmatched.map((s) => `${s.id},${s.name},${s.sido},${s.sigungu ?? ''},,,,,`),
+    ...needManual.map((s) => `${s.id},${s.name},${s.sido},${s.sigungu ?? ''},,,,,`),
   ].join('\n');
   fs.writeFileSync(path.join(ROOT, 'libraries.unmatched.csv'), '﻿' + csv, 'utf8');
 }
@@ -248,23 +261,36 @@ if (unmatched.length > 0) {
 const matched = Object.keys(entries).length;
 const withCoords = Object.values(entries).filter((e) => e.coords).length;
 const withHours = Object.values(entries).filter((e) => e.hours?.byDay?.length).length;
+const withClosed = Object.values(entries).filter((e) => e.closedDays).length;
 
-console.log('─'.repeat(46));
+console.log('─'.repeat(52));
 console.log(`매칭 성공   ${matched} / ${seeds.length}곳`);
-console.log(`  좌표      ${withCoords}곳`);
-console.log(`  운영시간  ${withHours}곳 (파싱 성공한 것만)`);
+console.log(`  주소·좌표 ${withCoords}곳`);
+console.log(`  운영시간  ${withHours}곳 (요일별 판정까지 가능한 것만)`);
+console.log(`  휴관일    ${withClosed}곳`);
+console.log(`확신 부족   ${lowConfidence.length}곳 — 비워 뒀습니다`);
 console.log(`매칭 실패   ${unmatched.length}곳`);
-if (ambiguous.length > 0) {
-  console.log(`\n⚠️ 후보가 여럿이라 첫 번째를 쓴 곳 ${ambiguous.length}건 — 확인 필요:`);
-  for (const a of ambiguous.slice(0, 10)) {
-    console.log(`   ${a.seed.name} (${a.seed.sido}) — 후보 ${a.count}개`);
+
+if (lowConfidence.length > 0) {
+  console.log('\n확신이 부족해 건너뛴 곳:');
+  for (const l of lowConfidence.slice(0, 12)) {
+    console.log(`  ${l.seed.name} (${l.seed.sido})  ← 후보: ${l.guess} [${l.s}점]`);
   }
+  if (lowConfidence.length > 12) console.log(`  ... 외 ${lowConfidence.length - 12}곳`);
 }
 if (unmatched.length > 0) {
-  console.log(`\n손으로 채울 목록 → libraries.unmatched.csv`);
-  console.log('   (정보나루에 없는 작은도서관·사립·전문도서관들입니다)');
-  for (const s of unmatched.slice(0, 15)) console.log(`   - ${s.name} (${s.sido})`);
-  if (unmatched.length > 15) console.log(`   ... 외 ${unmatched.length - 15}곳`);
+  console.log('\n정보나루에 없는 곳 (작은도서관·사립·전문도서관):');
+  for (const s of unmatched.slice(0, 12)) console.log(`  ${s.name} (${s.sido})`);
+  if (unmatched.length > 12) console.log(`  ... 외 ${unmatched.length - 12}곳`);
 }
-console.log('─'.repeat(46));
+if (review.length > 0) {
+  console.log('\n이름이 정확히 같지는 않은 매칭 (한 번 훑어보세요):');
+  for (const r of review.sort((a, b) => a.sim - b.sim)) {
+    console.log(`  ${r.seed.name} (${r.seed.sido})  →  ${r.matched}  [${r.sim.toFixed(2)}]`);
+  }
+}
+if (needManual.length > 0) {
+  console.log(`\n손으로 채울 목록 → libraries.unmatched.csv (${needManual.length}곳)`);
+}
+console.log('─'.repeat(52));
 console.log('→ src/data/libraries.enriched.json 갱신 완료');
