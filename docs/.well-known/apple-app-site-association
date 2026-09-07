@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "APPLE_TEAM_ID.com.libraryouting.app",
+        "paths": [
+          "/library/*"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>우리소리도서관 · 전국 도서관 나들이</title>
+<meta name="description" content="우리소리도서관 (서울) — 국악·우리 소리 특화 도서관. 달곰이와 함께하는 전국 도서관 나들이.">
+<meta property="og:title" content="우리소리도서관 · 전국 도서관 나들이">
+<meta property="og:description" content="국악·우리 소리 특화 도서관 · 서울">
+<meta property="og:type" content="website">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#FBF8F3;color:#2E2A26;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:520px;margin:0 auto;padding:32px 20px 56px}
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:28px}
+.brand img{width:40px;height:40px}
+.brand b{font-size:15px}
+.card{background:#fff;border:1px solid #EDE6DC;border-radius:18px;padding:24px;box-shadow:0 4px 16px rgba(139,111,92,.06)}
+.tag{display:inline-block;background:#E3F2EE;color:#3F8E7E;font-size:12px;font-weight:700;padding:5px 11px;border-radius:999px;margin-bottom:12px}
+h1{font-size:25px;line-height:1.45;margin-bottom:6px}
+.region{color:#7A7269;font-size:14px}
+dl{margin-top:20px;border-top:1px solid #F3EDE4}
+.row{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid #F3EDE4;font-size:14px}
+dt{color:#7A7269;width:64px;flex:none}
+dd{flex:1}
+.cta{display:block;background:#4FA695;color:#fff;text-align:center;font-weight:700;font-size:16px;padding:17px;border-radius:14px;margin-top:24px;text-decoration:none}
+.stores{display:flex;gap:10px;margin-top:12px}
+.stores a{flex:1;text-align:center;border:1px solid #EDE6DC;background:#fff;color:#2E2A26;padding:13px;border-radius:12px;font-size:13px;text-decoration:none}
+.hint{color:#A79E93;font-size:12.5px;text-align:center;margin-top:18px;line-height:1.7}
+.foot{text-align:center;color:#A79E93;font-size:12px;margin-top:36px}
+.foot a{color:#7A7269}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.grid a{background:#fff;border:1px solid #EDE6DC;border-radius:12px;padding:14px;text-decoration:none;color:#2E2A26;font-size:14px;font-weight:600}
+.grid small{display:block;color:#A79E93;font-weight:400;font-size:12px;margin-top:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <img src="../../dalgomi.png" alt="">
+    <b>전국 도서관 나들이</b>
+  </div>
+
+  <div class="card">
+    <span class="tag">국악·우리 소리</span>
+    <h1>우리소리도서관</h1>
+    <div class="region">서울</div>
+
+    <dl>
+      <div class="row"><dt>특화</dt><dd>국악·우리 소리</dd></div>
+      <div class="row"><dt>지역</dt><dd>서울</dd></div>
+      <div class="row"><dt>위치</dt><dd>서울 종로구 삼일대로30길 47</dd></div>
+      <div class="row"><dt>전화</dt><dd>070-4550-5015</dd></div>
+    </dl>
+
+    <a class="cta" id="open" href="#">앱에서 열기</a>
+
+    <div class="stores">
+      <a href="https://apps.apple.com/kr/app/idAPPLE_APP_ID">App Store</a>
+      <a href="https://play.google.com/store/apps/details?id=com.libraryouting.app">Google Play</a>
+    </div>
+
+    <p class="hint">앱이 설치되어 있으면 바로 열립니다.<br>없다면 위에서 설치해 주세요.</p>
+  </div>
+
+  <p class="foot"><a href="../../">전국 도서관 나들이 홈으로</a></p>
+</div>
+
+<script>
+(function(){
+  var scheme = "libraryapp://library/urisori-library";
+  var btn = document.getElementById('open');
+  function tryOpen(){ window.location.href = scheme; }
+  btn.addEventListener('click', function(e){ e.preventDefault(); tryOpen(); });
+  // 앱 링크로 이미 앱이 열렸다면 이 페이지는 백그라운드로 간다.
+  // 자동 실행은 하지 않는다 — 앱이 없는 사람에게 오류 화면만 띄우게 되기 때문.
+})();
+</script>
+</body>
+</html>

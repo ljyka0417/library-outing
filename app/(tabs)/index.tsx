@@ -124,7 +124,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   content: {
-    paddingBottom: spacing.xxxl,
+    // 마지막 항목이 탭바에 가리지 않도록 넉넉히 둔다
+    paddingBottom: spacing.xxxl + spacing.lg,
   },
   header: {
     paddingHorizontal: spacing.xl,
