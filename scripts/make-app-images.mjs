@@ -1,19 +1,17 @@
 /**
- * 달곰이로 앱 아이콘·스플래시 이미지를 만든다.
+ * 달곰이로 시작 화면(스플래시)을 만든다.
  *
  *   npm run app-images
  *
  * 만드는 것
- *   assets/splash.png         1284×2778  시작 화면 (손 흔드는 달곰이)
- *   assets/icon.png           1024×1024  iOS 홈 화면 아이콘 (얼굴)
- *   assets/adaptive-icon.png  1024×1024  Android. 원/사각 등으로 잘리므로
- *                                        가운데 66% 안전영역 안에만 그린다
+ *   assets/splash.png         1284×2778  시작 화면 (손 흔드는 달곰이 + 로고)
+ *
+ * 홈 화면 아이콘은 여기서 만들지 않는다 →  npm run icon
  *
  * ⚠️ 해상도 한계
  *   원본 시트가 1536×1024 라 캐릭터 한 마리가 180~270px 밖에 안 된다.
- *   1024px 아이콘으로 키우면 3~5배 확대라 가장자리가 뭉개진다.
- *   시트를 3배(4608×3072)로 다시 내보낸 뒤 npm run slice-mascot → 이 스크립트를
- *   다시 돌리면 선명해진다. 그때까지는 임시본으로 쓴다.
+ *   크게 키우면 가장자리가 뭉갠다. 시트를 3배(4608×3072)로 다시 내보낸 뒤
+ *   npm run slice-mascot → 이 스크립트를 다시 돌리면 선명해진다.
  */
 
 import fs from 'node:fs';
@@ -131,31 +129,18 @@ place(splash, logo, 560, 0.585);
 fs.writeFileSync(path.join(OUT, 'splash.png'), PNG.sync.write(splash));
 console.log('✓ assets/splash.png          1284×2778  (달곰이 + 로고)');
 
-/* ── iOS 아이콘 ───────────────────────────────────────────────
-   투명도가 있으면 안 되고, 모서리는 iOS 가 알아서 둥글린다.
-   홈 화면에서 60px 남짓으로 작아지므로 얼굴만 크게 넣는다. */
-const face = read('dalgomi-face-happy.png');
-const icon = canvas(1024, 1024, ICON_BG);
-place(icon, face, 800, 0.52);
-fs.writeFileSync(path.join(OUT, 'icon.png'), PNG.sync.write(icon));
-console.log('✓ assets/icon.png            1024×1024');
+/* ── 아이콘은 여기서 만들지 않는다 ────────────────────────────
+   전에는 달곰이 얼굴을 오려 아이콘으로 썼다. 원본이 작아 3~5배 확대라
+   가장자리가 뭉갰고, 무엇보다 "캐릭터 앱" 으로 읽혀서 지도·가이드북
+   성격이 드러나지 않았다.
 
-/* ── Android 적응형 아이콘 ────────────────────────────────────
-   런처가 원·사각·물방울 등 제멋대로 마스킹한다. 가장자리 17%씩은 잘려도
-   괜찮아야 하므로, 내용은 가운데 66% 안전영역 안에만 그린다. */
-const adaptive = canvas(1024, 1024, ICON_BG);
-place(adaptive, face, 560, 0.5);
-fs.writeFileSync(path.join(OUT, 'adaptive-icon.png'), PNG.sync.write(adaptive));
-console.log('✓ assets/adaptive-icon.png   1024×1024 (안전영역 66% 준수)');
-
-/* ── 파비콘 (웹) ─────────────────────────────────────────────── */
-const favicon = canvas(96, 96, ICON_BG);
-place(favicon, face, 84, 0.52);
-fs.writeFileSync(path.join(OUT, 'favicon.png'), PNG.sync.write(favicon));
-console.log('✓ assets/favicon.png         96×96');
+   지금 아이콘은 도형으로 그린다:  npm run icon
+   여기서 icon.png 를 다시 쓰면 그걸 덮어쓰게 되므로 손대지 않는다. */
 
 console.log(`
-원본 캐릭터가 ${face.width}px 라 아이콘(1024px)은 약 ${(1024 / face.width).toFixed(1)}배 확대됐습니다.
+스플래시의 달곰이는 원본 시트를 확대한 것이라 가장자리가 약간 무릅니다.
 선명하게 하려면 시트를 3배 크기로 다시 내보낸 뒤
   npm run slice-mascot  →  npm run app-images
-순서로 다시 돌리면 됩니다.`);
+순서로 다시 돌리면 됩니다.
+
+홈 화면 아이콘은 이 스크립트가 아니라  npm run icon  이 만듭니다.`);

@@ -28,9 +28,10 @@
     },
     "android": {
       "package": "com.libraryouting.app",
+      "//adaptiveIcon": "backgroundColor 는 scripts/make-icon.mjs 의 바탕색과 같아야 한다. 아이콘 PNG 는 도형만 담고 바탕은 비어 있다.",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#E3F2EE"
+        "backgroundColor": "#111111"
       },
       "intentFilters": [
         {
