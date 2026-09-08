@@ -33,12 +33,64 @@ const BOX = 1024;
 /** 픽셀 하나를 몇 등분해 볼 것인가. 계단을 없애기 위한 초과표본. */
 const SS = 4;
 
+const hex = (s) => [
+  parseInt(s.slice(1, 3), 16),
+  parseInt(s.slice(3, 5), 16),
+  parseInt(s.slice(5, 7), 16),
+];
+
+/**
+ * 색 테마.
+ *
+ * bg 가 두 색이면 왼쪽 위에서 오른쪽 아래로 흐르는 그라데이션이 된다.
+ * 홈 화면(60px)에서는 거의 안 보이지만 앱스토어 페이지에서는 크게 나오고,
+ * 그때 단색과 확실히 달라 보인다.
+ *
+ * vignette 은 네 귀퉁이를 아주 살짝 눌러 주는 값이다. 0.06 정도면
+ * "왜인지 모르게 도형이 떠 보이는" 효과만 남고 그림자로는 안 읽힌다.
+ */
+const THEMES = {
+  ink: {
+    name: '먹색 그라데이션',
+    bg: [hex('#3A3A3C'), hex('#0B0B0C')],
+    fg: [hex('#FFFFFF'), hex('#E6E9E8')],
+    vignette: 0.07,
+  },
+  forest: {
+    name: '딥 그린 그라데이션 (브랜드 색 계열)',
+    bg: [hex('#28453D'), hex('#0A1512')],
+    fg: [hex('#FFFFFF'), hex('#DFEFE9')],
+    vignette: 0.07,
+  },
+  midnight: {
+    name: '미드나잇 블루 그라데이션',
+    bg: [hex('#2B4560'), hex('#0A1119')],
+    fg: [hex('#FFFFFF'), hex('#DDE7F0')],
+    vignette: 0.07,
+  },
+  mint: {
+    name: '민트 그라데이션',
+    bg: [hex('#63C3B0'), hex('#2E6D60')],
+    fg: [hex('#FFFFFF'), hex('#EAF6F3')],
+    vignette: 0.05,
+  },
+  flat: {
+    name: '검은 바탕 · 흰 도형 (단색)',
+    bg: [hex('#111111'), hex('#111111')],
+    fg: [hex('#FFFFFF'), hex('#FFFFFF')],
+    vignette: 0,
+  },
+  invert: {
+    name: '흰 바탕 · 검은 도형 (단색)',
+    bg: [hex('#FFFFFF'), hex('#FFFFFF')],
+    fg: [hex('#111111'), hex('#111111')],
+    vignette: 0,
+  },
+};
+
 const argv = process.argv.slice(2);
-const theme = argv.includes('--invert')
-  ? { bg: [0xff, 0xff, 0xff], fg: [0x11, 0x11, 0x11], name: '흰 바탕 · 검은 도형' }
-  : argv.includes('--mint')
-    ? { bg: [0x4f, 0xa6, 0x95], fg: [0xff, 0xff, 0xff], name: '민트 바탕 · 흰 도형' }
-    : { bg: [0x11, 0x11, 0x11], fg: [0xff, 0xff, 0xff], name: '검은 바탕 · 흰 도형' };
+const key = Object.keys(THEMES).find((k) => argv.includes(`--${k}`)) ?? 'ink';
+const theme = THEMES[key];
 
 /* ── 도형 정의 ────────────────────────────────────────────── */
 
@@ -121,6 +173,36 @@ function roundedRect(x, y, w, h, r) {
   ];
 }
 
+/* ── 색 ───────────────────────────────────────────────────── */
+
+const mix = (a, b, t) => [
+  a[0] + (b[0] - a[0]) * t,
+  a[1] + (b[1] - a[1]) * t,
+  a[2] + (b[2] - a[2]) * t,
+];
+
+function writePixel(data, i, rgb, alpha) {
+  data[i] = Math.max(0, Math.min(255, Math.round(rgb[0])));
+  data[i + 1] = Math.max(0, Math.min(255, Math.round(rgb[1])));
+  data[i + 2] = Math.max(0, Math.min(255, Math.round(rgb[2])));
+  data[i + 3] = alpha;
+}
+
+/**
+ * 네 귀퉁이를 아주 살짝 어둡게 한다.
+ *
+ * 가운데에서 멀어질수록 조금씩 눌러 주면 도형이 떠 보인다.
+ * 세게 주면 그림자로 읽혀 촌스러워지므로 값을 낮게 잡았다.
+ */
+function shade(rgb, x, y, size) {
+  if (!theme.vignette) return rgb;
+  const dx = (x / (size - 1)) * 2 - 1;
+  const dy = (y / (size - 1)) * 2 - 1;
+  const d = Math.min(1, Math.sqrt(dx * dx + dy * dy) / Math.SQRT2);
+  const k = 1 - theme.vignette * d * d;
+  return [rgb[0] * k, rgb[1] * k, rgb[2] * k];
+}
+
 /* ── 래스터라이즈 ─────────────────────────────────────────── */
 
 /**
@@ -169,7 +251,7 @@ function fillPolygon(mask, size, poly, value, transform) {
  * 0.8 정도로 줄여 가운데 안전영역 안에 들어가게 한다.
  * transparent 를 켜면 바탕을 비운다 (Android 는 배경색을 따로 준다).
  */
-function render(size, { scale = 1, transparent = false } = {}) {
+function render(size, { scale = 1, transparent = false, bgOnly = false } = {}) {
   const big = size * SS;
   const mask = new Uint8Array(big * big);
 
@@ -200,16 +282,17 @@ function render(size, { scale = 1, transparent = false } = {}) {
       const a = hit / area;
       const i = (y * size + x) << 2;
 
-      if (transparent) {
-        png.data[i] = theme.fg[0];
-        png.data[i + 1] = theme.fg[1];
-        png.data[i + 2] = theme.fg[2];
-        png.data[i + 3] = Math.round(a * 255);
+      // 왼쪽 위 0 → 오른쪽 아래 1 로 흐르는 대각선 위치
+      const t = (x + y) / (2 * (size - 1));
+      const fg = mix(theme.fg[0], theme.fg[1], t);
+
+      if (bgOnly) {
+        writePixel(png.data, i, shade(mix(theme.bg[0], theme.bg[1], t), x, y, size), 255);
+      } else if (transparent) {
+        writePixel(png.data, i, fg, Math.round(a * 255));
       } else {
-        for (let c = 0; c < 3; c++) {
-          png.data[i + c] = Math.round(theme.bg[c] + (theme.fg[c] - theme.bg[c]) * a);
-        }
-        png.data[i + 3] = 255;
+        const bg = shade(mix(theme.bg[0], theme.bg[1], t), x, y, size);
+        writePixel(png.data, i, mix(bg, fg, a), 255);
       }
     }
   }
@@ -225,12 +308,18 @@ function write(name, png) {
 console.log(`앱 아이콘 생성 — ${theme.name}\n`);
 
 write('icon.png', render(1024, { scale: 0.98 }));
-// Android 는 마스크 바깥이 잘린다. 배경색은 app.json 의 adaptiveIcon 이 칠한다.
+// Android 는 마스크 바깥이 잘린다. 도형만 담고 바탕은 따로 깐다.
 write('adaptive-icon.png', render(1024, { scale: 0.78, transparent: true }));
+// 안드로이드 배경. 단색으로는 그라데이션을 줄 수 없어 이미지로 깐다.
+write('adaptive-background.png', render(1024, { bgOnly: true }));
 write('favicon.png', render(64, { scale: 0.92 }));
 
+const mid = mix(theme.bg[0], theme.bg[1], 0.5)
+  .map((n) => Math.round(n).toString(16).padStart(2, '0'))
+  .join('');
+
 console.log(`
-app.json 확인
-  android.adaptiveIcon.backgroundColor 를 바탕색과 같게 맞추세요.
-  지금 테마의 바탕색: #${theme.bg.map((n) => n.toString(16).padStart(2, '0')).join('')}
+app.json 의 android.adaptiveIcon
+  backgroundImage 로 adaptive-background.png 를 쓰고 있습니다.
+  그게 안 먹는 환경이면 backgroundColor 를 #${mid} 로 두세요 (그라데이션 중간색).
 `);

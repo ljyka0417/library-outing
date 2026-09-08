@@ -28,10 +28,11 @@
     },
     "android": {
       "package": "com.libraryouting.app",
-      "//adaptiveIcon": "backgroundColor 는 scripts/make-icon.mjs 의 바탕색과 같아야 한다. 아이콘 PNG 는 도형만 담고 바탕은 비어 있다.",
+      "//adaptiveIcon": "이미지는 npm run icon 으로 생성한다. 안드로이드는 배경을 색 하나로만 줄 수 있어 그라데이션이 안 되므로 배경도 이미지로 깐다. backgroundColor 는 backgroundImage 가 안 먹는 환경을 위한 대비값(그라데이션 중간색).",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#111111"
+        "backgroundImage": "./assets/adaptive-background.png",
+        "backgroundColor": "#192D28"
       },
       "intentFilters": [
         {
