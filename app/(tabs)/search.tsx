@@ -76,10 +76,12 @@ export default function SearchScreen() {
           selected={!category}
           onPress={() => setCategory(undefined)}
         />
+        {/* 칩에도 부제는 붙이지 않는다. "음악·LP" 는 그 분류가 LP 도서관만
+            모아 둔 것처럼 읽힌다. 실제로는 음악 도서관 6곳 중 한 곳뿐이다. */}
         {CATEGORIES.map((c) => (
           <Chip
             key={c.id}
-            label={`${c.name}·${c.sub}`}
+            label={c.name}
             selected={category === c.id}
             onPress={() => setCategory(category === c.id ? undefined : c.id)}
           />
@@ -107,9 +109,7 @@ export default function SearchScreen() {
       </ScrollView>
 
       <Text style={styles.count}>
-        {activeCategoryLabel
-          ? `${activeCategoryLabel.name}·${activeCategoryLabel.sub} `
-          : ''}
+        {activeCategoryLabel ? `${activeCategoryLabel.name} ` : ''}
         도서관 {results.length}곳
         {isStale ? ' · 오프라인 저장본' : ''}
       </Text>

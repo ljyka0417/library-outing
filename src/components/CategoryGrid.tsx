@@ -2,8 +2,25 @@ import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { CATEGORIES } from '@/data/categories';
+import { MOCK_LIBRARIES } from '@/data/libraries.mock';
 import { categoryColors, colors, radius, spacing, typography } from '@/theme';
 import type { CategoryId } from '@/types';
+
+/**
+ * 주제별 도서관 수.
+ *
+ * 원래 이 자리에는 부제("LP", "IT", "디자인")가 있었다. 부제는 그 분류를
+ * 설명하는 말이 아니라 그 안의 한 예일 뿐이어서, 「음악·LP」를 누른 사람이
+ * LP 도서관을 기대하고 들어와 음악 도서관 6곳을 보게 됐다. 그중 LP 는 한 곳뿐이다.
+ * 개수는 어긋날 일이 없고, 어느 주제에 볼거리가 많은지 고르는 데도 도움이 된다.
+ */
+const COUNTS: Record<string, number> = MOCK_LIBRARIES.reduce(
+  (acc, lib) => {
+    for (const c of lib.categories) acc[c] = (acc[c] ?? 0) + 1;
+    return acc;
+  },
+  {} as Record<string, number>
+);
 
 interface Props {
   onSelect: (id: CategoryId) => void;
@@ -24,7 +41,7 @@ export function CategoryGrid({ onSelect, selected }: Props) {
             onPress={() => onSelect(cat.id)}
             style={({ pressed }) => [styles.item, pressed && { opacity: 0.7 }]}
             accessibilityRole="button"
-            accessibilityLabel={`${cat.name} ${cat.sub} 주제 도서관 보기`}
+            accessibilityLabel={`${cat.name} 주제 도서관 ${COUNTS[cat.id] ?? 0}곳 보기`}
           >
             <View
               style={[
@@ -36,7 +53,7 @@ export function CategoryGrid({ onSelect, selected }: Props) {
               <Ionicons name={cat.icon as never} size={24} color={palette.fg} />
             </View>
             <Text style={styles.name}>{cat.name}</Text>
-            <Text style={styles.sub}>{cat.sub}</Text>
+            <Text style={styles.sub}>{COUNTS[cat.id] ?? 0}곳</Text>
           </Pressable>
         );
       })}

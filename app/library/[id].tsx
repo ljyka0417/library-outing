@@ -118,12 +118,10 @@ export default function LibraryDetailScreen() {
           <View style={styles.badgeRow}>
             {library.isLandmark ? <Badge label="지역 대표" tone="brown" /> : null}
             {library.categories.map((c) =>
+              // 부제(LP·IT 같은 예시어)는 붙이지 않는다. 그 분류의 한 예일 뿐이라
+              // 이 도서관 이야기인 것처럼 읽힌다. 특화는 아래 "특화" 줄에 있다.
               CATEGORY_MAP[c] ? (
-                <Badge
-                  key={c}
-                  label={`${CATEGORY_MAP[c].name}·${CATEGORY_MAP[c].sub}`}
-                  category={c}
-                />
+                <Badge key={c} label={CATEGORY_MAP[c].name} category={c} />
               ) : null
             )}
           </View>

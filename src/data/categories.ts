@@ -10,20 +10,25 @@ import type { Category } from '@/types';
  *  - 도서관이 최소 3~4곳은 모이는 분류만 만든다. 1곳짜리 분류는 필터로서 쓸모가 없다.
  *  - 그래도 안 담기는 세부 태그는 Library.specialty 에 원문 그대로 남겨 화면에 노출한다.
  *    (예: '아라가야 정신', '국채보상운동', '팬기부형')
+ *  - 화면에는 분류 이름만 쓴다. 한때 "음악·LP", "과학·IT" 처럼 부제를 함께
+ *    찍었는데, 부제는 그 분류를 설명하는 말이 아니라 안에 든 한 예였다.
+ *    음악 6곳 중 LP 는 한 곳, 과학 14곳 중 IT 는 두 곳이다. 그래서 국악
+ *    도서관 카드에도 "음악·LP" 가 붙었고, LP 를 기대하고 들어온 사람은
+ *    "다른 도서관이 섞였다" 고 느꼈다.
  */
 export const CATEGORIES: Category[] = [
-  { id: 'landmark', name: '랜드마크', sub: '대표', icon: 'business' },
-  { id: 'kids', name: '어린이', sub: '그림책', icon: 'happy' },
-  { id: 'language', name: '어학', sub: '영어', icon: 'language' },
-  { id: 'music', name: '음악', sub: 'LP', icon: 'musical-notes' },
-  { id: 'art', name: '예술', sub: '디자인', icon: 'color-palette' },
-  { id: 'history', name: '역사', sub: '전통', icon: 'library' },
-  { id: 'nature', name: '자연', sub: '환경', icon: 'leaf' },
-  { id: 'science', name: '과학', sub: 'IT', icon: 'rocket' },
-  { id: 'comics', name: '만화', sub: '영상', icon: 'film' },
-  { id: 'food', name: '음식', sub: '미식', icon: 'restaurant' },
-  { id: 'travel', name: '여행', sub: '바다', icon: 'boat' },
-  { id: 'humanities', name: '인문', sub: '사회', icon: 'people' },
+  { id: 'landmark', name: '랜드마크', icon: 'business' },
+  { id: 'kids', name: '어린이', icon: 'happy' },
+  { id: 'language', name: '어학', icon: 'language' },
+  { id: 'music', name: '음악', icon: 'musical-notes' },
+  { id: 'art', name: '예술', icon: 'color-palette' },
+  { id: 'history', name: '역사', icon: 'library' },
+  { id: 'nature', name: '자연', icon: 'leaf' },
+  { id: 'science', name: '과학', icon: 'rocket' },
+  { id: 'comics', name: '만화', icon: 'film' },
+  { id: 'food', name: '음식', icon: 'restaurant' },
+  { id: 'travel', name: '여행', icon: 'boat' },
+  { id: 'humanities', name: '인문', icon: 'people' },
 ];
 
 export const CATEGORY_MAP: Record<string, Category> = Object.fromEntries(

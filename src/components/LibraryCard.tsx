@@ -31,9 +31,16 @@ export function LibraryCard({
 }: Props) {
   const open = isOpenNow(library.hours);
   const mainCategory = library.categories[0];
-  const categoryLabel = CATEGORY_MAP[mainCategory]
-    ? `${CATEGORY_MAP[mainCategory].name}·${CATEGORY_MAP[mainCategory].sub}`
-    : '';
+
+  /**
+   * 배지에는 분류 이름만 쓴다.
+   *
+   * 예전엔 "음악·LP" 처럼 부제까지 붙였는데, 부제는 그 분류를 설명하는 말이
+   * 아니라 그 안의 한 예일 뿐이다. 음악 분류 6곳 중 실제로 LP 가 있는 곳은
+   * 한 곳인데, 국악 도서관에도 미술 도서관에도 "음악·LP" 가 찍혔다.
+   * 그 도서관만의 특화는 아래 specialty 줄이 이미 정확하게 말해 준다.
+   */
+  const categoryLabel = CATEGORY_MAP[mainCategory]?.name ?? '';
 
   if (variant === 'carousel') {
     return (

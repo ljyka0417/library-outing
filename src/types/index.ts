@@ -16,9 +16,8 @@ export type CategoryId =
 
 export interface Category {
   id: CategoryId;
-  /** 홈 그리드에 보이는 라벨. 2줄로 끊어 보여주기 위해 name/sub 로 나눈다. */
+  /** 화면에 보이는 분류 이름. 이것 말고 다른 수식어를 붙이지 않는다 */
   name: string;
-  sub: string;
   /** @expo/vector-icons 의 Ionicons 이름 */
   icon: string;
 }
