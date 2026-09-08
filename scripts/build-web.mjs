@@ -129,9 +129,9 @@ function libraryPage(seed) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${esc(seed.name)} · 전국 도서관 나들이</title>
+<title>${esc(seed.name)} · 도서관 지도</title>
 <meta name="description" content="${esc(seed.name)} (${esc(region)}) — ${esc(seed.specialty)} 특화 도서관. 달곰이와 함께하는 전국 도서관 나들이.">
-<meta property="og:title" content="${esc(seed.name)} · 전국 도서관 나들이">
+<meta property="og:title" content="${esc(seed.name)} · 도서관 지도">
 <meta property="og:description" content="${esc(seed.specialty)} 특화 도서관 · ${esc(region)}">
 <meta property="og:type" content="website">
 <style>${CSS}</style>
@@ -140,7 +140,7 @@ function libraryPage(seed) {
 <div class="wrap">
   <div class="brand">
     <img src="${ROOT_REL}/dalgomi.png" alt="">
-    <b>전국 도서관 나들이</b>
+    <b>도서관 지도</b>
   </div>
 
   <div class="card">
@@ -162,7 +162,7 @@ function libraryPage(seed) {
     <p class="hint">앱이 설치되어 있으면 바로 열립니다.<br>없다면 위에서 설치해 주세요.</p>
   </div>
 
-  <p class="foot"><a href="${ROOT_REL}/">전국 도서관 나들이 홈으로</a></p>
+  <p class="foot"><a href="${ROOT_REL}/">도서관 지도 홈으로</a></p>
 </div>
 ${OPEN_SCRIPT(seed.id)}
 </body>
@@ -193,7 +193,7 @@ function indexPage() {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>전국 도서관 나들이</title>
+<title>도서관 지도 · 전국 특화 도서관 132곳</title>
 <meta name="description" content="달곰이와 함께하는 전국 도서관 나들이. 전국 ${seeds.length}곳의 특화 도서관을 주제별로 만나보세요.">
 <style>${CSS}</style>
 </head>
@@ -201,11 +201,11 @@ function indexPage() {
 <div class="wrap" style="max-width:720px">
   <div class="brand">
     <img src="./dalgomi.png" alt="">
-    <b>전국 도서관 나들이</b>
+    <b>도서관 지도</b>
   </div>
 
   <div class="card">
-    <h1>달곰이와 함께<br>전국 도서관 나들이</h1>
+    <h1>달곰이와 함께<br>도서관 나들이</h1>
     <p style="color:#7A7269;margin-top:10px;font-size:14.5px">
       가이드북에서 마음에 드는 도서관을 찾았다면 옆에 있는 QR 코드를 찍어 보세요.
       운영시간과 특화 서비스는 물론, 주변 맛집·카페까지 한 번에 볼 수 있습니다.
@@ -219,7 +219,7 @@ function indexPage() {
   <h2 style="font-size:17px;margin:36px 0 2px">수록 도서관 ${seeds.length}곳</h2>
 ${sections}
 
-  <p class="foot">달곰이 · 전국 도서관 나들이</p>
+  <p class="foot">달곰이 · 도서관 지도</p>
 </div>
 </body>
 </html>`;
