@@ -98,7 +98,8 @@ function DataStatus() {
           기기가 옛 번들을 돌고 있는지 여기서 바로 구분할 수 있다.
           목록이 전부 같으면 도서관별 데이터가 아니라는 뜻이라 붉게 표시한다. */}
       <Text style={styles.devText}>
-        대출도서 {loanBookStatus.libraryCount}곳 / {loanBookStatus.bookCount}권
+        대출순위 도서관별 {loanBookStatus.libraryCount}곳 · 지역별{' '}
+        {loanBookStatus.regionCount}곳 / {loanBookStatus.bookCount}권
       </Text>
       <Text
         style={[

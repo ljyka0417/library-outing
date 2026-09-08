@@ -17,6 +17,11 @@
  * 그럴듯하긴 해도 그 도서관과는 아무 상관 없는 목록이었다.
  * 이걸 실제 대출 데이터로 바꾸면 "이 도서관에서 사람들이 실제로 많이 빌린 책"이 된다.
  *
+ * 정보나루에 없는 도서관도 있다. 국립·국회·대학·작은도서관은 대출 데이터를
+ * 내보내지 않는다. 132곳 중 54곳이 그렇다. 이런 곳은 시·도 단위 대출 순위를
+ * 대신 담고, 어디를 집계한 것인지 rankScope 로 표시해 화면에서 밝힌다.
+ * 없는 데이터를 지어내지 않으면서도 도서관마다 다른 목록을 보여줄 수 있다.
+ *
  * ⚠️ 표지 이미지에 대하여
  *   API 가 알라딘·네이버의 이미지 URL 을 돌려준다. 이건 정보나루가 도서관 서비스
  *   활용을 위해 제공하는 것이지만, 외부 이미지를 직접 링크하는 방식이라
@@ -46,11 +51,74 @@ const enriched = JSON.parse(
   fs.readFileSync(path.join(ROOT, 'src/data/libraries.enriched.json'), 'utf8')
 ).entries ?? {};
 
-const targets = seeds
+const geocoded = JSON.parse(
+  fs.readFileSync(path.join(ROOT, 'src/data/libraries.geocoded.json'), 'utf8')
+).entries ?? {};
+
+/**
+ * 정보나루 지역 코드. 행정표준코드와 다르다 (부산이 26 이 아니라 21).
+ * 17곳 모두 실제로 응답이 오는지 확인하고 넣었다.
+ */
+const REGIONS = [
+  ['서울', '11'],
+  ['부산', '21'],
+  ['대구', '22'],
+  ['인천', '23'],
+  ['광주', '24'],
+  ['대전', '25'],
+  ['울산', '26'],
+  ['세종', '29'],
+  ['경기', '31'],
+  ['강원', '32'],
+  ['충청북도', '33'],
+  ['충북', '33'],
+  ['충청남도', '34'],
+  ['충남', '34'],
+  ['전북', '35'],
+  ['전라북도', '35'],
+  ['전남', '36'],
+  ['전라남도', '36'],
+  ['경상북도', '37'],
+  ['경북', '37'],
+  ['경상남도', '38'],
+  ['경남', '38'],
+  ['제주', '39'],
+];
+
+/**
+ * 시·도를 알아낸다.
+ *
+ * 씨앗의 sido 는 "충청"·"경상"·"전라" 처럼 묶여 있어 코드를 정할 수 없다.
+ * 주소가 있으면 주소에서 먼저 찾는다.
+ *
+ * 광주는 조심해야 한다. 주소가 "전남광주통합특별시" 로 시작해서
+ * 앞에서부터 훑으면 전남으로 잘못 잡힌다.
+ */
+function regionOf(seed) {
+  const address = enriched[seed.id]?.address ?? geocoded[seed.id]?.address ?? '';
+  const hay = `${address} ${seed.sido}`;
+
+  if (/광주(광역시|시)|전남광주통합특별시/.test(address)) return { name: '광주', code: '24' };
+
+  for (const [name, code] of REGIONS) {
+    if (address.startsWith(name)) return { name: name.slice(0, 2), code };
+  }
+  for (const [name, code] of REGIONS) {
+    if (hay.includes(name)) return { name: name.slice(0, 2), code };
+  }
+  return null;
+}
+
+const withCode = seeds
   .map((s) => ({ ...s, libCode: enriched[s.id]?.sourceApiId }))
   .filter((s) => s.libCode);
 
-if (targets.length === 0) {
+const withoutCode = seeds
+  .filter((s) => !enriched[s.id]?.sourceApiId)
+  .map((s) => ({ ...s, region: regionOf(s) }))
+  .filter((s) => s.region);
+
+if (withCode.length === 0) {
   console.error(`
 정보나루 도서관 코드가 있는 곳이 없습니다.
   먼저  npm run enrich  를 돌려 도서관을 매칭하세요.
@@ -58,8 +126,22 @@ if (targets.length === 0) {
   process.exit(1);
 }
 
+/* 주소가 없고 sido 가 "경상"·"전라"처럼 묶여 있으면 시·도를 정할 수 없다.
+   찍어서 넣지 않고 비워 둔다. 그 도서관은 주제별 추천으로 떨어진다. */
+const noRegion = seeds.filter(
+  (s) => !enriched[s.id]?.sourceApiId && !regionOf(s)
+);
+
 console.log(`인기 대출 도서 수집`);
-console.log(`  대상 ${targets.length} / ${seeds.length}곳 (정보나루에 매칭된 곳)`);
+console.log(`  도서관별 순위 ${withCode.length}곳 (정보나루에 등록된 곳)`);
+console.log(`  지역 순위로 대체 ${withoutCode.length}곳`);
+if (noRegion.length > 0) {
+  console.log(
+    `  시·도를 몰라 건너뜀 ${noRegion.length}곳: ` +
+      noRegion.map((s) => s.name).join(', ')
+  );
+  console.log(`    → 주소를 채우면(geocode/enrich) 지역 순위가 붙습니다.`);
+}
 console.log(`  도서관당 ${PER_LIBRARY}권\n`);
 
 /**
@@ -135,10 +217,18 @@ function cleanAuthor(raw = '') {
   return first.replace(/^(지은이|글|저자|엮은이)\s*[:：]\s*/, '').trim();
 }
 
-async function fetchBooks(libCode) {
-  const url =
-    `https://data4library.kr/api/loanItemSrchByLib?authKey=${KEY}` +
-    `&libCode=${libCode}&format=json&pageSize=${PER_LIBRARY}`;
+/**
+ * 대출 순위를 받아 온다.
+ *
+ *   {libCode}   그 도서관의 순위      loanItemSrchByLib
+ *   {region}    그 시·도의 순위       loanItemSrch (region 은 무시되지 않는다)
+ */
+async function fetchBooks({ libCode, region }) {
+  const url = libCode
+    ? `https://data4library.kr/api/loanItemSrchByLib?authKey=${KEY}` +
+      `&libCode=${libCode}&format=json&pageSize=${PER_LIBRARY}`
+    : `https://data4library.kr/api/loanItemSrch?authKey=${KEY}` +
+      `&region=${region}&format=json&pageSize=${PER_LIBRARY}`;
 
   const res = await fetch(url);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -186,18 +276,20 @@ async function fetchBooks(libCode) {
 }
 
 const byLibrary = {};
-let ok = 0;
+let okLibrary = 0;
+let okRegion = 0;
 const failed = [];
 const nameMismatch = [];
 
-for (let i = 0; i < targets.length; i++) {
-  const t = targets[i];
-  progress(i, targets.length, t.name);
+/* 1) 정보나루에 등록된 도서관 — 그 도서관의 실제 대출 순위 */
+for (let i = 0; i < withCode.length; i++) {
+  const t = withCode[i];
+  progress(i, withCode.length, t.name);
   try {
-    const { books, libNm } = await fetchBooks(t.libCode);
+    const { books, libNm } = await fetchBooks({ libCode: t.libCode });
     if (books.length > 0) {
-      byLibrary[t.id] = books;
-      ok++;
+      byLibrary[t.id] = { scope: 'library', books };
+      okLibrary++;
       // 정보나루는 "전남광주통합특별시 북구 운암도서관" 처럼 행정구역을 앞에 붙여 준다.
       // 그래서 유사도만 보면 멀쩡한 매칭도 경고가 뜬다 — 포함 관계도 같이 본다.
       const a = strip(libNm);
@@ -216,15 +308,51 @@ for (let i = 0; i < targets.length; i++) {
 
 process.stdout.write('\n\n');
 
+/* 2) 등록되지 않은 도서관 — 시·도 순위로 대신한다.
+      같은 시·도는 결과가 같으므로 한 번만 받아 돌려쓴다.
+
+      코드는 붙었는데 대출 데이터가 비어 있는 곳도 여기로 넘어온다.
+      정보나루에 등록만 되어 있고 실적을 올리지 않은 도서관이 있다. */
+const regionCache = new Map();
+
+const regionTargets = [
+  ...withoutCode,
+  ...failed.splice(0).map((t) => ({ ...t, region: regionOf(t) })),
+].filter((t) => t.region);
+
+for (let i = 0; i < regionTargets.length; i++) {
+  const t = regionTargets[i];
+  progress(i, regionTargets.length, `${t.name} (${t.region.name})`);
+  try {
+    if (!regionCache.has(t.region.code)) {
+      const { books } = await fetchBooks({ region: t.region.code });
+      regionCache.set(t.region.code, books);
+      await sleep(150);
+    }
+    const books = regionCache.get(t.region.code);
+    if (books.length > 0) {
+      byLibrary[t.id] = { scope: 'region', region: t.region.name, books };
+      okRegion++;
+    } else {
+      failed.push(t);
+    }
+  } catch {
+    failed.push(t);
+  }
+}
+
+process.stdout.write('\n\n');
+
 fs.writeFileSync(
   path.join(ROOT, 'src/data/books.generated.json'),
   JSON.stringify(
     {
       _readme: [
-        '정보나루 인기대출도서 API 로 수집한 도서관별 실제 대출 순위입니다.',
-        '직접 고치지 마세요 — 다음 실행 때 덮어씁니다.',
+        '정보나루 대출 순위입니다. 직접 고치지 마세요 — 다음 실행 때 덮어씁니다.',
         '생성: npm run collect-books',
-        '비어 있으면 앱은 주제별 추천 도서로 떨어집니다.',
+        'scope=library 는 그 도서관의 순위, scope=region 은 그 시·도의 순위입니다.',
+        '정보나루에 등록되지 않은 도서관은 자기 대출 데이터가 없어 지역 순위로 대신합니다.',
+        '둘 다 없으면 앱은 주제별 추천 도서로 떨어집니다.',
       ],
       _generatedAt: new Date().toISOString(),
       byLibrary,
@@ -235,14 +363,13 @@ fs.writeFileSync(
   'utf8'
 );
 
-const totalBooks = Object.values(byLibrary).reduce((n, arr) => n + arr.length, 0);
-const withCover = Object.values(byLibrary)
-  .flat()
-  .filter((b) => b.coverImageUrl).length;
+const allBooks = Object.values(byLibrary).flatMap((e) => e.books);
+const withCover = allBooks.filter((b) => b.coverImageUrl).length;
 
 console.log('─'.repeat(52));
-console.log(`수집 성공  ${ok} / ${targets.length}곳 · 도서 ${totalBooks}권`);
-console.log(`  표지 있음 ${withCover}권`);
+console.log(`도서관별 순위  ${okLibrary} / ${withCode.length}곳`);
+console.log(`지역 순위 대체 ${okRegion} / ${regionTargets.length}곳`);
+console.log(`도서 ${allBooks.length}권 · 표지 있음 ${withCover}권`);
 if (failed.length > 0) {
   console.log(`\n대출 데이터가 없던 곳 ${failed.length}곳:`);
   for (const f of failed.slice(0, 10)) console.log(`  ${f.name} (${f.sido})`);
@@ -263,13 +390,15 @@ if (nameMismatch.length > 0) {
  * 전에 이 검증이 없어서, 전국 순위를 도서관별 순위인 척 보여주는 채로 나갔다.
  * 한 곳만 보면 그럴듯해 보이기 때문에 한 곳만 봐서는 알 수 없다.
  */
-const distinct = new Set(
-  Object.values(byLibrary).map((arr) => arr.map((b) => b.title).join('|'))
-);
+const listOf = (e) => e.books.map((b) => b.title).join('|');
+const libraryEntries = Object.values(byLibrary).filter((e) => e.scope === 'library');
+const distinct = new Set(libraryEntries.map(listOf)).size;
 
 console.log('─'.repeat(52));
-console.log(`서로 다른 목록  ${distinct.size} / ${ok}곳`);
-if (ok > 1 && distinct.size === 1) {
+console.log(`도서관별 순위 중 서로 다른 목록  ${distinct} / ${libraryEntries.length}곳`);
+console.log(`지역 순위 ${regionCache.size}종`);
+
+if (libraryEntries.length > 1 && distinct === 1) {
   console.error(`
 ✗ 모든 도서관이 같은 목록입니다. 도서관별 데이터가 아닙니다.
   loanItemSrchByLib 가 아니라 loanItemSrch 를 부르고 있지 않은지 확인하세요.

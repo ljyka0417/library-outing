@@ -21,7 +21,8 @@
     "app-images": "node scripts/make-app-images.mjs",
     "build:android": "eas build --profile development --platform android",
     "build:ios": "eas build --profile development --platform ios",
-    "build:preview": "eas build --profile preview --platform android"
+    "build:preview": "eas build --profile preview --platform android",
+    "match-coords": "node scripts/match-by-coords.mjs"
   },
   "dependencies": {
     "@expo/metro-runtime": "~57.0.15",

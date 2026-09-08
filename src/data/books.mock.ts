@@ -97,8 +97,16 @@ interface GeneratedBook {
   coverImageUrl?: string;
 }
 
+interface GeneratedEntry {
+  /** library = 이 도서관의 순위, region = 이 시·도의 순위 */
+  scope: 'library' | 'region';
+  /** scope 가 region 일 때의 지역 이름 */
+  region?: string;
+  books: GeneratedBook[];
+}
+
 const loanBooks =
-  (generated as { byLibrary?: Record<string, GeneratedBook[]> }).byLibrary ?? {};
+  (generated as { byLibrary?: Record<string, GeneratedEntry> }).byLibrary ?? {};
 
 /**
  * 수집 시각. 화면 캐시 키에 섞어 쓴다.
@@ -113,9 +121,9 @@ export const loanDataVersion =
 
 /** 실제 대출 순위가 있으면 그걸, 없으면 주제별 추천을 돌려준다. */
 export function booksForLibrary(libraryId: string, categories: CategoryId[]): Book[] {
-  const real = loanBooks[libraryId];
-  if (real && real.length > 0) {
-    return real.map((b, i) => ({
+  const entry = loanBooks[libraryId];
+  if (entry && entry.books.length > 0) {
+    return entry.books.map((b, i) => ({
       id: `${libraryId}-loan-${i}`,
       title: b.title,
       author: b.author ?? '',
@@ -123,6 +131,8 @@ export function booksForLibrary(libraryId: string, categories: CategoryId[]): Bo
       // 대출 순위 기반이라 주제 분류는 도서관의 대표 주제를 따른다
       category: categories[0],
       rank: i + 1,
+      rankScope: entry.scope,
+      rankRegion: entry.region,
     }));
   }
   return booksForCategories(categories);
@@ -130,11 +140,14 @@ export function booksForLibrary(libraryId: string, categories: CategoryId[]): Bo
 
 /** 실제 대출 데이터가 있는 도서관 수 (개발 중 현황 확인용) */
 export const loanBookStatus = {
-  libraryCount: Object.keys(loanBooks).length,
-  bookCount: Object.values(loanBooks).reduce((n, arr) => n + arr.length, 0),
+  libraryCount: Object.values(loanBooks).filter((e) => e.scope === 'library').length,
+  regionCount: Object.values(loanBooks).filter((e) => e.scope === 'region').length,
+  bookCount: Object.values(loanBooks).reduce((n, e) => n + e.books.length, 0),
   /** 도서관마다 목록이 실제로 다른지. 같은 목록이 돌아다니면 수집이 잘못된 것이다 */
   distinctCount: new Set(
-    Object.values(loanBooks).map((arr) => arr.map((b) => b.title).join('|'))
+    Object.values(loanBooks)
+      .filter((e) => e.scope === 'library')
+      .map((e) => e.books.map((b) => b.title).join('|'))
   ).size,
   version: loanDataVersion,
 };

@@ -23,11 +23,27 @@ import { useAppStore } from '@/store/useAppStore';
 import { colors, radius, shadow, spacing, typography } from '@/theme';
 import { callPhone, openWeb } from '@/utils/mapLinks';
 import { isOpenNow, todayHoursLabel } from '@/utils/openingHours';
-import type { Library } from '@/types';
+import type { Book, Library } from '@/types';
 
 /** 시/군/구는 확인된 곳만 있으므로 있을 때만 붙인다. */
 function regionLabel(library: Library) {
   return [library.region.sido, library.region.sigungu].filter(Boolean).join(' ');
+}
+
+/**
+ * 도서 섹션 제목.
+ *
+ * 정보나루에 등록되지 않은 도서관(국립·국회·대학·작은도서관)은 자기 대출
+ * 데이터가 없어서 시·도 순위를 대신 보여준다. 그럴 땐 지역 이름을 제목에
+ * 넣어, 이게 이 도서관의 순위가 아니라는 걸 읽는 사람이 바로 알게 한다.
+ */
+function booksHeading(first: Book, library: Library) {
+  if (!first.rank) return { title: '이 주제의 추천 도서' };
+  if (first.rankScope === 'region') {
+    const where = first.rankRegion ?? library.region.sido;
+    return { title: `${where}에서 많이 빌린 책`, subtitle: '이 지역 도서관들의 대출 순위' };
+  }
+  return { title: '이 도서관에서 많이 빌린 책', subtitle: '실제 대출 순위' };
 }
 
 /**
@@ -233,12 +249,10 @@ export default function LibraryDetailScreen() {
         {/* 추천 도서 */}
         {books && books.length > 0 ? (
           <View style={styles.section}>
-            {/* 실제 대출 순위 데이터가 있으면 그렇다고 밝힌다.
-                주제별 일반 추천과 구분되어야 정보의 무게가 다르게 읽힌다. */}
-            <SectionHeader
-              title={books[0].rank ? '이 도서관에서 많이 빌린 책' : '이 주제의 추천 도서'}
-              subtitle={books[0].rank ? '실제 대출 순위' : undefined}
-            />
+            {/* 무엇을 집계한 목록인지 제목에서 분명히 밝힌다.
+                도서관 순위·지역 순위·주제 추천은 정보의 무게가 다르고,
+                지역 순위를 그 도서관 순위인 척 보여주면 거짓말이 된다. */}
+            <SectionHeader {...booksHeading(books[0], library)} />
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}

@@ -5,7 +5,7 @@
     "API 에 없는 도서관은 libraries.manual.json 에 손으로 넣으세요. 그쪽이 우선합니다.",
     "entries 가 비어 있으면 앱은 이름·지역·특화 태그만으로 동작합니다."
   ],
-  "_generatedAt": "2026-09-07T16:50:50.051Z",
+  "_generatedAt": "2026-09-08T15:27:11.207Z",
   "entries": {
     "seoul-library": {
       "sourceApiId": "111314",
@@ -2181,6 +2181,84 @@
       "hours": {
         "label": "평일 : 오전9시~오후6시 / 주말 : 오전9시~오후5시",
         "byDay": []
+      }
+    },
+    "gwacheon-it": {
+      "sourceApiId": "141062",
+      "matchedName": "과천시정보과학도서관",
+      "matchedBy": "coords",
+      "address": "경기도 과천시 중앙로24",
+      "phone": "02-2150-3008",
+      "homepage": "http://www.gclib.go.kr",
+      "closedDays": "매주 금요일 / 법정공휴일, 개관기념일",
+      "coords": {
+        "lat": 37.4187291,
+        "lng": 126.9897092
+      }
+    },
+    "songdo-intl": {
+      "sourceApiId": "128121",
+      "matchedName": "송도국제도서관",
+      "matchedBy": "coords",
+      "address": "인천광역시 연수구 아카데미로 166",
+      "phone": "032-749-8270",
+      "homepage": "http://www.yspubliclib.go.kr",
+      "closedDays": "매주 월요일 / 법정공휴일",
+      "coords": {
+        "lat": 37.3805347,
+        "lng": 126.6319779
+      }
+    },
+    "dongchun-narae": {
+      "sourceApiId": "128108",
+      "matchedName": "동춘나래도서관",
+      "matchedBy": "coords",
+      "address": "인천광역시 연수구 봉재산로 54번길 30",
+      "phone": "032-749-8242",
+      "homepage": "http://www.yspubliclib.go.kr",
+      "closedDays": "매주 월요일 / 법정공휴일",
+      "coords": {
+        "lat": 37.4077783,
+        "lng": 126.6639241
+      }
+    },
+    "songdo-kids": {
+      "sourceApiId": "128047",
+      "matchedName": "송도국제어린이",
+      "matchedBy": "coords",
+      "address": "인천광역시 연수구 컨벤시아대로 43",
+      "phone": "032-749-8220",
+      "homepage": "http://www.yspubliclib.go.kr",
+      "closedDays": "매주 월요일 / 법정공휴일",
+      "coords": {
+        "lat": 37.3979884,
+        "lng": 126.6536217
+      }
+    },
+    "seonhak-starlight": {
+      "sourceApiId": "128104",
+      "matchedName": "선학별빛도서관",
+      "matchedBy": "coords",
+      "address": "인천광역시 연수구 넘말로 30",
+      "phone": "032-749-6710",
+      "homepage": "http://www.yspubliclib.go.kr",
+      "closedDays": "매주 월요일 / 법정공휴일",
+      "coords": {
+        "lat": 37.4298453,
+        "lng": 126.6978848
+      }
+    },
+    "okhyeon-kids": {
+      "sourceApiId": "131074",
+      "matchedName": "울산 남구 옥현어린이도서관",
+      "matchedBy": "coords",
+      "address": "울산광역시 남구 옥현로58번길 40",
+      "phone": "052-226-2370",
+      "homepage": "http://www.ulsannamgu.go.kr/library/",
+      "closedDays": "매주 월요일 / 법정공휴일, 기타 도서관 관장이 공고한 날",
+      "coords": {
+        "lat": 35.5391622,
+        "lng": 129.264824
       }
     }
   }

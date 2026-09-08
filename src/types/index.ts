@@ -90,8 +90,21 @@ export interface Book {
   coverImageUrl?: string;
   /** 이 책이 어울리는 주제 */
   category: CategoryId;
-  /** 그 도서관의 실제 대출 순위. 주제별 일반 추천에는 없다. */
+  /** 실제 대출 순위. 주제별 일반 추천에는 없다. */
   rank?: number;
+  /**
+   * 그 순위가 어디를 집계한 것인지.
+   *
+   *   library  이 도서관의 대출 순위
+   *   region   이 도서관이 있는 시·도의 대출 순위
+   *
+   * 정보나루에 등록되지 않은 도서관(국립·국회·대학·작은도서관 등)은
+   * 자기 대출 데이터가 없다. 그럴 때 지역 순위를 대신 보여주되,
+   * 화면에서 어디를 집계한 것인지 분명히 밝힌다.
+   */
+  rankScope?: 'library' | 'region';
+  /** rankScope 가 region 일 때 그 지역 이름 */
+  rankRegion?: string;
 }
 
 export type NearbyType = 'restaurant' | 'cafe' | 'culture';
