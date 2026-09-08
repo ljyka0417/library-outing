@@ -14,6 +14,8 @@
     "enrich": "node scripts/enrich-libraries.mjs",
     "geocode": "node scripts/geocode-libraries.mjs",
     "collect-nearby": "node scripts/collect-nearby.mjs",
+    "collect-books": "node scripts/collect-books.mjs",
+    "build-web": "node scripts/build-web.mjs",
     "extract-logo": "node scripts/extract-logo.mjs",
     "slice-mascot": "node scripts/slice-mascot-sheet.mjs \"assets/mascot/달곰이.png\"",
     "app-images": "node scripts/make-app-images.mjs",
