@@ -17,6 +17,7 @@ import { NearbySection } from '@/components/NearbySection';
 import { Badge, EmptyState, InfoRow, SectionHeader } from '@/components/common';
 import { libraryApi } from '@/api/libraryApi';
 import { CATEGORY_MAP } from '@/data/categories';
+import { loanDataVersion } from '@/data/books.mock';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
 import { colors, radius, shadow, spacing, typography } from '@/theme';
@@ -52,10 +53,12 @@ export default function LibraryDetailScreen() {
     { cacheKey: `library-${id}`, enabled: !!id }
   );
 
+  // 캐시 키에 수집 시각을 섞는다. 데이터를 새로 모으면 기기에 남은 옛 목록이
+  // 조회되지 않고 곧바로 새 목록이 뜬다.
   const { data: books } = useAsync(
     () => libraryApi.recommendedBooks(id),
     [id],
-    { cacheKey: `books-${id}`, enabled: !!id }
+    { cacheKey: `books-${id}-${loanDataVersion}`, enabled: !!id }
   );
 
   // 상세를 실제로 본 시점에만 "최근 본 도서관"에 기록한다.

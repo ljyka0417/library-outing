@@ -5,7 +5,7 @@
     "생성: npm run collect-books",
     "비어 있으면 앱은 주제별 추천 도서로 떨어집니다."
   ],
-  "_generatedAt": "2026-09-08T14:43:26.422Z",
+  "_generatedAt": "2026-09-08T15:15:35.277Z",
   "byLibrary": {
     "seoul-library": [
       {
@@ -59,7 +59,7 @@
     ],
     "songpa-kids-english": [
       {
-        "title": "(The) boy in the dress",
+        "title": "The boy in the dress",
         "author": "David Walliams",
         "isbn": "9780007279043",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/064/721/06472179.jpg?type=m1&udate=20151119"
@@ -75,19 +75,19 @@
         "isbn": "9780192745712"
       },
       {
-        "title": "(쿠폰가 99,000원) 어스본 리딩 2단계 1권",
+        "title": "어스본 리딩 2단계: Usborne My Reading Library SET ((Book 42권 + MP3 CD 1장 + Book 추가 8권)) - Papetback 50권 + MP3 CD 1장 1권",
         "author": "Usborne (지은이)",
         "isbn": "9781409591528",
         "coverImageUrl": "https://image.aladin.co.kr/product/6877/99/cover/f642434270_1.jpg"
       },
       {
-        "title": "(쿠폰가 99,000원) 어스본 리딩 2단계 3권",
+        "title": "어스본 리딩 2단계: Usborne My Reading Library SET ((Book 42권 + MP3 CD 1장 + Book 추가 8권)) - Papetback 50권 + MP3 CD 1장 3권",
         "author": "Usborne (지은이)",
         "isbn": "9781409591528",
         "coverImageUrl": "https://image.aladin.co.kr/product/6877/99/cover/f642434270_1.jpg"
       },
       {
-        "title": "(쿠폰가 99,000원) 어스본 리딩 2단계 4권",
+        "title": "어스본 리딩 2단계: Usborne My Reading Library SET ((Book 42권 + MP3 CD 1장 + Book 추가 8권)) - Papetback 50권 + MP3 CD 1장 4권",
         "author": "Usborne (지은이)",
         "isbn": "9781409591528",
         "coverImageUrl": "https://image.aladin.co.kr/product/6877/99/cover/f642434270_1.jpg"
@@ -99,7 +99,7 @@
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/066/664/06666435.jpg?type=m1&udate=20130702"
       },
       {
-        "title": "Time to discover time권",
+        "title": "Time to discover",
         "author": "Melvin and Gilda Berger",
         "isbn": "9780439574747",
         "coverImageUrl": "https://image.aladin.co.kr/product/4926/26/cover/0439574749_1.jpg"
@@ -157,7 +157,7 @@
     ],
     "ansan-media": [
       {
-        "title": "Oxford Reading Tree 111권",
+        "title": "Oxford Reading Tree: Level 1+: More First Sentences A: What Dogs Like",
         "author": "Roderick Hunt",
         "isbn": "9780198480723",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/078/502/07850276.jpg?type=m1&udate=20150915"
@@ -169,13 +169,13 @@
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/072/911/07291154.jpg?type=m1&udate=20180330"
       },
       {
-        "title": "Henry and Mudge and the Big Sleepover 1권",
+        "title": "Henry and Mudge and the Big Sleepover",
         "author": "신시아 라일런트, Sucie Stevenson (지은이)",
         "isbn": "9780689834516",
         "coverImageUrl": "https://image.aladin.co.kr/product/159/43/cover/0689834519_1.jpg"
       },
       {
-        "title": "Oxford Reading Tree 211권",
+        "title": "Oxford Reading Tree: Level 2 More A Decode and Develop Got a Job?",
         "author": "Hunt, Roderick|Shipton, Paul",
         "isbn": "9780198489108",
         "coverImageUrl": "https://image.aladin.co.kr/product/5696/33/cover/0198489102_2.jpg"
@@ -187,19 +187,19 @@
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
       },
       {
-        "title": "Oxford Reading Tree 311권",
+        "title": "Oxford Reading Tree: Level 3 More a Decode and Develop King of the Castle",
         "author": "Hunt|Roderick",
         "isbn": "9780198489214",
         "coverImageUrl": "https://image.aladin.co.kr/product/5696/33/cover/0198489218_2.jpg"
       },
       {
-        "title": "Oxford Reading Tree 711권",
+        "title": "Oxford Reading Tree: Level 7: Stories: Red Planet",
         "author": "Hunt|Roderick",
         "isbn": "9780198483090",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/073/062/07306241.jpg?type=m1&udate=20130911"
       },
       {
-        "title": "Their Adventures 1권",
+        "title": "Their Adventures",
         "author": "story by Cynthia Rylant",
         "isbn": "9780689832840",
         "coverImageUrl": "https://image.aladin.co.kr/product/101/39/cover/0689832842_1.jpg"
@@ -213,13 +213,13 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
       },
       {
-        "title": "고양이 해결사 깜냥 1권",
+        "title": "고양이 해결사 깜냥",
         "author": "홍민정 동화",
         "isbn": "9788936447694",
         "coverImageUrl": "https://image.aladin.co.kr/product/23651/80/cover/8936447696_1.jpg"
       },
       {
-        "title": "5번 레인 82권",
+        "title": "5번 레인",
         "author": "은소홀 글",
         "isbn": "9788954674638",
         "coverImageUrl": "https://image.aladin.co.kr/product/25151/14/cover/8954674631_1.jpg"
@@ -273,7 +273,7 @@
         "isbn": "9788984692381"
       },
       {
-        "title": "설민석의 한국사 대모험 1권",
+        "title": "설민석의 한국사 대모험",
         "author": "설민석,그림: 정현희",
         "isbn": "9791195794799",
         "coverImageUrl": "https://image.aladin.co.kr/product/10016/32/cover/k512536564_2.jpg"
@@ -290,7 +290,7 @@
         "isbn": "9788901053127"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 2권",
+        "title": "엉덩이 탐정",
         "author": "트롤 글·그림",
         "isbn": "9788937853470",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/113/327/11332741.jpg?type=m1&udate=20161209"
@@ -304,7 +304,7 @@
     ],
     "juyeop-kids": [
       {
-        "title": "슈퍼 거북 15권",
+        "title": "슈퍼 거북",
         "author": "유설화 글·그림",
         "isbn": "9788993242980",
         "coverImageUrl": "https://image.aladin.co.kr/product/3568/34/cover/8993242984_1.jpg"
@@ -316,7 +316,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/8781/70/cover/8960869643_1.jpg"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 1권",
+        "title": "엉덩이 탐정",
         "author": "트롤 글·그림",
         "isbn": "9788937838750",
         "coverImageUrl": "https://image.aladin.co.kr/product/8920/23/cover/8937838753_1.jpg"
@@ -334,7 +334,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/10822/59/cover/8960863548_1.jpg"
       },
       {
-        "title": "종이 봉지 공주 49권",
+        "title": "종이 봉지 공주",
         "author": "로버트 먼치",
         "isbn": "9788949110479",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/001/826/00182678.jpg?type=m1&udate=20170918"
@@ -360,19 +360,19 @@
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/073/384/07338415.jpg?type=m1&udate=20131227"
       },
       {
-        "title": "만복이네 떡집 354권",
+        "title": "만복이네 떡집",
         "author": "김리리 글",
         "isbn": "9788949161341",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/062/895/06289560.jpg?type=m1&udate=20180324"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 7권",
+        "title": "엉덩이 탐정",
         "author": "트롤 글·그림",
         "isbn": "9791162339466",
         "coverImageUrl": "https://image.aladin.co.kr/product/17457/14/cover/k792534209_1.jpg"
       },
       {
-        "title": "이상한 엄마 33권",
+        "title": "이상한 엄마",
         "author": "백희나",
         "isbn": "9791158360214",
         "coverImageUrl": "https://image.aladin.co.kr/product/7918/85/cover/k352434031_1.jpg"
@@ -390,7 +390,7 @@
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/134/447/13444720.jpg?type=m1&udate=20180326"
       },
       {
-        "title": "이게 정말 사과일까? 3권",
+        "title": "이게 정말 사과일까?",
         "author": "요시타게 신스케 글·그림",
         "isbn": "9788934968726",
         "coverImageUrl": "https://image.aladin.co.kr/product/4766/67/cover/8934968729_2.jpg"
@@ -415,7 +415,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
       },
       {
-        "title": "만복이네 떡집 354권",
+        "title": "만복이네 떡집",
         "author": "김리리 글",
         "isbn": "9788949161341",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/062/895/06289560.jpg?type=m1&udate=20180324"
@@ -432,7 +432,7 @@
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/002/198/00219849.jpg?type=m1&udate=20100111"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 1권",
+        "title": "엉덩이 탐정 1권",
         "author": "트롤 글·그림",
         "isbn": "9788937838750",
         "coverImageUrl": "https://image.aladin.co.kr/product/8920/23/cover/8937838753_1.jpg"
@@ -444,7 +444,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 3권",
+        "title": "엉덩이 탐정 3권",
         "author": "트롤 글·그림",
         "isbn": "9788937889714",
         "coverImageUrl": "https://image.aladin.co.kr/product/10644/93/cover/8937889714_1.jpg"
@@ -457,7 +457,7 @@
         "isbn": "9788943302177"
       },
       {
-        "title": "(진짜 진짜 재밌는) 바다 그림책",
+        "title": "바다 그림책",
         "author": "수잔 바라클로우 지음",
         "isbn": "9788994545530",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/077/421/07742182.jpg?type=m1&udate=20150715"
@@ -475,13 +475,13 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
       },
       {
-        "title": "(세상에서 제일 작은 거인) 먼클 트록 1권",
+        "title": "먼클 트록",
         "author": "재닛 폭슬리 글",
         "isbn": "9788952764850",
         "coverImageUrl": "https://image.aladin.co.kr/product/1600/8/cover/8952764854_1.jpg"
       },
       {
-        "title": "흔한남매 1권",
+        "title": "흔한남매",
         "author": "원작: 흔한남매",
         "isbn": "9791164131686",
         "coverImageUrl": "https://image.aladin.co.kr/product/19404/61/cover/k712635217_1.jpg"
@@ -493,7 +493,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
       },
       {
-        "title": "체리새우 42권",
+        "title": "체리새우",
         "author": "황영미",
         "isbn": "9788954654753",
         "coverImageUrl": "https://image.aladin.co.kr/product/17970/0/cover/8954654754_1.jpg"
@@ -549,25 +549,25 @@
     ],
     "majeon-library": [
       {
-        "title": "(추리 천재) 엉덩이 탐정 5권",
+        "title": "엉덩이 탐정 5권",
         "author": "트롤 글·그림",
         "isbn": "9791162332542",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/129/756/12975600.jpg?type=m1&udate=20180126"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 7권",
+        "title": "엉덩이 탐정 7권",
         "author": "트롤 글·그림",
         "isbn": "9791162339466",
         "coverImageUrl": "https://image.aladin.co.kr/product/17457/14/cover/k792534209_1.jpg"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 4권",
+        "title": "엉덩이 탐정 4권",
         "author": "트롤 글·그림",
         "isbn": "9788937848247",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/124/953/12495377.jpg?type=m1&udate=20170829"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 6권",
+        "title": "엉덩이 탐정 6권",
         "author": "트롤 글·그림",
         "isbn": "9791162335123",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/135/613/13561388.jpg?type=m1&udate=20180619"
@@ -579,7 +579,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/16897/0/cover/1405292873_1.jpg"
       },
       {
-        "title": "마법천자문 47권",
+        "title": "마법천자문",
         "author": "스튜디오시리얼,정수영",
         "isbn": "9788950984748",
         "coverImageUrl": "https://image.aladin.co.kr/product/22947/24/cover/8950984741_1.jpg"
@@ -614,31 +614,31 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/24895/69/cover/k882632470_2.jpg"
       },
       {
-        "title": "쿠키런 어드벤처 4권",
+        "title": "쿠키런 어드벤처: 쿠키들의 신 나는 세계여행 4권",
         "author": "송도수",
         "isbn": "9788926395967",
         "coverImageUrl": "https://image.aladin.co.kr/product/4364/18/cover/8926395960_1.jpg"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 3권",
+        "title": "엉덩이 탐정 3권",
         "author": "트롤 글·그림",
         "isbn": "9788937889714",
         "coverImageUrl": "https://image.aladin.co.kr/product/10644/93/cover/8937889714_1.jpg"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 6권",
+        "title": "엉덩이 탐정 6권",
         "author": "트롤 글·그림",
         "isbn": "9791162335123",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/135/613/13561388.jpg?type=m1&udate=20180619"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 5권",
+        "title": "엉덩이 탐정 5권",
         "author": "트롤 글·그림",
         "isbn": "9791162332542",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/129/756/12975600.jpg?type=m1&udate=20180126"
       },
       {
-        "title": "쿠키런 어드벤처 6권",
+        "title": "쿠키런 어드벤처: 쿠키들의 신 나는 세계여행 6권",
         "author": "송도수",
         "isbn": "9788926397787",
         "coverImageUrl": "https://image.aladin.co.kr/product/4907/11/cover/8926397785_1.jpg"
@@ -646,13 +646,13 @@
     ],
     "yeongjong-sky": [
       {
-        "title": "(추리 천재) 엉덩이 탐정 3권",
+        "title": "엉덩이 탐정 3권",
         "author": "트롤 글·그림",
         "isbn": "9788937889714",
         "coverImageUrl": "https://image.aladin.co.kr/product/10644/93/cover/8937889714_1.jpg"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 6권",
+        "title": "엉덩이 탐정 6권",
         "author": "트롤 글·그림",
         "isbn": "9791162335123",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/135/613/13561388.jpg?type=m1&udate=20180619"
@@ -674,13 +674,13 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 5권",
+        "title": "엉덩이 탐정 5권",
         "author": "트롤 글·그림",
         "isbn": "9791162332542",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/129/756/12975600.jpg?type=m1&udate=20180126"
       },
       {
-        "title": "설민석의 한국사 대모험 1권",
+        "title": "설민석의 한국사 대모험",
         "author": "설민석,그림: 정현희",
         "isbn": "9791195794799",
         "coverImageUrl": "https://image.aladin.co.kr/product/10016/32/cover/k512536564_2.jpg"
@@ -724,7 +724,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/16751/86/cover/k642534567_2.jpg"
       },
       {
-        "title": "강아지똥 1권",
+        "title": "강아지똥",
         "author": "권정생",
         "isbn": "9788986621136",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/001/824/00182451.jpg?type=m1&udate=20150126"
@@ -786,7 +786,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/24895/69/cover/k882632470_2.jpg"
       },
       {
-        "title": "Who? 박지성 8권",
+        "title": "Who? 박지성",
         "author": "카툰박스",
         "isbn": "9791156391586",
         "coverImageUrl": "https://image.aladin.co.kr/product/5505/23/cover/6000823615_3.jpg"
@@ -800,7 +800,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/9781/41/cover/k532535644_1.jpg"
       },
       {
-        "title": "소리 질러, 운동장 279권",
+        "title": "소리 질러, 운동장",
         "author": "진형민",
         "isbn": "9788936442798",
         "coverImageUrl": "https://image.aladin.co.kr/product/5911/75/cover/8936442791_1.jpg"
@@ -818,7 +818,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/14558/8/cover/8974839326_1.jpg"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 1권",
+        "title": "엉덩이 탐정 1권",
         "author": "트롤 글·그림",
         "isbn": "9788937838750",
         "coverImageUrl": "https://image.aladin.co.kr/product/8920/23/cover/8937838753_1.jpg"
@@ -836,7 +836,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/15652/86/cover/k232533034_1.jpg"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 2권",
+        "title": "엉덩이 탐정 2권",
         "author": "트롤 글·그림",
         "isbn": "9788937853470",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/113/327/11332741.jpg?type=m1&udate=20161209"
@@ -856,13 +856,13 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/10227/84/cover/k782536886_2.jpg"
       },
       {
-        "title": "(흔한남매) 안 흔한 일기 2권",
+        "title": "안 흔한 일기",
         "author": "흔한남매 원작",
         "isbn": "9791164135158",
         "coverImageUrl": "https://image.aladin.co.kr/product/24050/77/cover/k252639625_1.jpg"
       },
       {
-        "title": "화재에서 살아남기 50권",
+        "title": "화재에서 살아남기",
         "author": "달콤팩토리",
         "isbn": "9788937837548",
         "coverImageUrl": "https://image.aladin.co.kr/product/8025/12/cover/8937837544_1.jpg"
@@ -874,19 +874,19 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/10780/17/cover/k342530155_2.jpg"
       },
       {
-        "title": "흔한남매 1권",
+        "title": "흔한남매",
         "author": "원작: 흔한남매",
         "isbn": "9791164131686",
         "coverImageUrl": "https://image.aladin.co.kr/product/19404/61/cover/k712635217_1.jpg"
       },
       {
-        "title": "나이트 사파리에서 살아남기 44권",
+        "title": "나이트 사파리에서 살아남기",
         "author": "곰돌이co.",
         "isbn": "9788937839542",
         "coverImageUrl": "https://image.aladin.co.kr/product/4828/58/cover/8937839547_1.jpg"
       },
       {
-        "title": "(퀴즈!) 과학상식 64권",
+        "title": "과학상식",
         "author": "도기성 지음",
         "isbn": "9791186472835",
         "coverImageUrl": "https://image.aladin.co.kr/product/5796/18/cover/6000843997_1.jpg"
@@ -894,7 +894,7 @@
     ],
     "sokcho-kids-english": [
       {
-        "title": "[유아] 백설공주 39권",
+        "title": "[유아] 백설공주",
         "author": "키즈스콜레편집부 편",
         "isbn": "9791156178620"
       },
@@ -905,12 +905,12 @@
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/030/390/03039026.jpg?type=m1&udate=20090821"
       },
       {
-        "title": "[유아] 인어공주 313권",
+        "title": "[유아] 인어공주",
         "author": "키즈스콜레편집부 편",
         "isbn": "9791156178651"
       },
       {
-        "title": "[유아] 정글북 312권",
+        "title": "[유아] 정글북",
         "author": "키즈스콜레편집부 편",
         "isbn": "9791156178583"
       },
@@ -927,7 +927,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/37402/66/cover200/8955828136_1.jpg"
       },
       {
-        "title": "네 기분은 어떤 색깔이니? 94권",
+        "title": "네 기분은 어떤 색깔이니?",
         "author": "최숙희",
         "isbn": "9791158363925",
         "coverImageUrl": "https://image.aladin.co.kr/product/30866/85/cover/k882831576_1.jpg"
@@ -1033,7 +1033,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
       },
       {
-        "title": "(흔한남매) 안 흔한 일기 2권",
+        "title": "안 흔한 일기",
         "author": "흔한남매 원작",
         "isbn": "9791164135158",
         "coverImageUrl": "https://image.aladin.co.kr/product/24050/77/cover/k252639625_1.jpg"
@@ -1071,7 +1071,7 @@
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/001/944/00194461.jpg?type=m1&udate=20060523"
       },
       {
-        "title": "놓지 마 과학! 2권",
+        "title": "놓지 마 과학!",
         "author": "글·그림: 신태훈,나승훈",
         "isbn": "9788960869929",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/111/713/11171384.jpg?type=m1&udate=20161007"
@@ -1159,25 +1159,25 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/27877/5/cover/8954682154_1.jpg"
       },
       {
-        "title": "(흔한남매) 별난 방탈출 2권",
+        "title": "별난 방탈출",
         "author": "흔한남매 원작",
         "isbn": "9791164137879",
         "coverImageUrl": "https://image.aladin.co.kr/product/26959/80/cover/k182730410_1.jpg"
       },
       {
-        "title": "흔한남매의 흔한 호기심 3권",
+        "title": "흔한남매의 흔한 호기심",
         "author": "원작: 흔한남매",
         "isbn": "9791164137923",
         "coverImageUrl": "https://image.aladin.co.kr/product/27025/25/cover/k542730528_2.jpg"
       },
       {
-        "title": "슈뻘맨의 숨은 국어 찾기 1권",
+        "title": "슈뻘맨의 숨은 국어 찾기",
         "author": "슈뻘맨 원작",
         "isbn": "9791173114168",
         "coverImageUrl": "https://image.aladin.co.kr/product/35227/77/cover200/k672934634_1.jpg"
       },
       {
-        "title": "꽁꽁꽁 피자 69권",
+        "title": "꽁꽁꽁 피자",
         "author": "윤정주 글·그림",
         "isbn": "9791158361907",
         "coverImageUrl": "https://image.aladin.co.kr/product/24617/17/cover/k992631274_1.jpg"
@@ -1203,7 +1203,7 @@
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/069/922/06992205.jpg?type=m1&udate=20180120"
       },
       {
-        "title": "놓지 마 과학! 7 - 정신이 모험에 정신 놓다 7권",
+        "title": "놓지 마 과학! 7 - 정신이 모험에 정신 놓다",
         "author": "신태훈|나승훈",
         "isbn": "9791162205624",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/135/602/13560214.jpg?type=m1&udate=20180430"
@@ -1221,13 +1221,13 @@
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/001/747/00174790.jpg?type=m1&udate=20150923"
       },
       {
-        "title": "설민석의 한국사 대모험 2권",
+        "title": "설민석의 한국사 대모험",
         "author": "설민석,그림: 정현희",
         "isbn": "9791196025809",
         "coverImageUrl": "https://image.aladin.co.kr/product/10227/84/cover/k782536886_2.jpg"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 1권",
+        "title": "엉덩이 탐정",
         "author": "트롤 글·그림",
         "isbn": "9788937838750",
         "coverImageUrl": "https://image.aladin.co.kr/product/8920/23/cover/8937838753_1.jpg"
@@ -1276,7 +1276,7 @@
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
       },
       {
-        "title": "흔한남매의 흔한 호기심 4권",
+        "title": "흔한남매의 흔한 호기심",
         "author": "원작: 흔한남매",
         "isbn": "9791164138982",
         "coverImageUrl": "https://image.aladin.co.kr/product/27892/11/cover/k652734308_1.jpg"
@@ -1302,7 +1302,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/27456/81/cover/k752733475_1.jpg"
       },
       {
-        "title": "(흔한남매) 별난 방탈출 1권",
+        "title": "별난 방탈출: 탈출 미션 스토리북 1권",
         "author": "흔한남매 원작",
         "isbn": "9791164137176",
         "coverImageUrl": "https://image.aladin.co.kr/product/25813/3/cover/k172736336_1.jpg"
@@ -1314,7 +1314,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/24307/73/cover/k822630592_2.jpg"
       },
       {
-        "title": "(흔한남매) 별난 방탈출 3권",
+        "title": "별난 방탈출: 탈출 미션 스토리북 3권",
         "author": "흔한남매 원작",
         "isbn": "9791164138715",
         "coverImageUrl": "https://image.aladin.co.kr/product/27760/63/cover/k442734867_1.jpg"
@@ -1332,7 +1332,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/29286/99/cover/k082837005_1.jpg"
       },
       {
-        "title": "흔한남매 불꽃 튀는 우리말 1 - 초등 국어 고수 되기 프로젝트 1권",
+        "title": "흔한남매 불꽃 튀는 우리말 1 - 초등 국어 고수 되기 프로젝트",
         "author": "흔한남매 (원작)|한은호",
         "isbn": "9791130635712",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/180/044/18004469.jpg?type=m1&udate=20210218"
@@ -1352,7 +1352,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/36208/50/cover200/k712038303_1.jpg"
       },
       {
-        "title": "(흔한남매) 흔한 게임 2권",
+        "title": "흔한 게임",
         "author": "원작: 흔한남매",
         "isbn": "9791173470660",
         "coverImageUrl": "https://image.aladin.co.kr/product/35728/24/cover200/k702036432_2.jpg"
@@ -1370,19 +1370,19 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/35063/62/cover200/k532934196_1.jpg"
       },
       {
-        "title": "소워니놀이터 1권",
+        "title": "소워니놀이터",
         "author": "원작: 소워니놀이터",
         "isbn": "9791142309298",
         "coverImageUrl": "https://image.aladin.co.kr/product/35986/64/cover200/k222037415_1.jpg"
       },
       {
-        "title": "흔한남매 과학 탐험대 10권",
+        "title": "흔한남매 과학 탐험대",
         "author": "원작: 흔한남매",
         "isbn": "9788934905851",
         "coverImageUrl": "https://image.aladin.co.kr/product/33970/53/cover200/8934905859_1.jpg"
       },
       {
-        "title": "토깽이네 경제 오락실 1권",
+        "title": "토깽이네 경제 오락실",
         "author": "원작: 토깽이네",
         "isbn": "9791171710218",
         "coverImageUrl": "https://image.aladin.co.kr/product/32955/87/cover/k972936241_1.jpg"
@@ -1390,49 +1390,49 @@
     ],
     "sejong-city-library": [
       {
-        "title": "놓지 마 과학! 15권",
+        "title": "놓지 마 과학!",
         "author": "글·그림: 신태훈,나승훈",
         "isbn": "9791191766318",
         "coverImageUrl": "https://image.aladin.co.kr/product/27685/48/cover/k642733336_1.jpg"
       },
       {
-        "title": "흔한남매의 흔한 호기심 5권",
+        "title": "흔한남매의 흔한 호기심: 일상에서 만나는 과학 상식 5권",
         "author": "원작: 흔한남매",
         "isbn": "9791168410848",
         "coverImageUrl": "https://image.aladin.co.kr/product/28736/69/cover/k332836780_1.jpg"
       },
       {
-        "title": "토깽이네 지구 구출 대작전 1권",
+        "title": "토깽이네 지구 구출 대작전",
         "author": "원작: 토깽이네",
         "isbn": "9791191583212",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/197/161/19716117.jpg?type=m1&udate=20210423"
       },
       {
-        "title": "(읽으면서 바로 써먹는) 어린이 사자성어",
+        "title": "어린이 사자성어",
         "author": "글·그림: 한날",
         "isbn": "9791158681944",
         "coverImageUrl": "https://image.aladin.co.kr/product/26944/79/cover/k392730819_1.jpg"
       },
       {
-        "title": "흔한남매 불꽃 튀는 우리말 2권",
+        "title": "흔한남매 불꽃 튀는 우리말",
         "author": "원작: 흔한남매",
         "isbn": "9791130637594",
         "coverImageUrl": "https://image.aladin.co.kr/product/27144/52/cover/k372731447_1.jpg"
       },
       {
-        "title": "흔한남매 3권",
+        "title": "흔한남매",
         "author": "원작: 흔한남매",
         "isbn": "9791164134267",
         "coverImageUrl": "https://image.aladin.co.kr/product/22327/46/cover/k782636924_1.jpg"
       },
       {
-        "title": "(흔한남매) 별난 방탈출 2권",
+        "title": "별난 방탈출",
         "author": "흔한남매 원작",
         "isbn": "9791164137879",
         "coverImageUrl": "https://image.aladin.co.kr/product/26959/80/cover/k182730410_1.jpg"
       },
       {
-        "title": "흔한남매의 흔한 호기심 3권",
+        "title": "흔한남매의 흔한 호기심: 일상에서 만나는 과학 상식 3권",
         "author": "원작: 흔한남매",
         "isbn": "9791164137923",
         "coverImageUrl": "https://image.aladin.co.kr/product/27025/25/cover/k542730528_2.jpg"
@@ -1440,7 +1440,7 @@
     ],
     "gyeongbuk-library": [
       {
-        "title": "흔한남매의 흔한 호기심 1권",
+        "title": "흔한남매의 흔한 호기심: 일상에서 만나는 과학 상식 1권",
         "author": "원작: 흔한남매",
         "isbn": "9791164136032",
         "coverImageUrl": "https://image.aladin.co.kr/product/25055/39/cover/k002632646_1.jpg"
@@ -1452,19 +1452,19 @@
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/062/895/06289560.jpg?type=m1&udate=20180324"
       },
       {
-        "title": "흔한남매의 흔한 호기심 2권",
+        "title": "흔한남매의 흔한 호기심: 일상에서 만나는 과학 상식 2권",
         "author": "원작: 흔한남매",
         "isbn": "9791164137121",
         "coverImageUrl": "https://image.aladin.co.kr/product/25812/8/cover/k352736335_1.jpg"
       },
       {
-        "title": "(흔한남매) 안 흔한 일기 1권",
+        "title": "안 흔한 일기 1권",
         "author": "흔한남매 원작",
         "isbn": "9791164134649",
         "coverImageUrl": "https://image.aladin.co.kr/product/23331/23/cover/k012637918_1.jpg"
       },
       {
-        "title": "(흔한남매) 안 흔한 일기 3권",
+        "title": "안 흔한 일기 3권",
         "author": "흔한남매 원작",
         "isbn": "9791164136223",
         "coverImageUrl": "https://image.aladin.co.kr/product/25151/11/cover/k762633375_1.jpg"
@@ -1514,7 +1514,7 @@
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/001/824/00182451.jpg?type=m1&udate=20150126"
       },
       {
-        "title": "윔피 키드 11권",
+        "title": "윔피 키드",
         "author": "제프 키니 글·그림",
         "isbn": "9788937847004",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/112/970/11297011.jpg?type=m1&udate=20171229"
@@ -1532,7 +1532,7 @@
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/092/727/09272737.jpg?type=m1&udate=20180717"
       },
       {
-        "title": "쿠키런 깜짝 마술 과학 상식 10권",
+        "title": "쿠키런 깜짝 마술 과학 상식",
         "author": "조주희",
         "isbn": "9788926388785",
         "coverImageUrl": "https://image.aladin.co.kr/product/7761/92/cover/8926388786_1.jpg"
@@ -1576,7 +1576,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
       },
       {
-        "title": "흔한남매 1권",
+        "title": "흔한남매",
         "author": "원작: 흔한남매",
         "isbn": "9791164131686",
         "coverImageUrl": "https://image.aladin.co.kr/product/19404/61/cover/k712635217_1.jpg"
@@ -1590,19 +1590,19 @@
     ],
     "kkumirang-library": [
       {
-        "title": "(흔한남매) 별난 방탈출 4권",
+        "title": "별난 방탈출: 탈출 미션 스토리북 4권",
         "author": "흔한남매 원작",
         "isbn": "9791168410541",
         "coverImageUrl": "https://image.aladin.co.kr/product/28533/10/cover/k182835138_1.jpg"
       },
       {
-        "title": "(흔한남매) 별난 방탈출 5권",
+        "title": "별난 방탈출: 탈출 미션 스토리북 5권",
         "author": "흔한남매 원작",
         "isbn": "9791168411692",
         "coverImageUrl": "https://image.aladin.co.kr/product/29445/12/cover/k012837621_1.jpg"
       },
       {
-        "title": "(흔한남매) 별난 방탈출 1권",
+        "title": "별난 방탈출: 탈출 미션 스토리북 1권",
         "author": "흔한남매 원작",
         "isbn": "9791164137176",
         "coverImageUrl": "https://image.aladin.co.kr/product/25813/3/cover/k172736336_1.jpg"
@@ -1614,7 +1614,7 @@
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/112/111/11211133.jpg?type=m1&udate=20180530"
       },
       {
-        "title": "흔한남매의 흔한 호기심 5권",
+        "title": "흔한남매의 흔한 호기심",
         "author": "원작: 흔한남매",
         "isbn": "9791168410848",
         "coverImageUrl": "https://image.aladin.co.kr/product/28736/69/cover/k332836780_1.jpg"
@@ -1664,13 +1664,13 @@
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 6권",
+        "title": "엉덩이 탐정 6권",
         "author": "트롤 글·그림",
         "isbn": "9791162335123",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/135/613/13561388.jpg?type=m1&udate=20180619"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 4권",
+        "title": "엉덩이 탐정 4권",
         "author": "트롤 글·그림",
         "isbn": "9788937848247",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/124/953/12495377.jpg?type=m1&udate=20170829"
@@ -1682,7 +1682,7 @@
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/083/399/08339910.jpg?type=m1&udate=20180616"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 1권",
+        "title": "엉덩이 탐정 1권",
         "author": "트롤 글·그림",
         "isbn": "9788937838750",
         "coverImageUrl": "https://image.aladin.co.kr/product/8920/23/cover/8937838753_1.jpg"
@@ -1690,7 +1690,7 @@
     ],
     "sancheong-jirisan": [
       {
-        "title": "불편한 편의점",
+        "title": "불편한 편의점: 김호연 장편소설",
         "author": "김호연",
         "isbn": "9791161571188",
         "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
@@ -1712,7 +1712,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/27541/91/cover/8954681174_1.jpg"
       },
       {
-        "title": "불편한 편의점 2권",
+        "title": "불편한 편의점: 김호연 장편소설 2권",
         "author": "김호연",
         "isbn": "9791161571379",
         "coverImageUrl": "https://image.aladin.co.kr/product/29858/98/cover/k432838027_1.jpg"
@@ -1729,7 +1729,7 @@
         "isbn": "9788962478150"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 8권",
+        "title": "엉덩이 탐정",
         "author": "트롤 글·그림",
         "isbn": "9791164131914",
         "coverImageUrl": "https://image.aladin.co.kr/product/19874/27/cover/k432635431_1.jpg"
@@ -1748,7 +1748,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/26674/56/cover/8949123495_1.jpg"
       },
       {
-        "title": "(한밤중) 달빛 식당",
+        "title": "달빛 식당",
         "author": "이분희 글",
         "isbn": "9788949161969",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/134/248/13424876.jpg?type=m1&udate=20180427"
@@ -1786,13 +1786,13 @@
     ],
     "dosan-library": [
       {
-        "title": "강남 사장님 30권",
+        "title": "강남 사장님",
         "author": "글쓴이: 이지음",
         "isbn": "9788949121925",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/164/180/16418054.jpg?type=m1&udate=20200715"
       },
       {
-        "title": "(한밤중) 달빛 식당",
+        "title": "달빛 식당",
         "author": "이분희 글",
         "isbn": "9788949161969",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/134/248/13424876.jpg?type=m1&udate=20180427"
@@ -1821,7 +1821,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/26674/56/cover/8949123495_1.jpg"
       },
       {
-        "title": "(흔한남매) 안 흔한 일기 1권",
+        "title": "안 흔한 일기",
         "author": "흔한남매 원작",
         "isbn": "9791164134649",
         "coverImageUrl": "https://image.aladin.co.kr/product/23331/23/cover/k012637918_1.jpg"
@@ -1847,7 +1847,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/16938/73/cover/8965746663_1.jpg"
       },
       {
-        "title": "(흔한남매) 안 흔한 일기 1권",
+        "title": "안 흔한 일기",
         "author": "흔한남매 원작",
         "isbn": "9791164134649",
         "coverImageUrl": "https://image.aladin.co.kr/product/23331/23/cover/k012637918_1.jpg"
@@ -1871,13 +1871,13 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/17897/98/cover/8934983469_1.jpg"
       },
       {
-        "title": "(한밤중) 달빛 식당",
+        "title": "달빛 식당",
         "author": "이분희 글",
         "isbn": "9788949161969",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/134/248/13424876.jpg?type=m1&udate=20180427"
       },
       {
-        "title": "해리포터와 마법사의 돌 11권",
+        "title": "해리포터와 마법사의 돌",
         "author": "조앤 K. 롤링 지음",
         "isbn": "9788983920683",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/001/795/00179542.jpg?type=m1&udate=20130212"
@@ -1885,7 +1885,7 @@
     ],
     "wolbong-library": [
       {
-        "title": "흔한남매의 흔한 호기심 3권",
+        "title": "흔한남매의 흔한 호기심",
         "author": "원작: 흔한남매",
         "isbn": "9791164137923",
         "coverImageUrl": "https://image.aladin.co.kr/product/27025/25/cover/k542730528_2.jpg"
@@ -1902,7 +1902,7 @@
         "isbn": "9791186797693"
       },
       {
-        "title": "설민석의 한국사 대모험 1권",
+        "title": "설민석의 한국사 대모험",
         "author": "설민석,그림: 정현희",
         "isbn": "9791195794799",
         "coverImageUrl": "https://image.aladin.co.kr/product/10016/32/cover/k512536564_2.jpg"
@@ -1914,7 +1914,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/24307/73/cover/k822630592_2.jpg"
       },
       {
-        "title": "(흔한남매) 별난 방탈출 2권",
+        "title": "별난 방탈출",
         "author": "흔한남매 원작",
         "isbn": "9791164137879",
         "coverImageUrl": "https://image.aladin.co.kr/product/26959/80/cover/k182730410_1.jpg"
@@ -1990,7 +1990,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/34942/93/cover200/k562934467_1.jpg"
       },
       {
-        "title": "(흔한남매) 별난 세계 여행 1권",
+        "title": "별난 세계 여행",
         "author": "흔한남매 원작",
         "isbn": "9791168415355",
         "coverImageUrl": "https://image.aladin.co.kr/product/31704/70/cover/k952833687_1.jpg"
@@ -2026,7 +2026,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/33899/7/cover200/8954697941_1.jpg"
       },
       {
-        "title": "흔한남매의 흔한 호기심 2권",
+        "title": "흔한남매의 흔한 호기심",
         "author": "원작: 흔한남매",
         "isbn": "9791164137121",
         "coverImageUrl": "https://image.aladin.co.kr/product/25812/8/cover/k352736335_1.jpg"
@@ -2249,19 +2249,19 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/8229/22/cover/8965481570_1.jpg"
       },
       {
-        "title": "흔한남매 1권",
+        "title": "흔한남매",
         "author": "원작: 흔한남매",
         "isbn": "9791164131686",
         "coverImageUrl": "https://image.aladin.co.kr/product/19404/61/cover/k712635217_1.jpg"
       },
       {
-        "title": "쿠키런 추리.수사 과학 상식 4권",
+        "title": "쿠키런 추리.수사 과학 상식",
         "author": "조주희 (글), 이태영 (그림), 정효해 (감수)",
         "isbn": "9788926389362",
         "coverImageUrl": "https://image.aladin.co.kr/product/5166/38/cover/8926389367_1.jpg"
       },
       {
-        "title": "코믹 메이플 스토리 수학도둑 51 - 국내 최초 수학논술만화 51권",
+        "title": "코믹 메이플 스토리 수학도둑 51 - 국내 최초 수학논술만화",
         "author": "송도수 (글), 서정 엔터테인먼트 (그림), 여운방 (감수)",
         "isbn": "9788926387511",
         "coverImageUrl": "https://image.aladin.co.kr/product/7964/52/cover/8926387518_1.jpg"
@@ -2317,13 +2317,13 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/22210/39/cover/8962472066_1.jpg"
       },
       {
-        "title": "해리포터 11권",
+        "title": "해리포터",
         "author": "J.K. 롤링 지음",
         "isbn": "9788983925312",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/085/391/08539163.jpg?type=m1&udate=20141215"
       },
       {
-        "title": "쿠키런 서바이벌 대작전 2권",
+        "title": "쿠키런 서바이벌 대작전",
         "author": "김강현",
         "isbn": "9788926388082",
         "coverImageUrl": "https://image.aladin.co.kr/product/5781/97/cover/8926388085_2.jpg"
@@ -2343,13 +2343,13 @@
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/083/399/08339910.jpg?type=m1&udate=20180616"
       },
       {
-        "title": "쿠키런 어드벤처 10권",
+        "title": "쿠키런 어드벤처: 쿠키들의 신 나는 세계여행 10권",
         "author": "송도수",
         "isbn": "9788926387054",
         "coverImageUrl": "https://image.aladin.co.kr/product/6325/60/cover/8926387054_1.jpg"
       },
       {
-        "title": "쿠키런 어드벤처 12권",
+        "title": "쿠키런 어드벤처: 쿠키들의 신 나는 세계여행 12권",
         "author": "송도수",
         "isbn": "9788926387252",
         "coverImageUrl": "https://image.aladin.co.kr/product/7016/36/cover/8926387259_1.jpg"
@@ -2361,7 +2361,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
       },
       {
-        "title": "쿠키런 어드벤처 8권",
+        "title": "쿠키런 어드벤처: 쿠키들의 신 나는 세계여행 8권",
         "author": "송도수",
         "isbn": "9788926398258",
         "coverImageUrl": "https://image.aladin.co.kr/product/5482/20/cover/8926398250_2.jpg"
@@ -2437,19 +2437,19 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 4권",
+        "title": "엉덩이 탐정 4권",
         "author": "트롤 글·그림",
         "isbn": "9788937848247",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/124/953/12495377.jpg?type=m1&udate=20170829"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 5권",
+        "title": "엉덩이 탐정 5권",
         "author": "트롤 글·그림",
         "isbn": "9791162332542",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/129/756/12975600.jpg?type=m1&udate=20180126"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 3권",
+        "title": "엉덩이 탐정 3권",
         "author": "트롤 글·그림",
         "isbn": "9788937889714",
         "coverImageUrl": "https://image.aladin.co.kr/product/10644/93/cover/8937889714_1.jpg"
@@ -2461,7 +2461,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/10016/32/cover/k512536564_2.jpg"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 6권",
+        "title": "엉덩이 탐정 6권",
         "author": "트롤 글·그림",
         "isbn": "9791162335123",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/135/613/13561388.jpg?type=m1&udate=20180619"
@@ -2546,13 +2546,13 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/3617/36/cover/8954623220_1.jpg"
       },
       {
-        "title": "흔한남매 2권",
+        "title": "흔한남매",
         "author": "원작: 흔한남매",
         "isbn": "9791164132454",
         "coverImageUrl": "https://image.aladin.co.kr/product/20398/4/cover/k002635150_1.jpg"
       },
       {
-        "title": "인체에서 살아남기 1권",
+        "title": "인체에서 살아남기",
         "author": "곰돌이 co.",
         "isbn": "9788937847974",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/062/076/06207667.jpg?type=m1&udate=20100510"
@@ -2564,7 +2564,7 @@
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/083/399/08339910.jpg?type=m1&udate=20180616"
       },
       {
-        "title": "(TV동화)행복한 세상 5권",
+        "title": "행복한 세상",
         "author": "박인식 기획·구성",
         "isbn": "9788946417946"
       },
@@ -2589,7 +2589,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
       },
       {
-        "title": "마인크래프트 건축가이드 미니 프로젝트 3권",
+        "title": "마인크래프트 건축가이드 미니 프로젝트: 20가지가 넘는 작은 건축물을 지어 보세요 3권",
         "author": "Mojang AB",
         "isbn": "9788931467949",
         "coverImageUrl": "https://image.aladin.co.kr/product/31786/71/cover/893146794x_1.jpg"
@@ -2619,7 +2619,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/36808/37/cover200/k082030009_1.jpg"
       },
       {
-        "title": "마인크래프트 건축가이드 미니 프로젝트 2권",
+        "title": "마인크래프트 건축가이드 미니 프로젝트: 20가지가 넘는 작은 건축물을 지어 보세요 2권",
         "author": "Mojang AB",
         "isbn": "9788931466201",
         "coverImageUrl": "https://image.aladin.co.kr/product/30081/1/cover/893146620x_1.jpg"
@@ -2639,7 +2639,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
       },
       {
-        "title": "(돈도 마음도 낭비 없이 나만의 행복을 버는) 저소비 생활",
+        "title": "저소비 생활",
         "author": "가제노타미 지음",
         "isbn": "9788925573229",
         "coverImageUrl": "https://image.aladin.co.kr/product/37117/86/cover200/8925573229_1.jpg"
@@ -2669,7 +2669,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/34499/81/cover200/k712932751_1.jpg"
       },
       {
-        "title": "불편한 편의점 1권",
+        "title": "불편한 편의점",
         "author": "김호연",
         "isbn": "9791161571188",
         "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
@@ -2677,49 +2677,49 @@
     ],
     "dalseong-gunlib": [
       {
-        "title": "코믹 메이플 스토리 수학도둑 1 - 국내 최초 수학논술만화, 개정판 1권",
+        "title": "코믹 메이플 스토리 수학도둑 1 - 국내 최초 수학논술만화, 개정판",
         "author": "송도수",
         "isbn": "9788926393697",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/071/326/07132621.jpg?type=m1&udate=20150731"
       },
       {
-        "title": "내일은 발명왕 13권",
+        "title": "내일은 발명왕: 본격 대결 과학발명 만화 13권",
         "author": "곰돌이 co.",
         "isbn": "9788937899232",
         "coverImageUrl": "https://image.aladin.co.kr/product/5524/86/cover/893789923x_1.jpg"
       },
       {
-        "title": "코믹 메이플 스토리 수학도둑 51 - 국내 최초 수학논술만화 51권",
+        "title": "코믹 메이플 스토리 수학도둑 51 - 국내 최초 수학논술만화",
         "author": "송도수 (글), 서정 엔터테인먼트 (그림), 여운방 (감수)",
         "isbn": "9788926387511",
         "coverImageUrl": "https://image.aladin.co.kr/product/7964/52/cover/8926387518_1.jpg"
       },
       {
-        "title": "코믹 메이플 스토리 수학도둑 49 - 국내 최초 수학논술만화 49권",
+        "title": "코믹 메이플 스토리 수학도둑 49 - 국내 최초 수학논술만화",
         "author": "송도수 (글), 서정 엔터테인먼트 (그림), 여운방 (감수)",
         "isbn": "9788926387245",
         "coverImageUrl": "https://image.aladin.co.kr/product/7015/27/cover/8926387240_1.jpg"
       },
       {
-        "title": "(코믹 메이플스토리) 수학도둑 43권",
+        "title": "수학도둑: 사고력과 이해력을 향상시켜 주는 국내 최초 수학논술만화 43권",
         "author": "송도수",
         "isbn": "9788926397985",
         "coverImageUrl": "https://image.aladin.co.kr/product/4910/3/cover/892639798x_1.jpg"
       },
       {
-        "title": "내일은 발명왕 7권",
+        "title": "내일은 발명왕: 본격 대결 과학발명 만화 7권",
         "author": "곰돌이 co.",
         "isbn": "9788937884962",
         "coverImageUrl": "https://image.aladin.co.kr/product/3070/59/cover/8937884968_1.jpg"
       },
       {
-        "title": "코믹 메이플 스토리 수학도둑 48 - 국내 최초 수학논술만화 48권",
+        "title": "코믹 메이플 스토리 수학도둑 48 - 국내 최초 수학논술만화",
         "author": "송도수 (글), 서정 엔터테인먼트 (그림), 여운방 (감수)",
         "isbn": "9788926387214",
         "coverImageUrl": "https://image.aladin.co.kr/product/6677/15/cover/8926387216_1.jpg"
       },
       {
-        "title": "(코믹 메이플스토리) 수학도둑 27권",
+        "title": "수학도둑: 사고력과 이해력을 향상시켜 주는 국내 최초 수학논술만화 27권",
         "author": "송도수",
         "isbn": "9788926391846",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/068/630/06863051.jpg?type=m1&udate=20170208"
@@ -2739,7 +2739,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/1348/7/cover/0552560065_1.jpg"
       },
       {
-        "title": "Oxford Reading Tree 131권",
+        "title": "Oxford Reading Tree: Level 1+: More First Sentences C: Ice Cream",
         "author": "Hunt|Roderick",
         "isbn": "9780198480907",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/130/803/13080373.jpg?type=m1&udate=20171230"
@@ -2751,19 +2751,19 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/11754/58/cover/d252736265_1.jpg"
       },
       {
-        "title": "Oxford Reading Tree 17권",
+        "title": "Oxford Reading Tree: Level 1+: Decode and Develop: Hop, Hop, Pop!",
         "author": "Roderick Hunt",
         "isbn": "9780198483786",
         "coverImageUrl": "https://image.aladin.co.kr/product/1187/73/cover/0198483783_1.jpg"
       },
       {
-        "title": "Oxford Reading Tree 113권",
+        "title": "Oxford Reading Tree: Level 1+: First Sentences: Hide and Seek",
         "author": "Roderick Hunt",
         "isbn": "9780198480631",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/074/245/07424590.jpg?type=m1&udate=20171218"
       },
       {
-        "title": "Oxford Reading Tree 11권",
+        "title": "Oxford Reading Tree: Level 1+ More Stories A: Decode and Develop the Picture Book Man",
         "author": "Hunt|Roderick",
         "isbn": "9780198489016",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/087/975/08797511.jpg?type=m1&udate=20150217"
@@ -2783,43 +2783,43 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/26953/57/cover/075550187d_1.jpg"
       },
       {
-        "title": "(흔한남매) 별난 방탈출 1권",
+        "title": "별난 방탈출: 탈출 미션 스토리북 1권",
         "author": "흔한남매 원작",
         "isbn": "9791164137176",
         "coverImageUrl": "https://image.aladin.co.kr/product/25813/3/cover/k172736336_1.jpg"
       },
       {
-        "title": "(흔한남매) 안 흔한 일기 3권",
+        "title": "안 흔한 일기 3권",
         "author": "흔한남매 원작",
         "isbn": "9791164136223",
         "coverImageUrl": "https://image.aladin.co.kr/product/25151/11/cover/k762633375_1.jpg"
       },
       {
-        "title": "(흔한남매) 별난 방탈출 2권",
+        "title": "별난 방탈출: 탈출 미션 스토리북 2권",
         "author": "흔한남매 원작",
         "isbn": "9791164137879",
         "coverImageUrl": "https://image.aladin.co.kr/product/26959/80/cover/k182730410_1.jpg"
       },
       {
-        "title": "(흔한남매) 안 흔한 일기 1권",
+        "title": "안 흔한 일기 1권",
         "author": "흔한남매 원작",
         "isbn": "9791164134649",
         "coverImageUrl": "https://image.aladin.co.kr/product/23331/23/cover/k012637918_1.jpg"
       },
       {
-        "title": "(흔한남매) 별난 방탈출 3권",
+        "title": "별난 방탈출: 탈출 미션 스토리북 3권",
         "author": "흔한남매 원작",
         "isbn": "9791164138715",
         "coverImageUrl": "https://image.aladin.co.kr/product/27760/63/cover/k442734867_1.jpg"
       },
       {
-        "title": "(흔한남매) 별난 방탈출 4권",
+        "title": "별난 방탈출: 탈출 미션 스토리북 4권",
         "author": "흔한남매 원작",
         "isbn": "9791168410541",
         "coverImageUrl": "https://image.aladin.co.kr/product/28533/10/cover/k182835138_1.jpg"
       },
       {
-        "title": "(흔한남매) 안 흔한 일기 2권",
+        "title": "안 흔한 일기 2권",
         "author": "흔한남매 원작",
         "isbn": "9791164135158",
         "coverImageUrl": "https://image.aladin.co.kr/product/24050/77/cover/k252639625_1.jpg"
@@ -2833,43 +2833,43 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/10537/49/cover/8936447017_1.jpg"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 4권",
+        "title": "엉덩이 탐정 4권",
         "author": "트롤 글·그림",
         "isbn": "9788937848247",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/124/953/12495377.jpg?type=m1&udate=20170829"
       },
       {
-        "title": "빨강 연필 71권",
+        "title": "빨강 연필",
         "author": "글쓴이: 신수현",
         "isbn": "9788949121338",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/066/470/06647066.jpg?type=m1&udate=20180415"
       },
       {
-        "title": "그리스 로마 신화 1권",
+        "title": "그리스 로마 신화",
         "author": "김민희,정보 글: 강대진",
         "isbn": "9788950971366",
         "coverImageUrl": "https://image.aladin.co.kr/product/11839/63/cover/8950971364_2.jpg"
       },
       {
-        "title": "퀴즈! 과학상식 68권",
+        "title": "퀴즈! 과학상식",
         "author": "신혜영 (지은이), 손영운 (감수)",
         "isbn": "9791170182856",
         "coverImageUrl": "https://image.aladin.co.kr/product/8695/57/cover/k102535389_1.jpg"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 1권",
+        "title": "엉덩이 탐정 1권",
         "author": "트롤 글·그림",
         "isbn": "9788937838750",
         "coverImageUrl": "https://image.aladin.co.kr/product/8920/23/cover/8937838753_1.jpg"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 2권",
+        "title": "엉덩이 탐정 2권",
         "author": "트롤 글·그림",
         "isbn": "9788937853470",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/113/327/11332741.jpg?type=m1&udate=20161209"
       },
       {
-        "title": "(퀴즈!) 과학상식 67권",
+        "title": "과학상식",
         "author": "도기성 지음",
         "isbn": "9791170182610",
         "coverImageUrl": "https://image.aladin.co.kr/product/7877/63/cover/k562434730_1.jpg"
@@ -2976,37 +2976,37 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/8358/14/cover/scm85094323024.jpg"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 3권",
+        "title": "엉덩이 탐정 3권",
         "author": "트롤 글·그림",
         "isbn": "9788937889714",
         "coverImageUrl": "https://image.aladin.co.kr/product/10644/93/cover/8937889714_1.jpg"
       },
       {
-        "title": "고양이 해결사 깜냥 1권",
+        "title": "고양이 해결사 깜냥",
         "author": "홍민정 동화",
         "isbn": "9788936447694",
         "coverImageUrl": "https://image.aladin.co.kr/product/23651/80/cover/8936447696_1.jpg"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 2권",
+        "title": "엉덩이 탐정 2권",
         "author": "트롤 글·그림",
         "isbn": "9788937853470",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/113/327/11332741.jpg?type=m1&udate=20161209"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 1권",
+        "title": "엉덩이 탐정 1권",
         "author": "트롤 글·그림",
         "isbn": "9788937838750",
         "coverImageUrl": "https://image.aladin.co.kr/product/8920/23/cover/8937838753_1.jpg"
       },
       {
-        "title": "흔한남매 4권",
+        "title": "흔한남매",
         "author": "원작: 흔한남매",
         "isbn": "9791164134847",
         "coverImageUrl": "https://image.aladin.co.kr/product/23568/96/cover/k992638123_1.jpg"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 7권",
+        "title": "엉덩이 탐정 7권",
         "author": "트롤 글·그림",
         "isbn": "9791162339466",
         "coverImageUrl": "https://image.aladin.co.kr/product/17457/14/cover/k792534209_1.jpg"
@@ -3014,7 +3014,7 @@
     ],
     "tamna-library": [
       {
-        "title": "흔한남매 6권",
+        "title": "흔한남매",
         "author": "원작: 흔한남매",
         "isbn": "9791164136261",
         "coverImageUrl": "https://image.aladin.co.kr/product/25301/95/cover/k062633309_1.jpg"
@@ -3200,13 +3200,13 @@
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 2권",
+        "title": "엉덩이 탐정 2권",
         "author": "트롤 글·그림",
         "isbn": "9788937853470",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/113/327/11332741.jpg?type=m1&udate=20161209"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 5권",
+        "title": "엉덩이 탐정 5권",
         "author": "트롤 글·그림",
         "isbn": "9791162332542",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/129/756/12975600.jpg?type=m1&udate=20180126"
@@ -3258,13 +3258,13 @@
     ],
     "iyagikkot-library": [
       {
-        "title": "장수탕 선녀님 7권",
+        "title": "장수탕 선녀님",
         "author": "백희나",
         "isbn": "9788993242706",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/069/922/06992205.jpg?type=m1&udate=20180120"
       },
       {
-        "title": "슈퍼 거북 15권",
+        "title": "슈퍼 거북",
         "author": "유설화 글·그림",
         "isbn": "9788993242980",
         "coverImageUrl": "https://image.aladin.co.kr/product/3568/34/cover/8993242984_1.jpg"
@@ -3282,25 +3282,25 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/411/63/cover/8989863783_1.jpg"
       },
       {
-        "title": "알사탕 39권",
+        "title": "알사탕",
         "author": "백희나",
         "isbn": "9791158360375",
         "coverImageUrl": "https://image.aladin.co.kr/product/10586/14/cover/k422530533_1.jpg"
       },
       {
-        "title": "흔한남매 11권",
+        "title": "흔한남매",
         "author": "원작: 흔한남매",
         "isbn": "9791168412477",
         "coverImageUrl": "https://image.aladin.co.kr/product/29832/74/cover/k652838723_1.jpg"
       },
       {
-        "title": "이상한 엄마 33권",
+        "title": "이상한 엄마",
         "author": "백희나",
         "isbn": "9791158360214",
         "coverImageUrl": "https://image.aladin.co.kr/product/7918/85/cover/k352434031_1.jpg"
       },
       {
-        "title": "나비의 모험 2권",
+        "title": "나비의 모험",
         "author": "김보통 만화",
         "isbn": "9791163141006",
         "coverImageUrl": "https://image.aladin.co.kr/product/22272/15/cover/k972636922_1.jpg"
@@ -3370,25 +3370,25 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/10636/66/cover/8936456784_1.jpg"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 1권",
+        "title": "엉덩이 탐정 1권",
         "author": "트롤 글·그림",
         "isbn": "9788937838750",
         "coverImageUrl": "https://image.aladin.co.kr/product/8920/23/cover/8937838753_1.jpg"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 5권",
+        "title": "엉덩이 탐정 5권",
         "author": "트롤 글·그림",
         "isbn": "9791162332542",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/129/756/12975600.jpg?type=m1&udate=20180126"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 4권",
+        "title": "엉덩이 탐정 4권",
         "author": "트롤 글·그림",
         "isbn": "9788937848247",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/124/953/12495377.jpg?type=m1&udate=20170829"
       },
       {
-        "title": "흔한남매 4권",
+        "title": "흔한남매",
         "author": "원작: 흔한남매",
         "isbn": "9791164134847",
         "coverImageUrl": "https://image.aladin.co.kr/product/23568/96/cover/k992638123_1.jpg"
@@ -3400,7 +3400,7 @@
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 3권",
+        "title": "엉덩이 탐정 3권",
         "author": "트롤 글·그림",
         "isbn": "9788937889714",
         "coverImageUrl": "https://image.aladin.co.kr/product/10644/93/cover/8937889714_1.jpg"
@@ -3444,13 +3444,13 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/4516/64/cover/8966350275_1.jpg"
       },
       {
-        "title": "(코믹 메이플스토리) 수학도둑 41권",
+        "title": "수학도둑",
         "author": "송도수",
         "isbn": "9788926397657",
         "coverImageUrl": "https://image.aladin.co.kr/product/4350/30/cover/8926397653_1.jpg"
       },
       {
-        "title": "(코믹) 메이플스토리 35권",
+        "title": "메이플스토리",
         "author": "송도수",
         "isbn": "9788953293939",
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/060/576/06057697.jpg?type=m1&udate=20150715"
@@ -3476,13 +3476,13 @@
         "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
       },
       {
-        "title": "고양이 해결사 깜냥 1권",
+        "title": "고양이 해결사 깜냥",
         "author": "홍민정 동화",
         "isbn": "9788936447694",
         "coverImageUrl": "https://image.aladin.co.kr/product/23651/80/cover/8936447696_1.jpg"
       },
       {
-        "title": "(추리 천재) 엉덩이 탐정 1권",
+        "title": "엉덩이 탐정",
         "author": "트롤 글·그림",
         "isbn": "9788937838750",
         "coverImageUrl": "https://image.aladin.co.kr/product/8920/23/cover/8937838753_1.jpg"
@@ -3494,7 +3494,7 @@
         "coverImageUrl": "https://image.aladin.co.kr/product/15851/64/cover/k202533538_1.jpg"
       },
       {
-        "title": "흔한남매의 흔한 호기심 1권",
+        "title": "흔한남매의 흔한 호기심",
         "author": "원작: 흔한남매",
         "isbn": "9791164136032",
         "coverImageUrl": "https://image.aladin.co.kr/product/25055/39/cover/k002632646_1.jpg"

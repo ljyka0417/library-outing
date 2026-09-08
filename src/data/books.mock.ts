@@ -100,6 +100,17 @@ interface GeneratedBook {
 const loanBooks =
   (generated as { byLibrary?: Record<string, GeneratedBook[]> }).byLibrary ?? {};
 
+/**
+ * 수집 시각. 화면 캐시 키에 섞어 쓴다.
+ *
+ * useAsync 는 AsyncStorage 에 지난 결과를 캐시해 두고 먼저 보여준다.
+ * 데이터를 다시 수집하면 기기에 남은 옛 목록이 잠깐이라도 먼저 뜨는데,
+ * 그게 "고쳤는데 그대로다" 로 보인다. 수집 시각이 바뀌면 캐시 키도 바뀌므로
+ * 옛 캐시는 조회되지 않는다.
+ */
+export const loanDataVersion =
+  (generated as { _generatedAt?: string })._generatedAt ?? 'none';
+
 /** 실제 대출 순위가 있으면 그걸, 없으면 주제별 추천을 돌려준다. */
 export function booksForLibrary(libraryId: string, categories: CategoryId[]): Book[] {
   const real = loanBooks[libraryId];
@@ -121,4 +132,9 @@ export function booksForLibrary(libraryId: string, categories: CategoryId[]): Bo
 export const loanBookStatus = {
   libraryCount: Object.keys(loanBooks).length,
   bookCount: Object.values(loanBooks).reduce((n, arr) => n + arr.length, 0),
+  /** 도서관마다 목록이 실제로 다른지. 같은 목록이 돌아다니면 수집이 잘못된 것이다 */
+  distinctCount: new Set(
+    Object.values(loanBooks).map((arr) => arr.map((b) => b.title).join('|'))
+  ).size,
+  version: loanDataVersion,
 };

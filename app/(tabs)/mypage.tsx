@@ -94,8 +94,20 @@ function DataStatus() {
           ? `${nearbyDataStatus.libraryCount}곳 / ${nearbyDataStatus.placeCount}개 장소`
           : '미수집 (mock 사용중)'}
       </Text>
+      {/* 수집 시각과 "서로 다른 목록 수"를 같이 보여준다.
+          기기가 옛 번들을 돌고 있는지 여기서 바로 구분할 수 있다.
+          목록이 전부 같으면 도서관별 데이터가 아니라는 뜻이라 붉게 표시한다. */}
       <Text style={styles.devText}>
         대출도서 {loanBookStatus.libraryCount}곳 / {loanBookStatus.bookCount}권
+      </Text>
+      <Text
+        style={[
+          styles.devText,
+          loanBookStatus.distinctCount <= 1 && { color: colors.closed, fontWeight: '700' },
+        ]}
+      >
+        서로 다른 목록 {loanBookStatus.distinctCount}곳 · 수집{' '}
+        {loanBookStatus.version.slice(0, 16).replace('T', ' ')}
       </Text>
     </View>
   );
