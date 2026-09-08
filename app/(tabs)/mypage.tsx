@@ -8,6 +8,7 @@ import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
 import { nearbyDataStatus } from '@/api/nearbyApi';
 import { dataCompleteness } from '@/data/libraries.mock';
+import { loanBookStatus } from '@/data/books.mock';
 import { colors, radius, spacing, typography } from '@/theme';
 
 export default function MyPageScreen() {
@@ -92,6 +93,9 @@ function DataStatus() {
         {nearbyDataStatus.generated
           ? `${nearbyDataStatus.libraryCount}곳 / ${nearbyDataStatus.placeCount}개 장소`
           : '미수집 (mock 사용중)'}
+      </Text>
+      <Text style={styles.devText}>
+        대출도서 {loanBookStatus.libraryCount}곳 / {loanBookStatus.bookCount}권
       </Text>
     </View>
   );

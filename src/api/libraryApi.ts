@@ -1,5 +1,5 @@
 import type { Book, Library, LibraryFilter } from '@/types';
-import { booksForCategories } from '@/data/books.mock';
+import { booksForLibrary } from '@/data/books.mock';
 import { MOCK_LIBRARIES } from '@/data/libraries.mock';
 import { isOpenNow } from '@/utils/openingHours';
 import { delay } from './config';
@@ -64,7 +64,7 @@ export const libraryApi: LibraryApi = {
   async recommendedBooks(libraryId) {
     await delay();
     const lib = MOCK_LIBRARIES.find((l) => l.id === libraryId);
-    return lib ? booksForCategories(lib.categories) : [];
+    return lib ? booksForLibrary(lib.id, lib.categories) : [];
   },
 
   async featured() {

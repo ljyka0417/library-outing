@@ -1,4 +1,5 @@
 import type { Book, CategoryId } from '@/types';
+import generated from './books.generated.json';
 
 /**
  * ⚠️ 샘플(mock) 데이터입니다.
@@ -80,3 +81,44 @@ export function booksForCategories(categories: CategoryId[]): Book[] {
   const picked = MOCK_BOOKS.filter((b) => categories.includes(b.category));
   return picked.slice(0, 6);
 }
+
+/* ── 실제 대출 데이터 ────────────────────────────────────────
+   정보나루 인기대출도서 API 로 수집한 도서관별 실제 대출 순위.
+   npm run collect-books 로 갱신한다.
+
+   있으면 이걸 쓰고, 없는 도서관만 위의 주제별 추천으로 떨어진다.
+   "이 도서관에서 사람들이 실제로 많이 빌린 책" 이 주제별 일반 추천보다
+   훨씬 그 도서관다운 정보다. */
+
+interface GeneratedBook {
+  title: string;
+  author?: string;
+  isbn?: string;
+  coverImageUrl?: string;
+}
+
+const loanBooks =
+  (generated as { byLibrary?: Record<string, GeneratedBook[]> }).byLibrary ?? {};
+
+/** 실제 대출 순위가 있으면 그걸, 없으면 주제별 추천을 돌려준다. */
+export function booksForLibrary(libraryId: string, categories: CategoryId[]): Book[] {
+  const real = loanBooks[libraryId];
+  if (real && real.length > 0) {
+    return real.map((b, i) => ({
+      id: `${libraryId}-loan-${i}`,
+      title: b.title,
+      author: b.author ?? '',
+      coverImageUrl: b.coverImageUrl,
+      // 대출 순위 기반이라 주제 분류는 도서관의 대표 주제를 따른다
+      category: categories[0],
+      rank: i + 1,
+    }));
+  }
+  return booksForCategories(categories);
+}
+
+/** 실제 대출 데이터가 있는 도서관 수 (개발 중 현황 확인용) */
+export const loanBookStatus = {
+  libraryCount: Object.keys(loanBooks).length,
+  bookCount: Object.values(loanBooks).reduce((n, arr) => n + arr.length, 0),
+};

@@ -230,7 +230,12 @@ export default function LibraryDetailScreen() {
         {/* 추천 도서 */}
         {books && books.length > 0 ? (
           <View style={styles.section}>
-            <SectionHeader title="이 도서관의 추천 도서" />
+            {/* 실제 대출 순위 데이터가 있으면 그렇다고 밝힌다.
+                주제별 일반 추천과 구분되어야 정보의 무게가 다르게 읽힌다. */}
+            <SectionHeader
+              title={books[0].rank ? '이 도서관에서 많이 빌린 책' : '이 주제의 추천 도서'}
+              subtitle={books[0].rank ? '실제 대출 순위' : undefined}
+            />
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}

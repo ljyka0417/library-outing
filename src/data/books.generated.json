@@ -1,0 +1,3611 @@
+{
+  "_readme": [
+    "정보나루 인기대출도서 API 로 수집한 도서관별 실제 대출 순위입니다.",
+    "직접 고치지 마세요 — 다음 실행 때 덮어씁니다.",
+    "생성: npm run collect-books",
+    "비어 있으면 앱은 주제별 추천 도서로 떨어집니다."
+  ],
+  "_generatedAt": "2026-09-07T17:44:21.930Z",
+  "byLibrary": {
+    "seoul-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "songpa-kids-english": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "goyang-hwajeong": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "ansan-media": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "leeseokyoung-media": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "uijeongbu-english": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "juyeop-kids": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "pangyo-kids": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "goyang-aramnuri": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "hwaseong-jinan": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "incheon-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "majeon-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "cheongna-intl": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "yeongjong-sky": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "yulmok-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "cheongna-lake": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "wonju-central": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "chuncheon-city": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "sokcho-kids-english": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "hanbat-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "chungnam-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "baebang-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "cheongju-ochang-lake": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "eumbong-eoulsaem": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "kkumsaem-kids": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "chungju-city": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "dunpo-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "baebang-wolcheon": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "sejong-city-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "gyeongbuk-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "gyeongju-city": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "hadong-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "kkumirang-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "haman-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "sancheong-jirisan": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "ulsan-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "dosan-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "sinbok-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "wolbong-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "sanjeon-comics": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "ulsan-jonggatjip": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "gangdong-sea": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "busan-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "donggu-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "yeongdo-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "busanjin-kids-youth": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "dongnae-eupseong": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "busan-namgu-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "mandeok-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "haeundae-humanities": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "geumjeong-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "jeonggwan-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "seogu-ami-dream": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "daegu-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "dalseong-gunlib": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "daegu-seogu-english": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "dalseong-kids-forest": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "dalseo-family": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "gukchae-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "dowon-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "halla-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "tamna-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "dunsan-english": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "jeonnam-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "jorye-lake": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "mudeung-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "iyagikkot-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "kids-eco-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "unam-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "jangdeok-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "unnam-kids": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ],
+    "pureungil-library": [
+      {
+        "title": "나미야 잡화점의 기적",
+        "author": "히가시노 게이고",
+        "isbn": "9788972756194",
+        "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+      },
+      {
+        "title": "소년이 온다",
+        "author": "한강",
+        "isbn": "9788936434120",
+        "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+      },
+      {
+        "title": "채식주의자",
+        "author": "한강",
+        "isbn": "9788936433598",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+      },
+      {
+        "title": "불편한 편의점",
+        "author": "김호연",
+        "isbn": "9791161571188",
+        "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+      },
+      {
+        "title": "아몬드",
+        "author": "손원평",
+        "isbn": "9788936434267",
+        "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+      },
+      {
+        "title": "종의 기원",
+        "author": "정유정",
+        "isbn": "9788956609959",
+        "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
+      },
+      {
+        "title": "수박 수영장",
+        "author": "안녕달",
+        "isbn": "9788936446819",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+      },
+      {
+        "title": "사피엔스",
+        "author": "유발 하라리",
+        "isbn": "9788934972464",
+        "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+      }
+    ]
+  }
+}

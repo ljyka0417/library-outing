@@ -90,6 +90,8 @@ export interface Book {
   coverImageUrl?: string;
   /** 이 책이 어울리는 주제 */
   category: CategoryId;
+  /** 그 도서관의 실제 대출 순위. 주제별 일반 추천에는 없다. */
+  rank?: number;
 }
 
 export type NearbyType = 'restaurant' | 'cafe' | 'culture';

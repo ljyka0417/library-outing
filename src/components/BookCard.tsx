@@ -21,7 +21,15 @@ export function BookCard({ book }: { book: Book }) {
   return (
     <View style={styles.card}>
       {book.coverImageUrl ? (
-        <Image source={{ uri: book.coverImageUrl }} style={styles.cover} />
+        <View>
+          <Image source={{ uri: book.coverImageUrl }} style={styles.cover} />
+          {/* 실제 대출 순위가 있을 때만 표시한다 */}
+          {book.rank ? (
+            <View style={styles.rank}>
+              <Text style={styles.rankText}>{book.rank}</Text>
+            </View>
+          ) : null}
+        </View>
       ) : (
         <View style={[styles.cover, styles.fauxCover, { backgroundColor: palette.bg }]}>
           {/* 책등 느낌의 세로선 — 표지처럼 읽히게 하는 최소한의 장치 */}
@@ -75,7 +83,24 @@ const styles = StyleSheet.create({
     ...typography.tiny,
     fontWeight: '700',
     textAlign: 'center',
-    lineHeight: 15,
+    lineHeight: 17,
+  },
+  rank: {
+    position: 'absolute',
+    top: 6,
+    left: 6,
+    minWidth: 22,
+    height: 22,
+    borderRadius: 11,
+    backgroundColor: 'rgba(46,42,38,0.82)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 6,
+  },
+  rankText: {
+    ...typography.tiny,
+    color: '#FFFFFF',
+    fontWeight: '700',
   },
   title: {
     ...typography.captionBold,
