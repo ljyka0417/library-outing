@@ -9,18 +9,9 @@ import { colors } from '@/theme';
 // 로컬 저장소 복원이 끝날 때까지 스플래시를 유지한다.
 void SplashScreen.preventAutoHideAsync();
 
-/**
- * 이번 실행에서 달곰이 안내를 이미 띄웠는가.
- *
- * 앱을 켤 때마다 안내를 보여 준다. 모듈 스코프 변수라 앱이 완전히 꺼지면
- * 함께 사라지고, 앱 안에서 화면을 옮겨 다니는 동안에는 남아 있다.
- * 저장소에 넣지 않는 이유가 그것이다 — 저장하면 "한 번 보면 끝" 이 되고,
- * 화면 상태로 두면 탭을 옮길 때마다 다시 뜬다.
- */
-let shownThisLaunch = false;
-
 export default function RootLayout() {
   const hydrated = useAppStore((s) => s._hydrated);
+  const hasSeenOnboarding = useAppStore((s) => s.hasSeenOnboarding);
   const router = useRouter();
   const segments = useSegments();
 
@@ -41,17 +32,17 @@ export default function RootLayout() {
      */
     const isDeepLinkedDetail = segments[0] === 'library';
 
-    if (isDeepLinkedDetail) {
-      // QR 로 들어왔으면 안내를 건너뛰되, 이번 실행에서는 다시 띄우지 않는다
-      shownThisLaunch = true;
-      return;
-    }
-
-    if (!shownThisLaunch && !onOnboarding) {
-      shownThisLaunch = true;
+    /**
+     * 안내는 처음 설치했을 때 한 번만 띄운다.
+     *
+     * hasSeenOnboarding 은 기기에 저장되므로 앱을 껐다 켜도 다시 뜨지 않는다.
+     * (한때 켤 때마다 띄워 봤는데, 매번 세 장을 넘겨야 해서 금방 성가시다)
+     * 마이 탭에서 기록을 전부 지우면 이 값도 함께 지워져 다시 나온다.
+     */
+    if (!hasSeenOnboarding && !onOnboarding && !isDeepLinkedDetail) {
       router.replace('/onboarding');
     }
-  }, [hydrated, segments, router]);
+  }, [hydrated, hasSeenOnboarding, segments, router]);
 
   if (!hydrated) return null;
 
