@@ -6,6 +6,8 @@ import { LibraryCard } from '@/components/LibraryCard';
 import { SearchBar } from '@/components/SearchBar';
 import { Chip, EmptyState } from '@/components/common';
 import { CATEGORIES, CATEGORY_MAP, SIDO_LIST } from '@/data/categories';
+import { useTabBarPadding } from '@/hooks/useTabBarPadding';
+import { localizeRegion, useT } from '@/i18n';
 import { libraryApi } from '@/api/libraryApi';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
@@ -23,6 +25,8 @@ export default function SearchScreen() {
   );
   const [sido, setSido] = useState<string | undefined>();
   const [openNow, setOpenNow] = useState(false);
+  const T = useT();
+  const tabPad = useTabBarPadding();
 
   const favorites = useAppStore((s) => s.favorites);
   const toggleFavorite = useAppStore((s) => s.toggleFavorite);
@@ -60,7 +64,7 @@ export default function SearchScreen() {
         <SearchBar
           value={keyword}
           onChangeText={setKeyword}
-          placeholder="도서관명, 지역, 주제 검색"
+          placeholder={T.search.placeholder}
         />
       </View>
 
@@ -72,7 +76,7 @@ export default function SearchScreen() {
         style={[{ flexGrow: 0, flexShrink: 0 }, styles.filterRowSpacing]}
       >
         <Chip
-          label="전체 주제"
+          label={T.search.allTopics}
           selected={!category}
           onPress={() => setCategory(undefined)}
         />
@@ -81,7 +85,7 @@ export default function SearchScreen() {
         {CATEGORIES.map((c) => (
           <Chip
             key={c.id}
-            label={c.name}
+            label={T.categories[c.id]}
             selected={category === c.id}
             onPress={() => setCategory(category === c.id ? undefined : c.id)}
           />
@@ -95,13 +99,13 @@ export default function SearchScreen() {
         contentContainerStyle={styles.filterRow}
         style={[{ flexGrow: 0, flexShrink: 0 }, styles.filterRowSpacing]}
       >
-        <Chip label="지금 운영중" selected={openNow} onPress={() => setOpenNow(!openNow)} />
+        <Chip label={T.search.openNow} selected={openNow} onPress={() => setOpenNow(!openNow)} />
         <View style={styles.divider} />
-        <Chip label="전국" selected={!sido} onPress={() => setSido(undefined)} />
+        <Chip label={T.search.nationwide} selected={!sido} onPress={() => setSido(undefined)} />
         {SIDO_LIST.map((s) => (
           <Chip
             key={s}
-            label={s}
+            label={localizeRegion(T, s)}
             selected={sido === s}
             onPress={() => setSido(sido === s ? undefined : s)}
           />
@@ -109,9 +113,9 @@ export default function SearchScreen() {
       </ScrollView>
 
       <Text style={styles.count}>
-        {activeCategoryLabel ? `${activeCategoryLabel.name} ` : ''}
-        도서관 {results.length}곳
-        {isStale ? ' · 오프라인 저장본' : ''}
+        {activeCategoryLabel ? `${T.categories[activeCategoryLabel.id]} ` : ''}
+        {T.common.libraries(results.length)}
+        {isStale ? ` · ${T.common.offline}` : ''}
       </Text>
 
       {loading && !data ? (
@@ -119,20 +123,20 @@ export default function SearchScreen() {
       ) : error ? (
         <EmptyState
           pose="faceWink"
-          title="목록을 불러오지 못했어요"
-          description="네트워크 상태를 확인한 뒤 다시 시도해 주세요"
+          title={T.search.errorTitle}
+          description={T.search.errorBody}
         />
       ) : (
         <FlatList
           data={results}
           keyExtractor={(item) => item.id}
-          contentContainerStyle={styles.list}
+          contentContainerStyle={[styles.list, { paddingBottom: 24 + tabPad }]}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
           ListEmptyComponent={
             <EmptyState
-              title="조건에 맞는 도서관이 없어요"
-              description="검색어나 필터를 조금 바꿔 보세요"
+              title={T.search.emptyTitle}
+              description={T.search.emptyBody}
             />
           }
           renderItem={({ item }) => (

@@ -19,6 +19,8 @@ import { BookCard } from '@/components/BookCard';
 import { LibraryCard } from '@/components/LibraryCard';
 import { useAppStore } from '@/store/useAppStore';
 import { ask, STARTER_QUESTIONS, type Answer } from '@/utils/assistant';
+import { useTabBarPadding } from '@/hooks/useTabBarPadding';
+import { useT } from '@/i18n';
 import { colors, radius, spacing, typography } from '@/theme';
 import { formatDistance, walkingMinutes } from '@/utils/openingHours';
 import { openKakaoMap } from '@/utils/mapLinks';
@@ -30,14 +32,6 @@ interface Message {
   answer?: Answer;
 }
 
-const GREETING: Message = {
-  id: 'greeting',
-  role: 'dalgomi',
-  text: `안녕하세요, 달곰이예요.
-전국 도서관 132곳을 알고 있어요. 무엇이든 물어보세요.
-
-저는 이 앱에 담긴 정보로만 답해요. 모르는 건 지어내지 않고 모른다고 말할게요.`,
-};
 
 /**
  * 달곰이에게 물어보기.
@@ -50,11 +44,13 @@ const GREETING: Message = {
 export default function ChatScreen() {
   const router = useRouter();
   const listRef = useRef<FlatList<Message>>(null);
+  const T = useT();
+  const tabPad = useTabBarPadding();
 
   const favorites = useAppStore((s) => s.favorites);
   const toggleFavorite = useAppStore((s) => s.toggleFavorite);
 
-  const [messages, setMessages] = useState<Message[]>([GREETING]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [thinking, setThinking] = useState(false);
 
@@ -84,19 +80,32 @@ export default function ChatScreen() {
   // 새 말풍선이 생기면 아래로 붙인다
   const scrollToEnd = () => listRef.current?.scrollToEnd({ animated: true });
 
+  // 인사말은 언어를 바꾸면 같이 바뀌어야 하므로 상태에 넣지 않고 그때그때 만든다
+  const greeting: Message = { id: 'greeting', role: 'dalgomi', text: T.chat.greeting };
+  const thread = [greeting, ...messages];
+
   const lastSuggestions =
     messages[messages.length - 1]?.answer?.suggestions ??
-    (messages.length === 1 ? STARTER_QUESTIONS : undefined);
+    (messages.length === 0 ? STARTER_QUESTIONS : undefined);
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
       <View style={styles.header}>
         <Mascot size={38} pose="faceHappy" />
         <View style={{ flex: 1 }}>
-          <Text style={styles.headerTitle}>달곰이에게 물어보기</Text>
-          <Text style={styles.headerSub}>앱에 담긴 132곳 정보로 답해요</Text>
+          <Text style={styles.headerTitle}>{T.chat.title}</Text>
+          <Text style={styles.headerSub}>{T.chat.subtitle}</Text>
         </View>
       </View>
+
+      {/* 도우미의 답은 아직 한국어만 만든다. 화면은 번역됐는데 답만 한국어면
+          고장으로 보이므로, 그렇다고 미리 밝혀 둔다. */}
+      {T.chat.koreanOnly ? (
+        <View style={styles.notice}>
+          <Ionicons name="information-circle-outline" size={14} color={colors.brown} />
+          <Text style={styles.noticeText}>{T.chat.koreanOnly}</Text>
+        </View>
+      ) : null}
 
       <KeyboardAvoidingView
         style={{ flex: 1 }}
@@ -105,9 +114,9 @@ export default function ChatScreen() {
       >
         <FlatList
           ref={listRef}
-          data={messages}
+          data={thread}
           keyExtractor={(m) => m.id}
-          contentContainerStyle={styles.list}
+          contentContainerStyle={[styles.list, { paddingBottom: 16 + tabPad }]}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
           onContentSizeChange={scrollToEnd}
@@ -124,7 +133,7 @@ export default function ChatScreen() {
         {thinking ? (
           <View style={styles.thinking}>
             <ActivityIndicator size="small" color={colors.primary} />
-            <Text style={styles.thinkingText}>달곰이가 찾아보는 중</Text>
+            <Text style={styles.thinkingText}>{T.chat.thinking}</Text>
           </View>
         ) : null}
 
@@ -147,7 +156,7 @@ export default function ChatScreen() {
           <TextInput
             value={input}
             onChangeText={setInput}
-            placeholder="어린이 도서관 추천해줘"
+            placeholder={T.chat.placeholder}
             placeholderTextColor={colors.textMuted}
             style={styles.input}
             returnKeyType="send"
@@ -159,7 +168,7 @@ export default function ChatScreen() {
             disabled={!input.trim() || thinking}
             style={[styles.sendButton, (!input.trim() || thinking) && { opacity: 0.4 }]}
             accessibilityRole="button"
-            accessibilityLabel="질문 보내기"
+            accessibilityLabel={T.chat.send}
           >
             <Ionicons name="arrow-up" size={20} color={colors.white} />
           </Pressable>
@@ -259,6 +268,16 @@ const styles = StyleSheet.create({
   },
   headerTitle: { ...typography.bodyBold, color: colors.text },
   headerSub: { ...typography.tiny, color: colors.textSub },
+
+  notice: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: spacing.xs,
+    paddingHorizontal: spacing.xl,
+    paddingVertical: spacing.sm,
+    backgroundColor: colors.brownSoft,
+  },
+  noticeText: { ...typography.tiny, color: colors.brown, flex: 1 },
 
   list: { padding: spacing.xl, gap: spacing.lg, paddingBottom: spacing.xl },
 
