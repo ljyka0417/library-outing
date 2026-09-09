@@ -1,7 +1,6 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useT } from '@/i18n';
 import { colors, radius, spacing, typography } from '@/theme';
 import { openKakaoMap, openNaverMap, type MapTarget } from '@/utils/mapLinks';
 
@@ -46,7 +45,6 @@ interface ButtonProps {
 }
 
 function MapButton({ label, brandColor, markTint = colors.white, onPress }: ButtonProps) {
-  const T = useT();
   return (
     <Pressable
       onPress={onPress}
@@ -60,7 +58,7 @@ function MapButton({ label, brandColor, markTint = colors.white, onPress }: Butt
 
       <View style={{ flex: 1 }}>
         <Text style={styles.label}>{label}</Text>
-        <Text style={styles.sub}>{T.common.openIn}</Text>
+        <Text style={styles.sub}>바로 열기</Text>
       </View>
 
       <Ionicons name="open-outline" size={16} color={colors.textMuted} />

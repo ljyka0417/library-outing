@@ -13,15 +13,29 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Mascot } from '@/components/Mascot';
 import { useAppStore } from '@/store/useAppStore';
-import { useT } from '@/i18n';
 import { colors, radius, spacing, typography } from '@/theme';
 
 /**
  * 가이드북 → 앱으로 이어지는 사용 흐름 3단계.
  * 달곰이 포즈를 각 단계의 행동에 맞췄다 (인사 → 책 읽기 → 지도 펼치기).
- * 글은 언어마다 다르므로 포즈만 여기 두고 문구는 번역 사전에서 가져온다.
  */
-const POSES = ['wave', 'read', 'map'] as const;
+const SLIDES = [
+  {
+    title: '안녕! 나는 달곰이야',
+    body: '전국의 도서관을 함께 다니는 친구예요.\n어떤 도서관이 있는지 같이 보러 갈까요?',
+    pose: 'wave' as const,
+  },
+  {
+    title: '책에서 발견하고, QR로 자세히',
+    body: '가이드북에서 마음에 드는 도서관을 찾았다면\n옆에 있는 QR 코드를 찍어 보세요.',
+    pose: 'read' as const,
+  },
+  {
+    title: '나들이 코스로 완성',
+    body: '지도앱으로 길을 찾고,\n주변 맛집·카페·볼거리까지 한 번에.',
+    pose: 'map' as const,
+  },
+];
 
 export default function OnboardingScreen() {
   // Dimensions.get() 을 모듈 스코프에서 읽으면 화면이 아직 없는 시점이라
@@ -31,9 +45,6 @@ export default function OnboardingScreen() {
   const scrollRef = useRef<ScrollView>(null);
   const completeOnboarding = useAppStore((s) => s.completeOnboarding);
   const router = useRouter();
-  const T = useT();
-
-  const SLIDES = T.onboarding.slides.map((s, i) => ({ ...s, pose: POSES[i] }));
 
   const finish = () => {
     completeOnboarding();
@@ -55,7 +66,7 @@ export default function OnboardingScreen() {
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'bottom']}>
       <Pressable onPress={finish} style={styles.skip} hitSlop={10}>
-        <Text style={styles.skipText}>{T.onboarding.skip}</Text>
+        <Text style={styles.skipText}>건너뛰기</Text>
       </Pressable>
 
       <ScrollView
@@ -91,7 +102,7 @@ export default function OnboardingScreen() {
           style={({ pressed }) => [styles.cta, pressed && { opacity: 0.85 }]}
         >
           <Text style={styles.ctaText}>
-            {page === SLIDES.length - 1 ? T.onboarding.start : T.onboarding.next}
+            {page === SLIDES.length - 1 ? '도서관 둘러보기' : '다음'}
           </Text>
         </Pressable>
       </View>

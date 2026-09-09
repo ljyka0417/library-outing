@@ -11,16 +11,15 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { EmptyState } from './common';
 import { nearbyApi } from '@/api/nearbyApi';
-import { useT } from '@/i18n';
 import { colors, radius, spacing, typography } from '@/theme';
 import { formatDistance, walkingMinutes } from '@/utils/openingHours';
 import { openKakaoMap } from '@/utils/mapLinks';
 import type { Coordinates, NearbyPlace, NearbyType } from '@/types';
 
-const TABS: { type: NearbyType; key: NearbyType; icon: keyof typeof Ionicons.glyphMap }[] = [
-  { type: 'restaurant', key: 'restaurant', icon: 'restaurant' },
-  { type: 'cafe', key: 'cafe', icon: 'cafe' },
-  { type: 'culture', key: 'culture', icon: 'color-palette' },
+const TABS: { type: NearbyType; label: string; icon: keyof typeof Ionicons.glyphMap }[] = [
+  { type: 'restaurant', label: '주변 맛집', icon: 'restaurant' },
+  { type: 'cafe', label: '주변 카페', icon: 'cafe' },
+  { type: 'culture', label: '문화·볼거리', icon: 'color-palette' },
 ];
 
 /** 사진 대신 쓰는 종류별 색·아이콘 */
@@ -44,7 +43,6 @@ interface Props {
  */
 export function NearbySection({ libraryId, coords }: Props) {
   const [tab, setTab] = useState<NearbyType>('restaurant');
-  const T = useT();
   const [places, setPlaces] = useState<NearbyPlace[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -87,7 +85,7 @@ export function NearbySection({ libraryId, coords }: Props) {
                 size={15}
                 color={active ? colors.white : colors.textSub}
               />
-              <Text style={[styles.tabText, active && styles.tabTextActive]}>{T.nearby[t.key]}</Text>
+              <Text style={[styles.tabText, active && styles.tabTextActive]}>{t.label}</Text>
             </Pressable>
           );
         })}

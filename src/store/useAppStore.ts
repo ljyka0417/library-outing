@@ -2,7 +2,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import type { VisitRecord } from '@/types';
-import type { Language } from '@/i18n';
 
 /**
  * 로그인 없이도 쓸 수 있는 로컬 상태.
@@ -19,14 +18,12 @@ interface AppState {
   recentLibraryIds: string[];
   visits: VisitRecord[];
   hasSeenOnboarding: boolean;
-  language: Language;
 
   toggleFavorite: (libraryId: string) => void;
   isFavorite: (libraryId: string) => boolean;
   pushRecent: (libraryId: string) => void;
   addVisit: (libraryId: string) => void;
   completeOnboarding: () => void;
-  setLanguage: (language: Language) => void;
   resetAll: () => void;
 
   /** persist 복원 완료 여부. 스플래시를 언제 내릴지 판단하는 데 쓴다. */
@@ -41,7 +38,6 @@ export const useAppStore = create<AppState>()(
       recentLibraryIds: [],
       visits: [],
       hasSeenOnboarding: false,
-      language: 'ko',
       _hydrated: false,
 
       toggleFavorite: (libraryId) =>
@@ -69,8 +65,6 @@ export const useAppStore = create<AppState>()(
 
       completeOnboarding: () => set({ hasSeenOnboarding: true }),
 
-      setLanguage: (language) => set({ language }),
-
       resetAll: () =>
         set({ favorites: [], recentLibraryIds: [], visits: [], hasSeenOnboarding: false }),
 
@@ -85,7 +79,6 @@ export const useAppStore = create<AppState>()(
         recentLibraryIds: state.recentLibraryIds,
         visits: state.visits,
         hasSeenOnboarding: state.hasSeenOnboarding,
-        language: state.language,
       }),
       // 복원에 실패하더라도 반드시 hydrated 를 켠다.
       // 그러지 않으면 루트 레이아웃이 null 을 계속 반환해 스플래시에서 멈춘다.

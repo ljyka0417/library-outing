@@ -8,9 +8,6 @@ import { LibraryCard } from '@/components/LibraryCard';
 import { Mascot } from '@/components/Mascot';
 import { SearchBar } from '@/components/SearchBar';
 import { SectionHeader } from '@/components/common';
-import { LanguagePicker } from '@/components/LanguagePicker';
-import { useTabBarPadding } from '@/hooks/useTabBarPadding';
-import { useT } from '@/i18n';
 import { libraryApi } from '@/api/libraryApi';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
@@ -20,8 +17,6 @@ import type { CategoryId } from '@/types';
 export default function HomeScreen() {
   const router = useRouter();
   const recentIds = useAppStore((s) => s.recentLibraryIds);
-  const T = useT();
-  const tabPad = useTabBarPadding();
 
   const featured = useAsync(() => libraryApi.featured(), [], { cacheKey: 'featured' });
   const all = useAsync(() => libraryApi.list(), [], { cacheKey: 'all-libraries' });
@@ -38,19 +33,13 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[styles.content, { paddingBottom: 40 + tabPad }]}>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.content}>
         {/* 인사 + 검색 */}
         <View style={styles.header}>
-          {/* 언어 선택은 오른쪽 위 고정.
-              글을 못 읽는 상태에서도 국기는 알아볼 수 있어야 하므로 아이콘을 앞세운다. */}
-          <View style={styles.topBar}>
-            <LanguagePicker />
-          </View>
-
           <View style={styles.greetingRow}>
             <View style={{ flex: 1 }}>
-              <Text style={styles.greeting}>{T.home.greeting}</Text>
-              <Text style={styles.headline}>{T.home.headline}</Text>
+              <Text style={styles.greeting}>안녕하세요!</Text>
+              <Text style={styles.headline}>어떤 도서관을{'\n'}찾고 계시나요?</Text>
             </View>
             <Mascot size={84} pose="faceHappy" />
           </View>
@@ -64,23 +53,23 @@ export default function HomeScreen() {
             <Ionicons name="qr-code-outline" size={20} color={colors.brown} />
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={styles.qrTitle}>{T.home.qrTitle}</Text>
-            <Text style={styles.qrBody}>{T.home.qrBody}</Text>
+            <Text style={styles.qrTitle}>가이드북을 갖고 계신가요?</Text>
+            <Text style={styles.qrBody}>책 속 QR을 찍으면 그 도서관으로 바로 이동해요</Text>
           </View>
         </View>
 
         {/* 주제별 도서관 */}
         <View style={styles.section}>
-          <SectionHeader title={T.home.categories} subtitle={T.home.categoriesSub} />
+          <SectionHeader title="주제별 도서관" subtitle="관심 있는 주제를 골라 보세요" />
           <CategoryGrid onSelect={goCategory} />
         </View>
 
         {/* 추천 도서관 */}
         <View style={styles.section}>
           <SectionHeader
-            title={T.home.featured}
-            subtitle={T.home.featuredSub}
-            actionLabel={T.home.seeAll}
+            title="이번 주 추천 도서관"
+            subtitle="가이드북이 고른 특별한 공간"
+            actionLabel="전체보기"
             onAction={() => router.push('/search')}
           />
           {featured.loading && !featured.data ? (
@@ -106,7 +95,7 @@ export default function HomeScreen() {
         {/* 최근 본 도서관 */}
         {recentLibraries.length > 0 ? (
           <View style={styles.section}>
-            <SectionHeader title={T.home.recent} />
+            <SectionHeader title="최근 본 도서관" />
             <View style={styles.list}>
               {recentLibraries.slice(0, 3).map((lib) => (
                 <LibraryCard
@@ -120,7 +109,9 @@ export default function HomeScreen() {
         ) : null}
 
         {featured.isStale || all.isStale ? (
-          <Text style={styles.offlineNote}>{T.home.staleNote}</Text>
+          <Text style={styles.offlineNote}>
+            네트워크가 불안정해 마지막으로 본 정보를 보여드리고 있어요
+          </Text>
         ) : null}
       </ScrollView>
     </SafeAreaView>
@@ -141,10 +132,6 @@ const styles = StyleSheet.create({
     paddingTop: spacing.md,
     paddingBottom: spacing.xl,
     gap: spacing.lg,
-  },
-  topBar: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
   },
   greetingRow: {
     flexDirection: 'row',

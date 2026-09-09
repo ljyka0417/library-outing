@@ -9,16 +9,11 @@ import { useAppStore } from '@/store/useAppStore';
 import { nearbyDataStatus } from '@/api/nearbyApi';
 import { dataCompleteness } from '@/data/libraries.mock';
 import { loanBookStatus } from '@/data/books.mock';
-import { LanguagePicker } from '@/components/LanguagePicker';
-import { useTabBarPadding } from '@/hooks/useTabBarPadding';
-import { useT } from '@/i18n';
 import { colors, radius, spacing, typography } from '@/theme';
 
 export default function MyPageScreen() {
   const { favorites, visits, recentLibraryIds, resetAll } = useAppStore();
   const { data } = useAsync(() => libraryApi.list(), [], { cacheKey: 'all-libraries' });
-  const T = useT();
-  const tabPad = useTabBarPadding();
 
   const visitedNames = visits
     .slice(0, 5)
@@ -26,32 +21,36 @@ export default function MyPageScreen() {
     .filter(Boolean) as string[];
 
   const confirmReset = () => {
-    Alert.alert(T.mypage.resetTitle, T.mypage.resetBody, [
-      { text: T.common.cancel, style: 'cancel' },
-      { text: T.common.delete, style: 'destructive', onPress: resetAll },
-    ]);
+    Alert.alert(
+      '기록을 모두 지울까요?',
+      '즐겨찾기, 최근 본 도서관, 방문 기록이 모두 삭제돼요. 되돌릴 수 없습니다.',
+      [
+        { text: '취소', style: 'cancel' },
+        { text: '삭제', style: 'destructive', onPress: resetAll },
+      ]
+    );
   };
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[styles.content, { paddingBottom: 24 + tabPad }]}>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.content}>
         <View style={styles.profile}>
           <Mascot size={110} pose="hello" />
-          <Text style={styles.name}>{T.mypage.name}</Text>
-          <Text style={styles.sub}>{T.mypage.sub}</Text>
+          <Text style={styles.name}>달곰이와 도서관 나들이 중</Text>
+          <Text style={styles.sub}>로그인 없이도 기록은 이 기기에 저장돼요</Text>
         </View>
 
         <View style={styles.stats}>
-          <Stat label={T.mypage.favorites} value={favorites.length} />
+          <Stat label="즐겨찾기" value={favorites.length} />
           <View style={styles.statDivider} />
-          <Stat label={T.mypage.visits} value={visits.length} />
+          <Stat label="방문 기록" value={visits.length} />
           <View style={styles.statDivider} />
-          <Stat label={T.mypage.recent} value={recentLibraryIds.length} />
+          <Stat label="최근 본 곳" value={recentLibraryIds.length} />
         </View>
 
         {visitedNames.length > 0 ? (
           <View style={styles.card}>
-            <Text style={styles.cardTitle}>{T.mypage.visited}</Text>
+            <Text style={styles.cardTitle}>최근 다녀온 도서관</Text>
             {visitedNames.map((n, i) => (
               <View key={`${n}-${i}`} style={styles.visitRow}>
                 <Ionicons name="checkmark-circle" size={16} color={colors.primary} />
@@ -62,19 +61,11 @@ export default function MyPageScreen() {
         ) : null}
 
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>{T.mypage.settings}</Text>
-
-          {/* 홈 우측 상단에도 있지만, 설정에서 찾는 사람도 있다 */}
-          <View style={styles.menuRow}>
-            <Ionicons name="language-outline" size={18} color={colors.textSub} />
-            <Text style={styles.menuLabel}>{T.mypage.language}</Text>
-            <LanguagePicker />
-          </View>
-
-          <MenuRow icon="notifications-outline" label={T.mypage.notifications} comingSoon />
-          <MenuRow icon="person-add-outline" label={T.mypage.account} comingSoon />
-          <MenuRow icon="color-wand-outline" label={T.mypage.dressUp} comingSoon />
-          <MenuRow icon="trash-outline" label={T.mypage.reset} onPress={confirmReset} danger />
+          <Text style={styles.cardTitle}>설정</Text>
+          <MenuRow icon="notifications-outline" label="알림 설정" comingSoon />
+          <MenuRow icon="person-add-outline" label="로그인 / 기기 간 동기화" comingSoon />
+          <MenuRow icon="color-wand-outline" label="달곰이 꾸미기" comingSoon />
+          <MenuRow icon="trash-outline" label="기록 전체 삭제" onPress={confirmReset} danger />
         </View>
 
         {/* 개발용 데이터 수집 현황. __DEV__ 라 배포 빌드에는 나오지 않는다. */}
@@ -141,7 +132,6 @@ interface MenuRowProps {
 }
 
 function MenuRow({ icon, label, onPress, comingSoon, danger }: MenuRowProps) {
-  const T = useT();
   return (
     <Pressable
       onPress={onPress}
@@ -151,7 +141,7 @@ function MenuRow({ icon, label, onPress, comingSoon, danger }: MenuRowProps) {
       <Ionicons name={icon} size={18} color={danger ? colors.closed : colors.textSub} />
       <Text style={[styles.menuLabel, danger && { color: colors.closed }]}>{label}</Text>
       {comingSoon ? (
-        <Text style={styles.soon}>{T.common.soon}</Text>
+        <Text style={styles.soon}>준비중</Text>
       ) : (
         <Ionicons name="chevron-forward" size={16} color={colors.textMuted} />
       )}

@@ -7,16 +7,12 @@ import { EmptyState } from '@/components/common';
 import { libraryApi } from '@/api/libraryApi';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
-import { useTabBarPadding } from '@/hooks/useTabBarPadding';
-import { useT } from '@/i18n';
 import { colors, spacing, typography } from '@/theme';
 
 export default function FavoritesScreen() {
   const router = useRouter();
   const favorites = useAppStore((s) => s.favorites);
   const toggleFavorite = useAppStore((s) => s.toggleFavorite);
-  const T = useT();
-  const tabPad = useTabBarPadding();
 
   const { data } = useAsync(() => libraryApi.list(), [], { cacheKey: 'all-libraries' });
 
@@ -28,22 +24,24 @@ export default function FavoritesScreen() {
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
       <View style={styles.header}>
-        <Text style={styles.title}>{T.favorites.title}</Text>
+        <Text style={styles.title}>즐겨찾기</Text>
         <Text style={styles.subtitle}>
-          {saved.length > 0 ? T.favorites.subtitle(saved.length) : T.favorites.emptyBody}
+          {saved.length > 0
+            ? `${saved.length}곳을 저장했어요`
+            : '가고 싶은 도서관을 모아 두세요'}
         </Text>
       </View>
 
       <FlatList
         data={saved}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={[styles.list, { paddingBottom: 24 + tabPad }]}
+        contentContainerStyle={styles.list}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={
           <EmptyState
             pose="faceHeart"
-            title={T.favorites.emptyTitle}
-            description={T.favorites.emptyBody}
+            title="아직 저장한 도서관이 없어요"
+            description={'도서관 상세 화면의 하트를 눌러\n나만의 나들이 목록을 만들어 보세요'}
           />
         }
         renderItem={({ item }) => (
