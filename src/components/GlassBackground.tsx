@@ -19,8 +19,23 @@ import { colors } from '@/theme';
  *   그래서 불러오기 자체를 try 로 감싸고, 실패하면 조용히 단색으로 떨어진다.
  */
 
+/**
+ * iOS 26 의 Liquid Glass 를 쓸 것인가.
+ *
+ * ⚠️ 지금은 꺼 두었다.
+ *   앱이 켜지자마자 죽는 문제를 쫓는 중인데, 이게 가장 유력한 용의자다.
+ *   iOS 26 에서만 켜지는 새 네이티브 기능이라 웹에서는 멀쩡하고 아이폰에서만
+ *   죽는 증상과 맞는다. 꺼 두면 아래 흐림 처리로 떨어지는데, 보기에는
+ *   거의 차이가 없다.
+ *
+ *   앱이 정상으로 켜지는 걸 확인한 뒤 이 값을 true 로 바꿔 다시 시험한다.
+ *   그때도 죽으면 원인이 확정되고, 안 죽으면 원인은 다른 데 있다.
+ */
+const USE_LIQUID_GLASS = false;
+
 /** 모듈을 안전하게 불러온다. 없으면 null. 한 번만 확인한다. */
 function loadGlass() {
+  if (!USE_LIQUID_GLASS) return null;
   if (Platform.OS === 'web') return null;
   try {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
