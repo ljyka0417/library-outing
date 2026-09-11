@@ -1,6 +1,7 @@
 import type { CategoryId, Coordinates, Library } from '@/types';
 import geocodedJson from './libraries.geocoded.json';
 import enrichedJson from './libraries.enriched.json';
+import standardJson from './libraries.standard.json';
 import manualJson from './libraries.manual.json';
 
 /**
@@ -262,12 +263,22 @@ interface Enrichment {
 type EntryMap = { entries?: Record<string, Enrichment> };
 const geocodedEntries = (geocodedJson as EntryMap).entries ?? {};
 const enrichedEntries = (enrichedJson as EntryMap).entries ?? {};
+const standardEntries = (standardJson as EntryMap).entries ?? {};
 const manualEntries = (manualJson as EntryMap).entries ?? {};
 
 function toLibrary(seed: Seed): Library {
   const extra: Enrichment = {
     ...geocodedEntries[seed.id],
     ...enrichedEntries[seed.id],
+    /*
+     * 전국도서관표준데이터가 정보나루보다 뒤에 온다 = 우선한다.
+     *
+     * 정보나루의 운영시간은 자유 문장이라 해석이 필요하고 실제로 틀린 적이
+     * 있다. 표준데이터는 평일/토요일 시각이 칸으로 나뉘어 있어 해석할 것이
+     * 없다. 같은 도서관이면 이쪽을 믿는다.
+     * 손으로 넣은 manual 은 여전히 맨 뒤 — 사람이 확인한 것이 제일 세다.
+     */
+    ...standardEntries[seed.id],
     ...manualEntries[seed.id],
   };
 

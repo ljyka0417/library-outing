@@ -1,0 +1,3416 @@
+{
+  "_readme": "행정안전부 전국도서관표준데이터에서 받은 운영시간입니다. 직접 고치지 마세요. 다시 받으려면 npm run collect-hours. 시각이 칸으로 나뉘어 있어 문장을 해석할 필요가 없습니다.",
+  "_generatedAt": "2026-09-11T13:48:10.770Z",
+  "_source": "행정안전부 전국도서관표준데이터 (data.go.kr/data/15013109)",
+  "entries": {
+    "urisori-library": {
+      "_source": "전국도서관표준데이터 (우리소리도서관, 좌표 7m)",
+      "matchedName": "우리소리도서관",
+      "hours": {
+        "label": "09:00~18:00",
+        "byDay": [
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "일+1월1일+설+추석+법정공휴일",
+      "address": "서울특별시 종로구 삼일대로30길 47(종로14가동 주민센터 4,5층)",
+      "phone": "070-4550-5015",
+      "homepage": "http://lib.jongno.go.kr/"
+    },
+    "cheongun-lit": {
+      "_source": "전국도서관표준데이터 (청운문학도서관, 좌표 3m)",
+      "matchedName": "청운문학도서관",
+      "hours": {
+        "label": "09:00~21:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1260
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          }
+        ]
+      },
+      "closedDays": "월+1월1일+설+추석",
+      "address": "서울특별시 종로구 자하문로36길 40",
+      "phone": "070-4680-4032",
+      "homepage": "http://lib.jongno.go.kr/"
+    },
+    "songpa-kids-english": {
+      "_source": "전국도서관표준데이터 (송파어린이영어도서관, 좌표 95m)",
+      "matchedName": "송파어린이영어도서관",
+      "hours": {
+        "label": "09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "매주 월+국가지정공휴일",
+      "address": "서울특별시 송파구 오금로 1 (신천동)",
+      "phone": "02-415-3567",
+      "homepage": "http://www.splib.or.kr"
+    },
+    "goyang-hwajeong": {
+      "_source": "전국도서관표준데이터 (화정도서관, 좌표 7m)",
+      "matchedName": "화정도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "금+일요일을 제외한 법정공휴일",
+      "address": "경기도 고양시 덕양구 은빛로77번길 8(화정동)",
+      "phone": "031-8075-9215",
+      "homepage": "https://www.goyanglib.or.kr/ME/index.do"
+    },
+    "ansan-media": {
+      "_source": "전국도서관표준데이터 (안산미디어도서관, 좌표 15m)",
+      "matchedName": "안산미디어도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "매주금요일+국가지정공휴일+추석연휴+설날연휴",
+      "address": "경기도 안산시 단원구 광덕1로 198(고잔동)",
+      "phone": "031-481-3961",
+      "homepage": "http://lib.ansan.go.kr"
+    },
+    "leeseokyoung-media": {
+      "_source": "전국도서관표준데이터 (이석영뉴미디어도서관, 좌표 2m)",
+      "matchedName": "이석영뉴미디어도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "둘째·넷째 금요일+1월 1일+설날·추석 연휴(대체공휴일 포함)",
+      "address": "경기도 남양주시 화도읍 맷돌로 84",
+      "phone": "031-595-8390",
+      "homepage": "http://lib.nyj.go.kr/lsy"
+    },
+    "uijeongbu-english": {
+      "_source": "전국도서관표준데이터 (의정부영어도서관, 좌표 10m)",
+      "matchedName": "의정부영어도서관",
+      "hours": {
+        "label": "평일 10:00~20:00 / 주말 10:00~18:00",
+        "byDay": [
+          {
+            "open": 600,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 600,
+            "close": 1200
+          },
+          {
+            "open": 600,
+            "close": 1200
+          },
+          {
+            "open": 600,
+            "close": 1200
+          },
+          {
+            "open": 600,
+            "close": 1200
+          },
+          {
+            "open": 600,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "매주월요일+법정공휴일(일요일 제외)",
+      "address": "경기도 의정부시 회룡로 79",
+      "phone": "031-828-8710",
+      "homepage": "http://www.uilib.go.kr"
+    },
+    "gwacheon-it": {
+      "_source": "전국도서관표준데이터 (정보과학도서관, 좌표 15m)",
+      "matchedName": "정보과학도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "금+국가지정공휴일+개관기념일",
+      "address": "경기도 과천시 중앙로 24",
+      "phone": "02-2150-3008",
+      "homepage": "https://www.gclib.go.kr/"
+    },
+    "juyeop-kids": {
+      "_source": "전국도서관표준데이터 (주엽어린이도서관, 좌표 6m)",
+      "matchedName": "주엽어린이도서관",
+      "hours": {
+        "label": "09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "금+일요일을 제외한 법정공휴일",
+      "address": "경기도 고양시 일산서구 주엽로 104(주엽동)",
+      "phone": "031-8075-9168",
+      "homepage": "https://www.goyanglib.or.kr/MG/index.do"
+    },
+    "pangyo-kids": {
+      "_source": "전국도서관표준데이터 (판교어린이도서관, 좌표 18m)",
+      "matchedName": "판교어린이도서관",
+      "hours": {
+        "label": "07:00~23:00",
+        "byDay": [
+          {
+            "open": 420,
+            "close": 1380
+          },
+          {
+            "open": 420,
+            "close": 1380
+          },
+          {
+            "open": 420,
+            "close": 1380
+          },
+          {
+            "open": 420,
+            "close": 1380
+          },
+          {
+            "open": 420,
+            "close": 1380
+          },
+          {
+            "open": 420,
+            "close": 1380
+          },
+          {
+            "open": 420,
+            "close": 1380
+          }
+        ]
+      },
+      "closedDays": "둘째 주 월+넷재 주 월+1월1일+설 연휴+추석 연휴",
+      "address": "경기도 성남시 분당구 판교역로 75(백현동)",
+      "phone": "031-729-8880",
+      "homepage": "https://www.snlib.go.kr/cpg"
+    },
+    "goyang-aramnuri": {
+      "_source": "전국도서관표준데이터 (아람누리도서관, 좌표 112m)",
+      "matchedName": "아람누리도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+일요일을 제외한 법정공휴일",
+      "address": "경기도 고양시 일산동구 중앙로 1286(마두동)",
+      "phone": "031-8075-9038",
+      "homepage": "https://www.goyanglib.or.kr/MF/index.do"
+    },
+    "hwaseong-jinan": {
+      "_source": "전국도서관표준데이터 (진안도서관, 좌표 26m)",
+      "matchedName": "진안도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "매월 두 번째, 네 번째 월요일, 일요일을 제외한 법정공휴일, 재단창립기념일",
+      "address": "경기도 화성시 병점구 병점중앙로 229 (진안동)",
+      "phone": "031-224-9977",
+      "homepage": "www.hscitylib.or.kr"
+    },
+    "songdo-intl": {
+      "_source": "전국도서관표준데이터 (송도국제도서관, 좌표 17m)",
+      "matchedName": "송도국제도서관",
+      "hours": {
+        "label": "평일 09:00~21:00 / 주말 09:00~18:00",
+        "byDay": [
+          null,
+          null,
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+일+국가지정공휴일",
+      "address": "인천광역시 연수구 아카데미로 166 (송도동)",
+      "phone": "032-749-8270",
+      "homepage": "http://www.yspubliclib.go.kr"
+    },
+    "dongchun-narae": {
+      "_source": "전국도서관표준데이터 (동춘나래도서관, 좌표 22m)",
+      "matchedName": "동춘나래도서관",
+      "hours": {
+        "label": "09:00~18:00",
+        "byDay": [
+          null,
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+일+국가지정공휴일",
+      "address": "인천광역시 연수구 봉재산로54번길 30",
+      "phone": "032-749-8240",
+      "homepage": "http://www.yspubliclib.go.kr"
+    },
+    "songdo-kids": {
+      "_source": "전국도서관표준데이터 (송도국제어린이도서관, 좌표 1m)",
+      "matchedName": "송도국제어린이도서관",
+      "hours": {
+        "label": "09:00~18:00",
+        "byDay": [
+          null,
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+일+국가지정공휴일",
+      "address": "인천광역시 연수구 컨벤시아대로 43",
+      "phone": "032-749-8220",
+      "homepage": "http://www.yspubliclib.go.kr"
+    },
+    "kkumdream-kids-english": {
+      "_source": "전국도서관표준데이터 (꿈드림어린이영어도서관, 좌표 8m)",
+      "matchedName": "꿈드림어린이영어도서관",
+      "hours": {
+        "label": "평일 09:00~18:00 / 주말 09:00~17:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "금+공휴일",
+      "address": "인천광역시 동구 새천년로 93",
+      "phone": "032-770-5983",
+      "homepage": "https://lib.icdonggu.go.kr/dream/"
+    },
+    "seonhak-starlight": {
+      "_source": "전국도서관표준데이터 (선학별빛도서관, 좌표 7m)",
+      "matchedName": "선학별빛도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          null,
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+일+국가지정공휴일",
+      "address": "인천광역시 연수구 넘말로30",
+      "phone": "032-749-6710",
+      "homepage": "http://www.yspubliclib.go.kr"
+    },
+    "wonju-central": {
+      "_source": "전국도서관표준데이터 (시립중앙도서관, 좌표 4m)",
+      "matchedName": "시립중앙도서관",
+      "hours": {
+        "label": "07:00~22:00",
+        "byDay": [
+          {
+            "open": 420,
+            "close": 1320
+          },
+          {
+            "open": 420,
+            "close": 1320
+          },
+          {
+            "open": 420,
+            "close": 1320
+          },
+          {
+            "open": 420,
+            "close": 1320
+          },
+          {
+            "open": 420,
+            "close": 1320
+          },
+          {
+            "open": 420,
+            "close": 1320
+          },
+          {
+            "open": 420,
+            "close": 1320
+          }
+        ]
+      },
+      "closedDays": "마지막 주 월+국가지정 공휴일+12월 31일(자료실 매주 월 휴관)",
+      "address": "강원특별자치도 원주시 서원대로 472-12(단구동)",
+      "phone": "033-737-4360",
+      "homepage": "https://lib.wonju.go.kr/ja"
+    },
+    "jungcheon-philosophy": {
+      "_source": "전국도서관표준데이터 (중천철학도서관, 좌표 0m)",
+      "matchedName": "중천철학도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+국가지정 공휴일+12월 31일",
+      "address": "강원특별자치도 원주시 흥업면 남원로 105",
+      "phone": "033-737-4476",
+      "homepage": "https://lib.wonju.go.kr/jc"
+    },
+    "gangneung-moru": {
+      "_source": "전국도서관표준데이터 (행복한모루도서관, 좌표 3m)",
+      "matchedName": "행복한모루도서관",
+      "hours": {
+        "label": "09:00~23:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1380
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1380
+          },
+          {
+            "open": 540,
+            "close": 1380
+          },
+          {
+            "open": 540,
+            "close": 1380
+          },
+          {
+            "open": 540,
+            "close": 1380
+          },
+          {
+            "open": 540,
+            "close": 1380
+          }
+        ]
+      },
+      "closedDays": "월+국가지정 공휴일",
+      "address": "강원특별자치도 강릉시 율곡로 2923-12(교동)",
+      "phone": "033-660-3252",
+      "homepage": "http://www.gnslib.or.kr/"
+    },
+    "chuncheon-city": {
+      "_source": "전국도서관표준데이터 (춘천시립도서관, 좌표 15m)",
+      "matchedName": "춘천시립도서관",
+      "hours": {
+        "label": "09:00~22:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          }
+        ]
+      },
+      "closedDays": "매주금요일+국가지정공휴일+대청소일(12.30.~12.31.)",
+      "address": "강원특별자치도 춘천시 우석로 100",
+      "phone": "033-245-5102",
+      "homepage": "https://library.chuncheon.go.kr"
+    },
+    "wondeok-library": {
+      "_source": "전국도서관표준데이터 (원덕도서관, 좌표 27m)",
+      "matchedName": "원덕도서관",
+      "hours": {
+        "label": "09:00~22:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          }
+        ]
+      },
+      "closedDays": "월요일+법정공휴일",
+      "address": "강원특별자치도 삼척시 원덕읍 삼척로 446-11",
+      "phone": "033-572-4819"
+    },
+    "hanbat-library": {
+      "_source": "전국도서관표준데이터 (한밭도서관, 좌표 3m)",
+      "matchedName": "한밭도서관",
+      "hours": {
+        "label": "07:00~23:00",
+        "byDay": [
+          {
+            "open": 420,
+            "close": 1380
+          },
+          null,
+          {
+            "open": 420,
+            "close": 1380
+          },
+          {
+            "open": 420,
+            "close": 1380
+          },
+          {
+            "open": 420,
+            "close": 1380
+          },
+          {
+            "open": 420,
+            "close": 1380
+          },
+          {
+            "open": 420,
+            "close": 1380
+          }
+        ]
+      },
+      "closedDays": "매주월요일",
+      "address": "대전광역시 중구 서문로 10",
+      "phone": "042-270-7420",
+      "homepage": "https://www.daejeon.go.kr/hanbatlibrary/index.do"
+    },
+    "kids-english-village": {
+      "_source": "전국도서관표준데이터 (어린이영어마을도서관, 좌표 14m)",
+      "matchedName": "어린이영어마을도서관",
+      "hours": {
+        "label": "10:00~17:00",
+        "byDay": [
+          {
+            "open": 600,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월+공휴일",
+      "address": "대전광역시 유성구 지족동로 145(지족동)",
+      "phone": "042-611-6962",
+      "homepage": "http://small.u-library.kr"
+    },
+    "munhak-village": {
+      "_source": "전국도서관표준데이터 (문학마을작은도서관, 좌표 5m)",
+      "matchedName": "문학마을작은도서관",
+      "hours": {
+        "label": "10:00~17:00",
+        "byDay": [
+          {
+            "open": 600,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월+공휴일",
+      "address": "대전광역시 유성구 어은로 22(어은동",
+      "phone": "070-4192-1677",
+      "homepage": "http://small.u-library.kr"
+    },
+    "munhak-village-small": {
+      "_source": "전국도서관표준데이터 (문학마을작은도서관, 이름 일치)",
+      "matchedName": "문학마을작은도서관",
+      "hours": {
+        "label": "10:00~17:00",
+        "byDay": [
+          {
+            "open": 600,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월+공휴일",
+      "address": "대전광역시 유성구 어은로 22(어은동",
+      "phone": "070-4192-1677",
+      "homepage": "http://small.u-library.kr"
+    },
+    "byeoldongbyeol-science": {
+      "_source": "전국도서관표준데이터 (별똥별과학도서관, 좌표 0m)",
+      "matchedName": "별똥별과학도서관",
+      "hours": {
+        "label": "10:00~17:00",
+        "byDay": [
+          {
+            "open": 600,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월+공휴일",
+      "address": "대전광역시 유성구 죽동로 322(죽동)",
+      "phone": "042-825-6987",
+      "homepage": "http://small.u-library.kr"
+    },
+    "chungnam-library": {
+      "_source": "전국도서관표준데이터 (충남도서관, 좌표 12m)",
+      "matchedName": "충남도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+법정공휴일+국가지정임시휴일",
+      "address": "충청남도 홍성군 홍북읍 도청대로 577",
+      "phone": "041-635-8000",
+      "homepage": "library.chungnam.go.kr"
+    },
+    "baebang-library": {
+      "_source": "전국도서관표준데이터 (배방도서관, 좌표 57m)",
+      "matchedName": "배방도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+국가지정공휴일",
+      "address": "충청남도 아산시 배방읍 모산로 182-14",
+      "phone": "041-537-3956",
+      "homepage": "http://ascl.asan.go.kr"
+    },
+    "asan-central": {
+      "_source": "전국도서관표준데이터 (아산중앙도서관, 좌표 9m)",
+      "matchedName": "아산중앙도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+국가지정공휴일",
+      "address": "충청남도 아산시 남부로 229",
+      "phone": "041-530-6600",
+      "homepage": "http://ascl.asan.go.kr"
+    },
+    "cheongju-ochang-lake": {
+      "_source": "전국도서관표준데이터 (청주오창호수도서관, 좌표 10m)",
+      "matchedName": "청주오창호수도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "매주월요일+국가지정공휴일",
+      "address": "충청북도 청주시 청원구 오창읍 오창공원로 102",
+      "phone": "043-201-4096",
+      "homepage": "https://library.cheongju.go.kr"
+    },
+    "eumbong-eoulsaem": {
+      "_source": "전국도서관표준데이터 (음봉어울샘도서관, 좌표 12m)",
+      "matchedName": "음봉어울샘도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+국가지정공휴일",
+      "address": "충청남도 아산시 음봉면 음봉로 515-36",
+      "phone": "041-530-6450",
+      "homepage": "http://ascl.asan.go.kr"
+    },
+    "kkumsaem-kids": {
+      "_source": "전국도서관표준데이터 (꿈샘어린이청소년도서관, 좌표 93m)",
+      "matchedName": "꿈샘어린이청소년도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+국가지정공휴일",
+      "address": "충청남도 아산시 시민로 500",
+      "phone": "041-530-6722",
+      "homepage": "http://ascl.asan.go.kr"
+    },
+    "chungju-city": {
+      "_source": "전국도서관표준데이터 (충주시립도서관, 좌표 62m)",
+      "matchedName": "충주시립도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "매주 월",
+      "address": "충청북도 충주시 예성로 207",
+      "phone": "043-850-3970",
+      "homepage": "lib.chungju.go.kr"
+    },
+    "cheonan-jiksan": {
+      "_source": "전국도서관표준데이터 (직산도서관, 좌표 0m)",
+      "matchedName": "직산도서관",
+      "hours": {
+        "label": "09:00~20:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          }
+        ]
+      },
+      "closedDays": "첫째 주 월+셋째 주 월+국가지정공휴일",
+      "address": "충청남도 천안시 서북구 직산읍 삼은4길 12",
+      "phone": "041-521-3736",
+      "homepage": "http://www.cheonan.go.kr/lib.do"
+    },
+    "dunpo-library": {
+      "_source": "전국도서관표준데이터 (둔포도서관, 좌표 0m)",
+      "matchedName": "둔포도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+국가지정공휴일",
+      "address": "충청남도 아산시 둔포면 둔포중앙로 161번길 27-6",
+      "phone": "041-536-8595",
+      "homepage": "http://ascl.asan.go.kr"
+    },
+    "baebang-wolcheon": {
+      "_source": "전국도서관표준데이터 (배방월천도서관, 좌표 7m)",
+      "matchedName": "배방월천도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+국가지정공휴일",
+      "address": "충청남도 아산시 배방읍 월천5길 13",
+      "phone": "041-530-6380",
+      "homepage": "http://ascl.asan.go.kr"
+    },
+    "sejong-city-library": {
+      "_source": "전국도서관표준데이터 (시립도서관, 좌표 20m)",
+      "matchedName": "시립도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "매주월요일+국가지정공휴일",
+      "address": "세종특별자치시 세종로1207",
+      "phone": "044-301-4300",
+      "homepage": "https://lib.sejong.go.kr"
+    },
+    "gyeongbuk-library": {
+      "_source": "전국도서관표준데이터 (경북도서관, 좌표 1m)",
+      "matchedName": "경북도서관",
+      "hours": {
+        "label": "평일 09:00~21:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "1)매월 첫째, 셋째 월요일 2)법정공휴일 3)그 밖의 경북도서관장이 필요하다고 인정하는 경우",
+      "address": "경상북도 예천군 호명면 도청대로 200",
+      "phone": "054-650-3941",
+      "homepage": "https://gb.go.kr/lib"
+    },
+    "gyeongnam-library": {
+      "_source": "전국도서관표준데이터 (상남도서관, 좌표 16m)",
+      "matchedName": "상남도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+1월1일+설 연휴+추석 연휴+기타 법정공휴일",
+      "address": "경상남도 창원시 성산구 원이대로 810(가음정동)",
+      "phone": "055-225-7411",
+      "homepage": "https://lib.changwon.go.kr/sn"
+    },
+    "gyeongju-city": {
+      "_source": "전국도서관표준데이터 (경주시립도서관, 좌표 6m)",
+      "matchedName": "경주시립도서관",
+      "hours": {
+        "label": "평일 09:00~18:00 / 주말 09:00~17:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월+국가지정공휴일(열람실은 연중무휴)",
+      "address": "경상북도 경주시 원화로 431-12(황성동 370)",
+      "phone": "054-779-8913",
+      "homepage": "https://library.gyeongju.go.kr/"
+    },
+    "poeun-heunghae": {
+      "_source": "전국도서관표준데이터 (포은흥해도서관, 좌표 20m)",
+      "matchedName": "포은흥해도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "둘째주 월+넷째 주 월+일요일을 제외한 법정공휴일+법정공휴일과 겹치는 일요일",
+      "address": "경상북도 포항시 북구 흥해읍 흥해로81번길 46",
+      "phone": "054-270-4390",
+      "homepage": "http://phlib.pohang.go.kr/"
+    },
+    "hadong-library": {
+      "_source": "전국도서관표준데이터 (하동도서관, 좌표 29m)",
+      "matchedName": "하동도서관",
+      "hours": {
+        "label": "09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "매주 월+국가지정공휴일",
+      "address": "경상남도 하동군 하동읍 경서대로 80",
+      "phone": "055-884-7981",
+      "homepage": "https://hdlib.gne.go.kr"
+    },
+    "kkumirang-library": {
+      "_source": "전국도서관표준데이터 (꿈이랑도서관, 좌표 1m)",
+      "matchedName": "꿈이랑도서관",
+      "hours": {
+        "label": "09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "매주월요일+법정공휴일",
+      "address": "경상남도 통영시 산양읍 둔전길 155",
+      "phone": "055-650-2500",
+      "homepage": "http://www.tongyeonglib.or.kr"
+    },
+    "haman-library": {
+      "_source": "전국도서관표준데이터 (함안도서관, 좌표 3m)",
+      "matchedName": "함안도서관",
+      "hours": {
+        "label": "09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "매주 월+국가지정공휴일",
+      "address": "경상남도 함안군 가야읍 선왕길 16",
+      "phone": "055-584-5772",
+      "homepage": "https://hmlib.gne.go.kr"
+    },
+    "sancheong-jirisan": {
+      "_source": "전국도서관표준데이터 (산청지리산도서관, 좌표 0m)",
+      "matchedName": "산청지리산도서관",
+      "hours": {
+        "label": "09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "매주 월+국가지정공휴일",
+      "address": "경상남도 산청군 신안면 원지강변로 101",
+      "phone": "055-974-1611",
+      "homepage": "https://sjlib.gne.go.kr"
+    },
+    "ulsan-library": {
+      "_source": "전국도서관표준데이터 (울산도서관, 좌표 2m)",
+      "matchedName": "울산도서관",
+      "hours": {
+        "label": "평일 09:00~21:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "매주 월요일+국가지정공휴일+울산도서관장이 필요하다고 인정하는 경우",
+      "address": "울산광역시 남구 꽃대나리로 140(여천동)",
+      "phone": "052-266-5670",
+      "homepage": "http://library.ulsan.go.kr"
+    },
+    "ulju-cheonsang": {
+      "_source": "전국도서관표준데이터 (울주천상도서관, 좌표 0m)",
+      "matchedName": "울주천상도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "매주월요일+국가지정공휴일",
+      "address": "울산광역시 울주군 범서읍 천상길 60",
+      "phone": "052-243-9096",
+      "homepage": "https://uljulib.ulju.ulsan.kr/index.do"
+    },
+    "dosan-library": {
+      "_source": "전국도서관표준데이터 (도산도서관, 좌표 44m)",
+      "matchedName": "도산도서관",
+      "hours": {
+        "label": "09:00~22:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          }
+        ]
+      },
+      "closedDays": "월+법정공휴일",
+      "address": "울산광역시 남구 번영로54번길 6",
+      "phone": "052-226-5710",
+      "homepage": "http://ulsannamgu.go.kr/library/main.do"
+    },
+    "sinbok-library": {
+      "_source": "전국도서관표준데이터 (신복도서관, 좌표 2m)",
+      "matchedName": "신복도서관",
+      "hours": {
+        "label": "09:00~22:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          }
+        ]
+      },
+      "closedDays": "월+법정공휴일",
+      "address": "울산광역시 남구 신복로72번길 18-13(무거동)",
+      "phone": "052-226-2367",
+      "homepage": "http://ulsannamgu.go.kr/library/main.do"
+    },
+    "okhyeon-kids": {
+      "_source": "전국도서관표준데이터 (옥현어린이도서관, 좌표 27m)",
+      "matchedName": "옥현어린이도서관",
+      "hours": {
+        "label": "09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+법정공휴일",
+      "address": "울산광역시 남구 옥현로58번길 40(무거동)",
+      "phone": "052-226-2370",
+      "homepage": "http://ulsannamgu.go.kr/library/main.do"
+    },
+    "wolbong-library": {
+      "_source": "전국도서관표준데이터 (월봉도서관, 좌표 61m)",
+      "matchedName": "월봉도서관",
+      "hours": {
+        "label": "09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+법정공휴일",
+      "address": "울산광역시 남구 돋질로139번길 23",
+      "phone": "052-226-2377",
+      "homepage": "http://ulsannamgu.go.kr/library/main.do"
+    },
+    "cheolsae-village": {
+      "_source": "전국도서관표준데이터 (철새마을도서관, 좌표 4m)",
+      "matchedName": "철새마을도서관",
+      "hours": {
+        "label": "09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+법정공휴일",
+      "address": "울산광역시 남구 삼호로149번길22(삼호동)",
+      "phone": "052-226-2386",
+      "homepage": "http://ulsannamgu.go.kr/library/main.do"
+    },
+    "sanjeon-comics": {
+      "_source": "전국도서관표준데이터 (산전만화도서관, 좌표 5m)",
+      "matchedName": "산전만화도서관",
+      "hours": {
+        "label": "09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+공휴일",
+      "address": "울산광역시 중구 산전 6길 32-1(동동)",
+      "phone": "052-290-4859",
+      "homepage": "https://lib.junggu.ulsan.kr/index.jsp"
+    },
+    "ulsan-jonggatjip": {
+      "_source": "전국도서관표준데이터 (울산종갓집도서관, 좌표 16m)",
+      "matchedName": "울산종갓집도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+공휴일",
+      "address": "울산광역시 중구 종가3길 29(유곡동)",
+      "phone": "052-700-5230",
+      "homepage": "https://lib.junggu.ulsan.kr/index.jsp"
+    },
+    "gangdong-sea": {
+      "_source": "전국도서관표준데이터 (강동바다도서관, 좌표 3m)",
+      "matchedName": "강동바다도서관",
+      "hours": {
+        "label": "평일 09:00~20:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "매주월요일+국가지정공휴일",
+      "address": "울산광역시 북구 산하중앙3로62(산하동)",
+      "phone": "052-241-7480",
+      "homepage": "https://usbl.bukgu.ulsan.kr"
+    },
+    "donggu-library": {
+      "_source": "전국도서관표준데이터 (동구도서관, 좌표 3m)",
+      "matchedName": "동구도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+국경일+국가지정공휴일",
+      "address": "부산광역시 동구 성북로 36번길 54",
+      "phone": "051-440-6411",
+      "homepage": "http://www.bsdonggu.go.kr/library"
+    },
+    "yeongdo-library": {
+      "_source": "전국도서관표준데이터 (영도도서관, 좌표 55m)",
+      "matchedName": "영도도서관",
+      "hours": {
+        "label": "09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+공휴일",
+      "address": "부산광역시 영도구 함지로79번길6(동삼동)",
+      "phone": "051-419-4821",
+      "homepage": "http://www.yeongdo.go.kr/library.web"
+    },
+    "busanjin-kids-youth": {
+      "_source": "전국도서관표준데이터 (부산진구어린이청소년도서관, 좌표 8m)",
+      "matchedName": "부산진구어린이청소년도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+국가지정공휴일",
+      "address": "부산광역시 부산진구 백양순환로110번길 25",
+      "phone": "051-605-5801",
+      "homepage": "https://www.busanjin.go.kr/library/index.busanjin"
+    },
+    "dongnae-eupseong": {
+      "_source": "전국도서관표준데이터 (동래읍성도서관, 좌표 10m)",
+      "matchedName": "동래읍성도서관",
+      "hours": {
+        "label": "07:00~22:00",
+        "byDay": [
+          {
+            "open": 420,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 420,
+            "close": 1320
+          },
+          {
+            "open": 420,
+            "close": 1320
+          },
+          {
+            "open": 420,
+            "close": 1320
+          },
+          {
+            "open": 420,
+            "close": 1320
+          },
+          {
+            "open": 420,
+            "close": 1320
+          }
+        ]
+      },
+      "closedDays": "매주 월요일+국가지정공휴일",
+      "address": "부산광역시 동래구 동래로159번길153 (칠산동)",
+      "phone": "051-550-6901",
+      "homepage": "http://lib.dongnae.go.kr/dongnae"
+    },
+    "mandeok-library": {
+      "_source": "전국도서관표준데이터 (만덕도서관, 좌표 6m)",
+      "matchedName": "만덕도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+국가지정 공휴일",
+      "address": "부산광역시 북구 은행나무로 26(만덕동)",
+      "phone": "051-309-2097",
+      "homepage": "https://www.bsbukgu.go.kr/mdlib"
+    },
+    "haeundae-humanities": {
+      "_source": "전국도서관표준데이터 (해운대인문학도서관, 좌표 4m)",
+      "matchedName": "해운대인문학도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+공휴일",
+      "address": "부산광역시 해운대구 반여로 132 (반여동)",
+      "phone": "051-749-6580",
+      "homepage": "http://www.haeundae.go.kr/library"
+    },
+    "geumjeong-library": {
+      "_source": "전국도서관표준데이터 (금정도서관, 좌표 15m)",
+      "matchedName": "금정도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~17:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "매주 월요일+국가지정 공휴일",
+      "address": "부산광역시 금정구 금정도서관로 33(청룡동)",
+      "phone": "051-519-5601",
+      "homepage": "http://library.geumjeong.go.kr"
+    },
+    "jeonggwan-library": {
+      "_source": "전국도서관표준데이터 (정관도서관, 좌표 19m)",
+      "matchedName": "정관도서관",
+      "hours": {
+        "label": "07:00~23:59",
+        "byDay": [
+          {
+            "open": 420,
+            "close": 1439
+          },
+          {
+            "open": 420,
+            "close": 1439
+          },
+          {
+            "open": 420,
+            "close": 1439
+          },
+          {
+            "open": 420,
+            "close": 1439
+          },
+          {
+            "open": 420,
+            "close": 1439
+          },
+          {
+            "open": 420,
+            "close": 1439
+          },
+          {
+            "open": 420,
+            "close": 1439
+          }
+        ]
+      },
+      "closedDays": "연중무휴(자료실 휴실 : 신정 명절연휴 매월 둘째 월요일)",
+      "address": "부산광역시 기장군 정관읍 정관중앙로100",
+      "phone": "051-709-3901",
+      "homepage": "http://library.gijang.go.kr/jglib/main.do"
+    },
+    "dalseong-gunlib": {
+      "_source": "전국도서관표준데이터 (달성군립도서관, 좌표 3m)",
+      "matchedName": "달성군립도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~17:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월+국가지정공휴일",
+      "address": "대구광역시 달성군 다사읍 달구벌대로 174길 10-13",
+      "phone": "053-584-0011"
+    },
+    "suseongmot-picturebook": {
+      "_source": "전국도서관표준데이터 (수성구립수성못그림책도서관, 좌표 1m)",
+      "matchedName": "수성구립수성못그림책도서관",
+      "hours": {
+        "label": "09:00~21:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1260
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          }
+        ]
+      },
+      "closedDays": "매주월요일+국가지정공휴일",
+      "address": "대구광역시 수성구 무학로 112, 1층",
+      "phone": "053-668-1770",
+      "homepage": "https://library.daegu.go.kr/yonghak/html/yonghakCalendar3.do?menu_idx=195"
+    },
+    "daegu-seogu-english": {
+      "_source": "전국도서관표준데이터 (서구영어도서관, 좌표 0m)",
+      "matchedName": "서구영어도서관",
+      "hours": {
+        "label": "평일 09:00~18:00 / 주말 09:00~17:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월+공휴일",
+      "address": "대구광역시 서구 평리로35길 90-6",
+      "phone": "053-663-3861",
+      "homepage": "http://lib.dgs.go.kr"
+    },
+    "daegu-seogu-kids-english": {
+      "_source": "전국도서관표준데이터 (서구어린이영어도서관, 좌표 57m)",
+      "matchedName": "서구어린이영어도서관",
+      "hours": {
+        "label": "평일 09:00~18:00 / 주말 09:00~17:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월+공휴일",
+      "address": "대구광역시 서구 문화로 160, 3층",
+      "phone": "053-663-3951",
+      "homepage": "http://lib.dgs.go.kr"
+    },
+    "dalseo-family": {
+      "_source": "전국도서관표준데이터 (달서가족문화도서관, 좌표 1m)",
+      "matchedName": "달서가족문화도서관",
+      "hours": {
+        "label": "평일 09:00~20:00 / 주말 09:00~17:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월+법정공휴일",
+      "address": "대구광역시 달서구 조암남로 137(대천동)",
+      "phone": "053-667-4970",
+      "homepage": "https://library.daegu.go.kr/dalseolib/index.do"
+    },
+    "gukchae-library": {
+      "_source": "전국도서관표준데이터 (국채보상운동기념도서관, 좌표 96m)",
+      "matchedName": "국채보상운동기념도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~17:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "첫째 월 + 셋째 월 + 일요일을제외한국가지정공휴일",
+      "address": "대구광역시 중구 공평로 10길 25",
+      "phone": "053-231-2000",
+      "homepage": "https://library.daegu.go.kr/jungang/index.do"
+    },
+    "dowon-library": {
+      "_source": "전국도서관표준데이터 (달서구립 도원도서관, 좌표 3m)",
+      "matchedName": "달서구립 도원도서관",
+      "hours": {
+        "label": "평일 09:00~20:00 / 주말 09:00~17:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월+법정공휴일",
+      "address": "대구광역시 달서구 한실로 113(도원동)",
+      "phone": "053-667-4840",
+      "homepage": "https://library.daegu.go.kr/dalseolib/"
+    },
+    "halla-library": {
+      "_source": "전국도서관표준데이터 (한라도서관, 좌표 7m)",
+      "matchedName": "한라도서관",
+      "hours": {
+        "label": "평일 08:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "매주금요일+1월1일+설연휴+추석연휴+12월31일+「관공서의 공휴일에 관한 규정」제3조제1항제2호에 따른 대체공휴일",
+      "address": "제주특별자치도 제주시 오남로 221",
+      "phone": "064-710-8666",
+      "homepage": "http://lib.jeju.go.kr/"
+    },
+    "tamna-library": {
+      "_source": "전국도서관표준데이터 (탐라도서관, 좌표 87m)",
+      "matchedName": "탐라도서관",
+      "hours": {
+        "label": "08:00~23:00",
+        "byDay": [
+          {
+            "open": 480,
+            "close": 1380
+          },
+          {
+            "open": 480,
+            "close": 1380
+          },
+          {
+            "open": 480,
+            "close": 1380
+          },
+          {
+            "open": 480,
+            "close": 1380
+          },
+          {
+            "open": 480,
+            "close": 1380
+          },
+          null,
+          {
+            "open": 480,
+            "close": 1380
+          }
+        ]
+      },
+      "closedDays": "금요일+1월1일+설연휴+추석연휴+12월31일+「관공서의 공휴일에 관한 규정」제3조제1항제2호에 따른 대체공휴일",
+      "address": "제주특별자치도 제주시 정원로 50",
+      "phone": "064-728-1506",
+      "homepage": "http://lib.jeju.go.kr/"
+    },
+    "jeonbuk-provincial": {
+      "_source": "전국도서관표준데이터 (전북도청도서관, 좌표 243m)",
+      "matchedName": "전북도청도서관",
+      "hours": {
+        "label": "09:00~18:00",
+        "byDay": [
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null
+        ]
+      },
+      "closedDays": "토+일+공휴일",
+      "address": "전북특별자치도 전주시 완산구 효자로 225",
+      "phone": "063-280-2452",
+      "homepage": "http://library.jeonbuk.go.kr"
+    },
+    "galdaesup-small": {
+      "_source": "전국도서관표준데이터 (갈대숲작은도서관, 좌표 2m)",
+      "matchedName": "갈대숲작은도서관",
+      "hours": {
+        "label": "09:00~18:00",
+        "byDay": [
+          null,
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+일+법정공휴일",
+      "address": "전북특별자치도 부안군 줄포면 서빈1길 10-13",
+      "phone": "063-581-2336",
+      "homepage": "https://lib.buan.go.kr"
+    },
+    "muju-manna-small": {
+      "_source": "전국도서관표준데이터 (무주만나작은도서관, 좌표 3m)",
+      "matchedName": "무주만나작은도서관",
+      "hours": {
+        "label": "10:00~18:00",
+        "byDay": [
+          null,
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          null
+        ]
+      },
+      "closedDays": "토+일+공휴일",
+      "address": "전북특별자치도 무주군 안성면 진성로 2393",
+      "phone": "070-8802-6000",
+      "homepage": "https://library.muju.go.kr/main/contents.do?idx=1454"
+    },
+    "jeonnam-library": {
+      "_source": "전국도서관표준데이터 (전라남도립도서관, 좌표 24m)",
+      "matchedName": "전라남도립도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~20:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1200
+          }
+        ]
+      },
+      "closedDays": "첫째, 셋째 수요일+법정공휴일",
+      "address": "전라남도 무안군 삼향읍 남악로 210",
+      "phone": "061-288-5200",
+      "homepage": "https://lib.jeonnam.go.kr/"
+    },
+    "jorye-lake": {
+      "_source": "전국도서관표준데이터 (조례호수도서관, 좌표 16m)",
+      "matchedName": "조례호수도서관",
+      "hours": {
+        "label": "08:00~22:00",
+        "byDay": [
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          }
+        ]
+      },
+      "closedDays": "매월 첫 번째 월요일(정비의 날)+ 일요일을 제외한 국가 지정 공휴일(일요일과 국가 지정 공휴일이 겹칠 경우 휴관)",
+      "address": "전라남도 순천시 조례2길 31",
+      "phone": "061-749-8891",
+      "homepage": "https://library.suncheon.go.kr/"
+    },
+    "jindo-cheolma": {
+      "_source": "전국도서관표준데이터 (철마도서관, 좌표 63m)",
+      "matchedName": "철마도서관",
+      "hours": {
+        "label": "09:00~22:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          }
+        ]
+      },
+      "closedDays": "금+공휴일",
+      "address": "전라남도 진도군 진도읍 철마길 25",
+      "phone": "061-540-3061",
+      "homepage": "http://lib.jindo.go.kr"
+    },
+    "mudeung-library": {
+      "_source": "전국도서관표준데이터 (무등도서관, 좌표 8m)",
+      "matchedName": "무등도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~17:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "둘째 주 월+넷째 주 월+법정공휴일",
+      "address": "광주광역시 북구 면앙로 130",
+      "phone": "062-613-7753",
+      "homepage": "https://citylib.gwangju.go.kr"
+    },
+    "iyagikkot-library": {
+      "_source": "전국도서관표준데이터 (이야기꽃도서관, 좌표 3m)",
+      "matchedName": "이야기꽃도서관",
+      "hours": {
+        "label": "08:00~22:00",
+        "byDay": [
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          }
+        ]
+      },
+      "closedDays": "월(첫째 주+셋째 주)+일요일 제외한 법정공휴일",
+      "address": "광주광역시 광산구 선운중앙로67번길 6(선암동)",
+      "phone": "062-960-6818",
+      "homepage": "https://lib.gwangsan.go.kr"
+    },
+    "kids-eco-library": {
+      "_source": "전국도서관표준데이터 (서구어린이생태학습도서관, 좌표 14m)",
+      "matchedName": "서구어린이생태학습도서관",
+      "hours": {
+        "label": "평일 09:00~18:00 / 주말 09:00~17:00",
+        "byDay": [
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "둘째 월+넷째 월+일+국가지정공휴일",
+      "address": "광주광역시 서구 풍암공원로 8",
+      "phone": "062-350-4584",
+      "homepage": "http://www.seogu.gwangju.kr/library"
+    },
+    "chaekdori-library": {
+      "_source": "전국도서관표준데이터 (책돌이도서관, 좌표 0m)",
+      "matchedName": "책돌이도서관",
+      "hours": {
+        "label": "11:00~17:00",
+        "byDay": [
+          {
+            "open": 660,
+            "close": 1020
+          },
+          {
+            "open": 660,
+            "close": 1020
+          },
+          {
+            "open": 660,
+            "close": 1020
+          },
+          {
+            "open": 660,
+            "close": 1020
+          },
+          {
+            "open": 660,
+            "close": 1020
+          },
+          {
+            "open": 660,
+            "close": 1020
+          },
+          {
+            "open": 660,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "국가지정공휴일",
+      "address": "광주광역시 북구 우치로 235 (오치동)",
+      "phone": "062-266-7279",
+      "homepage": "https://www.smalllibrary.org/library/detail/1048431"
+    },
+    "unam-library": {
+      "_source": "전국도서관표준데이터 (운암도서관, 좌표 9m)",
+      "matchedName": "운암도서관",
+      "hours": {
+        "label": "07:00~22:00",
+        "byDay": [
+          {
+            "open": 420,
+            "close": 1320
+          },
+          {
+            "open": 420,
+            "close": 1320
+          },
+          {
+            "open": 420,
+            "close": 1320
+          },
+          {
+            "open": 420,
+            "close": 1320
+          },
+          {
+            "open": 420,
+            "close": 1320
+          },
+          {
+            "open": 420,
+            "close": 1320
+          },
+          {
+            "open": 420,
+            "close": 1320
+          }
+        ]
+      },
+      "closedDays": "둘째주+넷째주월+법정공휴일",
+      "address": "광주광역시 북구 북문대로 118 (운암동)",
+      "phone": "062-410-6957",
+      "homepage": "http://lib.bukgu.gwangju.kr"
+    },
+    "jangdeok-library": {
+      "_source": "전국도서관표준데이터 (장덕도서관, 좌표 2m)",
+      "matchedName": "장덕도서관",
+      "hours": {
+        "label": "08:00~22:00",
+        "byDay": [
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          }
+        ]
+      },
+      "closedDays": "월(첫째 주+셋째 주)+일요일 제외한 법정공휴일",
+      "address": "광주광역시 광산구 풍영로 179(장덕동)",
+      "phone": "062-960-3997",
+      "homepage": "https://lib.gwangsan.go.kr"
+    },
+    "seochang-hanok": {
+      "_source": "전국도서관표준데이터 (서창한옥작은도서관, 좌표 0m)",
+      "matchedName": "서창한옥작은도서관",
+      "hours": {
+        "label": "10:00~18:00",
+        "byDay": [
+          null,
+          null,
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월+일+국가지정공휴일",
+      "address": "광주광역시 서구 세동1길 27-1",
+      "phone": "062-385-9073"
+    },
+    "gwangju-braille": {
+      "_source": "전국도서관표준데이터 (시립점자도서관, 좌표 6m)",
+      "matchedName": "시립점자도서관",
+      "hours": {
+        "label": "09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null
+        ]
+      },
+      "closedDays": "토+법정공휴일",
+      "address": "광주광역시 남구 천변좌로370번길 3",
+      "phone": "062-672-9534",
+      "homepage": "https://citylib.gwangju.go.kr/braille"
+    },
+    "unnam-kids": {
+      "_source": "전국도서관표준데이터 (운남어린이도서관, 좌표 41m)",
+      "matchedName": "운남어린이도서관",
+      "hours": {
+        "label": "평일 09:00~18:00 / 주말 09:00~17:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월(둘째 주+넷째 주)+일요일 제외한 법정공휴일",
+      "address": "광주광역시 광산구 목련로217번길 10(운남동)",
+      "phone": "062-960-8302",
+      "homepage": "https://lib.gwangsan.go.kr"
+    },
+    "pureungil-library": {
+      "_source": "전국도서관표준데이터 (푸른길도서관, 좌표 4m)",
+      "matchedName": "푸른길도서관",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~17:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "둘째주 월+넷째주 월+공휴일(일 제외)",
+      "address": "광주광역시 남구 금당로 140",
+      "phone": "062-607-2531",
+      "homepage": "https://lib.namgu.gwangju.kr/"
+    }
+  }
+}
