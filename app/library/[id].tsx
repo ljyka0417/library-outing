@@ -26,6 +26,7 @@ import { readableName } from '@/utils/romanize';
 import { colors, radius, shadow, spacing, typography } from '@/theme';
 import { callPhone, openWeb } from '@/utils/mapLinks';
 import { isOpenNow, todayHoursLabel } from '@/utils/openingHours';
+import { useNow } from '@/hooks/useNow';
 import type { Book, Library } from '@/types';
 
 /** 시/군/구는 확인된 곳만 있으므로 있을 때만 붙인다. */
@@ -68,6 +69,8 @@ export default function LibraryDetailScreen() {
   const [expanded, setExpanded] = useState(false);
   const layout = useLayout();
   const { t, lang } = useT();
+  // 분이 바뀌면 다시 그려져서 운영중/운영종료가 저절로 넘어간다
+  const now = useNow();
 
   const favorites = useAppStore((s) => s.favorites);
   const toggleFavorite = useAppStore((s) => s.toggleFavorite);
@@ -116,7 +119,7 @@ export default function LibraryDetailScreen() {
     );
   }
 
-  const open = isOpenNow(library.hours);
+  const open = isOpenNow(library.hours, now);
   const isFav = favorites.includes(library.id);
 
   return (
@@ -169,7 +172,7 @@ export default function LibraryDetailScreen() {
               <Text style={[styles.openText, { color: open ? colors.open : colors.closed }]}>
                 {open ? t('badge.open') : t('badge.closed')}
               </Text>
-              <Text style={styles.openSub}>· {todayHoursLabel(library.hours, lang)}</Text>
+              <Text style={styles.openSub}>· {todayHoursLabel(library.hours, lang, now)}</Text>
             </View>
           ) : null}
 

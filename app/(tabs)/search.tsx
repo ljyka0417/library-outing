@@ -11,6 +11,7 @@ import { libraryApi } from '@/api/libraryApi';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
 import { isOpenNow } from '@/utils/openingHours';
+import { useNow } from '@/hooks/useNow';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { centered, useLayout } from '@/hooks/useLayout';
 import { colors, spacing, typography } from '@/theme';
@@ -29,6 +30,8 @@ export default function SearchScreen() {
   const tabPad = useTabBarPadding();
   const { t, lang } = useT();
   const layout = useLayout();
+  // "지금 운영중" 필터도 분이 바뀌면 다시 걸러진다
+  const now = useNow();
 
   /**
    * 홈에서 주제를 눌러 들어왔을 때 그 주제로 맞춘다.
@@ -73,10 +76,10 @@ export default function SearchScreen() {
         if (!hay.includes(q)) return false;
       }
       // 운영시간을 모르는 곳은 "운영중" 필터에서 빠진다 (isOpenNow 가 null).
-      if (openNow && isOpenNow(lib.hours) !== true) return false;
+      if (openNow && isOpenNow(lib.hours, now) !== true) return false;
       return true;
     });
-  }, [data, keyword, category, sido, openNow]);
+  }, [data, keyword, category, sido, openNow, now]);
 
   // 지역 이름(서울, 경기…)은 옮기지 않는다. 주소에 적힌 원문이고,
   // 현지에서 길을 물을 때도 그 글자가 있어야 통한다.

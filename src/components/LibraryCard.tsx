@@ -7,6 +7,7 @@ import { useT } from '@/i18n';
 import { readableName } from '@/utils/romanize';
 import { colors, radius, shadow, spacing, typography } from '@/theme';
 import { isOpenNow } from '@/utils/openingHours';
+import { useNow } from '@/hooks/useNow';
 import type { Library } from '@/types';
 
 /** 시/군/구는 확인된 곳만 있으므로 있을 때만 붙인다. */
@@ -30,7 +31,9 @@ export function LibraryCard({
   isFavorite,
   onToggleFavorite,
 }: Props) {
-  const open = isOpenNow(library.hours);
+  // 분이 바뀌면 다시 그려진다. 9시가 되면 그 자리에서 "운영중" 으로 바뀐다.
+  const now = useNow();
+  const open = isOpenNow(library.hours, now);
   const mainCategory = library.categories[0];
   const { t, lang } = useT();
 
