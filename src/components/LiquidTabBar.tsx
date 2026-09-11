@@ -100,9 +100,18 @@ export function LiquidTabBar({ state, descriptors, navigation }: BottomTabBarPro
               혹시 여기서 죽더라도 앱을 껐다 켜면 꺼진 상태로 돌아온다. */}
           {glass ? <GlassSurface /> : null}
 
-          {/* 색 방울. 유리를 안 쓸 때만. 칸 뒤에 깔리므로 버튼보다 먼저 그린다. */}
-          {!glass && itemWidth > 0 ? (
-            <Animated.View pointerEvents="none" style={[styles.blob, movingStyle]} />
+          {/* 고른 칸 표시. 버튼보다 먼저 그려서 아이콘 **뒤**에 깔린다.
+              한때 유리 렌즈를 아이콘 위에 올려 봤는데, 실기기에서 진짜
+              Liquid Glass 가 돌면서 선택된 탭의 글씨가 뭉개져 읽을 수 없었다.
+              뒤에 깔아도 탭바 뒤 화면은 그대로 굴절되므로 유리 느낌은 남는다. */}
+          {itemWidth > 0 ? (
+            glass ? (
+              <Animated.View pointerEvents="none" style={[styles.lens, movingStyle]}>
+                <GlassSurface variant="clear" />
+              </Animated.View>
+            ) : (
+              <Animated.View pointerEvents="none" style={[styles.blob, movingStyle]} />
+            )
           ) : null}
 
           {state.routes.map((route, index) => {
@@ -144,13 +153,6 @@ export function LiquidTabBar({ state, descriptors, navigation }: BottomTabBarPro
             );
           })}
 
-          {/* 유리 렌즈. 아이콘 **위**를 지나간다.
-              누르는 걸 막지 않도록 pointerEvents 를 꺼 둔다. */}
-          {glass && itemWidth > 0 ? (
-            <Animated.View pointerEvents="none" style={[styles.lens, movingStyle]}>
-              <GlassSurface variant="clear" />
-            </Animated.View>
-          ) : null}
         </View>
       </View>
     </View>
