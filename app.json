@@ -25,6 +25,13 @@
         "LSApplicationQueriesSchemes": [
           "nmap",
           "kakaomap"
+        ],
+        "//UISupportedInterfaceOrientations~ipad": "위 orientation:portrait 은 아이폰용이다. 아이패드는 어느 방향으로 들어도 이상하지 않아야 한다 — 거치대에 가로로 세워 두고 쓰는 사람이 많고, 심사자도 가로로 열어 본다. ~ipad 접미사가 붙은 키는 아이패드에서만 적용되므로 아이폰은 세로 고정 그대로다. 화면은 이미 폭을 따라가므로(useLayout) 가로로 돌아가도 레이아웃이 따라온다.",
+        "UISupportedInterfaceOrientations~ipad": [
+          "UIInterfaceOrientationPortrait",
+          "UIInterfaceOrientationPortraitUpsideDown",
+          "UIInterfaceOrientationLandscapeLeft",
+          "UIInterfaceOrientationLandscapeRight"
         ]
       }
     },
