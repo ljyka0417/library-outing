@@ -19,7 +19,6 @@ import { BookCard } from '@/components/BookCard';
 import { LibraryCard } from '@/components/LibraryCard';
 import { useAppStore } from '@/store/useAppStore';
 import { ask, STARTER_QUESTIONS, type Answer } from '@/utils/assistant';
-import { SwipeTabs } from '@/components/SwipeTabs';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { colors, radius, spacing, typography } from '@/theme';
 import { formatDistance, walkingMinutes } from '@/utils/openingHours';
@@ -92,7 +91,6 @@ export default function ChatScreen() {
     (messages.length === 1 ? STARTER_QUESTIONS : undefined);
 
   return (
-    <SwipeTabs>
     <SafeAreaView style={styles.safe} edges={['top']}>
       <View style={styles.header}>
         <Mascot size={38} pose="faceHappy" />
@@ -170,7 +168,6 @@ export default function ChatScreen() {
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
-    </SwipeTabs>
   );
 }
 

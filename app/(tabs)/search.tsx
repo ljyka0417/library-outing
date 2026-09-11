@@ -10,7 +10,6 @@ import { libraryApi } from '@/api/libraryApi';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
 import { isOpenNow } from '@/utils/openingHours';
-import { SwipeTabs } from '@/components/SwipeTabs';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { colors, spacing, typography } from '@/theme';
 import type { CategoryId } from '@/types';
@@ -58,7 +57,6 @@ export default function SearchScreen() {
   const activeCategoryLabel = category ? CATEGORY_MAP[category] : undefined;
 
   return (
-    <SwipeTabs>
     <SafeAreaView style={styles.safe} edges={['top']}>
       <View style={styles.searchWrap}>
         <SearchBar
@@ -150,7 +148,6 @@ export default function SearchScreen() {
         />
       )}
     </SafeAreaView>
-    </SwipeTabs>
   );
 }
 

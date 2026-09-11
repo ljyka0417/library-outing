@@ -8,11 +8,43 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import type { BottomTabBarProps } from 'expo-router/build/layouts/Tabs';
 import { GlassSurface } from '@/components/GlassSurface';
 import { useAppStore } from '@/store/useAppStore';
 import { TAB_BAR } from '@/hooks/useTabBarPadding';
 import { colors, typography } from '@/theme';
+
+/**
+ * 탭바가 실제로 쓰는 것만 적는다.
+ *
+ * expo-router 안에 든 MaterialTopTabBarProps 는 any 로 풀려 있어서 타입이
+ * 하나도 안 잡힌다. 필요한 모양을 여기 직접 적어 두면 무엇에 기대고 있는지도
+ * 분명해지고, 나중에 탭 방식을 또 바꿔도 여기만 맞추면 된다.
+ */
+interface TabBarProps {
+  state: {
+    index: number;
+    routes: { key: string; name: string; params?: object }[];
+  };
+  descriptors: Record<
+    string,
+    {
+      options: {
+        title?: string;
+        tabBarLabel?: string | ((p: { focused: boolean; color: string }) => React.ReactNode);
+        tabBarIcon?: (p: { focused: boolean; color: string }) => React.ReactNode;
+      };
+    }
+  >;
+  navigation: {
+    emit: (e: {
+      type: string;
+      target: string;
+      canPreventDefault?: boolean;
+    }) => { defaultPrevented: boolean };
+    navigate: (name: string, params?: object) => void;
+  };
+}
+
 
 /** 알약 좌우 안쪽 여백 */
 const PAD = 6;
@@ -37,7 +69,7 @@ const INSET = 8;
  * 유리를 켜면 방울 대신 **렌즈**가 된다. 아이콘 위에 올려 봤더니 실기기에서
  * 글씨가 뭉개져 읽을 수 없어, 아이콘 뒤에 깐다.
  */
-export function LiquidTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
+export function LiquidTabBar({ state, descriptors, navigation }: TabBarProps) {
   const insets = useSafeAreaInsets();
   const bottom = Math.max(insets.bottom, TAB_BAR.minBottom);
   const glass = useAppStore((s) => s.glassTest);
@@ -146,7 +178,7 @@ export function LiquidTabBar({ state, descriptors, navigation }: BottomTabBarPro
                 accessibilityState={{ selected: focused }}
                 accessibilityLabel={typeof label === 'string' ? label : undefined}
               >
-                {options.tabBarIcon?.({ focused, color, size: 22 })}
+                {options.tabBarIcon?.({ focused, color })}
                 <Text numberOfLines={1} style={[styles.label, { color }]}>
                   {label}
                 </Text>

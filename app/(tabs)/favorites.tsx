@@ -7,7 +7,6 @@ import { EmptyState } from '@/components/common';
 import { libraryApi } from '@/api/libraryApi';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
-import { SwipeTabs } from '@/components/SwipeTabs';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { colors, spacing, typography } from '@/theme';
 
@@ -25,7 +24,6 @@ export default function FavoritesScreen() {
     .sort((a, b) => favorites.indexOf(a.id) - favorites.indexOf(b.id));
 
   return (
-    <SwipeTabs>
     <SafeAreaView style={styles.safe} edges={['top']}>
       <View style={styles.header}>
         <Text style={styles.title}>즐겨찾기</Text>
@@ -58,7 +56,6 @@ export default function FavoritesScreen() {
         )}
       />
     </SafeAreaView>
-    </SwipeTabs>
   );
 }
 

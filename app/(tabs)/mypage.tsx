@@ -10,7 +10,7 @@ import { nearbyDataStatus } from '@/api/nearbyApi';
 import { dataCompleteness } from '@/data/libraries.mock';
 import { loanBookStatus } from '@/data/books.mock';
 import { glassSupport } from '@/components/GlassSurface';
-import { SwipeTabs } from '@/components/SwipeTabs';import { useTabBarPadding } from '@/hooks/useTabBarPadding';
+import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { colors, radius, spacing, typography } from '@/theme';
 
 export default function MyPageScreen() {
@@ -35,7 +35,6 @@ export default function MyPageScreen() {
   };
 
   return (
-    <SwipeTabs>
     <SafeAreaView style={styles.safe} edges={['top']}>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[styles.content, { paddingBottom: tabPad }]}>
         <View style={styles.profile}>
@@ -77,7 +76,6 @@ export default function MyPageScreen() {
         {__DEV__ ? <DataStatus /> : null}
       </ScrollView>
     </SafeAreaView>
-    </SwipeTabs>
   );
 }
 

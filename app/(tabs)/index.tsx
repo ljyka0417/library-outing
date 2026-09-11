@@ -11,7 +11,6 @@ import { SectionHeader } from '@/components/common';
 import { libraryApi } from '@/api/libraryApi';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
-import { SwipeTabs } from '@/components/SwipeTabs';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { colors, radius, spacing, typography } from '@/theme';
 import type { CategoryId } from '@/types';
@@ -35,7 +34,6 @@ export default function HomeScreen() {
   );
 
   return (
-    <SwipeTabs>
     <SafeAreaView style={styles.safe} edges={['top']}>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[styles.content, { paddingBottom: tabPad }]}>
         {/* 인사 + 검색 */}
@@ -119,7 +117,6 @@ export default function HomeScreen() {
         ) : null}
       </ScrollView>
     </SafeAreaView>
-    </SwipeTabs>
   );
 }
 
