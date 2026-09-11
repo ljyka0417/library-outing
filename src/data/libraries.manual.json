@@ -17,32 +17,120 @@
   ],
   "entries": {
     "national-library": {
-      "_source": "국립중앙도서관 공식 이용안내 (nl.go.kr/NL/contents/N40101000000.do)",
-      "_note": "휴관일이 '매월 둘째·넷째 월요일' 이라 요일 반복으로 표현할 수 없다. byDay 를 비워 두어 '운영중' 판정을 하지 않고, 안내 문구만 보여준다.",
+      "_source": "국립중앙도서관 이용안내 (nl.go.kr)",
+      "_note": "휴관이 \"매월 둘째·넷째 월요일\" 이라 주 단위로는 담을 수 없다. 월요일은 여는 날로 두고 실제 휴관일은 아래 문구로 보여준다 — 한 달 네 번 중 두 번은 실제로 열기 때문에, 월요일을 통째로 휴관으로 적으면 맞는 날보다 틀리는 날이 많아진다.",
       "closedDays": "매월 둘째·넷째 월요일 / 일요일을 제외한 관공서 공휴일",
       "hours": {
-        "label": "09:00 - 18:00 (수요일은 21:00까지 야간개관)",
-        "byDay": []
+        "label": "09:00~18:00 (수요일은 21:00까지)",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
       }
     },
-
     "seoul-botanic-plant": {
-      "_source": "서울식물원 공식 안내 (식물문화센터 내 위치)",
-      "address": "서울특별시 강서구 마곡동로 161",
-      "closedDays": "매주 월요일"
+      "_source": "서울식물원 식물전문도서관 (botanicpark.seoul.go.kr/lib)",
+      "address": "서울특별시 강서구 마곡동로 161 서울식물원 식물문화센터 2층",
+      "closedDays": "매주 월요일 / 법정공휴일",
+      "phone": "02-2104-9794",
+      "hours": {
+        "label": "09:30~18:00",
+        "byDay": [
+          {
+            "open": 570,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 570,
+            "close": 1080
+          },
+          {
+            "open": 570,
+            "close": 1080
+          },
+          {
+            "open": 570,
+            "close": 1080
+          },
+          {
+            "open": 570,
+            "close": 1080
+          },
+          {
+            "open": 570,
+            "close": 1080
+          }
+        ]
+      }
     },
-
     "nongshim-food": {
       "_source": "농심 본사 도연관 2층 (기업 운영 도서관)",
       "address": "서울특별시 동작구 여의대방로 112"
     },
-
     "michuhol-library": {
-      "_source": "인천광역시 공식 안내",
+      "_source": "국립중앙도서관 도서관정보 (books.nl.go.kr, libId=123001) — 지금 이름은 「인천도서관」",
       "address": "인천광역시 남동구 인주대로776번길 53",
-      "phone": "032-440-6662"
+      "phone": "032-440-6662",
+      "_note": "⚠️ 목록의 incheon-library(인천도서관)와 같은 곳이다. 미추홀도서관이 인천도서관으로 이름을 바꿨고 주소가 같다 (인천 남동구 인주대로776번길 53). 운영시간도 같게 둔다.",
+      "closedDays": "매주 금요일",
+      "hours": {
+        "label": "일반·종합자료실 평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      }
     },
-
     "feb28-library": {
       "_source": "대구광역시통합도서관 (library.daegu.go.kr/228lib)",
       "address": "대구광역시 중구 2.28길 9",
@@ -51,47 +139,1030 @@
       "hours": {
         "label": "화~금 09:00~20:00 / 토·일 09:00~17:00",
         "byDay": [
-          { "open": 540, "close": 1020 },
+          {
+            "open": 540,
+            "close": 1020
+          },
           null,
-          { "open": 540, "close": 1200 },
-          { "open": 540, "close": 1200 },
-          { "open": 540, "close": 1200 },
-          { "open": 540, "close": 1200 },
-          { "open": 540, "close": 1020 }
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
         ]
       }
     },
-
     "soraui-seong": {
       "_source": "서귀포시 근대건축물 안내 / 문화포털",
       "address": "제주특별자치도 서귀포시 칠십리로214번길 17-17",
       "hours": {
         "label": "매일 09:00 - 18:00",
         "byDay": [
-          { "open": 540, "close": 1080 },
-          { "open": 540, "close": 1080 },
-          { "open": 540, "close": 1080 },
-          { "open": 540, "close": 1080 },
-          { "open": 540, "close": 1080 },
-          { "open": 540, "close": 1080 },
-          { "open": 540, "close": 1080 }
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
         ]
       }
     },
-
     "wagle-kids": {
       "_source": "대구광역시 보도자료 (정확한 도로명주소 미확인 — 주소는 비워 둠)",
       "closedDays": "매주 월요일 / 1월 1일, 설날, 추석",
       "hours": {
         "label": "09:00 - 19:00",
         "byDay": [
-          { "open": 540, "close": 1140 },
+          {
+            "open": 540,
+            "close": 1140
+          },
           null,
-          { "open": 540, "close": 1140 },
-          { "open": 540, "close": 1140 },
-          { "open": 540, "close": 1140 },
-          { "open": 540, "close": 1140 },
-          { "open": 540, "close": 1140 }
+          {
+            "open": 540,
+            "close": 1140
+          },
+          {
+            "open": 540,
+            "close": 1140
+          },
+          {
+            "open": 540,
+            "close": 1140
+          },
+          {
+            "open": 540,
+            "close": 1140
+          },
+          {
+            "open": 540,
+            "close": 1140
+          }
+        ]
+      }
+    },
+    "incheon-library": {
+      "_source": "정보나루 운영시간 원문 — 일반·종합자료실 기준",
+      "_note": "열람실(06:00~22:00)과 어린이자료실은 따로 움직인다. 본관 자료실 시간을 도서관 시간으로 본다.",
+      "hours": {
+        "label": "일반·종합자료실 평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      }
+    },
+    "majeon-library": {
+      "_source": "정보나루 운영시간 원문 — 일반자료실 기준",
+      "hours": {
+        "label": "일반자료실 평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      }
+    },
+    "yeongjong-sky": {
+      "_source": "정보나루 운영시간 원문 — 종합자료실 기준",
+      "hours": {
+        "label": "종합자료실 평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      }
+    },
+    "cheongna-lake": {
+      "_source": "정보나루 운영시간 원문 — 일반자료실 기준",
+      "hours": {
+        "label": "일반자료실 평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      }
+    },
+    "cheongna-intl": {
+      "_source": "정보나루 운영시간 원문 — 종합자료실 기준",
+      "hours": {
+        "label": "종합자료실 평일 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      }
+    },
+    "yulmok-library": {
+      "_source": "정보나루 운영시간 원문 — 일반자료실 기준",
+      "hours": {
+        "label": "일반자료실 화~금 09:00~22:00 / 토·일 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      }
+    },
+    "dunsan-english": {
+      "_source": "전국도서관표준데이터 (완주군립 둔산영어도서관)",
+      "_note": "휴관 문구가 \"자료실(일+공휴일) + 공부방(공휴일)\" 이라 자료실 기준으로 일요일을 쉬는 날로 둔다.",
+      "hours": {
+        "label": "08:00~22:00",
+        "byDay": [
+          null,
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          },
+          {
+            "open": 480,
+            "close": 1320
+          }
+        ]
+      },
+      "closedDays": "자료실 매주 일요일 / 공휴일"
+    },
+    "assembly-library": {
+      "_source": "국회도서관 이용시간 (nanet.go.kr/libaryuseinfo/libUseUserTimeView.do)",
+      "_note": "대출대·사회과학자료실·법률정보센터·정기간행물실 기준. 어린이방·디지털정보센터는 평일 18시까지, 인문·자연과학자료실은 주말에 이용할 수 없다. 휴관이 \"매월 둘째·넷째 토요일\" 이라 주 단위로는 담을 수 없어 토요일은 여는 날로 두었다.",
+      "closedDays": "매월 둘째·넷째 토요일 / 일요일을 제외한 공휴일(공휴일과 겹친 토·일요일 휴관)",
+      "hours": {
+        "label": "월~금 09:00~21:00 / 토·일 09:00~17:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      }
+    },
+    "national-children-library": {
+      "_source": "국립어린이청소년도서관 도서관이용안내 (nlcy.go.kr)",
+      "_note": "휴관이 \"매월 둘째·넷째 월요일\" 이라 주 단위로 담을 수 없다. 월요일은 여는 날로 둔다.",
+      "closedDays": "매월 둘째·넷째 월요일 / 일요일을 제외한 관공서 공휴일",
+      "hours": {
+        "label": "09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      }
+    },
+    "gyeonggi-library": {
+      "_source": "경기도서관 홈페이지 운영시간 (library.kr)",
+      "_note": "휴관일이 달마다 날짜로 공지된다. 2026년 9월은 14·28일(둘째·넷째 월요일)과 25일(추석)이었다. 월요일은 여는 날로 둔다.",
+      "closedDays": "매월 둘째·넷째 월요일 / 공휴일",
+      "hours": {
+        "label": "평일 10:00~21:00 / 주말 10:00~18:00",
+        "byDay": [
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1260
+          },
+          {
+            "open": 600,
+            "close": 1260
+          },
+          {
+            "open": 600,
+            "close": 1260
+          },
+          {
+            "open": 600,
+            "close": 1260
+          },
+          {
+            "open": 600,
+            "close": 1260
+          },
+          {
+            "open": 600,
+            "close": 1080
+          }
+        ]
+      }
+    },
+    "court-library": {
+      "_source": "법원도서관 이용방법 — 법마루 (library.scourt.go.kr/introduction/use/way)",
+      "_note": "일반에 열려 있는 열람실 「법마루」 기준이고, 만 16세 이상 홈페이지 회원만 들어갈 수 있다. 휴관이 \"매월 마지막 주 월요일\" 이라 주 단위로 담을 수 없어 월요일은 여는 날로 두었다.",
+      "closedDays": "매월 마지막 주 월요일 / 관공서의 공휴일(일요일 제외)",
+      "hours": {
+        "label": "법마루 평일 09:00~18:00 / 주말 09:30~17:30",
+        "byDay": [
+          {
+            "open": 570,
+            "close": 1050
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 570,
+            "close": 1050
+          }
+        ]
+      }
+    },
+    "dream-kids-english": {
+      "_source": "꿈드림어린이영어도서관 이용시간 및 시설안내 (lib.jemulpo.go.kr/dream)",
+      "_note": "정식 이름은 「꿈드림어린이영어도서관」이다. 전국도서관표준데이터의 같은 이름 항목과도 시각이 맞다.",
+      "address": "인천광역시 동구 새천년로 93",
+      "phone": "032-766-0725",
+      "closedDays": "매주 금요일 / 법정공휴일",
+      "hours": {
+        "label": "월~목 09:00~18:00 / 토·일 09:00~17:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      }
+    },
+    "nonhyeon-maru": {
+      "_source": "강남구립 논현문화마루도서관 이용시간/휴관일 (library.gangnam.go.kr/nmmlib)",
+      "_note": "정식 이름은 「논현문화마루도서관」. 성인자료실(4층) 기준이고 어린이자료실(5층)은 매일 18시까지다.",
+      "address": "서울특별시 강남구 논현로131길 40",
+      "phone": "02-512-8580",
+      "closedDays": "매주 월요일 / 일요일을 제외한 법정공휴일",
+      "hours": {
+        "label": "성인자료실 화~금 09:00~22:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      }
+    },
+    "brighton-library": {
+      "_source": "영등포문화재단 여의도브라이튼도서관 (ydpcf.or.kr/library/library_brighten.do)",
+      "_note": "어린이·유아자료실은 평일에도 18시까지다.",
+      "address": "서울특별시 영등포구 국제금융로 39",
+      "phone": "02-2125-4400",
+      "closedDays": "매주 월요일 / 법정공휴일",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~17:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      }
+    },
+    "ulsan-kids-youth": {
+      "_source": "울산어린이청소년도서관 도서관 운영안내 (library.ulsan.go.kr/cylib)",
+      "address": "울산광역시 남구 봉월로38번길 32 종하이노베이션센터 1·2층",
+      "phone": "052-266-5990",
+      "closedDays": "매주 월요일 / 법정공휴일 (토·일요일이 법정공휴일과 겹치면 휴관)",
+      "hours": {
+        "label": "화~일 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      }
+    },
+    "busan-namgu-library": {
+      "_source": "부산 남구도서관 이용안내 (bsnamgu.go.kr/library)",
+      "_note": "종합·문학자료실 기준. 어린이자료실은 평일 20시까지, 꿈오름실(열람실)은 07:00~23:00 으로 따로 움직인다.",
+      "closedDays": "매주 월요일 / 국경일·국가 공휴일",
+      "hours": {
+        "label": "종합·문학자료실 화~금 09:00~22:00 / 토 09:00~18:00 / 일 09:00~17:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      }
+    },
+    "dongdaejeon-library": {
+      "_source": "대전광역시 동대전도서관 이용안내 (daejeon.go.kr/ddj)",
+      "_note": "종합자료실·청소년자료실 기준. 어린이자료실은 매일 18시까지다.",
+      "closedDays": "매주 금요일 / 정부 지정 공휴일",
+      "hours": {
+        "label": "종합·청소년자료실 월~목 09:00~20:00 / 토·일 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      }
+    },
+    "sangju-dodream": {
+      "_source": "상주시립도서관 이용안내 (sangju.go.kr/lib) — 만화특화공간이 있는 복룡2길 22 본관",
+      "_note": "휴관이 \"매월 첫째·셋째 월요일\" 이라 주 단위로 담을 수 없다. 월요일은 여는 날로 둔다.",
+      "closedDays": "매월 첫째·셋째 월요일 / 일요일을 제외한 공휴일",
+      "hours": {
+        "label": "평일 09:00~21:00 / 토·일 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      }
+    },
+    "gochang-hwangyunseok": {
+      "_source": "고창군 고창황윤석도서관 안내 (gochang.go.kr/tour)",
+      "_note": "고창군 안내에 운영시간이 \"화~금 / 토,일\" 로만 적혀 있고 휴관일 문구는 없었다. 월요일이 빠져 있어 휴관으로 본다.",
+      "address": "전북특별자치도 고창군 고창읍 중앙로 340",
+      "phone": "063-560-2420",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 토·일 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      }
+    },
+    "inje-miracle": {
+      "_source": "인제기적의도서관 이용안내 (lib.inje.go.kr/main/contents.do?idx=4419)",
+      "_note": "자료실 기준. 어린이실은 매일 18시까지다.",
+      "address": "강원특별자치도 인제군 인제읍 인제로140번길 52-7",
+      "phone": "033-460-4321",
+      "closedDays": "매주 금요일 / 법정공휴일",
+      "hours": {
+        "label": "자료실 09:00~22:00 (어린이실 09:00~18:00)",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          }
+        ]
+      }
+    },
+    "yeonhwajeong-library": {
+      "_source": "작은도서관 누리집 — 문화체육관광부 (mcst.go.kr/slibrary/library/detail/3275246)",
+      "address": "전북특별자치도 전주시 덕진구 권삼득로 390-1",
+      "phone": "063-714-3527",
+      "closedDays": "매주 월요일",
+      "hours": {
+        "label": "화~일 10:00~19:00",
+        "byDay": [
+          {
+            "open": 600,
+            "close": 1140
+          },
+          null,
+          {
+            "open": 600,
+            "close": 1140
+          },
+          {
+            "open": 600,
+            "close": 1140
+          },
+          {
+            "open": 600,
+            "close": 1140
+          },
+          {
+            "open": 600,
+            "close": 1140
+          },
+          {
+            "open": 600,
+            "close": 1140
+          }
+        ]
+      }
+    },
+    "hanok-village-library": {
+      "_source": "작은도서관 누리집 — 문화체육관광부 (mcst.go.kr/slibrary/library/detail/3275252)",
+      "address": "전북특별자치도 전주시 완산구 한지길 68-3",
+      "phone": "063-714-3531",
+      "closedDays": "매주 월요일",
+      "hours": {
+        "label": "화~일 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      }
+    },
+    "dongmun-usedbook": {
+      "_source": "작은도서관 누리집 — 문화체육관광부 (mcst.go.kr/slibrary/library/detail/3284886)",
+      "address": "전북특별자치도 전주시 완산구 동문길 51",
+      "phone": "063-714-3529",
+      "closedDays": "매주 월요일",
+      "hours": {
+        "label": "화~일 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      }
+    },
+    "uknow-yunho": {
+      "_source": "작은도서관 누리집 — 문화체육관광부 (mcst.go.kr/slibrary/library/detail/1972573)",
+      "address": "광주광역시 광산구 소촌로85번길 14-9 소촌아트팩토리",
+      "phone": "062-960-3689",
+      "closedDays": "매주 월요일",
+      "hours": {
+        "label": "화~일 10:00~18:00",
+        "byDay": [
+          {
+            "open": 600,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          }
+        ]
+      }
+    },
+    "mangsang-beach": {
+      "_source": "작은도서관 누리집 — 문화체육관광부 (mcst.go.kr/slibrary/library/detail/2655408, 등록명 「바닷가작은도서관」)",
+      "_note": "누리집에 올라 있는 이름은 「바닷가작은도서관」이지만 주소(동해시 동해대로 6261, 망상동)와 개관일(2019년 11월 1일)이 망상해뜰책뜰과 같다.",
+      "address": "강원특별자치도 동해시 동해대로 6261",
+      "closedDays": "매주 월·화요일",
+      "hours": {
+        "label": "수~일 10:00~17:00",
+        "byDay": [
+          {
+            "open": 600,
+            "close": 1020
+          },
+          null,
+          null,
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          }
+        ]
+      }
+    },
+    "kimyoungsu-library": {
+      "_source": "비짓제주 — 제주관광공사 (visitjeju.net, CNTS_200000000008792)",
+      "_note": "낮 09:00~17:00 은 제주북초등학교 학교도서관으로 운영해 외부인이 들어갈 수 없다. 마을도서관으로 여는 시간만 적었다.",
+      "address": "제주특별자치도 제주시 중앙로8길 18",
+      "phone": "064-717-3359",
+      "closedDays": "매주 화요일 / 국·공휴일",
+      "hours": {
+        "label": "마을도서관 월~금 17:00~21:00 / 토·일 10:00~18:00",
+        "byDay": [
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 1020,
+            "close": 1260
+          },
+          null,
+          {
+            "open": 1020,
+            "close": 1260
+          },
+          {
+            "open": 1020,
+            "close": 1260
+          },
+          {
+            "open": 1020,
+            "close": 1260
+          },
+          {
+            "open": 600,
+            "close": 1080
+          }
         ]
       }
     }
