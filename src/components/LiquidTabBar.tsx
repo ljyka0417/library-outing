@@ -146,15 +146,21 @@ export function LiquidTabBar({ state, descriptors, navigation }: TabBarProps) {
    * 탭바를 꾹 누른 채 손가락을 옆으로 끌면 유리가 따라오고, 지나가는 칸마다
    * 탭이 바뀐다. iOS 26 탭바가 하는 동작이다.
    *
-   * activateAfterLongPress 를 두는 이유: 이게 없으면 그냥 톡 누르는 것까지
-   * 제스처가 가로채서 탭이 안 눌린다. 잠깐 누르고 있어야 끌기가 시작되므로
-   * 누르기와 끌기가 서로 방해하지 않는다.
+   * 누르기와 끌기를 가르는 기준은 **손가락이 움직였는가** 다.
+   *   처음엔 "꾹 눌러야 시작"(activateAfterLongPress)으로 뒀는데, 누르자마자
+   *   끌고 싶다는 요청이 있었다. 가로로 10 이상 움직여야 끌기로 넘어가게 하면,
+   *   톡 누르는 건 움직임이 없으니 그대로 탭 누르기로 간다. 둘이 안 부딪히면서
+   *   끌기는 즉시 시작된다.
+   *   세로로 12 이상 움직이면 손을 뗀다. 탭바를 스치며 화면을 위아래로
+   *   넘길 때 탭이 바뀌지 않게 하기 위한 것이다.
    */
   const maxSlide = Math.max(0, (count - 1) * itemWidth) + INSET;
   const drag = Gesture.Pan()
-    .activateAfterLongPress(140)
-    .minDistance(0)
-    .onBegin(() => {
+    .activeOffsetX([-10, 10])
+    .failOffsetY([-12, 12])
+    // onBegin 은 손가락이 닿기만 해도 불린다. 실제로 끌기 시작할 때만 잡아야
+    // 톡 누르는 경우에 아래 useEffect 가 막히지 않는다.
+    .onStart(() => {
       dragging.value = true;
       draggedIndex.value = state.index;
     })
