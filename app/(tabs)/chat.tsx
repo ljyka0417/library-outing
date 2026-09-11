@@ -19,6 +19,7 @@ import { BookCard } from '@/components/BookCard';
 import { LibraryCard } from '@/components/LibraryCard';
 import { useAppStore } from '@/store/useAppStore';
 import { ask, STARTER_QUESTIONS, type Answer } from '@/utils/assistant';
+import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { colors, radius, spacing, typography } from '@/theme';
 import { formatDistance, walkingMinutes } from '@/utils/openingHours';
 import { openKakaoMap } from '@/utils/mapLinks';
@@ -50,6 +51,7 @@ const GREETING: Message = {
 export default function ChatScreen() {
   const router = useRouter();
   const listRef = useRef<FlatList<Message>>(null);
+  const tabPad = useTabBarPadding();
 
   const favorites = useAppStore((s) => s.favorites);
   const toggleFavorite = useAppStore((s) => s.toggleFavorite);
@@ -107,7 +109,7 @@ export default function ChatScreen() {
           ref={listRef}
           data={messages}
           keyExtractor={(m) => m.id}
-          contentContainerStyle={styles.list}
+          contentContainerStyle={[styles.list, { paddingBottom: tabPad }]}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
           onContentSizeChange={scrollToEnd}

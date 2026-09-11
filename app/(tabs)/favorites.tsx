@@ -7,12 +7,14 @@ import { EmptyState } from '@/components/common';
 import { libraryApi } from '@/api/libraryApi';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
+import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { colors, spacing, typography } from '@/theme';
 
 export default function FavoritesScreen() {
   const router = useRouter();
   const favorites = useAppStore((s) => s.favorites);
   const toggleFavorite = useAppStore((s) => s.toggleFavorite);
+  const tabPad = useTabBarPadding();
 
   const { data } = useAsync(() => libraryApi.list(), [], { cacheKey: 'all-libraries' });
 
@@ -35,7 +37,7 @@ export default function FavoritesScreen() {
       <FlatList
         data={saved}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={styles.list}
+        contentContainerStyle={[styles.list, { paddingBottom: tabPad }]}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={
           <EmptyState

@@ -9,11 +9,13 @@ import { useAppStore } from '@/store/useAppStore';
 import { nearbyDataStatus } from '@/api/nearbyApi';
 import { dataCompleteness } from '@/data/libraries.mock';
 import { loanBookStatus } from '@/data/books.mock';
+import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { colors, radius, spacing, typography } from '@/theme';
 
 export default function MyPageScreen() {
   const { favorites, visits, recentLibraryIds, resetAll } = useAppStore();
   const { data } = useAsync(() => libraryApi.list(), [], { cacheKey: 'all-libraries' });
+  const tabPad = useTabBarPadding();
 
   const visitedNames = visits
     .slice(0, 5)
@@ -33,7 +35,7 @@ export default function MyPageScreen() {
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.content}>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[styles.content, { paddingBottom: tabPad }]}>
         <View style={styles.profile}>
           <Mascot size={110} pose="hello" />
           <Text style={styles.name}>달곰이와 도서관 나들이 중</Text>

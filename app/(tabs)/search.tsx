@@ -10,6 +10,7 @@ import { libraryApi } from '@/api/libraryApi';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
 import { isOpenNow } from '@/utils/openingHours';
+import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { colors, spacing, typography } from '@/theme';
 import type { CategoryId } from '@/types';
 
@@ -23,6 +24,7 @@ export default function SearchScreen() {
   );
   const [sido, setSido] = useState<string | undefined>();
   const [openNow, setOpenNow] = useState(false);
+  const tabPad = useTabBarPadding();
 
   const favorites = useAppStore((s) => s.favorites);
   const toggleFavorite = useAppStore((s) => s.toggleFavorite);
@@ -126,7 +128,7 @@ export default function SearchScreen() {
         <FlatList
           data={results}
           keyExtractor={(item) => item.id}
-          contentContainerStyle={styles.list}
+          contentContainerStyle={[styles.list, { paddingBottom: tabPad }]}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
           ListEmptyComponent={

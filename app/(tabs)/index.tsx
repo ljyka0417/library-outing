@@ -11,12 +11,14 @@ import { SectionHeader } from '@/components/common';
 import { libraryApi } from '@/api/libraryApi';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
+import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { colors, radius, spacing, typography } from '@/theme';
 import type { CategoryId } from '@/types';
 
 export default function HomeScreen() {
   const router = useRouter();
   const recentIds = useAppStore((s) => s.recentLibraryIds);
+  const tabPad = useTabBarPadding();
 
   const featured = useAsync(() => libraryApi.featured(), [], { cacheKey: 'featured' });
   const all = useAsync(() => libraryApi.list(), [], { cacheKey: 'all-libraries' });
@@ -33,7 +35,7 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.content}>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[styles.content, { paddingBottom: tabPad }]}>
         {/* 인사 + 검색 */}
         <View style={styles.header}>
           <View style={styles.greetingRow}>
