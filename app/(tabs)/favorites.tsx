@@ -9,6 +9,7 @@ import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { centered, useLayout } from '@/hooks/useLayout';
+import { useT } from '@/i18n';
 import { colors, spacing, typography } from '@/theme';
 
 export default function FavoritesScreen() {
@@ -17,6 +18,7 @@ export default function FavoritesScreen() {
   const toggleFavorite = useAppStore((s) => s.toggleFavorite);
   const tabPad = useTabBarPadding();
   const layout = useLayout();
+  const { t } = useT();
 
   const { data } = useAsync(() => libraryApi.list(), [], { cacheKey: 'all-libraries' });
 
@@ -30,11 +32,11 @@ export default function FavoritesScreen() {
       {/* 태블릿에서는 제목부터 목록까지 한 덩어리로 가운데에 모은다 */}
       <View style={[styles.body, centered(layout)]}>
       <View style={[styles.header, { paddingHorizontal: layout.gutter }]}>
-        <Text style={styles.title}>즐겨찾기</Text>
+        <Text style={styles.title}>{t('tab.favorites')}</Text>
         <Text style={styles.subtitle}>
           {saved.length > 0
-            ? `${saved.length}곳을 저장했어요`
-            : '가고 싶은 도서관을 모아 두세요'}
+            ? t('fav.savedCount', { n: saved.length })
+            : t('fav.prompt')}
         </Text>
       </View>
 
@@ -54,8 +56,8 @@ export default function FavoritesScreen() {
         ListEmptyComponent={
           <EmptyState
             pose="faceHeart"
-            title="아직 저장한 도서관이 없어요"
-            description={'도서관 상세 화면의 하트를 눌러\n나만의 나들이 목록을 만들어 보세요'}
+            title={t('fav.emptyTitle')}
+            description={t('fav.emptyBody')}
           />
         }
         renderItem={({ item }) => (

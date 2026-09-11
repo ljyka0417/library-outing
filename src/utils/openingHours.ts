@@ -1,3 +1,4 @@
+import { translate, type Lang } from '@/i18n';
 import type { OperatingHours } from '@/types';
 
 /**
@@ -16,13 +17,25 @@ export function isOpenNow(hours: OperatingHours | undefined, now = new Date()): 
   return minutes >= today.open && minutes < today.close;
 }
 
-/** 오늘의 운영시간 문구. 휴관이면 안내 문구를 돌려준다. */
-export function todayHoursLabel(hours: OperatingHours | undefined, now = new Date()): string {
-  if (!hours) return '운영시간 정보 준비중';
+/**
+ * 오늘의 운영시간 문구. 휴관이면 안내 문구를 돌려준다.
+ *
+ * hours.label 은 수집한 원문("화~금 09:00~21:00")이라 옮기지 않는다.
+ * 우리가 지어 붙이는 말만 화면에 쓰는 언어를 따라간다.
+ */
+export function todayHoursLabel(
+  hours: OperatingHours | undefined,
+  lang: Lang = 'ko',
+  now = new Date()
+): string {
+  if (!hours) return translate(lang, 'hours.unknown');
   const today = hours.byDay?.[now.getDay()];
   if (today === undefined) return hours.label;
-  if (today === null) return '오늘은 휴관일이에요';
-  return `오늘 ${formatMinutes(today.open)} - ${formatMinutes(today.close)}`;
+  if (today === null) return translate(lang, 'hours.closedToday');
+  return translate(lang, 'hours.today', {
+    from: formatMinutes(today.open),
+    to: formatMinutes(today.close),
+  });
 }
 
 function formatMinutes(m: number): string {

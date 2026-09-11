@@ -21,6 +21,7 @@ import { useAppStore } from '@/store/useAppStore';
 import { ask, STARTER_QUESTIONS, type Answer } from '@/utils/assistant';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { centered, useLayout } from '@/hooks/useLayout';
+import { useT } from '@/i18n';
 import { colors, radius, spacing, typography } from '@/theme';
 import { formatDistance, walkingMinutes } from '@/utils/openingHours';
 import { openKakaoMap } from '@/utils/mapLinks';
@@ -54,6 +55,7 @@ export default function ChatScreen() {
   const listRef = useRef<FlatList<Message>>(null);
   const tabPad = useTabBarPadding();
   const layout = useLayout();
+  const { t, lang } = useT();
 
   const favorites = useAppStore((s) => s.favorites);
   const toggleFavorite = useAppStore((s) => s.toggleFavorite);
@@ -100,10 +102,19 @@ export default function ChatScreen() {
       <View style={[styles.header, { paddingHorizontal: layout.gutter }]}>
         <Mascot size={38} pose="faceHappy" />
         <View style={{ flex: 1 }}>
-          <Text style={styles.headerTitle}>달곰이에게 물어보기</Text>
-          <Text style={styles.headerSub}>앱에 담긴 132곳 정보로 답해요</Text>
+          <Text style={styles.headerTitle}>{t('chat.title')}</Text>
+          <Text style={styles.headerSub}>{t('chat.sub')}</Text>
         </View>
       </View>
+
+      {/* 달곰이는 한국어 질문만 알아듣는다. 영어로 물었다가 "모르겠어요" 를
+          받으면 고장난 것처럼 보이므로, 묻기 전에 미리 말해 준다. */}
+      {lang !== 'ko' ? (
+        <View style={[styles.notice, { paddingHorizontal: layout.gutter }]}>
+          <Ionicons name="information-circle-outline" size={14} color={colors.textSub} />
+          <Text style={styles.noticeText}>{t('chat.koreanOnly')}</Text>
+        </View>
+      ) : null}
 
       <KeyboardAvoidingView
         style={{ flex: 1 }}
@@ -121,7 +132,10 @@ export default function ChatScreen() {
           onContentSizeChange={scrollToEnd}
           renderItem={({ item }) => (
             <Bubble
-              message={item}
+              /* 첫 인사만은 말을 바꾸면 그 자리에서 같이 바뀌어야 한다.
+                 처음 뜰 때 만든 글을 그대로 두면 영어로 바꿔도 한국어
+                 인사가 남는다. */
+              message={item.id === 'greeting' ? { ...item, text: t('chat.greeting') } : item}
               onOpenLibrary={(id) => router.push(`/library/${id}`)}
               favorites={favorites}
               onToggleFavorite={toggleFavorite}
@@ -132,7 +146,7 @@ export default function ChatScreen() {
         {thinking ? (
           <View style={styles.thinking}>
             <ActivityIndicator size="small" color={colors.primary} />
-            <Text style={styles.thinkingText}>달곰이가 찾아보는 중</Text>
+            <Text style={styles.thinkingText}>{t('chat.thinking')}</Text>
           </View>
         ) : null}
 
@@ -167,7 +181,7 @@ export default function ChatScreen() {
             disabled={!input.trim() || thinking}
             style={[styles.sendButton, (!input.trim() || thinking) && { opacity: 0.4 }]}
             accessibilityRole="button"
-            accessibilityLabel="질문 보내기"
+            accessibilityLabel={t('chat.send')}
           >
             <Ionicons name="arrow-up" size={20} color={colors.white} />
           </Pressable>
@@ -268,6 +282,14 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.divider,
     backgroundColor: colors.surface,
   },
+  notice: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    paddingVertical: spacing.sm,
+    backgroundColor: colors.surfaceAlt,
+  },
+  noticeText: { ...typography.tiny, color: colors.textSub, flex: 1 },
   headerTitle: { ...typography.bodyBold, color: colors.text },
   headerSub: { ...typography.tiny, color: colors.textSub },
 

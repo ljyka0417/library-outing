@@ -12,6 +12,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Mascot } from './Mascot';
 import { CATEGORY_MAP } from '@/data/categories';
 import { getPhoto } from '@/data/libraryPhotos';
+import { useT } from '@/i18n';
 import { categoryColors, colors, typography } from '@/theme';
 import type { Library } from '@/types';
 
@@ -40,6 +41,7 @@ interface Props {
 }
 
 export function LibraryImage({ library, variant, style }: Props) {
+  const { t } = useT();
   const photo = getPhoto(library.id);
   const shapeStyle = variant === 'hero' ? styles.hero : variant === 'card' ? styles.card : styles.carousel;
 
@@ -63,7 +65,7 @@ export function LibraryImage({ library, variant, style }: Props) {
             style={styles.watermark}
           />
           <Mascot size={104} pose="camera" />
-          <Text style={[styles.heroText, { color: palette.fg }]}>사진을 준비하고 있어요</Text>
+          <Text style={[styles.heroText, { color: palette.fg }]}>{t('image.preparing')}</Text>
         </>
       ) : (
         <Ionicons name={icon as never} size={variant === 'card' ? 28 : 34} color={palette.fg} />

@@ -21,7 +21,9 @@ export function SearchBar({
   value,
   onChangeText,
   onSubmit,
-  placeholder = '도서관명, 지역, 주제 검색',
+  /* 기본값을 한국어로 두면 부르는 쪽이 빠뜨렸을 때 다른 말 화면에 한글이
+     새어 나온다. 기본값 없이 두어 그런 일이 생기면 바로 눈에 띄게 한다. */
+  placeholder,
   readOnly,
   onPress,
   autoFocus,

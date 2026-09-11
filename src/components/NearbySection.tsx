@@ -14,12 +14,14 @@ import { nearbyApi } from '@/api/nearbyApi';
 import { colors, radius, spacing, typography } from '@/theme';
 import { formatDistance, walkingMinutes } from '@/utils/openingHours';
 import { openKakaoMap } from '@/utils/mapLinks';
+import { useT } from '@/i18n';
 import type { Coordinates, NearbyPlace, NearbyType } from '@/types';
 
-const TABS: { type: NearbyType; label: string; icon: keyof typeof Ionicons.glyphMap }[] = [
-  { type: 'restaurant', label: '주변 맛집', icon: 'restaurant' },
-  { type: 'cafe', label: '주변 카페', icon: 'cafe' },
-  { type: 'culture', label: '문화·볼거리', icon: 'color-palette' },
+/* 이름은 화면에서 언어에 맞춰 붙인다. 여기에는 어떤 탭이 있는지만 적는다. */
+const TABS: { type: NearbyType; key: 'nearby.restaurant' | 'nearby.cafe' | 'nearby.culture'; icon: keyof typeof Ionicons.glyphMap }[] = [
+  { type: 'restaurant', key: 'nearby.restaurant', icon: 'restaurant' },
+  { type: 'cafe', key: 'nearby.cafe', icon: 'cafe' },
+  { type: 'culture', key: 'nearby.culture', icon: 'color-palette' },
 ];
 
 /** 사진 대신 쓰는 종류별 색·아이콘 */
@@ -45,12 +47,14 @@ export function NearbySection({ libraryId, coords }: Props) {
   const [tab, setTab] = useState<NearbyType>('restaurant');
   const [places, setPlaces] = useState<NearbyPlace[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  // 실패했는지만 담는다. 문구는 화면에서 언어에 맞춰 붙인다.
+  const [error, setError] = useState(false);
+  const { t } = useT();
 
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    setError(null);
+    setError(false);
 
     nearbyApi
       .list(libraryId, coords, tab)
@@ -58,7 +62,7 @@ export function NearbySection({ libraryId, coords }: Props) {
         if (!cancelled) setPlaces(result);
       })
       .catch(() => {
-        if (!cancelled) setError('주변 정보를 불러오지 못했어요');
+        if (!cancelled) setError(true);
       })
       .finally(() => {
         if (!cancelled) setLoading(false);
@@ -72,20 +76,22 @@ export function NearbySection({ libraryId, coords }: Props) {
   return (
     <View>
       <View style={styles.tabs}>
-        {TABS.map((t) => {
-          const active = t.type === tab;
+        {TABS.map((item) => {
+          const active = item.type === tab;
           return (
             <Pressable
-              key={t.type}
-              onPress={() => setTab(t.type)}
+              key={item.type}
+              onPress={() => setTab(item.type)}
               style={[styles.tab, active && styles.tabActive]}
             >
               <Ionicons
-                name={t.icon}
+                name={item.icon}
                 size={15}
                 color={active ? colors.white : colors.textSub}
               />
-              <Text style={[styles.tabText, active && styles.tabTextActive]}>{t.label}</Text>
+              <Text style={[styles.tabText, active && styles.tabTextActive]}>
+                {t(item.key)}
+              </Text>
             </Pressable>
           );
         })}
@@ -96,13 +102,13 @@ export function NearbySection({ libraryId, coords }: Props) {
           <ActivityIndicator color={colors.primary} />
         </View>
       ) : error ? (
-        <EmptyState pose="faceWink" title={error} description="잠시 후 다시 시도해 주세요" />
+        <EmptyState pose="faceWink" title={t('nearby.error')} description={t('nearby.retry')} />
       ) : places.length === 0 ? (
         <EmptyState
           // 탭에 맞는 포즈를 골라 준다 — 카페 탭이면 커피 든 달곰이
           pose={tab === 'cafe' ? 'coffee' : tab === 'culture' ? 'camera' : 'faceSleepy'}
-          title="주변 정보가 아직 준비되지 않았어요"
-          description="곧 이 근처의 좋은 곳들을 모아 올릴게요"
+          title={t('nearby.emptyTitle')}
+          description={t('nearby.emptyBody')}
         />
       ) : (
         <ScrollView

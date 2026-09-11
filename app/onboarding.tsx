@@ -14,6 +14,7 @@ import { useRouter } from 'expo-router';
 import { Mascot } from '@/components/Mascot';
 import { useAppStore } from '@/store/useAppStore';
 import { centered, useLayout } from '@/hooks/useLayout';
+import { useT } from '@/i18n';
 import { colors, radius, spacing, typography } from '@/theme';
 
 /**
@@ -21,28 +22,17 @@ import { colors, radius, spacing, typography } from '@/theme';
  * 달곰이 포즈를 각 단계의 행동에 맞췄다 (인사 → 책 읽기 → 지도 펼치기).
  */
 const SLIDES = [
-  {
-    title: '안녕! 나는 달곰이야',
-    body: '전국의 도서관을 함께 다니는 친구예요.\n어떤 도서관이 있는지 같이 보러 갈까요?',
-    pose: 'wave' as const,
-  },
-  {
-    title: '책에서 발견하고, QR로 자세히',
-    body: '가이드북에서 마음에 드는 도서관을 찾았다면\n옆에 있는 QR 코드를 찍어 보세요.',
-    pose: 'read' as const,
-  },
-  {
-    title: '나들이 코스로 완성',
-    body: '지도앱으로 길을 찾고,\n주변 맛집·카페·볼거리까지 한 번에.',
-    pose: 'map' as const,
-  },
-];
+  { title: 'ob.title1', body: 'ob.body1', pose: 'wave' },
+  { title: 'ob.title2', body: 'ob.body2', pose: 'read' },
+  { title: 'ob.title3', body: 'ob.body3', pose: 'map' },
+] as const;
 
 export default function OnboardingScreen() {
   // Dimensions.get() 을 모듈 스코프에서 읽으면 화면이 아직 없는 시점이라
   // 0 이 나올 수 있다. 훅으로 읽어야 회전/리사이즈에도 따라온다.
   const { width } = useWindowDimensions();
   const layout = useLayout();
+  const { t } = useT();
   const [page, setPage] = useState(0);
   const scrollRef = useRef<ScrollView>(null);
   const completeOnboarding = useAppStore((s) => s.completeOnboarding);
@@ -68,7 +58,7 @@ export default function OnboardingScreen() {
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'bottom']}>
       <Pressable onPress={finish} style={styles.skip} hitSlop={10}>
-        <Text style={styles.skipText}>건너뛰기</Text>
+        <Text style={styles.skipText}>{t('ob.skip')}</Text>
       </Pressable>
 
       <ScrollView
@@ -89,8 +79,8 @@ export default function OnboardingScreen() {
                 <Mascot size={190} pose={slide.pose} />
               </View>
 
-              <Text style={styles.title}>{slide.title}</Text>
-              <Text style={styles.body}>{slide.body}</Text>
+              <Text style={styles.title}>{t(slide.title)}</Text>
+              <Text style={styles.body}>{t(slide.body)}</Text>
             </View>
           </View>
         ))}
@@ -108,7 +98,7 @@ export default function OnboardingScreen() {
           style={({ pressed }) => [styles.cta, pressed && { opacity: 0.85 }]}
         >
           <Text style={styles.ctaText}>
-            {page === SLIDES.length - 1 ? '도서관 둘러보기' : '다음'}
+            {page === SLIDES.length - 1 ? t('ob.start') : t('ob.next')}
           </Text>
         </Pressable>
       </View>

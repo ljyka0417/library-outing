@@ -1,6 +1,7 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useT } from '@/i18n';
 import { colors, radius, spacing, typography } from '@/theme';
 import { openKakaoMap, openNaverMap, type MapTarget } from '@/utils/mapLinks';
 
@@ -19,15 +20,17 @@ import { openKakaoMap, openNaverMap, type MapTarget } from '@/utils/mapLinks';
  *   - 카카오: Kakao Developers > 디자인 가이드의 카카오맵 버튼 에셋
  */
 export function MapButtons({ target }: { target: MapTarget }) {
+  const { t } = useT();
+
   return (
     <View style={styles.row}>
       <MapButton
-        label="네이버 지도"
+        label={t('map.naver')}
         brandColor="#03C75A"
         onPress={() => void openNaverMap(target)}
       />
       <MapButton
-        label="카카오맵"
+        label={t('map.kakao')}
         brandColor="#FEE500"
         markTint={colors.text}
         onPress={() => void openKakaoMap(target)}
@@ -45,20 +48,22 @@ interface ButtonProps {
 }
 
 function MapButton({ label, brandColor, markTint = colors.white, onPress }: ButtonProps) {
+  const { t } = useT();
+
   return (
     <Pressable
       onPress={onPress}
       style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}
       accessibilityRole="button"
-      accessibilityLabel={`${label} 앱에서 이 도서관 위치 보기`}
+      accessibilityLabel={t('map.open', { app: label })}
       // 지도앱으로 화면이 전환되는 동작이라 미리 알려 준다
-      accessibilityHint="지도 앱이 열립니다"
+      accessibilityHint={t('map.opensApp')}
     >
       <BrandMark color={brandColor} tint={markTint} />
 
       <View style={{ flex: 1 }}>
         <Text style={styles.label}>{label}</Text>
-        <Text style={styles.sub}>바로 열기</Text>
+        <Text style={styles.sub}>{t('map.openNow')}</Text>
       </View>
 
       <Ionicons name="open-outline" size={16} color={colors.textMuted} />

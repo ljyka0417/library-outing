@@ -94,7 +94,7 @@ export function LibraryCard({
           hitSlop={10}
           style={styles.heart}
           accessibilityRole="button"
-          accessibilityLabel={isFavorite ? '즐겨찾기 해제' : '즐겨찾기 추가'}
+          accessibilityLabel={isFavorite ? t('lib.favRemove') : t('lib.favAdd')}
         >
           <Ionicons
             name={isFavorite ? 'heart' : 'heart-outline'}

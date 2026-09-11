@@ -21,6 +21,7 @@ import { loanDataVersion } from '@/data/books.mock';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
 import { centered, useLayout } from '@/hooks/useLayout';
+import { translate, useT, type Lang, type MessageKey } from '@/i18n';
 import { colors, radius, shadow, spacing, typography } from '@/theme';
 import { callPhone, openWeb } from '@/utils/mapLinks';
 import { isOpenNow, todayHoursLabel } from '@/utils/openingHours';
@@ -38,13 +39,19 @@ function regionLabel(library: Library) {
  * 데이터가 없어서 시·도 순위를 대신 보여준다. 그럴 땐 지역 이름을 제목에
  * 넣어, 이게 이 도서관의 순위가 아니라는 걸 읽는 사람이 바로 알게 한다.
  */
-function booksHeading(first: Book, library: Library) {
-  if (!first.rank) return { title: '이 주제의 추천 도서' };
+function booksHeading(first: Book, library: Library, lang: Lang) {
+  const tr = (key: MessageKey, vars?: Record<string, string>) => translate(lang, key, vars);
+
+  if (!first.rank) return { title: tr('lib.booksTopic') };
   if (first.rankScope === 'region') {
+    // 지역 이름은 옮기지 않는다. 주소에 적힌 원문이다.
     const where = first.rankRegion ?? library.region.sido;
-    return { title: `${where}에서 많이 빌린 책`, subtitle: '이 지역 도서관들의 대출 순위' };
+    return {
+      title: tr('lib.booksRegion', { where }),
+      subtitle: tr('lib.booksRegionSub'),
+    };
   }
-  return { title: '이 도서관에서 많이 빌린 책', subtitle: '실제 대출 순위' };
+  return { title: tr('lib.booksLibrary'), subtitle: tr('lib.booksLibrarySub') };
 }
 
 /**
@@ -59,6 +66,7 @@ export default function LibraryDetailScreen() {
   const router = useRouter();
   const [expanded, setExpanded] = useState(false);
   const layout = useLayout();
+  const { t, lang } = useT();
 
   const favorites = useAppStore((s) => s.favorites);
   const toggleFavorite = useAppStore((s) => s.toggleFavorite);
@@ -97,11 +105,11 @@ export default function LibraryDetailScreen() {
       <View style={styles.center}>
         <EmptyState
           pose="faceWink"
-          title="도서관 정보를 찾을 수 없어요"
-          description={'QR 코드가 오래되었거나\n주소가 잘못되었을 수 있어요'}
+          title={t('lib.notFoundTitle')}
+          description={t('lib.notFoundBody')}
         />
         <Pressable onPress={() => router.replace('/(tabs)')} style={styles.homeButton}>
-          <Text style={styles.homeButtonText}>홈으로 가기</Text>
+          <Text style={styles.homeButtonText}>{t('lib.goHome')}</Text>
         </Pressable>
       </View>
     );
@@ -121,12 +129,12 @@ export default function LibraryDetailScreen() {
 
         <View style={styles.card}>
           <View style={styles.badgeRow}>
-            {library.isLandmark ? <Badge label="지역 대표" tone="brown" /> : null}
+            {library.isLandmark ? <Badge label={t('lib.landmark')} tone="brown" /> : null}
             {library.categories.map((c) =>
               // 부제(LP·IT 같은 예시어)는 붙이지 않는다. 그 분류의 한 예일 뿐이라
               // 이 도서관 이야기인 것처럼 읽힌다. 특화는 아래 "특화" 줄에 있다.
               CATEGORY_MAP[c] ? (
-                <Badge key={c} label={CATEGORY_MAP[c].name} category={c} />
+                <Badge key={c} label={t(`cat.${c}`)} category={c} />
               ) : null
             )}
           </View>
@@ -137,7 +145,7 @@ export default function LibraryDetailScreen() {
               onPress={() => toggleFavorite(library.id)}
               hitSlop={10}
               accessibilityRole="button"
-              accessibilityLabel={isFav ? '즐겨찾기 해제' : '즐겨찾기 추가'}
+              accessibilityLabel={isFav ? t('lib.favRemove') : t('lib.favAdd')}
             >
               <Ionicons
                 name={isFav ? 'heart' : 'heart-outline'}
@@ -151,9 +159,9 @@ export default function LibraryDetailScreen() {
             <View style={styles.openRow}>
               <View style={[styles.dot, { backgroundColor: open ? colors.open : colors.closed }]} />
               <Text style={[styles.openText, { color: open ? colors.open : colors.closed }]}>
-                {open ? '운영중' : '운영종료'}
+                {open ? t('badge.open') : t('badge.closed')}
               </Text>
-              <Text style={styles.openSub}>· {todayHoursLabel(library.hours)}</Text>
+              <Text style={styles.openSub}>· {todayHoursLabel(library.hours, lang)}</Text>
             </View>
           ) : null}
 
@@ -167,28 +175,28 @@ export default function LibraryDetailScreen() {
               아직 확인되지 않은 항목은 아예 렌더하지 않는다. "정보 없음" 을 줄줄이
               띄우는 것보다 조용히 비는 편이 신뢰를 덜 깎는다. */}
           <View style={styles.infoBlock}>
-            <InfoRow icon="sparkles-outline" label="특화" value={library.specialty} />
+            <InfoRow icon="sparkles-outline" label={t('lib.specialty')} value={library.specialty} />
             <View style={styles.hr} />
-            <InfoRow icon="map-outline" label="지역" value={regionLabel(library)} />
+            <InfoRow icon="map-outline" label={t('lib.region')} value={regionLabel(library)} />
 
             {library.address ? (
               <>
                 <View style={styles.hr} />
-                <InfoRow icon="location-outline" label="위치" value={library.address} />
+                <InfoRow icon="location-outline" label={t('lib.address')} value={library.address} />
               </>
             ) : null}
 
             {library.hours ? (
               <>
                 <View style={styles.hr} />
-                <InfoRow icon="time-outline" label="운영시간" value={library.hours.label} />
+                <InfoRow icon="time-outline" label={t('lib.hours')} value={library.hours.label} />
               </>
             ) : null}
 
             {library.closedDays ? (
               <>
                 <View style={styles.hr} />
-                <InfoRow icon="close-circle-outline" label="휴관일" value={library.closedDays} />
+                <InfoRow icon="close-circle-outline" label={t('lib.closedDays')} value={library.closedDays} />
               </>
             ) : null}
 
@@ -197,7 +205,7 @@ export default function LibraryDetailScreen() {
                 <View style={styles.hr} />
                 <InfoRow
                   icon="call-outline"
-                  label="전화"
+                  label={t('lib.phone')}
                   value={library.phone}
                   onPress={() => void callPhone(library.phone!)}
                 />
@@ -209,7 +217,7 @@ export default function LibraryDetailScreen() {
                 <View style={styles.hr} />
                 <InfoRow
                   icon="globe-outline"
-                  label="홈페이지"
+                  label={t('lib.homepage')}
                   value={library.homepage}
                   onPress={() => void openWeb(library.homepage!)}
                 />
@@ -225,7 +233,7 @@ export default function LibraryDetailScreen() {
 
           {library.description || library.homepage ? (
             <Pressable onPress={() => setExpanded(!expanded)} style={styles.moreButton}>
-              <Text style={styles.moreText}>{expanded ? '접기' : '상세 정보 더보기'}</Text>
+              <Text style={styles.moreText}>{expanded ? t('lib.less') : t('lib.more')}</Text>
               <Ionicons
                 name={expanded ? 'chevron-up' : 'chevron-down'}
                 size={15}
@@ -237,7 +245,7 @@ export default function LibraryDetailScreen() {
 
         {/* 지도 연결 */}
         <View style={styles.section}>
-          <SectionHeader title="지도로 위치 확인" subtitle="쓰시는 지도앱으로 바로 열려요" />
+          <SectionHeader title={t('lib.mapTitle')} subtitle={t('lib.mapSub')} />
           <View style={{ paddingHorizontal: spacing.xl }}>
             <MapButtons
               target={{
@@ -255,7 +263,7 @@ export default function LibraryDetailScreen() {
             {/* 무엇을 집계한 목록인지 제목에서 분명히 밝힌다.
                 도서관 순위·지역 순위·주제 추천은 정보의 무게가 다르고,
                 지역 순위를 그 도서관 순위인 척 보여주면 거짓말이 된다. */}
-            <SectionHeader {...booksHeading(books[0], library)} />
+            <SectionHeader {...booksHeading(books[0], library, lang)} />
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
@@ -272,8 +280,8 @@ export default function LibraryDetailScreen() {
         {library.coords ? (
           <View style={styles.section}>
             <SectionHeader
-              title="도서관 주변 둘러보기"
-              subtitle="책 읽고 나서 들르기 좋은 곳"
+              title={t('lib.nearbyTitle')}
+              subtitle={t('lib.nearbySub')}
             />
             <NearbySection libraryId={library.id} coords={library.coords} />
           </View>
@@ -286,7 +294,7 @@ export default function LibraryDetailScreen() {
             style={({ pressed }) => [styles.checkin, pressed && { opacity: 0.85 }]}
           >
             <Ionicons name="footsteps-outline" size={18} color={colors.primary} />
-            <Text style={styles.checkinText}>여기 다녀왔어요</Text>
+            <Text style={styles.checkinText}>{t('lib.checkin')}</Text>
           </Pressable>
         </View>
         </View>
