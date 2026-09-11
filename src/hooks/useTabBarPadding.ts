@@ -19,5 +19,5 @@ export const TAB_BAR = {
 export function useTabBarPadding() {
   const insets = useSafeAreaInsets();
   const bottom = Math.max(insets.bottom, TAB_BAR.minBottom);
-  return TAB_BAR.height + bottom + 8;
+  return TAB_BAR.height + bottom + 16;
 }

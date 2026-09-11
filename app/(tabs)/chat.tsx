@@ -109,7 +109,7 @@ export default function ChatScreen() {
           ref={listRef}
           data={messages}
           keyExtractor={(m) => m.id}
-          contentContainerStyle={[styles.list, { paddingBottom: tabPad }]}
+          contentContainerStyle={styles.list}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
           onContentSizeChange={scrollToEnd}
@@ -145,7 +145,7 @@ export default function ChatScreen() {
           </ScrollView>
         ) : null}
 
-        <View style={styles.inputRow}>
+        <View style={[styles.inputRow, { paddingBottom: tabPad }]}>
           <TextInput
             value={input}
             onChangeText={setInput}
