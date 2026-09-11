@@ -19,11 +19,21 @@ interface AppState {
   visits: VisitRecord[];
   hasSeenOnboarding: boolean;
 
+  /**
+   * 유리 효과 시험 스위치.
+   *
+   * **일부러 저장하지 않는다.** 유리는 네이티브 기능이라 기기에 따라 화면을
+   * 못 그릴 수 있는데, 켜진 상태가 저장되면 앱을 껐다 켜도 계속 죽어서
+   * 빠져나올 방법이 없다. 저장하지 않으면 다시 켤 때 꺼진 채로 시작한다.
+   */
+  glassTest: boolean;
+
   toggleFavorite: (libraryId: string) => void;
   isFavorite: (libraryId: string) => boolean;
   pushRecent: (libraryId: string) => void;
   addVisit: (libraryId: string) => void;
   completeOnboarding: () => void;
+  setGlassTest: (on: boolean) => void;
   resetAll: () => void;
 
   /** persist 복원 완료 여부. 스플래시를 언제 내릴지 판단하는 데 쓴다. */
@@ -38,6 +48,7 @@ export const useAppStore = create<AppState>()(
       recentLibraryIds: [],
       visits: [],
       hasSeenOnboarding: false,
+      glassTest: false,
       _hydrated: false,
 
       toggleFavorite: (libraryId) =>
@@ -64,6 +75,16 @@ export const useAppStore = create<AppState>()(
         })),
 
       completeOnboarding: () => set({ hasSeenOnboarding: true }),
+
+      /**
+       * 유리 효과를 켜고 끈다.
+       *
+       * **일부러 저장하지 않는다.** 유리는 네이티브 기능이라 기기에 따라
+       * 화면을 못 그릴 수 있는데, 그 상태가 저장되면 앱을 껐다 켜도 계속
+       * 죽어서 빠져나올 방법이 없다. 저장하지 않으면 다시 켤 때 꺼진 상태로
+       * 시작하므로 언제든 되돌아온다.
+       */
+      setGlassTest: (on) => set({ glassTest: on }),
 
       resetAll: () =>
         set({ favorites: [], recentLibraryIds: [], visits: [], hasSeenOnboarding: false }),

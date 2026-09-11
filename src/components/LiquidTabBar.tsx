@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Animated, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { BottomTabBarProps } from 'expo-router/build/layouts/Tabs';
+import { GlassSurface } from '@/components/GlassSurface';
+import { useAppStore } from '@/store/useAppStore';
 import { TAB_BAR } from '@/hooks/useTabBarPadding';
 import { colors, typography } from '@/theme';
 
@@ -22,6 +24,7 @@ import { colors, typography } from '@/theme';
 export function LiquidTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
   const insets = useSafeAreaInsets();
   const bottom = Math.max(insets.bottom, TAB_BAR.minBottom);
+  const glass = useAppStore((st) => st.glassTest);
 
   /** 알약 안쪽 너비. 칸 너비를 나누려면 실제로 그려진 뒤에 재야 한다. */
   const [innerWidth, setInnerWidth] = useState(0);
@@ -48,7 +51,14 @@ export function LiquidTabBar({ state, descriptors, navigation }: BottomTabBarPro
       onLayout={(e) => setInnerWidth(e.nativeEvent.layout.width - PAD * 2)}
       pointerEvents="box-none"
     >
-      <View style={styles.row}>
+      {/* 그림자와 잘라내기를 한 겹에 같이 두면 iOS 에서 그림자가 잘린다.
+          바깥은 그림자만, 안쪽은 둥글게 자르는 역할만 맡는다. */}
+      <View style={[styles.shadowHost, glass && styles.shadowHostGlass]}>
+        <View style={[styles.row, glass && styles.rowGlass]}>
+          {/* 유리를 켰을 때만 뒤가 비친다. 스위치는 저장되지 않으므로
+              혹시 여기서 죽더라도 앱을 껐다 켜면 꺼진 상태로 돌아온다. */}
+          {glass ? <GlassSurface /> : null}
+
         {/* 방울. 칸 뒤에 깔리므로 버튼보다 먼저 그린다. */}
         {itemWidth > 0 ? (
           <Animated.View
@@ -103,6 +113,7 @@ export function LiquidTabBar({ state, descriptors, navigation }: BottomTabBarPro
             </Pressable>
           );
         })}
+        </View>
       </View>
     </View>
   );
@@ -119,19 +130,31 @@ const styles = StyleSheet.create({
     left: TAB_BAR.side,
     right: TAB_BAR.side,
   },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: TAB_BAR.height,
-    paddingHorizontal: PAD,
+  shadowHost: {
     borderRadius: TAB_BAR.height / 2,
-    backgroundColor: colors.surface,
     // 떠 있어 보이게 하는 그림자. 진하면 무거워 보여 옅게 깐다.
     shadowColor: '#2E2A26',
     shadowOpacity: 0.12,
     shadowRadius: 16,
     shadowOffset: { width: 0, height: 6 },
     elevation: 12,
+  },
+  shadowHostGlass: {
+    // 유리 위에 짙은 그림자가 겹치면 탁해 보인다
+    shadowOpacity: 0.08,
+  },
+  row: {
+    overflow: 'hidden',
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: TAB_BAR.height,
+    paddingHorizontal: PAD,
+    borderRadius: TAB_BAR.height / 2,
+    backgroundColor: colors.surface,
+  },
+  rowGlass: {
+    // 유리가 뒤를 그리므로 판 색을 비운다. 색을 남기면 불투명해져 안 비친다.
+    backgroundColor: 'transparent',
   },
   blob: {
     position: 'absolute',

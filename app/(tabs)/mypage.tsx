@@ -9,6 +9,7 @@ import { useAppStore } from '@/store/useAppStore';
 import { nearbyDataStatus } from '@/api/nearbyApi';
 import { dataCompleteness } from '@/data/libraries.mock';
 import { loanBookStatus } from '@/data/books.mock';
+import { glassSupport } from '@/components/GlassSurface';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { colors, radius, spacing, typography } from '@/theme';
 
@@ -71,9 +72,52 @@ export default function MyPageScreen() {
         </View>
 
         {/* 개발용 데이터 수집 현황. __DEV__ 라 배포 빌드에는 나오지 않는다. */}
+        {__DEV__ ? <GlassTest /> : null}
         {__DEV__ ? <DataStatus /> : null}
       </ScrollView>
     </SafeAreaView>
+  );
+}
+
+/**
+ * 유리 효과 시험 스위치 (개발 중에만 표시).
+ *
+ * 유리는 네이티브 기능이라 기기에서만 진짜 모습이 나온다. 그런데 전에
+ * 바로 켜 두었다가 앱이 켜지자마자 죽어 되돌릴 방법이 없었다.
+ * 그래서 앱 안에서 켜고 끄게 하고, 이 값은 **저장하지 않는다.**
+ * 켜서 문제가 생겨도 앱을 껐다 켜면 꺼진 상태로 돌아온다.
+ */
+function GlassTest() {
+  const glass = useAppStore((s) => s.glassTest);
+  const setGlass = useAppStore((s) => s.setGlassTest);
+
+  const support =
+    glassSupport === 'liquid'
+      ? '이 기기는 진짜 유리(Liquid Glass)를 씁니다'
+      : glassSupport === 'blur'
+        ? '이 기기는 흐림 처리로 대신합니다'
+        : '이 기기는 유리를 쓸 수 없어 반투명으로 대신합니다';
+
+  return (
+    <Pressable
+      onPress={() => setGlass(!glass)}
+      style={({ pressed }) => [styles.devBox, pressed && { opacity: 0.7 }]}
+      accessibilityRole="switch"
+      accessibilityState={{ checked: glass }}
+    >
+      <View style={styles.glassRow}>
+        <Ionicons
+          name={glass ? 'toggle' : 'toggle-outline'}
+          size={26}
+          color={glass ? colors.primary : colors.textMuted}
+        />
+        <View style={{ flex: 1 }}>
+          <Text style={styles.devTitle}>탭바 유리 효과 {glass ? '켜짐' : '꺼짐'} (시험)</Text>
+          <Text style={styles.devText}>{support}</Text>
+          <Text style={styles.devText}>앱을 껐다 켜면 다시 꺼집니다</Text>
+        </View>
+      </View>
+    </Pressable>
   );
 }
 
@@ -197,6 +241,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surfaceAlt,
     gap: 2,
   },
+  glassRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.md },
   devTitle: { ...typography.tiny, color: colors.textSub, fontWeight: '700', marginBottom: 2 },
   devText: { ...typography.tiny, color: colors.textMuted },
 });
