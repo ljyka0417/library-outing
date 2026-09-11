@@ -18,7 +18,7 @@ import { Mascot } from '@/components/Mascot';
 import { BookCard } from '@/components/BookCard';
 import { LibraryCard } from '@/components/LibraryCard';
 import { useAppStore } from '@/store/useAppStore';
-import { ask, STARTER_QUESTIONS, type Answer } from '@/utils/assistant';
+import { ask, starterQuestions, type Answer } from '@/utils/assistant';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { centered, useLayout } from '@/hooks/useLayout';
 import { useT } from '@/i18n';
@@ -33,6 +33,8 @@ interface Message {
   answer?: Answer;
 }
 
+/* 인사말은 화면에서 t('chat.greeting') 으로 갈아 끼운다. 말을 바꾸면
+   그 자리에서 같이 바뀌어야 하기 때문이다. 여기 text 는 쓰이지 않는다. */
 const GREETING: Message = {
   id: 'greeting',
   role: 'dalgomi',
@@ -76,7 +78,7 @@ export default function ChatScreen() {
         { id: `u-${Date.now()}`, role: 'user', text: question },
       ]);
 
-      const answer = await ask(question);
+      const answer = await ask(question, lang);
 
       setMessages((prev) => [
         ...prev,
@@ -84,7 +86,7 @@ export default function ChatScreen() {
       ]);
       setThinking(false);
     },
-    [thinking]
+    [thinking, lang]
   );
 
   // 새 말풍선이 생기면 아래로 붙인다
@@ -92,7 +94,7 @@ export default function ChatScreen() {
 
   const lastSuggestions =
     messages[messages.length - 1]?.answer?.suggestions ??
-    (messages.length === 1 ? STARTER_QUESTIONS : undefined);
+    (messages.length === 1 ? starterQuestions(lang) : undefined);
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
@@ -107,12 +109,12 @@ export default function ChatScreen() {
         </View>
       </View>
 
-      {/* 달곰이는 한국어 질문만 알아듣는다. 영어로 물었다가 "모르겠어요" 를
-          받으면 고장난 것처럼 보이므로, 묻기 전에 미리 말해 준다. */}
+      {/* 달곰이는 네 가지 말을 알아듣지만 도서관 이름만은 한글이다.
+          "Seoul Library" 라고 치면 못 찾으므로 미리 알려 준다. */}
       {lang !== 'ko' ? (
         <View style={[styles.notice, { paddingHorizontal: layout.gutter }]}>
           <Ionicons name="information-circle-outline" size={14} color={colors.textSub} />
-          <Text style={styles.noticeText}>{t('chat.koreanOnly')}</Text>
+          <Text style={styles.noticeText}>{t('chat.nameHint')}</Text>
         </View>
       ) : null}
 
@@ -157,7 +159,7 @@ export default function ChatScreen() {
             contentContainerStyle={[styles.suggestRow, { paddingHorizontal: layout.gutter }]}
             style={{ flexGrow: 0, flexShrink: 0 }}
           >
-            {lastSuggestions.map((s) => (
+            {lastSuggestions.map((s: string) => (
               <Pressable key={s} onPress={() => void send(s)} style={styles.suggestChip}>
                 <Text style={styles.suggestText}>{s}</Text>
               </Pressable>
@@ -169,7 +171,7 @@ export default function ChatScreen() {
           <TextInput
             value={input}
             onChangeText={setInput}
-            placeholder="어린이 도서관 추천해줘"
+            placeholder={t('bot.sugKids')}
             placeholderTextColor={colors.textMuted}
             style={styles.input}
             returnKeyType="send"

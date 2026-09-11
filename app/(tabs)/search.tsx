@@ -6,7 +6,7 @@ import { LibraryCard } from '@/components/LibraryCard';
 import { SearchBar } from '@/components/SearchBar';
 import { Chip, EmptyState } from '@/components/common';
 import { CATEGORIES, CATEGORY_MAP, SIDO_LIST } from '@/data/categories';
-import { useT } from '@/i18n';
+import { regionName, useT } from '@/i18n';
 import { libraryApi } from '@/api/libraryApi';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
@@ -27,7 +27,7 @@ export default function SearchScreen() {
   const [sido, setSido] = useState<string | undefined>();
   const [openNow, setOpenNow] = useState(false);
   const tabPad = useTabBarPadding();
-  const { t } = useT();
+  const { t, lang } = useT();
   const layout = useLayout();
 
   /**
@@ -142,7 +142,8 @@ export default function SearchScreen() {
         {SIDO_LIST.map((s) => (
           <Chip
             key={s}
-            label={s}
+            /* 보이는 글자만 그 말로 바꾼다. 걸러 내는 값 s 는 한국어 원문이다 */
+            label={regionName(lang, s)}
             selected={sido === s}
             onPress={() => setSido(sido === s ? undefined : s)}
           />

@@ -111,7 +111,7 @@ const ko = {
   'chat.send': '질문 보내기',
   'chat.greeting':
     '안녕하세요, 달곰이예요.\n전국 도서관 132곳을 알고 있어요. 무엇이든 물어보세요.\n\n저는 이 앱에 담긴 정보로만 답해요. 모르는 건 지어내지 않고 모른다고 말할게요.',
-  'chat.koreanOnly': '',
+  'chat.nameHint': '',
 
   'lib.notFoundTitle': '도서관 정보를 찾을 수 없어요',
   'lib.notFoundBody': 'QR 코드가 오래되었거나\n주소가 잘못되었을 수 있어요',
@@ -167,6 +167,78 @@ const ko = {
   'ob.body2': '가이드북에서 마음에 드는 도서관을 찾았다면\n옆에 있는 QR 코드를 찍어 보세요.',
   'ob.title3': '나들이 코스로 완성',
   'ob.body3': '지도앱으로 길을 찾고,\n주변 맛집·카페·볼거리까지 한 번에.',
+
+  /*
+   * 달곰이가 하는 말.
+   *
+   * {nameTopic} 은 한국어에만 있다. "서울도서관은 / 강북도서관은" 처럼
+   * 받침에 따라 조사가 갈리는데, 그 판단은 코드가 해서 넣어 준다.
+   * 다른 말은 그냥 {name} 을 쓴다.
+   */
+  'bot.help':
+    '저는 이 앱에 담긴 132곳 정보로만 답해요. 이런 걸 물어보세요.\n\n· 어린이 도서관 추천해줘\n· 부산에 있는 도서관\n· 지금 문 연 도서관\n· 서울도서관 몇 시까지 해?\n· 한밭도서관 주변 카페\n· 울산종갓집도서관에서 많이 빌린 책\n\n모르는 건 지어내지 않고 모른다고 말할게요.',
+  'bot.hello': '안녕하세요, 달곰이예요. 전국 도서관 132곳을 알고 있어요. 무엇을 찾아드릴까요?',
+  'bot.thanks': '천만에요! 또 궁금한 게 있으면 물어보세요.',
+
+  'bot.noCoords': '{nameTopic} 아직 좌표를 확인하지 못해서 주변을 찾아드릴 수 없어요.',
+  'bot.nearbyNone': '{name} 주변에서 찾은 {kindSubj} 아직 없어요.',
+  'bot.nearbyFound': '{name} 주변 {kind} {n}곳이에요. 가까운 순서예요.',
+
+  'bot.hoursUnknown':
+    '{name}의 운영시간은 아직 확인하지 못했어요. 확인되지 않은 시간을 알려드리면 헛걸음하실 수 있어서 비워 두고 있어요. 전화로 확인하시는 게 가장 정확해요.',
+  'bot.phoneLine': '\n전화: {phone}',
+  'bot.hoursMain': '{nameTopic} {label}.',
+  'bot.openYes': ' 지금은 열려 있어요.',
+  'bot.openNo': ' 지금은 운영시간이 아니에요.',
+  'bot.closedLine': '\n휴관일: {days}',
+
+  'bot.phoneIs': '{name} 전화번호는 {phone}이에요.',
+  'bot.phoneUnknown': '{name}의 전화번호는 아직 확인하지 못했어요.',
+  'bot.closedIs': '{name} 휴관일은 {days}이에요.',
+  'bot.closedUnknown': '{name}의 휴관일은 아직 확인하지 못했어요.',
+  'bot.addressIs': '{nameTopic} {address}에 있어요. 카드를 누르면 지도앱으로 바로 열 수 있어요.',
+  'bot.addressUnknown': '{name}의 주소는 아직 확인하지 못했어요.',
+
+  'bot.booksNone':
+    '{name}의 대출 순위는 아직 없어요. 정보나루에 등록되지 않은 도서관이라 대출 데이터를 받아올 수 없어요.',
+  'bot.booksRegion': '{where} 지역에서 많이 빌린 책이에요.',
+  'bot.booksLibrary': '{name}에서 많이 빌린 책이에요.',
+
+  'bot.sumFocus': '{sido} · {specialty} 특화 도서관이에요.',
+  'bot.sumAddress': '주소는 {address}.',
+  'bot.sumHours': '운영시간은 {label}.',
+  'bot.sumHoursUnknown': '운영시간은 아직 확인 중이에요.',
+
+  'bot.labelBoth': '{sido} {cat} 도서관',
+  'bot.labelCat': '{cat} 도서관',
+  'bot.labelSido': '{sido} 도서관',
+  'bot.labelAny': '도서관',
+  'bot.browseNone': '{labelTopic} 찾지 못했어요.',
+  'bot.browseNoneOpen':
+    '\n운영시간을 확인한 곳이 132곳 중 72곳이라, 나머지는 지금 열려 있는지 판단할 수 없어 빠져 있어요.',
+  'bot.browseHeadOpen': '지금 열려 있는 {label} {n}곳이에요.',
+  'bot.browseHead': '{label} {n}곳이 있어요.',
+  'bot.browseTail': '\n그중 {n}곳을 먼저 보여드릴게요.',
+
+  'bot.needLibrary': '어느 도서관 주변인지 알려주시면 찾아드릴게요. "한밭도서관 주변 카페" 처럼요.',
+  'bot.notUnderstood': '"{q}" 는 제가 아직 이해하지 못했어요.',
+
+  'bot.kindCafe': '카페',
+  'bot.kindFood': '맛집',
+  'bot.kindCulture': '문화·볼거리',
+
+  /* 누르면 그대로 질문으로 보내지므로, 달곰이가 알아듣는 낱말로 쓴다 */
+  'bot.sugKids': '어린이 도서관 추천해줘',
+  'bot.sugOpen': '지금 문 연 도서관',
+  'bot.sugSeoul': '서울 도서관',
+  'bot.sugMusic': '음악 도서관',
+  'bot.sugHours': '{name} 운영시간',
+  'bot.sugBooks': '{name} 인기 도서',
+  'bot.sugCafe': '{name} 주변 카페',
+  'bot.sugFood': '{name} 주변 맛집',
+  'bot.sugCatSido': '{cat} 도서관 서울',
+  'bot.sugSeoulCafe': '서울도서관 주변 카페',
+  'bot.sugBusanFood': '부산도서관 주변 맛집',
 } as const;
 
 export type MessageKey = keyof typeof ko;
@@ -254,7 +326,7 @@ const en: Messages = {
   'chat.send': 'Send question',
   'chat.greeting':
     'Hello, I am Dalgomi.\nI know 132 libraries across Korea. Ask me anything.\n\nI answer only from what is in this app. If I do not know something, I will say so instead of making it up.',
-  'chat.koreanOnly': 'Dalgomi understands Korean questions only for now',
+  'chat.nameHint': 'Ask in English. Library names stay Korean — type them as they appear, like 서울도서관.',
 
   'lib.notFoundTitle': 'Library not found',
   'lib.notFoundBody': 'The QR code may be out of date,\nor the address may be wrong',
@@ -312,6 +384,74 @@ const en: Messages = {
   'ob.title3': 'Make it a day out',
   'ob.body3':
     'Get directions in your map app,\nplus places to eat, cafes and sights nearby.',
+
+  /* 도서관 이름은 한국어 그대로 쓴다. 예시에도 한글 이름을 남겨
+     "이름은 한글로 적으면 된다" 를 자연스럽게 알려 준다. */
+  'bot.help':
+    'I answer only from the 132 libraries in this app. Try asking things like this.\n\n· Recommend kids libraries\n· Libraries in Busan\n· Libraries open now\n· 서울도서관 hours\n· Cafes near 한밭도서관\n· Popular books at 울산종갓집도서관\n\nIf I do not know something, I will say so instead of making it up.',
+  'bot.hello': 'Hello, I am Dalgomi. I know 132 libraries across Korea. What can I find for you?',
+  'bot.thanks': 'You are welcome! Ask me anything else.',
+
+  'bot.noCoords':
+    'We have not confirmed the coordinates of {name} yet, so I cannot look up what is nearby.',
+  'bot.nearbyNone': 'I have not found any {kind} near {name} yet.',
+  'bot.nearbyFound': '{n} {kind} near {name}, closest first.',
+
+  'bot.hoursUnknown':
+    'The opening hours for {name} are not confirmed yet. Telling you unconfirmed hours could send you there for nothing, so I leave them blank. Calling is the surest way to check.',
+  'bot.phoneLine': '\nPhone: {phone}',
+  'bot.hoursMain': '{name}: {label}.',
+  'bot.openYes': ' It is open right now.',
+  'bot.openNo': ' It is not open right now.',
+  'bot.closedLine': '\nClosed: {days}',
+
+  'bot.phoneIs': 'The phone number for {name} is {phone}.',
+  'bot.phoneUnknown': 'The phone number for {name} is not confirmed yet.',
+  'bot.closedIs': '{name} is closed on {days}.',
+  'bot.closedUnknown': 'The closing days for {name} are not confirmed yet.',
+  'bot.addressIs': '{name} is at {address}. Tap the card to open it in a map app.',
+  'bot.addressUnknown': 'The address for {name} is not confirmed yet.',
+
+  'bot.booksNone':
+    'There is no loan ranking for {name} yet. It is not registered with the national library data service, so loan data cannot be fetched.',
+  'bot.booksRegion': 'The most borrowed books in {where}.',
+  'bot.booksLibrary': 'The most borrowed books at {name}.',
+
+  'bot.sumFocus': 'A library in {sido}. Focus: {specialty}.',
+  'bot.sumAddress': 'Address: {address}.',
+  'bot.sumHours': 'Hours: {label}.',
+  'bot.sumHoursUnknown': 'Hours are not confirmed yet.',
+
+  'bot.labelBoth': '{cat} libraries in {sido}',
+  'bot.labelCat': '{cat} libraries',
+  'bot.labelSido': 'libraries in {sido}',
+  'bot.labelAny': 'libraries',
+  'bot.browseNone': 'I could not find any {label}.',
+  'bot.browseNoneOpen':
+    '\nOpening hours are confirmed for only 72 of the 132 libraries, so the rest cannot be judged as open and are left out.',
+  'bot.browseHeadOpen': '{n} {label} open right now.',
+  'bot.browseHead': 'There are {n} {label}.',
+  'bot.browseTail': '\nHere are the first {n}.',
+
+  'bot.needLibrary':
+    'Tell me which library you mean and I will look. For example, "Cafes near 한밭도서관".',
+  'bot.notUnderstood': 'I do not understand "{q}" yet.',
+
+  'bot.kindCafe': 'cafes',
+  'bot.kindFood': 'places to eat',
+  'bot.kindCulture': 'culture and sights',
+
+  'bot.sugKids': 'Recommend kids libraries',
+  'bot.sugOpen': 'Libraries open now',
+  'bot.sugSeoul': 'Libraries in Seoul',
+  'bot.sugMusic': 'Music libraries',
+  'bot.sugHours': '{name} hours',
+  'bot.sugBooks': 'Popular books at {name}',
+  'bot.sugCafe': 'Cafes near {name}',
+  'bot.sugFood': 'Places to eat near {name}',
+  'bot.sugCatSido': '{cat} libraries in Seoul',
+  'bot.sugSeoulCafe': 'Cafes near 서울도서관',
+  'bot.sugBusanFood': 'Places to eat near 부산도서관',
 };
 
 const ja: Messages = {
@@ -396,7 +536,7 @@ const ja: Messages = {
   'chat.send': '質問を送る',
   'chat.greeting':
     'こんにちは、ダルゴミです。\n韓国じゅうの図書館132館を知っています。何でも聞いてください。\n\n私はこのアプリに入っている情報だけで答えます。分からないことは作り話をせず、分からないと言います。',
-  'chat.koreanOnly': 'ダルゴミはいまのところ韓国語の質問だけ理解します',
+  'chat.nameHint': '日本語で聞けます。図書館名は韓国語のままなので 서울도서관 のように入力してください。',
 
   'lib.notFoundTitle': '図書館の情報が見つかりません',
   'lib.notFoundBody': 'QRコードが古いか、\n住所が間違っている可能性があります',
@@ -453,6 +593,72 @@ const ja: Messages = {
   'ob.body2': 'ガイドブックで気になる図書館を見つけたら\n横のQRコードを読み取ってください。',
   'ob.title3': 'おでかけコースに',
   'ob.body3': '地図アプリで道を調べて、\n周辺のグルメ・カフェ・見どころまで一度に。',
+
+  'bot.help':
+    'このアプリに入っている132館の情報だけで答えます。こんなふうに聞いてください。\n\n· こども図書館のおすすめ\n· 釜山の図書館\n· 今開いている図書館\n· 서울도서관 の開館時間\n· 한밭도서관 の周辺カフェ\n· 울산종갓집도서관 でよく借りられた本\n\n分からないことは作り話をせず、分からないと言います。',
+  'bot.hello':
+    'こんにちは、ダルゴミです。韓国じゅうの図書館132館を知っています。何をお探しですか？',
+  'bot.thanks': 'どういたしまして！ほかにも気になることがあれば聞いてください。',
+
+  'bot.noCoords': '{name} はまだ座標を確認できていないので、周辺をお探しできません。',
+  'bot.nearbyNone': '{name} の周辺で見つかった{kind}はまだありません。',
+  'bot.nearbyFound': '{name} の周辺の{kind}が{n}件です。近い順です。',
+
+  'bot.hoursUnknown':
+    '{name} の開館時間はまだ確認できていません。確認していない時間をお伝えすると無駄足になりかねないので、空けてあります。電話で確かめるのが確実です。',
+  'bot.phoneLine': '\n電話: {phone}',
+  'bot.hoursMain': '{name} は {label}。',
+  'bot.openYes': ' いまは開いています。',
+  'bot.openNo': ' いまは開館時間ではありません。',
+  'bot.closedLine': '\n休館日: {days}',
+
+  'bot.phoneIs': '{name} の電話番号は {phone} です。',
+  'bot.phoneUnknown': '{name} の電話番号はまだ確認できていません。',
+  'bot.closedIs': '{name} の休館日は {days} です。',
+  'bot.closedUnknown': '{name} の休館日はまだ確認できていません。',
+  'bot.addressIs': '{name} は {address} にあります。カードを押すと地図アプリで開けます。',
+  'bot.addressUnknown': '{name} の住所はまだ確認できていません。',
+
+  'bot.booksNone':
+    '{name} の貸出ランキングはまだありません。図書館情報ナルに登録されていない図書館なので、貸出データを取得できません。',
+  'bot.booksRegion': '{where} 地域でよく借りられた本です。',
+  'bot.booksLibrary': '{name} でよく借りられた本です。',
+
+  'bot.sumFocus': '{sido} の図書館です。特化: {specialty}。',
+  'bot.sumAddress': '住所は {address}。',
+  'bot.sumHours': '開館時間は {label}。',
+  'bot.sumHoursUnknown': '開館時間はまだ確認中です。',
+
+  'bot.labelBoth': '{sido}の{cat}図書館',
+  'bot.labelCat': '{cat}図書館',
+  'bot.labelSido': '{sido}の図書館',
+  'bot.labelAny': '図書館',
+  'bot.browseNone': '{label}は見つかりませんでした。',
+  'bot.browseNoneOpen':
+    '\n開館時間を確認できたのは132館のうち72館なので、残りはいま開いているか判断できず外れています。',
+  'bot.browseHeadOpen': 'いま開いている{label}が{n}館です。',
+  'bot.browseHead': '{label}が{n}館あります。',
+  'bot.browseTail': '\nそのうち{n}館を先にお見せします。',
+
+  'bot.needLibrary':
+    'どの図書館の周辺かを教えていただければお探しします。「한밭도서관 の周辺カフェ」のように。',
+  'bot.notUnderstood': '「{q}」はまだ理解できませんでした。',
+
+  'bot.kindCafe': 'カフェ',
+  'bot.kindFood': 'グルメ',
+  'bot.kindCulture': '文化・見どころ',
+
+  'bot.sugKids': 'こども図書館のおすすめ',
+  'bot.sugOpen': '今開いている図書館',
+  'bot.sugSeoul': 'ソウルの図書館',
+  'bot.sugMusic': '音楽の図書館',
+  'bot.sugHours': '{name} の開館時間',
+  'bot.sugBooks': '{name} の人気の本',
+  'bot.sugCafe': '{name} の周辺カフェ',
+  'bot.sugFood': '{name} の周辺グルメ',
+  'bot.sugCatSido': 'ソウルの{cat}図書館',
+  'bot.sugSeoulCafe': '서울도서관 の周辺カフェ',
+  'bot.sugBusanFood': '부산도서관 の周辺グルメ',
 };
 
 const zh: Messages = {
@@ -536,7 +742,7 @@ const zh: Messages = {
   'chat.send': '发送问题',
   'chat.greeting':
     '你好，我是达尔戈米。\n我知道韩国各地的 132 家图书馆，什么都可以问我。\n\n我只根据这个应用里的资料回答。不知道的事情我不会编造，会直接说不知道。',
-  'chat.koreanOnly': '达尔戈米目前只能听懂韩语提问',
+  'chat.nameHint': '可以用中文提问。图书馆名称保持韩文，请照原样输入，例如 서울도서관。',
 
   'lib.notFoundTitle': '找不到这家图书馆的资料',
   'lib.notFoundBody': '二维码可能已过期，\n或者地址有误',
@@ -592,9 +798,113 @@ const zh: Messages = {
   'ob.body2': '在导览手册里找到喜欢的图书馆，\n扫描旁边的二维码就好。',
   'ob.title3': '凑成一天的行程',
   'ob.body3': '用地图应用找路，\n周边美食、咖啡和景点一次搞定。',
+
+  'bot.help':
+    '我只根据这个应用里的 132 家图书馆资料回答。可以这样问我。\n\n· 推荐儿童图书馆\n· 釜山的图书馆\n· 现在开放的图书馆\n· 서울도서관 开放时间\n· 한밭도서관 周边咖啡\n· 울산종갓집도서관 借阅最多的书\n\n不知道的事情我不会编造，会直接说不知道。',
+  'bot.hello': '你好，我是达尔戈米。我知道韩国各地的 132 家图书馆。想找什么呢？',
+  'bot.thanks': '不客气！还有想问的随时说。',
+
+  'bot.noCoords': '{name} 的坐标还没有确认，所以无法查找周边。',
+  'bot.nearbyNone': '{name} 周边还没有找到{kind}。',
+  'bot.nearbyFound': '{name} 周边的{kind}共 {n} 处，按距离由近到远。',
+
+  'bot.hoursUnknown':
+    '{name} 的开放时间还没有确认。告诉您未经确认的时间可能让您白跑一趟，所以这里留空。打电话确认最准确。',
+  'bot.phoneLine': '\n电话: {phone}',
+  'bot.hoursMain': '{name}：{label}。',
+  'bot.openYes': ' 现在开放中。',
+  'bot.openNo': ' 现在不在开放时间内。',
+  'bot.closedLine': '\n闭馆日: {days}',
+
+  'bot.phoneIs': '{name} 的电话是 {phone}。',
+  'bot.phoneUnknown': '{name} 的电话还没有确认。',
+  'bot.closedIs': '{name} 的闭馆日是 {days}。',
+  'bot.closedUnknown': '{name} 的闭馆日还没有确认。',
+  'bot.addressIs': '{name} 位于 {address}。点击卡片可以直接用地图应用打开。',
+  'bot.addressUnknown': '{name} 的地址还没有确认。',
+
+  'bot.booksNone':
+    '{name} 还没有借阅排行。这家图书馆没有在图书馆信息纳鲁登记，无法取得借阅数据。',
+  'bot.booksRegion': '{where} 地区借阅最多的书。',
+  'bot.booksLibrary': '{name} 借阅最多的书。',
+
+  'bot.sumFocus': '位于{sido}的图书馆。特色：{specialty}。',
+  'bot.sumAddress': '地址：{address}。',
+  'bot.sumHours': '开放时间：{label}。',
+  'bot.sumHoursUnknown': '开放时间还在确认中。',
+
+  'bot.labelBoth': '{sido}的{cat}图书馆',
+  'bot.labelCat': '{cat}图书馆',
+  'bot.labelSido': '{sido}的图书馆',
+  'bot.labelAny': '图书馆',
+  'bot.browseNone': '没有找到{label}。',
+  'bot.browseNoneOpen':
+    '\n132 家中只有 72 家确认了开放时间，其余无法判断现在是否开放，因此没有列入。',
+  'bot.browseHeadOpen': '现在开放的{label}共 {n} 家。',
+  'bot.browseHead': '{label}共 {n} 家。',
+  'bot.browseTail': '\n先给您看其中 {n} 家。',
+
+  'bot.needLibrary': '告诉我是哪家图书馆的周边，我就去找。例如「한밭도서관 周边咖啡」。',
+  'bot.notUnderstood': '我还听不懂「{q}」。',
+
+  'bot.kindCafe': '咖啡',
+  'bot.kindFood': '美食',
+  'bot.kindCulture': '文化景点',
+
+  'bot.sugKids': '推荐儿童图书馆',
+  'bot.sugOpen': '现在开放的图书馆',
+  'bot.sugSeoul': '首尔的图书馆',
+  'bot.sugMusic': '音乐图书馆',
+  'bot.sugHours': '{name} 开放时间',
+  'bot.sugBooks': '{name} 热门图书',
+  'bot.sugCafe': '{name} 周边咖啡',
+  'bot.sugFood': '{name} 周边美食',
+  'bot.sugCatSido': '首尔的{cat}图书馆',
+  'bot.sugSeoulCafe': '서울도서관 周边咖啡',
+  'bot.sugBusanFood': '부산도서관 周边美食',
 };
 
 const DICT: Record<Lang, Messages> = { ko, en, ja, zh };
+
+/**
+ * 지역 이름.
+ *
+ * 도서관 이름과 달리 지명에는 이미 정해진 표기가 있다. 서울은 Seoul 이고
+ * 首尔이고 ソウル이다. 지어내는 게 아니라 있는 이름을 쓰는 것이라
+ * 옮겨도 된다.
+ *
+ * ⚠️ 여기서 바꾸는 것은 **보여 주는 글자뿐**이다. 걸러 내는 값은 한국어
+ *   원문 그대로다. 도서관 데이터의 region.sido 가 한국어이기 때문이다.
+ *
+ * 주소 전체는 옮기지 않는다. "Seoul 중구 세종대로" 처럼 반만 옮긴 주소는
+ * 물어볼 때도 찾아갈 때도 쓸모가 없다.
+ */
+const REGION_NAMES: Record<Lang, Record<string, string>> = {
+  ko: {},
+  en: {
+    서울: 'Seoul', 경기: 'Gyeonggi', 인천: 'Incheon', 강원: 'Gangwon',
+    충청: 'Chungcheong', 대전: 'Daejeon', 세종: 'Sejong', 전라: 'Jeolla',
+    광주: 'Gwangju', 경상: 'Gyeongsang', 대구: 'Daegu', 울산: 'Ulsan',
+    부산: 'Busan', 제주: 'Jeju',
+  },
+  ja: {
+    서울: 'ソウル', 경기: '京畿', 인천: '仁川', 강원: '江原',
+    충청: '忠清', 대전: '大田', 세종: '世宗', 전라: '全羅',
+    광주: '光州', 경상: '慶尚', 대구: '大邱', 울산: '蔚山',
+    부산: '釜山', 제주: '済州',
+  },
+  zh: {
+    서울: '首尔', 경기: '京畿', 인천: '仁川', 강원: '江原',
+    충청: '忠清', 대전: '大田', 세종: '世宗', 전라: '全罗',
+    광주: '光州', 경상: '庆尚', 대구: '大邱', 울산: '蔚山',
+    부산: '釜山', 제주: '济州',
+  },
+};
+
+/** 지역 이름을 그 말로 보여 준다. 모르는 지역은 원문 그대로 돌려준다. */
+export function regionName(lang: Lang, sido: string): string {
+  return REGION_NAMES[lang]?.[sido] ?? sido;
+}
 
 /**
  * 한 문장을 골라 온다.
