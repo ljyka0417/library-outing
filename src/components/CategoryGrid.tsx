@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { CATEGORIES } from '@/data/categories';
 import { MOCK_LIBRARIES } from '@/data/libraries.mock';
+import { useT } from '@/i18n';
 import { categoryColors, colors, radius, spacing, typography } from '@/theme';
 import type { CategoryId } from '@/types';
 
@@ -30,18 +31,24 @@ interface Props {
 
 /** 4열 x 2행 주제 그리드. 가이드북 목차의 8개 분류와 대응한다. */
 export function CategoryGrid({ onSelect, selected }: Props) {
+  const { t } = useT();
+
   return (
     <View style={styles.grid}>
       {CATEGORIES.map((cat) => {
         const palette = categoryColors[cat.id];
         const isSelected = selected === cat.id;
+        // 주제 이름은 옮긴다. 도서관 이름과 달리 우리가 지은 분류라서
+        // 옮겨도 없는 것을 지어내는 게 아니다.
+        const name = t(`cat.${cat.id}`);
+        const count = COUNTS[cat.id] ?? 0;
         return (
           <Pressable
             key={cat.id}
             onPress={() => onSelect(cat.id)}
             style={({ pressed }) => [styles.item, pressed && { opacity: 0.7 }]}
             accessibilityRole="button"
-            accessibilityLabel={`${cat.name} 주제 도서관 ${COUNTS[cat.id] ?? 0}곳 보기`}
+            accessibilityLabel={t('a11y.category', { c: name, n: count })}
           >
             <View
               style={[
@@ -52,8 +59,10 @@ export function CategoryGrid({ onSelect, selected }: Props) {
             >
               <Ionicons name={cat.icon as never} size={24} color={palette.fg} />
             </View>
-            <Text style={styles.name}>{cat.name}</Text>
-            <Text style={styles.sub}>{COUNTS[cat.id] ?? 0}곳</Text>
+            <Text numberOfLines={1} style={styles.name}>
+              {name}
+            </Text>
+            <Text style={styles.sub}>{t('unit.places', { n: count })}</Text>
           </Pressable>
         );
       })}

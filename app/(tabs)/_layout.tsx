@@ -2,6 +2,7 @@ import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 import { LiquidTabBar, type TabBarProps } from '@/components/LiquidTabBar';
+import { useT } from '@/i18n';
 
 /**
  * 탭 구성.
@@ -19,6 +20,10 @@ import { LiquidTabBar, type TabBarProps } from '@/components/LiquidTabBar';
  * 아래 여백을 확보해야 한다.
  */
 export default function TabsLayout() {
+  // 탭 이름도 언어를 따라간다. 여기서 title 을 바꾸면 LiquidTabBar 가
+  // 그대로 받아 그린다.
+  const { t } = useT();
+
   return (
     <Tabs
       /* 내비게이션 라이브러리가 주는 타입은 이벤트 이름까지 제네릭으로 묶여 있어
@@ -30,21 +35,21 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: '홈',
+          title: t('tab.home'),
           tabBarIcon: ({ color }) => <Ionicons name="home" size={22} color={color} />,
         }}
       />
       <Tabs.Screen
         name="search"
         options={{
-          title: '검색',
+          title: t('tab.search'),
           tabBarIcon: ({ color }) => <Ionicons name="search" size={22} color={color} />,
         }}
       />
       <Tabs.Screen
         name="chat"
         options={{
-          title: '달곰이',
+          title: t('tab.chat'),
           tabBarIcon: ({ color }) => (
             <Ionicons name="chatbubble-ellipses" size={22} color={color} />
           ),
@@ -53,14 +58,14 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="favorites"
         options={{
-          title: '즐겨찾기',
+          title: t('tab.favorites'),
           tabBarIcon: ({ color }) => <Ionicons name="heart" size={22} color={color} />,
         }}
       />
       <Tabs.Screen
         name="mypage"
         options={{
-          title: '마이',
+          title: t('tab.mypage'),
           tabBarIcon: ({ color }) => <Ionicons name="person" size={22} color={color} />,
         }}
       />

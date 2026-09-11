@@ -8,6 +8,8 @@ import { LibraryCard } from '@/components/LibraryCard';
 import { Mascot } from '@/components/Mascot';
 import { SearchBar } from '@/components/SearchBar';
 import { SectionHeader } from '@/components/common';
+import { LanguageButton } from '@/components/LanguageButton';
+import { useT } from '@/i18n';
 import { libraryApi } from '@/api/libraryApi';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
@@ -19,6 +21,7 @@ export default function HomeScreen() {
   const router = useRouter();
   const recentIds = useAppStore((s) => s.recentLibraryIds);
   const tabPad = useTabBarPadding();
+  const { t } = useT();
 
   const featured = useAsync(() => libraryApi.featured(), [], { cacheKey: 'featured' });
   const all = useAsync(() => libraryApi.list(), [], { cacheKey: 'all-libraries' });
@@ -38,15 +41,25 @@ export default function HomeScreen() {
       <ScrollView directionalLockEnabled showsVerticalScrollIndicator={false} contentContainerStyle={[styles.content, { paddingBottom: tabPad }]}>
         {/* 인사 + 검색 */}
         <View style={styles.header}>
+          {/* 언어 단추는 맨 위 오른쪽. 가이드북을 든 외국인 방문객이
+              제일 먼저 찾는 자리다. */}
+          <View style={styles.langRow}>
+            <LanguageButton />
+          </View>
+
           <View style={styles.greetingRow}>
             <View style={{ flex: 1 }}>
-              <Text style={styles.greeting}>안녕하세요!</Text>
-              <Text style={styles.headline}>어떤 도서관을{'\n'}찾고 계시나요?</Text>
+              <Text style={styles.greeting}>{t('home.greeting')}</Text>
+              <Text style={styles.headline}>{t('home.headline')}</Text>
             </View>
             <Mascot size={84} pose="faceHappy" />
           </View>
 
-          <SearchBar readOnly onPress={() => router.push('/search')} />
+          <SearchBar
+            readOnly
+            placeholder={t('search.placeholder')}
+            onPress={() => router.push('/search')}
+          />
         </View>
 
         {/* QR 안내 배너 - 책과 앱을 잇는 핵심 동선이라 홈 상단에 고정 노출.
@@ -57,23 +70,26 @@ export default function HomeScreen() {
             <Ionicons name="qr-code" size={20} color={colors.black} />
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={styles.qrTitle}>가이드북을 갖고 계신가요?</Text>
-            <Text style={styles.qrBody}>책 속 QR을 찍으면 그 도서관으로 바로 이동해요</Text>
+            <Text style={styles.qrTitle}>{t('home.qrTitle')}</Text>
+            <Text style={styles.qrBody}>{t('home.qrBody')}</Text>
           </View>
         </View>
 
         {/* 주제별 도서관 */}
         <View style={styles.section}>
-          <SectionHeader title="주제별 도서관" subtitle="관심 있는 주제를 골라 보세요" />
+          <SectionHeader
+            title={t('home.categoryTitle')}
+            subtitle={t('home.categorySub')}
+          />
           <CategoryGrid onSelect={goCategory} />
         </View>
 
         {/* 추천 도서관 */}
         <View style={styles.section}>
           <SectionHeader
-            title="이번 주 추천 도서관"
-            subtitle="가이드북이 고른 특별한 공간"
-            actionLabel="전체보기"
+            title={t('home.featuredTitle')}
+            subtitle={t('home.featuredSub')}
+            actionLabel={t('home.seeAll')}
             onAction={() => router.push('/search')}
           />
           {featured.loading && !featured.data ? (
@@ -99,7 +115,7 @@ export default function HomeScreen() {
         {/* 최근 본 도서관 */}
         {recentLibraries.length > 0 ? (
           <View style={styles.section}>
-            <SectionHeader title="최근 본 도서관" />
+            <SectionHeader title={t('home.recentTitle')} />
             <View style={styles.list}>
               {recentLibraries.slice(0, 3).map((lib) => (
                 <LibraryCard
@@ -113,9 +129,7 @@ export default function HomeScreen() {
         ) : null}
 
         {featured.isStale || all.isStale ? (
-          <Text style={styles.offlineNote}>
-            네트워크가 불안정해 마지막으로 본 정보를 보여드리고 있어요
-          </Text>
+          <Text style={styles.offlineNote}>{t('home.offline')}</Text>
         ) : null}
       </ScrollView>
     </SafeAreaView>
@@ -136,6 +150,10 @@ const styles = StyleSheet.create({
     paddingTop: spacing.md,
     paddingBottom: spacing.xl,
     gap: spacing.lg,
+  },
+  langRow: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
   greetingRow: {
     flexDirection: 'row',

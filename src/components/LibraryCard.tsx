@@ -3,7 +3,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Badge } from './common';
 import { LibraryImage } from './LibraryImage';
-import { CATEGORY_MAP } from '@/data/categories';
+import { useT } from '@/i18n';
 import { colors, radius, shadow, spacing, typography } from '@/theme';
 import { isOpenNow } from '@/utils/openingHours';
 import type { Library } from '@/types';
@@ -31,6 +31,7 @@ export function LibraryCard({
 }: Props) {
   const open = isOpenNow(library.hours);
   const mainCategory = library.categories[0];
+  const { t } = useT();
 
   /**
    * 배지에는 분류 이름만 쓴다.
@@ -40,7 +41,7 @@ export function LibraryCard({
    * 한 곳인데, 국악 도서관에도 미술 도서관에도 "음악·LP" 가 찍혔다.
    * 그 도서관만의 특화는 아래 specialty 줄이 이미 정확하게 말해 준다.
    */
-  const categoryLabel = CATEGORY_MAP[mainCategory]?.name ?? '';
+  const categoryLabel = mainCategory ? t(`cat.${mainCategory}`) : '';
 
   if (variant === 'carousel') {
     return (
@@ -72,7 +73,7 @@ export function LibraryCard({
         <View style={styles.badgeRow}>
           {categoryLabel ? <Badge label={categoryLabel} category={mainCategory} /> : null}
           {open !== null ? (
-            <Badge label={open ? '운영중' : '운영종료'} tone={open ? 'open' : 'closed'} />
+            <Badge label={open ? t('badge.open') : t('badge.closed')} tone={open ? 'open' : 'closed'} />
           ) : null}
         </View>
 
