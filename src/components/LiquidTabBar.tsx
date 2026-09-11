@@ -16,8 +16,16 @@ import { colors, typography } from '@/theme';
 
 /** 알약 좌우 안쪽 여백 */
 const PAD = 6;
-/** 방울이 칸보다 얼마나 좁은가 (한쪽) */
-const INSET = 6;
+/**
+ * 방울이 칸보다 얼마나 좁은가 (한쪽).
+ *
+ * 알약 모서리가 둥글어서, 첫 칸과 마지막 칸에서는 방울이 그 곡선 바깥으로
+ * 삐져나온다. 알약 반지름이 35 이므로 방울 위아래를 9 만큼 띄우면 그 높이의
+ * 경계는 왼쪽에서 약 11.6 이다. 여백을 14(PAD 6 + INSET 8)로 두면 안에 들어온다.
+ * (overflow: hidden 이 걸려 있는데도 iOS 에서는 유리가 잘리지 않아, 자르는 데
+ *  기대지 않고 애초에 넘지 않게 둔다)
+ */
+const INSET = 8;
 
 /**
  * 떠 있는 알약 탭바 + 고른 탭을 따라다니는 방울.
@@ -187,17 +195,17 @@ const styles = StyleSheet.create({
   blob: {
     position: 'absolute',
     left: PAD,
-    top: 7,
-    bottom: 7,
+    top: 9,
+    bottom: 9,
     borderRadius: 22,
     backgroundColor: colors.primarySoft,
   },
   lens: {
     position: 'absolute',
     left: PAD,
-    top: 5,
-    bottom: 5,
-    borderRadius: 26,
+    top: 9,
+    bottom: 9,
+    borderRadius: 22,
     // 유리가 모서리를 넘지 않도록 잘라낸다
     overflow: 'hidden',
     // 얇은 흰 선을 둬야 렌즈의 가장자리가 보인다
