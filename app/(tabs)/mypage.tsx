@@ -8,6 +8,7 @@ import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
 import { nearbyDataStatus, photoCredits } from '@/api/nearbyApi';
 import { dataCompleteness } from '@/data/libraries.mock';
+import { libraryPhotoCount } from '@/data/libraryPhotos';
 import { loanBookStatus } from '@/data/books.mock';
 import { glassSupport } from '@/components/GlassSurface';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
@@ -81,13 +82,14 @@ export default function MyPageScreen() {
         {/* 사진 출처. 공공누리 제1·3유형은 출처 표시가 의무다.
             사진 위에도 찍지만, 한곳에 모아 두는 편이 맞다.
             사진이 없으면 이 칸 자체가 안 나온다. */}
-        {photoCredits.length > 0 ? (
+        {photoCredits.length > 0 || libraryPhotoCount > 0 ? (
           <View style={styles.card}>
             <Text style={styles.cardTitle}>{t('my.credits')}</Text>
             <Text style={styles.creditText}>
               {t('my.creditsBody', {
-                n: nearbyDataStatus.photoCount,
-                who: photoCredits.join(', '),
+                libs: libraryPhotoCount,
+                places: nearbyDataStatus.photoCount,
+                who: photoCredits.join(', ') || '한국관광공사',
               })}
             </Text>
           </View>

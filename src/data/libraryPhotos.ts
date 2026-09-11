@@ -31,9 +31,13 @@
  * 앱의 [마이 > 사진 출처] 에 모아 보여줄 수 있습니다.
  */
 
+import generated from './library-photos.generated.json';
+
 export interface LibraryPhoto {
-  /** require() 결과 */
-  source: number;
+  /** 앱에 넣어 둔 사진 — require() 결과 */
+  source?: number;
+  /** 인터넷에서 불러오는 사진 (관광공사) */
+  uri?: string;
   /** 출처 표기가 필요한 경우 (공공누리, CC 등) */
   credit?: string;
 }
@@ -46,13 +50,50 @@ export const PHOTOS: Record<string, LibraryPhoto> = {
   // },
 };
 
+/**
+ * 한국관광공사에서 찾은 도서관 실사진.
+ *
+ * 우리 132곳 중 일부는 관광공사에 "문화시설" 로 등록되어 있어서, 공사가
+ * 저작권을 확보한 사진을 API 로 내려준다. 그 도서관의 진짜 사진을 합법적으로
+ * 쓸 수 있는 셈이다.
+ *
+ * 엉뚱한 건물이 붙지 않도록 **이름이 닮은 것만으로는 받아들이지 않는다.**
+ * 우리가 아는 좌표에서 가까운 것만 남긴다. 「중앙도서관」 같은 이름은 전국에
+ * 널려 있어서, 이름만 보면 다른 도시 도서관 사진이 붙는다.
+ *
+ * 수집: npm run collect-library-photos
+ */
+const remote = (generated as { byId?: Record<string, RemotePhoto> }).byId ?? {};
+
+interface RemotePhoto {
+  url: string;
+  credit: string;
+  copyright: string;
+  matchedTitle: string;
+  distanceMeters: number;
+}
+
+/**
+ * 이 도서관 사진을 돌려준다.
+ *
+ * 직접 넣은 사진(PHOTOS)이 먼저다. 관광공사 사진보다 우리가 고른 사진이
+ * 그 도서관을 더 잘 보여줄 테니까.
+ */
 export function getPhoto(libraryId: string): LibraryPhoto | undefined {
-  return PHOTOS[libraryId];
+  if (PHOTOS[libraryId]) return PHOTOS[libraryId];
+
+  const r = remote[libraryId];
+  if (!r) return undefined;
+  return { uri: r.url, credit: r.credit };
 }
 
 /** 출처 표기가 필요한 사진 목록 (크레딧 화면용) */
 export function photoCredits(): { libraryId: string; credit: string }[] {
-  return Object.entries(PHOTOS)
-    .filter(([, p]) => p.credit)
-    .map(([libraryId, p]) => ({ libraryId, credit: p.credit! }));
+  return [
+    ...Object.entries(PHOTOS).filter(([, p]) => p.credit),
+    ...Object.entries(remote),
+  ].map(([libraryId, p]) => ({ libraryId, credit: p.credit! }));
 }
+
+/** 실사진이 붙은 도서관 수. 개발 중 상태 확인용. */
+export const libraryPhotoCount = Object.keys(PHOTOS).length + Object.keys(remote).length;

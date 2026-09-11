@@ -1,0 +1,204 @@
+{
+  "_readme": "한국관광공사 TourAPI 에서 찾은 도서관 실사진입니다. 직접 고치지 마세요. 다시 찾으려면 npm run collect-library-photos. 이름이 닮고 좌표가 가까운 것만 받아들였고, 저작권 유형을 확인한 사진만 남겼습니다.",
+  "_generatedAt": "2026-09-11T12:49:23.868Z",
+  "_maxDistanceMeters": 700,
+  "_source": "한국관광공사 (공공누리 제1·3유형 사진만)",
+  "byId": {
+    "national-library": {
+      "url": "https://tong.visitkorea.or.kr/cms/resource/67/3491267_image2_1.jpg",
+      "credit": "한국관광공사",
+      "copyright": "Type3",
+      "matchedTitle": "국립중앙도서관",
+      "distanceMeters": 66
+    },
+    "assembly-library": {
+      "url": "https://tong.visitkorea.or.kr/cms/resource/26/4091326_image2_1.jpg",
+      "credit": "한국관광공사",
+      "copyright": "Type3",
+      "matchedTitle": "국회도서관",
+      "distanceMeters": 210
+    },
+    "urisori-library": {
+      "url": "https://tong.visitkorea.or.kr/cms/resource/57/3457757_image2_1.jpg",
+      "credit": "한국관광공사",
+      "copyright": "Type1",
+      "matchedTitle": "우리소리도서관",
+      "distanceMeters": 7
+    },
+    "national-children-library": {
+      "url": "https://tong.visitkorea.or.kr/cms/resource/94/3386194_image2_1.JPG",
+      "credit": "한국관광공사",
+      "copyright": "Type3",
+      "matchedTitle": "국립어린이청소년도서관",
+      "distanceMeters": 49
+    },
+    "cheongun-lit": {
+      "url": "http://tong.visitkorea.or.kr/cms/resource/38/3531838_image2_1.jpg",
+      "credit": "한국관광공사",
+      "copyright": "Type1",
+      "matchedTitle": "청운문학도서관",
+      "distanceMeters": 4
+    },
+    "gyeonggi-library": {
+      "url": "https://tong.visitkorea.or.kr/cms/resource/52/3564752_image2_1.jpg",
+      "credit": "한국관광공사",
+      "copyright": "Type3",
+      "matchedTitle": "경기도서관",
+      "distanceMeters": 1
+    },
+    "juyeop-kids": {
+      "url": "https://tong.visitkorea.or.kr/cms/resource/43/3590243_image2_1.jpg",
+      "credit": "한국관광공사",
+      "copyright": "Type1",
+      "matchedTitle": "고양시립주엽어린이도서관",
+      "distanceMeters": 6
+    },
+    "incheon-library": {
+      "url": "https://tong.visitkorea.or.kr/cms/resource/91/3528691_image2_1.jpg",
+      "credit": "한국관광공사",
+      "copyright": "Type1",
+      "matchedTitle": "인천도서관",
+      "distanceMeters": 22
+    },
+    "cheongna-lake": {
+      "url": "https://tong.visitkorea.or.kr/cms/resource/01/3529701_image2_1.jpg",
+      "credit": "한국관광공사",
+      "copyright": "Type1",
+      "matchedTitle": "청라호수도서관",
+      "distanceMeters": 8
+    },
+    "wonju-central": {
+      "url": "https://tong.visitkorea.or.kr/cms/resource/27/3405327_image2_1.jpg",
+      "credit": "한국관광공사",
+      "copyright": "Type3",
+      "matchedTitle": "원주시립중앙도서관",
+      "distanceMeters": 6
+    },
+    "chuncheon-city": {
+      "url": "http://tong.visitkorea.or.kr/cms/resource/00/2745900_image2_1.jpg",
+      "credit": "한국관광공사",
+      "copyright": "Type3",
+      "matchedTitle": "춘천시립도서관(장난감도서관)",
+      "distanceMeters": 302
+    },
+    "hanbat-library": {
+      "url": "https://tong.visitkorea.or.kr/cms/resource/19/3063019_image2_1.JPG",
+      "credit": "한국관광공사",
+      "copyright": "Type3",
+      "matchedTitle": "대전한밭도서관",
+      "distanceMeters": 92
+    },
+    "chungju-city": {
+      "url": "http://tong.visitkorea.or.kr/cms/resource/74/3347574_image2_1.JPG",
+      "credit": "한국관광공사",
+      "copyright": "Type3",
+      "matchedTitle": "충주시립도서관",
+      "distanceMeters": 56
+    },
+    "baebang-wolcheon": {
+      "url": "https://tong.visitkorea.or.kr/cms/resource/93/3543293_image2_1.jpg",
+      "credit": "한국관광공사",
+      "copyright": "Type1",
+      "matchedTitle": "배방월천도서관",
+      "distanceMeters": 1
+    },
+    "kkumirang-library": {
+      "url": "https://tong.visitkorea.or.kr/cms/resource/87/3556787_image2_1.jpg",
+      "credit": "한국관광공사",
+      "copyright": "Type1",
+      "matchedTitle": "꿈이랑도서관",
+      "distanceMeters": 1
+    },
+    "haman-library": {
+      "url": "http://tong.visitkorea.or.kr/cms/resource/35/3077435_image2_1.jpg",
+      "credit": "한국관광공사",
+      "copyright": "Type3",
+      "matchedTitle": "함안도서관",
+      "distanceMeters": 7
+    },
+    "ulju-cheonsang": {
+      "url": "https://tong.visitkorea.or.kr/cms/resource/51/4085351_image2_1.jpg",
+      "credit": "한국관광공사",
+      "copyright": "Type3",
+      "matchedTitle": "울주천상도서관",
+      "distanceMeters": 0
+    },
+    "ulsan-jonggatjip": {
+      "url": "https://tong.visitkorea.or.kr/cms/resource/67/4085267_image2_1.jpg",
+      "credit": "한국관광공사",
+      "copyright": "Type3",
+      "matchedTitle": "울산종갓집도서관",
+      "distanceMeters": 4
+    },
+    "gangdong-sea": {
+      "url": "https://tong.visitkorea.or.kr/cms/resource/53/3376953_image2_1.jpg",
+      "credit": "한국관광공사",
+      "copyright": "Type3",
+      "matchedTitle": "울산 강동바다도서관",
+      "distanceMeters": 2
+    },
+    "busan-library": {
+      "url": "https://tong.visitkorea.or.kr/cms/resource/82/4060282_image2_1.JPG",
+      "credit": "한국관광공사",
+      "copyright": "Type3",
+      "matchedTitle": "부산도서관",
+      "distanceMeters": 1
+    },
+    "donggu-library": {
+      "url": "http://tong.visitkorea.or.kr/cms/resource/43/3343343_image2_1.jpg",
+      "credit": "한국관광공사",
+      "copyright": "Type3",
+      "matchedTitle": "부산 동구도서관",
+      "distanceMeters": 5
+    },
+    "yeongdo-library": {
+      "url": "http://tong.visitkorea.or.kr/cms/resource/45/3032045_image2_1.JPG",
+      "credit": "한국관광공사",
+      "copyright": "Type3",
+      "matchedTitle": "부산광역시 영도도서관",
+      "distanceMeters": 44
+    },
+    "geumjeong-library": {
+      "url": "https://tong.visitkorea.or.kr/cms/resource/25/3070525_image2_1.JPG",
+      "credit": "한국관광공사",
+      "copyright": "Type3",
+      "matchedTitle": "부산금정도서관",
+      "distanceMeters": 18
+    },
+    "dalseong-gunlib": {
+      "url": "https://tong.visitkorea.or.kr/cms/resource/07/3427707_image2_1.JPG",
+      "credit": "한국관광공사",
+      "copyright": "Type1",
+      "matchedTitle": "달성군립도서관",
+      "distanceMeters": 2
+    },
+    "gukchae-library": {
+      "url": "http://tong.visitkorea.or.kr/cms/resource/45/3569645_image2_1.JPG",
+      "credit": "한국관광공사",
+      "copyright": "Type1",
+      "matchedTitle": "국채보상운동기념도서관",
+      "distanceMeters": 5
+    },
+    "kimyoungsu-library": {
+      "url": "https://tong.visitkorea.or.kr/cms/resource/36/3546136_image2_1.jpg",
+      "credit": "한국관광공사",
+      "copyright": "Type1",
+      "matchedTitle": "김영수도서관",
+      "distanceMeters": 61
+    },
+    "gochang-hwangyunseok": {
+      "url": "https://tong.visitkorea.or.kr/cms/resource/31/4085631_image2_1.jpg",
+      "credit": "한국관광공사",
+      "copyright": "Type3",
+      "matchedTitle": "고창황윤석도서관",
+      "distanceMeters": 0
+    },
+    "dongmun-usedbook": {
+      "url": "https://tong.visitkorea.or.kr/cms/resource/79/3449579_image2_1.jpg",
+      "credit": "한국관광공사",
+      "copyright": "Type1",
+      "matchedTitle": "동문헌책도서관",
+      "distanceMeters": 1
+    }
+  }
+}

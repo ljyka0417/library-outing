@@ -45,8 +45,30 @@ export function LibraryImage({ library, variant, style }: Props) {
   const photo = getPhoto(library.id);
   const shapeStyle = variant === 'hero' ? styles.hero : variant === 'card' ? styles.card : styles.carousel;
 
-  if (photo) {
-    return <Image source={photo.source} style={[shapeStyle, style]} resizeMode="cover" />;
+  /*
+   * 앱에 넣어 둔 사진(source)과 인터넷에서 불러오는 사진(uri) 둘 다 받는다.
+   * 관광공사 사진은 uri 로 온다.
+   */
+  if (photo?.source || photo?.uri) {
+    return (
+      <View style={[shapeStyle, style]}>
+        <Image
+          source={photo.source ? photo.source : { uri: photo.uri! }}
+          style={styles.fill}
+          resizeMode="cover"
+        />
+        {/* 공공누리 사진은 출처를 밝혀야 한다.
+            다만 목록 썸네일은 84픽셀이라 글자를 넣으면 읽히지도 않고 지저분하다.
+            거기서는 빼고, 상세 상단과 [마이 > 사진 출처] 에서 밝힌다. */}
+        {photo.credit && variant !== 'card' ? (
+          <View style={[styles.creditBar, variant === 'hero' && styles.creditBarHero]}>
+            <Text style={styles.creditText} numberOfLines={1}>
+              {photo.credit}
+            </Text>
+          </View>
+        ) : null}
+      </View>
+    );
   }
 
   const category = library.categories[0];
@@ -75,18 +97,50 @@ export function LibraryImage({ library, variant, style }: Props) {
 }
 
 const styles = StyleSheet.create({
+  fill: {
+    width: '100%',
+    height: '100%',
+  },
+  /** 공공누리 사진의 출처 표기 */
+  creditBar: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    backgroundColor: 'rgba(0,0,0,0.4)',
+  },
+  /**
+   * 상세 상단 사진은 위아래가 다 가린다 — 위는 헤더 막대가, 아래는 흰 카드가
+   * 20픽셀 덮고 올라온다. 그래서 아래에서 조금 띄워 그 사이에 넣는다.
+   */
+  creditBarHero: {
+    bottom: 26,
+    right: undefined,
+    borderTopRightRadius: 8,
+    borderBottomRightRadius: 8,
+  },
+  creditText: {
+    ...typography.tiny,
+    fontSize: 10,
+    color: colors.white,
+  },
   hero: {
     width: '100%',
     height: 260,
+    overflow: 'hidden',
   },
   card: {
     width: 84,
     height: 84,
     borderRadius: 12,
+    overflow: 'hidden',
   },
   carousel: {
     width: '100%',
     height: 104,
+    overflow: 'hidden',
   },
   placeholder: {
     alignItems: 'center',

@@ -25,7 +25,8 @@
     "match-coords": "node scripts/match-by-coords.mjs",
     "icon": "node scripts/make-icon.mjs",
     "flags": "node scripts/make-flags.mjs",
-    "collect-tour": "node scripts/collect-tour-photos.mjs"
+    "collect-tour": "node scripts/collect-tour-photos.mjs",
+    "collect-library-photos": "node scripts/collect-library-photos.mjs"
   },
   "dependencies": {
     "@expo/metro-runtime": "~57.0.15",
