@@ -22,7 +22,7 @@ import { colors, typography } from '@/theme';
  * 하나도 안 잡힌다. 필요한 모양을 여기 직접 적어 두면 무엇에 기대고 있는지도
  * 분명해지고, 나중에 탭 방식을 또 바꿔도 여기만 맞추면 된다.
  */
-interface TabBarProps {
+export interface TabBarProps {
   state: {
     index: number;
     routes: { key: string; name: string; params?: object }[];
@@ -32,8 +32,9 @@ interface TabBarProps {
     {
       options: {
         title?: string;
-        tabBarLabel?: string | ((p: { focused: boolean; color: string }) => React.ReactNode);
-        tabBarIcon?: (p: { focused: boolean; color: string }) => React.ReactNode;
+        /** 문자열일 때만 쓴다. 함수형 라벨은 탭 방식마다 인자가 달라 받지 않는다 */
+        tabBarLabel?: unknown;
+        tabBarIcon?: (p: { focused: boolean; color: string; size: number }) => React.ReactNode;
       };
     }
   >;
@@ -245,7 +246,7 @@ export function LiquidTabBar({ state, descriptors, navigation }: TabBarProps) {
                 accessibilityState={{ selected: focused }}
                 accessibilityLabel={typeof label === 'string' ? label : undefined}
               >
-                {options.tabBarIcon?.({ focused, color })}
+                {options.tabBarIcon?.({ focused, color, size: 22 })}
                 <Text numberOfLines={1} style={[styles.label, { color }]}>
                   {label}
                 </Text>

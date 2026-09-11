@@ -1,71 +1,69 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { TopTabs } from 'expo-router/build/layouts/TopTabs';
-import type { ComponentProps } from 'react';
-import { LiquidTabBar } from '@/components/LiquidTabBar';
-import { colors } from '@/theme';
+import { Tabs } from 'expo-router';
+import { LiquidTabBar, type TabBarProps } from '@/components/LiquidTabBar';
 
 /**
- * 좌우로 쓸어 넘길 수 있는 탭.
+ * 탭 구성.
  *
- * 원래는 눌러야만 넘어가는 탭이었다. 손가락을 따라 화면이 끌려오게 하려면
- * 페이지를 넘기는 방식이라야 해서 갈아탔다. 위치는 그대로 아래다.
+ * 눌러서 넘기는 탭이다. 한때 페이지를 쓸어 넘기는 방식으로 바꿔 봤는데,
+ * 정작 원했던 건 페이지가 아니라 **탭바 위에서 손가락을 끄는 것**이었다.
+ * 그건 LiquidTabBar 안에서 처리하므로 페이지 넘김은 필요 없어져 되돌렸다.
+ * (react-native-tab-view / react-native-pager-view 도 같이 걷어냈다)
  *
- * ⚠️ @react-navigation/material-top-tabs 를 직접 쓰면 안 된다.
- *   SDK 56 부터 expo-router 는 외부 react-navigation 패키지와 함께 쓸 수
- *   없고, 번들러가 아예 막는다. 대신 expo-router 가 같은 것을 안에 넣어
- *   두었으므로 그걸 쓴다 (react-native-tab-view / react-native-pager-view 는
- *   따로 깔아야 한다 — 이 둘은 expo-router 가 동적으로 찾는다).
+ * 탭바는 LiquidTabBar 가 직접 그린다 — 떠 있는 알약, 따라다니는 유리,
+ * 끌어서 옮기기가 기본 탭바로는 안 되기 때문이다. 여기에는 어떤 탭이
+ * 있는지만 적는다.
  *
- * 탭바는 LiquidTabBar 가 직접 그린다. 여기에는 어떤 탭이 있는지만 적는다.
+ * 탭바가 콘텐츠 위에 떠 있으므로 각 화면은 useTabBarPadding() 으로
+ * 아래 여백을 확보해야 한다.
  */
 export default function TabsLayout() {
   return (
-    <TopTabs
-      tabBarPosition="bottom"
-      tabBar={(props: ComponentProps<typeof LiquidTabBar>) => <LiquidTabBar {...props} />}
-      screenOptions={{
-        swipeEnabled: true,
-        sceneStyle: { backgroundColor: colors.background },
-      }}
+    <Tabs
+      /* 내비게이션 라이브러리가 주는 타입은 이벤트 이름까지 제네릭으로 묶여 있어
+         우리가 쓰는 부분만 적은 타입과 그대로는 안 맞는다. 실제로 넘어오는 값은
+         같은 모양이므로 이 한 곳에서만 맞춰 준다. */
+      tabBar={(props) => <LiquidTabBar {...(props as unknown as TabBarProps)} />}
+      screenOptions={{ headerShown: false }}
     >
-      <TopTabs.Screen
+      <Tabs.Screen
         name="index"
         options={{
           title: '홈',
-          tabBarIcon: ({ color }: { color: string }) => <Ionicons name="home" size={22} color={color} />,
+          tabBarIcon: ({ color }) => <Ionicons name="home" size={22} color={color} />,
         }}
       />
-      <TopTabs.Screen
+      <Tabs.Screen
         name="search"
         options={{
           title: '검색',
-          tabBarIcon: ({ color }: { color: string }) => <Ionicons name="search" size={22} color={color} />,
+          tabBarIcon: ({ color }) => <Ionicons name="search" size={22} color={color} />,
         }}
       />
-      <TopTabs.Screen
+      <Tabs.Screen
         name="chat"
         options={{
           title: '달곰이',
-          tabBarIcon: ({ color }: { color: string }) => (
+          tabBarIcon: ({ color }) => (
             <Ionicons name="chatbubble-ellipses" size={22} color={color} />
           ),
         }}
       />
-      <TopTabs.Screen
+      <Tabs.Screen
         name="favorites"
         options={{
           title: '즐겨찾기',
-          tabBarIcon: ({ color }: { color: string }) => <Ionicons name="heart" size={22} color={color} />,
+          tabBarIcon: ({ color }) => <Ionicons name="heart" size={22} color={color} />,
         }}
       />
-      <TopTabs.Screen
+      <Tabs.Screen
         name="mypage"
         options={{
           title: '마이',
-          tabBarIcon: ({ color }: { color: string }) => <Ionicons name="person" size={22} color={color} />,
+          tabBarIcon: ({ color }) => <Ionicons name="person" size={22} color={color} />,
         }}
       />
-    </TopTabs>
+    </Tabs>
   );
 }
