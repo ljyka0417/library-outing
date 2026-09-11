@@ -49,10 +49,12 @@ export default function HomeScreen() {
           <SearchBar readOnly onPress={() => router.push('/search')} />
         </View>
 
-        {/* QR 안내 배너 - 책과 앱을 잇는 핵심 동선이라 홈 상단에 고정 노출 */}
+        {/* QR 안내 배너 - 책과 앱을 잇는 핵심 동선이라 홈 상단에 고정 노출.
+            아이콘은 검게 둔다. 실제 QR 이 검은색이라, 흐린 갈색보다
+            "이게 QR 이야기구나" 가 한눈에 읽힌다. */}
         <View style={styles.qrBanner}>
           <View style={styles.qrIcon}>
-            <Ionicons name="qr-code-outline" size={20} color={colors.brown} />
+            <Ionicons name="qr-code" size={20} color={colors.black} />
           </View>
           <View style={{ flex: 1 }}>
             <Text style={styles.qrTitle}>가이드북을 갖고 계신가요?</Text>
