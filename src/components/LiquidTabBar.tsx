@@ -1,12 +1,12 @@
-import React, { useEffect, useRef } from 'react';
-import {
-  Animated,
-  Pressable,
-  StyleSheet,
-  Text,
-  useWindowDimensions,
-  View,
-} from 'react-native';
+import React, { useEffect } from 'react';
+import { Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSequence,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { BottomTabBarProps } from 'expo-router/build/layouts/Tabs';
 import { GlassSurface } from '@/components/GlassSurface';
@@ -24,10 +24,10 @@ const INSET = 6;
  *
  * 기본 탭바로는 "고른 칸 뒤에 방울이 미끄러져 오는" 모양을 만들 수 없어
  * 직접 그린다. 대신 얻는 게 크다 — 도형 하나를 움직이는 것뿐이라
- * 네이티브 모듈이 필요 없다. React Native 에 원래 있는 Animated 만 쓴다.
+ * 네이티브 모듈을 새로 깔지 않는다. 이미 들어 있는 Reanimated 로 움직인다.
  *
- * 유리를 켜면 방울 대신 **렌즈**가 아이콘 위를 지나간다. 뒤에 깔면 그냥
- * 색판이고, 위에 올려야 지나가는 자리의 아이콘이 굴절돼 보인다.
+ * 유리를 켜면 방울 대신 **렌즈**가 된다. 아이콘 위에 올려 봤더니 실기기에서
+ * 글씨가 뭉개져 읽을 수 없어, 아이콘 뒤에 깐다.
  */
 export function LiquidTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
   const insets = useSafeAreaInsets();
@@ -48,25 +48,23 @@ export function LiquidTabBar({ state, descriptors, navigation }: BottomTabBarPro
   /**
    * 가로 위치와 가로 늘어남.
    *
-   * ⚠️ useNativeDriver 를 켜지 않는다.
-   *   네이티브 드라이버가 더 매끄럽지만, 이 개발 환경에서는 그게 제대로
-   *   도는지 확인할 방법이 없었다. 확인 못 한 최적화보다 어디서나 도는 쪽이
-   *   낫다. 움직이는 건 작은 도형 하나뿐이라 JS 로 돌려도 충분히 부드럽다.
+   * ⚠️ React Native 기본 Animated 로 짰더니 실기기에서 방울이 미끄러지지 않고
+   *   툭 건너뛰었다. Reanimated 로 옮긴다. UI 스레드에서 직접 돌기 때문에
+   *   목록을 스크롤하는 중에도 끊기지 않는다.
+   *   Reanimated 는 이미 앱에 들어 있으므로 새로 깔 것도, 다시 빌드할 것도 없다.
    */
-  const slide = useRef(new Animated.Value(INSET)).current;
-  const stretch = useRef(new Animated.Value(1)).current;
+  const slide = useSharedValue(INSET);
+  const stretch = useSharedValue(1);
 
   useEffect(() => {
     if (itemWidth <= 0) return;
 
-    Animated.spring(slide, {
-      toValue: state.index * itemWidth + INSET,
-      useNativeDriver: false,
-      // 살짝 물러섰다 자리잡는 정도. 더 튀면 장난스러워진다.
+    // 살짝 물러섰다 자리잡는 정도. 더 튀면 장난스러워진다.
+    slide.value = withSpring(state.index * itemWidth + INSET, {
       damping: 16,
       stiffness: 180,
       mass: 0.9,
-    }).start();
+    });
 
     /**
      * 출발할 때 옆으로 늘었다가 도착하면서 되돌아온다.
@@ -74,21 +72,16 @@ export function LiquidTabBar({ state, descriptors, navigation }: BottomTabBarPro
      * 늘기만 하면 찌그러져 보이므로 되돌아오는 쪽을 spring 으로 둬서
      * 끝에서 살짝 출렁이게 했다.
      */
-    Animated.sequence([
-      Animated.timing(stretch, { toValue: 1.22, duration: 110, useNativeDriver: false }),
-      Animated.spring(stretch, {
-        toValue: 1,
-        useNativeDriver: false,
-        damping: 11,
-        stiffness: 200,
-      }),
-    ]).start();
+    stretch.value = withSequence(
+      withTiming(1.22, { duration: 110 }),
+      withSpring(1, { damping: 11, stiffness: 200 })
+    );
   }, [state.index, itemWidth, slide, stretch]);
 
-  const movingStyle = {
-    width: Math.max(0, itemWidth - INSET * 2),
-    transform: [{ translateX: slide }, { scaleX: stretch }],
-  };
+  const movingStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: slide.value }, { scaleX: stretch.value }],
+  }));
+  const movingSize = { width: Math.max(0, itemWidth - INSET * 2) };
 
   return (
     <View style={[styles.wrap, { bottom }]} pointerEvents="box-none">
@@ -106,11 +99,11 @@ export function LiquidTabBar({ state, descriptors, navigation }: BottomTabBarPro
               뒤에 깔아도 탭바 뒤 화면은 그대로 굴절되므로 유리 느낌은 남는다. */}
           {itemWidth > 0 ? (
             glass ? (
-              <Animated.View pointerEvents="none" style={[styles.lens, movingStyle]}>
+              <Animated.View pointerEvents="none" style={[styles.lens, movingSize, movingStyle]}>
                 <GlassSurface variant="clear" />
               </Animated.View>
             ) : (
-              <Animated.View pointerEvents="none" style={[styles.blob, movingStyle]} />
+              <Animated.View pointerEvents="none" style={[styles.blob, movingSize, movingStyle]} />
             )
           ) : null}
 
