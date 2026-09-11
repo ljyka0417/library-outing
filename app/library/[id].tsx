@@ -22,6 +22,7 @@ import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
 import { centered, useLayout } from '@/hooks/useLayout';
 import { translate, useT, type Lang, type MessageKey } from '@/i18n';
+import { readableName } from '@/utils/romanize';
 import { colors, radius, shadow, spacing, typography } from '@/theme';
 import { callPhone, openWeb } from '@/utils/mapLinks';
 import { isOpenNow, todayHoursLabel } from '@/utils/openingHours';
@@ -140,7 +141,14 @@ export default function LibraryDetailScreen() {
           </View>
 
           <View style={styles.titleRow}>
-            <Text style={styles.name}>{library.name}</Text>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.name}>{library.name}</Text>
+              {/* 읽는 법. 한국어일 때는 빈 문자열이라 줄이 생기지 않는다.
+                  이름을 갈아 치우지 않는 이유는 romanize.ts 에 적어 두었다. */}
+              {readableName(library.name, lang) ? (
+                <Text style={styles.reading}>{readableName(library.name, lang)}</Text>
+              ) : null}
+            </View>
             <Pressable
               onPress={() => toggleFavorite(library.id)}
               hitSlop={10}
@@ -340,7 +348,12 @@ const styles = StyleSheet.create({
   name: {
     ...typography.h1,
     color: colors.text,
-    flex: 1,
+  },
+  /** 한글 이름 아래 붙는 읽는 법 */
+  reading: {
+    ...typography.caption,
+    color: colors.textSub,
+    marginTop: 2,
   },
   openRow: {
     flexDirection: 'row',

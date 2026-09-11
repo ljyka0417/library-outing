@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Badge } from './common';
 import { LibraryImage } from './LibraryImage';
 import { useT } from '@/i18n';
+import { readableName } from '@/utils/romanize';
 import { colors, radius, shadow, spacing, typography } from '@/theme';
 import { isOpenNow } from '@/utils/openingHours';
 import type { Library } from '@/types';
@@ -31,7 +32,15 @@ export function LibraryCard({
 }: Props) {
   const open = isOpenNow(library.hours);
   const mainCategory = library.categories[0];
-  const { t } = useT();
+  const { t, lang } = useT();
+
+  /**
+   * 한글 이름 아래 붙는 읽는 법. 한국어일 때는 빈 문자열이라 줄이 생기지 않는다.
+   *
+   * 이름을 갈아 치우지 않고 한 줄 더 붙이는 이유는 romanize.ts 에 적어 두었다.
+   * 요지는 이게 공식 영문명이 아니라 소리를 옮긴 것이라는 점이다.
+   */
+  const reading = readableName(library.name, lang);
 
   /**
    * 배지에는 분류 이름만 쓴다.
@@ -54,6 +63,11 @@ export function LibraryCard({
           <Text style={styles.carouselName} numberOfLines={1}>
             {library.name}
           </Text>
+          {reading ? (
+            <Text style={styles.reading} numberOfLines={1}>
+              {reading}
+            </Text>
+          ) : null}
           <Text style={styles.region} numberOfLines={1}>
             {regionLabel(library)}
           </Text>
@@ -80,6 +94,11 @@ export function LibraryCard({
         <Text style={styles.name} numberOfLines={1}>
           {library.name}
         </Text>
+        {reading ? (
+          <Text style={styles.reading} numberOfLines={1}>
+            {reading}
+          </Text>
+        ) : null}
         <Text style={styles.region} numberOfLines={1}>
           {regionLabel(library)}
         </Text>
@@ -137,6 +156,11 @@ const styles = StyleSheet.create({
   name: {
     ...typography.bodyBold,
     color: colors.text,
+  },
+  /** 한글 이름 아래 붙는 읽는 법. 이름보다 눈에 덜 띄게 둔다. */
+  reading: {
+    ...typography.tiny,
+    color: colors.textSub,
   },
   region: {
     ...typography.caption,

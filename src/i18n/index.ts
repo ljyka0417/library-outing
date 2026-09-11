@@ -20,11 +20,13 @@ import { useAppStore } from '@/store/useAppStore';
  *      현지에서 길을 물을 때도 원문이 있어야 쓸모가 있다.
  */
 
+/* 국기는 이모지가 아니라 Flag.tsx 가 도형으로 그린다. 이모지 국기는
+   윈도우와 일부 안드로이드에서 "KR", "US" 같은 글자로 나오기 때문이다. */
 export const LANGUAGES = [
-  { code: 'ko', flag: '🇰🇷', label: '한국어' },
-  { code: 'en', flag: '🇺🇸', label: 'English' },
-  { code: 'ja', flag: '🇯🇵', label: '日本語' },
-  { code: 'zh', flag: '🇨🇳', label: '中文' },
+  { code: 'ko', label: '한국어' },
+  { code: 'en', label: 'English' },
+  { code: 'ja', label: '日本語' },
+  { code: 'zh', label: '中文' },
 ] as const;
 
 export type Lang = (typeof LANGUAGES)[number]['code'];
@@ -117,6 +119,7 @@ const ko = {
   'lib.notFoundBody': 'QR 코드가 오래되었거나\n주소가 잘못되었을 수 있어요',
   'lib.goHome': '홈으로 가기',
   'lib.landmark': '지역 대표',
+  'lib.kindWord': '도서관',
   'lib.favAdd': '즐겨찾기 추가',
   'lib.favRemove': '즐겨찾기 해제',
   'lib.specialty': '특화',
@@ -332,6 +335,7 @@ const en: Messages = {
   'lib.notFoundBody': 'The QR code may be out of date,\nor the address may be wrong',
   'lib.goHome': 'Go home',
   'lib.landmark': 'Local landmark',
+  'lib.kindWord': 'Library',
   'lib.favAdd': 'Add to saved',
   'lib.favRemove': 'Remove from saved',
   'lib.specialty': 'Focus',
@@ -542,6 +546,7 @@ const ja: Messages = {
   'lib.notFoundBody': 'QRコードが古いか、\n住所が間違っている可能性があります',
   'lib.goHome': 'ホームへ',
   'lib.landmark': '地域の代表',
+  'lib.kindWord': '図書館',
   'lib.favAdd': 'お気に入りに追加',
   'lib.favRemove': 'お気に入りから外す',
   'lib.specialty': '特化',
@@ -748,6 +753,7 @@ const zh: Messages = {
   'lib.notFoundBody': '二维码可能已过期，\n或者地址有误',
   'lib.goHome': '回到首页',
   'lib.landmark': '地区代表',
+  'lib.kindWord': '图书馆',
   'lib.favAdd': '加入收藏',
   'lib.favRemove': '取消收藏',
   'lib.specialty': '特色',

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { LANGUAGES, useT } from '@/i18n';
+import { Flag } from './Flag';
 import { useAppStore } from '@/store/useAppStore';
 import { colors, radius, spacing, typography } from '@/theme';
 
@@ -30,7 +31,7 @@ export function LanguageButton() {
         accessibilityRole="button"
         accessibilityLabel={`${t('lang.title')} — ${current.label}`}
       >
-        <Text style={styles.buttonFlag}>{current.flag}</Text>
+        <Flag code={current.code} />
         <Ionicons name="chevron-down" size={12} color={colors.textSub} />
       </Pressable>
 
@@ -63,7 +64,7 @@ export function LanguageButton() {
                   accessibilityRole="radio"
                   accessibilityState={{ selected }}
                 >
-                  <Text style={styles.rowFlag}>{l.flag}</Text>
+                  <Flag code={l.code} size={1.4} />
                   <Text style={[styles.rowLabel, selected && styles.rowLabelSelected]}>
                     {l.label}
                   </Text>
@@ -96,7 +97,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.border,
   },
-  buttonFlag: { fontSize: 17 },
 
   backdrop: {
     flex: 1,
@@ -125,7 +125,6 @@ const styles = StyleSheet.create({
     borderRadius: radius.md,
   },
   rowSelected: { backgroundColor: colors.primarySoft },
-  rowFlag: { fontSize: 22 },
   rowLabel: { ...typography.body, color: colors.text, flex: 1 },
   rowLabelSelected: { color: colors.primary, fontWeight: '700' },
   note: {

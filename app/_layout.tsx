@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Platform } from 'react-native';
 import { Stack, useRouter, useSegments } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
@@ -8,6 +9,41 @@ import { colors } from '@/theme';
 
 // 로컬 저장소 복원이 끝날 때까지 스플래시를 유지한다.
 void SplashScreen.preventAutoHideAsync();
+
+/**
+ * 웹에서 쓸 글꼴 차례를 정한다.
+ *
+ * 기본 차례에는 한자·가나를 가진 글꼴이 하나도 없다. 그래서 윈도우
+ * 브라우저는 글자마다 아무 글꼴이나 끌어다 쓰는데, 그중에 굵은 꼴이
+ * 없는 글꼴이 섞이면 같은 문장 안에서 "您在找" 는 가늘고 "哪座图书馆"
+ * 은 굵게 나온다. 중국어 화면에서 굵기가 들쭉날쭉했던 게 이것이다.
+ *
+ * 한·중·일 글꼴을 차례에 넣어 굵은 꼴이 있는 글꼴로 먼저 가게 한다.
+ * 새로 받아 오는 글꼴이 아니라 기기에 이미 있는 것들을 가리키는 것이라
+ * 앱이 무거워지지 않는다.
+ *
+ * 네이티브(아이폰·안드로이드)는 시스템이 알아서 굵은 꼴이 있는 글꼴로
+ * 떨어지므로 건드리지 않는다.
+ */
+if (Platform.OS === 'web' && typeof document !== 'undefined') {
+  const style = document.createElement('style');
+  /*
+   * :not([style*="font-family"]) 가 꼭 필요하다.
+   *
+   * 아이콘(Ionicons)은 글꼴 이름을 요소에 직접 박아 넣는다. !important 로
+   * 싸잡아 덮으면 아이콘이 전부 네모로 깨진다. 글꼴을 직접 지정한 요소는
+   * 건드리지 않고 지나간다.
+   */
+  style.textContent = `
+    body, body *:not([style*="font-family"]) {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR",
+        "PingFang SC", "Hiragino Sans", "Yu Gothic UI", "Microsoft YaHei",
+        "Noto Sans SC", "Noto Sans JP", Helvetica, Arial, sans-serif !important;
+    }
+  `;
+  document.head.appendChild(style);
+}
 
 export default function RootLayout() {
   const hydrated = useAppStore((s) => s._hydrated);
