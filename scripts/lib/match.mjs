@@ -130,6 +130,26 @@ function containsName(a, b) {
 
 /** 후보 목록에서 가장 그럴듯한 하나를 고른다. 확신이 부족하면 null. */
 export function pickBest(candidates, seed, seedNames, threshold = 60) {
+  /*
+   * 이름이 정확히 같은 후보가 있으면 그것부터 본다.
+   *
+   * ⚠️ 점수만으로 하나를 고르면 진짜를 놓친다.
+   *   「송도국제도서관」을 찾을 때 「송도국제기구도서관」이 더 높은 점수를
+   *   받아 뽑히고, 그게 이름 검사에서 걸러지면서 **같은 목록에 있던 진짜
+   *   송도국제도서관까지 함께 버려졌다.** 그래서 운영시간이 비어 있었다.
+   *   동춘나래·선학별빛도 같은 이유로 빠졌다.
+   *
+   *   이름이 (행정 수식어를 뺀 뒤) 글자 그대로 같고 지역까지 맞으면 더
+   *   따질 것이 없다. 점수 경쟁을 시키지 않고 바로 고른다.
+   */
+  const exact = candidates.find(
+    (c) => strip(c.name) === strip(seed.name) && regionMatches(c.address ?? '', seed.sido)
+  );
+  if (exact) {
+    const { score, similarity: sim } = scoreCandidate(exact, seed, seedNames);
+    return { picked: { cand: exact, score, similarity: sim }, best: { cand: exact, score, similarity: sim } };
+  }
+
   let best = null;
   for (const cand of candidates) {
     const { score, similarity: sim } = scoreCandidate(cand, seed, seedNames);

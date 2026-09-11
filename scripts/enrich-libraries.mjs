@@ -23,6 +23,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { ROOT, requireEnv, readSeeds } from './lib/env.mjs';
 import { strip, regionMatches, pickBest } from './lib/match.mjs';
+import { parseHours, applyClosedDays } from './lib/hours.mjs';
 
 const KEY = requireEnv(
   'DATA4LIBRARY_KEY',
@@ -73,84 +74,9 @@ async function fetchAllLibraries() {
  */
 
 /* ── 운영시간 파싱 ──────────────────────────────────────────
-   정보나루의 operatingTime 은 표준화되지 않은 자유 문자열이다.
-   "화~금 09:00~21:00 / 토,일 09:00~18:00" 처럼 평일과 주말이 다른 경우가 많아,
-   첫 시간대 하나만 읽으면 주말 마감 시각을 틀리게 말하게 된다.
-
-   그래서 (1) 평일/주말 구분이 보이면 나눠서 적용하고
-        (2) 시간대가 하나뿐이면 전 요일에 적용하고
-        (3) 그 외 애매하면 byDay 를 비워 "운영중" 판정을 포기한다.
-   틀린 시각을 단정하느니 뱃지를 숨기는 편이 낫다. */
-
-const WEEKDAY_HINT = /(평일|월~금|월-금|월~목|화~금|주중)/;
-const WEEKEND_HINT = /(주말|토~일|토,\s*일|토·일|토요일|일요일)/;
-
-/** "09:00~18:00" 같은 시간대를 모두 뽑는다 */
-function extractRanges(text) {
-  const re = /(\d{1,2})\s*:\s*(\d{2})\s*[~\-–]\s*(\d{1,2})\s*:\s*(\d{2})/g;
-  const out = [];
-  let m;
-  while ((m = re.exec(text)) !== null) {
-    const open = Number(m[1]) * 60 + Number(m[2]);
-    const close = Number(m[3]) * 60 + Number(m[4]);
-    if (close > open) out.push({ open, close, index: m.index });
-  }
-  return out;
-}
-
-function parseHours(raw) {
-  if (!raw) return undefined;
-  const label = raw.replace(/\s+/g, ' ').trim();
-  const ranges = extractRanges(label);
-
-  if (ranges.length === 0) return { label, byDay: [] };
-
-  // 시간대가 하나뿐이면 전 요일 동일하다고 본다
-  if (ranges.length === 1) {
-    const { open, close } = ranges[0];
-    return { label, byDay: Array.from({ length: 7 }, () => ({ open, close })) };
-  }
-
-  // 평일/주말 힌트가 둘 다 있으면, 각 힌트에 가장 가까운 시간대를 붙인다
-  const wdHint = label.search(WEEKDAY_HINT);
-  const weHint = label.search(WEEKEND_HINT);
-
-  if (wdHint >= 0 && weHint >= 0) {
-    const nearest = (pos) =>
-      ranges.reduce((best, r) =>
-        Math.abs(r.index - pos) < Math.abs(best.index - pos) ? r : best
-      );
-    const wd = nearest(wdHint);
-    const we = nearest(weHint);
-
-    if (wd !== we) {
-      // 0=일 ... 6=토
-      const byDay = [
-        { open: we.open, close: we.close }, // 일
-        { open: wd.open, close: wd.close },
-        { open: wd.open, close: wd.close },
-        { open: wd.open, close: wd.close },
-        { open: wd.open, close: wd.close },
-        { open: wd.open, close: wd.close }, // 금
-        { open: we.open, close: we.close }, // 토
-      ];
-      return { label, byDay };
-    }
-  }
-
-  // 시간대는 여럿인데 어느 요일인지 판단이 안 서면 포기한다
-  return { label, byDay: [] };
-}
-
-/** 휴관일 문구에서 쉬는 요일을 뽑아 byDay 에 반영 */
-const DAY_TOKENS = { 일: 0, 월: 1, 화: 2, 수: 3, 목: 4, 금: 5, 토: 6 };
-function applyClosedDays(hours, closedText) {
-  if (!hours?.byDay?.length || !closedText) return hours;
-  for (const [ch, idx] of Object.entries(DAY_TOKENS)) {
-    if (new RegExp(`매주\\s*${ch}`).test(closedText)) hours.byDay[idx] = null;
-  }
-  return hours;
-}
+   정보나루의 operatingTime 은 표준이 없는 자유 문자열이라 읽는 규칙이 제법 길다.
+   geocode 쪽에서도 쓸 수 있게 scripts/lib/hours.mjs 로 옮겼다.
+   못 읽는 문장은 byDay 를 비워 두고, 화면은 배지 없이 원문만 보여준다. */
 
 /* ── 실행 ───────────────────────────────────────────────────── */
 console.log('정보나루에서 전국 도서관 목록을 받아옵니다...');

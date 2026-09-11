@@ -5,7 +5,7 @@
     "API 에 없는 도서관은 libraries.manual.json 에 손으로 넣으세요. 그쪽이 우선합니다.",
     "entries 가 비어 있으면 앱은 이름·지역·특화 태그만으로 동작합니다."
   ],
-  "_generatedAt": "2026-09-08T15:27:11.207Z",
+  "_generatedAt": "2026-09-11T13:41:31.368Z",
   "entries": {
     "seoul-library": {
       "sourceApiId": "111314",
@@ -62,7 +62,33 @@
       "closedDays": "매주 월요일 / 법정공휴일, 기타 도서관 사정에 의해 관장이 정한 날",
       "hours": {
         "label": "오전 9시 ~ 오후 6시",
-        "byDay": []
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
       }
     },
     "goyang-hwajeong": {
@@ -291,7 +317,33 @@
       "closedDays": "매주 월요일 / 단 일반열람실은 매월 둘째주, 넷째주 월요일 휴관",
       "hours": {
         "label": "09:00~18:00(자료실) / 07:00~22:00(일반열람실)",
-        "byDay": []
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
       }
     },
     "goyang-aramnuri": {
@@ -393,8 +445,50 @@
       },
       "closedDays": "매주 금요일 / 법정공휴일",
       "hours": {
-        "label": "[일반 열람실 1, 2, 3 : 06:00~22:00] [일반&middot;종합자료실 : 9:00~22:00(평일) / 9:00~18:00(주말)] [어린이자료실(꿈나무터) : 9:00~18:00(평일) / 9:00~17:00(주말)] [그 외 시설 : 9:00~18:00 (나눔터 주말 미운영)]",
+        "label": "[일반 열람실 1, 2, 3 : 06:00~22:00] [일반·종합자료실 : 9:00~22:00(평일) / 9:00~18:00(주말)] [어린이자료실(꿈나무터) : 9:00~18:00(평일) / 9:00~17:00(주말)] [그 외 시설 : 9:00~18:00 (나눔터 주말 미운영)]",
         "byDay": []
+      }
+    },
+    "songdo-intl": {
+      "sourceApiId": "128121",
+      "matchedName": "송도국제도서관",
+      "address": "인천광역시 연수구 아카데미로 166",
+      "phone": "032-749-8270",
+      "homepage": "http://www.yspubliclib.go.kr",
+      "coords": {
+        "lat": 37.3805347,
+        "lng": 126.6319779
+      },
+      "closedDays": "매주 월요일 / 법정공휴일",
+      "hours": {
+        "label": "평일 09:00~21:00, 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
       }
     },
     "majeon-library": {
@@ -457,8 +551,92 @@
       },
       "closedDays": "매주 월요일",
       "hours": {
-        "label": "일반자료실, 디지털자료코너, 정기간행물코너: 평일(화~금) 09:00~22:00, 토&middot;일 09:00~18:00 / 어린이자료실: 평일(화~금) 09:00~18:00, 토&middot;일 09:00~18:00 ※ 사회적 거리두기 상황에 따라 운영시간이 수시로 변동되오니 방문 전 공지사항 확인 부탁드립니다.",
+        "label": "일반자료실, 디지털자료코너, 정기간행물코너: 평일(화~금) 09:00~22:00, 토·일 09:00~18:00 / 어린이자료실: 평일(화~금) 09:00~18:00, 토·일 09:00~18:00 ※ 사회적 거리두기 상황에 따라 운영시간이 수시로 변동되오니 방문 전 공지사항 확인 부탁드립니다.",
         "byDay": []
+      }
+    },
+    "dongchun-narae": {
+      "sourceApiId": "128108",
+      "matchedName": "동춘나래도서관",
+      "address": "인천광역시 연수구 봉재산로 54번길 30",
+      "phone": "032-749-8242",
+      "homepage": "http://www.yspubliclib.go.kr",
+      "coords": {
+        "lat": 37.4077783,
+        "lng": 126.6639241
+      },
+      "closedDays": "매주 월요일 / 법정공휴일",
+      "hours": {
+        "label": "화요일 ~ 일요일 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      }
+    },
+    "songdo-kids": {
+      "sourceApiId": "128047",
+      "matchedName": "송도국제어린이",
+      "address": "인천광역시 연수구 컨벤시아대로 43",
+      "phone": "032-749-8220",
+      "homepage": "http://www.yspubliclib.go.kr",
+      "coords": {
+        "lat": 37.3979884,
+        "lng": 126.6536217
+      },
+      "closedDays": "매주 월요일 / 법정공휴일",
+      "hours": {
+        "label": "화,수,금,토,일요일 : 10:00 ~18:00 / 목 : 10:00 ~ 20:00",
+        "byDay": [
+          {
+            "open": 600,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1200
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          }
+        ]
       }
     },
     "cheongna-lake": {
@@ -473,8 +651,50 @@
       },
       "closedDays": "매주 금요일 / 법정공휴일",
       "hours": {
-        "label": "[일반자료실 09:00~22:00(평일) / 09:00~18:00(주말)] [어린이 자료실 09:00~18:00(평일) / 09:00~17:00(주말)] [디지털실 및 참고&middot;연속간행물실 09:00~18:00(평일,주말)]",
+        "label": "[일반자료실 09:00~22:00(평일) / 09:00~18:00(주말)] [어린이 자료실 09:00~18:00(평일) / 09:00~17:00(주말)] [디지털실 및 참고·연속간행물실 09:00~18:00(평일,주말)]",
         "byDay": []
+      }
+    },
+    "seonhak-starlight": {
+      "sourceApiId": "128104",
+      "matchedName": "선학별빛도서관",
+      "address": "인천광역시 연수구 넘말로 30",
+      "phone": "032-749-6710",
+      "homepage": "http://www.yspubliclib.go.kr",
+      "coords": {
+        "lat": 37.4298453,
+        "lng": 126.6978848
+      },
+      "closedDays": "매주 월요일 / 법정공휴일",
+      "hours": {
+        "label": "평일 09:00~22:00, 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
       }
     },
     "wonju-central": {
@@ -725,7 +945,7 @@
         "byDay": [
           {
             "open": 540,
-            "close": 1320
+            "close": 1080
           },
           null,
           {
@@ -746,7 +966,7 @@
           },
           {
             "open": 540,
-            "close": 1320
+            "close": 1080
           }
         ]
       }
@@ -756,7 +976,7 @@
       "matchedName": "충주시립도서관",
       "address": "충청북도 충주시 예성로 207",
       "phone": "043-850-3972",
-      "homepage": "https://lib.chungju.go.kr/web/index.do",
+      "homepage": "https://www.chungju.go.kr/lib/web/index.do",
       "coords": {
         "lat": 36.974893,
         "lng": 127.9342231
@@ -864,33 +1084,7 @@
       "closedDays": "매주 월요일 / 법정공휴일 및 국가가 정한 임시휴일",
       "hours": {
         "label": "평일 9:00~22:00, 주말 09:00~18:00 (어린이열람실 평일 10:00~19:00, 주말 09:00~18:00)",
-        "byDay": [
-          {
-            "open": 540,
-            "close": 1080
-          },
-          null,
-          {
-            "open": 540,
-            "close": 1320
-          },
-          {
-            "open": 540,
-            "close": 1320
-          },
-          {
-            "open": 540,
-            "close": 1320
-          },
-          {
-            "open": 540,
-            "close": 1320
-          },
-          {
-            "open": 540,
-            "close": 1080
-          }
-        ]
+        "byDay": []
       }
     },
     "gyeongbuk-library": {
@@ -951,33 +1145,7 @@
       "closedDays": "매주 월요일 / 법정공휴일 / 열람실은 설,추석 당일",
       "hours": {
         "label": "종합자료실 - 평일(화~금) 09:00~21:00, 주말(토~일) 09:00~17:00 / 어린이자료실 - 평일(화~금) 09:00~18:00, 주말(토~일) 09:00~17:00 / 열람실 - 평일(월~금) 09:00~22:00, 주말(토~일) 09:00~21:00",
-        "byDay": [
-          {
-            "open": 540,
-            "close": 1020
-          },
-          null,
-          {
-            "open": 540,
-            "close": 1260
-          },
-          {
-            "open": 540,
-            "close": 1260
-          },
-          {
-            "open": 540,
-            "close": 1260
-          },
-          {
-            "open": 540,
-            "close": 1260
-          },
-          {
-            "open": 540,
-            "close": 1020
-          }
-        ]
+        "byDay": []
       }
     },
     "hadong-library": {
@@ -1292,34 +1460,8 @@
       },
       "closedDays": "매주 월요일 / 법정공휴일, 특별한 사유로 관장이 공고한 날",
       "hours": {
-        "label": "평일: 일반자료실 1&middot;2, 재미&middot;열린마루(09:00~22:00), 유아&middot;어린이자료실(09:00~18:00) / 주말: 09:00~18:00",
-        "byDay": [
-          {
-            "open": 540,
-            "close": 1080
-          },
-          null,
-          {
-            "open": 540,
-            "close": 1320
-          },
-          {
-            "open": 540,
-            "close": 1320
-          },
-          {
-            "open": 540,
-            "close": 1320
-          },
-          {
-            "open": 540,
-            "close": 1320
-          },
-          {
-            "open": 540,
-            "close": 1080
-          }
-        ]
+        "label": "평일: 일반자료실 1·2, 재미·열린마루(09:00~22:00), 유아·어린이자료실(09:00~18:00) / 주말: 09:00~18:00",
+        "byDay": []
       }
     },
     "gangdong-sea": {
@@ -1553,15 +1695,28 @@
       "closedDays": "연중무휴 (※매월 2번째 월요일, 신정, 명절 휴실)",
       "hours": {
         "label": "자료실 월-금 09:00~22:00 주말/공휴일 09:00~18:00, 열람실 07:00~24:00",
+        "byDay": []
+      }
+    },
+    "seogu-ami-dream": {
+      "sourceApiId": "126173",
+      "matchedName": "부산광역시 서구아미드림도서관",
+      "address": "부산광역시 서구 까치고개로80번길 10",
+      "phone": "051-290-5720",
+      "homepage": "https://www.bsseogu.go.kr/amlib/main.do",
+      "coords": {
+        "lat": 35.1016672,
+        "lng": 129.015934
+      },
+      "closedDays": "매주 월요일 / 공휴일(대체공휴일, 임시공휴일 포함), 기타 구청장이 지정한 임시 휴관일",
+      "hours": {
+        "label": "화요일~금요일 09:00~22:00, 토요일 09:00~18:00, 일요일 09:00~17:00",
         "byDay": [
           {
             "open": 540,
-            "close": 1080
+            "close": 1020
           },
-          {
-            "open": 540,
-            "close": 1320
-          },
+          null,
           {
             "open": 540,
             "close": 1320
@@ -1583,22 +1738,6 @@
             "close": 1080
           }
         ]
-      }
-    },
-    "seogu-ami-dream": {
-      "sourceApiId": "126173",
-      "matchedName": "부산광역시 서구아미드림도서관",
-      "address": "부산광역시 서구 까치고개로80번길 10",
-      "phone": "051-290-5720",
-      "homepage": "https://www.bsseogu.go.kr/amlib/main.do",
-      "coords": {
-        "lat": 35.1016672,
-        "lng": 129.015934
-      },
-      "closedDays": "매주 월요일 / 공휴일(대체공휴일, 임시공휴일 포함), 기타 구청장이 지정한 임시 휴관일",
-      "hours": {
-        "label": "화요일~금요일 09:00~22:00, 토요일 09:00~18:00, 일요일 09:00~17:00",
-        "byDay": []
       }
     },
     "daegu-library": {
@@ -1656,7 +1795,33 @@
       "closedDays": "매주 월요일 / 관공서의 공휴일, 도서관장이 필요하다고 인정하는 때",
       "hours": {
         "label": "평일 09:00 ~ 22:00, 토일 09:00 ~ 17:00",
-        "byDay": []
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
       }
     },
     "daegu-seogu-english": {
@@ -1672,7 +1837,33 @@
       "closedDays": "매주 월요일 / 법정공휴일",
       "hours": {
         "label": "09:00 ~ 18:00, 토/일요일 09:00 ~ 17:00",
-        "byDay": []
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
       }
     },
     "dalseong-kids-forest": {
@@ -1729,34 +1920,8 @@
       },
       "closedDays": "매주 월요일 / 관공서의 공휴일, 도서관장이 필요하다고 인정하는 때",
       "hours": {
-        "label": "평일 09:00~20:00(유아실&middot;어린이실 09:00~18:00), 주말 09:00~17:00",
-        "byDay": [
-          {
-            "open": 540,
-            "close": 1020
-          },
-          null,
-          {
-            "open": 540,
-            "close": 1200
-          },
-          {
-            "open": 540,
-            "close": 1200
-          },
-          {
-            "open": 540,
-            "close": 1200
-          },
-          {
-            "open": 540,
-            "close": 1200
-          },
-          {
-            "open": 540,
-            "close": 1020
-          }
-        ]
+        "label": "평일 09:00~20:00(유아실·어린이실 09:00~18:00), 주말 09:00~17:00",
+        "byDay": []
       }
     },
     "gukchae-library": {
@@ -1878,36 +2043,7 @@
       "closedDays": "매월 첫째, 셋째 수요일 / 관공서의 공휴일, 기타 임시 휴관일",
       "hours": {
         "label": "월~금 09:00~22:00, 토 09:00~20:00 일요일 09:00~18:00 (일부실 연장운영중)",
-        "byDay": [
-          {
-            "open": 540,
-            "close": 1080
-          },
-          {
-            "open": 540,
-            "close": 1320
-          },
-          {
-            "open": 540,
-            "close": 1320
-          },
-          {
-            "open": 540,
-            "close": 1320
-          },
-          {
-            "open": 540,
-            "close": 1320
-          },
-          {
-            "open": 540,
-            "close": 1320
-          },
-          {
-            "open": 540,
-            "close": 1080
-          }
-        ]
+        "byDay": []
       }
     },
     "jorye-lake": {
@@ -2180,85 +2316,33 @@
       "closedDays": "매주 월요일 / 관공서 공휴일(공휴일이 토요일, 일요일과 겹칠 경우 휴관), 도서관 사정으로 관장이 지정한 날",
       "hours": {
         "label": "평일 : 오전9시~오후6시 / 주말 : 오전9시~오후5시",
-        "byDay": []
-      }
-    },
-    "gwacheon-it": {
-      "sourceApiId": "141062",
-      "matchedName": "과천시정보과학도서관",
-      "matchedBy": "coords",
-      "address": "경기도 과천시 중앙로24",
-      "phone": "02-2150-3008",
-      "homepage": "http://www.gclib.go.kr",
-      "closedDays": "매주 금요일 / 법정공휴일, 개관기념일",
-      "coords": {
-        "lat": 37.4187291,
-        "lng": 126.9897092
-      }
-    },
-    "songdo-intl": {
-      "sourceApiId": "128121",
-      "matchedName": "송도국제도서관",
-      "matchedBy": "coords",
-      "address": "인천광역시 연수구 아카데미로 166",
-      "phone": "032-749-8270",
-      "homepage": "http://www.yspubliclib.go.kr",
-      "closedDays": "매주 월요일 / 법정공휴일",
-      "coords": {
-        "lat": 37.3805347,
-        "lng": 126.6319779
-      }
-    },
-    "dongchun-narae": {
-      "sourceApiId": "128108",
-      "matchedName": "동춘나래도서관",
-      "matchedBy": "coords",
-      "address": "인천광역시 연수구 봉재산로 54번길 30",
-      "phone": "032-749-8242",
-      "homepage": "http://www.yspubliclib.go.kr",
-      "closedDays": "매주 월요일 / 법정공휴일",
-      "coords": {
-        "lat": 37.4077783,
-        "lng": 126.6639241
-      }
-    },
-    "songdo-kids": {
-      "sourceApiId": "128047",
-      "matchedName": "송도국제어린이",
-      "matchedBy": "coords",
-      "address": "인천광역시 연수구 컨벤시아대로 43",
-      "phone": "032-749-8220",
-      "homepage": "http://www.yspubliclib.go.kr",
-      "closedDays": "매주 월요일 / 법정공휴일",
-      "coords": {
-        "lat": 37.3979884,
-        "lng": 126.6536217
-      }
-    },
-    "seonhak-starlight": {
-      "sourceApiId": "128104",
-      "matchedName": "선학별빛도서관",
-      "matchedBy": "coords",
-      "address": "인천광역시 연수구 넘말로 30",
-      "phone": "032-749-6710",
-      "homepage": "http://www.yspubliclib.go.kr",
-      "closedDays": "매주 월요일 / 법정공휴일",
-      "coords": {
-        "lat": 37.4298453,
-        "lng": 126.6978848
-      }
-    },
-    "okhyeon-kids": {
-      "sourceApiId": "131074",
-      "matchedName": "울산 남구 옥현어린이도서관",
-      "matchedBy": "coords",
-      "address": "울산광역시 남구 옥현로58번길 40",
-      "phone": "052-226-2370",
-      "homepage": "http://www.ulsannamgu.go.kr/library/",
-      "closedDays": "매주 월요일 / 법정공휴일, 기타 도서관 관장이 공고한 날",
-      "coords": {
-        "lat": 35.5391622,
-        "lng": 129.264824
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
       }
     }
   }
