@@ -6,7 +6,9 @@ import Animated, {
   withSequence,
   withSpring,
   withTiming,
+  runOnJS,
 } from 'react-native-reanimated';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { GlassSurface } from '@/components/GlassSurface';
 import { useAppStore } from '@/store/useAppStore';
@@ -95,9 +97,26 @@ export function LiquidTabBar({ state, descriptors, navigation }: TabBarProps) {
    */
   const slide = useSharedValue(INSET);
   const stretch = useSharedValue(1);
+  /** 탭바를 꾹 눌러 끄는 중인가. 끄는 동안에는 손가락이 위치를 정한다. */
+  const dragging = useSharedValue(false);
+  /** 끄는 동안 마지막으로 지나간 칸. 같은 칸에서 여러 번 넘기지 않으려고 둔다. */
+  const draggedIndex = useSharedValue(0);
+
+  const goToIndex = (index: number) => {
+    const route = state.routes[index];
+    if (!route || index === state.index) return;
+    const event = navigation.emit({
+      type: 'tabPress',
+      target: route.key,
+      canPreventDefault: true,
+    });
+    if (!event.defaultPrevented) navigation.navigate(route.name, route.params);
+  };
 
   useEffect(() => {
     if (itemWidth <= 0) return;
+    // 손가락이 끌고 있는 동안에는 위치를 손가락이 정한다. 여기서 끼어들면 튄다.
+    if (dragging.value) return;
 
     // 살짝 물러섰다 자리잡는 정도. 더 튀면 장난스러워진다.
     slide.value = withSpring(state.index * itemWidth + INSET, {
@@ -123,11 +142,53 @@ export function LiquidTabBar({ state, descriptors, navigation }: TabBarProps) {
   }));
   const movingSize = { width: Math.max(0, itemWidth - INSET * 2) };
 
+  /**
+   * 탭바를 꾹 누른 채 손가락을 옆으로 끌면 유리가 따라오고, 지나가는 칸마다
+   * 탭이 바뀐다. iOS 26 탭바가 하는 동작이다.
+   *
+   * activateAfterLongPress 를 두는 이유: 이게 없으면 그냥 톡 누르는 것까지
+   * 제스처가 가로채서 탭이 안 눌린다. 잠깐 누르고 있어야 끌기가 시작되므로
+   * 누르기와 끌기가 서로 방해하지 않는다.
+   */
+  const maxSlide = Math.max(0, (count - 1) * itemWidth) + INSET;
+  const drag = Gesture.Pan()
+    .activateAfterLongPress(140)
+    .minDistance(0)
+    .onBegin(() => {
+      dragging.value = true;
+      draggedIndex.value = state.index;
+    })
+    .onUpdate((e) => {
+      if (itemWidth <= 0) return;
+      // 유리를 손가락 가운데에 두되 알약 밖으로 나가지 않게 잡아 둔다
+      const wanted = e.x - PAD - itemWidth / 2 + INSET;
+      slide.value = Math.min(Math.max(wanted, INSET), maxSlide);
+
+      const idx = Math.min(
+        Math.max(Math.floor((e.x - PAD) / itemWidth), 0),
+        count - 1
+      );
+      if (idx !== draggedIndex.value) {
+        draggedIndex.value = idx;
+        runOnJS(goToIndex)(idx);
+      }
+    })
+    .onFinalize(() => {
+      dragging.value = false;
+      // 손을 떼면 그 칸에 정확히 맞춰 앉는다
+      slide.value = withSpring(draggedIndex.value * itemWidth + INSET, {
+        damping: 16,
+        stiffness: 180,
+        mass: 0.9,
+      });
+    });
+
   return (
     <View style={[styles.wrap, { bottom }]} pointerEvents="box-none">
       {/* 그림자와 잘라내기를 한 겹에 같이 두면 iOS 에서 그림자가 잘린다.
           바깥은 그림자만, 안쪽은 둥글게 자르는 역할만 맡는다. */}
       <View style={[styles.shadowHost, glass && styles.shadowHostGlass]}>
+        <GestureDetector gesture={drag}>
         <View style={[styles.row, glass && styles.rowGlass]}>
           {/* 유리를 켰을 때만 뒤가 비친다. 스위치는 저장되지 않으므로
               혹시 여기서 죽더라도 앱을 껐다 켜면 꺼진 상태로 돌아온다. */}
@@ -187,6 +248,7 @@ export function LiquidTabBar({ state, descriptors, navigation }: TabBarProps) {
           })}
 
         </View>
+        </GestureDetector>
       </View>
     </View>
   );
