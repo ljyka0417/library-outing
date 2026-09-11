@@ -51,7 +51,22 @@ const KEY = requireEnv(
 );
 
 const BASE = 'http://apis.data.go.kr/B551011/KorService2';
-const COMMON = `MobileOS=ETC&MobileApp=librarymap&_type=json&serviceKey=${encodeURIComponent(KEY)}`;
+
+/**
+ * ⚠️ data.go.kr 은 키를 두 벌 준다 — Encoding 키와 Decoding 키.
+ *
+ *   Encoding 키  이미 URL 인코딩된 것 (%2F, %2B, %3D 가 보인다)
+ *   Decoding 키  원문 (/, +, = 가 그대로 보인다)
+ *
+ * 여기서 무턱대고 encodeURIComponent 를 걸면 Encoding 키는 두 번 인코딩되어
+ * (%2F → %252F) 서버가 못 알아본다. 그런데 돌아오는 말은 "등록되지 않은
+ * 서비스키" 라서, 신청을 안 한 줄 알고 엉뚱한 데를 찾게 된다. 실제로 그랬다.
+ *
+ * 그래서 이미 인코딩된 키인지 보고 판단한다. 어느 쪽을 넣어도 된다.
+ */
+const looksEncoded = /%[0-9A-Fa-f]{2}/.test(KEY);
+const SERVICE_KEY = looksEncoded ? KEY : encodeURIComponent(KEY);
+const COMMON = `MobileOS=ETC&MobileApp=librarymap&_type=json&serviceKey=${SERVICE_KEY}`;
 
 /** 몇 미터 안을 볼 것인가. 걸어갈 만한 거리로 둔다. */
 const RADIUS = 1500;

@@ -102,4 +102,16 @@ export const nearbyDataStatus = {
   generated: hasGenerated,
   libraryCount: Object.keys(byLibrary).length,
   placeCount: Object.values(byLibrary).reduce((n, arr) => n + arr.length, 0),
+  photoCount: Object.values(tourByLibrary).reduce((n, arr) => n + arr.length, 0),
 };
+
+/**
+ * 사진 출처.
+ *
+ * 공공누리 제1·3유형은 **출처 표시가 의무**다. 사진 위에 작게 찍고 있지만,
+ * 어디 사진을 얼마나 쓰고 있는지는 한곳에 모아 두는 편이 맞다.
+ * 사진이 한 장도 없으면 빈 배열이라 화면에 아무것도 안 나온다.
+ */
+export const photoCredits = [
+  ...new Set(Object.values(tourByLibrary).flat().map((p) => p.credit)),
+].filter(Boolean);

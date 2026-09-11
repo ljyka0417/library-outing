@@ -6,7 +6,7 @@ import { Mascot } from '@/components/Mascot';
 import { libraryApi } from '@/api/libraryApi';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
-import { nearbyDataStatus } from '@/api/nearbyApi';
+import { nearbyDataStatus, photoCredits } from '@/api/nearbyApi';
 import { dataCompleteness } from '@/data/libraries.mock';
 import { loanBookStatus } from '@/data/books.mock';
 import { glassSupport } from '@/components/GlassSurface';
@@ -77,6 +77,21 @@ export default function MyPageScreen() {
           <MenuRow icon="color-wand-outline" label={t('my.dressUp')} comingSoon />
           <MenuRow icon="trash-outline" label={t('my.reset')} onPress={confirmReset} danger />
         </View>
+
+        {/* 사진 출처. 공공누리 제1·3유형은 출처 표시가 의무다.
+            사진 위에도 찍지만, 한곳에 모아 두는 편이 맞다.
+            사진이 없으면 이 칸 자체가 안 나온다. */}
+        {photoCredits.length > 0 ? (
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>{t('my.credits')}</Text>
+            <Text style={styles.creditText}>
+              {t('my.creditsBody', {
+                n: nearbyDataStatus.photoCount,
+                who: photoCredits.join(', '),
+              })}
+            </Text>
+          </View>
+        ) : null}
 
         {/* 개발용 데이터 수집 현황. __DEV__ 라 배포 빌드에는 나오지 않는다. */}
         {__DEV__ ? <GlassTest /> : null}
@@ -235,6 +250,7 @@ const styles = StyleSheet.create({
     padding: spacing.lg,
   },
   cardTitle: { ...typography.captionBold, color: colors.textSub, marginBottom: spacing.sm },
+  creditText: { ...typography.caption, color: colors.textSub, lineHeight: 20 },
   visitRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, paddingVertical: 6 },
   visitName: { ...typography.body, color: colors.text },
 
