@@ -119,6 +119,8 @@ export interface NearbyPlace {
   coords: Coordinates;
   /** 도서관으로부터의 도보 거리(m) */
   distanceMeters: number;
+  /** 카카오 장소 페이지. 사진·후기·영업시간이 거기 있다. */
+  placeUrl?: string;
   imageUrl?: string;
   /** 한 줄 소개 */
   note?: string;

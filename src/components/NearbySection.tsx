@@ -13,7 +13,7 @@ import { EmptyState } from './common';
 import { nearbyApi } from '@/api/nearbyApi';
 import { colors, radius, spacing, typography } from '@/theme';
 import { formatDistance, walkingMinutes } from '@/utils/openingHours';
-import { openKakaoMap } from '@/utils/mapLinks';
+import { openKakaoMap, openWeb } from '@/utils/mapLinks';
 import { useT } from '@/i18n';
 import type { Coordinates, NearbyPlace, NearbyType } from '@/types';
 
@@ -121,25 +121,63 @@ export function NearbySection({ libraryId, coords }: Props) {
           ))}
         </ScrollView>
       )}
+
+      {/* 카드를 누르면 앱 밖으로 나가므로 미리 알려 준다. 사진이 우리 화면에
+          없는 대신 어디에 있는지를 말해 주는 줄이기도 하다. */}
+      {!loading && !error && places.length > 0 && places[0].placeUrl ? (
+        <Text style={styles.hint}>{t('nearby.opensKakao')}</Text>
+      ) : null}
     </View>
   );
 }
 
 function PlaceCard({ place }: { place: NearbyPlace }) {
+  const { t } = useT();
+
+  /*
+   * 누르면 카카오 장소 페이지로 간다. 거기에 사진·후기·영업시간이 있다.
+   *
+   * 사진을 우리가 가져다 붙이지 않는 이유: 지도 API 는 장소 사진을 주지
+   * 않고(카카오·네이버 둘 다), 검색해서 나온 사진을 가져다 쓰면 남의
+   * 사진을 그 가게 것인 양 싣는 셈이 된다. 사진이 있는 곳으로 보내면
+   * 그 문제 없이 사진을 보여줄 수 있다.
+   *
+   * 좌표는 남겨 둔다. 옛 데이터에는 placeUrl 이 없어서, 그때는 지도에
+   * 핀을 찍는 예전 동작으로 떨어진다.
+   */
+  const open = () =>
+    place.placeUrl
+      ? void openWeb(place.placeUrl)
+      : void openKakaoMap({ name: place.name, coords: place.coords });
+
   return (
     <Pressable
-      onPress={() => void openKakaoMap({ name: place.name, coords: place.coords })}
+      onPress={open}
       style={({ pressed }) => [styles.card, pressed && { opacity: 0.85 }]}
     >
       {/* 카카오 로컬 API 는 장소 사진을 주지 않는다.
           "이미지 없음" 회색 상자를 놓느니, 종류별 색과 아이콘으로 칠해
           목록에서 맛집/카페/문화시설이 한눈에 구분되게 한다. */}
-      <View style={[styles.cardImage, { backgroundColor: TYPE_STYLE[place.type].bg }]}>
+      {/* cardImageFallback 을 빠뜨려서 아이콘이 가운데가 아니라 왼쪽 위에
+          붙어 있었다. 사진 대신 놓는 자리인 만큼 가운데가 맞다. */}
+      <View
+        style={[
+          styles.cardImage,
+          styles.cardImageFallback,
+          { backgroundColor: TYPE_STYLE[place.type].bg },
+        ]}
+      >
         <Ionicons
           name={TYPE_STYLE[place.type].icon}
           size={30}
           color={TYPE_STYLE[place.type].fg}
         />
+        {/* 앱 밖으로 나간다는 표시. 눌렀을 때 딴 데로 튀는 느낌을 없앤다. */}
+        {place.placeUrl ? (
+          <View style={styles.linkBadge}>
+            <Ionicons name="open-outline" size={11} color={colors.white} />
+          </View>
+        ) : null}
       </View>
 
       <View style={styles.cardBody}>
@@ -152,7 +190,8 @@ function PlaceCard({ place }: { place: NearbyPlace }) {
         <View style={styles.cardMeta}>
           <Ionicons name="walk-outline" size={12} color={colors.primary} />
           <Text style={styles.cardMetaText}>
-            {formatDistance(place.distanceMeters)} · 도보 {walkingMinutes(place.distanceMeters)}분
+            {formatDistance(place.distanceMeters)} ·{' '}
+            {t('nearby.walk', { n: walkingMinutes(place.distanceMeters) })}
           </Text>
         </View>
         {place.note ? (
@@ -195,6 +234,12 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontWeight: '700',
   },
+  hint: {
+    ...typography.tiny,
+    color: colors.textMuted,
+    paddingHorizontal: spacing.xl,
+    marginTop: spacing.sm,
+  },
   loading: {
     height: 120,
     alignItems: 'center',
@@ -220,6 +265,18 @@ const styles = StyleSheet.create({
   cardImageFallback: {
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  /** 앱 밖으로 나간다는 표시 */
+  linkBadge: {
+    position: 'absolute',
+    top: 6,
+    right: 6,
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.35)',
   },
   cardBody: {
     padding: spacing.md,

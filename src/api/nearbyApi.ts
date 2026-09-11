@@ -57,7 +57,15 @@ export const nearbyApi: NearbyApi = {
         address: p.address,
         coords: p.coords,
         distanceMeters: p.distanceMeters,
-        // 카카오 로컬 API 는 사진을 주지 않는다. 사진이 필요하면 따로 큐레이션해야 한다.
+        placeUrl: p.placeUrl,
+        /*
+         * 카카오 로컬 API 는 사진을 주지 않는다. 응답 항목 열두 개에 이미지가
+         * 아예 없다 — 지도 앱에서 보이는 가게 사진은 업주·이용자가 올린 것이라
+         * 카카오가 외부에 내줄 권리가 없기 때문이다. 네이버도 같다.
+         *
+         * 그래서 사진을 가져오는 대신 **사진이 있는 곳으로 보낸다.**
+         * 카드를 누르면 위 placeUrl(카카오 장소 페이지)이 열린다.
+         */
         imageUrl: undefined,
       }));
   },

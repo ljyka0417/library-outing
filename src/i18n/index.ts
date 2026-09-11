@@ -149,6 +149,8 @@ const ko = {
   'nearby.retry': '잠시 후 다시 시도해 주세요',
   'nearby.emptyTitle': '주변 정보가 아직 준비되지 않았어요',
   'nearby.emptyBody': '곧 이 근처의 좋은 곳들을 모아 올릴게요',
+  'nearby.walk': '도보 {n}분',
+  'nearby.opensKakao': '카카오 장소 페이지에서 사진과 후기를 볼 수 있어요',
 
   'map.naver': '네이버 지도',
   'map.kakao': '카카오맵',
@@ -365,6 +367,8 @@ const en: Messages = {
   'nearby.retry': 'Please try again in a moment',
   'nearby.emptyTitle': 'Nearby information is not ready yet',
   'nearby.emptyBody': 'We will gather good places around here soon',
+  'nearby.walk': '{n} min walk',
+  'nearby.opensKakao': 'Photos and reviews are on the KakaoMap place page',
 
   'map.naver': 'Naver Map',
   'map.kakao': 'KakaoMap',
@@ -576,6 +580,8 @@ const ja: Messages = {
   'nearby.retry': '少し経ってからもう一度お試しください',
   'nearby.emptyTitle': '周辺の情報はまだ準備中です',
   'nearby.emptyBody': 'この近くの良い場所をまもなく集めます',
+  'nearby.walk': '徒歩{n}分',
+  'nearby.opensKakao': '写真と口コミはカカオマップの場所ページにあります',
 
   'map.naver': 'Naver Map',
   'map.kakao': 'KakaoMap',
@@ -783,6 +789,8 @@ const zh: Messages = {
   'nearby.retry': '请稍后再试',
   'nearby.emptyTitle': '周边信息尚未准备好',
   'nearby.emptyBody': '我们很快会整理这附近的好去处',
+  'nearby.walk': '步行 {n} 分钟',
+  'nearby.opensKakao': '照片和评价在 KakaoMap 的地点页面上',
 
   'map.naver': 'Naver Map',
   'map.kakao': 'KakaoMap',
