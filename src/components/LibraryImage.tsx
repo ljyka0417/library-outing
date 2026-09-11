@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Image,
   StyleSheet,
@@ -40,10 +40,64 @@ interface Props {
   style?: StyleProp<ImageStyle & ViewStyle>;
 }
 
+/** 상세 상단 사진이 너무 납작하거나 너무 길어지지 않게 가두는 범위 */
+const HERO_MIN_RATIO = 1.2;
+const HERO_MAX_RATIO = 1.9;
+/** 아직 크기를 모를 때 쓰는 비율 (관광공사 사진에서 제일 흔한 3:2) */
+const HERO_DEFAULT_RATIO = 1.5;
+
 export function LibraryImage({ library, variant, style }: Props) {
   const { t } = useT();
   const photo = getPhoto(library.id);
-  const shapeStyle = variant === 'hero' ? styles.hero : variant === 'card' ? styles.card : styles.carousel;
+
+  /**
+   * 상세 상단 사진은 **잘리지 않게** 사진 비율에 칸을 맞춘다.
+   *
+   * 높이를 260 으로 못 박아 두었더니 위아래가 잘렸다. 관광공사 사진은
+   * 비율이 제각각이다 — 4:3(1.33), 3:2(1.50), 16:9(1.78) 이 섞여 있다.
+   * 어떤 높이를 골라도 어느 한쪽은 잘린다.
+   *
+   * 그래서 사진 크기를 물어보고 그 비율대로 칸을 만든다. 칸과 사진의 비율이
+   * 같으면 cover 로 깔아도 잘릴 것이 없다.
+   * 너무 납작하거나 너무 긴 사진이 화면을 차지하지 않게 범위는 가둔다.
+   *
+   * 목록 썸네일(card·carousel)은 그대로 둔다. 거기서는 줄이 맞는 게 더 중요해서
+   * 잘리는 편이 낫다.
+   */
+  const [ratio, setRatio] = useState(HERO_DEFAULT_RATIO);
+
+  useEffect(() => {
+    if (variant !== 'hero') return;
+
+    if (photo?.source) {
+      const asset = Image.resolveAssetSource(photo.source);
+      if (asset?.width && asset?.height) setRatio(asset.width / asset.height);
+      return;
+    }
+    if (!photo?.uri) return;
+
+    let alive = true;
+    Image.getSize(
+      photo.uri,
+      (w, h) => {
+        // 크기를 받아오는 사이에 화면을 벗어났을 수 있다
+        if (alive && h > 0) setRatio(w / h);
+      },
+      // 못 받아오면 기본 비율 그대로 쓴다. 사진은 어차피 보인다.
+      () => {}
+    );
+    return () => {
+      alive = false;
+    };
+  }, [variant, photo?.source, photo?.uri]);
+
+  const heroRatio = Math.min(Math.max(ratio, HERO_MIN_RATIO), HERO_MAX_RATIO);
+  const shapeStyle =
+    variant === 'hero'
+      ? [styles.hero, { aspectRatio: heroRatio }]
+      : variant === 'card'
+        ? styles.card
+        : styles.carousel;
 
   /*
    * 앱에 넣어 둔 사진(source)과 인터넷에서 불러오는 사진(uri) 둘 다 받는다.
@@ -128,7 +182,7 @@ const styles = StyleSheet.create({
   },
   hero: {
     width: '100%',
-    height: 260,
+    // 높이는 사진 비율대로 정해진다 (위 useEffect)
     overflow: 'hidden',
   },
   card: {
