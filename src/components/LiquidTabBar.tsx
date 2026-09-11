@@ -1,5 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Animated, Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import {
+  Animated,
+  Pressable,
+  StyleSheet,
+  Text,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { BottomTabBarProps } from 'expo-router/build/layouts/Tabs';
 import { GlassSurface } from '@/components/GlassSurface';
@@ -7,50 +14,84 @@ import { useAppStore } from '@/store/useAppStore';
 import { TAB_BAR } from '@/hooks/useTabBarPadding';
 import { colors, typography } from '@/theme';
 
+/** 알약 좌우 안쪽 여백 */
+const PAD = 6;
+/** 방울이 칸보다 얼마나 좁은가 (한쪽) */
+const INSET = 6;
+
 /**
  * 떠 있는 알약 탭바 + 고른 탭을 따라다니는 방울.
  *
- * 기본 탭바로는 "고른 칸 뒤에 색 방울이 미끄러져 오는" 모양을 만들 수 없어
- * 직접 그린다. 대신 얻는 게 크다 — 방울 하나를 움직이는 것뿐이라
- * 네이티브 모듈이 필요 없다.
+ * 기본 탭바로는 "고른 칸 뒤에 방울이 미끄러져 오는" 모양을 만들 수 없어
+ * 직접 그린다. 대신 얻는 게 크다 — 도형 하나를 움직이는 것뿐이라
+ * 네이티브 모듈이 필요 없다. React Native 에 원래 있는 Animated 만 쓴다.
  *
- * 지난번에 expo-glass-effect 로 진짜 유리를 넣었다가 앱이 켜지자마자 죽었고
- * 되돌리는 데 며칠이 걸렸다. 여기서는 React Native 에 원래 있는 Animated 만
- * 쓴다. 새로 까는 것도, 다시 빌드할 것도 없다.
- *
- * 움직임은 spring 이다. 일정한 속도로 미끄러지면 기계 같고, 끝에서 살짝
- * 물러섰다 자리를 잡아야 말랑해 보인다. 그게 "리퀴드" 로 읽히는 부분이다.
+ * 유리를 켜면 방울 대신 **렌즈**가 아이콘 위를 지나간다. 뒤에 깔면 그냥
+ * 색판이고, 위에 올려야 지나가는 자리의 아이콘이 굴절돼 보인다.
  */
 export function LiquidTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
   const insets = useSafeAreaInsets();
   const bottom = Math.max(insets.bottom, TAB_BAR.minBottom);
-  const glass = useAppStore((st) => st.glassTest);
+  const glass = useAppStore((s) => s.glassTest);
 
-  /** 알약 안쪽 너비. 칸 너비를 나누려면 실제로 그려진 뒤에 재야 한다. */
-  const [innerWidth, setInnerWidth] = useState(0);
+  /**
+   * 칸 하나의 너비.
+   *
+   * 처음엔 onLayout 으로 쟀는데, 그림자용 겹을 하나 끼우자 측정이 멈추면서
+   * 방울이 통째로 사라졌다. 알약 폭은 화면 폭에서 여백을 뺀 값으로 정해지니
+   * 재지 않고 계산할 수 있다. 계산으로 두면 구조를 바꿔도 깨지지 않는다.
+   */
+  const { width: screenWidth } = useWindowDimensions();
   const count = state.routes.length;
-  const itemWidth = count > 0 ? innerWidth / count : 0;
+  const itemWidth = count > 0 ? (screenWidth - TAB_BAR.side * 2 - PAD * 2) / count : 0;
 
-  const slide = useRef(new Animated.Value(0)).current;
+  /**
+   * 가로 위치와 가로 늘어남.
+   *
+   * ⚠️ useNativeDriver 를 켜지 않는다.
+   *   네이티브 드라이버가 더 매끄럽지만, 이 개발 환경에서는 그게 제대로
+   *   도는지 확인할 방법이 없었다. 확인 못 한 최적화보다 어디서나 도는 쪽이
+   *   낫다. 움직이는 건 작은 도형 하나뿐이라 JS 로 돌려도 충분히 부드럽다.
+   */
+  const slide = useRef(new Animated.Value(INSET)).current;
+  const stretch = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
-    if (itemWidth === 0) return;
+    if (itemWidth <= 0) return;
+
     Animated.spring(slide, {
-      toValue: state.index * itemWidth,
-      useNativeDriver: true,
+      toValue: state.index * itemWidth + INSET,
+      useNativeDriver: false,
       // 살짝 물러섰다 자리잡는 정도. 더 튀면 장난스러워진다.
       damping: 16,
       stiffness: 180,
       mass: 0.9,
     }).start();
-  }, [state.index, itemWidth, slide]);
+
+    /**
+     * 출발할 때 옆으로 늘었다가 도착하면서 되돌아온다.
+     * 물방울이 움직일 때 길어지는 걸 흉내낸 것이고, 이게 "리퀴드" 로 읽힌다.
+     * 늘기만 하면 찌그러져 보이므로 되돌아오는 쪽을 spring 으로 둬서
+     * 끝에서 살짝 출렁이게 했다.
+     */
+    Animated.sequence([
+      Animated.timing(stretch, { toValue: 1.22, duration: 110, useNativeDriver: false }),
+      Animated.spring(stretch, {
+        toValue: 1,
+        useNativeDriver: false,
+        damping: 11,
+        stiffness: 200,
+      }),
+    ]).start();
+  }, [state.index, itemWidth, slide, stretch]);
+
+  const movingStyle = {
+    width: Math.max(0, itemWidth - INSET * 2),
+    transform: [{ translateX: slide }, { scaleX: stretch }],
+  };
 
   return (
-    <View
-      style={[styles.wrap, { bottom }]}
-      onLayout={(e) => setInnerWidth(e.nativeEvent.layout.width - PAD * 2)}
-      pointerEvents="box-none"
-    >
+    <View style={[styles.wrap, { bottom }]} pointerEvents="box-none">
       {/* 그림자와 잘라내기를 한 겹에 같이 두면 iOS 에서 그림자가 잘린다.
           바깥은 그림자만, 안쪽은 둥글게 자르는 역할만 맡는다. */}
       <View style={[styles.shadowHost, glass && styles.shadowHostGlass]}>
@@ -59,70 +100,62 @@ export function LiquidTabBar({ state, descriptors, navigation }: BottomTabBarPro
               혹시 여기서 죽더라도 앱을 껐다 켜면 꺼진 상태로 돌아온다. */}
           {glass ? <GlassSurface /> : null}
 
-        {/* 방울. 칸 뒤에 깔리므로 버튼보다 먼저 그린다. */}
-        {itemWidth > 0 ? (
-          <Animated.View
-            pointerEvents="none"
-            style={[
-              styles.blob,
-              {
-                width: itemWidth - BLOB_INSET * 2,
-                transform: [{ translateX: Animated.add(slide, new Animated.Value(BLOB_INSET)) }],
-              },
-            ]}
-          />
-        ) : null}
+          {/* 색 방울. 유리를 안 쓸 때만. 칸 뒤에 깔리므로 버튼보다 먼저 그린다. */}
+          {!glass && itemWidth > 0 ? (
+            <Animated.View pointerEvents="none" style={[styles.blob, movingStyle]} />
+          ) : null}
 
-        {state.routes.map((route, index) => {
-          const { options } = descriptors[route.key];
-          const focused = state.index === index;
-          const label =
-            typeof options.tabBarLabel === 'string'
-              ? options.tabBarLabel
-              : (options.title ?? route.name);
-          const color = focused ? colors.primary : colors.textMuted;
+          {state.routes.map((route, index) => {
+            const { options } = descriptors[route.key];
+            const focused = state.index === index;
+            const label =
+              typeof options.tabBarLabel === 'string'
+                ? options.tabBarLabel
+                : (options.title ?? route.name);
+            const color = focused ? colors.primary : colors.textMuted;
 
-          const onPress = () => {
-            const event = navigation.emit({
-              type: 'tabPress',
-              target: route.key,
-              canPreventDefault: true,
-            });
-            // 이미 그 탭이면 다시 밀어 넣지 않는다 (스크롤 위치가 튄다)
-            if (!focused && !event.defaultPrevented) {
-              navigation.navigate(route.name, route.params);
-            }
-          };
-
-          return (
-            <Pressable
-              key={route.key}
-              onPress={onPress}
-              onLongPress={() =>
-                navigation.emit({ type: 'tabLongPress', target: route.key })
+            const onPress = () => {
+              const event = navigation.emit({
+                type: 'tabPress',
+                target: route.key,
+                canPreventDefault: true,
+              });
+              // 이미 그 탭이면 다시 밀어 넣지 않는다 (스크롤 위치가 튄다)
+              if (!focused && !event.defaultPrevented) {
+                navigation.navigate(route.name, route.params);
               }
-              style={styles.item}
-              accessibilityRole="button"
-              accessibilityState={{ selected: focused }}
-              accessibilityLabel={typeof label === 'string' ? label : undefined}
-            >
-              {options.tabBarIcon?.({ focused, color, size: 22 })}
-              <Text numberOfLines={1} style={[styles.label, { color }]}>
-                {label}
-              </Text>
-            </Pressable>
-          );
-        })}
+            };
+
+            return (
+              <Pressable
+                key={route.key}
+                onPress={onPress}
+                onLongPress={() => navigation.emit({ type: 'tabLongPress', target: route.key })}
+                style={styles.item}
+                accessibilityRole="button"
+                accessibilityState={{ selected: focused }}
+                accessibilityLabel={typeof label === 'string' ? label : undefined}
+              >
+                {options.tabBarIcon?.({ focused, color, size: 22 })}
+                <Text numberOfLines={1} style={[styles.label, { color }]}>
+                  {label}
+                </Text>
+              </Pressable>
+            );
+          })}
+
+          {/* 유리 렌즈. 아이콘 **위**를 지나간다.
+              누르는 걸 막지 않도록 pointerEvents 를 꺼 둔다. */}
+          {glass && itemWidth > 0 ? (
+            <Animated.View pointerEvents="none" style={[styles.lens, movingStyle]}>
+              <GlassSurface variant="clear" />
+            </Animated.View>
+          ) : null}
         </View>
       </View>
     </View>
   );
 }
-
-/** 알약 좌우 안쪽 여백 */
-const PAD = 6;
-/** 방울이 칸보다 얼마나 좁은가 (한쪽) */
-const BLOB_INSET = 6;
 
 const styles = StyleSheet.create({
   wrap: {
@@ -163,6 +196,18 @@ const styles = StyleSheet.create({
     bottom: 7,
     borderRadius: 22,
     backgroundColor: colors.primarySoft,
+  },
+  lens: {
+    position: 'absolute',
+    left: PAD,
+    top: 5,
+    bottom: 5,
+    borderRadius: 26,
+    // 유리가 모서리를 넘지 않도록 잘라낸다
+    overflow: 'hidden',
+    // 얇은 흰 선을 둬야 렌즈의 가장자리가 보인다
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: 'rgba(255,255,255,0.7)',
   },
   item: {
     flex: 1,

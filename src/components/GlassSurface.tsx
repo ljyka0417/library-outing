@@ -52,12 +52,21 @@ export const glassSupport: 'liquid' | 'blur' | 'none' = GlassView
     ? 'blur'
     : 'none';
 
-export function GlassSurface({ tint = 'light' }: { tint?: 'light' | 'dark' }) {
+interface Props {
+  tint?: 'light' | 'dark';
+  /**
+   * regular  판처럼 쓸 때. 뒤가 은은하게 비친다.
+   * clear    렌즈처럼 쓸 때. 더 맑아서 뒤 모양이 그대로 굴절돼 보인다.
+   */
+  variant?: 'regular' | 'clear';
+}
+
+export function GlassSurface({ tint = 'light', variant = 'regular' }: Props) {
   if (GlassView) {
     return (
       <GlassView
         style={StyleSheet.absoluteFill}
-        glassEffectStyle="regular"
+        glassEffectStyle={variant}
         colorScheme={tint}
       />
     );
@@ -66,7 +75,7 @@ export function GlassSurface({ tint = 'light' }: { tint?: 'light' | 'dark' }) {
   if (BlurView) {
     return (
       <BlurView
-        intensity={70}
+        intensity={variant === 'clear' ? 34 : 70}
         tint={tint === 'dark' ? 'dark' : 'light'}
         style={StyleSheet.absoluteFill}
       />
@@ -76,7 +85,10 @@ export function GlassSurface({ tint = 'light' }: { tint?: 'light' | 'dark' }) {
   // 유리를 못 쓰는 곳에서는 반투명 흰 판으로 흉내만 낸다
   return (
     <View
-      style={[StyleSheet.absoluteFill, { backgroundColor: 'rgba(255,255,255,0.88)' }]}
+      style={[
+        StyleSheet.absoluteFill,
+        { backgroundColor: `rgba(255,255,255,${variant === 'clear' ? 0.4 : 0.88})` },
+      ]}
     />
   );
 }
