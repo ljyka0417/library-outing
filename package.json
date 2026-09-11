@@ -23,7 +23,8 @@
     "build:ios": "eas build --profile development --platform ios",
     "build:preview": "eas build --profile preview --platform android",
     "match-coords": "node scripts/match-by-coords.mjs",
-    "icon": "node scripts/make-icon.mjs"
+    "icon": "node scripts/make-icon.mjs",
+    "flags": "node scripts/make-flags.mjs"
   },
   "dependencies": {
     "@expo/metro-runtime": "~57.0.15",
