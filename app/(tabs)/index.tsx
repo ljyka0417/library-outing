@@ -35,7 +35,7 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[styles.content, { paddingBottom: tabPad }]}>
+      <ScrollView directionalLockEnabled showsVerticalScrollIndicator={false} contentContainerStyle={[styles.content, { paddingBottom: tabPad }]}>
         {/* 인사 + 검색 */}
         <View style={styles.header}>
           <View style={styles.greetingRow}>

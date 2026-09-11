@@ -35,6 +35,7 @@ export default function FavoritesScreen() {
       </View>
 
       <FlatList
+        directionalLockEnabled
         data={saved}
         keyExtractor={(item) => item.id}
         contentContainerStyle={[styles.list, { paddingBottom: tabPad }]}

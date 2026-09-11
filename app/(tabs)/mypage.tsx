@@ -36,7 +36,7 @@ export default function MyPageScreen() {
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[styles.content, { paddingBottom: tabPad }]}>
+      <ScrollView directionalLockEnabled showsVerticalScrollIndicator={false} contentContainerStyle={[styles.content, { paddingBottom: tabPad }]}>
         <View style={styles.profile}>
           <Mascot size={110} pose="hello" />
           <Text style={styles.name}>달곰이와 도서관 나들이 중</Text>

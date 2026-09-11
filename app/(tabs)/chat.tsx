@@ -107,6 +107,7 @@ export default function ChatScreen() {
       >
         <FlatList
           ref={listRef}
+          directionalLockEnabled
           data={messages}
           keyExtractor={(m) => m.id}
           contentContainerStyle={styles.list}
