@@ -84,7 +84,19 @@ export function getPhoto(libraryId: string): LibraryPhoto | undefined {
 
   const r = remote[libraryId];
   if (!r) return undefined;
-  return { uri: r.url, credit: r.credit };
+  return { uri: secureUrl(r.url), credit: r.credit };
+}
+
+/**
+ * 사진 주소를 https 로 맞춘다.
+ *
+ * ⚠️ 아이폰은 http 로 된 사진을 아예 안 불러온다(App Transport Security).
+ *   웹에서는 멀쩡히 보이다가 기기에서만 빈칸이 되어 한참 헤맸다.
+ *   수집기에서도 맞춰 두지만, 옛 데이터가 남아 있어도 안 깨지도록 여기서
+ *   한 번 더 본다. 같은 주소가 https 로도 열린다.
+ */
+export function secureUrl(url: string): string {
+  return url.replace(/^http:\/\//, 'https://');
 }
 
 /** 출처 표기가 필요한 사진 목록 (크레딧 화면용) */

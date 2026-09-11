@@ -85,6 +85,17 @@ const CAFE_CAT3 = 'A05020900';
 /** 쓸 수 있는 저작권 유형 */
 const OK_COPYRIGHT = new Set(['Type1', 'Type3']);
 
+/**
+ * 사진 주소를 https 로 맞춘다.
+ *
+ * ⚠️ 관광공사는 같은 사진을 http 로 주기도 하고 https 로 주기도 한다.
+ *   http 로 온 것을 그대로 두면 **아이폰에서 사진이 안 나온다.** 애플이
+ *   기본으로 http 접속을 막기 때문이다(App Transport Security). 웹에서는
+ *   멀쩡히 보이다가 기기에서만 빈칸이 돼서 원인을 찾기 어렵다.
+ *   같은 주소가 https 로도 열리므로 여기서 바꿔 둔다.
+ */
+const secure = (url) => String(url ?? '').replace(/^http:\/\//, 'https://');
+
 let requests = 0;
 
 async function callApi(op, params) {
@@ -162,7 +173,7 @@ async function nearbyWithPhoto(coords) {
       address: String(it.addr1 ?? '').trim(),
       coords: { lat: Number(it.mapy), lng: Number(it.mapx) },
       distanceMeters: Math.round(Number(it.dist) || 0),
-      image: it.firstimage,
+      image: secure(it.firstimage),
       type:
         Number(it.contenttypeid) === 39 && it.cat3 === CAFE_CAT3
           ? 'cafe'
@@ -196,7 +207,7 @@ async function usablePhoto(contentId, fallback) {
   if (!ok) return null;
 
   return {
-    url: ok.originimgurl || ok.smallimageurl || fallback,
+    url: secure(ok.originimgurl || ok.smallimageurl || fallback),
     copyright: String(ok.cpyrhtDivCd),
   };
 }

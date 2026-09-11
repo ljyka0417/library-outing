@@ -2,6 +2,7 @@ import type { Coordinates, NearbyPlace, NearbyType } from '@/types';
 import { MOCK_NEARBY } from '@/data/nearby.mock';
 import generated from '@/data/nearby.generated.json';
 import tourPhotos from '@/data/tour-photos.generated.json';
+import { secureUrl } from '@/data/libraryPhotos';
 import { delay } from './config';
 
 /**
@@ -91,7 +92,10 @@ export const nearbyApi: NearbyApi = {
          * 이미지가 아예 없다 — 지도 앱에서 보이는 가게 사진은 업주·이용자가
          * 올린 것이라 카카오가 외부에 내줄 권리가 없기 때문이다. 네이버도 같다.
          */
-        imageUrl: (p as Partial<TourPlace>).imageUrl,
+        // 아이폰은 http 사진을 안 불러온다. 옛 데이터가 남아 있어도 안 깨지게 여기서 맞춘다.
+        imageUrl: (p as Partial<TourPlace>).imageUrl
+          ? secureUrl((p as TourPlace).imageUrl)
+          : undefined,
         credit: (p as Partial<TourPlace>).credit,
       }));
   },
