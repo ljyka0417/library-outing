@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
@@ -20,11 +20,31 @@ export default function SearchScreen() {
 
   const [keyword, setKeyword] = useState('');
   const [category, setCategory] = useState<CategoryId | undefined>(
-    params.category as CategoryId | undefined
+    CATEGORY_MAP[params.category ?? ''] ? (params.category as CategoryId) : undefined
   );
   const [sido, setSido] = useState<string | undefined>();
   const [openNow, setOpenNow] = useState(false);
   const tabPad = useTabBarPadding();
+
+  /**
+   * 홈에서 주제를 눌러 들어왔을 때 그 주제로 맞춘다.
+   *
+   * 검색은 탭 화면이라 한 번 뜨면 계속 살아 있다. 위 useState 의 초기값은
+   * 맨 처음 한 번만 읽히므로, 홈에서 주제를 눌러도 필터가 안 걸리고 132곳이
+   * 통째로 나왔다. 목록이 랜드마크로 시작하니 "전부 랜드마크로 나온다" 로
+   * 보였던 게 이것이다.
+   *
+   * 읽고 나면 주소에서 지운다(consume). 그래야 사용자가 화면에서 주제를
+   * 직접 껐을 때 다시 켜지지 않고, 홈에서 같은 주제를 또 눌러도 반응한다.
+   */
+  useEffect(() => {
+    const incoming = params.category;
+    if (!incoming || !CATEGORY_MAP[incoming]) return;
+    setCategory(incoming as CategoryId);
+    // 주제를 새로 고른 것은 새로 둘러보겠다는 뜻이다. 이전 검색어는 비운다.
+    setKeyword('');
+    router.setParams({ category: '' });
+  }, [params.category, router]);
 
   const favorites = useAppStore((s) => s.favorites);
   const toggleFavorite = useAppStore((s) => s.toggleFavorite);
