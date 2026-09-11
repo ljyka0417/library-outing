@@ -13,7 +13,7 @@ import { EmptyState } from './common';
 import { nearbyApi } from '@/api/nearbyApi';
 import { colors, radius, spacing, typography } from '@/theme';
 import { formatDistance, walkingMinutes } from '@/utils/openingHours';
-import { openKakaoMap, openWeb } from '@/utils/mapLinks';
+import { openKakaoMap } from '@/utils/mapLinks';
 import { useT } from '@/i18n';
 import type { Coordinates, NearbyPlace, NearbyType } from '@/types';
 
@@ -121,12 +121,6 @@ export function NearbySection({ libraryId, coords }: Props) {
           ))}
         </ScrollView>
       )}
-
-      {/* 카드를 누르면 앱 밖으로 나가므로 미리 알려 준다. 사진이 우리 화면에
-          없는 대신 어디에 있는지를 말해 주는 줄이기도 하다. */}
-      {!loading && !error && places.length > 0 && places[0].placeUrl ? (
-        <Text style={styles.hint}>{t('nearby.opensKakao')}</Text>
-      ) : null}
     </View>
   );
 }
@@ -134,51 +128,48 @@ export function NearbySection({ libraryId, coords }: Props) {
 function PlaceCard({ place }: { place: NearbyPlace }) {
   const { t } = useT();
 
-  /*
-   * 누르면 카카오 장소 페이지로 간다. 거기에 사진·후기·영업시간이 있다.
-   *
-   * 사진을 우리가 가져다 붙이지 않는 이유: 지도 API 는 장소 사진을 주지
-   * 않고(카카오·네이버 둘 다), 검색해서 나온 사진을 가져다 쓰면 남의
-   * 사진을 그 가게 것인 양 싣는 셈이 된다. 사진이 있는 곳으로 보내면
-   * 그 문제 없이 사진을 보여줄 수 있다.
-   *
-   * 좌표는 남겨 둔다. 옛 데이터에는 placeUrl 이 없어서, 그때는 지도에
-   * 핀을 찍는 예전 동작으로 떨어진다.
-   */
-  const open = () =>
-    place.placeUrl
-      ? void openWeb(place.placeUrl)
-      : void openKakaoMap({ name: place.name, coords: place.coords });
-
   return (
     <Pressable
-      onPress={open}
+      onPress={() => void openKakaoMap({ name: place.name, coords: place.coords })}
       style={({ pressed }) => [styles.card, pressed && { opacity: 0.85 }]}
     >
-      {/* 카카오 로컬 API 는 장소 사진을 주지 않는다.
-          "이미지 없음" 회색 상자를 놓느니, 종류별 색과 아이콘으로 칠해
-          목록에서 맛집/카페/문화시설이 한눈에 구분되게 한다. */}
-      {/* cardImageFallback 을 빠뜨려서 아이콘이 가운데가 아니라 왼쪽 위에
-          붙어 있었다. 사진 대신 놓는 자리인 만큼 가운데가 맞다. */}
-      <View
-        style={[
-          styles.cardImage,
-          styles.cardImageFallback,
-          { backgroundColor: TYPE_STYLE[place.type].bg },
-        ]}
-      >
-        <Ionicons
-          name={TYPE_STYLE[place.type].icon}
-          size={30}
-          color={TYPE_STYLE[place.type].fg}
-        />
-        {/* 앱 밖으로 나간다는 표시. 눌렀을 때 딴 데로 튀는 느낌을 없앤다. */}
-        {place.placeUrl ? (
-          <View style={styles.linkBadge}>
-            <Ionicons name="open-outline" size={11} color={colors.white} />
-          </View>
-        ) : null}
-      </View>
+      {/*
+        사진이 있는 곳은 관광공사에서 온 것뿐이다. 카카오 로컬 API 는 장소
+        사진을 주지 않는다 — 지도 앱에서 보이는 가게 사진은 업주·이용자가
+        올린 것이라 카카오가 외부에 내줄 권리가 없다. 네이버도 같다.
+
+        사진이 없으면 "이미지 없음" 회색 상자를 놓느니 종류별 색과 아이콘으로
+        칠한다. 목록에서 맛집/카페/문화시설이 한눈에 구분되기도 한다.
+      */}
+      {place.imageUrl ? (
+        <View style={styles.cardImage}>
+          <Image source={{ uri: place.imageUrl }} style={styles.cardPhoto} resizeMode="cover" />
+          {/* 공공누리 사진은 출처를 밝혀야 한다. 사진 위 한 줄로 붙인다. */}
+          {place.credit ? (
+            <View style={styles.creditBar}>
+              <Text style={styles.creditText} numberOfLines={1}>
+                {place.credit}
+              </Text>
+            </View>
+          ) : null}
+        </View>
+      ) : (
+        /* cardImageFallback 을 빠뜨려서 아이콘이 가운데가 아니라 왼쪽 위에
+           붙어 있었다. 사진 대신 놓는 자리인 만큼 가운데가 맞다. */
+        <View
+          style={[
+            styles.cardImage,
+            styles.cardImageFallback,
+            { backgroundColor: TYPE_STYLE[place.type].bg },
+          ]}
+        >
+          <Ionicons
+            name={TYPE_STYLE[place.type].icon}
+            size={30}
+            color={TYPE_STYLE[place.type].fg}
+          />
+        </View>
+      )}
 
       <View style={styles.cardBody}>
         <Text style={styles.cardName} numberOfLines={1}>
@@ -234,12 +225,6 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontWeight: '700',
   },
-  hint: {
-    ...typography.tiny,
-    color: colors.textMuted,
-    paddingHorizontal: spacing.xl,
-    marginTop: spacing.sm,
-  },
   loading: {
     height: 120,
     alignItems: 'center',
@@ -266,17 +251,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  /** 앱 밖으로 나간다는 표시 */
-  linkBadge: {
+  cardPhoto: {
+    width: '100%',
+    height: '100%',
+  },
+  /** 공공누리 사진의 출처 표기 */
+  creditBar: {
     position: 'absolute',
-    top: 6,
-    right: 6,
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(0,0,0,0.35)',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    backgroundColor: 'rgba(0,0,0,0.45)',
+  },
+  creditText: {
+    ...typography.tiny,
+    fontSize: 9,
+    color: colors.white,
   },
   cardBody: {
     padding: spacing.md,

@@ -1,6 +1,7 @@
 import type { Coordinates, NearbyPlace, NearbyType } from '@/types';
 import { MOCK_NEARBY } from '@/data/nearby.mock';
 import generated from '@/data/nearby.generated.json';
+import tourPhotos from '@/data/tour-photos.generated.json';
 import { delay } from './config';
 
 /**
@@ -33,6 +34,23 @@ interface GeneratedPlace {
 const byLibrary = (generated as { byLibrary?: Record<string, GeneratedPlace[]> }).byLibrary ?? {};
 const hasGenerated = Object.keys(byLibrary).length > 0;
 
+/**
+ * 한국관광공사에서 모은 "사진 있는 주변 장소".
+ *
+ * 카카오 목록을 대체하지 않고 **보탠다.** 관광공사에는 등록된 관광지와
+ * 업소만 있어서 동네 구내식당 같은 곳이 빠지고, 카카오에는 사진이 없다.
+ * 둘을 합치면 사진 있는 곳이 앞에 서고 나머지가 뒤를 채운다.
+ *
+ * 사진에는 출처 표기 의무가 있다 (공공누리 제1·3유형).
+ * 수집은 scripts/collect-tour-photos.mjs 가 한다 — npm run collect-tour
+ */
+interface TourPlace extends GeneratedPlace {
+  imageUrl: string;
+  credit: string;
+}
+const tourByLibrary =
+  (tourPhotos as { byLibrary?: Record<string, TourPlace[]> }).byLibrary ?? {};
+
 export interface NearbyApi {
   list(libraryId: string, coords: Coordinates, type: NearbyType): Promise<NearbyPlace[]>;
 }
@@ -45,9 +63,17 @@ export const nearbyApi: NearbyApi = {
       return MOCK_NEARBY.filter((p) => p.libraryId === libraryId && p.type === type);
     }
 
-    const places = byLibrary[libraryId] ?? [];
-    return places
-      .filter((p) => p.type === type)
+    /*
+     * 사진 있는 곳(관광공사)을 앞에, 나머지(카카오)를 뒤에 놓는다.
+     * 같은 곳이 양쪽에 있으면 이름이 겹치므로 한 번만 남긴다.
+     */
+    const withPhoto = (tourByLibrary[libraryId] ?? []).filter((p) => p.type === type);
+    const seen = new Set(withPhoto.map((p) => p.name.replace(/\s/g, '')));
+    const rest = (byLibrary[libraryId] ?? []).filter(
+      (p) => p.type === type && !seen.has(p.name.replace(/\s/g, ''))
+    );
+
+    return [...withPhoto, ...rest]
       .map((p) => ({
         id: p.id,
         libraryId: p.libraryId,
@@ -59,14 +85,14 @@ export const nearbyApi: NearbyApi = {
         distanceMeters: p.distanceMeters,
         placeUrl: p.placeUrl,
         /*
-         * 카카오 로컬 API 는 사진을 주지 않는다. 응답 항목 열두 개에 이미지가
-         * 아예 없다 — 지도 앱에서 보이는 가게 사진은 업주·이용자가 올린 것이라
-         * 카카오가 외부에 내줄 권리가 없기 때문이다. 네이버도 같다.
+         * 사진은 관광공사에서 온 것만 있다.
          *
-         * 그래서 사진을 가져오는 대신 **사진이 있는 곳으로 보낸다.**
-         * 카드를 누르면 위 placeUrl(카카오 장소 페이지)이 열린다.
+         * 카카오 로컬 API 는 장소 사진을 주지 않는다. 응답 항목 열두 개에
+         * 이미지가 아예 없다 — 지도 앱에서 보이는 가게 사진은 업주·이용자가
+         * 올린 것이라 카카오가 외부에 내줄 권리가 없기 때문이다. 네이버도 같다.
          */
-        imageUrl: undefined,
+        imageUrl: (p as Partial<TourPlace>).imageUrl,
+        credit: (p as Partial<TourPlace>).credit,
       }));
   },
 };

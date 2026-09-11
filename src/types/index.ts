@@ -121,7 +121,9 @@ export interface NearbyPlace {
   distanceMeters: number;
   /** 카카오 장소 페이지. 사진·후기·영업시간이 거기 있다. */
   placeUrl?: string;
+  /** 관광공사 사진. 출처 표기 의무가 있어 credit 을 같이 받는다. */
   imageUrl?: string;
+  credit?: string;
   /** 한 줄 소개 */
   note?: string;
 }

@@ -1,0 +1,7 @@
+{
+  "_readme": "한국관광공사 TourAPI 로 빌드 타임에 수집한 \"사진 있는 주변 장소\" 입니다. 직접 고치지 마세요. 다시 모으려면 npm run collect-tour.",
+  "_generatedAt": "2026-09-11T12:28:45.275Z",
+  "_radiusMeters": 1500,
+  "_source": "한국관광공사 (공공누리 제1·3유형 사진만)",
+  "byLibrary": {}
+}
