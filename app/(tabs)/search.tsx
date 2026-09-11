@@ -12,6 +12,7 @@ import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
 import { isOpenNow } from '@/utils/openingHours';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
+import { centered, useLayout } from '@/hooks/useLayout';
 import { colors, spacing, typography } from '@/theme';
 import type { CategoryId } from '@/types';
 
@@ -27,6 +28,7 @@ export default function SearchScreen() {
   const [openNow, setOpenNow] = useState(false);
   const tabPad = useTabBarPadding();
   const { t } = useT();
+  const layout = useLayout();
 
   /**
    * 홈에서 주제를 눌러 들어왔을 때 그 주제로 맞춘다.
@@ -84,7 +86,10 @@ export default function SearchScreen() {
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
-      <View style={styles.searchWrap}>
+      {/* 태블릿에서는 이 안쪽을 가운데로 모은다. 검색창부터 목록까지 한
+          덩어리로 묶어야 세로줄이 어긋나지 않는다. */}
+      <View style={[styles.body, centered(layout)]}>
+      <View style={[styles.searchWrap, { paddingHorizontal: layout.gutter }]}>
         <SearchBar
           value={keyword}
           onChangeText={setKeyword}
@@ -96,7 +101,7 @@ export default function SearchScreen() {
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.filterRow}
+        contentContainerStyle={[styles.filterRow, { paddingHorizontal: layout.gutter }]}
         style={[{ flexGrow: 0, flexShrink: 0 }, styles.filterRowSpacing]}
       >
         <Chip
@@ -120,7 +125,7 @@ export default function SearchScreen() {
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.filterRow}
+        contentContainerStyle={[styles.filterRow, { paddingHorizontal: layout.gutter }]}
         style={[{ flexGrow: 0, flexShrink: 0 }, styles.filterRowSpacing]}
       >
         <Chip
@@ -144,7 +149,7 @@ export default function SearchScreen() {
         ))}
       </ScrollView>
 
-      <Text style={styles.count}>
+      <Text style={[styles.count, { paddingHorizontal: layout.gutter }]}>
         {countLabel}
         {isStale ? t('search.stale') : ''}
       </Text>
@@ -162,7 +167,18 @@ export default function SearchScreen() {
           directionalLockEnabled
           data={results}
           keyExtractor={(item) => item.id}
-          contentContainerStyle={[styles.list, { paddingBottom: tabPad }]}
+          /* 열 수가 바뀌면 FlatList 는 다시 만들어야 한다. 안 그러면
+             "numColumns 를 도중에 못 바꾼다" 며 화면이 깨진다.
+             아이패드를 돌리거나 화면을 나눠 쓸 때 실제로 바뀐다. */
+          key={layout.listColumns}
+          numColumns={layout.listColumns}
+          columnWrapperStyle={
+            layout.listColumns > 1 ? { gap: spacing.md } : undefined
+          }
+          contentContainerStyle={[
+            styles.list,
+            { paddingHorizontal: layout.gutter, paddingBottom: tabPad },
+          ]}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
           ListEmptyComponent={
@@ -172,15 +188,20 @@ export default function SearchScreen() {
             />
           }
           renderItem={({ item }) => (
-            <LibraryCard
-              library={item}
-              onPress={() => router.push(`/library/${item.id}`)}
-              isFavorite={favorites.includes(item.id)}
-              onToggleFavorite={() => toggleFavorite(item.id)}
-            />
+            /* 두 줄로 놓을 때 카드가 각자 반씩 나눠 갖게 한다.
+               한 줄일 때도 flex:1 은 해가 없다. */
+            <View style={{ flex: 1 }}>
+              <LibraryCard
+                library={item}
+                onPress={() => router.push(`/library/${item.id}`)}
+                isFavorite={favorites.includes(item.id)}
+                onToggleFavorite={() => toggleFavorite(item.id)}
+              />
+            </View>
           )}
         />
       )}
+      </View>
     </SafeAreaView>
   );
 }
@@ -190,13 +211,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background,
   },
+  /** 태블릿에서 가운데로 모이는 본문 (폰에서는 화면 폭 그대로) */
+  body: {
+    flex: 1,
+  },
   searchWrap: {
-    paddingHorizontal: spacing.xl,
     paddingTop: spacing.md,
     paddingBottom: spacing.lg,
   },
   filterRow: {
-    paddingHorizontal: spacing.xl,
     gap: spacing.sm,
     // 칩이 잘리지 않도록 위아래 여유를 준다
     paddingVertical: spacing.xs,
@@ -214,12 +237,11 @@ const styles = StyleSheet.create({
   count: {
     ...typography.caption,
     color: colors.textSub,
-    paddingHorizontal: spacing.xl,
     paddingVertical: spacing.sm,
   },
   list: {
-    padding: spacing.xl,
     paddingTop: spacing.sm,
+    paddingBottom: spacing.xl,
     gap: spacing.md,
   },
 });

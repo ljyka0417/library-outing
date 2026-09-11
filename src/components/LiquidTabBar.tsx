@@ -86,7 +86,14 @@ export function LiquidTabBar({ state, descriptors, navigation }: TabBarProps) {
    */
   const { width: screenWidth } = useWindowDimensions();
   const count = state.routes.length;
-  const itemWidth = count > 0 ? (screenWidth - TAB_BAR.side * 2 - PAD * 2) / count : 0;
+  /**
+   * 알약 폭.
+   *
+   * 아이패드에서 화면 끝까지 늘리면 아이콘 다섯 개가 손이 닿지 않을 만큼
+   * 멀어진다. 폰에서 쓰던 크기를 넘지 않게 묶고 가운데에 둔다.
+   */
+  const barWidth = Math.min(screenWidth - TAB_BAR.side * 2, TAB_BAR.maxWidth);
+  const itemWidth = count > 0 ? (barWidth - PAD * 2) / count : 0;
 
   /**
    * 가로 위치와 가로 늘어남.
@@ -194,7 +201,7 @@ export function LiquidTabBar({ state, descriptors, navigation }: TabBarProps) {
     <View style={[styles.wrap, { bottom }]} pointerEvents="box-none">
       {/* 그림자와 잘라내기를 한 겹에 같이 두면 iOS 에서 그림자가 잘린다.
           바깥은 그림자만, 안쪽은 둥글게 자르는 역할만 맡는다. */}
-      <View style={[styles.shadowHost, glass && styles.shadowHostGlass]}>
+      <View style={[styles.shadowHost, { width: barWidth }, glass && styles.shadowHostGlass]}>
         <GestureDetector gesture={drag}>
         <View style={[styles.row, glass && styles.rowGlass]}>
           {/* 유리를 켰을 때만 뒤가 비친다. 스위치는 저장되지 않으므로
@@ -266,6 +273,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: TAB_BAR.side,
     right: TAB_BAR.side,
+    // 알약이 화면보다 좁을 수 있으므로(태블릿) 가운데에 둔다
+    alignItems: 'center',
   },
   shadowHost: {
     borderRadius: TAB_BAR.height / 2,

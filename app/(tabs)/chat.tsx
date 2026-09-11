@@ -20,6 +20,7 @@ import { LibraryCard } from '@/components/LibraryCard';
 import { useAppStore } from '@/store/useAppStore';
 import { ask, STARTER_QUESTIONS, type Answer } from '@/utils/assistant';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
+import { centered, useLayout } from '@/hooks/useLayout';
 import { colors, radius, spacing, typography } from '@/theme';
 import { formatDistance, walkingMinutes } from '@/utils/openingHours';
 import { openKakaoMap } from '@/utils/mapLinks';
@@ -52,6 +53,7 @@ export default function ChatScreen() {
   const router = useRouter();
   const listRef = useRef<FlatList<Message>>(null);
   const tabPad = useTabBarPadding();
+  const layout = useLayout();
 
   const favorites = useAppStore((s) => s.favorites);
   const toggleFavorite = useAppStore((s) => s.toggleFavorite);
@@ -92,7 +94,10 @@ export default function ChatScreen() {
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
-      <View style={styles.header}>
+      {/* 태블릿에서는 대화 전체를 가운데로 모은다. 말풍선이 화면 끝까지
+          퍼지면 한 줄이 너무 길어 읽기 힘들다. */}
+      <View style={[styles.body, centered(layout)]}>
+      <View style={[styles.header, { paddingHorizontal: layout.gutter }]}>
         <Mascot size={38} pose="faceHappy" />
         <View style={{ flex: 1 }}>
           <Text style={styles.headerTitle}>달곰이에게 물어보기</Text>
@@ -110,7 +115,7 @@ export default function ChatScreen() {
           directionalLockEnabled
           data={messages}
           keyExtractor={(m) => m.id}
-          contentContainerStyle={styles.list}
+          contentContainerStyle={[styles.list, { paddingHorizontal: layout.gutter }]}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
           onContentSizeChange={scrollToEnd}
@@ -135,7 +140,7 @@ export default function ChatScreen() {
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.suggestRow}
+            contentContainerStyle={[styles.suggestRow, { paddingHorizontal: layout.gutter }]}
             style={{ flexGrow: 0, flexShrink: 0 }}
           >
             {lastSuggestions.map((s) => (
@@ -146,7 +151,7 @@ export default function ChatScreen() {
           </ScrollView>
         ) : null}
 
-        <View style={[styles.inputRow, { paddingBottom: tabPad }]}>
+        <View style={[styles.inputRow, { paddingHorizontal: layout.gutter, paddingBottom: tabPad }]}>
           <TextInput
             value={input}
             onChangeText={setInput}
@@ -168,6 +173,7 @@ export default function ChatScreen() {
           </Pressable>
         </View>
       </KeyboardAvoidingView>
+      </View>
     </SafeAreaView>
   );
 }
@@ -249,6 +255,8 @@ function Bubble({ message, onOpenLibrary, favorites, onToggleFavorite }: BubbleP
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.background },
+  /** 태블릿에서 가운데로 모이는 본문 (폰에서는 화면 폭 그대로) */
+  body: { flex: 1, backgroundColor: colors.background },
 
   header: {
     flexDirection: 'row',

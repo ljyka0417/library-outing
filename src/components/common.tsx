@@ -2,6 +2,7 @@ import React from 'react';
 import { Pressable, StyleSheet, Text, View, type ViewStyle } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Mascot, type MascotPose } from './Mascot';
+import { useLayout } from '@/hooks/useLayout';
 import { categoryColors, colors, radius, spacing, typography } from '@/theme';
 import type { CategoryId } from '@/types';
 
@@ -44,8 +45,12 @@ interface SectionHeaderProps {
 }
 
 export function SectionHeader({ title, subtitle, actionLabel, onAction }: SectionHeaderProps) {
+  // 좌우 여백은 화면 폭을 따라간다. 부르는 쪽마다 넘겨 주면 한 군데만
+  // 빠뜨려도 제목 줄이 어긋나므로 여기서 직접 읽는다.
+  const layout = useLayout();
+
   return (
-    <View style={styles.sectionHeader}>
+    <View style={[styles.sectionHeader, { paddingHorizontal: layout.gutter }]}>
       <View style={{ flex: 1 }}>
         <Text style={styles.sectionTitle}>{title}</Text>
         {subtitle ? <Text style={styles.sectionSubtitle}>{subtitle}</Text> : null}
@@ -151,7 +156,7 @@ const styles = StyleSheet.create({
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: spacing.xl,
+    // 좌우 여백은 useLayout 이 준다
     marginBottom: spacing.md,
   },
   sectionTitle: {

@@ -8,6 +8,7 @@ import { libraryApi } from '@/api/libraryApi';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
+import { centered, useLayout } from '@/hooks/useLayout';
 import { colors, spacing, typography } from '@/theme';
 
 export default function FavoritesScreen() {
@@ -15,6 +16,7 @@ export default function FavoritesScreen() {
   const favorites = useAppStore((s) => s.favorites);
   const toggleFavorite = useAppStore((s) => s.toggleFavorite);
   const tabPad = useTabBarPadding();
+  const layout = useLayout();
 
   const { data } = useAsync(() => libraryApi.list(), [], { cacheKey: 'all-libraries' });
 
@@ -25,7 +27,9 @@ export default function FavoritesScreen() {
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
-      <View style={styles.header}>
+      {/* 태블릿에서는 제목부터 목록까지 한 덩어리로 가운데에 모은다 */}
+      <View style={[styles.body, centered(layout)]}>
+      <View style={[styles.header, { paddingHorizontal: layout.gutter }]}>
         <Text style={styles.title}>즐겨찾기</Text>
         <Text style={styles.subtitle}>
           {saved.length > 0
@@ -38,7 +42,14 @@ export default function FavoritesScreen() {
         directionalLockEnabled
         data={saved}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={[styles.list, { paddingBottom: tabPad }]}
+        /* 열 수가 바뀌면 FlatList 를 새로 만들어야 한다 (아이패드 회전) */
+        key={layout.listColumns}
+        numColumns={layout.listColumns}
+        columnWrapperStyle={layout.listColumns > 1 ? { gap: spacing.md } : undefined}
+        contentContainerStyle={[
+          styles.list,
+          { paddingHorizontal: layout.gutter, paddingBottom: tabPad },
+        ]}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={
           <EmptyState
@@ -48,14 +59,17 @@ export default function FavoritesScreen() {
           />
         }
         renderItem={({ item }) => (
-          <LibraryCard
-            library={item}
-            onPress={() => router.push(`/library/${item.id}`)}
-            isFavorite
-            onToggleFavorite={() => toggleFavorite(item.id)}
-          />
+          <View style={{ flex: 1 }}>
+            <LibraryCard
+              library={item}
+              onPress={() => router.push(`/library/${item.id}`)}
+              isFavorite
+              onToggleFavorite={() => toggleFavorite(item.id)}
+            />
+          </View>
         )}
       />
+      </View>
     </SafeAreaView>
   );
 }
@@ -65,8 +79,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background,
   },
+  /** 태블릿에서 가운데로 모이는 본문 (폰에서는 화면 폭 그대로) */
+  body: {
+    flex: 1,
+  },
   header: {
-    paddingHorizontal: spacing.xl,
     paddingTop: spacing.lg,
     paddingBottom: spacing.md,
   },
@@ -80,7 +97,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   list: {
-    padding: spacing.xl,
+    paddingVertical: spacing.xl,
     gap: spacing.md,
     flexGrow: 1,
   },

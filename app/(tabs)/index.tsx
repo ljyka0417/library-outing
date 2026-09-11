@@ -14,6 +14,7 @@ import { libraryApi } from '@/api/libraryApi';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
+import { centered, useLayout } from '@/hooks/useLayout';
 import { colors, radius, spacing, typography } from '@/theme';
 import type { CategoryId } from '@/types';
 
@@ -22,6 +23,7 @@ export default function HomeScreen() {
   const recentIds = useAppStore((s) => s.recentLibraryIds);
   const tabPad = useTabBarPadding();
   const { t } = useT();
+  const layout = useLayout();
 
   const featured = useAsync(() => libraryApi.featured(), [], { cacheKey: 'featured' });
   const all = useAsync(() => libraryApi.list(), [], { cacheKey: 'all-libraries' });
@@ -38,9 +40,16 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
-      <ScrollView directionalLockEnabled showsVerticalScrollIndicator={false} contentContainerStyle={[styles.content, { paddingBottom: tabPad }]}>
+      {/* 태블릿에서는 본문을 가운데로 모은다. 폰에서는 화면 폭 그대로라
+          centered() 가 아무 일도 하지 않는다. */}
+      <ScrollView
+        directionalLockEnabled
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={[styles.content, { paddingBottom: tabPad }]}
+      >
+        <View style={centered(layout)}>
         {/* 인사 + 검색 */}
-        <View style={styles.header}>
+        <View style={[styles.header, { paddingHorizontal: layout.gutter }]}>
           {/* 언어 단추는 맨 위 오른쪽. 가이드북을 든 외국인 방문객이
               제일 먼저 찾는 자리다. */}
           <View style={styles.langRow}>
@@ -65,7 +74,7 @@ export default function HomeScreen() {
         {/* QR 안내 배너 - 책과 앱을 잇는 핵심 동선이라 홈 상단에 고정 노출.
             아이콘은 검게 둔다. 실제 QR 이 검은색이라, 흐린 갈색보다
             "이게 QR 이야기구나" 가 한눈에 읽힌다. */}
-        <View style={styles.qrBanner}>
+        <View style={[styles.qrBanner, { marginHorizontal: layout.gutter }]}>
           <View style={styles.qrIcon}>
             <Ionicons name="qr-code" size={20} color={colors.black} />
           </View>
@@ -98,7 +107,7 @@ export default function HomeScreen() {
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
-              contentContainerStyle={styles.carousel}
+              contentContainerStyle={[styles.carousel, { paddingHorizontal: layout.gutter }]}
             >
               {(featured.data ?? []).map((lib) => (
                 <LibraryCard
@@ -116,7 +125,7 @@ export default function HomeScreen() {
         {recentLibraries.length > 0 ? (
           <View style={styles.section}>
             <SectionHeader title={t('home.recentTitle')} />
-            <View style={styles.list}>
+            <View style={[styles.list, { paddingHorizontal: layout.gutter }]}>
               {recentLibraries.slice(0, 3).map((lib) => (
                 <LibraryCard
                   key={lib.id}
@@ -131,6 +140,7 @@ export default function HomeScreen() {
         {featured.isStale || all.isStale ? (
           <Text style={styles.offlineNote}>{t('home.offline')}</Text>
         ) : null}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -146,7 +156,6 @@ const styles = StyleSheet.create({
     paddingBottom: spacing.xxxl + spacing.lg,
   },
   header: {
-    paddingHorizontal: spacing.xl,
     paddingTop: spacing.md,
     paddingBottom: spacing.xl,
     gap: spacing.lg,
@@ -199,11 +208,9 @@ const styles = StyleSheet.create({
     marginBottom: spacing.xxl,
   },
   carousel: {
-    paddingHorizontal: spacing.xl,
     gap: spacing.md,
   },
   list: {
-    paddingHorizontal: spacing.xl,
     gap: spacing.md,
   },
   offlineNote: {

@@ -13,6 +13,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Mascot } from '@/components/Mascot';
 import { useAppStore } from '@/store/useAppStore';
+import { centered, useLayout } from '@/hooks/useLayout';
 import { colors, radius, spacing, typography } from '@/theme';
 
 /**
@@ -41,6 +42,7 @@ export default function OnboardingScreen() {
   // Dimensions.get() 을 모듈 스코프에서 읽으면 화면이 아직 없는 시점이라
   // 0 이 나올 수 있다. 훅으로 읽어야 회전/리사이즈에도 따라온다.
   const { width } = useWindowDimensions();
+  const layout = useLayout();
   const [page, setPage] = useState(0);
   const scrollRef = useRef<ScrollView>(null);
   const completeOnboarding = useAppStore((s) => s.completeOnboarding);
@@ -79,13 +81,17 @@ export default function OnboardingScreen() {
       >
         {SLIDES.map((slide) => (
           <View key={slide.title} style={[styles.slide, { width }]}>
-            {/* 포즈 자체가 각 단계의 행동을 말해 주므로 별도 아이콘 배지는 두지 않는다 */}
-            <View style={styles.mascotWrap}>
-              <Mascot size={190} pose={slide.pose} />
-            </View>
+            {/* 한 장은 화면 폭을 그대로 차지해야 넘기기가 맞는다. 대신 안쪽
+                내용만 태블릿에서 가운데로 모아 글줄이 길어지지 않게 한다. */}
+            <View style={[styles.slideInner, centered(layout)]}>
+              {/* 포즈 자체가 각 단계의 행동을 말해 주므로 별도 아이콘 배지는 두지 않는다 */}
+              <View style={styles.mascotWrap}>
+                <Mascot size={190} pose={slide.pose} />
+              </View>
 
-            <Text style={styles.title}>{slide.title}</Text>
-            <Text style={styles.body}>{slide.body}</Text>
+              <Text style={styles.title}>{slide.title}</Text>
+              <Text style={styles.body}>{slide.body}</Text>
+            </View>
           </View>
         ))}
       </ScrollView>
@@ -96,7 +102,7 @@ export default function OnboardingScreen() {
         ))}
       </View>
 
-      <View style={styles.footer}>
+      <View style={[styles.footer, centered(layout)]}>
         <Pressable
           onPress={next}
           style={({ pressed }) => [styles.cta, pressed && { opacity: 0.85 }]}
@@ -127,6 +133,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: spacing.xxxl,
     paddingHorizontal: spacing.xxl,
+  },
+  /** 태블릿에서 가운데로 모이는 한 장의 내용 (폰에서는 화면 폭 그대로) */
+  slideInner: {
+    alignItems: 'center',
   },
   mascotWrap: {
     marginBottom: spacing.xxl,

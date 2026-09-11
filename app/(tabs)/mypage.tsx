@@ -11,12 +11,14 @@ import { dataCompleteness } from '@/data/libraries.mock';
 import { loanBookStatus } from '@/data/books.mock';
 import { glassSupport } from '@/components/GlassSurface';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
+import { centered, useLayout } from '@/hooks/useLayout';
 import { colors, radius, spacing, typography } from '@/theme';
 
 export default function MyPageScreen() {
   const { favorites, visits, recentLibraryIds, resetAll } = useAppStore();
   const { data } = useAsync(() => libraryApi.list(), [], { cacheKey: 'all-libraries' });
   const tabPad = useTabBarPadding();
+  const layout = useLayout();
 
   const visitedNames = visits
     .slice(0, 5)
@@ -36,7 +38,14 @@ export default function MyPageScreen() {
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
-      <ScrollView directionalLockEnabled showsVerticalScrollIndicator={false} contentContainerStyle={[styles.content, { paddingBottom: tabPad }]}>
+      <ScrollView
+        directionalLockEnabled
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={[styles.content, { paddingBottom: tabPad }]}
+      >
+        {/* 태블릿에서는 이 안쪽을 가운데로 모은다. ScrollView 의
+            contentContainerStyle 에 직접 넣으면 왼쪽에 붙은 채로 남는다. */}
+        <View style={[styles.inner, centered(layout), { paddingHorizontal: layout.gutter }]}>
         <View style={styles.profile}>
           <Mascot size={110} pose="hello" />
           <Text style={styles.name}>달곰이와 도서관 나들이 중</Text>
@@ -74,6 +83,7 @@ export default function MyPageScreen() {
         {/* 개발용 데이터 수집 현황. __DEV__ 라 배포 빌드에는 나오지 않는다. */}
         {__DEV__ ? <GlassTest /> : null}
         {__DEV__ ? <DataStatus /> : null}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -197,7 +207,9 @@ function MenuRow({ icon, label, onPress, comingSoon, danger }: MenuRowProps) {
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.background },
-  content: { padding: spacing.xl, gap: spacing.lg, paddingBottom: spacing.xxxl },
+  content: { paddingVertical: spacing.xl, paddingBottom: spacing.xxxl },
+  /** 태블릿에서 가운데로 모이는 본문 (폰에서는 화면 폭 그대로) */
+  inner: { gap: spacing.lg },
   profile: { alignItems: 'center', paddingVertical: spacing.lg, gap: spacing.xs },
   name: { ...typography.h3, color: colors.text, marginTop: spacing.sm },
   sub: { ...typography.caption, color: colors.textSub },

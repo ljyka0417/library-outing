@@ -20,6 +20,7 @@ import { CATEGORY_MAP } from '@/data/categories';
 import { loanDataVersion } from '@/data/books.mock';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
+import { centered, useLayout } from '@/hooks/useLayout';
 import { colors, radius, shadow, spacing, typography } from '@/theme';
 import { callPhone, openWeb } from '@/utils/mapLinks';
 import { isOpenNow, todayHoursLabel } from '@/utils/openingHours';
@@ -57,6 +58,7 @@ export default function LibraryDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
   const [expanded, setExpanded] = useState(false);
+  const layout = useLayout();
 
   const favorites = useAppStore((s) => s.favorites);
   const toggleFavorite = useAppStore((s) => s.toggleFavorite);
@@ -111,6 +113,9 @@ export default function LibraryDetailScreen() {
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.content}>
+        {/* 태블릿에서는 상세 전체를 가운데로 모은다. QR 로 바로 들어오는
+            화면이라 여기가 제일 자주 보인다. */}
+        <View style={centered(layout)}>
         {/* 대표 이미지. 실사진이 없으면 주제 색 플레이스홀더가 나온다. */}
         <LibraryImage library={library} variant="hero" />
 
@@ -283,6 +288,7 @@ export default function LibraryDetailScreen() {
             <Ionicons name="footsteps-outline" size={18} color={colors.primary} />
             <Text style={styles.checkinText}>여기 다녀왔어요</Text>
           </Pressable>
+        </View>
         </View>
       </ScrollView>
     </View>
