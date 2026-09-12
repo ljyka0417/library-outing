@@ -18,6 +18,7 @@ import { Mascot } from '@/components/Mascot';
 import { BookCard } from '@/components/BookCard';
 import { LibraryCard } from '@/components/LibraryCard';
 import { useAppStore } from '@/store/useAppStore';
+import { LIBRARY_COUNT } from '@/data/libraries.mock';
 import { ask, starterQuestions, type Answer } from '@/utils/assistant';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { centered, useLayout } from '@/hooks/useLayout';
@@ -34,20 +35,18 @@ interface Message {
 }
 
 /* 인사말은 화면에서 t('chat.greeting') 으로 갈아 끼운다. 말을 바꾸면
-   그 자리에서 같이 바뀌어야 하기 때문이다. 여기 text 는 쓰이지 않는다. */
+   그 자리에서 같이 바뀌어야 하기 때문이다. 여기 text 는 쓰이지 않으므로
+   도서관 수도 적지 않는다 — 목록이 바뀌면 곧바로 거짓말이 된다. */
 const GREETING: Message = {
   id: 'greeting',
   role: 'dalgomi',
-  text: `안녕하세요, 달곰이예요.
-전국 도서관 132곳을 알고 있어요. 무엇이든 물어보세요.
-
-저는 이 앱에 담긴 정보로만 답해요. 모르는 건 지어내지 않고 모른다고 말할게요.`,
+  text: '',
 };
 
 /**
  * 달곰이에게 물어보기.
  *
- * 바깥 AI 를 부르지 않는다. 앱에 담긴 132곳 데이터로 답한다.
+ * 바깥 AI 를 부르지 않는다. 앱에 담긴 도서관 데이터로만 답한다.
  * 그래서 서버도 API 키도 요금도 없고, 비행기 모드에서도 답한다.
  * 무엇보다 확인되지 않은 운영시간을 지어내지 않는다 — 답을 만드는 규칙은
  * src/utils/assistant.ts 에 있다.
@@ -105,7 +104,7 @@ export default function ChatScreen() {
         <Mascot size={38} pose="faceHappy" />
         <View style={{ flex: 1 }}>
           <Text style={styles.headerTitle}>{t('chat.title')}</Text>
-          <Text style={styles.headerSub}>{t('chat.sub')}</Text>
+          <Text style={styles.headerSub}>{t('chat.sub', { count: LIBRARY_COUNT })}</Text>
         </View>
       </View>
 
@@ -137,7 +136,7 @@ export default function ChatScreen() {
               /* 첫 인사만은 말을 바꾸면 그 자리에서 같이 바뀌어야 한다.
                  처음 뜰 때 만든 글을 그대로 두면 영어로 바꿔도 한국어
                  인사가 남는다. */
-              message={item.id === 'greeting' ? { ...item, text: t('chat.greeting') } : item}
+              message={item.id === 'greeting' ? { ...item, text: t('chat.greeting', { count: LIBRARY_COUNT }) } : item}
               onOpenLibrary={(id) => router.push(`/library/${id}`)}
               favorites={favorites}
               onToggleFavorite={toggleFavorite}

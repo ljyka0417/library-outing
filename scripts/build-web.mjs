@@ -193,7 +193,7 @@ function indexPage() {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>도서관 지도 · 전국 특화 도서관 132곳</title>
+<title>도서관 지도 · 전국 특화 도서관</title>
 <meta name="description" content="달곰이와 함께하는 전국 도서관 나들이. 전국 ${seeds.length}곳의 특화 도서관을 주제별로 만나보세요.">
 <style>${CSS}</style>
 </head>

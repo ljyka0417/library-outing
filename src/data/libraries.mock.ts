@@ -5,7 +5,7 @@ import standardJson from './libraries.standard.json';
 import manualJson from './libraries.manual.json';
 
 /**
- * 졸업작품 선정 도서관 132곳.
+ * 졸업작품 선정 도서관 목록.
  *
  * ─────────────────────────────────────────────────────────────
  * 이 파일에 들어 있는 것 / 없는 것
@@ -58,7 +58,10 @@ const APPROX_COORDS: Record<string, Coordinates> = {
 };
 
 /**
- * 도서관 132곳.
+ * 도서관 목록.
+ *
+ * 곳 수는 여기서 세어 LIBRARY_COUNT 로 내보낸다. 화면 문구에 숫자를
+ * 직접 적으면 목록이 바뀔 때 조용히 틀린 말이 남는다.
  *
  * **주제는 도서관마다 딱 하나다.**
  *   전에는 두 개씩 달 수 있었다. 「어린이」를 눌렀는데 미술 도서관이,
@@ -123,7 +126,6 @@ const SEEDS: Seed[] = [
   { id: 'knu-future', name: '강원대학교 KNU미래도서관', sido: '강원', specialty: 'IT·미래', categories: ['science'] },
   { id: 'inje-miracle', name: '인제 기적의도서관', sido: '강원', specialty: '어린이', categories: ['kids'] },
   { id: 'wondeok-library', name: '원덕도서관', sido: '강원', specialty: '자연', categories: ['nature'] },
-  { id: 'gangneung-culture-small', name: '강릉 문화작은도서관', sido: '강원', specialty: '커피', categories: ['food'] },
   { id: 'mangsang-beach', name: '망상해뜰책뜰 바닷가작은도서관', sido: '강원', specialty: '바닷가·여행', categories: ['travel'] },
 
   /* ── 대전 ──────────────────────────────────────────────── */
@@ -307,6 +309,20 @@ function toLibrary(seed: Seed): Library {
 }
 
 export const MOCK_LIBRARIES: Library[] = SEEDS.map(toLibrary);
+
+/**
+ * 달곰이가 "전국 도서관 몇 곳을 알고 있어요" 라고 말할 때 쓰는 숫자.
+ *
+ * 예전엔 네 가지 언어의 문구에 132 를 직접 적어 두었다. 목록에서 한 곳을
+ * 빼자마자 열여섯 군데가 한꺼번에 틀렸고, 그중 하나는 아무도 모르게
+ * 오래전 숫자(72)로 남아 있었다. 숫자는 데이터에서 센다.
+ */
+export const LIBRARY_COUNT = MOCK_LIBRARIES.length;
+
+/** 그중 운영시간을 확인해 "지금 열려 있는지" 판단할 수 있는 곳 */
+export const LIBRARY_HOURS_COUNT = MOCK_LIBRARIES.filter(
+  (l) => l.hours?.byDay?.length === 7
+).length;
 
 /** 상세 정보가 얼마나 채워졌는지. 개발 중 진행률 확인용. */
 export function dataCompleteness() {

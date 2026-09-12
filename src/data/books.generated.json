@@ -4900,60 +4900,6 @@
         }
       ]
     },
-    "gangneung-culture-small": {
-      "scope": "region",
-      "region": "강원",
-      "books": [
-        {
-          "title": "소년이 온다",
-          "author": "한강",
-          "isbn": "9788936434120",
-          "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
-        },
-        {
-          "title": "모순",
-          "author": "양귀자",
-          "isbn": "9788998441012",
-          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/071/902/07190270.jpg?type=m1&udate=20170801"
-        },
-        {
-          "title": "혼모노",
-          "author": "성해나",
-          "isbn": "9788936439743",
-          "coverImageUrl": "https://image.aladin.co.kr/product/36101/66/cover200/893643974x_1.jpg"
-        },
-        {
-          "title": "불편한 편의점",
-          "author": "김호연",
-          "isbn": "9791161571188",
-          "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
-        },
-        {
-          "title": "작별하지 않는다",
-          "author": "한강",
-          "isbn": "9788954682152",
-          "coverImageUrl": "https://image.aladin.co.kr/product/27877/5/cover/8954682154_1.jpg"
-        },
-        {
-          "title": "안녕이라 그랬어",
-          "author": "김애란",
-          "isbn": "9791141602376",
-          "coverImageUrl": "https://image.aladin.co.kr/product/36566/52/cover200/k462039240_1.jpg"
-        },
-        {
-          "title": "흔한남매 16권",
-          "author": "원작: 흔한남매",
-          "isbn": "9791168418011",
-          "coverImageUrl": "https://image.aladin.co.kr/product/33815/12/cover200/k832930683_1.jpg"
-        },
-        {
-          "title": "흔한남매 14권",
-          "author": "원작: 흔한남매",
-          "isbn": "9791168416369",
-          "coverImageUrl": "https://image.aladin.co.kr/product/32459/74/cover/k622935200_1.jpg"
-        }
-      ]
-    },
     "mangsang-beach": {
       "scope": "region",
       "region": "강원",

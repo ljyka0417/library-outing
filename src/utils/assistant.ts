@@ -1,5 +1,5 @@
 import { CATEGORIES, SIDO_LIST } from '@/data/categories';
-import { MOCK_LIBRARIES } from '@/data/libraries.mock';
+import { LIBRARY_COUNT, LIBRARY_HOURS_COUNT, MOCK_LIBRARIES } from '@/data/libraries.mock';
 import { booksForLibrary } from '@/data/books.mock';
 import { nearbyApi } from '@/api/nearbyApi';
 import { isOpenNow, todayHoursLabel } from './openingHours';
@@ -13,7 +13,7 @@ import type { Book, CategoryId, Library, NearbyPlace, NearbyType } from '@/types
  * 그래서 서버도 API 키도 요금도 없고, 비행기 모드에서도 답한다.
  *
  * **모르는 건 모른다고 말한다.**
- *   운영시간을 확인한 곳은 132곳 중 72곳뿐이다. 나머지는 비워 두는 것이
+ *   운영시간을 확인하지 못한 곳은 비워 두는 것이
  *   이 앱의 원칙이고, 도우미도 같은 원칙을 따른다. 그럴듯한 시간을 지어내면
  *   사람이 헛걸음한다. 화면에서 조용히 숨기던 것을 말로 지어내면 더 나쁘다.
  *
@@ -388,8 +388,17 @@ function answerBrowse(q: string, lang: Lang, category?: CategoryId, sido?: strin
           : tr('bot.labelAny');
 
   if (libs.length === 0) {
-    // 왜 없는지까지 말해 준다. "없어요" 만으로는 앱이 고장 난 것처럼 보인다.
-    const reason = openOnly ? tr('bot.browseNoneOpen') : '';
+    /*
+     * 왜 없는지까지 말해 준다. "없어요" 만으로는 앱이 고장 난 것처럼 보인다.
+     *
+     * 단, 운영시간을 다 채운 뒤로는 "몇 곳 중 몇 곳뿐이라" 가 말이 안 된다.
+     * 빠진 곳이 실제로 있을 때만 그 사정을 덧붙인다.
+     */
+    const someHoursMissing = LIBRARY_HOURS_COUNT < LIBRARY_COUNT;
+    const reason =
+      openOnly && someHoursMissing
+        ? tr('bot.browseNoneOpen', { total: LIBRARY_COUNT, known: LIBRARY_HOURS_COUNT })
+        : '';
     return {
       text: tr('bot.browseNone', { label, labelTopic: josa(label, '은는') }) + reason,
       suggestions: [tr('bot.sugKids'), tr('bot.sugSeoul'), tr('bot.sugOpen')],
@@ -420,12 +429,12 @@ function answerBrowse(q: string, lang: Lang, category?: CategoryId, sido?: strin
 export async function ask(question: string, lang: Lang = 'ko'): Promise<Answer> {
   const tr = (key: MessageKey, vars?: Vars) => translate(lang, key, vars);
   const q = question.trim();
-  if (!q) return { text: tr('bot.help') };
+  if (!q) return { text: tr('bot.help', { count: LIBRARY_COUNT }) };
   const text = norm(q);
 
   if (ASK.greeting.test(text)) {
     return {
-      text: tr('bot.hello'),
+      text: tr('bot.hello', { count: LIBRARY_COUNT }),
       suggestions: [tr('bot.sugKids'), tr('bot.sugOpen'), tr('bot.sugSeoul')],
     };
   }
@@ -433,7 +442,7 @@ export async function ask(question: string, lang: Lang = 'ko'): Promise<Answer> 
     return { text: tr('bot.thanks') };
   }
   if (ASK.help.test(text)) {
-    return { text: tr('bot.help') };
+    return { text: tr('bot.help', { count: LIBRARY_COUNT }) };
   }
 
   /**
@@ -480,7 +489,7 @@ export async function ask(question: string, lang: Lang = 'ko'): Promise<Answer> 
   }
 
   return {
-    text: `${tr('bot.notUnderstood', { q })}\n\n${tr('bot.help')}`,
+    text: `${tr('bot.notUnderstood', { q })}\n\n${tr('bot.help', { count: LIBRARY_COUNT })}`,
     suggestions: [tr('bot.sugKids'), tr('bot.sugOpen')],
   };
 }

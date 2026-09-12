@@ -110,11 +110,11 @@ const ko = {
   'my.delete': '삭제',
 
   'chat.title': '달곰이에게 물어보기',
-  'chat.sub': '앱에 담긴 132곳 정보로 답해요',
+  'chat.sub': '앱에 담긴 {count}곳 정보로 답해요',
   'chat.thinking': '달곰이가 찾아보는 중',
   'chat.send': '질문 보내기',
   'chat.greeting':
-    '안녕하세요, 달곰이예요.\n전국 도서관 132곳을 알고 있어요. 무엇이든 물어보세요.\n\n저는 이 앱에 담긴 정보로만 답해요. 모르는 건 지어내지 않고 모른다고 말할게요.',
+    '안녕하세요, 달곰이예요.\n전국 도서관 {count}곳을 알고 있어요. 무엇이든 물어보세요.\n\n저는 이 앱에 담긴 정보로만 답해요. 모르는 건 지어내지 않고 모른다고 말할게요.',
   'chat.nameHint': '',
 
   'lib.notFoundTitle': '도서관 정보를 찾을 수 없어요',
@@ -183,8 +183,8 @@ const ko = {
    * 다른 말은 그냥 {name} 을 쓴다.
    */
   'bot.help':
-    '저는 이 앱에 담긴 132곳 정보로만 답해요. 이런 걸 물어보세요.\n\n· 어린이 도서관 추천해줘\n· 부산에 있는 도서관\n· 지금 문 연 도서관\n· 서울도서관 몇 시까지 해?\n· 한밭도서관 주변 카페\n· 울산종갓집도서관에서 많이 빌린 책\n\n모르는 건 지어내지 않고 모른다고 말할게요.',
-  'bot.hello': '안녕하세요, 달곰이예요. 전국 도서관 132곳을 알고 있어요. 무엇을 찾아드릴까요?',
+    '저는 이 앱에 담긴 {count}곳 정보로만 답해요. 이런 걸 물어보세요.\n\n· 어린이 도서관 추천해줘\n· 부산에 있는 도서관\n· 지금 문 연 도서관\n· 서울도서관 몇 시까지 해?\n· 한밭도서관 주변 카페\n· 울산종갓집도서관에서 많이 빌린 책\n\n모르는 건 지어내지 않고 모른다고 말할게요.',
+  'bot.hello': '안녕하세요, 달곰이예요. 전국 도서관 {count}곳을 알고 있어요. 무엇을 찾아드릴까요?',
   'bot.thanks': '천만에요! 또 궁금한 게 있으면 물어보세요.',
 
   'bot.noCoords': '{nameTopic} 아직 좌표를 확인하지 못해서 주변을 찾아드릴 수 없어요.',
@@ -222,7 +222,7 @@ const ko = {
   'bot.labelAny': '도서관',
   'bot.browseNone': '{labelTopic} 찾지 못했어요.',
   'bot.browseNoneOpen':
-    '\n운영시간을 확인한 곳이 132곳 중 72곳이라, 나머지는 지금 열려 있는지 판단할 수 없어 빠져 있어요.',
+    '\n운영시간을 확인한 곳이 {total}곳 중 {known}곳이라, 나머지는 지금 열려 있는지 판단할 수 없어 빠져 있어요.',
   'bot.browseHeadOpen': '지금 열려 있는 {label} {n}곳이에요.',
   'bot.browseHead': '{label} {n}곳이 있어요.',
   'bot.browseTail': '\n그중 {n}곳을 먼저 보여드릴게요.',
@@ -330,11 +330,11 @@ const en: Messages = {
   'my.delete': 'Delete',
 
   'chat.title': 'Ask Dalgomi',
-  'chat.sub': 'Answers from the 132 libraries in this app',
+  'chat.sub': 'Answers from the {count} libraries in this app',
   'chat.thinking': 'Dalgomi is looking it up',
   'chat.send': 'Send question',
   'chat.greeting':
-    'Hello, I am Dalgomi.\nI know 132 libraries across Korea. Ask me anything.\n\nI answer only from what is in this app. If I do not know something, I will say so instead of making it up.',
+    'Hello, I am Dalgomi.\nI know {count} libraries across Korea. Ask me anything.\n\nI answer only from what is in this app. If I do not know something, I will say so instead of making it up.',
   'chat.nameHint': 'Ask in English. Library names stay Korean — type them as they appear, like 서울도서관.',
 
   'lib.notFoundTitle': 'Library not found',
@@ -400,8 +400,8 @@ const en: Messages = {
   /* 도서관 이름은 한국어 그대로 쓴다. 예시에도 한글 이름을 남겨
      "이름은 한글로 적으면 된다" 를 자연스럽게 알려 준다. */
   'bot.help':
-    'I answer only from the 132 libraries in this app. Try asking things like this.\n\n· Recommend kids libraries\n· Libraries in Busan\n· Libraries open now\n· 서울도서관 hours\n· Cafes near 한밭도서관\n· Popular books at 울산종갓집도서관\n\nIf I do not know something, I will say so instead of making it up.',
-  'bot.hello': 'Hello, I am Dalgomi. I know 132 libraries across Korea. What can I find for you?',
+    'I answer only from the {count} libraries in this app. Try asking things like this.\n\n· Recommend kids libraries\n· Libraries in Busan\n· Libraries open now\n· 서울도서관 hours\n· Cafes near 한밭도서관\n· Popular books at 울산종갓집도서관\n\nIf I do not know something, I will say so instead of making it up.',
+  'bot.hello': 'Hello, I am Dalgomi. I know {count} libraries across Korea. What can I find for you?',
   'bot.thanks': 'You are welcome! Ask me anything else.',
 
   'bot.noCoords':
@@ -440,7 +440,7 @@ const en: Messages = {
   'bot.labelAny': 'libraries',
   'bot.browseNone': 'I could not find any {label}.',
   'bot.browseNoneOpen':
-    '\nOpening hours are confirmed for only 72 of the 132 libraries, so the rest cannot be judged as open and are left out.',
+    '\nOpening hours are confirmed for only {known} of the {total} libraries, so the rest cannot be judged as open and are left out.',
   'bot.browseHeadOpen': '{n} {label} open right now.',
   'bot.browseHead': 'There are {n} {label}.',
   'bot.browseTail': '\nHere are the first {n}.',
@@ -545,11 +545,11 @@ const ja: Messages = {
   'my.delete': '削除',
 
   'chat.title': 'ダルゴミに聞く',
-  'chat.sub': 'アプリに入っている132館の情報で答えます',
+  'chat.sub': 'アプリに入っている{count}館の情報で答えます',
   'chat.thinking': 'ダルゴミが調べています',
   'chat.send': '質問を送る',
   'chat.greeting':
-    'こんにちは、ダルゴミです。\n韓国じゅうの図書館132館を知っています。何でも聞いてください。\n\n私はこのアプリに入っている情報だけで答えます。分からないことは作り話をせず、分からないと言います。',
+    'こんにちは、ダルゴミです。\n韓国じゅうの図書館{count}館を知っています。何でも聞いてください。\n\n私はこのアプリに入っている情報だけで答えます。分からないことは作り話をせず、分からないと言います。',
   'chat.nameHint': '日本語で聞けます。図書館名は韓国語のままなので 서울도서관 のように入力してください。',
 
   'lib.notFoundTitle': '図書館の情報が見つかりません',
@@ -612,9 +612,9 @@ const ja: Messages = {
   'ob.body3': '地図アプリで道を調べて、\n周辺のグルメ・カフェ・見どころまで一度に。',
 
   'bot.help':
-    'このアプリに入っている132館の情報だけで答えます。こんなふうに聞いてください。\n\n· こども図書館のおすすめ\n· 釜山の図書館\n· 今開いている図書館\n· 서울도서관 の開館時間\n· 한밭도서관 の周辺カフェ\n· 울산종갓집도서관 でよく借りられた本\n\n分からないことは作り話をせず、分からないと言います。',
+    'このアプリに入っている{count}館の情報だけで答えます。こんなふうに聞いてください。\n\n· こども図書館のおすすめ\n· 釜山の図書館\n· 今開いている図書館\n· 서울도서관 の開館時間\n· 한밭도서관 の周辺カフェ\n· 울산종갓집도서관 でよく借りられた本\n\n分からないことは作り話をせず、分からないと言います。',
   'bot.hello':
-    'こんにちは、ダルゴミです。韓国じゅうの図書館132館を知っています。何をお探しですか？',
+    'こんにちは、ダルゴミです。韓国じゅうの図書館{count}館を知っています。何をお探しですか？',
   'bot.thanks': 'どういたしまして！ほかにも気になることがあれば聞いてください。',
 
   'bot.noCoords': '{name} はまだ座標を確認できていないので、周辺をお探しできません。',
@@ -652,7 +652,7 @@ const ja: Messages = {
   'bot.labelAny': '図書館',
   'bot.browseNone': '{label}は見つかりませんでした。',
   'bot.browseNoneOpen':
-    '\n開館時間を確認できたのは132館のうち72館なので、残りはいま開いているか判断できず外れています。',
+    '\n開館時間を確認できたのは{total}館のうち{known}館なので、残りはいま開いているか判断できず外れています。',
   'bot.browseHeadOpen': 'いま開いている{label}が{n}館です。',
   'bot.browseHead': '{label}が{n}館あります。',
   'bot.browseTail': '\nそのうち{n}館を先にお見せします。',
@@ -756,11 +756,11 @@ const zh: Messages = {
   'my.delete': '删除',
 
   'chat.title': '问问达尔戈米',
-  'chat.sub': '根据应用内 132 家图书馆的资料回答',
+  'chat.sub': '根据应用内 {count} 家图书馆的资料回答',
   'chat.thinking': '达尔戈米正在查找',
   'chat.send': '发送问题',
   'chat.greeting':
-    '你好，我是达尔戈米。\n我知道韩国各地的 132 家图书馆，什么都可以问我。\n\n我只根据这个应用里的资料回答。不知道的事情我不会编造，会直接说不知道。',
+    '你好，我是达尔戈米。\n我知道韩国各地的 {count} 家图书馆，什么都可以问我。\n\n我只根据这个应用里的资料回答。不知道的事情我不会编造，会直接说不知道。',
   'chat.nameHint': '可以用中文提问。图书馆名称保持韩文，请照原样输入，例如 서울도서관。',
 
   'lib.notFoundTitle': '找不到这家图书馆的资料',
@@ -822,8 +822,8 @@ const zh: Messages = {
   'ob.body3': '用地图应用找路，\n周边美食、咖啡和景点一次搞定。',
 
   'bot.help':
-    '我只根据这个应用里的 132 家图书馆资料回答。可以这样问我。\n\n· 推荐儿童图书馆\n· 釜山的图书馆\n· 现在开放的图书馆\n· 서울도서관 开放时间\n· 한밭도서관 周边咖啡\n· 울산종갓집도서관 借阅最多的书\n\n不知道的事情我不会编造，会直接说不知道。',
-  'bot.hello': '你好，我是达尔戈米。我知道韩国各地的 132 家图书馆。想找什么呢？',
+    '我只根据这个应用里的 {count} 家图书馆资料回答。可以这样问我。\n\n· 推荐儿童图书馆\n· 釜山的图书馆\n· 现在开放的图书馆\n· 서울도서관 开放时间\n· 한밭도서관 周边咖啡\n· 울산종갓집도서관 借阅最多的书\n\n不知道的事情我不会编造，会直接说不知道。',
+  'bot.hello': '你好，我是达尔戈米。我知道韩国各地的 {count} 家图书馆。想找什么呢？',
   'bot.thanks': '不客气！还有想问的随时说。',
 
   'bot.noCoords': '{name} 的坐标还没有确认，所以无法查找周边。',
@@ -861,7 +861,7 @@ const zh: Messages = {
   'bot.labelAny': '图书馆',
   'bot.browseNone': '没有找到{label}。',
   'bot.browseNoneOpen':
-    '\n132 家中只有 72 家确认了开放时间，其余无法判断现在是否开放，因此没有列入。',
+    '\n{total} 家中只有 {known} 家确认了开放时间，其余无法判断现在是否开放，因此没有列入。',
   'bot.browseHeadOpen': '现在开放的{label}共 {n} 家。',
   'bot.browseHead': '{label}共 {n} 家。',
   'bot.browseTail': '\n先给您看其中 {n} 家。',
