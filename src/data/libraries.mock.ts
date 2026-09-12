@@ -88,6 +88,10 @@ const SEEDS: Seed[] = [
   { id: 'cheongun-lit', name: '청운문학도서관', sido: '서울', specialty: '한옥·문학', categories: ['nature'] },
   { id: 'songpa-kids-english', name: '송파어린이영어도서관', sido: '서울', specialty: '어린이 영어', categories: ['kids'] },
   { id: 'brighton-library', name: '브라이튼도서관', sido: '서울', specialty: '복합문화 공간', categories: ['landmark'] },
+  // 특화 분류에 '환경' 은 따로 두지 않았다. 한 곳만 담기는 분류는 필터로 쓸모가
+  // 없어서다(이 파일 위 설계 원칙). 가장 가까운 '자연' 에 넣고, 환경이라는 말은
+  // specialty 에 그대로 남겨 카드와 상세에 보이게 한다.
+  { id: 'gangseo-gayang', name: '강서도서관 가양관', sido: '서울', sigungu: '강서구', specialty: '환경·생태', categories: ['nature'] },
 
   /* ── 경기 ──────────────────────────────────────────────── */
   { id: 'gyeonggi-library', name: '경기도서관', sido: '경기', specialty: '경기 랜드마크', categories: ['landmark'], landmark: true },

@@ -5,7 +5,7 @@
     "API 에 없는 도서관은 libraries.manual.json 에 손으로 넣으세요. 그쪽이 우선합니다.",
     "entries 가 비어 있으면 앱은 이름·지역·특화 태그만으로 동작합니다."
   ],
-  "_generatedAt": "2026-09-11T13:41:31.368Z",
+  "_generatedAt": "2026-09-12T14:01:28.626Z",
   "entries": {
     "seoul-library": {
       "sourceApiId": "111314",
@@ -87,6 +87,51 @@
           {
             "open": 540,
             "close": 1080
+          }
+        ]
+      }
+    },
+    "gangseo-gayang": {
+      "sourceApiId": "111548",
+      "matchedName": "서울특별시교육청강서도서관가양관",
+      "address": "서울특별시 강서구 양천로55길 22",
+      "phone": "02-3219-7043",
+      "homepage": "https://gylib.sen.go.kr",
+      "coords": {
+        "lat": 37.5652517,
+        "lng": 126.8502318
+      },
+      "closedDays": "매월 첫째, 셋째 금요일 / 법정공휴일",
+      "hours": {
+        "label": "평일 09:00~20:00, 주말 09:00~17:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1020
           }
         ]
       }

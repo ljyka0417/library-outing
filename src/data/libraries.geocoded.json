@@ -1444,6 +1444,17 @@
         "lng": 126.79116859141276
       },
       "placeUrl": "http://place.map.kakao.com/1413486317"
+    },
+    "gangseo-gayang": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "강서도서관 가양관",
+      "address": "서울 강서구 양천로55길 46",
+      "phone": "02-3219-7043",
+      "coords": {
+        "lat": 37.5656273696532,
+        "lng": 126.850549569451
+      }
     }
   }
 }

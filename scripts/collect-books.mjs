@@ -208,7 +208,22 @@ function disambiguate(books) {
   for (const b of books) {
     if (titleCount.get(b.title) > 1 && b.vol) b.title = `${b.title} ${b.vol}권`;
   }
-  return books;
+
+  /*
+   * 여기까지 와도 제목이 똑같이 남는 줄이 있다. 권수를 안 알려 주는 자료가
+   * 섞이기 때문이다. 강서도서관 가양관은 「흔한남매」가 넉 줄이었는데, ISBN 은
+   * 다 달랐지만 화면에는 같은 제목 네 개가 나란히 찍혔다 — 고장 난 것처럼 보인다.
+   *
+   * 번호를 붙여 줄 수는 없다. 몇 권인지 모르는 채로 "3권" 이라고 쓰면 없는
+   * 사실을 지어내는 것이다. 그래서 구별할 수 없는 줄은 앞의 하나만 남긴다.
+   * 여덟 줄 중 넷이 똑같은 것보다, 다섯 줄이라도 서로 다른 편이 낫다.
+   */
+  const seen = new Set();
+  return books.filter((b) => {
+    if (seen.has(b.title)) return false;
+    seen.add(b.title);
+    return true;
+  });
 }
 
 /** "지은이: 한강 ;옮긴이: 양윤옥" → "한강" */

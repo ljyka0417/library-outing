@@ -26579,6 +26579,288 @@
         "distanceMeters": 1129,
         "placeUrl": "http://place.map.kakao.com/8664125"
       }
+    ],
+    "gangseo-gayang": [
+      {
+        "id": "gangseo-gayang-restaurant-0",
+        "libraryId": "gangseo-gayang",
+        "type": "restaurant",
+        "name": "라사천마라탕 홈플러스 가양점",
+        "subCategory": "라사천마라탕",
+        "address": "서울 강서구 양천로 431",
+        "coords": {
+          "lat": 37.564269457456,
+          "lng": 126.850105761037
+        },
+        "distanceMeters": 155,
+        "placeUrl": "http://place.map.kakao.com/524459925"
+      },
+      {
+        "id": "gangseo-gayang-restaurant-1",
+        "libraryId": "gangseo-gayang",
+        "type": "restaurant",
+        "name": "나주곰탕서옥",
+        "subCategory": "곰탕",
+        "address": "서울 강서구 양천로 401",
+        "coords": {
+          "lat": 37.565125660496456,
+          "lng": 126.848894066862
+        },
+        "distanceMeters": 156,
+        "placeUrl": "http://place.map.kakao.com/1064197603"
+      },
+      {
+        "id": "gangseo-gayang-restaurant-2",
+        "libraryId": "gangseo-gayang",
+        "type": "restaurant",
+        "name": "한촌설렁탕 강서점",
+        "subCategory": "한촌설렁탕",
+        "address": "서울 강서구 양천로 401",
+        "coords": {
+          "lat": 37.564900354275,
+          "lng": 126.848849246931
+        },
+        "distanceMeters": 170,
+        "placeUrl": "http://place.map.kakao.com/443614989"
+      },
+      {
+        "id": "gangseo-gayang-restaurant-3",
+        "libraryId": "gangseo-gayang",
+        "type": "restaurant",
+        "name": "북촌손만두 강서한강자이점",
+        "subCategory": "북촌손만두",
+        "address": "서울 강서구 양천로 401",
+        "coords": {
+          "lat": 37.56514429720094,
+          "lng": 126.84867218088513
+        },
+        "distanceMeters": 174,
+        "placeUrl": "http://place.map.kakao.com/1553626894"
+      },
+      {
+        "id": "gangseo-gayang-restaurant-4",
+        "libraryId": "gangseo-gayang",
+        "type": "restaurant",
+        "name": "황금오리농장",
+        "subCategory": "오리",
+        "address": "서울 강서구 양천로 401",
+        "coords": {
+          "lat": 37.5651451909398,
+          "lng": 126.848666519681
+        },
+        "distanceMeters": 174,
+        "placeUrl": "http://place.map.kakao.com/2048176933"
+      },
+      {
+        "id": "gangseo-gayang-restaurant-5",
+        "libraryId": "gangseo-gayang",
+        "type": "restaurant",
+        "name": "개성족발보쌈",
+        "subCategory": "족발,보쌈",
+        "address": "서울 강서구 양천로 401",
+        "coords": {
+          "lat": 37.56510279492663,
+          "lng": 126.84862812157287
+        },
+        "distanceMeters": 179,
+        "placeUrl": "http://place.map.kakao.com/8736245"
+      },
+      {
+        "id": "gangseo-gayang-restaurant-6",
+        "libraryId": "gangseo-gayang",
+        "type": "restaurant",
+        "name": "브루더",
+        "subCategory": "제과,베이커리",
+        "address": "서울 강서구 양천로 401",
+        "coords": {
+          "lat": 37.56527729420469,
+          "lng": 126.84839912846752
+        },
+        "distanceMeters": 193,
+        "placeUrl": "http://place.map.kakao.com/891538218"
+      },
+      {
+        "id": "gangseo-gayang-restaurant-7",
+        "libraryId": "gangseo-gayang",
+        "type": "restaurant",
+        "name": "담소소사골순대육개장 가양점",
+        "subCategory": "담소소사골순대육개장",
+        "address": "서울 강서구 양천로 401",
+        "coords": {
+          "lat": 37.564980854425976,
+          "lng": 126.84838954231154
+        },
+        "distanceMeters": 203,
+        "placeUrl": "http://place.map.kakao.com/20283429"
+      },
+      {
+        "id": "gangseo-gayang-cafe-0",
+        "libraryId": "gangseo-gayang",
+        "type": "cafe",
+        "name": "이디야커피 강서한강자이점",
+        "subCategory": "이디야커피",
+        "address": "서울 강서구 양천로 401",
+        "coords": {
+          "lat": 37.56504915284717,
+          "lng": 126.84895421092342
+        },
+        "distanceMeters": 155,
+        "placeUrl": "http://place.map.kakao.com/21029351"
+      },
+      {
+        "id": "gangseo-gayang-cafe-1",
+        "libraryId": "gangseo-gayang",
+        "type": "cafe",
+        "name": "메가MGC커피 강서한강자이타워점",
+        "subCategory": "메가MGC커피",
+        "address": "서울 강서구 양천로 401",
+        "coords": {
+          "lat": 37.564866978408496,
+          "lng": 126.84881875373857
+        },
+        "distanceMeters": 174,
+        "placeUrl": "http://place.map.kakao.com/970629359"
+      },
+      {
+        "id": "gangseo-gayang-cafe-2",
+        "libraryId": "gangseo-gayang",
+        "type": "cafe",
+        "name": "매머드익스프레스 한강자이타워점",
+        "subCategory": "매머드익스프레스",
+        "address": "서울 강서구 양천로 401",
+        "coords": {
+          "lat": 37.5655152781972,
+          "lng": 126.847793087791
+        },
+        "distanceMeters": 243,
+        "placeUrl": "http://place.map.kakao.com/307395781"
+      },
+      {
+        "id": "gangseo-gayang-cafe-3",
+        "libraryId": "gangseo-gayang",
+        "type": "cafe",
+        "name": "카페게이트 강서한강자이점",
+        "subCategory": "카페게이트",
+        "address": "서울 강서구 양천로 401",
+        "coords": {
+          "lat": 37.56525487810478,
+          "lng": 126.84778343067747
+        },
+        "distanceMeters": 247,
+        "placeUrl": "http://place.map.kakao.com/318819893"
+      },
+      {
+        "id": "gangseo-gayang-cafe-4",
+        "libraryId": "gangseo-gayang",
+        "type": "cafe",
+        "name": "빈스&크레마",
+        "subCategory": "카페",
+        "address": "서울 강서구 양천로 401",
+        "coords": {
+          "lat": 37.56570069148,
+          "lng": 126.847644433258
+        },
+        "distanceMeters": 256,
+        "placeUrl": "http://place.map.kakao.com/495900588"
+      },
+      {
+        "id": "gangseo-gayang-cafe-5",
+        "libraryId": "gangseo-gayang",
+        "type": "cafe",
+        "name": "카페유오유",
+        "subCategory": "디저트카페",
+        "address": "서울 강서구 양천로57길 13",
+        "coords": {
+          "lat": 37.5635997366147,
+          "lng": 126.852025598654
+        },
+        "distanceMeters": 260,
+        "placeUrl": "http://place.map.kakao.com/448082870"
+      },
+      {
+        "id": "gangseo-gayang-cafe-6",
+        "libraryId": "gangseo-gayang",
+        "type": "cafe",
+        "name": "빽다방 가양중앙점",
+        "subCategory": "빽다방",
+        "address": "서울 강서구 양천로57길 13",
+        "coords": {
+          "lat": 37.56351686082043,
+          "lng": 126.85203821297752
+        },
+        "distanceMeters": 268,
+        "placeUrl": "http://place.map.kakao.com/1638214863"
+      },
+      {
+        "id": "gangseo-gayang-cafe-7",
+        "libraryId": "gangseo-gayang",
+        "type": "cafe",
+        "name": "DUK커피",
+        "subCategory": "커피전문점",
+        "address": "서울 강서구 양천로 401",
+        "coords": {
+          "lat": 37.565433787133,
+          "lng": 126.847481985601
+        },
+        "distanceMeters": 271,
+        "placeUrl": "http://place.map.kakao.com/1543916406"
+      },
+      {
+        "id": "gangseo-gayang-culture-0",
+        "libraryId": "gangseo-gayang",
+        "type": "culture",
+        "name": "허준박물관",
+        "subCategory": "박물관",
+        "address": "서울 강서구 허준로 87",
+        "coords": {
+          "lat": 37.5678799742891,
+          "lng": 126.850998403189
+        },
+        "distanceMeters": 253,
+        "placeUrl": "http://place.map.kakao.com/8144917"
+      },
+      {
+        "id": "gangseo-gayang-culture-1",
+        "libraryId": "gangseo-gayang",
+        "type": "culture",
+        "name": "허준박물관 약초원",
+        "subCategory": "박물관",
+        "address": "서울 강서구 허준로 87",
+        "coords": {
+          "lat": 37.568155515114,
+          "lng": 126.850868814888
+        },
+        "distanceMeters": 282,
+        "placeUrl": "http://place.map.kakao.com/1014307544"
+      },
+      {
+        "id": "gangseo-gayang-culture-2",
+        "libraryId": "gangseo-gayang",
+        "type": "culture",
+        "name": "제주도탐라영재관",
+        "subCategory": "전시관",
+        "address": "서울 강서구 양천로57길 10-10",
+        "coords": {
+          "lat": 37.5628370542135,
+          "lng": 126.85239382473
+        },
+        "distanceMeters": 349,
+        "placeUrl": "http://place.map.kakao.com/389161824"
+      },
+      {
+        "id": "gangseo-gayang-culture-3",
+        "libraryId": "gangseo-gayang",
+        "type": "culture",
+        "name": "롯데시네마 가양",
+        "subCategory": "롯데시네마",
+        "address": "서울 강서구 양천로 476",
+        "coords": {
+          "lat": 37.56156337799074,
+          "lng": 126.8533832890494
+        },
+        "distanceMeters": 515,
+        "placeUrl": "http://place.map.kakao.com/27184197"
+      }
     ]
   }
 }

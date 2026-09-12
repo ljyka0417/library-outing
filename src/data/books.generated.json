@@ -6,7 +6,7 @@
     "정보나루에 등록되지 않은 도서관은 자기 대출 데이터가 없어 지역 순위로 대신합니다.",
     "둘 다 없으면 앱은 주제별 추천 도서로 떨어집니다."
   ],
-  "_generatedAt": "2026-09-08T15:35:53.402Z",
+  "_generatedAt": "2026-09-12T14:04:02.131Z",
   "byLibrary": {
     "seoul-library": {
       "scope": "library",
@@ -109,6 +109,41 @@
           "author": "Melvin and Gilda Berger",
           "isbn": "9780439574747",
           "coverImageUrl": "https://image.aladin.co.kr/product/4926/26/cover/0439574749_1.jpg"
+        }
+      ]
+    },
+    "gangseo-gayang": {
+      "scope": "library",
+      "books": [
+        {
+          "title": "흔한남매 20권",
+          "author": "원작: 흔한남매",
+          "isbn": "9791173479939",
+          "coverImageUrl": "https://image.aladin.co.kr/product/37191/81/cover200/k042031295_1.jpg"
+        },
+        {
+          "title": "흔한남매",
+          "author": "원작: 흔한남매",
+          "isbn": "9791173114038",
+          "coverImageUrl": "https://image.aladin.co.kr/product/35371/5/cover200/k792035405_1.jpg"
+        },
+        {
+          "title": "흔한남매 19권",
+          "author": "원작: 흔한남매",
+          "isbn": "9791173473968",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36208/50/cover200/k712038303_1.jpg"
+        },
+        {
+          "title": "흔한남매의 흔한 호기심",
+          "author": "원작: 흔한남매",
+          "isbn": "9791173471780",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36019/61/cover200/k872037826_1.jpg"
+        },
+        {
+          "title": "놓지 마 과학!",
+          "author": "글·그림: 신태훈,나승훈",
+          "isbn": "9791171712267",
+          "coverImageUrl": "https://image.aladin.co.kr/product/34155/83/cover200/k032931590_1.jpg"
         }
       ]
     },
@@ -321,55 +356,6 @@
         }
       ]
     },
-    "gwacheon-it": {
-      "scope": "library",
-      "books": [
-        {
-          "title": "아기괴물의 하루",
-          "author": "글·그림: 사라 다이어",
-          "isbn": "9788940900000",
-          "coverImageUrl": "https://image.aladin.co.kr/product/1426/24/cover/scm625151768963.jpg"
-        },
-        {
-          "title": "바닷가로 떠나요!",
-          "author": "엘런 델랑어",
-          "isbn": "9788997366132",
-          "coverImageUrl": "https://image.aladin.co.kr/product/1417/23/cover150/8996732087_1.jpg"
-        },
-        {
-          "title": "전통 민속 도감",
-          "author": "이은주 펴냄",
-          "isbn": "9788990225604"
-        },
-        {
-          "title": "뒤죽박죽 수상한 자바자바 정글",
-          "author": "윌리엄 스타이그 글·그림",
-          "isbn": "9788949110004"
-        },
-        {
-          "title": "꼬마 카무의 모험",
-          "author": "간자와 도시코 글",
-          "isbn": "9788949159966"
-        },
-        {
-          "title": "푸루와 마법 가루",
-          "author": "배현주",
-          "isbn": "9788993242300",
-          "coverImageUrl": "https://image.aladin.co.kr/product/5006/34/cover150/1185564233_1.jpg"
-        },
-        {
-          "title": "여행을 떠나요",
-          "author": "레이첼 쿰브스 글",
-          "isbn": "9788993160017",
-          "coverImageUrl": "https://image.aladin.co.kr/product/9763/18/cover/scm4212384750026.jpg"
-        },
-        {
-          "title": "걱정 많은 앙리",
-          "author": "카트린 르파주 지음",
-          "isbn": "9788943302177"
-        }
-      ]
-    },
     "juyeop-kids": {
       "scope": "library",
       "books": [
@@ -404,12 +390,6 @@
           "coverImageUrl": "https://image.aladin.co.kr/product/10822/59/cover/8960863548_1.jpg"
         },
         {
-          "title": "종이 봉지 공주",
-          "author": "로버트 먼치",
-          "isbn": "9788949110479",
-          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/001/826/00182678.jpg?type=m1&udate=20170918"
-        },
-        {
           "title": "13층 나무 집",
           "author": "앤디 그리피스 글",
           "isbn": "9788952773104",
@@ -420,6 +400,12 @@
           "author": "글·그림: 신태훈,나승훈",
           "isbn": "9788960863163",
           "coverImageUrl": "https://image.aladin.co.kr/product/10065/1/cover/8960863165_1.jpg"
+        },
+        {
+          "title": "종이 봉지 공주",
+          "author": "로버트 먼치",
+          "isbn": "9788949110479",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/001/826/00182678.jpg?type=m1&udate=20170918"
         }
       ]
     },
@@ -630,6 +616,59 @@
         }
       ]
     },
+    "songdo-intl": {
+      "scope": "library",
+      "books": [
+        {
+          "title": "퀴즈! 과학상식: 황당수학",
+          "author": "도기성",
+          "isbn": "9791186472453",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/090/536/09053653.jpg?type=m1&udate=20160218"
+        },
+        {
+          "title": "과학상식: 엉뚱 실험 수학",
+          "author": "권찬호 지음",
+          "isbn": "9791170185468",
+          "coverImageUrl": "https://image.aladin.co.kr/product/20924/78/cover/k652636179_1.jpg"
+        },
+        {
+          "title": "과학상식: 황당 추리 수학",
+          "author": "도기성 지음",
+          "isbn": "9791170181514",
+          "coverImageUrl": "https://image.aladin.co.kr/product/3203/75/cover/k412434891_1.jpg"
+        },
+        {
+          "title": "과학상식: 황당 도형 수학",
+          "author": "도기성 지음",
+          "isbn": "9791170182610",
+          "coverImageUrl": "https://image.aladin.co.kr/product/7877/63/cover/k562434730_1.jpg"
+        },
+        {
+          "title": "과학상식: 황당? 개그 수학",
+          "author": "권찬호 지음",
+          "isbn": "9791170183280",
+          "coverImageUrl": "https://image.aladin.co.kr/product/9782/38/cover/k232535646_1.jpg"
+        },
+        {
+          "title": "과학상식: 세계 불가사의 수학",
+          "author": "권찬호 지음",
+          "isbn": "9791170185970",
+          "coverImageUrl": "https://image.aladin.co.kr/product/27271/75/cover/k442732111_1.jpg"
+        },
+        {
+          "title": "퀴즈! 과학상식: 황당 마술 수학",
+          "author": "도기성",
+          "isbn": "9791170180203",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/091/532/09153202.jpg?type=m1&udate=20160218"
+        },
+        {
+          "title": "과학상식: 뇌와 인공 지능",
+          "author": "도기성 지음",
+          "isbn": "9791170183808",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/123/044/12304416.jpg?type=m1&udate=20170814"
+        }
+      ]
+    },
     "majeon-library": {
       "scope": "library",
       "books": [
@@ -771,16 +810,16 @@
           "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/129/756/12975600.jpg?type=m1&udate=20180126"
         },
         {
-          "title": "설민석의 한국사 대모험",
-          "author": "설민석,그림: 정현희",
-          "isbn": "9791195794799",
-          "coverImageUrl": "https://image.aladin.co.kr/product/10016/32/cover/k512536564_2.jpg"
-        },
-        {
           "title": "나미야 잡화점의 기적",
           "author": "히가시노 게이고",
           "isbn": "9788972756194",
           "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+        },
+        {
+          "title": "설민석의 한국사 대모험",
+          "author": "설민석,그림: 정현희",
+          "isbn": "9791195794799",
+          "coverImageUrl": "https://image.aladin.co.kr/product/10016/32/cover/k512536564_2.jpg"
         }
       ]
     },
@@ -837,6 +876,110 @@
         }
       ]
     },
+    "dongchun-narae": {
+      "scope": "library",
+      "books": [
+        {
+          "title": "공룡 백만년",
+          "author": "딕 세바스트 감독",
+          "isbn": "8809639457230"
+        },
+        {
+          "title": "흔한남매 3권",
+          "author": "원작: 흔한남매",
+          "isbn": "9791164134267",
+          "coverImageUrl": "https://image.aladin.co.kr/product/22327/46/cover/k782636924_1.jpg"
+        },
+        {
+          "title": "흔한남매 4권",
+          "author": "원작: 흔한남매",
+          "isbn": "9791164134847",
+          "coverImageUrl": "https://image.aladin.co.kr/product/23568/96/cover/k992638123_1.jpg"
+        },
+        {
+          "title": "비행기 사고에서 살아남기",
+          "author": "곰돌이 co.",
+          "isbn": "9791162336182",
+          "coverImageUrl": "https://image.aladin.co.kr/product/15851/64/cover/k202533538_1.jpg"
+        },
+        {
+          "title": "안 흔한 일기",
+          "author": "흔한남매 원작",
+          "isbn": "9791164136223",
+          "coverImageUrl": "https://image.aladin.co.kr/product/25151/11/cover/k762633375_1.jpg"
+        },
+        {
+          "title": "똥볶이 할멈",
+          "author": "강효미",
+          "isbn": "9791190409124",
+          "coverImageUrl": "https://image.aladin.co.kr/product/27982/44/cover/k832734228_1.jpg"
+        },
+        {
+          "title": "흔한남매 6권",
+          "author": "원작: 흔한남매",
+          "isbn": "9791164136261",
+          "coverImageUrl": "https://image.aladin.co.kr/product/25301/95/cover/k062633309_1.jpg"
+        },
+        {
+          "title": "물 부족에서 살아남기",
+          "author": "달콤팩토리",
+          "isbn": "9788937838200",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/106/602/10660255.jpg?type=m1&udate=20171229"
+        }
+      ]
+    },
+    "songdo-kids": {
+      "scope": "library",
+      "books": [
+        {
+          "title": "The King's Pudding",
+          "author": "retold by Mairi Mackinnon",
+          "isbn": "9788997889123"
+        },
+        {
+          "title": "Diary of a wimpy kid",
+          "author": "by Jeff Kinney",
+          "isbn": "9780810984912",
+          "coverImageUrl": "https://image.aladin.co.kr/product/664/77/cover/0810984911_2.jpg"
+        },
+        {
+          "title": "Henry and Mudge and the Funny Lunch (Paperback) - Henry and Mudge Ready-to-Read",
+          "author": "신시아 라일런트 (지은이), Carolyn Bracken (그림)",
+          "isbn": "9780689834448",
+          "coverImageUrl": "https://image.aladin.co.kr/product/101/67/cover/0689834446_1.jpg"
+        },
+        {
+          "title": "Oxford Reading Tree: Level 4: Stories: the Secret Room",
+          "author": "Hunt|Roderick",
+          "isbn": "9780198482116",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/131/246/13124662.jpg?type=m1&udate=20180105"
+        },
+        {
+          "title": "Nate the Great",
+          "author": "마저리 와인먼 샤매트 (글), 마르크 시몽 (그림)",
+          "isbn": "9780440461265",
+          "coverImageUrl": "https://image.aladin.co.kr/product/53/22/cover/044046126x_2.jpg"
+        },
+        {
+          "title": "Oxford Reading Tree: Level 4: More Stories B: the Dragon Dance",
+          "author": "Hunt|Roderick",
+          "isbn": "9780198482260",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/130/901/13090187.jpg?type=m1&udate=20171231"
+        },
+        {
+          "title": "The Escape of the Deadly Dinosaur",
+          "author": "Hunt|Elizabeth Singer",
+          "isbn": "9781602860049",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/032/981/03298171.jpg?type=m1&udate=20130707"
+        },
+        {
+          "title": "Oxford Reading Tree: Level 4: Stories: the New House",
+          "author": "Hunt|Roderick",
+          "isbn": "9780198482093",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/129/765/12976519.jpg?type=m1&udate=20171220"
+        }
+      ]
+    },
     "cheongna-lake": {
       "scope": "library",
       "books": [
@@ -887,6 +1030,59 @@
           "author": "카툰박스",
           "isbn": "9791156391586",
           "coverImageUrl": "https://image.aladin.co.kr/product/5505/23/cover/6000823615_3.jpg"
+        }
+      ]
+    },
+    "seonhak-starlight": {
+      "scope": "library",
+      "books": [
+        {
+          "title": "엉덩이 탐정",
+          "author": "트롤 글·그림",
+          "isbn": "9788937889714",
+          "coverImageUrl": "https://image.aladin.co.kr/product/10644/93/cover/8937889714_1.jpg"
+        },
+        {
+          "title": "만복이네 떡집",
+          "author": "김리리 글",
+          "isbn": "9788949161341",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/062/895/06289560.jpg?type=m1&udate=20180324"
+        },
+        {
+          "title": "달빛 식당",
+          "author": "이분희 글",
+          "isbn": "9788949161969",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/134/248/13424876.jpg?type=m1&udate=20180427"
+        },
+        {
+          "title": "불편한 편의점",
+          "author": "김호연",
+          "isbn": "9791161571188",
+          "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+        },
+        {
+          "title": "쿠키런 서바이벌 대작전 17",
+          "author": "김강현",
+          "isbn": "9788926381304",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/133/184/13318445.jpg?type=m1&udate=20180219"
+        },
+        {
+          "title": "아주 작은 습관의 힘",
+          "author": "제임스 클리어 지음",
+          "isbn": "9791162540640",
+          "coverImageUrl": "https://image.aladin.co.kr/product/18228/51/cover/k832534441_1.jpg"
+        },
+        {
+          "title": "페인트",
+          "author": "이희영",
+          "isbn": "9788936456894",
+          "coverImageUrl": "https://image.aladin.co.kr/product/18958/95/cover/893645689x_1.jpg"
+        },
+        {
+          "title": "돈의 속성",
+          "author": "김승호",
+          "isbn": "9791188331796",
+          "coverImageUrl": "https://image.aladin.co.kr/product/24191/64/cover/k562639753_1.jpg"
         }
       ]
     },
@@ -1021,28 +1217,28 @@
           "isbn": "9791156178583"
         },
         {
-          "title": "두고 온 여름",
-          "author": "성해나",
-          "isbn": "9788936439002",
-          "coverImageUrl": "https://image.aladin.co.kr/product/31294/95/cover/8936439006_1.jpg"
-        },
-        {
           "title": "까칠한 포도",
           "author": "조리 존 글",
           "isbn": "9788955828139",
           "coverImageUrl": "https://image.aladin.co.kr/product/37402/66/cover200/8955828136_1.jpg"
         },
         {
+          "title": "두고 온 여름",
+          "author": "성해나",
+          "isbn": "9788936439002",
+          "coverImageUrl": "https://image.aladin.co.kr/product/31294/95/cover/8936439006_1.jpg"
+        },
+        {
+          "title": "안녕이라 그랬어",
+          "author": "김애란",
+          "isbn": "9791141602376",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36566/52/cover200/k462039240_1.jpg"
+        },
+        {
           "title": "네 기분은 어떤 색깔이니?",
           "author": "최숙희",
           "isbn": "9791158363925",
           "coverImageUrl": "https://image.aladin.co.kr/product/30866/85/cover/k882831576_1.jpg"
-        },
-        {
-          "title": "주토피아 1",
-          "author": "헤티 놀스 (지은이), 비비안 우 (그림), 박혜원 (옮긴이)",
-          "isbn": "9791175240384",
-          "coverImageUrl": "https://image.aladin.co.kr/product/37539/11/cover200/k022032129_1.jpg"
         }
       ]
     },
@@ -1345,6 +1541,12 @@
           "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/001/747/00174790.jpg?type=m1&udate=20150923"
         },
         {
+          "title": "꿈에서 맛본 똥파리",
+          "author": "백희나",
+          "isbn": "9791185564128",
+          "coverImageUrl": "https://image.aladin.co.kr/product/4296/38/cover/1185564128_1.jpg"
+        },
+        {
           "title": "설민석의 한국사 대모험",
           "author": "설민석,그림: 정현희",
           "isbn": "9791196025809",
@@ -1355,12 +1557,6 @@
           "author": "트롤 글·그림",
           "isbn": "9788937838750",
           "coverImageUrl": "https://image.aladin.co.kr/product/8920/23/cover/8937838753_1.jpg"
-        },
-        {
-          "title": "꿈에서 맛본 똥파리",
-          "author": "백희나",
-          "isbn": "9791185564128",
-          "coverImageUrl": "https://image.aladin.co.kr/product/4296/38/cover/1185564128_1.jpg"
         }
       ]
     },
@@ -1703,16 +1899,16 @@
           "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
         },
         {
-          "title": "바닷가로 떠나요!",
-          "author": "엘런 델랑어",
-          "isbn": "9788997366132",
-          "coverImageUrl": "https://image.aladin.co.kr/product/1417/23/cover150/8996732087_1.jpg"
-        },
-        {
           "title": "채식주의자",
           "author": "한강",
           "isbn": "9788936433598",
           "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+        },
+        {
+          "title": "바닷가로 떠나요!",
+          "author": "엘런 델랑어",
+          "isbn": "9788997366132",
+          "coverImageUrl": "https://image.aladin.co.kr/product/1417/23/cover150/8996732087_1.jpg"
         },
         {
           "title": "불편한 편의점",
@@ -2047,59 +2243,6 @@
         }
       ]
     },
-    "okhyeon-kids": {
-      "scope": "library",
-      "books": [
-        {
-          "title": "아몬드",
-          "author": "손원평",
-          "isbn": "9788936434267",
-          "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
-        },
-        {
-          "title": "체리새우",
-          "author": "황영미",
-          "isbn": "9788954654753",
-          "coverImageUrl": "https://image.aladin.co.kr/product/17970/0/cover/8954654754_1.jpg"
-        },
-        {
-          "title": "달빛 식당",
-          "author": "이분희 글",
-          "isbn": "9788949161969",
-          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/134/248/13424876.jpg?type=m1&udate=20180427"
-        },
-        {
-          "title": "어린이 속담",
-          "author": "글·그림: 한날",
-          "isbn": "9791158681258",
-          "coverImageUrl": "https://image.aladin.co.kr/product/12004/94/cover/k622531848_1.jpg"
-        },
-        {
-          "title": "뽀짜툰 1권",
-          "author": "글·그림: 채유리",
-          "isbn": "9788937834448",
-          "coverImageUrl": "https://image.aladin.co.kr/product/3757/17/cover/8937834448_1.jpg"
-        },
-        {
-          "title": "뽀짜툰 5권",
-          "author": "글·그림: 채유리",
-          "isbn": "9788937888649",
-          "coverImageUrl": "https://image.aladin.co.kr/product/9774/73/cover/8937888645_1.jpg"
-        },
-        {
-          "title": "정글의 법칙",
-          "author": "SBS김병만의정글의법칙제작팀 원작",
-          "isbn": "9788934965831",
-          "coverImageUrl": "https://image.aladin.co.kr/product/3447/3/cover/8934965835_1.jpg"
-        },
-        {
-          "title": "흔한남매",
-          "author": "원작: 흔한남매",
-          "isbn": "9791164131686",
-          "coverImageUrl": "https://image.aladin.co.kr/product/19404/61/cover/k712635217_1.jpg"
-        }
-      ]
-    },
     "wolbong-library": {
       "scope": "library",
       "books": [
@@ -2253,8 +2396,8 @@
         {
           "title": "흔한남매의 흔한 호기심",
           "author": "원작: 흔한남매",
-          "isbn": "9791164137121",
-          "coverImageUrl": "https://image.aladin.co.kr/product/25812/8/cover/k352736335_1.jpg"
+          "isbn": "9791164138982",
+          "coverImageUrl": "https://image.aladin.co.kr/product/27892/11/cover/k652734308_1.jpg"
         }
       ]
     },
@@ -2903,16 +3046,16 @@
           "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
         },
         {
-          "title": "저소비 생활",
-          "author": "가제노타미 지음",
-          "isbn": "9788925573229",
-          "coverImageUrl": "https://image.aladin.co.kr/product/37117/86/cover200/8925573229_1.jpg"
-        },
-        {
           "title": "순례 주택",
           "author": "유은실",
           "isbn": "9788949123493",
           "coverImageUrl": "https://image.aladin.co.kr/product/26674/56/cover/8949123495_1.jpg"
+        },
+        {
+          "title": "저소비 생활",
+          "author": "가제노타미 지음",
+          "isbn": "9788925573229",
+          "coverImageUrl": "https://image.aladin.co.kr/product/37117/86/cover200/8925573229_1.jpg"
         },
         {
           "title": "가면산장 살인사건",
@@ -2921,16 +3064,16 @@
           "coverImageUrl": "https://image.aladin.co.kr/product/4745/51/cover/899098257x_2.jpg"
         },
         {
-          "title": "지구에서 한아뿐",
-          "author": "정세랑",
-          "isbn": "9791188862290",
-          "coverImageUrl": "https://image.aladin.co.kr/product/19804/82/cover/k072635131_1.jpg"
-        },
-        {
           "title": "영원한 천국",
           "author": "정유정",
           "isbn": "9791167374561",
           "coverImageUrl": "https://image.aladin.co.kr/product/34499/81/cover200/k712932751_1.jpg"
+        },
+        {
+          "title": "지구에서 한아뿐",
+          "author": "정세랑",
+          "isbn": "9791188862290",
+          "coverImageUrl": "https://image.aladin.co.kr/product/19804/82/cover/k072635131_1.jpg"
         },
         {
           "title": "불편한 편의점",
@@ -3056,16 +3199,16 @@
           "coverImageUrl": "https://image.aladin.co.kr/product/26953/57/cover/075550187d_1.jpg"
         },
         {
-          "title": "별난 방탈출: 탈출 미션 스토리북 1권",
-          "author": "흔한남매 원작",
-          "isbn": "9791164137176",
-          "coverImageUrl": "https://image.aladin.co.kr/product/25813/3/cover/k172736336_1.jpg"
-        },
-        {
           "title": "안 흔한 일기 3권",
           "author": "흔한남매 원작",
           "isbn": "9791164136223",
           "coverImageUrl": "https://image.aladin.co.kr/product/25151/11/cover/k762633375_1.jpg"
+        },
+        {
+          "title": "별난 방탈출: 탈출 미션 스토리북 1권",
+          "author": "흔한남매 원작",
+          "isbn": "9791164137176",
+          "coverImageUrl": "https://image.aladin.co.kr/product/25813/3/cover/k172736336_1.jpg"
         },
         {
           "title": "별난 방탈출: 탈출 미션 스토리북 2권",
@@ -3184,14 +3327,14 @@
           "isbn": "7051878000743"
         },
         {
-          "title": "알파짱 과학동화 1. 꼬리, 꼬리, 고릴라 꼬리?",
-          "author": "누리북스",
-          "isbn": "7070024000711"
-        },
-        {
           "title": "상상수프 인성동화 1. 아기 곰과 꿀벌",
           "author": "불루앤트리",
           "isbn": "7051842003544"
+        },
+        {
+          "title": "알파짱 과학동화 1. 꼬리, 꼬리, 고릴라 꼬리?",
+          "author": "누리북스",
+          "isbn": "7070024000711"
         }
       ]
     },
@@ -3579,16 +3722,16 @@
           "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
         },
         {
-          "title": "100층짜리 집",
-          "author": "글·그림: 이와이 도시오",
-          "isbn": "9788989863786",
-          "coverImageUrl": "https://image.aladin.co.kr/product/411/63/cover/8989863783_1.jpg"
-        },
-        {
           "title": "알사탕",
           "author": "백희나",
           "isbn": "9791158360375",
           "coverImageUrl": "https://image.aladin.co.kr/product/10586/14/cover/k422530533_1.jpg"
+        },
+        {
+          "title": "100층짜리 집",
+          "author": "글·그림: 이와이 도시오",
+          "isbn": "9788989863786",
+          "coverImageUrl": "https://image.aladin.co.kr/product/411/63/cover/8989863783_1.jpg"
         },
         {
           "title": "흔한남매",
@@ -3703,16 +3846,16 @@
           "coverImageUrl": "https://image.aladin.co.kr/product/23568/96/cover/k992638123_1.jpg"
         },
         {
-          "title": "채식주의자",
-          "author": "한강",
-          "isbn": "9788936433598",
-          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
-        },
-        {
           "title": "엉덩이 탐정 3권",
           "author": "트롤 글·그림",
           "isbn": "9788937889714",
           "coverImageUrl": "https://image.aladin.co.kr/product/10644/93/cover/8937889714_1.jpg"
+        },
+        {
+          "title": "채식주의자",
+          "author": "한강",
+          "isbn": "9788936433598",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
         }
       ]
     },
@@ -3813,12 +3956,6 @@
           "author": "원작: 흔한남매",
           "isbn": "9791164136032",
           "coverImageUrl": "https://image.aladin.co.kr/product/25055/39/cover/k002632646_1.jpg"
-        },
-        {
-          "title": "비행기 사고에서 살아남기",
-          "author": "곰돌이 co.",
-          "isbn": "9791162335529",
-          "coverImageUrl": "https://image.aladin.co.kr/product/14688/10/cover/k382532855_1.jpg"
         }
       ]
     },
@@ -4468,6 +4605,60 @@
         }
       ]
     },
+    "gwacheon-it": {
+      "scope": "region",
+      "region": "경기",
+      "books": [
+        {
+          "title": "나미야 잡화점의 기적",
+          "author": "히가시노 게이고",
+          "isbn": "9788972756194",
+          "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+        },
+        {
+          "title": "채식주의자",
+          "author": "한강",
+          "isbn": "9788936433598",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+        },
+        {
+          "title": "소년이 온다",
+          "author": "한강",
+          "isbn": "9788936434120",
+          "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+        },
+        {
+          "title": "아몬드",
+          "author": "손원평",
+          "isbn": "9788936434267",
+          "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+        },
+        {
+          "title": "불편한 편의점",
+          "author": "김호연",
+          "isbn": "9791161571188",
+          "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+        },
+        {
+          "title": "설민석의 한국사 대모험",
+          "author": "설민석,그림: 정현희",
+          "isbn": "9791195794799",
+          "coverImageUrl": "https://image.aladin.co.kr/product/10016/32/cover/k512536564_2.jpg"
+        },
+        {
+          "title": "엉덩이 탐정 3권",
+          "author": "트롤 글·그림",
+          "isbn": "9788937889714",
+          "coverImageUrl": "https://image.aladin.co.kr/product/10644/93/cover/8937889714_1.jpg"
+        },
+        {
+          "title": "엉덩이 탐정 1권",
+          "author": "트롤 글·그림",
+          "isbn": "9788937838750",
+          "coverImageUrl": "https://image.aladin.co.kr/product/8920/23/cover/8937838753_1.jpg"
+        }
+      ]
+    },
     "michuhol-library": {
       "scope": "region",
       "region": "인천",
@@ -4485,22 +4676,16 @@
           "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
         },
         {
-          "title": "채식주의자",
-          "author": "한강",
-          "isbn": "9788936433598",
-          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
-        },
-        {
-          "title": "아몬드",
-          "author": "손원평",
-          "isbn": "9788936434267",
-          "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
-        },
-        {
           "title": "불편한 편의점",
           "author": "김호연",
           "isbn": "9791161571188",
           "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+        },
+        {
+          "title": "채식주의자",
+          "author": "한강",
+          "isbn": "9788936433598",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
         },
         {
           "title": "종의 기원",
@@ -4509,16 +4694,22 @@
           "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
         },
         {
-          "title": "7년의 밤",
-          "author": "정유정",
-          "isbn": "9788956604992",
-          "coverImageUrl": "https://image.aladin.co.kr/product/14712/55/cover/k202532053_1.jpg"
+          "title": "아몬드",
+          "author": "손원평",
+          "isbn": "9788936434267",
+          "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
         },
         {
           "title": "엉덩이 탐정",
           "author": "트롤 글·그림",
           "isbn": "9788937889714",
           "coverImageUrl": "https://image.aladin.co.kr/product/10644/93/cover/8937889714_1.jpg"
+        },
+        {
+          "title": "7년의 밤",
+          "author": "정유정",
+          "isbn": "9788956604992",
+          "coverImageUrl": "https://image.aladin.co.kr/product/14712/55/cover/k202532053_1.jpg"
         }
       ]
     },
@@ -4539,22 +4730,16 @@
           "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
         },
         {
-          "title": "채식주의자",
-          "author": "한강",
-          "isbn": "9788936433598",
-          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
-        },
-        {
-          "title": "아몬드",
-          "author": "손원평",
-          "isbn": "9788936434267",
-          "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
-        },
-        {
           "title": "불편한 편의점",
           "author": "김호연",
           "isbn": "9791161571188",
           "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+        },
+        {
+          "title": "채식주의자",
+          "author": "한강",
+          "isbn": "9788936433598",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
         },
         {
           "title": "종의 기원",
@@ -4563,16 +4748,22 @@
           "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
         },
         {
-          "title": "7년의 밤",
-          "author": "정유정",
-          "isbn": "9788956604992",
-          "coverImageUrl": "https://image.aladin.co.kr/product/14712/55/cover/k202532053_1.jpg"
+          "title": "아몬드",
+          "author": "손원평",
+          "isbn": "9788936434267",
+          "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
         },
         {
           "title": "엉덩이 탐정",
           "author": "트롤 글·그림",
           "isbn": "9788937889714",
           "coverImageUrl": "https://image.aladin.co.kr/product/10644/93/cover/8937889714_1.jpg"
+        },
+        {
+          "title": "7년의 밤",
+          "author": "정유정",
+          "isbn": "9788956604992",
+          "coverImageUrl": "https://image.aladin.co.kr/product/14712/55/cover/k202532053_1.jpg"
         }
       ]
     },
@@ -4593,22 +4784,16 @@
           "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
         },
         {
-          "title": "채식주의자",
-          "author": "한강",
-          "isbn": "9788936433598",
-          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
-        },
-        {
-          "title": "아몬드",
-          "author": "손원평",
-          "isbn": "9788936434267",
-          "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
-        },
-        {
           "title": "불편한 편의점",
           "author": "김호연",
           "isbn": "9791161571188",
           "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+        },
+        {
+          "title": "채식주의자",
+          "author": "한강",
+          "isbn": "9788936433598",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
         },
         {
           "title": "종의 기원",
@@ -4617,16 +4802,22 @@
           "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
         },
         {
-          "title": "7년의 밤",
-          "author": "정유정",
-          "isbn": "9788956604992",
-          "coverImageUrl": "https://image.aladin.co.kr/product/14712/55/cover/k202532053_1.jpg"
+          "title": "아몬드",
+          "author": "손원평",
+          "isbn": "9788936434267",
+          "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
         },
         {
           "title": "엉덩이 탐정",
           "author": "트롤 글·그림",
           "isbn": "9788937889714",
           "coverImageUrl": "https://image.aladin.co.kr/product/10644/93/cover/8937889714_1.jpg"
+        },
+        {
+          "title": "7년의 밤",
+          "author": "정유정",
+          "isbn": "9788956604992",
+          "coverImageUrl": "https://image.aladin.co.kr/product/14712/55/cover/k202532053_1.jpg"
         }
       ]
     },
@@ -5549,6 +5740,60 @@
       ]
     },
     "ulju-cheonsang": {
+      "scope": "region",
+      "region": "울산",
+      "books": [
+        {
+          "title": "순례 주택",
+          "author": "유은실",
+          "isbn": "9788949123493",
+          "coverImageUrl": "https://image.aladin.co.kr/product/26674/56/cover/8949123495_1.jpg"
+        },
+        {
+          "title": "체리새우",
+          "author": "황영미",
+          "isbn": "9788954654753",
+          "coverImageUrl": "https://image.aladin.co.kr/product/17970/0/cover/8954654754_1.jpg"
+        },
+        {
+          "title": "나미야 잡화점의 기적",
+          "author": "히가시노 게이고",
+          "isbn": "9788972756194",
+          "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+        },
+        {
+          "title": "지구 끝의 온실",
+          "author": "김초엽",
+          "isbn": "9791191824001",
+          "coverImageUrl": "https://image.aladin.co.kr/product/27692/63/cover/k082733434_1.jpg"
+        },
+        {
+          "title": "흔한남매",
+          "author": "원작: 흔한남매",
+          "isbn": "9791164131686",
+          "coverImageUrl": "https://image.aladin.co.kr/product/19404/61/cover/k712635217_1.jpg"
+        },
+        {
+          "title": "소년이 온다",
+          "author": "한강",
+          "isbn": "9788936434120",
+          "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+        },
+        {
+          "title": "설민석의 한국사 대모험",
+          "author": "설민석,그림: 정현희",
+          "isbn": "9791195794799",
+          "coverImageUrl": "https://image.aladin.co.kr/product/10016/32/cover/k512536564_2.jpg"
+        },
+        {
+          "title": "아몬드",
+          "author": "손원평",
+          "isbn": "9788936434267",
+          "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
+        }
+      ]
+    },
+    "okhyeon-kids": {
       "scope": "region",
       "region": "울산",
       "books": [
@@ -6679,222 +6924,6 @@
           "author": "원작: 흔한남매",
           "isbn": "9791164131686",
           "coverImageUrl": "https://image.aladin.co.kr/product/19404/61/cover/k712635217_1.jpg"
-        }
-      ]
-    },
-    "songdo-intl": {
-      "scope": "region",
-      "region": "인천",
-      "books": [
-        {
-          "title": "나미야 잡화점의 기적",
-          "author": "히가시노 게이고",
-          "isbn": "9788972756194",
-          "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
-        },
-        {
-          "title": "소년이 온다",
-          "author": "한강",
-          "isbn": "9788936434120",
-          "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
-        },
-        {
-          "title": "채식주의자",
-          "author": "한강",
-          "isbn": "9788936433598",
-          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
-        },
-        {
-          "title": "아몬드",
-          "author": "손원평",
-          "isbn": "9788936434267",
-          "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
-        },
-        {
-          "title": "불편한 편의점",
-          "author": "김호연",
-          "isbn": "9791161571188",
-          "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
-        },
-        {
-          "title": "종의 기원",
-          "author": "정유정",
-          "isbn": "9788956609959",
-          "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
-        },
-        {
-          "title": "7년의 밤",
-          "author": "정유정",
-          "isbn": "9788956604992",
-          "coverImageUrl": "https://image.aladin.co.kr/product/14712/55/cover/k202532053_1.jpg"
-        },
-        {
-          "title": "엉덩이 탐정",
-          "author": "트롤 글·그림",
-          "isbn": "9788937889714",
-          "coverImageUrl": "https://image.aladin.co.kr/product/10644/93/cover/8937889714_1.jpg"
-        }
-      ]
-    },
-    "dongchun-narae": {
-      "scope": "region",
-      "region": "인천",
-      "books": [
-        {
-          "title": "나미야 잡화점의 기적",
-          "author": "히가시노 게이고",
-          "isbn": "9788972756194",
-          "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
-        },
-        {
-          "title": "소년이 온다",
-          "author": "한강",
-          "isbn": "9788936434120",
-          "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
-        },
-        {
-          "title": "채식주의자",
-          "author": "한강",
-          "isbn": "9788936433598",
-          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
-        },
-        {
-          "title": "아몬드",
-          "author": "손원평",
-          "isbn": "9788936434267",
-          "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
-        },
-        {
-          "title": "불편한 편의점",
-          "author": "김호연",
-          "isbn": "9791161571188",
-          "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
-        },
-        {
-          "title": "종의 기원",
-          "author": "정유정",
-          "isbn": "9788956609959",
-          "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
-        },
-        {
-          "title": "7년의 밤",
-          "author": "정유정",
-          "isbn": "9788956604992",
-          "coverImageUrl": "https://image.aladin.co.kr/product/14712/55/cover/k202532053_1.jpg"
-        },
-        {
-          "title": "엉덩이 탐정",
-          "author": "트롤 글·그림",
-          "isbn": "9788937889714",
-          "coverImageUrl": "https://image.aladin.co.kr/product/10644/93/cover/8937889714_1.jpg"
-        }
-      ]
-    },
-    "songdo-kids": {
-      "scope": "region",
-      "region": "인천",
-      "books": [
-        {
-          "title": "나미야 잡화점의 기적",
-          "author": "히가시노 게이고",
-          "isbn": "9788972756194",
-          "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
-        },
-        {
-          "title": "소년이 온다",
-          "author": "한강",
-          "isbn": "9788936434120",
-          "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
-        },
-        {
-          "title": "채식주의자",
-          "author": "한강",
-          "isbn": "9788936433598",
-          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
-        },
-        {
-          "title": "아몬드",
-          "author": "손원평",
-          "isbn": "9788936434267",
-          "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
-        },
-        {
-          "title": "불편한 편의점",
-          "author": "김호연",
-          "isbn": "9791161571188",
-          "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
-        },
-        {
-          "title": "종의 기원",
-          "author": "정유정",
-          "isbn": "9788956609959",
-          "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
-        },
-        {
-          "title": "7년의 밤",
-          "author": "정유정",
-          "isbn": "9788956604992",
-          "coverImageUrl": "https://image.aladin.co.kr/product/14712/55/cover/k202532053_1.jpg"
-        },
-        {
-          "title": "엉덩이 탐정",
-          "author": "트롤 글·그림",
-          "isbn": "9788937889714",
-          "coverImageUrl": "https://image.aladin.co.kr/product/10644/93/cover/8937889714_1.jpg"
-        }
-      ]
-    },
-    "seonhak-starlight": {
-      "scope": "region",
-      "region": "인천",
-      "books": [
-        {
-          "title": "나미야 잡화점의 기적",
-          "author": "히가시노 게이고",
-          "isbn": "9788972756194",
-          "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
-        },
-        {
-          "title": "소년이 온다",
-          "author": "한강",
-          "isbn": "9788936434120",
-          "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
-        },
-        {
-          "title": "채식주의자",
-          "author": "한강",
-          "isbn": "9788936433598",
-          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
-        },
-        {
-          "title": "아몬드",
-          "author": "손원평",
-          "isbn": "9788936434267",
-          "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
-        },
-        {
-          "title": "불편한 편의점",
-          "author": "김호연",
-          "isbn": "9791161571188",
-          "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
-        },
-        {
-          "title": "종의 기원",
-          "author": "정유정",
-          "isbn": "9788956609959",
-          "coverImageUrl": "https://image.aladin.co.kr/product/7492/9/cover/8956609950_2.jpg"
-        },
-        {
-          "title": "7년의 밤",
-          "author": "정유정",
-          "isbn": "9788956604992",
-          "coverImageUrl": "https://image.aladin.co.kr/product/14712/55/cover/k202532053_1.jpg"
-        },
-        {
-          "title": "엉덩이 탐정",
-          "author": "트롤 글·그림",
-          "isbn": "9788937889714",
-          "coverImageUrl": "https://image.aladin.co.kr/product/10644/93/cover/8937889714_1.jpg"
         }
       ]
     }
