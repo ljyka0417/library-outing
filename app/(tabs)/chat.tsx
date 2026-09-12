@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -87,6 +87,49 @@ export default function ChatScreen() {
     },
     [thinking, lang]
   );
+
+  /*
+   * 말을 바꾸면 지난 답도 새 말로 다시 답한다.
+   *
+   * 말풍선에는 물어보던 그때 만들어진 글이 그대로 담겨 있다. 그래서 일본어로
+   * 바꾸고 달곰이 탭으로 돌아오면 테두리만 일본어가 되고 답과 추천 질문은
+   * 한국어로 남아 있었다. 탭은 화면을 살려 두기 때문에 이전 대화가 그대로
+   * 보이는데, 인사말만 그릴 때 번역되니 인사말 아래부터 말이 갈렸다.
+   *
+   * 답은 바깥 AI 가 아니라 앱 안에서 만들어진다. 그러니 같은 질문을 새 말로
+   * 다시 물어보면 그만이다. 사람이 친 질문은 친 그대로 둔다 — 그건 우리 말이
+   * 아니라 그 사람의 말이다.
+   */
+  const langRef = useRef(lang);
+  const messagesRef = useRef(messages);
+  messagesRef.current = messages;
+
+  useEffect(() => {
+    if (langRef.current === lang) return;
+    langRef.current = lang;
+
+    const asked = messagesRef.current.filter((m) => m.role === 'user');
+    if (asked.length === 0) return; // 인사말뿐이면 그리는 자리에서 이미 바뀐다
+
+    let cancelled = false;
+    setThinking(true);
+
+    void (async () => {
+      const rebuilt: Message[] = [GREETING];
+      for (const q of asked) {
+        const answer = await ask(q.text, lang);
+        rebuilt.push(q, { id: `d-${q.id}`, role: 'dalgomi', text: answer.text, answer });
+      }
+      if (cancelled) return;
+      setMessages(rebuilt);
+      setThinking(false);
+    })();
+
+    // 다시 바꾸면 앞의 것은 버린다. 늦게 온 옛 답이 새 답을 덮으면 안 된다.
+    return () => {
+      cancelled = true;
+    };
+  }, [lang]);
 
   // 새 말풍선이 생기면 아래로 붙인다
   const scrollToEnd = () => listRef.current?.scrollToEnd({ animated: true });

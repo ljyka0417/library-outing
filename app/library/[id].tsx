@@ -21,7 +21,7 @@ import { loanDataVersion } from '@/data/books.mock';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
 import { centered, useLayout } from '@/hooks/useLayout';
-import { translate, useT, type Lang, type MessageKey } from '@/i18n';
+import { regionName, translate, useT, type Lang, type MessageKey } from '@/i18n';
 import { readableName } from '@/utils/romanize';
 import { colors, radius, shadow, spacing, typography } from '@/theme';
 import { callPhone, openWeb } from '@/utils/mapLinks';
@@ -29,9 +29,11 @@ import { isOpenNow, todayHoursLabel } from '@/utils/openingHours';
 import { useNow } from '@/hooks/useNow';
 import type { Book, Library } from '@/types';
 
-/** 시/군/구는 확인된 곳만 있으므로 있을 때만 붙인다. */
-function regionLabel(library: Library) {
-  return [library.region.sido, library.region.sigungu].filter(Boolean).join(' ');
+/** 시/군/구는 확인된 곳만 있으므로 있을 때만 붙인다. 옮기는 기준은 LibraryCard 와 같다. */
+function regionLabel(library: Library, lang: Lang) {
+  return [regionName(lang, library.region.sido), library.region.sigungu]
+    .filter(Boolean)
+    .join(' ');
 }
 
 /**
@@ -188,7 +190,7 @@ export default function LibraryDetailScreen() {
           <View style={styles.infoBlock}>
             <InfoRow icon="sparkles-outline" label={t('lib.specialty')} value={library.specialty} />
             <View style={styles.hr} />
-            <InfoRow icon="map-outline" label={t('lib.region')} value={regionLabel(library)} />
+            <InfoRow icon="map-outline" label={t('lib.region')} value={regionLabel(library, lang)} />
 
             {library.address ? (
               <>

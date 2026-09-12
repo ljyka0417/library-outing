@@ -3,16 +3,25 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Badge } from './common';
 import { LibraryImage } from './LibraryImage';
-import { useT } from '@/i18n';
+import { regionName, useT, type Lang } from '@/i18n';
 import { readableName } from '@/utils/romanize';
 import { colors, radius, shadow, spacing, typography } from '@/theme';
 import { isOpenNow } from '@/utils/openingHours';
 import { useNow } from '@/hooks/useNow';
 import type { Library } from '@/types';
 
-/** 시/군/구는 확인된 곳만 있으므로 있을 때만 붙인다. */
-function regionLabel(library: Library) {
-  return [library.region.sido, library.region.sigungu].filter(Boolean).join(' ');
+/**
+ * 시/군/구는 확인된 곳만 있으므로 있을 때만 붙인다.
+ *
+ * 시·도는 쓰는 말로 옮긴다. 검색 화면의 지역 단추는 이미 「ソウル」이라고
+ * 쓰는데 그 아래 카드만 「서울」로 남아 한 화면에서 말이 갈렸다.
+ * 시/군/구는 옮기지 않는다 — 네 말 모두의 표기를 가진 표가 우리에게 없고,
+ * 없는 이름을 지어내느니 도서관 이름과 똑같이 원문으로 두는 편이 낫다.
+ */
+function regionLabel(library: Library, lang: Lang) {
+  return [regionName(lang, library.region.sido), library.region.sigungu]
+    .filter(Boolean)
+    .join(' ');
 }
 
 interface Props {
@@ -72,7 +81,7 @@ export function LibraryCard({
             </Text>
           ) : null}
           <Text style={styles.region} numberOfLines={1}>
-            {regionLabel(library)}
+            {regionLabel(library, lang)}
           </Text>
         </View>
       </Pressable>
@@ -103,7 +112,7 @@ export function LibraryCard({
           </Text>
         ) : null}
         <Text style={styles.region} numberOfLines={1}>
-          {regionLabel(library)}
+          {regionLabel(library, lang)}
         </Text>
         <Text style={styles.services} numberOfLines={1}>
           {library.specialty}
