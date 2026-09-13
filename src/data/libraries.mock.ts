@@ -272,6 +272,35 @@ const enrichedEntries = (enrichedJson as EntryMap).entries ?? {};
 const standardEntries = (standardJson as EntryMap).entries ?? {};
 const manualEntries = (manualJson as EntryMap).entries ?? {};
 
+/**
+ * 휴관일 문구를 읽기 좋게 다듬는다.
+ *
+ * 모아 둔 JSON 은 건드리지 않는다. 거기 적힌 것은 각 항목의 _source 가
+ * 가리키는 원문이고, 나중에 맞는지 확인할 때 쓰는 값이다. 화면에 나갈 때만
+ * 손본다.
+ *
+ * **항목을 벌린다.**
+ *   전국도서관표준데이터는 항목을 '+' 로 이어 붙인다.
+ *     "둘째 주 월+넷재 주 월+1월1일+설 연휴+추석 연휴"
+ *   붙여 놓으면 어디서 끊어 읽어야 하는지 안 보인다. 서로 다른 휴관일 문구
+ *   73가지 중 45가지가 이 모양이라, 한 곳만 고쳐도 화면 여럿이 같이 나아진다.
+ *
+ * **'넷재' 를 '넷째' 로.**
+ *   원문의 오타다. 뜻을 바꾸는 게 아니라 잘못 찍힌 글자를 바로잡는 것뿐이라
+ *   "자료가 말하지 않은 것은 말하지 않는다" 는 원칙에 어긋나지 않는다.
+ *   뒤에 요일이나 '주' 가 오는 자리만 고쳐서, '인터넷재개' 같은 말을
+ *   건드리지 않는다.
+ */
+function tidyClosedDays(text?: string): string | undefined {
+  if (!text) return undefined;
+  const tidy = text
+    .replace(/([첫둘셋넷])재(?=\s*(주|[일월화수목금토]))/g, '$1째')
+    .replace(/\s*\+\s*/g, ' / ')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+  return tidy || undefined;
+}
+
 function toLibrary(seed: Seed): Library {
   const extra: Enrichment = {
     ...geocodedEntries[seed.id],
@@ -299,7 +328,7 @@ function toLibrary(seed: Seed): Library {
     address: extra.address,
     phone: extra.phone,
     homepage: extra.homepage,
-    closedDays: extra.closedDays,
+    closedDays: tidyClosedDays(extra.closedDays),
     hours: extra.hours,
     sourceApiId: extra.sourceApiId,
     // 수집한 좌표가 있으면 그걸 쓰고, 없으면 시연용 근사값으로 떨어진다.
