@@ -162,7 +162,32 @@ function findLibrary(q: string): Library | undefined {
     return best?.lib;
   };
 
-  return scan(spaced) ?? scan(tight);
+  const found = scan(spaced) ?? scan(tight);
+  if (found) return found;
+
+  /*
+   * 우리가 아는 이름과 부르는 이름이 다를 때.
+   *
+   * "판교도서관 운영시간 몇시까지 해?" 가 「경기 도서관 11곳이 있어요」 로
+   * 답했다. 목록에 있는 이름은 「판교어린이도서관」이라 위 검사에 안 걸리고,
+   * 그다음 지역 찾기에서 '판교' 가 경기의 별명으로 잡혀 지역 목록이 나갔다.
+   * 운영시간을 물었는데 도서관 열한 곳을 받은 셈이다.
+   *
+   * 그래서 "○○도서관" 이라고 부른 말에서 ○○ 만 떼어, 그 말로 시작하는
+   * 도서관을 찾는다. **딱 한 곳일 때만** 받아들인다. 여럿이면 어느 쪽인지
+   * 알 수 없으니 지역·분류 쪽 답에 맡긴다.
+   */
+  const called = /([가-힣a-z0-9]{2,})도서관/.exec(tight);
+  if (!called) return undefined;
+
+  const stem = called[1].replace(/(시립|도립|군립|구립|공립)$/, '');
+  if (stem.length < 2) return undefined;
+
+  // 지역 이름으로 부른 것은 지역 목록이 맞다 ("부산도서관" 은 이미 위에서 잡힌다)
+  if (SIDO_LIST.some((s) => norm(s) === stem) || REGION_PREFIX.test(stem)) return undefined;
+
+  const starts = MOCK_LIBRARIES.filter((l) => norm(l.name).replace(/\s/g, '').startsWith(stem));
+  return starts.length === 1 ? starts[0] : undefined;
 }
 
 function findCategory(q: string): CategoryId | undefined {

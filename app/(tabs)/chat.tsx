@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
+  Keyboard,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -131,6 +132,37 @@ export default function ChatScreen() {
     };
   }, [lang]);
 
+  /*
+   * 키보드가 올라왔는지.
+   *
+   * 탭바는 화면 위에 떠 있어서, 입력칸 아래에 탭바 높이만큼(120 남짓) 비워
+   * 두고 있었다. 그런데 키보드가 올라오면 탭바는 그 밑에 가려 보이지도 않는데
+   * 그 자리는 그대로 남아, 입력칸과 키보드 사이가 손바닥만큼 벌어졌다.
+   * 대화는 그만큼 눌려서 말풍선이 잘렸다.
+   */
+  const [keyboardUp, setKeyboardUp] = useState(false);
+  useEffect(() => {
+    /*
+     * 웹에는 올라오는 키보드가 없다. react-native-web 의 Keyboard 에는
+     * addListener 자체가 없어서, 그냥 부르면 화면이 죽는다.
+     */
+    if (Platform.OS === 'web') return;
+
+    // iOS 는 will*, 안드로이드는 did* 만 온다. 둘 다 걸어 둔다.
+    const show = Keyboard.addListener(
+      Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow',
+      () => setKeyboardUp(true)
+    );
+    const hide = Keyboard.addListener(
+      Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide',
+      () => setKeyboardUp(false)
+    );
+    return () => {
+      show.remove();
+      hide.remove();
+    };
+  }, []);
+
   // 새 말풍선이 생기면 아래로 붙인다
   const scrollToEnd = () => listRef.current?.scrollToEnd({ animated: true });
 
@@ -163,7 +195,7 @@ export default function ChatScreen() {
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        keyboardVerticalOffset={90}
+        keyboardVerticalOffset={0}
       >
         <FlatList
           ref={listRef}
@@ -209,7 +241,7 @@ export default function ChatScreen() {
           </ScrollView>
         ) : null}
 
-        <View style={[styles.inputRow, { paddingHorizontal: layout.gutter, paddingBottom: tabPad }]}>
+        <View style={[styles.inputRow, { paddingHorizontal: layout.gutter, paddingBottom: keyboardUp ? spacing.md : tabPad }]}>
           <TextInput
             value={input}
             onChangeText={setInput}
