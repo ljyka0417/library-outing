@@ -101,6 +101,21 @@ export const nearbyApi: NearbyApi = {
   },
 };
 
+/**
+ * 이 도서관 주변에 그 종류의 장소가 하나라도 있는가.
+ *
+ * 달곰이 추천 문구를 만들 때 쓴다. "○○도서관 주변 카페" 를 권했는데
+ * "찾은 카페가 아직 없어요" 가 나오면 권한 쪽이 틀린 것이다.
+ * list() 와 같은 자료를 같은 순서로 본다.
+ */
+export function hasNearby(libraryId: string, type: NearbyType): boolean {
+  if (!hasGenerated) return MOCK_NEARBY.some((p) => p.libraryId === libraryId && p.type === type);
+  return (
+    (tourByLibrary[libraryId] ?? []).some((p) => p.type === type) ||
+    (byLibrary[libraryId] ?? []).some((p) => p.type === type)
+  );
+}
+
 /** 수집된 주변 정보가 있는지. 개발 중 상태 확인용. */
 export const nearbyDataStatus = {
   generated: hasGenerated,

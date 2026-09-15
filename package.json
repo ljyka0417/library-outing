@@ -28,6 +28,7 @@
     "collect-tour": "node scripts/collect-tour-photos.mjs",
     "collect-library-photos": "node scripts/collect-library-photos.mjs",
     "test-hours": "node scripts/test-hours.mjs",
+    "chat-ideas": "node scripts/chat-ideas.mjs",
     "collect-hours": "node scripts/collect-standard-hours.mjs"
   },
   "dependencies": {

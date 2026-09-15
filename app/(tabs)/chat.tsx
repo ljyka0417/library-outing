@@ -13,7 +13,7 @@ import {
   View,
 } from 'react-native';
 import { TabScreen } from '@/components/TabScreen';
-import { useRouter } from 'expo-router';
+import { useFocusEffect, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Mascot } from '@/components/Mascot';
 import { BookCard } from '@/components/BookCard';
@@ -56,6 +56,15 @@ const GREETING: Message = {
 export default function ChatScreen() {
   const router = useRouter();
   const listRef = useRef<FlatList<Message>>(null);
+
+  /*
+   * 처음 칩을 고르는 씨앗.
+   *
+   * 아직 아무것도 묻지 않은 채로 달곰이 탭에 들어올 때마다 바꾼다. 들어올 때마다
+   * 다른 질문을 권해서 "이런 것도 물어볼 수 있구나" 를 알게 한다.
+   * 대화를 시작한 뒤에는 바꾸지 않는다 (보고 있는 칩이 갑자기 바뀌면 헷갈린다).
+   */
+  const [starterSeed, setStarterSeed] = useState(() => Math.floor(Math.random() * 2 ** 31));
   const tabPad = useTabBarPadding();
   const layout = useLayout();
   const { t, lang } = useT();
@@ -133,6 +142,15 @@ export default function ChatScreen() {
     };
   }, [lang]);
 
+  // 아직 묻지 않았으면 탭에 들어올 때마다 처음 칩을 새로 고른다 (위 starterSeed 참고)
+  useFocusEffect(
+    useCallback(() => {
+      if (messagesRef.current.length === 1) {
+        setStarterSeed(Math.floor(Math.random() * 2 ** 31));
+      }
+    }, [])
+  );
+
   /*
    * 키보드가 올라왔는지.
    *
@@ -169,7 +187,7 @@ export default function ChatScreen() {
 
   const lastSuggestions =
     messages[messages.length - 1]?.answer?.suggestions ??
-    (messages.length === 1 ? starterQuestions(lang) : undefined);
+    (messages.length === 1 ? starterQuestions(lang, starterSeed) : undefined);
 
   return (
     <TabScreen style={styles.safe}>

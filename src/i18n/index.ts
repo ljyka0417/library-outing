@@ -250,6 +250,13 @@ const ko = {
   'bot.sugCatSido': '{cat} 도서관 서울',
   'bot.sugSeoulCafe': '서울도서관 주변 카페',
   'bot.sugBusanFood': '부산도서관 주변 맛집',
+  'bot.sugClosed': '{name} 휴관일',
+  'bot.sugPhone': '{name} 전화번호',
+  'bot.sugWhere': '{name} 어디에 있어?',
+  'bot.sugCulture': '{name} 주변 볼거리',
+  'bot.sugCat': '{cat} 도서관 추천해줘',
+  'bot.sugSido': '{sido} 도서관 알려줘',
+  'bot.sugSidoCat': '{sido} {cat} 도서관',
 } as const;
 
 export type MessageKey = keyof typeof ko;
@@ -471,6 +478,13 @@ const en: Messages = {
   'bot.sugCatSido': '{cat} libraries in Seoul',
   'bot.sugSeoulCafe': 'Cafes near 서울도서관',
   'bot.sugBusanFood': 'Places to eat near 부산도서관',
+  'bot.sugClosed': 'When is {name} closed?',
+  'bot.sugPhone': 'Phone number of {name}',
+  'bot.sugWhere': 'Where is {name}?',
+  'bot.sugCulture': 'Things to see near {name}',
+  'bot.sugCat': 'Recommend {cat} libraries',
+  'bot.sugSido': 'Libraries in {sido}',
+  'bot.sugSidoCat': '{cat} libraries in {sido}',
 };
 
 const ja: Messages = {
@@ -686,6 +700,13 @@ const ja: Messages = {
   'bot.sugCatSido': 'ソウルの{cat}図書館',
   'bot.sugSeoulCafe': '서울도서관 の周辺カフェ',
   'bot.sugBusanFood': '부산도서관 の周辺グルメ',
+  'bot.sugClosed': '{name} の休館日',
+  'bot.sugPhone': '{name} の電話番号',
+  'bot.sugWhere': '{name} はどこ？',
+  'bot.sugCulture': '{name} の周辺の見どころ',
+  'bot.sugCat': '{cat}の図書館のおすすめ',
+  'bot.sugSido': '{sido}の図書館',
+  'bot.sugSidoCat': '{sido}の{cat}図書館',
 };
 
 const zh: Messages = {
@@ -897,6 +918,13 @@ const zh: Messages = {
   'bot.sugCatSido': '首尔的{cat}图书馆',
   'bot.sugSeoulCafe': '서울도서관 周边咖啡',
   'bot.sugBusanFood': '부산도서관 周边美食',
+  'bot.sugClosed': '{name} 闭馆日',
+  'bot.sugPhone': '{name} 电话',
+  'bot.sugWhere': '{name} 在哪里？',
+  'bot.sugCulture': '{name} 周边景点',
+  'bot.sugCat': '推荐{cat}图书馆',
+  'bot.sugSido': '{sido}的图书馆',
+  'bot.sugSidoCat': '{sido}的{cat}图书馆',
 };
 
 const DICT: Record<Lang, Messages> = { ko, en, ja, zh };

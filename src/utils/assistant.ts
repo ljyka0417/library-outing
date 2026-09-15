@@ -4,6 +4,14 @@ import { booksForLibrary } from '@/data/books.mock';
 import { nearbyApi } from '@/api/nearbyApi';
 import { isOpenNow, todayHoursLabel } from './openingHours';
 import { regionName, translate, type Lang, type MessageKey } from '@/i18n';
+import {
+  browseFollowUps,
+  libraryFollowUps,
+  nearbyExamples,
+  seedFrom,
+  starterIdeas,
+  type IdeaKind,
+} from './chatIdeas';
 import type { Book, CategoryId, Library, NearbyPlace, NearbyType } from '@/types';
 
 /**
@@ -78,9 +86,12 @@ const CATEGORY_WORDS: [CategoryId, RegExp][] = [
   ['art', /예술|미술|디자인|전시|그림|\bart\b|\bdesign\b|\bexhibitions?\b|芸術|美術|デザイン|艺术|美术|设计/],
   ['history', /역사|전통|한옥|유적|\bhistory\b|\bheritage\b|歴史|伝統|历史|传统/],
   ['nature', /자연|환경|생태|숲|식물|정원|\bnature\b|\beco\b|\bforests?\b|\bplants?\b|\bgardens?\b|自然|森|植物|生态|花园/],
-  ['science', /과학|아이티|it|디지털|ai|인공지능|천문|우주|로봇|정보과학|\bscience\b|\btech\b|\brobots?\b|\bspace\b|科学|宇宙|ロボット|太空|机器人/],
+  // it·ai 는 낱말로만 받는다. \b 없이 두었더니 "Humanities" 안의 it 에 걸려 인문을 과학으로 답했다.
+  ['science', /과학|아이티|\bit\b|디지털|\bai\b|인공지능|천문|우주|로봇|정보과학|\bscience\b|\btech\b|\brobots?\b|\bspace\b|科学|宇宙|ロボット|太空|机器人/],
   ['comics', /만화|웹툰|영화|영상|미디어|\bcomics?\b|\bcartoons?\b|\bwebtoons?\b|\bmovies?\b|\bfilms?\b|マンガ|漫画|映画|动漫|电影/],
-  ['food', /미식|요리|식문화|음식 도서관|\bcooking\b|\bcuisine\b|\bgastronomy\b|グルメ|料理|美食|烹饪/],
+  // "food libraries" 는 주변 맛집이 아니라 음식 도서관이다. 뒤에 library 가 오면 주제로 받는다.
+  // 일본어 주제 이름은 '食' 한 글자라, 그것만으로는 食事(식사)와 섞이므로 '食の図書館' 꼴로 받는다.
+  ['food', /미식|요리|식문화|음식 도서관|\bfood librar(y|ies)\b|\bcooking\b|\bcuisine\b|\bgastronomy\b|グルメ|料理|食の図書館|食図書館|食文化|美食|烹饪/],
   ['travel', /여행|바다|해양|관광|바닷|\btravel\b|\bocean\b|\bsea\b|\btourism\b|旅行|海洋|旅游/],
   ['humanities', /인문|철학|문학|사회|법률|정치|다문화|\bhumanities\b|\bphilosophy\b|\bliterature\b|人文|哲学|文学|哲學/],
   ['landmark', /랜드마크|대표 도서관|큰 도서관|\blandmarks?\b|ランドマーク|地标|代表/],
@@ -214,7 +225,7 @@ const NEARBY_WORDS: [NearbyType, RegExp, MessageKey][] = [
   ],
   [
     'culture',
-    /볼거리|문화|구경|가볼|명소|전시관|\bculture\b|\bsights?\b|\bmuseums?\b|\bgallery\b|文化|見どころ|景点|博物馆/,
+    /볼거리|문화|구경|가볼|명소|전시관|\bculture\b|\bsights?\b|\bthings to (see|do)\b|\bmuseums?\b|\bgallery\b|文化|見どころ|景点|博物馆/,
     'bot.kindCulture',
   ],
 ];
@@ -255,7 +266,17 @@ function pick(libs: Library[]) {
 
 /** 특정 도서관에 대한 질문에 답한다. */
 async function answerAboutLibrary(lib: Library, q: string, lang: Lang): Promise<Answer> {
-  const text = norm(q);
+  /*
+   * 무엇을 묻는지는 도서관 이름을 뺀 나머지 말로 본다.
+   *
+   * 「농심식문화전문도서관 운영시간」이 "좌표가 없어 주변을 찾을 수 없어요" 로
+   * 답했다. 이름 속 '문화' 가 주변 볼거리(문화)를 묻는 말로 잡혔기 때문이다.
+   * 「달서가족문화도서관」도 같았다. 이름은 이미 도서관을 고르는 데 썼으니
+   * 질문을 읽을 때는 지운다. (붙여 쓴 이름도 지운다)
+   */
+  const text = norm(q)
+    .replace(norm(lib.name), ' ')
+    .replace(norm(lib.name).replace(/\s/g, ''), ' ');
   const cards = [lib];
   const tr = (key: MessageKey, vars?: Vars) => translate(lang, key, vars);
 
@@ -267,6 +288,14 @@ async function answerAboutLibrary(lib: Library, q: string, lang: Lang): Promise<
    * 다른 말의 문장은 {name} 만 쓰므로 남는 값은 그냥 버려진다.
    */
   const who: Vars = { name: lib.name, nameTopic: josa(lib.name, '은는') };
+
+  /*
+   * 이어 물을 칩. 방금 물은 것은 빼고 이 도서관에 대해 답할 수 있는 것 중에서 고른다
+   * (chatIdeas 가 검사를 통과한 것만 준다). 목록을 못 쓰면 예전 고정 칩으로.
+   */
+  const seed = seedFrom(norm(q));
+  const more = (asked: IdeaKind | undefined, fallback: string[] = []) =>
+    libraryFollowUps(lib.id, asked, lang, seed, () => fallback);
 
   // 주변 장소
   for (const [type, re, kindKey] of NEARBY_WORDS) {
@@ -286,7 +315,10 @@ async function answerAboutLibrary(lib: Library, q: string, lang: Lang): Promise<
       return {
         text: tr('bot.nearbyFound', { ...who, kind, n: places.length }),
         places: places.slice(0, 5),
-        suggestions: [tr('bot.sugHours', who), tr('bot.sugBooks', who)],
+        suggestions: more(type === 'restaurant' ? 'food' : type, [
+          tr('bot.sugHours', who),
+          tr('bot.sugBooks', who),
+        ]),
       };
     }
   }
@@ -312,6 +344,7 @@ async function answerAboutLibrary(lib: Library, q: string, lang: Lang): Promise<
         todayHoursLabel(lib.hours, lang) +
         (lib.closedDays ? tr('bot.closedLine', { days: lib.closedDays }) : ''),
       libraries: cards,
+      suggestions: more('hours'),
     };
   }
 
@@ -322,6 +355,7 @@ async function answerAboutLibrary(lib: Library, q: string, lang: Lang): Promise<
         ? tr('bot.phoneIs', { ...who, phone: lib.phone })
         : tr('bot.phoneUnknown', who),
       libraries: cards,
+      suggestions: more('phone'),
     };
   }
 
@@ -332,6 +366,7 @@ async function answerAboutLibrary(lib: Library, q: string, lang: Lang): Promise<
         ? tr('bot.closedIs', { ...who, days: lib.closedDays })
         : tr('bot.closedUnknown', who),
       libraries: cards,
+      suggestions: more('closed'),
     };
   }
 
@@ -342,7 +377,7 @@ async function answerAboutLibrary(lib: Library, q: string, lang: Lang): Promise<
         ? tr('bot.addressIs', { ...who, address: lib.address })
         : tr('bot.addressUnknown', who),
       libraries: cards,
-      suggestions: [tr('bot.sugCafe', who), tr('bot.sugHours', who)],
+      suggestions: more('where', [tr('bot.sugCafe', who), tr('bot.sugHours', who)]),
     };
   }
 
@@ -361,6 +396,7 @@ async function answerAboutLibrary(lib: Library, q: string, lang: Lang): Promise<
           : tr('bot.booksLibrary', who),
       books: books.slice(0, 5),
       libraries: cards,
+      suggestions: more('books'),
     };
   }
 
@@ -378,7 +414,11 @@ async function answerAboutLibrary(lib: Library, q: string, lang: Lang): Promise<
   return {
     text: bits.join('\n'),
     libraries: cards,
-    suggestions: [tr('bot.sugFood', who), tr('bot.sugBooks', who), tr('bot.sugHours', who)],
+    suggestions: more(undefined, [
+      tr('bot.sugFood', who),
+      tr('bot.sugBooks', who),
+      tr('bot.sugHours', who),
+    ]),
   };
 }
 
@@ -426,7 +466,11 @@ function answerBrowse(q: string, lang: Lang, category?: CategoryId, sido?: strin
         : '';
     return {
       text: tr('bot.browseNone', { label, labelTopic: josa(label, '은는') }) + reason,
-      suggestions: [tr('bot.sugKids'), tr('bot.sugSeoul'), tr('bot.sugOpen')],
+      suggestions: browseFollowUps(lang, seedFrom(text), () => [
+        tr('bot.sugKids'),
+        tr('bot.sugSeoul'),
+        tr('bot.sugOpen'),
+      ]),
     };
   }
 
@@ -438,9 +482,17 @@ function answerBrowse(q: string, lang: Lang, category?: CategoryId, sido?: strin
   return {
     text: head + tail,
     libraries: pick(libs),
-    suggestions: cat
-      ? [tr('bot.sugCatSido', { cat }), tr('bot.sugOpen')]
-      : [tr('bot.sugKids'), tr('bot.sugMusic'), tr('bot.sugOpen')],
+    // 같은 주제의 다른 지역, 다른 주제 쪽으로 넓힌다
+    suggestions: browseFollowUps(
+      lang,
+      seedFrom(text),
+      () =>
+        cat
+          ? [tr('bot.sugCatSido', { cat }), tr('bot.sugOpen')]
+          : [tr('bot.sugKids'), tr('bot.sugMusic'), tr('bot.sugOpen')],
+      category,
+      sido
+    ),
   };
 }
 
@@ -460,7 +512,7 @@ export async function ask(question: string, lang: Lang = 'ko'): Promise<Answer> 
   if (ASK.greeting.test(text)) {
     return {
       text: tr('bot.hello', { count: LIBRARY_COUNT }),
-      suggestions: [tr('bot.sugKids'), tr('bot.sugOpen'), tr('bot.sugSeoul')],
+      suggestions: starterQuestions(lang, seedFrom(text)).slice(0, 3),
     };
   }
   if (ASK.thanks.test(text)) {
@@ -502,7 +554,10 @@ export async function ask(question: string, lang: Lang = 'ko'): Promise<Answer> 
   if (NEARBY_WORDS.some(([, re]) => re.test(text)) && !findCategory(q)) {
     return {
       text: tr('bot.needLibrary'),
-      suggestions: [tr('bot.sugSeoulCafe'), tr('bot.sugBusanFood')],
+      suggestions: nearbyExamples(lang, seedFrom(text), () => [
+        tr('bot.sugSeoulCafe'),
+        tr('bot.sugBusanFood'),
+      ]),
     };
   }
 
@@ -515,7 +570,7 @@ export async function ask(question: string, lang: Lang = 'ko'): Promise<Answer> 
 
   return {
     text: `${tr('bot.notUnderstood', { q })}\n\n${tr('bot.help', { count: LIBRARY_COUNT })}`,
-    suggestions: [tr('bot.sugKids'), tr('bot.sugOpen')],
+    suggestions: starterQuestions(lang, seedFrom(text)).slice(0, 3),
   };
 }
 
@@ -524,15 +579,20 @@ export async function ask(question: string, lang: Lang = 'ko'): Promise<Answer> 
  *
  * 눌리면 그대로 질문으로 들어가므로, 달곰이가 알아듣는 말이어야 한다.
  * 도서관 이름은 어느 말에서든 한글 그대로다 — 이름을 옮기면 찾지 못한다.
+ *
+ * 검사를 통과한 1천여 개(npm run chat-ideas) 중에서 씨앗으로 네 개를 고른다.
+ * 대화 화면을 열 때마다 씨앗이 바뀌어 다른 칩이 나온다.
+ * 목록을 못 쓰면 아래 고정 네 개로 돌아간다 (복구 장치).
  */
-export function starterQuestions(lang: Lang): string[] {
+export function starterQuestions(lang: Lang, seed = 1): string[] {
   const tr = (key: MessageKey, vars?: Vars) => translate(lang, key, vars);
-  return [
+  const fixed = () => [
     tr('bot.sugKids'),
     tr('bot.sugOpen'),
     tr('bot.sugHours', { name: '서울도서관' }),
     tr('bot.sugCafe', { name: '한밭도서관' }),
   ];
+  return starterIdeas(lang, seed, fixed);
 }
 
 /** 개발 중 상태 확인용 */
