@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
@@ -18,7 +18,17 @@ import { bleedRow, centered, useLayout } from '@/hooks/useLayout';
 import { colors, radius, spacing, typography } from '@/theme';
 import type { CategoryId } from '@/types';
 
+/*
+ * 탭을 오갈 때마다 탭 화면은 다시 그려진다(내비게이터가 그렇게 한다). 그때 홈의
+ * 카드·주제 그리드까지 따라 그려지면 전환 효과가 시작되기 전에 멈칫한다.
+ * 본문을 받는 값 없는 memo 로 떼어 두면 본문은 자기가 쓰는 값(최근 본 도서관,
+ * 언어, 화면 폭)이 바뀔 때만 다시 그려진다.
+ */
 export default function HomeScreen() {
+  return <HomeContent />;
+}
+
+const HomeContent = memo(function HomeContent() {
   const router = useRouter();
   const recentIds = useAppStore((s) => s.recentLibraryIds);
   const tabPad = useTabBarPadding();
@@ -154,7 +164,7 @@ export default function HomeScreen() {
       </ScrollView>
     </SafeAreaView>
   );
-}
+});
 
 const styles = StyleSheet.create({
   safe: {

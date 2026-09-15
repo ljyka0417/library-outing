@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
@@ -86,7 +86,15 @@ interface Props {
  * 화면 너비만큼 커져서 정보가 한참 아래로 밀렸다. 책과 주변 장소는 그 아래에
  * 화면 끝까지 흐르는 가로 줄로 둔다 — 홈의 추천 줄과 같은 모양이다.
  */
-export function LibraryDetail({ id, embedded = false, recordRecent = true }: Props) {
+/*
+ * memo: 검색 탭의 오른쪽 칸에 들어가 있을 때, 탭을 오가며 검색 화면이 다시
+ * 그려져도 같은 도서관이면 상세 전체(책 선반·주변 장소)를 다시 만들지 않는다.
+ */
+export const LibraryDetail = memo(function LibraryDetail({
+  id,
+  embedded = false,
+  recordRecent = true,
+}: Props) {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const [expanded, setExpanded] = useState(false);
@@ -377,7 +385,7 @@ export function LibraryDetail({ id, embedded = false, recordRecent = true }: Pro
       </ScrollView>
     </View>
   );
-}
+});
 
 const styles = StyleSheet.create({
   center: {

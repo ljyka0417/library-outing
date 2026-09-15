@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
@@ -102,10 +102,15 @@ export default function SearchScreen() {
   const stillListed = selectedId !== undefined && results.some((r) => r.id === selectedId);
   const activeId = stillListed ? selectedId : results[0]?.id;
 
-  const openLibrary = (id: string) => {
-    if (layout.split) setSelectedId(id);
-    else router.push(`/library/${id}`);
-  };
+  // 목록 칸(ResultsPane)이 memo 라서 누를 때마다 새 함수를 넘기면 memo 가 소용없어진다
+  const split = layout.split;
+  const openLibrary = useCallback(
+    (id: string) => {
+      if (split) setSelectedId(id);
+      else router.push(`/library/${id}`);
+    },
+    [split, router]
+  );
 
   const list = (
     <ResultsPane
@@ -193,11 +198,16 @@ interface ResultsPaneProps {
 /**
  * 검색창·필터·결과 목록.
  *
+ * memo 로 감싼다. 탭을 오갈 때마다 검색 화면이 다시 그려지는데, 그때 이 칸도
+ * 따라 그려지면 카드 132장을 전부 다시 만든다. 재 보니 검색 탭으로 돌아올 때
+ * 컴포넌트 5,357개를 다시 그렸고, 그동안 탭 전환 효과가 멈춰 뚝 끊겨 보였다.
+ * 받는 값이 그대로면 건너뛴다.
+ *
  * 따로 떼어 둔 이유: 나란히 둘 때 이 칸은 360~420 폭만 쓴다. 폭에 따라 정해지는
  * 여백·열 수를 **이 안에서** useLayout 으로 읽어야 칸 폭을 따른다. 부모에서
  * 읽어 넘기면 부모의 넓은 폭 기준으로 두 줄 카드를 좁은 칸에 욱여넣는다.
  */
-function ResultsPane({
+const ResultsPane = memo(function ResultsPane({
   keyword,
   onKeyword,
   category,
@@ -312,7 +322,7 @@ function ResultsPane({
       )}
     </>
   );
-}
+});
 
 const styles = StyleSheet.create({
   safe: {

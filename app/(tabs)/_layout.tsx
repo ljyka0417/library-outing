@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Animated, Easing, StyleSheet, View, useWindowDimensions } from 'react-native';
 import { useReducedMotion } from 'react-native-reanimated';
 import { Ionicons } from '@expo/vector-icons';
-import { Tabs } from 'expo-router';
+import { Tabs, router } from 'expo-router';
 import { LiquidTabBar, type TabBarProps } from '@/components/LiquidTabBar';
 import {
   SIDEBAR_WIDTH,
@@ -78,6 +78,22 @@ export default function TabsLayout() {
   const [openChoice, setOpenChoice] = useState<boolean | null>(null);
   useEffect(() => setOpenChoice(null), [wide]);
   const sidebarOpen = openChoice ?? wide;
+
+  /*
+   * 나머지 탭을 미리 만들어 둔다.
+   *
+   * 탭 화면은 처음 눌렀을 때 만들어진다. 검색 탭은 카드 목록과 상세 칸까지 만드느라
+   * 재 보니 누른 뒤 전환이 시작되기까지 0.5초가 걸렸다(개발 PC, CPU 6배 느리게).
+   * 그동안 화면이 멈춰 첫 전환이 뚝 끊겨 보인다. 앱이 켜지고 첫 화면이 자리 잡은
+   * 뒤에 하나씩 미리 만들어 두면, 처음 누를 때도 이미 있는 화면으로 넘어간다.
+   * 한꺼번에 만들면 그 순간 첫 화면이 멈추므로 사이를 둔다.
+   */
+  useEffect(() => {
+    const timers = TABS.filter((tab) => tab.href !== '/').map((tab, i) =>
+      setTimeout(() => router.prefetch(tab.href), 1200 + i * 400)
+    );
+    return () => timers.forEach(clearTimeout);
+  }, []);
 
   const docked = nav === 'tablet' && sidebarOpen && wide;
   const overlay = nav === 'tablet' && sidebarOpen && !wide;
