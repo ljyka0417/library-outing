@@ -38,22 +38,22 @@ import { colors } from '@/theme';
  * 아이패드 기본 앱들도 탭 사이에서는 화면을 밀지 않는다 (밀면 "안으로 들어간다"
  * 로 읽힌다).
  *
- * 그냥 'fade' 를 쓰면 나가는 화면과 들어오는 화면이 똑같이 반씩 투명해지는
- * 순간 바탕색이 비쳐 한 번 깜빡인다. 그래서 가운데까지는 거의 불투명하게 두고
- * 끝에서만 빠르게 사라진다. 들어오는 화면이 위에 놓이므로 둘을 합치면 거의
- * 가려진 채로 바뀐다.
+ * ⚠️ 처음엔 두 화면이 반투명하게 겹치는 순간을 줄이려고 앞쪽에서 빨리 나타나는
+ *   곡선(ease-out + 가운데 0.85)을 썼다. 재 보니 새 화면이 0.06초 만에 거의 다
+ *   나타나서 눈에는 효과가 없는 것과 같았다. 두 화면의 바탕색이 같아 겹치는 순간에
+ *   깜빡임도 없으므로, 전체 시간에 고르게 겹치는 평범한 크로스페이드로 둔다.
  */
 const TAB_TRANSITION = {
   animation: 'fade' as const,
   transitionSpec: {
     animation: 'timing' as const,
-    config: { duration: 220, easing: Easing.out(Easing.cubic) },
+    config: { duration: 250, easing: Easing.inOut(Easing.quad) },
   },
   sceneStyleInterpolator: ({ current }: { current: { progress: Animated.Value } }) => ({
     sceneStyle: {
       opacity: current.progress.interpolate({
-        inputRange: [-1, -0.5, 0, 0.5, 1],
-        outputRange: [0, 0.85, 1, 0.85, 0],
+        inputRange: [-1, 0, 1],
+        outputRange: [0, 1, 0],
       }),
     },
   }),
