@@ -5,6 +5,7 @@ import { nearbyApi } from '@/api/nearbyApi';
 import { isOpenNow, todayHoursLabel } from './openingHours';
 import { regionName, translate, type Lang, type MessageKey } from '@/i18n';
 import {
+  CHIP_COUNT,
   browseFollowUps,
   libraryFollowUps,
   nearbyExamples,
@@ -299,8 +300,21 @@ async function answerAboutLibrary(
    * 이어 물을 칩. 방금 물은 것은 빼고 이 도서관에 대해 답할 수 있는 것 중에서 고른다
    * (chatIdeas 가 검사를 통과한 것만 준다). 목록을 못 쓰면 예전 고정 칩으로.
    */
-  const more = (asked: IdeaKind | undefined, fallback: string[] = []) =>
-    libraryFollowUps(ctx, lib.id, asked, () => fallback);
+  /*
+   * 목록을 못 쓸 때의 칩(복구 장치). 예전엔 운영시간·전화 답 뒤의 복구 칩이 비어 있어서,
+   * 목록이 비면 칩이 통째로 사라졌다. 이 도서관 이야기 + 둘러보기로 늘 채워 둔다.
+   */
+  const fixedChips = [
+    tr('bot.sugHours', who),
+    tr('bot.sugCafe', who),
+    tr('bot.sugBooks', who),
+    tr('bot.sugKids'),
+    tr('bot.sugOpen'),
+    tr('bot.sugSeoul'),
+    tr('bot.sugMusic'),
+  ];
+  const more = (asked: IdeaKind | undefined, fallback: string[] = fixedChips) =>
+    libraryFollowUps(ctx, lib.id, asked, () => [...fallback, ...fixedChips]);
 
   // 주변 장소
   for (const [type, re, kindKey] of NEARBY_WORDS) {
@@ -578,7 +592,7 @@ export async function ask(
       answer.suggestions = [
         hoursChip,
         ...(answer.suggestions ?? []).filter((s) => s !== hoursChip),
-      ].slice(0, 4);
+      ].slice(0, CHIP_COUNT);
     }
     return answer;
   }
