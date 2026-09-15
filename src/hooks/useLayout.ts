@@ -83,3 +83,36 @@ export function centered(layout: Layout) {
     alignSelf: 'center' as const,
   };
 }
+
+/**
+ * 가운데 칸 바깥, 양옆에 남는 폭. 폰에서는 0 이다.
+ */
+export function sideSpace(layout: Layout) {
+  return Math.max(0, (layout.width - layout.maxContentWidth) / 2);
+}
+
+/**
+ * 옆으로 넘기는 카드 줄을 화면 양 끝까지 늘린다.
+ *
+ * 가운데 칸 안에 가둔 채로 두면, 아이패드에서 카드가 칸 오른쪽 끝에서 뚝
+ * 잘렸다. 그 바깥은 텅 비어 있는데 가운데서 끊기니 고장 난 것처럼 보였다.
+ * 폰에서는 칸이 곧 화면이라 카드가 화면 끝에 걸쳐 "옆에 더 있다" 로 읽혔던
+ * 모양이다.
+ *
+ * 그래서 줄은 칸 밖으로 양쪽을 늘리고, 첫 카드만 본문 왼쪽 줄에 맞춘다.
+ * 아이패드 앱스토어의 가로 선반이 이렇게 생겼다.
+ *
+ * 쓰는 법 — 가운데 칸 안에 있는 ScrollView 에
+ *   style={bleedRow(layout).style}
+ *   contentContainerStyle={[원래 스타일, bleedRow(layout).content]}
+ *
+ * 첫 카드가 섹션 제목과 같은 선에서 시작하도록 여백은 gutter 를 쓴다.
+ * 예전에 몇 곳은 20 으로 고정해 둬서, 태블릿(28)에서 제목과 카드가 어긋났다.
+ */
+export function bleedRow(layout: Layout) {
+  const outside = sideSpace(layout);
+  return {
+    style: { marginHorizontal: -outside },
+    content: { paddingHorizontal: outside + layout.gutter },
+  };
+}

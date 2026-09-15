@@ -22,7 +22,8 @@ import { useAppStore } from '@/store/useAppStore';
 import { LIBRARY_COUNT } from '@/data/libraries.mock';
 import { ask, starterQuestions, type Answer } from '@/utils/assistant';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
-import { centered, useLayout } from '@/hooks/useLayout';
+import { centered, sideSpace, useLayout } from '@/hooks/useLayout';
+import { ChipRow } from '@/components/common';
 import { useT } from '@/i18n';
 import { colors, radius, spacing, typography } from '@/theme';
 import { formatDistance, walkingMinutes } from '@/utils/openingHours';
@@ -172,23 +173,33 @@ export default function ChatScreen() {
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
-      {/* 태블릿에서는 대화 전체를 가운데로 모은다. 말풍선이 화면 끝까지
-          퍼지면 한 줄이 너무 길어 읽기 힘들다. */}
-      <View style={[styles.body, centered(layout)]}>
-      <View style={[styles.header, { paddingHorizontal: layout.gutter }]}>
-        <Mascot size={38} pose="faceHappy" />
-        <View style={{ flex: 1 }}>
-          <Text style={styles.headerTitle}>{t('chat.title')}</Text>
-          <Text style={styles.headerSub}>{t('chat.sub', { count: LIBRARY_COUNT })}</Text>
+      {/*
+        태블릿에서 대화는 가운데 칸에 모으고, 위·아래 흰 띠는 화면 끝까지 깐다.
+
+        말풍선이 화면 끝까지 퍼지면 한 줄이 너무 길어 읽기 힘들어서 대화는
+        가운데로 모은다. 그런데 예전엔 흰 띠까지 그 칸 안에 넣어 둬서,
+        아이패드에서 띠 양옆에 크림색 줄이 남고 대화가 상자 안에 갇힌 것처럼
+        보였다. 폰은 칸이 곧 화면이라 드러나지 않던 문제다.
+        그래서 띠의 바탕은 끝까지, 안의 글자와 입력칸만 가운데에 둔다.
+      */}
+      <View style={styles.headerBar}>
+        <View style={[styles.header, centered(layout), { paddingHorizontal: layout.gutter }]}>
+          <Mascot size={38} pose="faceHappy" />
+          <View style={{ flex: 1 }}>
+            <Text style={styles.headerTitle}>{t('chat.title')}</Text>
+            <Text style={styles.headerSub}>{t('chat.sub', { count: LIBRARY_COUNT })}</Text>
+          </View>
         </View>
       </View>
 
       {/* 달곰이는 네 가지 말을 알아듣지만 도서관 이름만은 한글이다.
           "Seoul Library" 라고 치면 못 찾으므로 미리 알려 준다. */}
       {lang !== 'ko' ? (
-        <View style={[styles.notice, { paddingHorizontal: layout.gutter }]}>
-          <Ionicons name="information-circle-outline" size={14} color={colors.textSub} />
-          <Text style={styles.noticeText}>{t('chat.nameHint')}</Text>
+        <View style={styles.noticeBar}>
+          <View style={[styles.notice, centered(layout), { paddingHorizontal: layout.gutter }]}>
+            <Ionicons name="information-circle-outline" size={14} color={colors.textSub} />
+            <Text style={styles.noticeText}>{t('chat.nameHint')}</Text>
+          </View>
         </View>
       ) : null}
 
@@ -202,7 +213,7 @@ export default function ChatScreen() {
           directionalLockEnabled
           data={messages}
           keyExtractor={(m) => m.id}
-          contentContainerStyle={[styles.list, { paddingHorizontal: layout.gutter }]}
+          contentContainerStyle={[styles.list, { paddingHorizontal: sideSpace(layout) + layout.gutter }]}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
           onContentSizeChange={scrollToEnd}
@@ -220,28 +231,26 @@ export default function ChatScreen() {
         />
 
         {thinking ? (
-          <View style={styles.thinking}>
+          <View style={[styles.thinking, centered(layout), { paddingHorizontal: layout.gutter }]}>
             <ActivityIndicator size="small" color={colors.primary} />
             <Text style={styles.thinkingText}>{t('chat.thinking')}</Text>
           </View>
         ) : null}
 
         {lastSuggestions && lastSuggestions.length > 0 && !thinking ? (
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={[styles.suggestRow, { paddingHorizontal: layout.gutter }]}
-            style={{ flexGrow: 0, flexShrink: 0 }}
-          >
-            {lastSuggestions.map((s: string) => (
-              <Pressable key={s} onPress={() => void send(s)} style={styles.suggestChip}>
-                <Text style={styles.suggestText}>{s}</Text>
-              </Pressable>
-            ))}
-          </ScrollView>
+          <View style={centered(layout)}>
+            <ChipRow contentStyle={styles.suggestRow}>
+              {lastSuggestions.map((s: string) => (
+                <Pressable key={s} onPress={() => void send(s)} style={styles.suggestChip}>
+                  <Text style={styles.suggestText}>{s}</Text>
+                </Pressable>
+              ))}
+            </ChipRow>
+          </View>
         ) : null}
 
-        <View style={[styles.inputRow, { paddingHorizontal: layout.gutter, paddingBottom: keyboardUp ? spacing.md : tabPad }]}>
+        <View style={[styles.inputBar, { paddingBottom: keyboardUp ? spacing.md : tabPad }]}>
+        <View style={[styles.inputRow, centered(layout), { paddingHorizontal: layout.gutter }]}>
           <TextInput
             value={input}
             onChangeText={setInput}
@@ -262,8 +271,8 @@ export default function ChatScreen() {
             <Ionicons name="arrow-up" size={20} color={colors.white} />
           </Pressable>
         </View>
+        </View>
       </KeyboardAvoidingView>
-      </View>
     </SafeAreaView>
   );
 }
@@ -345,25 +354,25 @@ function Bubble({ message, onOpenLibrary, favorites, onToggleFavorite }: BubbleP
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.background },
-  /** 태블릿에서 가운데로 모이는 본문 (폰에서는 화면 폭 그대로) */
-  body: { flex: 1, backgroundColor: colors.background },
-
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.md,
-    paddingHorizontal: spacing.xl,
-    paddingVertical: spacing.md,
+  /** 위 흰 띠. 바탕은 화면 끝까지 간다. */
+  headerBar: {
     borderBottomWidth: 1,
     borderBottomColor: colors.divider,
     backgroundColor: colors.surface,
   },
+  /** 띠 안의 글자. 태블릿에서는 가운데 칸에 모인다. */
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.md,
+    paddingVertical: spacing.md,
+  },
+  noticeBar: { backgroundColor: colors.surfaceAlt },
   notice: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
     paddingVertical: spacing.sm,
-    backgroundColor: colors.surfaceAlt,
   },
   noticeText: { ...typography.tiny, color: colors.textSub, flex: 1 },
   headerTitle: { ...typography.bodyBold, color: colors.text },
@@ -414,13 +423,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.sm,
-    paddingHorizontal: spacing.xl,
     paddingBottom: spacing.sm,
   },
   thinkingText: { ...typography.caption, color: colors.textSub },
 
   suggestRow: {
-    paddingHorizontal: spacing.xl,
     paddingBottom: spacing.sm,
     gap: spacing.sm,
   },
@@ -434,16 +441,17 @@ const styles = StyleSheet.create({
   },
   suggestText: { ...typography.caption, color: colors.primary, fontWeight: '600' },
 
+  /** 아래 흰 띠. 바탕은 화면 끝까지, 아래 여백은 탭바·키보드에 따라 바뀐다. */
+  inputBar: {
+    paddingTop: spacing.sm,
+    borderTopWidth: 1,
+    borderTopColor: colors.divider,
+    backgroundColor: colors.surface,
+  },
   inputRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.sm,
-    paddingHorizontal: spacing.xl,
-    paddingTop: spacing.sm,
-    paddingBottom: spacing.md,
-    borderTopWidth: 1,
-    borderTopColor: colors.divider,
-    backgroundColor: colors.surface,
   },
   input: {
     flex: 1,

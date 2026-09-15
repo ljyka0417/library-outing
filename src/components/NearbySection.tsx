@@ -15,6 +15,7 @@ import { colors, radius, spacing, typography } from '@/theme';
 import { formatDistance, walkingMinutes } from '@/utils/openingHours';
 import { openKakaoMap } from '@/utils/mapLinks';
 import { useT } from '@/i18n';
+import { bleedRow, useLayout } from '@/hooks/useLayout';
 import type { Coordinates, NearbyPlace, NearbyType } from '@/types';
 
 /* 이름은 화면에서 언어에 맞춰 붙인다. 여기에는 어떤 탭이 있는지만 적는다. */
@@ -50,6 +51,7 @@ export function NearbySection({ libraryId, coords }: Props) {
   // 실패했는지만 담는다. 문구는 화면에서 언어에 맞춰 붙인다.
   const [error, setError] = useState(false);
   const { t } = useT();
+  const layout = useLayout();
 
   useEffect(() => {
     let cancelled = false;
@@ -75,7 +77,7 @@ export function NearbySection({ libraryId, coords }: Props) {
 
   return (
     <View>
-      <View style={styles.tabs}>
+      <View style={[styles.tabs, { paddingHorizontal: layout.gutter }]}>
         {TABS.map((item) => {
           const active = item.type === tab;
           return (
@@ -114,7 +116,8 @@ export function NearbySection({ libraryId, coords }: Props) {
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.list}
+          style={bleedRow(layout).style}
+          contentContainerStyle={[styles.list, bleedRow(layout).content]}
         >
           {places.map((place) => (
             <PlaceCard key={place.id} place={place} />
@@ -199,7 +202,7 @@ const styles = StyleSheet.create({
   tabs: {
     flexDirection: 'row',
     gap: spacing.sm,
-    paddingHorizontal: spacing.xl,
+    // 좌우 여백은 화면 폭을 따른다 (섹션 제목과 같은 선)
     marginBottom: spacing.lg,
   },
   tab: {
@@ -231,7 +234,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   list: {
-    paddingHorizontal: spacing.xl,
+    // 좌우 여백은 bleedRow 가 준다
     gap: spacing.md,
   },
   card: {

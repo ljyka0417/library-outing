@@ -14,7 +14,7 @@ import { libraryApi } from '@/api/libraryApi';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
-import { centered, useLayout } from '@/hooks/useLayout';
+import { bleedRow, centered, useLayout } from '@/hooks/useLayout';
 import { colors, radius, spacing, typography } from '@/theme';
 import type { CategoryId } from '@/types';
 
@@ -107,7 +107,9 @@ export default function HomeScreen() {
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
-              contentContainerStyle={[styles.carousel, { paddingHorizontal: layout.gutter }]}
+              // 태블릿에서는 가운데 칸 밖으로 늘려 화면 끝까지 흐르게 한다 (useLayout 의 bleedRow)
+              style={bleedRow(layout).style}
+              contentContainerStyle={[styles.carousel, bleedRow(layout).content]}
             >
               {(featured.data ?? []).map((lib) => (
                 <LibraryCard

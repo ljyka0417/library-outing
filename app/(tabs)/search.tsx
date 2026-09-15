@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator, FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { LibraryCard } from '@/components/LibraryCard';
 import { SearchBar } from '@/components/SearchBar';
-import { Chip, EmptyState } from '@/components/common';
+import { Chip, ChipRow, EmptyState } from '@/components/common';
 import { CATEGORIES, CATEGORY_MAP, SIDO_LIST } from '@/data/categories';
 import { regionName, useT } from '@/i18n';
 import { libraryApi } from '@/api/libraryApi';
@@ -101,12 +101,7 @@ export default function SearchScreen() {
       </View>
 
       {/* 필터: 주제 */}
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={[styles.filterRow, { paddingHorizontal: layout.gutter }]}
-        style={[{ flexGrow: 0, flexShrink: 0 }, styles.filterRowSpacing]}
-      >
+      <ChipRow contentStyle={styles.filterRow} style={styles.filterRowSpacing}>
         <Chip
           label={t('search.allCategories')}
           selected={!category}
@@ -122,15 +117,10 @@ export default function SearchScreen() {
             onPress={() => setCategory(category === c.id ? undefined : c.id)}
           />
         ))}
-      </ScrollView>
+      </ChipRow>
 
       {/* 필터: 지역 + 운영중 */}
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={[styles.filterRow, { paddingHorizontal: layout.gutter }]}
-        style={[{ flexGrow: 0, flexShrink: 0 }, styles.filterRowSpacing]}
-      >
+      <ChipRow contentStyle={styles.filterRow} style={styles.filterRowSpacing}>
         <Chip
           label={t('search.openNow')}
           selected={openNow}
@@ -151,7 +141,7 @@ export default function SearchScreen() {
             onPress={() => setSido(sido === s ? undefined : s)}
           />
         ))}
-      </ScrollView>
+      </ChipRow>
 
       <Text style={[styles.count, { paddingHorizontal: layout.gutter }]}>
         {countLabel}

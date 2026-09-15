@@ -20,7 +20,7 @@ import { CATEGORY_MAP } from '@/data/categories';
 import { loanDataVersion } from '@/data/books.mock';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
-import { centered, useLayout } from '@/hooks/useLayout';
+import { bleedRow, centered, useLayout } from '@/hooks/useLayout';
 import { regionName, translate, useT, type Lang, type MessageKey } from '@/i18n';
 import { readableName } from '@/utils/romanize';
 import { colors, radius, shadow, spacing, typography } from '@/theme';
@@ -280,7 +280,8 @@ export default function LibraryDetailScreen() {
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
-              contentContainerStyle={styles.bookList}
+              style={bleedRow(layout).style}
+              contentContainerStyle={[styles.bookList, bleedRow(layout).content]}
             >
               {books.map((b) => (
                 <BookCard key={b.id} book={b} />
@@ -415,7 +416,8 @@ const styles = StyleSheet.create({
     marginTop: spacing.xxl,
   },
   bookList: {
-    paddingHorizontal: spacing.xl,
+    // 좌우 여백은 bleedRow 가 준다. 20 으로 고정해 두었더니 태블릿(28)에서
+    // 섹션 제목과 첫 책의 왼쪽 선이 어긋났다.
     gap: spacing.lg,
   },
   checkin: {
