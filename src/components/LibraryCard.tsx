@@ -8,6 +8,7 @@ import { readableName } from '@/utils/romanize';
 import { colors, radius, shadow, spacing, typography } from '@/theme';
 import { isOpenNow } from '@/utils/openingHours';
 import { useNow } from '@/hooks/useNow';
+import { useLayout } from '@/hooks/useLayout';
 import type { Library } from '@/types';
 
 /**
@@ -31,6 +32,8 @@ interface Props {
   variant?: 'list' | 'carousel';
   isFavorite?: boolean;
   onToggleFavorite?: () => void;
+  /** 아이패드에서 목록 옆 칸에 띄워 둔 도서관. 어느 카드를 보고 있는지 표시한다 */
+  selected?: boolean;
 }
 
 export function LibraryCard({
@@ -39,12 +42,19 @@ export function LibraryCard({
   variant = 'list',
   isFavorite,
   onToggleFavorite,
+  selected = false,
 }: Props) {
   // 분이 바뀌면 다시 그려진다. 9시가 되면 그 자리에서 "운영중" 으로 바뀐다.
   const now = useNow();
   const open = isOpenNow(library.hours, now);
   const mainCategory = library.categories[0];
   const { t, lang } = useT();
+  /*
+   * 가로로 넘기는 카드의 폭. 폰은 168, 태블릿은 220.
+   * 폭을 168 로 못 박아 두었더니 아이패드 홈에서 추천 카드가 넓은 화면에
+   * 조그맣게 떠 있었다. 사진 높이도 폭에 맞춰 같은 비율로 키운다.
+   */
+  const { carouselCardWidth } = useLayout();
 
   /**
    * 한글 이름 아래 붙는 읽는 법. 한국어일 때는 빈 문자열이라 줄이 생기지 않는다.
@@ -68,9 +78,13 @@ export function LibraryCard({
     return (
       <Pressable
         onPress={onPress}
-        style={({ pressed }) => [styles.carouselCard, pressed && { opacity: 0.85 }]}
+        style={({ pressed }) => [styles.carouselCard, { width: carouselCardWidth }, pressed && { opacity: 0.85 }]}
       >
-        <LibraryImage library={library} variant="carousel" />
+        <LibraryImage
+          library={library}
+          variant="carousel"
+          style={{ height: Math.round(carouselCardWidth * 0.62) }}
+        />
         <View style={styles.carouselBody}>
           <Text style={styles.carouselName} numberOfLines={1}>
             {library.name}
@@ -91,7 +105,8 @@ export function LibraryCard({
   return (
     <Pressable
       onPress={onPress}
-      style={({ pressed }) => [styles.card, pressed && { opacity: 0.85 }]}
+      style={({ pressed }) => [styles.card, selected && styles.cardSelected, pressed && { opacity: 0.85 }]}
+      accessibilityState={{ selected }}
     >
       <LibraryImage library={library} variant="card" />
 
@@ -149,6 +164,10 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
     ...shadow.card,
   },
+  cardSelected: {
+    borderColor: colors.primary,
+    backgroundColor: colors.primarySoft,
+  },
   thumb: {
     width: 84,
     height: 84,
@@ -188,7 +207,6 @@ const styles = StyleSheet.create({
   },
 
   carouselCard: {
-    width: 168,
     backgroundColor: colors.surface,
     borderRadius: radius.lg,
     borderWidth: 1,

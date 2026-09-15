@@ -44,7 +44,7 @@ export default function MyPageScreen() {
       >
         {/* 태블릿에서는 이 안쪽을 가운데로 모은다. ScrollView 의
             contentContainerStyle 에 직접 넣으면 왼쪽에 붙은 채로 남는다. */}
-        <View style={[styles.inner, centered(layout), { paddingHorizontal: layout.gutter }]}>
+        <View style={[styles.inner, centered(layout, true), { paddingHorizontal: layout.gutter }]}>
         <View style={styles.profile}>
           <Mascot size={110} pose="hello" />
           <Text style={styles.name}>{t('my.tagline')}</Text>

@@ -127,14 +127,22 @@ export default function HomeScreen() {
         {recentLibraries.length > 0 ? (
           <View style={styles.section}>
             <SectionHeader title={t('home.recentTitle')} />
-            <View style={[styles.list, { paddingHorizontal: layout.gutter }]}>
-              {recentLibraries.slice(0, 3).map((lib) => (
-                <LibraryCard
-                  key={lib.id}
-                  library={lib}
-                  onPress={() => router.push(`/library/${lib.id}`)}
-                />
-              ))}
+            {/* 폰은 세 곳을 한 줄씩, 태블릿은 검색 목록과 같은 열 수로 두 줄 */}
+            {/* 칸마다 좌우로 반씩 띄우므로, 바깥 줄이 제목과 맞도록 그만큼 덜 민다 */}
+            <View style={[styles.grid, { paddingHorizontal: layout.gutter - (layout.listColumns > 1 ? spacing.md / 2 : 0) }]}>
+              {recentLibraries
+                .slice(0, layout.listColumns > 1 ? layout.listColumns * 2 : 3)
+                .map((lib) => (
+                  <View
+                    key={lib.id}
+                    style={{
+                      width: `${100 / layout.listColumns}%`,
+                      paddingHorizontal: layout.listColumns > 1 ? spacing.md / 2 : 0,
+                    }}
+                  >
+                    <LibraryCard library={lib} onPress={() => router.push(`/library/${lib.id}`)} />
+                  </View>
+                ))}
             </View>
           </View>
         ) : null}
@@ -212,8 +220,10 @@ const styles = StyleSheet.create({
   carousel: {
     gap: spacing.md,
   },
-  list: {
-    gap: spacing.md,
+  grid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    rowGap: spacing.md,
   },
   offlineNote: {
     ...typography.tiny,

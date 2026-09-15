@@ -1,4 +1,6 @@
+import { useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { navKind } from './useLayout';
 
 /** 떠 있는 탭바의 크기. 레이아웃과 화면 여백이 같은 값을 봐야 어긋나지 않는다. */
 export const TAB_BAR = {
@@ -25,6 +27,12 @@ export const TAB_BAR = {
  */
 export function useTabBarPadding() {
   const insets = useSafeAreaInsets();
+  const { width } = useWindowDimensions();
   const bottom = Math.max(insets.bottom, TAB_BAR.minBottom);
+
+  // 태블릿은 이동 메뉴가 왼쪽에 있어서 아래를 가리는 것이 없다.
+  // 탭바 높이만큼 비워 두면 목록 끝에 까닭 없는 빈칸이 생긴다.
+  if (navKind(width) !== 'bottom') return bottom + 16;
+
   return TAB_BAR.height + bottom + 16;
 }

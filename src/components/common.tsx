@@ -42,15 +42,17 @@ interface SectionHeaderProps {
   subtitle?: string;
   actionLabel?: string;
   onAction?: () => void;
+  /** 좌우 여백을 직접 줄 때. 두 단 배치처럼 이미 안쪽에 들어가 있는 칸에서 쓴다 */
+  inset?: number;
 }
 
-export function SectionHeader({ title, subtitle, actionLabel, onAction }: SectionHeaderProps) {
+export function SectionHeader({ title, subtitle, actionLabel, onAction, inset }: SectionHeaderProps) {
   // 좌우 여백은 화면 폭을 따라간다. 부르는 쪽마다 넘겨 주면 한 군데만
   // 빠뜨려도 제목 줄이 어긋나므로 여기서 직접 읽는다.
   const layout = useLayout();
 
   return (
-    <View style={[styles.sectionHeader, { paddingHorizontal: layout.gutter }]}>
+    <View style={[styles.sectionHeader, { paddingHorizontal: inset ?? layout.gutter }]}>
       <View style={{ flex: 1 }}>
         <Text style={styles.sectionTitle}>{title}</Text>
         {subtitle ? <Text style={styles.sectionSubtitle}>{subtitle}</Text> : null}

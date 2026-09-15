@@ -73,7 +73,7 @@ export default function OnboardingScreen() {
           <View key={slide.title} style={[styles.slide, { width }]}>
             {/* 한 장은 화면 폭을 그대로 차지해야 넘기기가 맞는다. 대신 안쪽
                 내용만 태블릿에서 가운데로 모아 글줄이 길어지지 않게 한다. */}
-            <View style={[styles.slideInner, centered(layout)]}>
+            <View style={[styles.slideInner, centered(layout, true)]}>
               {/* 포즈 자체가 각 단계의 행동을 말해 주므로 별도 아이콘 배지는 두지 않는다 */}
               <View style={styles.mascotWrap}>
                 <Mascot size={190} pose={slide.pose} />
@@ -92,7 +92,8 @@ export default function OnboardingScreen() {
         ))}
       </View>
 
-      <View style={[styles.footer, centered(layout)]}>
+      {/* 아이패드에서 버튼을 화면 폭으로 늘리면 누를 곳이 아니라 띠처럼 보인다 */}
+      <View style={[styles.footer, centered(layout, true), layout.isTablet && { maxWidth: 480 }]}>
         <Pressable
           onPress={next}
           style={({ pressed }) => [styles.cta, pressed && { opacity: 0.85 }]}

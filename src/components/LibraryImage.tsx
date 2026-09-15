@@ -38,6 +38,14 @@ interface Props {
   variant: 'hero' | 'card' | 'carousel';
   /** Image 와 View 양쪽에 쓰이므로 두 스타일의 교집합만 받는다 */
   style?: StyleProp<ImageStyle & ViewStyle>;
+  /**
+   * 상단 사진 아래를 카드가 덮지 않을 때.
+   *
+   * 폰 상세에서는 정보 카드가 사진 아래를 둥글게 덮고 올라오므로 출처 띠를
+   * 그만큼 위로 올려 둔다. 태블릿 두 단 배치에서는 사진이 따로 떨어져 있어서
+   * 같은 자리에 두면 띠가 사진 가운데쯤 떠 보인다.
+   */
+  framed?: boolean;
 }
 
 /** 상세 상단 사진이 너무 납작하거나 너무 길어지지 않게 가두는 범위 */
@@ -46,7 +54,7 @@ const HERO_MAX_RATIO = 1.9;
 /** 아직 크기를 모를 때 쓰는 비율 (관광공사 사진에서 제일 흔한 3:2) */
 const HERO_DEFAULT_RATIO = 1.5;
 
-export function LibraryImage({ library, variant, style }: Props) {
+export function LibraryImage({ library, variant, style, framed = false }: Props) {
   const { t } = useT();
   const photo = getPhoto(library.id);
 
@@ -115,7 +123,7 @@ export function LibraryImage({ library, variant, style }: Props) {
             다만 목록 썸네일은 84픽셀이라 글자를 넣으면 읽히지도 않고 지저분하다.
             거기서는 빼고, 상세 상단과 [마이 > 사진 출처] 에서 밝힌다. */}
         {photo.credit && variant !== 'card' ? (
-          <View style={[styles.creditBar, variant === 'hero' && styles.creditBarHero]}>
+          <View style={[styles.creditBar, variant === 'hero' && (framed ? styles.creditBarFramed : styles.creditBarHero)]}>
             <Text style={styles.creditText} numberOfLines={1}>
               {photo.credit}
             </Text>
@@ -169,6 +177,12 @@ const styles = StyleSheet.create({
    * 상세 상단 사진은 위아래가 다 가린다 — 위는 헤더 막대가, 아래는 흰 카드가
    * 20픽셀 덮고 올라온다. 그래서 아래에서 조금 띄워 그 사이에 넣는다.
    */
+  creditBarFramed: {
+    bottom: 12,
+    right: undefined,
+    borderTopRightRadius: 8,
+    borderBottomRightRadius: 8,
+  },
   creditBarHero: {
     bottom: 26,
     right: undefined,

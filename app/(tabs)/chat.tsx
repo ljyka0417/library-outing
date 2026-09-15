@@ -183,7 +183,7 @@ export default function ChatScreen() {
         그래서 띠의 바탕은 끝까지, 안의 글자와 입력칸만 가운데에 둔다.
       */}
       <View style={styles.headerBar}>
-        <View style={[styles.header, centered(layout), { paddingHorizontal: layout.gutter }]}>
+        <View style={[styles.header, centered(layout, true), { paddingHorizontal: layout.gutter }]}>
           <Mascot size={38} pose="faceHappy" />
           <View style={{ flex: 1 }}>
             <Text style={styles.headerTitle}>{t('chat.title')}</Text>
@@ -196,7 +196,7 @@ export default function ChatScreen() {
           "Seoul Library" 라고 치면 못 찾으므로 미리 알려 준다. */}
       {lang !== 'ko' ? (
         <View style={styles.noticeBar}>
-          <View style={[styles.notice, centered(layout), { paddingHorizontal: layout.gutter }]}>
+          <View style={[styles.notice, centered(layout, true), { paddingHorizontal: layout.gutter }]}>
             <Ionicons name="information-circle-outline" size={14} color={colors.textSub} />
             <Text style={styles.noticeText}>{t('chat.nameHint')}</Text>
           </View>
@@ -213,7 +213,7 @@ export default function ChatScreen() {
           directionalLockEnabled
           data={messages}
           keyExtractor={(m) => m.id}
-          contentContainerStyle={[styles.list, { paddingHorizontal: sideSpace(layout) + layout.gutter }]}
+          contentContainerStyle={[styles.list, { paddingHorizontal: sideSpace(layout, true) + layout.gutter }]}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
           onContentSizeChange={scrollToEnd}
@@ -231,14 +231,14 @@ export default function ChatScreen() {
         />
 
         {thinking ? (
-          <View style={[styles.thinking, centered(layout), { paddingHorizontal: layout.gutter }]}>
+          <View style={[styles.thinking, centered(layout, true), { paddingHorizontal: layout.gutter }]}>
             <ActivityIndicator size="small" color={colors.primary} />
             <Text style={styles.thinkingText}>{t('chat.thinking')}</Text>
           </View>
         ) : null}
 
         {lastSuggestions && lastSuggestions.length > 0 && !thinking ? (
-          <View style={centered(layout)}>
+          <View style={centered(layout, true)}>
             <ChipRow contentStyle={styles.suggestRow}>
               {lastSuggestions.map((s: string) => (
                 <Pressable key={s} onPress={() => void send(s)} style={styles.suggestChip}>
@@ -250,7 +250,7 @@ export default function ChatScreen() {
         ) : null}
 
         <View style={[styles.inputBar, { paddingBottom: keyboardUp ? spacing.md : tabPad }]}>
-        <View style={[styles.inputRow, centered(layout), { paddingHorizontal: layout.gutter }]}>
+        <View style={[styles.inputRow, centered(layout, true), { paddingHorizontal: layout.gutter }]}>
           <TextInput
             value={input}
             onChangeText={setInput}
