@@ -1,6 +1,6 @@
 import React from 'react';
-import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Alert, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { TabScreen } from '@/components/TabScreen';
 import { Ionicons } from '@expo/vector-icons';
 import { Mascot } from '@/components/Mascot';
 import { libraryApi } from '@/api/libraryApi';
@@ -36,7 +36,7 @@ export default function MyPageScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.safe} edges={['top']}>
+    <TabScreen style={styles.safe}>
       <ScrollView
         directionalLockEnabled
         showsVerticalScrollIndicator={false}
@@ -96,11 +96,46 @@ export default function MyPageScreen() {
         ) : null}
 
         {/* 개발용 데이터 수집 현황. __DEV__ 라 배포 빌드에는 나오지 않는다. */}
+        {__DEV__ && Platform.OS === 'ios' ? <NativeTabsTest /> : null}
         {__DEV__ ? <GlassTest /> : null}
         {__DEV__ ? <DataStatus /> : null}
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </TabScreen>
+  );
+}
+
+/**
+ * 애플 기본 탭바 시험 스위치 (iOS, 개발 중에만 표시).
+ *
+ * 켜면 탭 내비게이터가 통째로 바뀌어 홈으로 돌아간다. 유리 스위치처럼 저장하지
+ * 않으므로, 기본 탭바가 이 기기의 개발용 앱에서 화면을 못 그려도 앱을 껐다 켜면
+ * 우리 탭바로 돌아온다.
+ */
+function NativeTabsTest() {
+  const on = useAppStore((s) => s.nativeTabsTest);
+  const setOn = useAppStore((s) => s.setNativeTabsTest);
+
+  return (
+    <Pressable
+      onPress={() => setOn(!on)}
+      style={({ pressed }) => [styles.devBox, pressed && { opacity: 0.7 }]}
+      accessibilityRole="switch"
+      accessibilityState={{ checked: on }}
+    >
+      <View style={styles.glassRow}>
+        <Ionicons
+          name={on ? 'toggle' : 'toggle-outline'}
+          size={26}
+          color={on ? colors.primary : colors.textMuted}
+        />
+        <View style={{ flex: 1 }}>
+          <Text style={styles.devTitle}>애플 기본 탭바 {on ? '켜짐' : '꺼짐'} (시험)</Text>
+          <Text style={styles.devText}>iOS 26 이상에서 진짜 Liquid Glass 탭바로 바뀝니다</Text>
+          <Text style={styles.devText}>켜면 홈으로 돌아가고, 앱을 껐다 켜면 다시 꺼집니다</Text>
+        </View>
+      </View>
+    </Pressable>
   );
 }
 

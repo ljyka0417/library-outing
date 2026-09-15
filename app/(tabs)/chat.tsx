@@ -12,7 +12,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { TabScreen } from '@/components/TabScreen';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Mascot } from '@/components/Mascot';
@@ -172,7 +172,7 @@ export default function ChatScreen() {
     (messages.length === 1 ? starterQuestions(lang) : undefined);
 
   return (
-    <SafeAreaView style={styles.safe} edges={['top']}>
+    <TabScreen style={styles.safe}>
       {/*
         태블릿에서 대화는 가운데 칸에 모으고, 위·아래 흰 띠는 화면 끝까지 깐다.
 
@@ -273,7 +273,7 @@ export default function ChatScreen() {
         </View>
         </View>
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </TabScreen>
   );
 }
 

@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { TabScreen } from '@/components/TabScreen';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { LibraryCard } from '@/components/LibraryCard';
 import { LibraryDetail } from '@/components/LibraryDetail';
@@ -134,11 +134,11 @@ export default function SearchScreen() {
   /* ── 목록만 ───────────────────────────────────────────────── */
   if (!layout.split) {
     return (
-      <SafeAreaView style={styles.safe} edges={['top']}>
+      <TabScreen style={styles.safe}>
         {/* 태블릿 세로에서는 이 안쪽을 가운데로 모은다. 검색창부터 목록까지 한
             덩어리로 묶어야 세로줄이 어긋나지 않는다. */}
         <View style={[styles.body, centered(layout)]}>{list}</View>
-      </SafeAreaView>
+      </TabScreen>
     );
   }
 
@@ -146,7 +146,7 @@ export default function SearchScreen() {
   const detailWidth = layout.width - layout.listPaneWidth - StyleSheet.hairlineWidth;
 
   return (
-    <SafeAreaView style={styles.safe} edges={['top']}>
+    <TabScreen style={styles.safe}>
       <View style={styles.split}>
         {/* 각 칸이 자기 폭을 알아야 카드 열 수와 여백이 칸에 맞게 정해진다 */}
         <LayoutWidth width={layout.listPaneWidth}>
@@ -173,7 +173,7 @@ export default function SearchScreen() {
           </View>
         </LayoutWidth>
       </View>
-    </SafeAreaView>
+    </TabScreen>
   );
 }
 

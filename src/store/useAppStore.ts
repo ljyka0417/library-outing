@@ -31,6 +31,15 @@ interface AppState {
   glassTest: boolean;
 
   /**
+   * 애플 기본 탭바(NativeTabs) 시험 스위치. iOS 에서만 쓴다.
+   *
+   * 유리 스위치와 같은 까닭으로 **저장하지 않는다.** 기본 탭바는 네이티브 부품이라
+   * 기기에 설치된 개발용 앱에 따라 화면을 못 그릴 수 있다. 앱을 껐다 켜면 늘
+   * 우리가 그린 탭바로 돌아온다.
+   */
+  nativeTabsTest: boolean;
+
+  /**
    * 화면에 쓰는 말. 유리 스위치와 달리 **저장한다** — 언어는 앱을 껐다 켜도
    * 유지돼야 하고, 글자만 바뀌는 일이라 앱을 죽일 수가 없다.
    */
@@ -42,6 +51,7 @@ interface AppState {
   addVisit: (libraryId: string) => void;
   completeOnboarding: () => void;
   setGlassTest: (on: boolean) => void;
+  setNativeTabsTest: (on: boolean) => void;
   setLanguage: (lang: Lang) => void;
   resetAll: () => void;
 
@@ -58,6 +68,7 @@ export const useAppStore = create<AppState>()(
       visits: [],
       hasSeenOnboarding: false,
       glassTest: false,
+      nativeTabsTest: false,
       language: 'ko',
       _hydrated: false,
 
@@ -95,6 +106,8 @@ export const useAppStore = create<AppState>()(
        * 시작하므로 언제든 되돌아온다.
        */
       setGlassTest: (on) => set({ glassTest: on }),
+
+      setNativeTabsTest: (on) => set({ nativeTabsTest: on }),
 
       setLanguage: (lang) => set({ language: lang }),
 

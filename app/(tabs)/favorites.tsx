@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { TabScreen } from '@/components/TabScreen';
 import { useRouter } from 'expo-router';
 import { LibraryCard } from '@/components/LibraryCard';
 import { EmptyState } from '@/components/common';
@@ -28,7 +28,7 @@ export default function FavoritesScreen() {
     .sort((a, b) => favorites.indexOf(a.id) - favorites.indexOf(b.id));
 
   return (
-    <SafeAreaView style={styles.safe} edges={['top']}>
+    <TabScreen style={styles.safe}>
       {/* 태블릿에서는 제목부터 목록까지 한 덩어리로 가운데에 모은다 */}
       <View style={[styles.body, centered(layout)]}>
       <View style={[styles.header, { paddingHorizontal: layout.gutter }]}>
@@ -72,7 +72,7 @@ export default function FavoritesScreen() {
         )}
       />
       </View>
-    </SafeAreaView>
+    </TabScreen>
   );
 }
 

@@ -1,6 +1,6 @@
 import React, { memo, useCallback } from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { TabScreen } from '@/components/TabScreen';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { CategoryGrid } from '@/components/CategoryGrid';
@@ -49,7 +49,7 @@ const HomeContent = memo(function HomeContent() {
   );
 
   return (
-    <SafeAreaView style={styles.safe} edges={['top']}>
+    <TabScreen style={styles.safe}>
       {/* 태블릿에서는 본문을 가운데로 모은다. 폰에서는 화면 폭 그대로라
           centered() 가 아무 일도 하지 않는다. */}
       <ScrollView
@@ -162,7 +162,7 @@ const HomeContent = memo(function HomeContent() {
         ) : null}
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </TabScreen>
   );
 });
 

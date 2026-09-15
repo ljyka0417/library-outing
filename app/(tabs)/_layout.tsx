@@ -3,6 +3,7 @@ import { Animated, Easing, StyleSheet, View, useWindowDimensions } from 'react-n
 import { useReducedMotion } from 'react-native-reanimated';
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs, router } from 'expo-router';
+import { NativeTabs } from 'expo-router/unstable-native-tabs';
 import { LiquidTabBar, type TabBarProps } from '@/components/LiquidTabBar';
 import {
   SIDEBAR_WIDTH,
@@ -12,6 +13,7 @@ import {
   TabletTopBar,
 } from '@/components/TabletNav';
 import { LayoutWidth, SIDEBAR_DOCK, navKind } from '@/hooks/useLayout';
+import { useNativeTabs } from '@/hooks/useNativeTabs';
 import { useT } from '@/i18n';
 import { colors } from '@/theme';
 
@@ -60,6 +62,58 @@ const TAB_TRANSITION = {
 };
 
 export default function TabsLayout() {
+  // 스위치를 바꾸면 내비게이터가 통째로 바뀐다. 그때 첫 탭(홈)으로 돌아간다.
+  return useNativeTabs() ? <AppleTabs /> : <OurTabs />;
+}
+
+/**
+ * 애플 기본 탭바 (시험). iOS 에서 마이 탭의 스위치를 켰을 때만 쓴다.
+ *
+ * UITabBarController 를 그대로 쓰므로 iOS 26 이상에서는 진짜 Liquid Glass 가 된다.
+ * 선택 표시가 물방울처럼 옮겨 가고, 탭바를 끌어 고르기, 스크롤하면 작아지기가
+ * 모두 애플 앱과 같게 움직인다.
+ *
+ *   검색     role="search" 로 두면 iOS 26 이 탭 묶음 오른쪽에 동그란 유리 단추로
+ *            떼어 놓는다(App Store·음악 앱 모양). 그래서 맨 끝에 둔다.
+ *            이름은 시스템이 기기 언어로 붙인다.
+ *   아이패드  sidebarAdaptable 로 App Store 처럼 위쪽 탭바 ⇄ 사이드바를 오간다.
+ *   여백     화면 안의 스크롤 목록 하나에만 자동으로 여백이 붙는 방식이라, 검색처럼
+ *            가로 칩 줄이 먼저 나오는 화면에서는 엉뚱한 곳에 붙는다. 끄고
+ *            useTabBarPadding / TabScreen 으로 직접 잡는다.
+ */
+function AppleTabs() {
+  const { t } = useT();
+
+  return (
+    <NativeTabs tintColor={colors.primary} minimizeBehavior="onScrollDown" sidebarAdaptable>
+      <NativeTabs.Trigger name="index" disableAutomaticContentInsets>
+        <NativeTabs.Trigger.Icon sf={{ default: 'house', selected: 'house.fill' }} />
+        <NativeTabs.Trigger.Label>{t('tab.home')}</NativeTabs.Trigger.Label>
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="chat" disableAutomaticContentInsets>
+        <NativeTabs.Trigger.Icon
+          sf={{ default: 'bubble.left.and.bubble.right', selected: 'bubble.left.and.bubble.right.fill' }}
+        />
+        <NativeTabs.Trigger.Label>{t('tab.chat')}</NativeTabs.Trigger.Label>
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="favorites" disableAutomaticContentInsets>
+        <NativeTabs.Trigger.Icon sf={{ default: 'heart', selected: 'heart.fill' }} />
+        <NativeTabs.Trigger.Label>{t('tab.favorites')}</NativeTabs.Trigger.Label>
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="mypage" disableAutomaticContentInsets>
+        <NativeTabs.Trigger.Icon sf={{ default: 'person', selected: 'person.fill' }} />
+        <NativeTabs.Trigger.Label>{t('tab.mypage')}</NativeTabs.Trigger.Label>
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="search" role="search" disableAutomaticContentInsets>
+        <NativeTabs.Trigger.Icon sf="magnifyingglass" />
+        <NativeTabs.Trigger.Label>{t('tab.search')}</NativeTabs.Trigger.Label>
+      </NativeTabs.Trigger>
+    </NativeTabs>
+  );
+}
+
+/** 우리가 그린 탭바. 폰은 떠 있는 알약, 태블릿은 사이드바 ⇄ 위쪽 탭바 */
+function OurTabs() {
   const { t } = useT();
   const { width } = useWindowDimensions();
   // 설정에서 「동작 줄이기」를 켠 사람에게는 넘어가는 효과를 주지 않는다
