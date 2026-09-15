@@ -177,12 +177,24 @@ export const chatIdeasStatus = {
 /* ── 고르기 ───────────────────────────────────────────────── */
 
 /**
- * 씨앗으로 섞는다 (mulberry32).
+ * 고를 때 쓰는 것들.
  *
- * Math.random 을 그대로 쓰면 화면이 다시 그려질 때마다 칩이 바뀐다. 씨앗을
- * 정해 두면 같은 대화 안에서는 같은 칩이 남고, 언어를 바꿔도 **같은 칩이 그 말로**
- * 바뀐다.
+ *   seed   섞는 씨앗. **질문할 때마다 새로 뽑아 대화에 적어 둔다**(chat.tsx).
+ *          처음엔 질문 글자로 씨앗을 만들었는데, 그러면 같은 칩을 누를 때마다
+ *          똑같은 칩이 다시 나와 "랜덤이 아니라 계속 중복" 이었다.
+ *          대화에 적어 두므로 언어를 바꿔 다시 답할 때는 같은 칩이 그 말로 바뀐다.
+ *   avoid  이 대화에서 이미 물어본 질문들. 그 칩은 다시 권하지 않는다.
  */
+export interface PickContext {
+  lang: Lang;
+  seed: number;
+  avoid?: string[];
+}
+
+/** 칩은 늘 이만큼. 처음 네 개였다가 답할수록 두세 개로 줄던 것을 맞춘다 */
+export const CHIP_COUNT = 4;
+
+/** 씨앗으로 섞는다 (mulberry32). 같은 씨앗이면 같은 순서다 */
 function rng(seed: number) {
   let a = seed >>> 0;
   return () => {
@@ -194,7 +206,7 @@ function rng(seed: number) {
   };
 }
 
-/** 글자에서 씨앗을 만든다. 같은 질문이면 언어가 달라도 같은 이어 묻기 칩이 나온다 */
+/** 글자에서 씨앗을 만든다. 씨앗을 받지 못했을 때(검사 스크립트 등)만 쓴다 */
 export function seedFrom(text: string) {
   let h = 2166136261;
   for (let i = 0; i < text.length; i++) h = Math.imul(h ^ text.charCodeAt(i), 16777619);
@@ -211,30 +223,40 @@ function shuffled<T>(items: T[], seed: number): T[] {
   return a;
 }
 
+const squash = (s: string) => s.toLowerCase().replace(/\s+/g, '');
+
 /**
- * 조건에 맞는 것 중에서 n 개를 고른다. 같은 종류·같은 도서관·같은 주제·같은 지역이
- * 겹치지 않게 한다. ("○○ 운영시간 / △△ 운영시간", "경기 어린이 도서관 / 어린이 도서관
- * 추천해줘" 처럼 비슷한 것이 나란히 서면 다양해 보이지 않는다)
+ * 조건에 맞는 것 중에서 n 개를 고른다.
+ *
+ * 같은 종류·같은 도서관·같은 주제·같은 지역이 겹치지 않게 한다. ("○○ 운영시간 /
+ * △△ 운영시간", "경기 어린이 도서관 / 어린이 도서관 추천해줘" 처럼 비슷한 것이
+ * 나란히 서면 다양해 보이지 않는다) 이미 물어본 질문과 같은 글자도 뺀다.
  */
 function pick(
+  ctx: PickContext,
   filter: (i: Idea) => boolean,
   n: number,
-  seed: number,
+  salt: number,
   taken: Idea[] = [],
   /** 한 도서관에 대해 여러 가지를 물을 때는 같은 도서관이 겹쳐야 한다 */
   sameLibraryOk = false
 ): Idea[] {
+  const avoid = new Set((ctx.avoid ?? []).map(squash));
   const out: Idea[] = [];
   const kinds = new Set(taken.map((i) => i.k));
   const libs = new Set(taken.map((i) => i.id).filter(Boolean));
   const cats = new Set(taken.map((i) => i.c).filter(Boolean));
   const sidos = new Set(taken.map((i) => i.s).filter(Boolean));
-  for (const idea of shuffled(VERIFIED.filter(filter), seed)) {
+
+  for (const idea of shuffled(VERIFIED.filter(filter), ctx.seed + salt)) {
     if (out.length >= n) break;
     if (kinds.has(idea.k)) continue;
     if (idea.id && libs.has(idea.id) && !sameLibraryOk) continue;
     if (idea.c && cats.has(idea.c)) continue;
     if (idea.s && sidos.has(idea.s)) continue;
+    const text = ideaText(idea, ctx.lang);
+    if (!text || avoid.has(squash(text))) continue;
+
     out.push(idea);
     kinds.add(idea.k);
     if (idea.id) libs.add(idea.id);
@@ -247,13 +269,49 @@ function pick(
 const texts = (ideas: Idea[], lang: Lang) =>
   ideas.map((i) => ideaText(i, lang)).filter((t): t is string => !!t);
 
-/** 실패하면 예전 문구로. 칩 몇 개 때문에 대화 화면이 멈추면 안 된다 */
-function safely(make: () => string[], fallback: () => string[], min = 2): string[] {
+/**
+ * 모자라면 채운다.
+ *
+ * 한 도서관에 대해 물을 거리를 다 물었거나, 이미 물어본 것을 빼고 나면 넷이 안 될 때가
+ * 있다(재 보니 도서관 답 뒤의 13% 가 두세 개였다). 그때는 겹침 규칙을 풀고
+ * prefer(같은 주제의 다른 도서관 등) → 아무거나 순서로, 글자가 겹치지 않게 넷까지 채운다.
+ */
+function fillTo(ctx: PickContext, chosen: Idea[], prefer: (i: Idea) => boolean, salt: number): Idea[] {
+  if (chosen.length >= CHIP_COUNT) return chosen.slice(0, CHIP_COUNT);
+  const avoid = new Set((ctx.avoid ?? []).map(squash));
+  const seen = new Set(chosen.map((i) => squash(ideaText(i, ctx.lang) ?? '')));
+  const out = chosen.slice();
+  for (const pool of [VERIFIED.filter(prefer), VERIFIED]) {
+    for (const idea of shuffled(pool, ctx.seed + salt)) {
+      if (out.length >= CHIP_COUNT) return out;
+      const text = ideaText(idea, ctx.lang);
+      if (!text) continue;
+      const key = squash(text);
+      if (avoid.has(key) || seen.has(key)) continue;
+      out.push(idea);
+      seen.add(key);
+    }
+  }
+  return out;
+}
+
+/**
+ * 실패하면 예전 문구로 (복구 장치). 칩 몇 개 때문에 대화 화면이 멈추면 안 된다.
+ * 예전 문구에서도 이미 물어본 것은 뺀다.
+ */
+function safely(
+  ctx: PickContext,
+  make: () => string[],
+  fallback: () => string[],
+  min = 2
+): string[] {
+  const avoid = new Set((ctx.avoid ?? []).map(squash));
+  const fromFallback = () => fallback().filter((t) => !avoid.has(squash(t)));
   try {
     const out = make();
-    return out.length >= min ? out : fallback();
+    return out.length >= min ? out : fromFallback();
   } catch {
-    return fallback();
+    return fromFallback();
   }
 }
 
@@ -261,65 +319,119 @@ const isLibraryIdea = (i: Idea) => !!i.id;
 const isBrowseIdea = (i: Idea) => !i.id;
 
 /**
- * 처음 화면의 칩 네 개.
- * 둘러보기 둘(주제·지역 쪽) + 도서관 하나에 대한 질문 둘(서로 다른 종류).
+ * 둘러보기 칩을 n 개 채운다. 주제 하나를 먼저 놓고(first 조건) 나머지는 겹치지 않게.
+ * 종류가 네 가지(주제·지역·지역+주제·지금 문 연 곳)라 넷까지 채울 수 있다.
  */
-export function starterIdeas(lang: Lang, seed: number, fallback: () => string[]): string[] {
-  return safely(() => {
-    const browse = pick(isBrowseIdea, 2, seed);
-    const lib = pick(isLibraryIdea, 2, seed + 1, browse);
-    return texts([...browse, ...lib], lang);
-  }, fallback, 4);
+function browseSet(ctx: PickContext, first: (i: Idea) => boolean, rest: (i: Idea) => boolean, n: number, taken: Idea[] = []) {
+  const a = pick(ctx, (i) => isBrowseIdea(i) && first(i), 1, 11, taken);
+  const b = pick(ctx, (i) => isBrowseIdea(i) && rest(i), n - a.length, 23, [...taken, ...a]);
+  return [...a, ...b];
 }
 
-/** 도서관 하나를 답한 뒤. 방금 물은 종류는 빼고 그 도서관에 대해 더 물을 것 */
+/** 처음 화면. 둘러보기 둘 + 도서관 하나에 대한 질문 둘(서로 다른 도서관·종류) */
+export function starterIdeas(ctx: PickContext, fallback: () => string[]): string[] {
+  return safely(
+    ctx,
+    () => {
+      const browse = browseSet(ctx, () => true, () => true, 2);
+      const lib = pick(ctx, isLibraryIdea, CHIP_COUNT - browse.length, 37, browse);
+      return texts(fillTo(ctx, [...browse, ...lib], isLibraryIdea, 39), ctx.lang);
+    },
+    fallback,
+    CHIP_COUNT
+  );
+}
+
+/**
+ * 도서관 하나를 답한 뒤.
+ * 그 도서관에 대해 방금 물은 것 말고 셋 + 같은 주제의 도서관을 더 둘러볼 칩 하나.
+ */
 export function libraryFollowUps(
+  ctx: PickContext,
   libraryId: string,
   askedKind: IdeaKind | undefined,
-  lang: Lang,
-  seed: number,
   fallback: () => string[]
 ): string[] {
   return safely(
-    () =>
-      texts(
-        pick((i) => i.id === libraryId && i.k !== askedKind, 3, seed, [], true),
-        lang
-      ),
+    ctx,
+    () => {
+      const lib = libById.get(libraryId);
+      const same = pick(ctx, (i) => i.id === libraryId && i.k !== askedKind, CHIP_COUNT - 1, 41, [], true);
+      const cat = lib?.categories[0];
+      const wider = pick(
+        ctx,
+        (i) =>
+          isBrowseIdea(i) &&
+          i.c === cat &&
+          (i.k === 'category' || (i.k === 'regionCategory' && i.s !== lib?.region.sido)),
+        CHIP_COUNT - same.length,
+        43
+      );
+      // 모자라면 같은 주제의 다른 도서관 이야기로 채운다
+      const filled = fillTo(
+        ctx,
+        [...same, ...wider],
+        (i) => !!i.id && i.id !== libraryId && libById.get(i.id)?.categories[0] === cat,
+        47
+      );
+      return texts(filled, ctx.lang);
+    },
     fallback
   );
 }
 
-/** 목록을 답한 뒤. 같은 주제의 다른 지역, 다른 주제, 지금 문 연 곳 쪽으로 넓힌다 */
+/**
+ * 목록을 답한 뒤.
+ *
+ * 둘러보기 셋(같은 주제의 다른 지역을 먼저, 그다음 다른 주제·지역·지금 문 연 곳)
+ * + 방금 카드로 보여 준 도서관 중 한 곳에 대한 질문 하나.
+ * 둘러보기만 권하면 종류가 네 가지뿐이라, "지금 문 연 도서관" 을 한 번 묻고 나면
+ * 칩이 셋으로 줄었다. 보여 준 도서관 이야기를 하나 섞으면 늘 넷이 되고, 카드를
+ * 보고 궁금해질 만한 것(운영시간·주변 카페…)으로 이어진다.
+ */
 export function browseFollowUps(
-  lang: Lang,
-  seed: number,
+  ctx: PickContext,
   fallback: () => string[],
   category?: CategoryId,
-  sido?: string
+  sido?: string,
+  shownLibraryIds: string[] = []
 ): string[] {
-  return safely(() => {
-    const first = pick(
-      (i) =>
-        isBrowseIdea(i) &&
-        (category ? i.c === category && i.s !== undefined && i.s !== sido : i.k === 'category'),
-      1,
-      seed
-    );
-    const rest = pick(
-      (i) => isBrowseIdea(i) && i.c !== category && (!sido || i.s !== sido),
-      2,
-      seed + 7,
-      first
-    );
-    return texts([...first, ...rest], lang);
-  }, fallback);
+  return safely(
+    ctx,
+    () => {
+      const browse = browseSet(
+        ctx,
+        (i) => (category ? i.c === category && !!i.s && i.s !== sido : i.k === 'category'),
+        (i) => (!category || i.c !== category) && (!sido || i.s !== sido),
+        CHIP_COUNT - 1
+      );
+      const shown = new Set(shownLibraryIds);
+      const want = CHIP_COUNT - browse.length;
+      let lib = pick(ctx, (i) => !!i.id && shown.has(i.id), want, 59, browse);
+      // 보여 준 도서관이 없으면(찾지 못했어요) 아무 도서관 이야기로 채운다
+      if (lib.length < want) {
+        lib = [...lib, ...pick(ctx, isLibraryIdea, want - lib.length, 61, [...browse, ...lib])];
+      }
+      return texts(fillTo(ctx, [...browse, ...lib], isBrowseIdea, 67), ctx.lang);
+    },
+    fallback
+  );
 }
 
 /** "근처 카페" 처럼 도서관을 안 말했을 때. 주변 정보가 실제로 있는 도서관으로 예를 든다 */
-export function nearbyExamples(lang: Lang, seed: number, fallback: () => string[]): string[] {
+export function nearbyExamples(ctx: PickContext, fallback: () => string[]): string[] {
   return safely(
-    () => texts(pick((i) => i.k === 'cafe' || i.k === 'food' || i.k === 'culture', 2, seed), lang),
+    ctx,
+    () =>
+      texts(
+        fillTo(
+          ctx,
+          pick(ctx, (i) => i.k === 'cafe' || i.k === 'food' || i.k === 'culture', 3, 53),
+          (i) => i.k === 'cafe' || i.k === 'food' || i.k === 'culture',
+          57
+        ),
+        ctx.lang
+      ),
     fallback
   );
 }

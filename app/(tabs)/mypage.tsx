@@ -10,6 +10,7 @@ import { nearbyDataStatus, photoCredits } from '@/api/nearbyApi';
 import { dataCompleteness } from '@/data/libraries.mock';
 import { libraryPhotoCount } from '@/data/libraryPhotos';
 import { loanBookStatus } from '@/data/books.mock';
+import { chatIdeasStatus } from '@/utils/chatIdeas';
 import { glassSupport } from '@/components/GlassSurface';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { centered, useLayout } from '@/hooks/useLayout';
@@ -199,6 +200,18 @@ function DataStatus() {
         {nearbyDataStatus.generated
           ? `${nearbyDataStatus.libraryCount}곳 / ${nearbyDataStatus.placeCount}개 장소`
           : '미수집 (mock 사용중)'}
+      </Text>
+      {/* 달곰이 추천 칩 목록. 0 이면 예전 고정 칩으로 돌아가 있다는 뜻이라 붉게.
+          기기가 옛 번들을 돌고 있으면 이 줄 자체가 없다. */}
+      <Text
+        style={[
+          styles.devText,
+          chatIdeasStatus.verified === 0 && { color: colors.closed, fontWeight: '700' },
+        ]}
+      >
+        달곰이 추천 칩 {chatIdeasStatus.verified}개 (검사{' '}
+        {chatIdeasStatus.generatedAt ? chatIdeasStatus.generatedAt.slice(0, 10) : '안 함'})
+        {chatIdeasStatus.verified === 0 ? ' — 예전 고정 칩 사용 중' : ''}
       </Text>
       {/* 수집 시각과 "서로 다른 목록 수"를 같이 보여준다.
           기기가 옛 번들을 돌고 있는지 여기서 바로 구분할 수 있다.

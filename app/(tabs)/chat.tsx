@@ -34,7 +34,17 @@ interface Message {
   role: 'user' | 'dalgomi';
   text: string;
   answer?: Answer;
+  /**
+   * 사람이 물을 때 뽑은 칩 씨앗. 언어를 바꿔 다시 답할 때 같은 씨앗을 써서
+   * 같은 칩이 그 말로 바뀌게 한다 (새로 뽑으면 칩이 통째로 바뀐다).
+   */
+  seed?: number;
 }
+
+const newSeed = () => Math.floor(Math.random() * 2 ** 31);
+
+/** 이 메시지들 중 사람이 물은 질문 글자들. 칩으로 다시 권하지 않는다 */
+const askedTexts = (list: Message[]) => list.filter((m) => m.role === 'user').map((m) => m.text);
 
 /* 인사말은 화면에서 t('chat.greeting') 으로 갈아 끼운다. 말을 바꾸면
    그 자리에서 같이 바뀌어야 하기 때문이다. 여기 text 는 쓰이지 않으므로
@@ -83,12 +93,15 @@ export default function ChatScreen() {
 
       setInput('');
       setThinking(true);
+      // 질문마다 새 씨앗. 같은 칩을 다시 눌러도 다른 칩이 나온다.
+      const seed = newSeed();
+      const avoid = askedTexts(messagesRef.current);
       setMessages((prev) => [
         ...prev,
-        { id: `u-${Date.now()}`, role: 'user', text: question },
+        { id: `u-${Date.now()}`, role: 'user', text: question, seed },
       ]);
 
-      const answer = await ask(question, lang);
+      const answer = await ask(question, lang, { seed, avoid });
 
       setMessages((prev) => [
         ...prev,
@@ -128,7 +141,7 @@ export default function ChatScreen() {
     void (async () => {
       const rebuilt: Message[] = [GREETING];
       for (const q of asked) {
-        const answer = await ask(q.text, lang);
+        const answer = await ask(q.text, lang, { seed: q.seed, avoid: askedTexts(rebuilt) });
         rebuilt.push(q, { id: `d-${q.id}`, role: 'dalgomi', text: answer.text, answer });
       }
       if (cancelled) return;

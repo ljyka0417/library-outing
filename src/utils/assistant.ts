@@ -11,6 +11,7 @@ import {
   seedFrom,
   starterIdeas,
   type IdeaKind,
+  type PickContext,
 } from './chatIdeas';
 import type { Book, CategoryId, Library, NearbyPlace, NearbyType } from '@/types';
 
@@ -265,7 +266,12 @@ function pick(libs: Library[]) {
 }
 
 /** 특정 도서관에 대한 질문에 답한다. */
-async function answerAboutLibrary(lib: Library, q: string, lang: Lang): Promise<Answer> {
+async function answerAboutLibrary(
+  lib: Library,
+  q: string,
+  lang: Lang,
+  ctx: PickContext
+): Promise<Answer> {
   /*
    * 무엇을 묻는지는 도서관 이름을 뺀 나머지 말로 본다.
    *
@@ -293,9 +299,8 @@ async function answerAboutLibrary(lib: Library, q: string, lang: Lang): Promise<
    * 이어 물을 칩. 방금 물은 것은 빼고 이 도서관에 대해 답할 수 있는 것 중에서 고른다
    * (chatIdeas 가 검사를 통과한 것만 준다). 목록을 못 쓰면 예전 고정 칩으로.
    */
-  const seed = seedFrom(norm(q));
   const more = (asked: IdeaKind | undefined, fallback: string[] = []) =>
-    libraryFollowUps(lib.id, asked, lang, seed, () => fallback);
+    libraryFollowUps(ctx, lib.id, asked, () => fallback);
 
   // 주변 장소
   for (const [type, re, kindKey] of NEARBY_WORDS) {
@@ -423,7 +428,13 @@ async function answerAboutLibrary(lib: Library, q: string, lang: Lang): Promise<
 }
 
 /** 조건에 맞는 도서관을 골라 준다. */
-function answerBrowse(q: string, lang: Lang, category?: CategoryId, sido?: string): Answer {
+function answerBrowse(
+  q: string,
+  lang: Lang,
+  ctx: PickContext,
+  category?: CategoryId,
+  sido?: string
+): Answer {
   const text = norm(q);
   const tr = (key: MessageKey, vars?: Vars) => translate(lang, key, vars);
   const openOnly = ASK.openNow.test(text);
@@ -466,7 +477,7 @@ function answerBrowse(q: string, lang: Lang, category?: CategoryId, sido?: strin
         : '';
     return {
       text: tr('bot.browseNone', { label, labelTopic: josa(label, '은는') }) + reason,
-      suggestions: browseFollowUps(lang, seedFrom(text), () => [
+      suggestions: browseFollowUps(ctx, () => [
         tr('bot.sugKids'),
         tr('bot.sugSeoul'),
         tr('bot.sugOpen'),
@@ -484,14 +495,14 @@ function answerBrowse(q: string, lang: Lang, category?: CategoryId, sido?: strin
     libraries: pick(libs),
     // 같은 주제의 다른 지역, 다른 주제 쪽으로 넓힌다
     suggestions: browseFollowUps(
-      lang,
-      seedFrom(text),
+      ctx,
       () =>
         cat
           ? [tr('bot.sugCatSido', { cat }), tr('bot.sugOpen')]
           : [tr('bot.sugKids'), tr('bot.sugMusic'), tr('bot.sugOpen')],
       category,
-      sido
+      sido,
+      pick(libs).map((l) => l.id)
     ),
   };
 }
@@ -503,16 +514,36 @@ function answerBrowse(q: string, lang: Lang, category?: CategoryId, sido?: strin
  * "부산도서관 주변 카페" 에서 '부산'을 지역으로 먼저 잡아 버리면
  * 부산 전체 목록을 내놓게 된다.
  */
-export async function ask(question: string, lang: Lang = 'ko'): Promise<Answer> {
+export interface AskOptions {
+  /**
+   * 이어 물을 칩을 섞는 씨앗. 대화 화면이 질문마다 새로 뽑아 적어 둔다.
+   * 안 주면 질문 글자로 만든다(검사 스크립트처럼 늘 같은 결과가 필요할 때).
+   */
+  seed?: number;
+  /** 이 대화에서 이미 물어본 질문들. 칩으로 다시 권하지 않는다 */
+  avoid?: string[];
+}
+
+export async function ask(
+  question: string,
+  lang: Lang = 'ko',
+  options: AskOptions = {}
+): Promise<Answer> {
   const tr = (key: MessageKey, vars?: Vars) => translate(lang, key, vars);
   const q = question.trim();
   if (!q) return { text: tr('bot.help', { count: LIBRARY_COUNT }) };
   const text = norm(q);
+  // 방금 이 질문도 다시 권하지 않는다 ("지금 문 연 도서관" 을 누르고 또 "지금 문 연 도서관")
+  const ctx: PickContext = {
+    lang,
+    seed: options.seed ?? seedFrom(text),
+    avoid: [...(options.avoid ?? []), q],
+  };
 
   if (ASK.greeting.test(text)) {
     return {
       text: tr('bot.hello', { count: LIBRARY_COUNT }),
-      suggestions: starterQuestions(lang, seedFrom(text)).slice(0, 3),
+      suggestions: starterQuestions(lang, ctx.seed, ctx.avoid),
     };
   }
   if (ASK.thanks.test(text)) {
@@ -536,25 +567,30 @@ export async function ask(question: string, lang: Lang = 'ko'): Promise<Answer> 
 
   if (regionThenLibrary) {
     const sidoWord = regionThenLibrary[1];
-    const answer = answerBrowse(q, lang, findCategory(q), findSido(q));
+    const answer = answerBrowse(q, lang, ctx, findCategory(q), findSido(q));
     const exact = MOCK_LIBRARIES.find((l) => norm(l.name) === `${sidoWord}도서관`);
-    if (exact) {
+    const hoursChip = exact ? tr('bot.sugHours', { name: exact.name }) : undefined;
+    // 이미 물어본 적이 있으면 붙이지 않는다 (다른 칩들과 같은 규칙)
+    const alreadyAsked = (ctx.avoid ?? []).some(
+      (a) => norm(a).replace(/\s/g, '') === norm(hoursChip ?? '').replace(/\s/g, '')
+    );
+    if (hoursChip && !alreadyAsked) {
       answer.suggestions = [
-        tr('bot.sugHours', { name: exact.name }),
-        ...(answer.suggestions ?? []),
-      ].slice(0, 3);
+        hoursChip,
+        ...(answer.suggestions ?? []).filter((s) => s !== hoursChip),
+      ].slice(0, 4);
     }
     return answer;
   }
 
   const lib = findLibrary(q);
-  if (lib) return answerAboutLibrary(lib, q, lang);
+  if (lib) return answerAboutLibrary(lib, q, lang, ctx);
 
   // 도서관을 지목하지 않고 "근처 카페" 만 물으면 어디 기준인지 알 수 없다
   if (NEARBY_WORDS.some(([, re]) => re.test(text)) && !findCategory(q)) {
     return {
       text: tr('bot.needLibrary'),
-      suggestions: nearbyExamples(lang, seedFrom(text), () => [
+      suggestions: nearbyExamples(ctx, () => [
         tr('bot.sugSeoulCafe'),
         tr('bot.sugBusanFood'),
       ]),
@@ -565,12 +601,12 @@ export async function ask(question: string, lang: Lang = 'ko'): Promise<Answer> 
   const sido = findSido(q);
 
   if (category || sido || ASK.openNow.test(text) || ASK.wantsList.test(text)) {
-    return answerBrowse(q, lang, category, sido);
+    return answerBrowse(q, lang, ctx, category, sido);
   }
 
   return {
     text: `${tr('bot.notUnderstood', { q })}\n\n${tr('bot.help', { count: LIBRARY_COUNT })}`,
-    suggestions: starterQuestions(lang, seedFrom(text)).slice(0, 3),
+    suggestions: starterQuestions(lang, ctx.seed, ctx.avoid),
   };
 }
 
@@ -584,7 +620,7 @@ export async function ask(question: string, lang: Lang = 'ko'): Promise<Answer> 
  * 대화 화면을 열 때마다 씨앗이 바뀌어 다른 칩이 나온다.
  * 목록을 못 쓰면 아래 고정 네 개로 돌아간다 (복구 장치).
  */
-export function starterQuestions(lang: Lang, seed = 1): string[] {
+export function starterQuestions(lang: Lang, seed = 1, avoid: string[] = []): string[] {
   const tr = (key: MessageKey, vars?: Vars) => translate(lang, key, vars);
   const fixed = () => [
     tr('bot.sugKids'),
@@ -592,7 +628,7 @@ export function starterQuestions(lang: Lang, seed = 1): string[] {
     tr('bot.sugHours', { name: '서울도서관' }),
     tr('bot.sugCafe', { name: '한밭도서관' }),
   ];
-  return starterIdeas(lang, seed, fixed);
+  return starterIdeas({ lang, seed, avoid }, fixed);
 }
 
 /** 개발 중 상태 확인용 */
