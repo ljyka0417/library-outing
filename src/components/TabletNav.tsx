@@ -1,5 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Animated, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  Animated,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  type LayoutChangeEvent,
+  type LayoutRectangle,
+} from 'react-native';
+import Reanimated, {
+  Easing,
+  interpolateColor,
+  useAnimatedStyle,
+  useReducedMotion,
+  useSharedValue,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { usePathname, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -120,31 +138,15 @@ export function TabletSidebar({ onToggle, onPicked }: SidebarProps) {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: insets.bottom + spacing.xl }}
       >
-        {TABS.map((tab) => {
-          const active = isActive(pathname, tab.href);
-          return (
-            <Pressable
-              key={tab.name}
-              onPress={() => go(tab.href)}
-              accessibilityRole="tab"
-              accessibilityState={{ selected: active }}
-              style={({ pressed }) => [
-                styles.row,
-                active && styles.rowActive,
-                pressed && !active && styles.rowPressed,
-              ]}
-            >
-              <Ionicons
-                name={active ? tab.icon : tab.iconOutline}
-                size={23}
-                color={active ? colors.white : colors.primary}
-              />
-              <Text style={[styles.rowLabel, active && styles.rowLabelActive]} numberOfLines={1}>
-                {t(tab.titleKey)}
-              </Text>
-            </Pressable>
-          );
-        })}
+        {TABS.map((tab) => (
+          <SidebarTabRow
+            key={tab.name}
+            tab={tab}
+            label={t(tab.titleKey)}
+            active={isActive(pathname, tab.href)}
+            onPress={() => go(tab.href)}
+          />
+        ))}
 
         {/* 주제별 도서관 — 누르면 검색 탭이 그 주제로 걸러진 채 열린다 */}
         <Pressable
@@ -179,6 +181,69 @@ export function TabletSidebar({ onToggle, onPicked }: SidebarProps) {
           : null}
       </ScrollView>
     </View>
+  );
+}
+
+/**
+ * 사이드바의 탭 한 줄.
+ *
+ * 고른 줄의 알약이 뚝 켜지지 않고 짧게 번지며 켜진다. 알약을 옆 줄로 미끄러뜨리지
+ * 않은 까닭은 글자색 때문이다. 고른 줄의 글자는 흰색이라, 알약이 도착하기 전의
+ * 순간에 흰 글자가 밝은 바탕 위에 놓여 안 보인다. 그래서 알약·아이콘·글자색이
+ * 같은 박자로 함께 바뀐다.
+ */
+function SidebarTabRow({
+  tab,
+  label,
+  active,
+  onPress,
+}: {
+  tab: TabDef;
+  label: string;
+  active: boolean;
+  onPress: () => void;
+}) {
+  const reduceMotion = useReducedMotion();
+  const on = useSharedValue(active ? 1 : 0);
+
+  useEffect(() => {
+    const to = active ? 1 : 0;
+    on.value = reduceMotion ? to : withTiming(to, { duration: 200, easing: Easing.out(Easing.cubic) });
+  }, [active, reduceMotion, on]);
+
+  const fill = useAnimatedStyle(() => ({
+    opacity: on.value,
+    transform: [{ scale: 0.94 + 0.06 * on.value }],
+  }));
+  const shownWhenOn = useAnimatedStyle(() => ({ opacity: on.value }));
+  const shownWhenOff = useAnimatedStyle(() => ({ opacity: 1 - on.value }));
+  const labelColor = useAnimatedStyle(() => ({
+    color: interpolateColor(on.value, [0, 1], [colors.text, colors.white]),
+  }));
+
+  return (
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="tab"
+      accessibilityState={{ selected: active }}
+      style={({ pressed }) => [styles.row, pressed && !active && styles.rowPressed]}
+    >
+      <Reanimated.View pointerEvents="none" style={[styles.rowFill, fill]} />
+      <View style={styles.rowIcon}>
+        <Reanimated.View style={[styles.iconLayer, shownWhenOff]}>
+          <Ionicons name={tab.iconOutline} size={23} color={colors.primary} />
+        </Reanimated.View>
+        <Reanimated.View style={[styles.iconLayer, shownWhenOn]}>
+          <Ionicons name={tab.icon} size={23} color={colors.white} />
+        </Reanimated.View>
+      </View>
+      <Reanimated.Text
+        style={[styles.rowLabel, active && styles.rowLabelActive, labelColor]}
+        numberOfLines={1}
+      >
+        {label}
+      </Reanimated.Text>
+    </Pressable>
   );
 }
 
@@ -217,40 +282,95 @@ export function TabletSidebarOverlay({ onClose }: { onClose: () => void }) {
 
 /* ──────────────────────────────────────────────────────────── 위쪽 탭바 */
 
+/** 위쪽 탭바의 고른 칸 표시가 옮겨 갈 때의 탄성. 살짝만 넘쳤다 자리 잡는다 */
+const PILL_SPRING = { damping: 26, stiffness: 320, mass: 0.9 };
+
 export function TabletTopBar({ onToggle }: { onToggle: () => void }) {
   const insets = useSafeAreaInsets();
   const pathname = usePathname();
   const router = useRouter();
   const { t } = useT();
+  const reduceMotion = useReducedMotion();
+
+  const activeIndex = TABS.findIndex((tab) => isActive(pathname, tab.href));
+
+  /*
+   * 고른 칸 표시는 탭마다 따로 켜지 않고 하나를 옮긴다. App Store 의 위쪽 탭바가
+   * 이렇게 옆 칸으로 미끄러진다.
+   *
+   * 칸마다 글자 길이가 달라(「홈」과 「즐겨찾기」) 폭도 같이 옮긴다. 칸의 위치는
+   * 그려진 뒤에야 알 수 있어서 onLayout 으로 모아 둔다. 언어를 바꾸면 칸 폭이
+   * 바뀌고 onLayout 이 다시 불려 표시도 따라간다.
+   */
+  const frames = useRef<(LayoutRectangle | undefined)[]>([]);
+  const placed = useRef(false);
+  const x = useSharedValue(0);
+  const w = useSharedValue(0);
+  const shown = useSharedValue(0);
+
+  const moveTo = (index: number) => {
+    const f = frames.current[index];
+    if (!f) {
+      shown.value = 0;
+      return;
+    }
+    // 처음 자리 잡을 때는 날아오지 않고 그 자리에 바로 놓는다
+    if (!placed.current || reduceMotion) {
+      x.value = f.x;
+      w.value = f.width;
+    } else {
+      x.value = withSpring(f.x, PILL_SPRING);
+      w.value = withSpring(f.width, PILL_SPRING);
+    }
+    placed.current = true;
+    shown.value = 1;
+  };
+
+  useEffect(() => {
+    moveTo(activeIndex);
+    // moveTo 는 그릴 때마다 새로 만들어지지만 하는 일은 같아서 고른 칸이 바뀔 때만 부른다
+  }, [activeIndex]);
+
+  const onItemLayout = (index: number) => (e: LayoutChangeEvent) => {
+    frames.current[index] = e.nativeEvent.layout;
+    if (index === activeIndex) moveTo(index);
+  };
+
+  const indicator = useAnimatedStyle(() => ({
+    opacity: shown.value,
+    width: w.value,
+    transform: [{ translateX: x.value }],
+  }));
 
   return (
     <View style={[styles.topStrip, { paddingTop: insets.top + spacing.sm }]}>
       <View style={styles.topPill}>
         <SidebarToggle onPress={onToggle} open={false} />
         <View style={styles.topDivider} />
-        {TABS.map((tab) => {
-          const active = isActive(pathname, tab.href);
-          return (
-            <Pressable
-              key={tab.name}
-              onPress={() => router.navigate(tab.href as never)}
-              accessibilityRole="tab"
-              accessibilityState={{ selected: active }}
-              style={({ pressed }) => [
-                styles.topItem,
-                active && styles.topItemActive,
-                pressed && !active && { opacity: 0.6 },
-              ]}
-            >
-              <Text
-                style={[styles.topLabel, active && styles.topLabelActive]}
-                numberOfLines={1}
+        {/* 표시의 위치를 칸 위치와 같은 기준으로 재려고 테두리·여백 없는 줄에 따로 담는다 */}
+        <View style={styles.topTabs}>
+          <Reanimated.View pointerEvents="none" style={[styles.topIndicator, indicator]} />
+          {TABS.map((tab, index) => {
+            const active = index === activeIndex;
+            return (
+              <Pressable
+                key={tab.name}
+                onLayout={onItemLayout(index)}
+                onPress={() => router.navigate(tab.href as never)}
+                accessibilityRole="tab"
+                accessibilityState={{ selected: active }}
+                style={({ pressed }) => [styles.topItem, pressed && !active && { opacity: 0.6 }]}
               >
-                {t(tab.titleKey)}
-              </Text>
-            </Pressable>
-          );
-        })}
+                <Text
+                  style={[styles.topLabel, active && styles.topLabelActive]}
+                  numberOfLines={1}
+                >
+                  {t(tab.titleKey)}
+                </Text>
+              </Pressable>
+            );
+          })}
+        </View>
       </View>
     </View>
   );
@@ -312,11 +432,26 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 25,
   },
-  rowActive: {
+  rowFill: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    borderRadius: 25,
     backgroundColor: colors.primary,
   },
   rowPressed: {
     backgroundColor: 'rgba(79, 166, 149, 0.10)',
+  },
+  rowIcon: {
+    width: 23,
+    height: 23,
+  },
+  iconLayer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
   },
   rowLabel: {
     fontSize: 17,
@@ -324,7 +459,6 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
   rowLabelActive: {
-    color: colors.white,
     fontWeight: '600',
   },
 
@@ -398,22 +532,34 @@ const styles = StyleSheet.create({
     marginHorizontal: spacing.xs,
     backgroundColor: colors.border,
   },
+  topTabs: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 2,
+  },
+  topIndicator: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: colors.surfaceAlt,
+  },
   topItem: {
     paddingHorizontal: 18,
     height: 44,
     borderRadius: 22,
     justifyContent: 'center',
   },
-  topItemActive: {
-    backgroundColor: colors.surfaceAlt,
-  },
   topLabel: {
     fontSize: 16,
+    // 고른 칸만 굵게 하면 그 칸이 넓어지면서 옆 칸들이 밀려 표시가 흔들린다.
+    // 굵기는 모두 같게 두고 색으로만 가른다.
+    fontWeight: '600',
     color: colors.text,
   },
   topLabelActive: {
     color: colors.primary,
-    fontWeight: '700',
   },
 });
 

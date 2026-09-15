@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, useWindowDimensions } from 'react-native';
+import { Animated, Easing, StyleSheet, View, useWindowDimensions } from 'react-native';
+import { useReducedMotion } from 'react-native-reanimated';
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 import { LiquidTabBar, type TabBarProps } from '@/components/LiquidTabBar';
@@ -29,9 +30,40 @@ import { colors } from '@/theme';
  * 태블릿: 아이패드 기본 앱(App Store)처럼 사이드바 ⇄ 위쪽 탭바. TabletNav 참고.
  *     탭 내비게이터의 탭바 자리는 비워 두고 틀을 여기서 짠다.
  */
+/**
+ * 탭을 바꿀 때 화면이 넘어가는 모양.
+ *
+ * 아무것도 안 주면 탭이 한 프레임 만에 바뀌어서 뚝 끊겨 보였다. App Store 앱처럼
+ * 짧게 겹쳐 사라지고 나타나게 한다. 옆으로 미는 움직임은 넣지 않는다. 아이폰·
+ * 아이패드 기본 앱들도 탭 사이에서는 화면을 밀지 않는다 (밀면 "안으로 들어간다"
+ * 로 읽힌다).
+ *
+ * 그냥 'fade' 를 쓰면 나가는 화면과 들어오는 화면이 똑같이 반씩 투명해지는
+ * 순간 바탕색이 비쳐 한 번 깜빡인다. 그래서 가운데까지는 거의 불투명하게 두고
+ * 끝에서만 빠르게 사라진다. 들어오는 화면이 위에 놓이므로 둘을 합치면 거의
+ * 가려진 채로 바뀐다.
+ */
+const TAB_TRANSITION = {
+  animation: 'fade' as const,
+  transitionSpec: {
+    animation: 'timing' as const,
+    config: { duration: 220, easing: Easing.out(Easing.cubic) },
+  },
+  sceneStyleInterpolator: ({ current }: { current: { progress: Animated.Value } }) => ({
+    sceneStyle: {
+      opacity: current.progress.interpolate({
+        inputRange: [-1, -0.5, 0, 0.5, 1],
+        outputRange: [0, 0.85, 1, 0.85, 0],
+      }),
+    },
+  }),
+};
+
 export default function TabsLayout() {
   const { t } = useT();
   const { width } = useWindowDimensions();
+  // 설정에서 「동작 줄이기」를 켠 사람에게는 넘어가는 효과를 주지 않는다
+  const reduceMotion = useReducedMotion();
   const nav = navKind(width);
 
   /*
@@ -58,7 +90,7 @@ export default function TabsLayout() {
       tabBar={(props) =>
         nav === 'bottom' ? <LiquidTabBar {...(props as unknown as TabBarProps)} /> : null
       }
-      screenOptions={{ headerShown: false }}
+      screenOptions={{ headerShown: false, ...(reduceMotion ? null : TAB_TRANSITION) }}
     >
       {TABS.map((tab) => (
         <Tabs.Screen
