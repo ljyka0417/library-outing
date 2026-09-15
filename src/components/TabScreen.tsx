@@ -16,9 +16,14 @@ import { useNativeTabs } from '@/hooks/useNativeTabs';
  *         화면 제목이 탭바 밑에 깔린다. 그래서 탭바까지 포함한 안전 영역을
  *         아는 react-native-screens 의 SafeAreaView 를 쓴다.
  *
- *   폭    아이패드에서 사이드바를 펼치면 그만큼 화면이 좁아진다. 창 폭은 그대로라
- *         화면들이 창 폭을 믿으면 사이드바 밑으로 파고든다. 실제로 받은 폭을 재서
- *         LayoutWidth 로 알려 준다.
+ *   옆    아이패드의 사이드바는 화면을 밀어내지 않고 **화면 위에 유리로 떠 있다.**
+ *         화면은 창 전체에 깔리고, 사이드바 폭은 왼쪽 안전 영역으로만 알려 준다.
+ *         위쪽만 비웠더니 실기기에서 인사말·검색창·주제 첫 칸이 사이드바 밑에 깔렸다.
+ *         그래서 왼쪽·오른쪽도 안전 영역만큼 비운다. 바탕색은 틀에 칠해 두어
+ *         사이드바 유리 너머로는 여전히 화면이 비친다.
+ *
+ *   폭    그렇게 비우고 남은 폭을 재서 LayoutWidth 로 알려 준다. 창 폭을 믿으면
+ *         열 수와 가운데 정렬이 사이드바까지 포함한 폭으로 계산된다.
  */
 export function TabScreen({
   style,
@@ -40,7 +45,7 @@ export function TabScreen({
   }
 
   return (
-    <ControllerSafeAreaView style={style} edges={{ top: true }}>
+    <ControllerSafeAreaView style={style} edges={{ top: true, left: true, right: true }}>
       <View
         style={styles.fill}
         onLayout={(e) => {
