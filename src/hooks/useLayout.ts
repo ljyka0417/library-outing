@@ -24,7 +24,7 @@ import { useWindowDimensions } from 'react-native';
  * 실제 아이패드에서 보니 "폰 앱을 크게 띄운 것" 으로 보였다. 가로로 눕히면
  * 화면 절반이 비었고, 아래 떠 있는 탭바도 폰의 모양이었다. 그래서
  *
- *   - 이동 메뉴를 왼쪽으로 옮긴다      (창 폭으로 정한다 → navKind)
+ *   - 이동 메뉴를 아이패드 앱처럼 둔다  (사이드바 ⇄ 위쪽 탭바 → navKind, TabletNav)
  *   - 넓으면 목록과 상세를 나란히 둔다 (쓸 수 있는 폭으로 정한다 → split)
  *   - 카드 열 수는 폭에서 계산한다     (기기 이름을 보지 않는다 → listColumns)
  *   - 긴 글만 읽기 좋은 폭에 묶는다     (readableWidth)
@@ -38,21 +38,25 @@ import { useWindowDimensions } from 'react-native';
 const TABLET = 600;
 /** 이 폭 미만이면 좁은 폰 (아이폰 SE 1세대, 옛 갤럭시) */
 const COMPACT = 360;
-/** 창 폭이 이 이상이면 이름까지 적힌 사이드바, 아니면 아이콘 레일. 모든 아이패드의 가로가 여기 든다 */
-const SIDEBAR = 1100;
-/** 쓸 수 있는 폭이 이 이상이면 목록과 상세를 나란히 둔다. 미니 가로(사이드바 뺀 901)까지 든다 */
+/**
+ * 창 폭이 이 이상이면 사이드바를 내용 옆에 붙여 두고, 아니면 내용 위에 덮어 띄운다.
+ * 모든 아이패드의 가로가 여기 든다. 사이드바를 처음에 펼쳐 둘지도 이 값으로 정한다.
+ */
+export const SIDEBAR_DOCK = 1100;
+/** 쓸 수 있는 폭이 이 이상이면 목록과 상세를 나란히 둔다. 에어 11 가로에 사이드바를 펼쳐 둔 880 까지 든다 */
 const SPLIT = 880;
 /** 카드 한 장이 이보다 좁아지면 열을 줄인다. 이름이 두 줄로 잘리지 않는 폭이다 */
 const MIN_CARD = 290;
 
-/** 왼쪽 이동 메뉴의 폭 */
-export const NAV_WIDTH = { bottom: 0, rail: 84, sidebar: 232 } as const;
-export type NavKind = keyof typeof NAV_WIDTH;
+export type NavKind = 'bottom' | 'tablet';
 
-/** 창 폭으로 이동 메뉴 모양을 정한다. 아래 탭바 / 아이콘 레일 / 사이드바 */
+/**
+ * 창 폭으로 이동 메뉴를 정한다.
+ *   bottom  폰의 아래 떠 있는 알약
+ *   tablet  사이드바 ⇄ 위쪽 탭바 (TabletNav)
+ */
 export function navKind(windowWidth: number): NavKind {
-  if (windowWidth < TABLET) return 'bottom';
-  return windowWidth >= SIDEBAR ? 'sidebar' : 'rail';
+  return windowWidth < TABLET ? 'bottom' : 'tablet';
 }
 
 export interface Layout {

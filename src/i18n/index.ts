@@ -35,6 +35,8 @@ export type Lang = (typeof LANGUAGES)[number]['code'];
 const ko = {
   /** 태블릿 사이드바 맨 위에 적는 앱 이름 */
   'app.name': '도서관 지도',
+  'nav.openSidebar': '사이드바 열기',
+  'nav.closeSidebar': '사이드바 닫기',
   'tab.home': '홈',
   'tab.search': '검색',
   'tab.chat': '달곰이',
@@ -255,6 +257,8 @@ type Messages = Record<MessageKey, string>;
 
 const en: Messages = {
   'app.name': 'Library Map',
+  'nav.openSidebar': 'Show sidebar',
+  'nav.closeSidebar': 'Hide sidebar',
   'tab.home': 'Home',
   'tab.search': 'Search',
   'tab.chat': 'Dalgomi',
@@ -471,6 +475,8 @@ const en: Messages = {
 
 const ja: Messages = {
   'app.name': '図書館マップ',
+  'nav.openSidebar': 'サイドバーを表示',
+  'nav.closeSidebar': 'サイドバーを隠す',
   'tab.home': 'ホーム',
   'tab.search': '検索',
   'tab.chat': 'ダルゴミ',
@@ -684,6 +690,8 @@ const ja: Messages = {
 
 const zh: Messages = {
   'app.name': '图书馆地图',
+  'nav.openSidebar': '显示侧边栏',
+  'nav.closeSidebar': '隐藏侧边栏',
   'tab.home': '首页',
   'tab.search': '搜索',
   'tab.chat': '达尔戈米',
