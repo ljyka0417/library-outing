@@ -173,6 +173,22 @@ export default function ChatScreen() {
    * 대화는 그만큼 눌려서 말풍선이 잘렸다.
    */
   const [keyboardUp, setKeyboardUp] = useState(false);
+
+  /*
+   * 키보드를 피해 올라갈 높이의 기준점.
+   *
+   * KeyboardAvoidingView 는 "내 자리(부모 기준 y)" 와 "키보드 윗면(화면 기준 y)" 을
+   * 빼서 얼마나 올릴지 정한다. 두 값의 기준이 다르면 그 차이만큼 덜 올라가고,
+   * 애플 기본 탭바에서는 화면 칸 자체가 상태 표시줄 아래에서 시작하는 탓에
+   * 입력칸이 키보드 밑에 깔렸다. 실제 화면에서의 위치를 재서 그 차이를 메운다.
+   */
+  const kavRef = useRef<View>(null);
+  const [kavTop, setKavTop] = useState(0);
+  const measureKav = useCallback(() => {
+    kavRef.current?.measureInWindow?.((_x, y) => {
+      if (Number.isFinite(y)) setKavTop(Math.round(y));
+    });
+  }, []);
   useEffect(() => {
     /*
      * 웹에는 올라오는 키보드가 없다. react-native-web 의 Keyboard 에는
@@ -203,7 +219,7 @@ export default function ChatScreen() {
     (messages.length === 1 ? starterQuestions(lang, starterSeed) : undefined);
 
   return (
-    <TabScreen style={styles.safe}>
+    <TabScreen style={styles.safe} bottomEdge={!keyboardUp}>
       {/*
         태블릿에서 대화는 가운데 칸에 모으고, 위·아래 흰 띠는 화면 끝까지 깐다.
 
@@ -234,10 +250,11 @@ export default function ChatScreen() {
         </View>
       ) : null}
 
+      <View ref={kavRef} style={{ flex: 1 }} onLayout={measureKav} collapsable={false}>
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        keyboardVerticalOffset={0}
+        keyboardVerticalOffset={kavTop}
       >
         <FlatList
           ref={listRef}
@@ -304,6 +321,7 @@ export default function ChatScreen() {
         </View>
         </View>
       </KeyboardAvoidingView>
+      </View>
     </TabScreen>
   );
 }

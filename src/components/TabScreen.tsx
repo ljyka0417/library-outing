@@ -24,13 +24,21 @@ import { useNativeTabs } from '@/hooks/useNativeTabs';
  *
  *   폭    그렇게 비우고 남은 폭을 재서 LayoutWidth 로 알려 준다. 창 폭을 믿으면
  *         열 수와 가운데 정렬이 사이드바까지 포함한 폭으로 계산된다.
+ *
+ *   아래  탭바가 차지하는 만큼도 기기에게 물어서 비운다. 우리가 "탭바는 이만큼"
+ *         이라고 어림잡아 여백을 넣었더니, 애플 탭바에서는 그 위에 또 여백이 붙어
+ *         달곰이 입력칸과 탭바 사이가 손가락 두 개만큼 떴다.
+ *         키보드가 올라오면 탭바는 그 밑에 가려지므로 그때는 끈다(bottomEdge).
  */
 export function TabScreen({
   style,
   children,
+  bottomEdge = true,
 }: {
   style?: StyleProp<ViewStyle>;
   children: ReactNode;
+  /** 아래쪽 안전 영역(탭바 자리)을 비울지. 키보드가 올라온 동안에는 끈다 */
+  bottomEdge?: boolean;
 }) {
   const native = useNativeTabs();
   const { width: windowWidth } = useWindowDimensions();
@@ -45,7 +53,10 @@ export function TabScreen({
   }
 
   return (
-    <ControllerSafeAreaView style={style} edges={{ top: true, left: true, right: true }}>
+    <ControllerSafeAreaView
+      style={style}
+      edges={{ top: true, left: true, right: true, bottom: bottomEdge }}
+    >
       <View
         style={styles.fill}
         onLayout={(e) => {

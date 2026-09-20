@@ -37,11 +37,12 @@ export function useTabBarPadding() {
   if (navKind(width) !== 'bottom') return bottom + 16;
 
   /*
-   * 애플 기본 탭바. UITabBar 의 표준 높이는 49 이고 홈 인디케이터 영역 위에 놓인다.
-   * iOS 26 의 떠 있는 유리 탭바도 대략 그 자리를 차지한다.
-   * (아이패드는 탭바가 위에 있어 위의 태블릿 갈래로 간다)
+   * 애플 기본 탭바에서는 탭바 자리를 TabScreen 의 SafeAreaView 가 이미 비웠다.
+   * (기기가 알려 주는 실제 값이다) 여기서 또 49 니 하고 어림잡아 더하면 그만큼
+   * 빈칸이 생긴다 — 달곰이 입력칸이 탭바에서 한참 떠 있던 것이 이것이다.
+   * 마지막 줄이 답답하지 않을 만큼만 둔다.
    */
-  if (native) return insets.bottom + 49 + 16;
+  if (native) return 16;
 
   return TAB_BAR.height + bottom + 16;
 }
