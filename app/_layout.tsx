@@ -83,7 +83,9 @@ export default function RootLayout() {
   if (!hydrated) return null;
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    /* 바탕색을 창 맨 밑에도 깔아 둔다. 애플 기본 탭바를 쓰면 화면 칸이 상태 표시줄
+       아래에서 시작해, 그 위가 기기 기본 회색으로 남았다. */
+    <GestureHandlerRootView style={{ flex: 1, backgroundColor: colors.background }}>
       <StatusBar style="dark" />
       <Stack
         screenOptions={{

@@ -81,30 +81,33 @@ export default function TabsLayout() {
  *            가로 칩 줄이 먼저 나오는 화면에서는 엉뚱한 곳에 붙는다. 끄고
  *            useTabBarPadding / TabScreen 으로 직접 잡는다.
  */
+/** 탭 화면 칸의 바탕색. 비워 두면 기기 기본색(흰·회색)이 비친다 */
+const TAB_CONTENT = { backgroundColor: colors.background };
+
 function AppleTabs() {
   const { t } = useT();
 
   return (
     <NativeTabs tintColor={colors.primary} minimizeBehavior="onScrollDown" sidebarAdaptable>
-      <NativeTabs.Trigger name="index" disableAutomaticContentInsets>
+      <NativeTabs.Trigger name="index" disableAutomaticContentInsets contentStyle={TAB_CONTENT}>
         <NativeTabs.Trigger.Icon sf={{ default: 'house', selected: 'house.fill' }} />
         <NativeTabs.Trigger.Label>{t('tab.home')}</NativeTabs.Trigger.Label>
       </NativeTabs.Trigger>
-      <NativeTabs.Trigger name="chat" disableAutomaticContentInsets>
+      <NativeTabs.Trigger name="chat" disableAutomaticContentInsets contentStyle={TAB_CONTENT}>
         <NativeTabs.Trigger.Icon
           sf={{ default: 'bubble.left.and.bubble.right', selected: 'bubble.left.and.bubble.right.fill' }}
         />
         <NativeTabs.Trigger.Label>{t('tab.chat')}</NativeTabs.Trigger.Label>
       </NativeTabs.Trigger>
-      <NativeTabs.Trigger name="favorites" disableAutomaticContentInsets>
+      <NativeTabs.Trigger name="favorites" disableAutomaticContentInsets contentStyle={TAB_CONTENT}>
         <NativeTabs.Trigger.Icon sf={{ default: 'heart', selected: 'heart.fill' }} />
         <NativeTabs.Trigger.Label>{t('tab.favorites')}</NativeTabs.Trigger.Label>
       </NativeTabs.Trigger>
-      <NativeTabs.Trigger name="mypage" disableAutomaticContentInsets>
+      <NativeTabs.Trigger name="mypage" disableAutomaticContentInsets contentStyle={TAB_CONTENT}>
         <NativeTabs.Trigger.Icon sf={{ default: 'person', selected: 'person.fill' }} />
         <NativeTabs.Trigger.Label>{t('tab.mypage')}</NativeTabs.Trigger.Label>
       </NativeTabs.Trigger>
-      <NativeTabs.Trigger name="search" role="search" disableAutomaticContentInsets>
+      <NativeTabs.Trigger name="search" role="search" disableAutomaticContentInsets contentStyle={TAB_CONTENT}>
         <NativeTabs.Trigger.Icon sf="magnifyingglass" />
         <NativeTabs.Trigger.Label>{t('tab.search')}</NativeTabs.Trigger.Label>
       </NativeTabs.Trigger>
