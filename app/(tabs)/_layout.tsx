@@ -88,7 +88,19 @@ function AppleTabs() {
   const { t } = useT();
 
   return (
-    <NativeTabs tintColor={colors.primary} minimizeBehavior="onScrollDown" sidebarAdaptable>
+    <NativeTabs
+      tintColor={colors.primary}
+      minimizeBehavior="onScrollDown"
+      sidebarAdaptable
+      /*
+       * 화면을 담는 **네이티브** 칸의 바탕.
+       *
+       * 켜 보니 상태 표시줄 자리만 회색으로 남았다. 그 자리는 우리가 그리는 View 바깥이라
+       * contentStyle 로는 안 칠해진다(그건 화면 안쪽 View 의 바탕이다).
+       * react-native-screens 의 탭 컨테이너에 직접 색을 준다.
+       */
+      unstable_nativeProps={{ nativeContainerStyle: { backgroundColor: colors.background } }}
+    >
       <NativeTabs.Trigger name="index" disableAutomaticContentInsets contentStyle={TAB_CONTENT}>
         <NativeTabs.Trigger.Icon sf={{ default: 'house', selected: 'house.fill' }} />
         <NativeTabs.Trigger.Label>{t('tab.home')}</NativeTabs.Trigger.Label>
