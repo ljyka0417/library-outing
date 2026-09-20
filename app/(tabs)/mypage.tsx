@@ -186,6 +186,9 @@ function GlassTest() {
  * 데이터가 얼마나 채워졌는지 한눈에 보여준다.
  * npm run geocode / enrich / collect-nearby 를 돌린 뒤 여기서 확인한다.
  */
+/** 기기에 들어간 코드를 눈으로 확인하는 표시. 새 코드를 올릴 때마다 바꾼다 */
+const BUILD_MARK = '09-20 탭바바탕3';
+
 function DataStatus() {
   const d = dataCompleteness();
   const pct = (n: number) => `${n}/${d.total} (${Math.round((n / d.total) * 100)}%)`;
@@ -193,6 +196,10 @@ function DataStatus() {
   return (
     <View style={styles.devBox}>
       <Text style={styles.devTitle}>데이터 수집 현황 (개발 중에만 표시)</Text>
+      {/* 기기가 어느 코드를 돌고 있는지 한눈에 보는 표시. 고칠 때마다 손으로 바꾼다 */}
+      <Text style={[styles.devText, { fontWeight: '700', color: colors.primary }]}>
+        코드 표시: {BUILD_MARK}
+      </Text>
       <Text style={styles.devText}>주소 {pct(d.address)} · 전화 {pct(d.phone)}</Text>
       <Text style={styles.devText}>좌표 {pct(d.coords)} · 운영시간 {pct(d.hours)}</Text>
       <Text style={styles.devText}>
