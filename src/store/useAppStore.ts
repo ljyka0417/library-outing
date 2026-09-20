@@ -31,13 +31,15 @@ interface AppState {
   glassTest: boolean;
 
   /**
-   * 애플 기본 탭바(NativeTabs) 시험 스위치. iOS 에서만 쓴다.
+   * 애플 기본 탭바(NativeTabs)를 쓸까. iOS 에서만 본다. **기본은 켜짐.**
    *
-   * 유리 스위치와 같은 까닭으로 **저장하지 않는다.** 기본 탭바는 네이티브 부품이라
-   * 기기에 설치된 개발용 앱에 따라 화면을 못 그릴 수 있다. 앱을 껐다 켜면 늘
-   * 우리가 그린 탭바로 돌아온다.
+   * iOS 26 부터는 이게 진짜 Liquid Glass 탭바다. 시험 스위치로 며칠 써 보고
+   * (위쪽 회색 띠·달곰이 입력칸·키보드 문제를 다 고친 뒤) 기본으로 올렸다.
+   *
+   * 유리 스위치와 달리 **저장한다.** 기본이 켜짐이라, 저장하지 않으면 꺼 두어도
+   * 앱을 껐다 켤 때마다 되살아나 빠져나올 수 없다. 끈 선택은 남아 있어야 한다.
    */
-  nativeTabsTest: boolean;
+  nativeTabs: boolean;
 
   /**
    * 화면에 쓰는 말. 유리 스위치와 달리 **저장한다** — 언어는 앱을 껐다 켜도
@@ -51,7 +53,7 @@ interface AppState {
   addVisit: (libraryId: string) => void;
   completeOnboarding: () => void;
   setGlassTest: (on: boolean) => void;
-  setNativeTabsTest: (on: boolean) => void;
+  setNativeTabs: (on: boolean) => void;
   setLanguage: (lang: Lang) => void;
   resetAll: () => void;
 
@@ -68,7 +70,7 @@ export const useAppStore = create<AppState>()(
       visits: [],
       hasSeenOnboarding: false,
       glassTest: false,
-      nativeTabsTest: false,
+      nativeTabs: true,
       language: 'ko',
       _hydrated: false,
 
@@ -107,7 +109,7 @@ export const useAppStore = create<AppState>()(
        */
       setGlassTest: (on) => set({ glassTest: on }),
 
-      setNativeTabsTest: (on) => set({ nativeTabsTest: on }),
+      setNativeTabs: (on) => set({ nativeTabs: on }),
 
       setLanguage: (lang) => set({ language: lang }),
 
@@ -126,6 +128,8 @@ export const useAppStore = create<AppState>()(
         visits: state.visits,
         hasSeenOnboarding: state.hasSeenOnboarding,
         language: state.language,
+        // 애플 탭바를 끈 선택은 남긴다 (기본이 켜짐이라 저장하지 않으면 다시 켜진다)
+        nativeTabs: state.nativeTabs,
       }),
       // 복원에 실패하더라도 반드시 hydrated 를 켠다.
       // 그러지 않으면 루트 레이아웃이 null 을 계속 반환해 스플래시에서 멈춘다.

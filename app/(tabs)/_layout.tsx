@@ -67,7 +67,7 @@ export default function TabsLayout() {
 }
 
 /**
- * 애플 기본 탭바 (시험). iOS 에서 마이 탭의 스위치를 켰을 때만 쓴다.
+ * 애플 기본 탭바. iOS 의 기본값이다 (마이 탭에서 끌 수 있다).
  *
  * UITabBarController 를 그대로 쓰므로 iOS 26 이상에서는 진짜 Liquid Glass 가 된다.
  * 선택 표시가 물방울처럼 옮겨 가고, 탭바를 끌어 고르기, 스크롤하면 작아지기가

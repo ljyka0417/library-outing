@@ -107,15 +107,15 @@ export default function MyPageScreen() {
 }
 
 /**
- * 애플 기본 탭바 시험 스위치 (iOS, 개발 중에만 표시).
+ * 애플 기본 탭바 스위치 (iOS, 개발 중에만 표시). 기본은 켜짐.
  *
- * 켜면 탭 내비게이터가 통째로 바뀌어 홈으로 돌아간다. 유리 스위치처럼 저장하지
- * 않으므로, 기본 탭바가 이 기기의 개발용 앱에서 화면을 못 그려도 앱을 껐다 켜면
- * 우리 탭바로 돌아온다.
+ * 끄면 우리가 그린 떠 있는 알약 탭바로 돌아간다. 이 선택은 **저장된다** —
+ * 기본이 켜짐이라, 저장하지 않으면 꺼 두어도 앱을 껐다 켤 때마다 되살아난다.
+ * 바꾸면 탭 내비게이터가 통째로 바뀌어 홈으로 돌아간다.
  */
 function NativeTabsTest() {
-  const on = useAppStore((s) => s.nativeTabsTest);
-  const setOn = useAppStore((s) => s.setNativeTabsTest);
+  const on = useAppStore((s) => s.nativeTabs);
+  const setOn = useAppStore((s) => s.setNativeTabs);
 
   return (
     <Pressable
@@ -131,9 +131,12 @@ function NativeTabsTest() {
           color={on ? colors.primary : colors.textMuted}
         />
         <View style={{ flex: 1 }}>
-          <Text style={styles.devTitle}>애플 기본 탭바 {on ? '켜짐' : '꺼짐'} (시험)</Text>
-          <Text style={styles.devText}>iOS 26 이상에서 진짜 Liquid Glass 탭바로 바뀝니다</Text>
-          <Text style={styles.devText}>켜면 홈으로 돌아가고, 앱을 껐다 켜면 다시 꺼집니다</Text>
+          <Text style={styles.devTitle}>애플 기본 탭바 {on ? '켜짐' : '꺼짐'} (기본값 켜짐)</Text>
+          <Text style={styles.devText}>iOS 26 이상에서 진짜 Liquid Glass 탭바입니다</Text>
+          <Text style={styles.devText}>
+            {on ? '끄면 우리가 그린 알약 탭바로 돌아갑니다' : '우리가 그린 알약 탭바를 쓰는 중'} ·
+            이 선택은 저장됩니다
+          </Text>
         </View>
       </View>
     </Pressable>
@@ -187,7 +190,7 @@ function GlassTest() {
  * npm run geocode / enrich / collect-nearby 를 돌린 뒤 여기서 확인한다.
  */
 /** 기기에 들어간 코드를 눈으로 확인하는 표시. 새 코드를 올릴 때마다 바꾼다 */
-const BUILD_MARK = '09-20 달곰이여백4';
+const BUILD_MARK = '09-20 애플탭바기본5';
 
 function DataStatus() {
   const d = dataCompleteness();
