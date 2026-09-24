@@ -453,15 +453,17 @@ const styles = StyleSheet.create({
   mineText: { ...typography.body, color: colors.white },
 
   theirsRow: { flexDirection: 'row', gap: spacing.sm, alignItems: 'flex-start' },
-  /** 달곰이 얼굴을 담는 동그란 판 */
+  /**
+   * 달곰이 얼굴 자리.
+   *
+   * 바탕은 깔지 않는다 — 초록 동그라미를 대 봤더니 배지처럼 튀어서 대화가 시끄러웠다.
+   * 대신 자리(36)는 잡아 둔다. 그림이 늦게 뜨거나 안 그려져도 말풍선이 밀리지 않는다.
+   */
   avatar: {
     width: 36,
     height: 36,
-    borderRadius: 18,
-    backgroundColor: colors.primarySoft,
     alignItems: 'center',
     justifyContent: 'center',
-    overflow: 'hidden',
   },
   theirsBubble: {
     backgroundColor: colors.surface,
