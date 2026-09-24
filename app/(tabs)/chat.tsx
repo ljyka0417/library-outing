@@ -199,7 +199,15 @@ export default function ChatScreen() {
     // iOS 는 will*, 안드로이드는 did* 만 온다. 둘 다 걸어 둔다.
     const show = Keyboard.addListener(
       Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow',
-      () => setKeyboardUp(true)
+      () => {
+        setKeyboardUp(true);
+        /*
+         * 키보드가 올라오면 대화 칸이 그만큼 줄어드는데, 보고 있던 자리는 그대로라
+         * 마지막 말풍선의 아래가 잘려 보였다(아이패드에서 눈에 띈다).
+         * 줄어든 뒤에 맨 아래로 붙인다 — 줄어들기 전에 부르면 그대로 잘린 채 남는다.
+         */
+        setTimeout(() => listRef.current?.scrollToEnd({ animated: true }), 250);
+      }
     );
     const hide = Keyboard.addListener(
       Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide',
