@@ -3046,7 +3046,7 @@
         ]
       },
       "closedDays": "금+공휴일",
-      "address": "전남광주통합특별시 진도군 진도읍 철마길 25",
+      "address": "전라남도 진도군 진도읍 철마길 25",
       "phone": "061-540-3061",
       "homepage": "http://lib.jindo.go.kr"
     },
@@ -3128,7 +3128,7 @@
         ]
       },
       "closedDays": "월(첫째 주+셋째 주)+일요일 제외한 법정공휴일",
-      "address": "전남광주통합특별시 광산구 선운중앙로67번길 6(선암동)",
+      "address": "광주광역시 광산구 선운중앙로67번길 6(선암동)",
       "phone": "062-960-6818",
       "homepage": "https://lib.gwangsan.go.kr"
     },
@@ -3166,7 +3166,7 @@
         ]
       },
       "closedDays": "둘째 월+넷째 월+일+국가지정공휴일",
-      "address": "전남광주통합특별시 서구 풍암공원로 8",
+      "address": "광주광역시 서구 풍암공원로 8",
       "phone": "062-350-4584",
       "homepage": "http://www.seogu.gwangju.kr/library"
     },
@@ -3289,7 +3289,7 @@
         ]
       },
       "closedDays": "월(첫째 주+셋째 주)+일요일 제외한 법정공휴일",
-      "address": "전남광주통합특별시 광산구 풍영로 179(장덕동)",
+      "address": "광주광역시 광산구 풍영로 179(장덕동)",
       "phone": "062-960-3997",
       "homepage": "https://lib.gwangsan.go.kr"
     },
@@ -3324,7 +3324,7 @@
         ]
       },
       "closedDays": "월+일+국가지정공휴일",
-      "address": "전남광주통합특별시 서구 세동1길 27-1",
+      "address": "광주광역시 서구 세동1길 27-1",
       "phone": "062-385-9073"
     },
     "gwangju-braille": {
@@ -3361,7 +3361,7 @@
         ]
       },
       "closedDays": "토+법정공휴일",
-      "address": "전남광주통합특별시 남구 천변좌로370번길 3",
+      "address": "광주광역시 남구 천변좌로370번길 3",
       "phone": "062-672-9534",
       "homepage": "https://citylib.gwangju.go.kr/braille"
     },
@@ -3402,7 +3402,7 @@
         ]
       },
       "closedDays": "월(둘째 주+넷째 주)+일요일 제외한 법정공휴일",
-      "address": "전남광주통합특별시 광산구 목련로217번길 10(운남동)",
+      "address": "광주광역시 광산구 목련로217번길 10(운남동)",
       "phone": "062-960-8302",
       "homepage": "https://lib.gwangsan.go.kr"
     },
@@ -3443,7 +3443,7 @@
         ]
       },
       "closedDays": "둘째주 월+넷째주 월+공휴일(일 제외)",
-      "address": "전남광주통합특별시 남구 금당로 140",
+      "address": "광주광역시 남구 금당로 140",
       "phone": "062-607-2531",
       "homepage": "https://lib.namgu.gwangju.kr/"
     }
