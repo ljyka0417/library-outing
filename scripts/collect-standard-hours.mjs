@@ -158,9 +158,20 @@ function buildByDay(row) {
     `${String(Math.floor(v.open / 60)).padStart(2, '0')}:${String(v.open % 60).padStart(2, '0')}~` +
     `${String(Math.floor(v.close / 60)).padStart(2, '0')}:${String(v.close % 60).padStart(2, '0')}`;
 
-  const label = sat && (sat.open !== wd.open || sat.close !== wd.close)
-    ? `평일 ${fmt(wd)} / 주말 ${fmt(sat)}`
-    : fmt(wd);
+  /*
+   * 문구는 **실제로 여는 요일**만 말한다.
+   *
+   * 「평일 09:00~18:00 / 주말 09:00~17:00」 이라고 적어 놓고 휴관일이 "월+일" 인
+   * 곳이 네 곳 있었다. 일요일은 쉬는데 주말에 연다고 말한 셈이다. 토요일만 열면
+   * "토", 일요일만 열면 "일" 이라고 적는다. 둘 다 쉬면 평일 시각만 적는다.
+   */
+  const satOpen = byDay[6] !== null;
+  const sunOpen = byDay[0] !== null;
+  const weekendWord = satOpen && sunOpen ? '주말' : satOpen ? '토' : sunOpen ? '일' : null;
+  const label =
+    sat && weekendWord && (sat.open !== wd.open || sat.close !== wd.close)
+      ? `평일 ${fmt(wd)} / ${weekendWord} ${fmt(sat)}`
+      : fmt(wd);
 
   return { label, byDay };
 }

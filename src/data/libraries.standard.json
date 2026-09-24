@@ -1,6 +1,6 @@
 {
   "_readme": "행정안전부 전국도서관표준데이터에서 받은 운영시간입니다. 직접 고치지 마세요. 다시 받으려면 npm run collect-hours. 시각이 칸으로 나뉘어 있어 문장을 해석할 필요가 없습니다.",
-  "_generatedAt": "2026-09-11T13:48:10.770Z",
+  "_generatedAt": "2026-09-24T01:20:34.197Z",
   "_source": "행정안전부 전국도서관표준데이터 (data.go.kr/data/15013109)",
   "entries": {
     "urisori-library": {
@@ -116,6 +116,41 @@
       "address": "서울특별시 송파구 오금로 1 (신천동)",
       "phone": "02-415-3567",
       "homepage": "http://www.splib.or.kr"
+    },
+    "dongjak-english": {
+      "_source": "전국도서관표준데이터 (동작영어마루도서관, 좌표 3m)",
+      "matchedName": "동작영어마루도서관",
+      "hours": {
+        "label": "평일 09:00~18:00 / 토 09:00~17:00",
+        "byDay": [
+          null,
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "매주 월요일+매주 일요일+법정공휴일",
+      "address": "서울특별시 동작구 장승배기로16길 98",
+      "phone": "02-823-6750",
+      "homepage": "http://lib.dongjak.go.kr/"
     },
     "goyang-hwajeong": {
       "_source": "전국도서관표준데이터 (화정도서관, 좌표 7m)",
@@ -472,7 +507,7 @@
       "_source": "전국도서관표준데이터 (송도국제도서관, 좌표 17m)",
       "matchedName": "송도국제도서관",
       "hours": {
-        "label": "평일 09:00~21:00 / 주말 09:00~18:00",
+        "label": "평일 09:00~21:00 / 토 09:00~18:00",
         "byDay": [
           null,
           null,
@@ -615,7 +650,7 @@
       "_source": "전국도서관표준데이터 (선학별빛도서관, 좌표 7m)",
       "matchedName": "선학별빛도서관",
       "hours": {
-        "label": "평일 09:00~22:00 / 주말 09:00~18:00",
+        "label": "평일 09:00~22:00 / 토 09:00~18:00",
         "byDay": [
           null,
           null,
@@ -1143,7 +1178,7 @@
       "homepage": "http://ascl.asan.go.kr"
     },
     "cheongju-ochang-lake": {
-      "_source": "전국도서관표준데이터 (청주오창호수도서관, 좌표 10m)",
+      "_source": "전국도서관표준데이터 (청주오창호수도서관, 좌표 13m)",
       "matchedName": "청주오창호수도서관",
       "hours": {
         "label": "평일 09:00~22:00 / 주말 09:00~18:00",
@@ -1487,7 +1522,7 @@
       },
       "closedDays": "1)매월 첫째, 셋째 월요일 2)법정공휴일 3)그 밖의 경북도서관장이 필요하다고 인정하는 경우",
       "address": "경상북도 예천군 호명면 도청대로 200",
-      "phone": "054-650-3941",
+      "phone": "054-650-3900",
       "homepage": "https://gb.go.kr/lib"
     },
     "gyeongnam-library": {
@@ -2978,7 +3013,7 @@
       "homepage": "https://library.suncheon.go.kr/"
     },
     "jindo-cheolma": {
-      "_source": "전국도서관표준데이터 (철마도서관, 좌표 63m)",
+      "_source": "전국도서관표준데이터 (철마도서관, 좌표 80m)",
       "matchedName": "철마도서관",
       "hours": {
         "label": "09:00~22:00",
@@ -3011,7 +3046,7 @@
         ]
       },
       "closedDays": "금+공휴일",
-      "address": "전라남도 진도군 진도읍 철마길 25",
+      "address": "전남광주통합특별시 진도군 진도읍 철마길 25",
       "phone": "061-540-3061",
       "homepage": "http://lib.jindo.go.kr"
     },
@@ -3093,7 +3128,7 @@
         ]
       },
       "closedDays": "월(첫째 주+셋째 주)+일요일 제외한 법정공휴일",
-      "address": "광주광역시 광산구 선운중앙로67번길 6(선암동)",
+      "address": "전남광주통합특별시 광산구 선운중앙로67번길 6(선암동)",
       "phone": "062-960-6818",
       "homepage": "https://lib.gwangsan.go.kr"
     },
@@ -3101,7 +3136,7 @@
       "_source": "전국도서관표준데이터 (서구어린이생태학습도서관, 좌표 14m)",
       "matchedName": "서구어린이생태학습도서관",
       "hours": {
-        "label": "평일 09:00~18:00 / 주말 09:00~17:00",
+        "label": "평일 09:00~18:00 / 토 09:00~17:00",
         "byDay": [
           null,
           {
@@ -3131,7 +3166,7 @@
         ]
       },
       "closedDays": "둘째 월+넷째 월+일+국가지정공휴일",
-      "address": "광주광역시 서구 풍암공원로 8",
+      "address": "전남광주통합특별시 서구 풍암공원로 8",
       "phone": "062-350-4584",
       "homepage": "http://www.seogu.gwangju.kr/library"
     },
@@ -3218,7 +3253,7 @@
       "homepage": "http://lib.bukgu.gwangju.kr"
     },
     "jangdeok-library": {
-      "_source": "전국도서관표준데이터 (장덕도서관, 좌표 2m)",
+      "_source": "전국도서관표준데이터 (장덕도서관, 좌표 18m)",
       "matchedName": "장덕도서관",
       "hours": {
         "label": "08:00~22:00",
@@ -3254,7 +3289,7 @@
         ]
       },
       "closedDays": "월(첫째 주+셋째 주)+일요일 제외한 법정공휴일",
-      "address": "광주광역시 광산구 풍영로 179(장덕동)",
+      "address": "전남광주통합특별시 광산구 풍영로 179(장덕동)",
       "phone": "062-960-3997",
       "homepage": "https://lib.gwangsan.go.kr"
     },
@@ -3289,7 +3324,7 @@
         ]
       },
       "closedDays": "월+일+국가지정공휴일",
-      "address": "광주광역시 서구 세동1길 27-1",
+      "address": "전남광주통합특별시 서구 세동1길 27-1",
       "phone": "062-385-9073"
     },
     "gwangju-braille": {
@@ -3326,12 +3361,12 @@
         ]
       },
       "closedDays": "토+법정공휴일",
-      "address": "광주광역시 남구 천변좌로370번길 3",
+      "address": "전남광주통합특별시 남구 천변좌로370번길 3",
       "phone": "062-672-9534",
       "homepage": "https://citylib.gwangju.go.kr/braille"
     },
     "unnam-kids": {
-      "_source": "전국도서관표준데이터 (운남어린이도서관, 좌표 41m)",
+      "_source": "전국도서관표준데이터 (운남어린이도서관, 좌표 11m)",
       "matchedName": "운남어린이도서관",
       "hours": {
         "label": "평일 09:00~18:00 / 주말 09:00~17:00",
@@ -3367,7 +3402,7 @@
         ]
       },
       "closedDays": "월(둘째 주+넷째 주)+일요일 제외한 법정공휴일",
-      "address": "광주광역시 광산구 목련로217번길 10(운남동)",
+      "address": "전남광주통합특별시 광산구 목련로217번길 10(운남동)",
       "phone": "062-960-8302",
       "homepage": "https://lib.gwangsan.go.kr"
     },
@@ -3408,7 +3443,7 @@
         ]
       },
       "closedDays": "둘째주 월+넷째주 월+공휴일(일 제외)",
-      "address": "광주광역시 남구 금당로 140",
+      "address": "전남광주통합특별시 남구 금당로 140",
       "phone": "062-607-2531",
       "homepage": "https://lib.namgu.gwangju.kr/"
     }

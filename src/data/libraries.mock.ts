@@ -87,7 +87,7 @@ const SEEDS: Seed[] = [
   { id: 'nonhyeon-maru', name: '논현마루도서관', sido: '서울', specialty: '예술·디자인', categories: ['art'] },
   { id: 'cheongun-lit', name: '청운문학도서관', sido: '서울', specialty: '한옥·문학', categories: ['nature'] },
   { id: 'songpa-kids-english', name: '송파어린이영어도서관', sido: '서울', specialty: '어린이 영어', categories: ['kids'] },
-  { id: 'brighton-library', name: '브라이튼도서관', sido: '서울', specialty: '복합문화 공간', categories: ['landmark'] },
+  { id: 'dongjak-english', name: '동작영어마루도서관', sido: '서울', specialty: '영어·어학', categories: ['language'] },
   // 특화 분류에 '환경' 은 따로 두지 않았다. 한 곳만 담기는 분류는 필터로 쓸모가
   // 없어서다(이 파일 위 설계 원칙). 가장 가까운 '자연' 에 넣고, 환경이라는 말은
   // specialty 에 그대로 남겨 카드와 상세에 보이게 한다.
@@ -109,9 +109,7 @@ const SEEDS: Seed[] = [
   /* ── 인천 ──────────────────────────────────────────────── */
   { id: 'incheon-library', name: '인천도서관', sido: '인천', specialty: '인천 랜드마크', categories: ['landmark'], landmark: true },
   { id: 'songdo-intl', name: '송도국제도서관', sido: '인천', specialty: '국제·랜드마크', categories: ['landmark'], landmark: true },
-  { id: 'michuhol-library', name: '미추홀도서관', sido: '인천', specialty: '랜드마크·역사', categories: ['landmark'], landmark: true },
   { id: 'majeon-library', name: '마전도서관', sido: '인천', specialty: '음악', categories: ['music'] },
-  { id: 'dream-kids-english', name: '드림어린이영어도서관', sido: '인천', specialty: '어린이 영어', categories: ['kids'] },
   { id: 'cheongna-intl', name: '청라국제도서관', sido: '인천', specialty: '국제·세계문화', categories: ['humanities'] },
   { id: 'yeongjong-sky', name: '영종하늘도서관', sido: '인천', specialty: '미술·그림책', categories: ['art'] },
   { id: 'yulmok-library', name: '율목도서관', sido: '인천', specialty: '디지털', categories: ['science'] },
@@ -127,7 +125,6 @@ const SEEDS: Seed[] = [
   { id: 'gangneung-moru', name: '강릉모루도서관', sido: '강원', specialty: '음악·예술', categories: ['music'] },
   { id: 'chuncheon-city', name: '춘천시립도서관', sido: '강원', specialty: '음식', categories: ['food'] },
   { id: 'sokcho-kids-english', name: '속초 어린이영어도서관', sido: '강원', specialty: '어린이 영어', categories: ['kids'] },
-  { id: 'knu-future', name: '강원대학교 KNU미래도서관', sido: '강원', specialty: 'IT·미래', categories: ['science'] },
   { id: 'inje-miracle', name: '인제 기적의도서관', sido: '강원', specialty: '어린이', categories: ['kids'] },
   { id: 'wondeok-library', name: '원덕도서관', sido: '강원', specialty: '자연', categories: ['nature'] },
   { id: 'mangsang-beach', name: '망상해뜰책뜰 바닷가작은도서관', sido: '강원', specialty: '바닷가·여행', categories: ['travel'] },
@@ -159,7 +156,6 @@ const SEEDS: Seed[] = [
   { id: 'gyeongbuk-library', name: '경북도서관', sido: '경상', specialty: '경북 랜드마크', categories: ['landmark'], landmark: true },
   { id: 'gyeongnam-library', name: '경남도서관', sido: '경상', specialty: '경남 랜드마크', categories: ['landmark'], landmark: true },
   { id: 'gyeongju-city', name: '경주시립도서관', sido: '경상', specialty: '역사', categories: ['history'] },
-  { id: 'buksam-kids-youth', name: '북삼어린이청소년도서관', sido: '경상', specialty: '어린이·청소년', categories: ['kids'] },
   { id: 'poeun-heunghae', name: '포은흥해도서관', sido: '경상', specialty: '음악', categories: ['music'] },
   { id: 'sangju-dodream', name: '상주 두드림 시립도서관', sido: '경상', specialty: '만화·웹툰', categories: ['comics'] },
   { id: 'hadong-library', name: '하동도서관', sido: '경상', specialty: '녹차', categories: ['food'] },
@@ -213,7 +209,6 @@ const SEEDS: Seed[] = [
   { id: 'halla-library', name: '한라도서관', sido: '제주', specialty: '제주 랜드마크', categories: ['landmark'], landmark: true },
   { id: 'tamna-library', name: '탐라도서관', sido: '제주', specialty: '독립출판', categories: ['humanities'] },
   { id: 'kimyoungsu-library', name: '김영수도서관', sido: '제주', specialty: '학교도서관', categories: ['kids'] },
-  { id: 'soraui-seong', name: '소라의성', sido: '제주', specialty: '자연', categories: ['nature'] },
 
   /* ── 전라 ──────────────────────────────────────────────── */
   { id: 'jeonbuk-provincial', name: '전북특별자치도청도서관', sido: '전라', specialty: '전북 랜드마크', categories: ['landmark'], landmark: true },

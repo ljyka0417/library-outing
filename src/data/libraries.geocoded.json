@@ -5,7 +5,7 @@
     "우선순위: geocoded < enriched(정보나루) < manual(수동). 뒤쪽이 앞쪽을 덮습니다.",
     "confidence 가 medium 인 곳은 다른 장소일 수 있으니 확인이 필요합니다."
   ],
-  "_generatedAt": "2026-09-06T14:50:30.037Z",
+  "_generatedAt": "2026-09-24T01:19:53.038Z",
   "entries": {
     "seoul-library": {
       "source": "kakao",
@@ -103,17 +103,29 @@
       },
       "placeUrl": "http://place.map.kakao.com/18502744"
     },
-    "brighton-library": {
+    "dongjak-english": {
       "source": "kakao",
       "confidence": "high",
-      "matchedName": "여의도브라이튼도서관",
-      "address": "서울 영등포구 국제금융로 39",
-      "phone": "02-2125-4400",
+      "matchedName": "동작영어마루도서관",
+      "address": "서울 동작구 장승배기로16길 98",
+      "phone": "02-823-6750",
       "coords": {
-        "lat": 37.52394782000133,
-        "lng": 126.93043897489913
+        "lat": 37.5091900042695,
+        "lng": 126.943412067095
       },
-      "placeUrl": "http://place.map.kakao.com/276973485"
+      "placeUrl": "http://place.map.kakao.com/18719591"
+    },
+    "gangseo-gayang": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "강서도서관 가양관",
+      "address": "서울 강서구 양천로55길 46",
+      "phone": "02-3219-7043",
+      "coords": {
+        "lat": 37.565720366497544,
+        "lng": 126.85034734165627
+      },
+      "placeUrl": "http://place.map.kakao.com/2113876739"
     },
     "gyeonggi-library": {
       "source": "kakao",
@@ -439,18 +451,6 @@
       },
       "placeUrl": "http://place.map.kakao.com/2039318204"
     },
-    "knu-future": {
-      "source": "kakao",
-      "confidence": "high",
-      "matchedName": "강원대학교 KNU미래도서관",
-      "address": "강원특별자치도 춘천시 강원대학길 1",
-      "phone": "033-250-8019",
-      "coords": {
-        "lat": 37.86566632586433,
-        "lng": 127.74866698781702
-      },
-      "placeUrl": "http://place.map.kakao.com/641628185"
-    },
     "inje-miracle": {
       "source": "kakao",
       "confidence": "high",
@@ -578,8 +578,8 @@
       "address": "충북 청주시 청원구 오창읍 오창공원로 102",
       "phone": "043-201-4096",
       "coords": {
-        "lat": 36.7130317055849,
-        "lng": 127.423856674687
+        "lat": 36.712918569243946,
+        "lng": 127.42374300942348
       },
       "placeUrl": "http://place.map.kakao.com/27286441"
     },
@@ -1444,17 +1444,6 @@
         "lng": 126.79116859141276
       },
       "placeUrl": "http://place.map.kakao.com/1413486317"
-    },
-    "gangseo-gayang": {
-      "source": "kakao",
-      "confidence": "high",
-      "matchedName": "강서도서관 가양관",
-      "address": "서울 강서구 양천로55길 46",
-      "phone": "02-3219-7043",
-      "coords": {
-        "lat": 37.5656273696532,
-        "lng": 126.850549569451
-      }
     }
   }
 }
