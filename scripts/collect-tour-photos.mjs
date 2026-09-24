@@ -304,18 +304,44 @@ for (let i = 0; i < targets.length; i++) {
   await sleep(150);
 }
 
+const file = path.join(ROOT, 'src/data/tour-photos.generated.json');
+
+/*
+ * 이번에 못 받은 곳은 **지난 결과를 그대로 둔다.**
+ *
+ * 통째로 덮어쓰게 두었더니, 관광공사가 적게 돌려준 날 한 번 돌린 것만으로
+ * 113곳 528장이 17곳 75장으로 줄었다(2026-09-24). 사진은 한 번 받아 두면
+ * 그대로 쓰는 자료라, 못 받았다고 지울 이유가 없다.
+ * 목록에서 빠진 도서관은 지운다.
+ */
+// 이번에 돈 곳(targets)이 아니라 **목록 전체**를 기준으로 남긴다.
+// 기본 실행은 랜드마크만 돌기 때문에, targets 로 두면 나머지가 통째로 지워진다
+// (실제로 그렇게 94곳이 사라졌다).
+const alive = new Set(libraries.map((l) => l.id));
+let keptFromBefore = 0;
+if (fs.existsSync(file)) {
+  const prev = JSON.parse(fs.readFileSync(file, 'utf8')).byLibrary ?? {};
+  for (const [id, places] of Object.entries(prev)) {
+    if (!byLibrary[id] && alive.has(id)) {
+      byLibrary[id] = places;
+      keptFromBefore++;
+    }
+  }
+}
+
 const out = {
   _readme:
     '한국관광공사 TourAPI 로 빌드 타임에 수집한 "사진 있는 주변 장소" 입니다. ' +
-    '직접 고치지 마세요. 다시 모으려면 npm run collect-tour.',
+    '직접 고치지 마세요. 다시 모으려면 npm run collect-tour. ' +
+    '이번에 못 받은 곳은 지난 결과를 그대로 둡니다.',
   _generatedAt: new Date().toISOString(),
   _radiusMeters: RADIUS,
   _source: '한국관광공사 (공공누리 제1·3유형 사진만)',
   byLibrary,
 };
 
-const file = path.join(ROOT, 'src/data/tour-photos.generated.json');
 fs.writeFileSync(file, JSON.stringify(out, null, 2) + '\n');
+if (keptFromBefore > 0) console.log(`  지난 결과를 그대로 둔 도서관 ${keptFromBefore}곳`);
 
 console.log(`
 끝.

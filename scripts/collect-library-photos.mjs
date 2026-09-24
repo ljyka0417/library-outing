@@ -228,21 +228,39 @@ for (let i = 0; i < libraries.length; i++) {
   await sleep(120);
 }
 
+const outFile = path.join(ROOT, 'src/data/library-photos.generated.json');
+
+/*
+ * 이번에 못 받은 곳은 지난 결과를 그대로 둔다 (collect-tour 와 같은 까닭).
+ * 관광공사가 그날그날 다르게 돌려줘서, 한 번 덜 받은 것만으로 사진이 사라졌다.
+ * 목록에서 빠진 도서관은 지운다.
+ */
+const alive = new Set(libraries.map((l) => l.id));
+let keptFromBefore = 0;
+if (fs.existsSync(outFile)) {
+  const prev = JSON.parse(fs.readFileSync(outFile, 'utf8')).byId ?? {};
+  for (const [id, photo] of Object.entries(prev)) {
+    if (!byId[id] && alive.has(id)) {
+      byId[id] = photo;
+      keptFromBefore++;
+    }
+  }
+}
+
 const out = {
   _readme:
     '한국관광공사 TourAPI 에서 찾은 도서관 실사진입니다. 직접 고치지 마세요. ' +
     '다시 찾으려면 npm run collect-library-photos. ' +
-    '이름이 닮고 좌표가 가까운 것만 받아들였고, 저작권 유형을 확인한 사진만 남겼습니다.',
+    '이름이 닮고 좌표가 가까운 것만 받아들였고, 저작권 유형을 확인한 사진만 남겼습니다. ' +
+    '이번에 못 받은 곳은 지난 결과를 그대로 둡니다.',
   _generatedAt: new Date().toISOString(),
   _maxDistanceMeters: MAX_DISTANCE,
   _source: '한국관광공사 (공공누리 제1·3유형 사진만)',
   byId,
 };
 
-fs.writeFileSync(
-  path.join(ROOT, 'src/data/library-photos.generated.json'),
-  JSON.stringify(out, null, 2) + '\n'
-);
+fs.writeFileSync(outFile, JSON.stringify(out, null, 2) + '\n');
+if (keptFromBefore > 0) console.log(`  지난 결과를 그대로 둔 도서관 ${keptFromBefore}곳`);
 
 console.log(`
 끝.
