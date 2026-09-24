@@ -358,7 +358,11 @@ function Bubble({ message, onOpenLibrary, favorites, onToggleFavorite }: BubbleP
 
   return (
     <View style={styles.theirsRow}>
-      <Mascot size={30} pose="face" />
+      {/* 말하는 사람이 누구인지 한눈에 보이도록 달곰이 얼굴을 동그란 판 위에 둔다.
+          그림만 놓아 두었더니 기기에서 가끔 안 보였다 — 판이 있으면 자리도 분명하다. */}
+      <View style={styles.avatar}>
+        <Mascot size={30} pose="face" />
+      </View>
       <View style={{ flex: 1, gap: spacing.sm }}>
         <View style={styles.theirsBubble}>
           <Text style={styles.theirsText}>{message.text}</Text>
@@ -449,6 +453,16 @@ const styles = StyleSheet.create({
   mineText: { ...typography.body, color: colors.white },
 
   theirsRow: { flexDirection: 'row', gap: spacing.sm, alignItems: 'flex-start' },
+  /** 달곰이 얼굴을 담는 동그란 판 */
+  avatar: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: colors.primarySoft,
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+  },
   theirsBubble: {
     backgroundColor: colors.surface,
     borderRadius: radius.lg,
