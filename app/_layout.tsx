@@ -100,7 +100,18 @@ export default function RootLayout() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen
           name="library/[id]"
-          options={{ title: '', headerTransparent: true, headerBackTitle: '' }}
+          options={{
+            title: '',
+            headerTransparent: true,
+            /*
+             * 뒤로가기 단추에 화살표만 남긴다.
+             *
+             * iOS 는 기본으로 이전 화면의 이름을 화살표 옆에 붙이는데, 우리 이전 화면은
+             * 파일 폴더 이름인 「(tabs)」 라서 그 글자가 그대로 나왔다. 개발 중인 티가 난다.
+             * headerBackTitle: '' 로는 안 없어지고, 이 옵션이라야 화살표만 남는다.
+             */
+            headerBackButtonDisplayMode: 'minimal',
+          }}
         />
       </Stack>
     </GestureHandlerRootView>
