@@ -67,7 +67,9 @@ export default function OnboardingScreen() {
         pagingEnabled
         showsHorizontalScrollIndicator={false}
         onMomentumScrollEnd={onScroll}
-        style={{ flexGrow: 0 }}
+        /* 남은 높이를 다 쓴다. 내용 높이만큼만 차지하게 두었더니 세로로 든
+           아이패드에서 한 장의 내용이 위쪽에 몰리고 아래가 휑했다. */
+        style={{ flex: 1 }}
       >
         {SLIDES.map((slide) => (
           <View key={slide.title} style={[styles.slide, { width }]}>
@@ -122,7 +124,17 @@ const styles = StyleSheet.create({
   },
   slide: {
     alignItems: 'center',
+    /*
+     * 한 장의 내용을 세로 가운데에 둔다.
+     *
+     * 위에서부터 쌓아 두었더니 세로로 든 아이패드(1180 높이)에서 달곰이와 글이
+     * 위쪽 3분의 1에 몰리고 가운데가 휑했다. 폰에서는 화면이 짧아 차이가 거의 없다.
+     * 위 여백은 「건너뛰기」와 겹치지 않을 만큼만 남긴다.
+     */
+    flex: 1,
+    justifyContent: 'center',
     paddingTop: spacing.xxxl,
+    paddingBottom: spacing.xxl,
     paddingHorizontal: spacing.xxl,
   },
   /** 태블릿에서 가운데로 모이는 한 장의 내용 (폰에서는 화면 폭 그대로) */
