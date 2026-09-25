@@ -79,14 +79,14 @@ const SEEDS: Seed[] = [
   /* ── 서울 ──────────────────────────────────────────────── */
   { id: 'seoul-library', name: '서울도서관', sido: '서울', specialty: '서울 랜드마크', categories: ['landmark'], landmark: true },
   { id: 'national-library', name: '국립중앙도서관', sido: '서울', specialty: '국가대표 도서관', categories: ['landmark'], landmark: true },
-  { id: 'assembly-library', name: '국회도서관', sido: '서울', specialty: '정치·의회', categories: ['humanities'] },
+  { id: 'assembly-library', name: '국회도서관', sido: '서울', specialty: '정치·의회', categories: ['law'] },
   { id: 'seoul-botanic-plant', name: '서울식물원 식물전문도서관', sido: '서울', specialty: '식물·자연', categories: ['nature'] },
   { id: 'nongshim-food', name: '농심식문화전문도서관', sido: '서울', specialty: '음식·식문화', categories: ['food'] },
   { id: 'urisori-library', name: '우리소리도서관', sido: '서울', specialty: '국악·우리 소리', categories: ['music'] },
   { id: 'national-children-library', name: '국립어린이청소년도서관', sido: '서울', specialty: '어린이·청소년', categories: ['kids'] },
   { id: 'nonhyeon-maru', name: '논현마루도서관', sido: '서울', specialty: '예술·디자인', categories: ['art'] },
-  { id: 'cheongun-lit', name: '청운문학도서관', sido: '서울', specialty: '한옥·문학', categories: ['nature'] },
-  { id: 'songpa-kids-english', name: '송파어린이영어도서관', sido: '서울', specialty: '어린이 영어', categories: ['kids'] },
+  { id: 'cheongun-lit', name: '청운문학도서관', sido: '서울', specialty: '한옥·문학', categories: ['humanities'] },
+  { id: 'songpa-kids-english', name: '송파어린이영어도서관', sido: '서울', specialty: '어린이 영어', categories: ['language'] },
   { id: 'dongjak-english', name: '동작영어마루도서관', sido: '서울', specialty: '영어·어학', categories: ['language'] },
   // 특화 분류에 '환경' 은 따로 두지 않았다. 한 곳만 담기는 분류는 필터로 쓸모가
   // 없어서다(이 파일 위 설계 원칙). 가장 가까운 '자연' 에 넣고, 환경이라는 말은
@@ -95,7 +95,7 @@ const SEEDS: Seed[] = [
 
   /* ── 경기 ──────────────────────────────────────────────── */
   { id: 'gyeonggi-library', name: '경기도서관', sido: '경기', specialty: '경기 랜드마크', categories: ['landmark'], landmark: true },
-  { id: 'goyang-hwajeong', name: '고양화정도서관', sido: '경기', specialty: '꽃', categories: ['nature'] },
+  { id: 'goyang-hwajeong', name: '고양화정도서관', sido: '경기', specialty: '꽃', categories: ['art'] },
   { id: 'court-library', name: '법원도서관', sido: '경기', specialty: '법률', categories: ['law'] },
   { id: 'ansan-media', name: '안산시미디어도서관', sido: '경기', specialty: '영화·미디어', categories: ['media'] },
   { id: 'leeseokyoung-media', name: '이석영뉴미디어도서관', sido: '경기', specialty: '뉴미디어', categories: ['media'] },
@@ -109,13 +109,13 @@ const SEEDS: Seed[] = [
   /* ── 인천 ──────────────────────────────────────────────── */
   { id: 'incheon-library', name: '인천도서관', sido: '인천', specialty: '인천 랜드마크', categories: ['landmark'], landmark: true },
   { id: 'songdo-intl', name: '송도국제도서관', sido: '인천', specialty: '국제·랜드마크', categories: ['landmark'], landmark: true },
-  { id: 'majeon-library', name: '마전도서관', sido: '인천', specialty: '음악', categories: ['music'] },
-  { id: 'cheongna-intl', name: '청라국제도서관', sido: '인천', specialty: '국제·세계문화', categories: ['humanities'] },
+  { id: 'majeon-library', name: '마전도서관', sido: '인천', specialty: '음악', categories: ['nature'] },
+  { id: 'cheongna-intl', name: '청라국제도서관', sido: '인천', specialty: '국제·세계문화', categories: ['language'] },
   { id: 'yeongjong-sky', name: '영종하늘도서관', sido: '인천', specialty: '미술·그림책', categories: ['art'] },
-  { id: 'yulmok-library', name: '율목도서관', sido: '인천', specialty: '디지털', categories: ['science'] },
-  { id: 'dongchun-narae', name: '동춘나래도서관', sido: '인천', specialty: '웹툰', categories: ['comics'] },
+  { id: 'yulmok-library', name: '율목도서관', sido: '인천', specialty: '디지털', categories: ['humanities'] },
+  { id: 'dongchun-narae', name: '동춘나래도서관', sido: '인천', specialty: '웹툰', categories: ['art'] },
   { id: 'songdo-kids', name: '송도국제어린이도서관', sido: '인천', specialty: '어린이', categories: ['kids'] },
-  { id: 'kkumdream-kids-english', name: '꿈드림어린이영어도서관', sido: '인천', specialty: '어린이 영어', categories: ['kids'] },
+  { id: 'kkumdream-kids-english', name: '꿈드림어린이영어도서관', sido: '인천', specialty: '어린이 영어', categories: ['language'] },
   { id: 'cheongna-lake', name: '청라호수도서관', sido: '인천', specialty: '자연', categories: ['nature'] },
   { id: 'seonhak-starlight', name: '선학별빛도서관', sido: '인천', specialty: '천문학', categories: ['science'] },
 
