@@ -5,7 +5,7 @@
     "API 에 없는 도서관은 libraries.manual.json 에 손으로 넣으세요. 그쪽이 우선합니다.",
     "entries 가 비어 있으면 앱은 이름·지역·특화 태그만으로 동작합니다."
   ],
-  "_generatedAt": "2026-09-24T01:28:38.972Z",
+  "_generatedAt": "2026-09-25T03:42:20.414Z",
   "entries": {
     "seoul-library": {
       "sourceApiId": "111314",
@@ -47,6 +47,22 @@
             "close": 1080
           }
         ]
+      }
+    },
+    "nonhyeon-maru": {
+      "sourceApiId": "111071",
+      "matchedName": "논현문화마루도서관(분관)",
+      "address": "서울특별시 강남구 학동로 169",
+      "phone": "02-511-7466",
+      "homepage": "https://library.gangnam.go.kr/nhilib",
+      "coords": {
+        "lat": 37.517466,
+        "lng": 127.040487
+      },
+      "closedDays": "매주 토요일, 일요일 / 법정공휴일",
+      "hours": {
+        "label": "월~금 09~18시 (현장방문 대출불가, 분관서고 상호대차 이용)",
+        "byDay": []
       }
     },
     "songpa-kids-english": {
@@ -323,6 +339,90 @@
         ]
       }
     },
+    "uijeongbu-art": {
+      "sourceApiId": "141627",
+      "matchedName": "의정부미술도서관",
+      "address": "경기도 의정부시 민락로 248",
+      "phone": "031-828-8870",
+      "homepage": "https://www.uilib.go.kr",
+      "coords": {
+        "lat": 37.7533135,
+        "lng": 127.1073975
+      },
+      "closedDays": "매주 월요일 / 법정공휴일",
+      "hours": {
+        "label": "평일 09:00~21:00, 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      }
+    },
+    "uijeongbu-music": {
+      "sourceApiId": "141642",
+      "matchedName": "의정부음악도서관",
+      "address": "경기도 의정부시 장곡로 280",
+      "phone": "031-828-4850",
+      "homepage": "https://www.uilib.go.kr",
+      "coords": {
+        "lat": 37.7297293,
+        "lng": 127.0552995
+      },
+      "closedDays": "매주 월요일 / 법정공휴일",
+      "hours": {
+        "label": "평일 9:00~21:00, 주말 9:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      }
+    },
     "juyeop-kids": {
       "sourceApiId": "141124",
       "matchedName": "고양시립주엽어린이도서관",
@@ -399,93 +499,6 @@
           {
             "open": 540,
             "close": 1080
-          },
-          {
-            "open": 540,
-            "close": 1080
-          }
-        ]
-      }
-    },
-    "goyang-aramnuri": {
-      "sourceApiId": "141123",
-      "matchedName": "고양시립아람누리도서관",
-      "address": "경기도 고양시 일산동구 중앙로 1286",
-      "phone": "031-8075-9038",
-      "homepage": "https://www.goyanglib.or.kr/MF/index.do",
-      "coords": {
-        "lat": 37.6615541,
-        "lng": 126.7745
-      },
-      "closedDays": "매주 월요일 / 법정공휴일",
-      "hours": {
-        "label": "평일 ( 09:00 ~ 22:00 ) / 주말 ( 09:00 ~ 18:00 )",
-        "byDay": [
-          {
-            "open": 540,
-            "close": 1080
-          },
-          null,
-          {
-            "open": 540,
-            "close": 1320
-          },
-          {
-            "open": 540,
-            "close": 1320
-          },
-          {
-            "open": 540,
-            "close": 1320
-          },
-          {
-            "open": 540,
-            "close": 1320
-          },
-          {
-            "open": 540,
-            "close": 1080
-          }
-        ]
-      }
-    },
-    "hwaseong-jinan": {
-      "sourceApiId": "141575",
-      "matchedName": "화성시립진안도서관",
-      "address": "경기도 화성시 병점중앙로 229",
-      "phone": "031-224-9977",
-      "homepage": "https://www.hscitylib.or.kr/jalib/",
-      "coords": {
-        "lat": 37.2076452,
-        "lng": 127.0412738
-      },
-      "closedDays": "매월 두 번째, 네 번째 월요일",
-      "hours": {
-        "label": "평일 09:00 ~ 22:00, 주말 09:00 ~ 18:00 (도서관 자세한 운영시간 및 운영에 관련한 사항은 도서관 홈페이지 또는 전화를 통해 확인 바랍니다.)",
-        "byDay": [
-          {
-            "open": 540,
-            "close": 1080
-          },
-          {
-            "open": 540,
-            "close": 1320
-          },
-          {
-            "open": 540,
-            "close": 1320
-          },
-          {
-            "open": 540,
-            "close": 1320
-          },
-          {
-            "open": 540,
-            "close": 1320
-          },
-          {
-            "open": 540,
-            "close": 1320
           },
           {
             "open": 540,

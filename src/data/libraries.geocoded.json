@@ -5,7 +5,7 @@
     "우선순위: geocoded < enriched(정보나루) < manual(수동). 뒤쪽이 앞쪽을 덮습니다.",
     "confidence 가 medium 인 곳은 다른 장소일 수 있으니 확인이 필요합니다."
   ],
-  "_generatedAt": "2026-09-24T01:19:53.038Z",
+  "_generatedAt": "2026-09-25T03:40:44.238Z",
   "entries": {
     "seoul-library": {
       "source": "kakao",
@@ -69,7 +69,7 @@
     },
     "nonhyeon-maru": {
       "source": "kakao",
-      "confidence": "medium",
+      "confidence": "high",
       "matchedName": "논현문화마루도서관",
       "address": "서울 강남구 논현로131길 40",
       "phone": "02-512-8580",
@@ -199,6 +199,30 @@
       },
       "placeUrl": "http://place.map.kakao.com/12456958"
     },
+    "uijeongbu-art": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "의정부미술도서관",
+      "address": "경기 의정부시 민락로 248",
+      "phone": "031-828-8870",
+      "coords": {
+        "lat": 37.74514581177362,
+        "lng": 127.10612742019957
+      },
+      "placeUrl": "http://place.map.kakao.com/996959901"
+    },
+    "uijeongbu-music": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "의정부음악도서관",
+      "address": "경기 의정부시 장곡로 280",
+      "phone": "031-828-4850",
+      "coords": {
+        "lat": 37.728557530001574,
+        "lng": 127.05377333206435
+      },
+      "placeUrl": "http://place.map.kakao.com/614180690"
+    },
     "gwacheon-it": {
       "source": "kakao",
       "confidence": "high",
@@ -234,30 +258,6 @@
         "lng": 127.10785021058562
       },
       "placeUrl": "http://place.map.kakao.com/26573290"
-    },
-    "goyang-aramnuri": {
-      "source": "kakao",
-      "confidence": "high",
-      "matchedName": "고양시립 아람누리도서관",
-      "address": "경기 고양시 일산동구 중앙로 1286",
-      "phone": "031-8075-9038",
-      "coords": {
-        "lat": 37.66130202018634,
-        "lng": 126.7732077575862
-      },
-      "placeUrl": "http://place.map.kakao.com/11317287"
-    },
-    "hwaseong-jinan": {
-      "source": "kakao",
-      "confidence": "medium",
-      "matchedName": "화성시진안도서관",
-      "address": "경기 화성시 병점구 병점중앙로 229",
-      "phone": "031-224-9977",
-      "coords": {
-        "lat": 37.21729569381584,
-        "lng": 127.03387986355226
-      },
-      "placeUrl": "http://place.map.kakao.com/170825185"
     },
     "incheon-library": {
       "source": "kakao",
