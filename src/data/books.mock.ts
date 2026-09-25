@@ -67,6 +67,14 @@ const SEEDS: Seed[] = [
   ['humanities', '사피엔스', '유발 하라리'],
   ['humanities', '정의란 무엇인가', '마이클 샌델'],
   ['humanities', '총, 균, 쇠', '재레드 다이아몬드'],
+
+  ['law', '헌법의 풍경', '김두식'],
+  ['law', '판결을 다시 생각한다', '김영란'],
+  ['law', '법의 정신', '몽테스키외'],
+
+  ['media', '미디어의 이해', '마셜 매클루언'],
+  ['media', '대중문화의 이해', '김창남'],
+  ['media', '뉴스의 시대', '알랭 드 보통'],
 ];
 
 export const MOCK_BOOKS: Book[] = SEEDS.map(([category, title, author], i) => ({

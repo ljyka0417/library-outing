@@ -88,6 +88,8 @@ const ko = {
   'cat.food': '음식',
   'cat.travel': '여행',
   'cat.humanities': '인문',
+  'cat.law': '법률',
+  'cat.media': '미디어',
 
   'fav.savedCount': '{n}곳을 저장했어요',
   'fav.prompt': '가고 싶은 도서관을 모아 두세요',
@@ -317,6 +319,8 @@ const en: Messages = {
   'cat.food': 'Food',
   'cat.travel': 'Travel',
   'cat.humanities': 'Humanities',
+  'cat.law': 'Law',
+  'cat.media': 'Media',
 
   'fav.savedCount': 'You have saved {n} places',
   'fav.prompt': 'Collect the libraries you want to visit',
@@ -542,6 +546,8 @@ const ja: Messages = {
   'cat.food': '食',
   'cat.travel': '旅行',
   'cat.humanities': '人文',
+  'cat.law': '法律',
+  'cat.media': 'メディア',
 
   'fav.savedCount': '{n}館を保存しました',
   'fav.prompt': '行きたい図書館を集めておきましょう',
@@ -764,6 +770,8 @@ const zh: Messages = {
   'cat.food': '美食',
   'cat.travel': '旅行',
   'cat.humanities': '人文',
+  'cat.law': '法律',
+  'cat.media': '媒体',
 
   'fav.savedCount': '已收藏 {n} 家',
   'fav.prompt': '把想去的图书馆收藏起来吧',

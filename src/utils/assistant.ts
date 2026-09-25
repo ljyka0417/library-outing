@@ -90,12 +90,15 @@ const CATEGORY_WORDS: [CategoryId, RegExp][] = [
   ['nature', /자연|환경|생태|숲|식물|정원|\bnature\b|\beco\b|\bforests?\b|\bplants?\b|\bgardens?\b|自然|森|植物|生态|花园/],
   // it·ai 는 낱말로만 받는다. \b 없이 두었더니 "Humanities" 안의 it 에 걸려 인문을 과학으로 답했다.
   ['science', /과학|아이티|\bit\b|디지털|\bai\b|인공지능|천문|우주|로봇|정보과학|\bscience\b|\btech\b|\brobots?\b|\bspace\b|科学|宇宙|ロボット|太空|机器人/],
-  ['comics', /만화|웹툰|영화|영상|미디어|\bcomics?\b|\bcartoons?\b|\bwebtoons?\b|\bmovies?\b|\bfilms?\b|マンガ|漫画|映画|动漫|电影/],
+  ['comics', /만화|웹툰|영화|\bcomics?\b|\bcartoons?\b|\bwebtoons?\b|\bmovies?\b|\bfilms?\b|マンガ|漫画|映画|动漫|电影/],
+  // 미디어는 만화보다 먼저 볼 필요가 없다. '영화' 는 만화 쪽에 두었다.
+  ['media', /미디어|뉴미디어|영상|방송|신문|언론|\bmedia\b|\bbroadcast(ing)?\b|\bnews\b|メディア|映像|放送|媒体|新闻/],
   // "food libraries" 는 주변 맛집이 아니라 음식 도서관이다. 뒤에 library 가 오면 주제로 받는다.
   // 일본어 주제 이름은 '食' 한 글자라, 그것만으로는 食事(식사)와 섞이므로 '食の図書館' 꼴로 받는다.
   ['food', /미식|요리|식문화|음식 도서관|\bfood librar(y|ies)\b|\bcooking\b|\bcuisine\b|\bgastronomy\b|グルメ|料理|食の図書館|食図書館|食文化|美食|烹饪/],
   ['travel', /여행|바다|해양|관광|바닷|\btravel\b|\bocean\b|\bsea\b|\btourism\b|旅行|海洋|旅游/],
-  ['humanities', /인문|철학|문학|사회|법률|정치|다문화|\bhumanities\b|\bphilosophy\b|\bliterature\b|人文|哲学|文学|哲學/],
+  ['humanities', /인문|철학|문학|사회|정치|다문화|\bhumanities\b|\bphilosophy\b|\bliterature\b|人文|哲学|文学|哲學/],
+  ['law', /법률|법학|법원|판례|헌법|\blaws?\b|\blegal\b|法律|法学|法令/],
   ['landmark', /랜드마크|대표 도서관|큰 도서관|\blandmarks?\b|ランドマーク|地标|代表/],
 ];
 

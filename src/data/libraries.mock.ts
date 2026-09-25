@@ -96,9 +96,9 @@ const SEEDS: Seed[] = [
   /* ── 경기 ──────────────────────────────────────────────── */
   { id: 'gyeonggi-library', name: '경기도서관', sido: '경기', specialty: '경기 랜드마크', categories: ['landmark'], landmark: true },
   { id: 'goyang-hwajeong', name: '고양화정도서관', sido: '경기', specialty: '꽃', categories: ['nature'] },
-  { id: 'court-library', name: '법원도서관', sido: '경기', specialty: '법률', categories: ['humanities'] },
-  { id: 'ansan-media', name: '안산시미디어도서관', sido: '경기', specialty: '영화·미디어', categories: ['comics'] },
-  { id: 'leeseokyoung-media', name: '이석영뉴미디어도서관', sido: '경기', specialty: '뉴미디어', categories: ['comics'] },
+  { id: 'court-library', name: '법원도서관', sido: '경기', specialty: '법률', categories: ['law'] },
+  { id: 'ansan-media', name: '안산시미디어도서관', sido: '경기', specialty: '영화·미디어', categories: ['media'] },
+  { id: 'leeseokyoung-media', name: '이석영뉴미디어도서관', sido: '경기', specialty: '뉴미디어', categories: ['media'] },
   { id: 'uijeongbu-english', name: '의정부영어도서관', sido: '경기', specialty: '영어', categories: ['language'] },
   { id: 'gwacheon-it', name: '과천정보과학도서관', sido: '경기', specialty: '정보과학·IT', categories: ['science'] },
   { id: 'juyeop-kids', name: '주엽어린이도서관', sido: '경기', specialty: '그림책·어린이', categories: ['kids'] },

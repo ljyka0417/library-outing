@@ -86,6 +86,9 @@ export const categoryColors: Record<string, { bg: string; fg: string }> = {
   food: { bg: '#FDF0DC', fg: '#B98A33' },
   travel: { bg: '#E0F0F5', fg: '#3C8296' },
   humanities: { bg: '#EFEDE7', fg: '#6F6A5E' },
+  // 법률은 남색, 미디어는 푸른 회색. 이미 쓰는 열두 색과 겹치지 않는 자리를 골랐다.
+  law: { bg: '#E7EAF4', fg: '#5A61A8' },
+  media: { bg: '#E9EDEF', fg: '#4F707E' },
 };
 
 export const spacing = {

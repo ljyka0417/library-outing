@@ -1,13 +1,15 @@
 import type { Category } from '@/types';
 
 /**
- * 홈 화면 주제별 그리드 (4열 × 3행 = 12분류).
+ * 홈 화면 주제별 그리드 (14분류).
  *
  * 졸업작품에 선정된 전국 도서관들의 특화 태그를 전부 훑어서 다시 설계했다.
  * 원래 8분류로는 철학·웹툰·바다·점자·에너지 같은 태그가 갈 곳이 없었다.
  *
  * 설계 원칙
  *  - 도서관이 최소 3~4곳은 모이는 분류만 만든다. 1곳짜리 분류는 필터로서 쓸모가 없다.
+ *    (법률은 아직 법원도서관 한 곳뿐이다. 앞으로 같은 성격의 도서관을 넣을 자리로
+ *     먼저 만들어 두었다)
  *  - 그래도 안 담기는 세부 태그는 Library.specialty 에 원문 그대로 남겨 화면에 노출한다.
  *    (예: '아라가야 정신', '국채보상운동', '팬기부형')
  *  - 화면에는 분류 이름만 쓴다. 한때 "음악·LP", "과학·IT" 처럼 부제를 함께
@@ -29,6 +31,8 @@ export const CATEGORIES: Category[] = [
   { id: 'food', name: '음식', icon: 'restaurant' },
   { id: 'travel', name: '여행', icon: 'boat' },
   { id: 'humanities', name: '인문', icon: 'people' },
+  { id: 'law', name: '법률', icon: 'hammer' },
+  { id: 'media', name: '미디어', icon: 'videocam' },
 ];
 
 export const CATEGORY_MAP: Record<string, Category> = Object.fromEntries(

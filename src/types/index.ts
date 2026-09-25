@@ -12,7 +12,9 @@ export type CategoryId =
   | 'comics'
   | 'food'
   | 'travel'
-  | 'humanities';
+  | 'humanities'
+  | 'law'
+  | 'media';
 
 export interface Category {
   id: CategoryId;

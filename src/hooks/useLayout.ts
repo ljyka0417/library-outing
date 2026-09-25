@@ -73,7 +73,7 @@ export interface Layout {
   readableWidth: number;
   /** 좌우 여백 */
   gutter: number;
-  /** 주제 그리드 열 수. 12개라서 4열이면 3줄, 6열이면 2줄로 딱 떨어진다. */
+  /** 주제 그리드 열 수. 분류 14개 — 태블릿 7열이면 2줄로 딱 떨어지고, 폰 4열은 마지막 줄만 2개 */
   categoryColumns: number;
   /** 도서관 카드 열 수 */
   listColumns: number;
@@ -138,7 +138,7 @@ export function useLayout(): Layout {
     maxContentWidth,
     readableWidth: isTablet ? Math.min(width, 720) : width,
     gutter,
-    categoryColumns: isTablet ? 6 : 4,
+    categoryColumns: isTablet ? 7 : 4,
     listColumns,
     split,
     // 목록 칸은 폰 한 대 폭쯤. 넓은 화면에서도 420 을 넘기지 않아야 상세가 넉넉하다.
