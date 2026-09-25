@@ -20,8 +20,10 @@ export interface Category {
   id: CategoryId;
   /** 화면에 보이는 분류 이름. 이것 말고 다른 수식어를 붙이지 않는다 */
   name: string;
-  /** @expo/vector-icons 의 Ionicons 이름 */
+  /** 아이콘 이름 (기본은 Ionicons, iconFamily 로 묶음을 바꾼다) */
   icon: string;
+  /** 아이콘 묶음. 비우면 Ionicons. 법률의 판사봉처럼 Ionicons 에 없는 그림만 material */
+  iconFamily?: 'material';
 }
 
 export interface Coordinates {

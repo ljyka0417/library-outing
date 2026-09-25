@@ -21,6 +21,7 @@ import Reanimated, {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { usePathname, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { CategoryIcon } from './CategoryIcon';
 import { Mascot } from './Mascot';
 import { CATEGORIES } from '@/data/categories';
 import { useT, type MessageKey } from '@/i18n';
@@ -171,7 +172,7 @@ export function TabletSidebar({ onToggle, onPicked }: SidebarProps) {
                 style={({ pressed }) => [styles.row, pressed && styles.rowPressed]}
               >
                 <View style={[styles.topicIcon, { backgroundColor: categoryColors[c.id].bg }]}>
-                  <Ionicons name={c.icon as never} size={16} color={categoryColors[c.id].fg} />
+                  <CategoryIcon category={c} size={16} color={categoryColors[c.id].fg} />
                 </View>
                 <Text style={styles.rowLabel} numberOfLines={1}>
                   {t(`cat.${c.id}` as MessageKey)}

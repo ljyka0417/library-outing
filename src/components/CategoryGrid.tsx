@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { CategoryIcon } from './CategoryIcon';
 import { CATEGORIES } from '@/data/categories';
 import { MOCK_LIBRARIES } from '@/data/libraries.mock';
 import { useT } from '@/i18n';
@@ -71,11 +71,7 @@ export function CategoryGrid({ onSelect, selected }: Props) {
                 isSelected && { borderColor: palette.fg, borderWidth: 2 },
               ]}
             >
-              <Ionicons
-                name={cat.icon as never}
-                size={Math.round(box * 0.43)}
-                color={palette.fg}
-              />
+              <CategoryIcon category={cat} size={Math.round(box * 0.43)} color={palette.fg} />
             </View>
             <Text numberOfLines={1} style={styles.name}>
               {name}

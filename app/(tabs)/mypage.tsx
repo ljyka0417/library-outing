@@ -190,7 +190,7 @@ function GlassTest() {
  * npm run geocode / enrich / collect-nearby 를 돌린 뒤 여기서 확인한다.
  */
 /** 기기에 들어간 코드를 눈으로 확인하는 표시. 새 코드를 올릴 때마다 바꾼다 */
-const BUILD_MARK = '09-25 주제14개';
+const BUILD_MARK = '09-25 판사봉';
 
 function DataStatus() {
   const d = dataCompleteness();

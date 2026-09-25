@@ -8,7 +8,7 @@ import {
   type StyleProp,
   type ViewStyle,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { CategoryIcon } from './CategoryIcon';
 import { Mascot } from './Mascot';
 import { CATEGORY_MAP } from '@/data/categories';
 import { getPhoto } from '@/data/libraryPhotos';
@@ -135,24 +135,20 @@ export function LibraryImage({ library, variant, style, framed = false }: Props)
 
   const category = library.categories[0];
   const palette = categoryColors[category] ?? { bg: colors.surfaceAlt, fg: colors.textMuted };
-  const icon = CATEGORY_MAP[category]?.icon ?? 'library';
+  // 주제마다 아이콘 묶음이 다를 수 있다 (법률은 판사봉). CategoryIcon 이 알아서 고른다
+  const cat = CATEGORY_MAP[category] ?? { icon: 'library' };
 
   return (
     <View style={[shapeStyle, styles.placeholder, { backgroundColor: palette.bg }, style]}>
       {variant === 'hero' ? (
         <>
           {/* 큰 아이콘을 옅게 깔아 배경 무늬처럼 쓴다 */}
-          <Ionicons
-            name={icon as never}
-            size={190}
-            color={palette.fg}
-            style={styles.watermark}
-          />
+          <CategoryIcon category={cat} size={190} color={palette.fg} style={styles.watermark} />
           <Mascot size={104} pose="camera" />
           <Text style={[styles.heroText, { color: palette.fg }]}>{t('image.preparing')}</Text>
         </>
       ) : (
-        <Ionicons name={icon as never} size={variant === 'card' ? 28 : 34} color={palette.fg} />
+        <CategoryIcon category={cat} size={variant === 'card' ? 28 : 34} color={palette.fg} />
       )}
     </View>
   );

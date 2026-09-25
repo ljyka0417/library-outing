@@ -31,7 +31,8 @@ export const CATEGORIES: Category[] = [
   { id: 'food', name: '음식', icon: 'restaurant' },
   { id: 'travel', name: '여행', icon: 'boat' },
   { id: 'humanities', name: '인문', icon: 'people' },
-  { id: 'law', name: '법률', icon: 'hammer' },
+  // Ionicons 의 hammer 는 못 박는 망치라 공사장으로 읽힌다. 판사봉은 MaterialCommunityIcons 에 있다
+  { id: 'law', name: '법률', icon: 'gavel', iconFamily: 'material' },
   { id: 'media', name: '미디어', icon: 'videocam' },
 ];
 
