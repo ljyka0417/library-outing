@@ -29,7 +29,7 @@ export const CATEGORIES: Category[] = [
   { id: 'science', name: '과학', icon: 'rocket' },
   { id: 'comics', name: '만화', icon: 'film' },
   { id: 'food', name: '음식', icon: 'restaurant' },
-  { id: 'travel', name: '여행', icon: 'boat' },
+  { id: 'travel', name: '여행', icon: 'airplane' },
   { id: 'humanities', name: '인문', icon: 'people' },
   // Ionicons 의 hammer 는 못 박는 망치라 공사장으로 읽힌다. 판사봉은 MaterialCommunityIcons 에 있다
   { id: 'law', name: '법률', icon: 'gavel', iconFamily: 'material' },
