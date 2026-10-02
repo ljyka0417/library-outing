@@ -1,7 +1,7 @@
 {
   "expo": {
-    "//name": "홈 화면 아이콘 아래에 뜨는 이름이자 앱스토어 검색의 1순위 신호. 「전국 도서관 나들이」는 앱스토어에서 검색량이 0 이라 아무도 그 말로 찾아오지 못한다. 「도서관 지도」는 같은 이름의 앱이 없어 등록도 가능하다. 인쇄 가이드북 제목은 그대로 「전국 도서관 나들이」다.",
-    "name": "도서관 지도",
+    "//name": "홈 화면 아이콘 아래에 뜨는 이름. 가이드북 『오늘 도서관 갈래?』가 앱스토어 검색어로 「도서관 지도」를 안내하므로, 스토어 등록 이름은 「갈피 - 도서관 지도」처럼 둘을 함께 쓴다.",
+    "name": "갈피",
     "//slug": "EAS 프로젝트를 가리키는 값이라 바꾸면 빌드가 다른 프로젝트로 붙는다. 표시 이름과 무관하므로 그대로 둔다.",
     "slug": "library-outing",
     "version": "0.1.0",
@@ -37,11 +37,12 @@
     },
     "android": {
       "package": "com.libraryouting.app",
-      "//adaptiveIcon": "이미지는 npm run icon 으로 생성한다. 안드로이드는 배경을 색 하나로만 줄 수 있어 그라데이션이 안 되므로 배경도 이미지로 깐다. backgroundColor 는 backgroundImage 가 안 먹는 환경을 위한 대비값(그라데이션 중간색).",
+      "//adaptiveIcon": "시험 중: 아이콘은 한 줄 책갈피 + 지도 핀 점(assets/icon-src/galpi-line*.svg 에서 뽑음). npm run icon 을 돌리면 예전 핀 아이콘으로 덮어쓰니 주의. monochromeImage 는 안드로이드 13+ 테마 아이콘(벽지 색으로 칠함)용 단색 이미지. backgroundColor 는 backgroundImage 가 안 먹는 환경을 위한 대비값.",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundImage": "./assets/adaptive-background.png",
-        "backgroundColor": "#192D28"
+        "monochromeImage": "./assets/adaptive-icon-monochrome.png",
+        "backgroundColor": "#000000"
       },
       "intentFilters": [
         {

@@ -34,7 +34,7 @@ export type Lang = (typeof LANGUAGES)[number]['code'];
 /** 한국어가 원본이다. 다른 말은 여기 있는 열쇠를 전부 채워야 한다. */
 const ko = {
   /** 태블릿 사이드바 맨 위에 적는 앱 이름 */
-  'app.name': '도서관 지도',
+  'app.name': '갈피',
   'nav.openSidebar': '사이드바 열기',
   'nav.closeSidebar': '사이드바 닫기',
   'tab.home': '홈',
@@ -265,7 +265,7 @@ export type MessageKey = keyof typeof ko;
 type Messages = Record<MessageKey, string>;
 
 const en: Messages = {
-  'app.name': 'Library Map',
+  'app.name': 'Galpi',
   'nav.openSidebar': 'Show sidebar',
   'nav.closeSidebar': 'Hide sidebar',
   'tab.home': 'Home',
@@ -492,7 +492,7 @@ const en: Messages = {
 };
 
 const ja: Messages = {
-  'app.name': '図書館マップ',
+  'app.name': 'Galpi',
   'nav.openSidebar': 'サイドバーを表示',
   'nav.closeSidebar': 'サイドバーを隠す',
   'tab.home': 'ホーム',
@@ -716,7 +716,7 @@ const ja: Messages = {
 };
 
 const zh: Messages = {
-  'app.name': '图书馆地图',
+  'app.name': 'Galpi',
   'nav.openSidebar': '显示侧边栏',
   'nav.closeSidebar': '隐藏侧边栏',
   'tab.home': '首页',

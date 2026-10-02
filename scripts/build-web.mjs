@@ -129,9 +129,9 @@ function libraryPage(seed) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${esc(seed.name)} · 도서관 지도</title>
+<title>${esc(seed.name)} · 갈피</title>
 <meta name="description" content="${esc(seed.name)} (${esc(region)}) — ${esc(seed.specialty)} 특화 도서관. 달곰이와 함께하는 전국 도서관 나들이.">
-<meta property="og:title" content="${esc(seed.name)} · 도서관 지도">
+<meta property="og:title" content="${esc(seed.name)} · 갈피">
 <meta property="og:description" content="${esc(seed.specialty)} 특화 도서관 · ${esc(region)}">
 <meta property="og:type" content="website">
 <style>${CSS}</style>
@@ -140,7 +140,7 @@ function libraryPage(seed) {
 <div class="wrap">
   <div class="brand">
     <img src="${ROOT_REL}/dalgomi.png" alt="">
-    <b>도서관 지도</b>
+    <b>갈피</b>
   </div>
 
   <div class="card">
@@ -162,7 +162,7 @@ function libraryPage(seed) {
     <p class="hint">앱이 설치되어 있으면 바로 열립니다.<br>없다면 위에서 설치해 주세요.</p>
   </div>
 
-  <p class="foot"><a href="${ROOT_REL}/">도서관 지도 홈으로</a></p>
+  <p class="foot"><a href="${ROOT_REL}/">갈피 홈으로</a></p>
 </div>
 ${OPEN_SCRIPT(seed.id)}
 </body>
@@ -193,7 +193,7 @@ function indexPage() {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>도서관 지도 · 전국 특화 도서관</title>
+<title>갈피 · 전국 특화 도서관</title>
 <meta name="description" content="달곰이와 함께하는 전국 도서관 나들이. 전국 ${seeds.length}곳의 특화 도서관을 주제별로 만나보세요.">
 <style>${CSS}</style>
 </head>
@@ -201,7 +201,7 @@ function indexPage() {
 <div class="wrap" style="max-width:720px">
   <div class="brand">
     <img src="./dalgomi.png" alt="">
-    <b>도서관 지도</b>
+    <b>갈피</b>
   </div>
 
   <div class="card">
@@ -219,7 +219,7 @@ function indexPage() {
   <h2 style="font-size:17px;margin:36px 0 2px">수록 도서관 ${seeds.length}곳</h2>
 ${sections}
 
-  <p class="foot">달곰이 · 도서관 지도</p>
+  <p class="foot">달곰이 · 갈피</p>
 </div>
 </body>
 </html>`;
