@@ -984,44 +984,6 @@
       "phone": "070-4192-1677",
       "homepage": "http://small.u-library.kr"
     },
-    "munhak-village-small": {
-      "_source": "전국도서관표준데이터 (문학마을작은도서관, 이름 일치)",
-      "matchedName": "문학마을작은도서관",
-      "hours": {
-        "label": "10:00~17:00",
-        "byDay": [
-          {
-            "open": 600,
-            "close": 1020
-          },
-          null,
-          {
-            "open": 600,
-            "close": 1020
-          },
-          {
-            "open": 600,
-            "close": 1020
-          },
-          {
-            "open": 600,
-            "close": 1020
-          },
-          {
-            "open": 600,
-            "close": 1020
-          },
-          {
-            "open": 600,
-            "close": 1020
-          }
-        ]
-      },
-      "closedDays": "월+공휴일",
-      "address": "대전광역시 유성구 어은로 22(어은동",
-      "phone": "070-4192-1677",
-      "homepage": "http://small.u-library.kr"
-    },
     "byeoldongbyeol-science": {
       "_source": "전국도서관표준데이터 (별똥별과학도서관, 좌표 0m)",
       "matchedName": "별똥별과학도서관",
@@ -3443,6 +3405,47 @@
       "address": "전남광주통합특별시 남구 금당로 140",
       "phone": "062-607-2531",
       "homepage": "https://lib.namgu.gwangju.kr/"
+    },
+    "guryongpo-library": {
+      "_source": "전국도서관표준데이터 (구룡포도서관, 좌표 6m)",
+      "matchedName": "구룡포도서관",
+      "hours": {
+        "label": "09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "첫째 주 월+셋째 주 월+일요일을 제외한 법정공휴일+법정공휴일과 겹치는 일요일",
+      "address": "경상북도 포항시 남구 구룡포읍 병포길52번길 17",
+      "phone": "054-270-5629",
+      "homepage": "http://phlib.pohang.go.kr/"
     }
   }
 }

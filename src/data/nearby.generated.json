@@ -13444,204 +13444,6 @@
         "placeUrl": "http://place.map.kakao.com/1991629295"
       }
     ],
-    "namhaegak-sea": [
-      {
-        "id": "namhaegak-sea-restaurant-0",
-        "libraryId": "namhaegak-sea",
-        "type": "restaurant",
-        "name": "곰바우횟집",
-        "subCategory": "회",
-        "address": "경남 남해군 설천면 노량로 187",
-        "coords": {
-          "lat": 34.9407726840066,
-          "lng": 127.873750628198
-        },
-        "distanceMeters": 117,
-        "placeUrl": "http://place.map.kakao.com/8700207"
-      },
-      {
-        "id": "namhaegak-sea-restaurant-1",
-        "libraryId": "namhaegak-sea",
-        "type": "restaurant",
-        "name": "남성식당",
-        "subCategory": "회",
-        "address": "경남 남해군 설천면 노량로195번길 5-5",
-        "coords": {
-          "lat": 34.9406139142199,
-          "lng": 127.874269972596
-        },
-        "distanceMeters": 164,
-        "placeUrl": "http://place.map.kakao.com/10184683"
-      },
-      {
-        "id": "namhaegak-sea-restaurant-2",
-        "libraryId": "namhaegak-sea",
-        "type": "restaurant",
-        "name": "파도횟집",
-        "subCategory": "회",
-        "address": "경남 남해군 설천면 노량로195번길 3",
-        "coords": {
-          "lat": 34.9404010844387,
-          "lng": 127.874285227235
-        },
-        "distanceMeters": 168,
-        "placeUrl": "http://place.map.kakao.com/8118062"
-      },
-      {
-        "id": "namhaegak-sea-restaurant-3",
-        "libraryId": "namhaegak-sea",
-        "type": "restaurant",
-        "name": "제일횟집",
-        "subCategory": "회",
-        "address": "경남 남해군 설천면 노량로183번길 10",
-        "coords": {
-          "lat": 34.9410715789653,
-          "lng": 127.874301100614
-        },
-        "distanceMeters": 172,
-        "placeUrl": "http://place.map.kakao.com/11153682"
-      },
-      {
-        "id": "namhaegak-sea-restaurant-4",
-        "libraryId": "namhaegak-sea",
-        "type": "restaurant",
-        "name": "한려횟집",
-        "subCategory": "회",
-        "address": "경남 남해군 설천면 노량로 198-2",
-        "coords": {
-          "lat": 34.9398958279913,
-          "lng": 127.874354296653
-        },
-        "distanceMeters": 193,
-        "placeUrl": "http://place.map.kakao.com/9573431"
-      },
-      {
-        "id": "namhaegak-sea-restaurant-5",
-        "libraryId": "namhaegak-sea",
-        "type": "restaurant",
-        "name": "마산식당",
-        "subCategory": "회",
-        "address": "경남 남해군 설천면 노량로195번길 5-19",
-        "coords": {
-          "lat": 34.9408598014863,
-          "lng": 127.874671017109
-        },
-        "distanceMeters": 201,
-        "placeUrl": "http://place.map.kakao.com/13579864"
-      },
-      {
-        "id": "namhaegak-sea-cafe-0",
-        "libraryId": "namhaegak-sea",
-        "type": "cafe",
-        "name": "카페진정성 남해바다편",
-        "subCategory": "커피전문점",
-        "address": "경남 남해군 설천면 남해대로 4216",
-        "coords": {
-          "lat": 34.9407549673004,
-          "lng": 127.872453339623
-        },
-        "distanceMeters": 6,
-        "placeUrl": "http://place.map.kakao.com/473837181"
-      },
-      {
-        "id": "namhaegak-sea-cafe-1",
-        "libraryId": "namhaegak-sea",
-        "type": "cafe",
-        "name": "브니엘카페",
-        "subCategory": "카페",
-        "address": "경남 남해군 설천면 노량로195번길 5-15",
-        "coords": {
-          "lat": 34.9409296861608,
-          "lng": 127.874479109256
-        },
-        "distanceMeters": 185,
-        "placeUrl": "http://place.map.kakao.com/1069116521"
-      },
-      {
-        "id": "namhaegak-sea-cafe-2",
-        "libraryId": "namhaegak-sea",
-        "type": "cafe",
-        "name": "윌마",
-        "subCategory": "커피전문점",
-        "address": "경남 남해군 설천면 노량로183번길 22-1",
-        "coords": {
-          "lat": 34.941384759669624,
-          "lng": 127.87537057287977
-        },
-        "distanceMeters": 275,
-        "placeUrl": "http://place.map.kakao.com/328524726"
-      },
-      {
-        "id": "namhaegak-sea-cafe-3",
-        "libraryId": "namhaegak-sea",
-        "type": "cafe",
-        "name": "힐링스카페",
-        "subCategory": "카페",
-        "address": "경남 남해군 설천면 노량로 283",
-        "coords": {
-          "lat": 34.934525233622296,
-          "lng": 127.87477341367256
-        },
-        "distanceMeters": 716,
-        "placeUrl": "http://place.map.kakao.com/1046451934"
-      },
-      {
-        "id": "namhaegak-sea-cafe-4",
-        "libraryId": "namhaegak-sea",
-        "type": "cafe",
-        "name": "노량133",
-        "subCategory": "카페",
-        "address": "경남 하동군 금남면 노량해안길 133",
-        "coords": {
-          "lat": 34.9475877872637,
-          "lng": 127.870492881749
-        },
-        "distanceMeters": 785,
-        "placeUrl": "http://place.map.kakao.com/1171155805"
-      },
-      {
-        "id": "namhaegak-sea-cafe-5",
-        "libraryId": "namhaegak-sea",
-        "type": "cafe",
-        "name": "벤티프레소 경남하동점",
-        "subCategory": "벤티프레소",
-        "address": "경남 하동군 금남면 구노량길 13",
-        "coords": {
-          "lat": 34.94845140139956,
-          "lng": 127.87386603034363
-        },
-        "distanceMeters": 869,
-        "placeUrl": "http://place.map.kakao.com/139353947"
-      },
-      {
-        "id": "namhaegak-sea-culture-0",
-        "libraryId": "namhaegak-sea",
-        "type": "culture",
-        "name": "거북선전시관",
-        "subCategory": "전시관",
-        "address": "경남 남해군 설천면 노량로183번길 27",
-        "coords": {
-          "lat": 34.9420584553121,
-          "lng": 127.874942075054
-        },
-        "distanceMeters": 271,
-        "placeUrl": "http://place.map.kakao.com/1577019781"
-      },
-      {
-        "id": "namhaegak-sea-culture-1",
-        "libraryId": "namhaegak-sea",
-        "type": "culture",
-        "name": "노량대교 홍보관",
-        "subCategory": "전시관",
-        "address": "경남 하동군 금남면 섬진강대로 61",
-        "coords": {
-          "lat": 34.9487303585291,
-          "lng": 127.866128324218
-        },
-        "distanceMeters": 1063,
-        "placeUrl": "http://place.map.kakao.com/1701212403"
-      }
-    ],
     "kkumirang-library": [
       {
         "id": "kkumirang-library-restaurant-0",
@@ -26412,6 +26214,204 @@
         },
         "distanceMeters": 1129,
         "placeUrl": "http://place.map.kakao.com/8664125"
+      }
+    ],
+    "guryongpo-library": [
+      {
+        "id": "guryongpo-library-restaurant-0",
+        "libraryId": "guryongpo-library",
+        "type": "restaurant",
+        "name": "목원대게",
+        "subCategory": "게,대게",
+        "address": "경북 포항시 남구 구룡포읍 병포길52번길 4",
+        "coords": {
+          "lat": 35.9836176235309,
+          "lng": 129.552076770056
+        },
+        "distanceMeters": 160,
+        "placeUrl": "http://place.map.kakao.com/862150342"
+      },
+      {
+        "id": "guryongpo-library-restaurant-1",
+        "libraryId": "guryongpo-library",
+        "type": "restaurant",
+        "name": "주영식당",
+        "subCategory": "한식",
+        "address": "경북 포항시 남구 구룡포읍 호미로 180-94",
+        "coords": {
+          "lat": 35.984221742781,
+          "lng": 129.552477570355
+        },
+        "distanceMeters": 233,
+        "placeUrl": "http://place.map.kakao.com/1268974969"
+      },
+      {
+        "id": "guryongpo-library-restaurant-2",
+        "libraryId": "guryongpo-library",
+        "type": "restaurant",
+        "name": "동성반점",
+        "subCategory": "중국요리",
+        "address": "경북 포항시 남구 구룡포읍 병포길 22",
+        "coords": {
+          "lat": 35.9853244638267,
+          "lng": 129.550278281504
+        },
+        "distanceMeters": 293,
+        "placeUrl": "http://place.map.kakao.com/15879161"
+      },
+      {
+        "id": "guryongpo-library-restaurant-3",
+        "libraryId": "guryongpo-library",
+        "type": "restaurant",
+        "name": "삼천포식당",
+        "subCategory": "한식",
+        "address": "경북 포항시 남구 구룡포읍 병포길 20-1",
+        "coords": {
+          "lat": 35.985447027943884,
+          "lng": 129.55027668545088
+        },
+        "distanceMeters": 306,
+        "placeUrl": "http://place.map.kakao.com/21527951"
+      },
+      {
+        "id": "guryongpo-library-restaurant-4",
+        "libraryId": "guryongpo-library",
+        "type": "restaurant",
+        "name": "해안순대국밥",
+        "subCategory": "국밥",
+        "address": "경북 포항시 남구 구룡포읍 호미로 138",
+        "coords": {
+          "lat": 35.98547188294626,
+          "lng": 129.54821780334777
+        },
+        "distanceMeters": 379,
+        "placeUrl": "http://place.map.kakao.com/377186475"
+      },
+      {
+        "id": "guryongpo-library-restaurant-5",
+        "libraryId": "guryongpo-library",
+        "type": "restaurant",
+        "name": "대게닷컴",
+        "subCategory": "게,대게",
+        "address": "경북 포항시 남구 구룡포읍 호미로 148",
+        "coords": {
+          "lat": 35.985766414348966,
+          "lng": 129.54877268782352
+        },
+        "distanceMeters": 381,
+        "placeUrl": "http://place.map.kakao.com/10256224"
+      },
+      {
+        "id": "guryongpo-library-cafe-0",
+        "libraryId": "guryongpo-library",
+        "type": "cafe",
+        "name": "주영다방",
+        "subCategory": "다방",
+        "address": "경북 포항시 남구 구룡포읍 호미로 180-94",
+        "coords": {
+          "lat": 35.9842681831088,
+          "lng": 129.552496803499
+        },
+        "distanceMeters": 237,
+        "placeUrl": "http://place.map.kakao.com/8522802"
+      },
+      {
+        "id": "guryongpo-library-cafe-1",
+        "libraryId": "guryongpo-library",
+        "type": "cafe",
+        "name": "카페 파도",
+        "subCategory": "카페",
+        "address": "경북 포항시 남구 구룡포읍 하정로172번길 2",
+        "coords": {
+          "lat": 35.97678980092526,
+          "lng": 129.55145887824582
+        },
+        "distanceMeters": 660,
+        "placeUrl": "http://place.map.kakao.com/615627710"
+      },
+      {
+        "id": "guryongpo-library-cafe-2",
+        "libraryId": "guryongpo-library",
+        "type": "cafe",
+        "name": "컴포즈커피 포항구룡포점",
+        "subCategory": "컴포즈커피",
+        "address": "경북 포항시 남구 구룡포읍 호미로 187-6",
+        "coords": {
+          "lat": 35.98850870815121,
+          "lng": 129.55238293927098
+        },
+        "distanceMeters": 662,
+        "placeUrl": "http://place.map.kakao.com/1952675176"
+      },
+      {
+        "id": "guryongpo-library-cafe-3",
+        "libraryId": "guryongpo-library",
+        "type": "cafe",
+        "name": "나나다방",
+        "subCategory": "다방",
+        "address": "경북 포항시 남구 구룡포읍 구룡포길 39",
+        "coords": {
+          "lat": 35.9887958143499,
+          "lng": 129.550745930847
+        },
+        "distanceMeters": 676,
+        "placeUrl": "http://place.map.kakao.com/308935044"
+      },
+      {
+        "id": "guryongpo-library-cafe-4",
+        "libraryId": "guryongpo-library",
+        "type": "cafe",
+        "name": "로타리다방",
+        "subCategory": "다방",
+        "address": "경북 포항시 남구 구룡포읍 구룡포길 48-1",
+        "coords": {
+          "lat": 35.9891099765856,
+          "lng": 129.551774852566
+        },
+        "distanceMeters": 717,
+        "placeUrl": "http://place.map.kakao.com/50811867"
+      },
+      {
+        "id": "guryongpo-library-cafe-5",
+        "libraryId": "guryongpo-library",
+        "type": "cafe",
+        "name": "구룡포다방",
+        "subCategory": "다방",
+        "address": "경북 포항시 남구 구룡포읍 구룡포길 53-2",
+        "coords": {
+          "lat": 35.9895828858674,
+          "lng": 129.552202493054
+        },
+        "distanceMeters": 775,
+        "placeUrl": "http://place.map.kakao.com/1122080064"
+      },
+      {
+        "id": "guryongpo-library-culture-0",
+        "libraryId": "guryongpo-library",
+        "type": "culture",
+        "name": "구룡포예술공장",
+        "subCategory": "미술관",
+        "address": "경북 포항시 남구 구룡포읍 병포길 22",
+        "coords": {
+          "lat": 35.985325123581,
+          "lng": 129.550247263465
+        },
+        "distanceMeters": 293,
+        "placeUrl": "http://place.map.kakao.com/1840067978"
+      },
+      {
+        "id": "guryongpo-library-culture-1",
+        "libraryId": "guryongpo-library",
+        "type": "culture",
+        "name": "구룡포문화역사관",
+        "subCategory": "전시관",
+        "address": "경북 포항시 남구 구룡포읍 호미로 141-21",
+        "coords": {
+          "lat": 35.986544509884,
+          "lng": 129.547304494274
+        },
+        "distanceMeters": 524,
+        "placeUrl": "http://place.map.kakao.com/1034894562"
       }
     ]
   }

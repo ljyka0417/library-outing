@@ -4464,104 +4464,6 @@
         "copyright": "Type3"
       }
     ],
-    "namhaegak-sea": [
-      {
-        "id": "tour-2732578",
-        "libraryId": "namhaegak-sea",
-        "type": "culture",
-        "name": "남해각",
-        "subCategory": "문화시설",
-        "address": "경상남도 남해군 설천면 남해대로 4216",
-        "coords": {
-          "lat": 34.9407922785,
-          "lng": 127.8724733123
-        },
-        "distanceMeters": 11,
-        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/16/3553616_image2_1.jpg",
-        "credit": "한국관광공사",
-        "copyright": "Type1"
-      },
-      {
-        "id": "tour-128942",
-        "libraryId": "namhaegak-sea",
-        "type": "culture",
-        "name": "남해대교 유람선",
-        "subCategory": "관광지",
-        "address": "경상남도 남해군 설천면 노량로 177",
-        "coords": {
-          "lat": 34.9413227821,
-          "lng": 127.8729065944
-        },
-        "distanceMeters": 80,
-        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/82/3554682_image2_1.jpg",
-        "credit": "한국관광공사",
-        "copyright": "Type1"
-      },
-      {
-        "id": "tour-2761465",
-        "libraryId": "namhaegak-sea",
-        "type": "culture",
-        "name": "거북선전시관",
-        "subCategory": "문화시설",
-        "address": "경상남도 남해군 설천면 노량리",
-        "coords": {
-          "lat": 34.9420366295,
-          "lng": 127.8751202708
-        },
-        "distanceMeters": 279,
-        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/00/3561900_image2_1.jpg",
-        "credit": "한국관광공사",
-        "copyright": "Type1"
-      },
-      {
-        "id": "tour-129482",
-        "libraryId": "namhaegak-sea",
-        "type": "culture",
-        "name": "남해척화비",
-        "subCategory": "관광지",
-        "address": "경상남도 남해군 설천면 노량로183번길 27",
-        "coords": {
-          "lat": 34.9419033263,
-          "lng": 127.8759757544
-        },
-        "distanceMeters": 339,
-        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/19/3580619_image2_1.jpg",
-        "credit": "한국관광공사",
-        "copyright": "Type1"
-      },
-      {
-        "id": "tour-249950",
-        "libraryId": "namhaegak-sea",
-        "type": "culture",
-        "name": "남해대교",
-        "subCategory": "관광지",
-        "address": "경상남도 하동군 금남면 노량리",
-        "coords": {
-          "lat": 34.9437391605,
-          "lng": 127.8719205069
-        },
-        "distanceMeters": 342,
-        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/98/3554498_image2_1.jpg",
-        "credit": "한국관광공사",
-        "copyright": "Type1"
-      },
-      {
-        "id": "tour-128104",
-        "libraryId": "namhaegak-sea",
-        "type": "culture",
-        "name": "남해 충렬사",
-        "subCategory": "관광지",
-        "address": "경상남도 남해군 설천면 노량로183번길 27",
-        "coords": {
-          "lat": 34.9422116278,
-          "lng": 127.8761229565
-        },
-        "distanceMeters": 366,
-        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/91/3561791_image2_1.jpg",
-        "credit": "한국관광공사",
-        "copyright": "Type1"
-      }
-    ],
     "kkumirang-library": [
       {
         "id": "tour-2744396",
@@ -8394,6 +8296,88 @@
         },
         "distanceMeters": 1462,
         "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/27/2823327_image2_1.jpg",
+        "credit": "한국관광공사",
+        "copyright": "Type3"
+      }
+    ],
+    "guryongpo-library": [
+      {
+        "id": "tour-2834344",
+        "libraryId": "guryongpo-library",
+        "type": "cafe",
+        "name": "카페파도",
+        "subCategory": "카페",
+        "address": "경상북도 포항시 남구 구룡포읍 하정로172번길 2",
+        "coords": {
+          "lat": 35.9768342269,
+          "lng": 129.5514895569
+        },
+        "distanceMeters": 688,
+        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/31/2834331_image2_1.png",
+        "credit": "한국관광공사",
+        "copyright": "Type3"
+      },
+      {
+        "id": "tour-2610501",
+        "libraryId": "guryongpo-library",
+        "type": "culture",
+        "name": "구룡포항",
+        "subCategory": "관광지",
+        "address": "경상북도 포항시 남구 구룡포읍 호미로 222-1",
+        "coords": {
+          "lat": 35.9893051205,
+          "lng": 129.555641609
+        },
+        "distanceMeters": 851,
+        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/43/3528343_image2_1.jpg",
+        "credit": "한국관광공사",
+        "copyright": "Type1"
+      },
+      {
+        "id": "tour-2839194",
+        "libraryId": "guryongpo-library",
+        "type": "restaurant",
+        "name": "유림식당",
+        "subCategory": "음식점",
+        "address": "경상북도 포항시 남구 호미로 227-6",
+        "coords": {
+          "lat": 35.9909215972,
+          "lng": 129.5552721499
+        },
+        "distanceMeters": 989,
+        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/82/2839182_image2_1.jpg",
+        "credit": "한국관광공사",
+        "copyright": "Type3"
+      },
+      {
+        "id": "tour-2834330",
+        "libraryId": "guryongpo-library",
+        "type": "restaurant",
+        "name": "짬홍",
+        "subCategory": "음식점",
+        "address": "경상북도 포항시 남구 구룡포읍 호미로 259-1",
+        "coords": {
+          "lat": 35.9913466179,
+          "lng": 129.558841269
+        },
+        "distanceMeters": 1203,
+        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/20/2834320_image2_1.jpg",
+        "credit": "한국관광공사",
+        "copyright": "Type3"
+      },
+      {
+        "id": "tour-3067962",
+        "libraryId": "guryongpo-library",
+        "type": "culture",
+        "name": "구룡포 피어라계단 미디어아트",
+        "subCategory": "관광지",
+        "address": "경상북도 포항시 남구 구룡포읍 호미로 277",
+        "coords": {
+          "lat": 35.9906633933,
+          "lng": 129.5604855899
+        },
+        "distanceMeters": 1247,
+        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/57/3067957_image2_1.jpg",
         "credit": "한국관광공사",
         "copyright": "Type3"
       }

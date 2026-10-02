@@ -5152,60 +5152,6 @@
         }
       ]
     },
-    "munhak-village-small": {
-      "scope": "region",
-      "region": "대전",
-      "books": [
-        {
-          "title": "나미야 잡화점의 기적",
-          "author": "히가시노 게이고",
-          "isbn": "9788972756194",
-          "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
-        },
-        {
-          "title": "채식주의자",
-          "author": "한강",
-          "isbn": "9788936433598",
-          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
-        },
-        {
-          "title": "소년이 온다",
-          "author": "한강",
-          "isbn": "9788936434120",
-          "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
-        },
-        {
-          "title": "흔한남매 2권",
-          "author": "원작: 흔한남매",
-          "isbn": "9791164132454",
-          "coverImageUrl": "https://image.aladin.co.kr/product/20398/4/cover/k002635150_1.jpg"
-        },
-        {
-          "title": "설민석의 한국사 대모험",
-          "author": "설민석,그림: 정현희",
-          "isbn": "9791195794799",
-          "coverImageUrl": "https://image.aladin.co.kr/product/10016/32/cover/k512536564_2.jpg"
-        },
-        {
-          "title": "흔한남매 4권",
-          "author": "원작: 흔한남매",
-          "isbn": "9791164134847",
-          "coverImageUrl": "https://image.aladin.co.kr/product/23568/96/cover/k992638123_1.jpg"
-        },
-        {
-          "title": "흔한남매 1권",
-          "author": "원작: 흔한남매",
-          "isbn": "9791164131686",
-          "coverImageUrl": "https://image.aladin.co.kr/product/19404/61/cover/k712635217_1.jpg"
-        },
-        {
-          "title": "흔한남매 3권",
-          "author": "원작: 흔한남매",
-          "isbn": "9791164134267",
-          "coverImageUrl": "https://image.aladin.co.kr/product/22327/46/cover/k782636924_1.jpg"
-        }
-      ]
-    },
     "byeoldongbyeol-science": {
       "scope": "region",
       "region": "대전",
@@ -5527,60 +5473,6 @@
           "author": "원작: 흔한남매",
           "isbn": "9791164131686",
           "coverImageUrl": "https://image.aladin.co.kr/product/19404/61/cover/k712635217_1.jpg"
-        }
-      ]
-    },
-    "namhaegak-sea": {
-      "scope": "region",
-      "region": "경남",
-      "books": [
-        {
-          "title": "불편한 편의점",
-          "author": "김호연",
-          "isbn": "9791161571188",
-          "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
-        },
-        {
-          "title": "나미야 잡화점의 기적",
-          "author": "히가시노 게이고",
-          "isbn": "9788972756194",
-          "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
-        },
-        {
-          "title": "소년이 온다",
-          "author": "한강",
-          "isbn": "9788936434120",
-          "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
-        },
-        {
-          "title": "채식주의자",
-          "author": "한강",
-          "isbn": "9788936433598",
-          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
-        },
-        {
-          "title": "아몬드",
-          "author": "손원평",
-          "isbn": "9788936434267",
-          "coverImageUrl": "https://image.aladin.co.kr/product/16839/4/cover/k492534773_1.jpg"
-        },
-        {
-          "title": "수박 수영장",
-          "author": "안녕달",
-          "isbn": "9788936446819",
-          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
-        },
-        {
-          "title": "흔한남매",
-          "author": "원작: 흔한남매",
-          "isbn": "9791164135592",
-          "coverImageUrl": "https://image.aladin.co.kr/product/24307/73/cover/k822630592_2.jpg"
-        },
-        {
-          "title": "달러구트 꿈 백화점",
-          "author": "이미예",
-          "isbn": "9791165341909",
-          "coverImageUrl": "https://image.aladin.co.kr/product/24512/70/cover/k392630952_1.jpg"
         }
       ]
     },
@@ -6715,6 +6607,59 @@
           "author": "원작: 흔한남매",
           "isbn": "9791164131686",
           "coverImageUrl": "https://image.aladin.co.kr/product/19404/61/cover/k712635217_1.jpg"
+        }
+      ]
+    },
+    "guryongpo-library": {
+      "scope": "library",
+      "books": [
+        {
+          "title": "불편한 편의점",
+          "author": "김호연",
+          "isbn": "9791161571188",
+          "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+        },
+        {
+          "title": "흔한남매의 흔한 호기심",
+          "author": "원작: 흔한남매",
+          "isbn": "9791168413931",
+          "coverImageUrl": "https://image.aladin.co.kr/product/30224/42/cover/k502839203_1.jpg"
+        },
+        {
+          "title": "흔한남매 2권",
+          "author": "원작: 흔한남매",
+          "isbn": "9791164132454",
+          "coverImageUrl": "https://image.aladin.co.kr/product/20398/4/cover/k002635150_1.jpg"
+        },
+        {
+          "title": "흔한남매 7권",
+          "author": "원작: 흔한남매",
+          "isbn": "9791164137527",
+          "coverImageUrl": "https://image.aladin.co.kr/product/26556/36/cover/k602738939_1.jpg"
+        },
+        {
+          "title": "Who? 손흥민",
+          "author": "강진희",
+          "isbn": "9791156397267",
+          "coverImageUrl": "https://image.aladin.co.kr/product/17007/26/cover/k072534575_1.jpg"
+        },
+        {
+          "title": "흔한남매 1권",
+          "author": "원작: 흔한남매",
+          "isbn": "9791164131686",
+          "coverImageUrl": "https://image.aladin.co.kr/product/19404/61/cover/k712635217_1.jpg"
+        },
+        {
+          "title": "흔한남매 3권",
+          "author": "원작: 흔한남매",
+          "isbn": "9791164134267",
+          "coverImageUrl": "https://image.aladin.co.kr/product/22327/46/cover/k782636924_1.jpg"
+        },
+        {
+          "title": "별난 방탈출",
+          "author": "흔한남매 원작",
+          "isbn": "9791164137176",
+          "coverImageUrl": "https://image.aladin.co.kr/product/25813/3/cover/k172736336_1.jpg"
         }
       ]
     }

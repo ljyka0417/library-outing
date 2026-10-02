@@ -738,17 +738,6 @@
       },
       "placeUrl": "http://place.map.kakao.com/24516831"
     },
-    "namhaegak-sea": {
-      "source": "kakao",
-      "confidence": "high",
-      "matchedName": "남해각 바다도서관",
-      "address": "경남 남해군 설천면 남해대로 4216",
-      "coords": {
-        "lat": 34.940693546165,
-        "lng": 127.872471297263
-      },
-      "placeUrl": "http://place.map.kakao.com/598799677"
-    },
     "kkumirang-library": {
       "source": "kakao",
       "confidence": "high",
@@ -1444,6 +1433,18 @@
         "lng": 126.79116859141276
       },
       "placeUrl": "http://place.map.kakao.com/1413486317"
+    },
+    "guryongpo-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "포항시립구룡포도서관",
+      "address": "경북 포항시 남구 구룡포읍 병포길52번길 17",
+      "phone": "054-270-5629",
+      "coords": {
+        "lat": 35.98295588874648,
+        "lng": 129.55027628584438
+      },
+      "placeUrl": "http://place.map.kakao.com/1960419035"
     }
   }
 }

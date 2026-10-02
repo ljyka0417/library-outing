@@ -2418,6 +2418,51 @@
           }
         ]
       }
+    },
+    "guryongpo-library": {
+      "sourceApiId": "147172",
+      "matchedName": "포항시립구룡포도서관",
+      "address": "경상북도 포항시 남구 구룡포읍 병포길52번길 17",
+      "phone": "054-270-5629",
+      "homepage": "https://phlib.pohang.go.kr",
+      "coords": {
+        "lat": 35.9827066,
+        "lng": 129.5506891
+      },
+      "closedDays": "매월 첫째주, 셋째주 월요일",
+      "hours": {
+        "label": "평일 09:00~18:00, 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      }
     }
   }
 }

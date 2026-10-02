@@ -134,7 +134,6 @@ const SEEDS: Seed[] = [
   { id: 'dongdaejeon-library', name: '동대전도서관', sido: '대전', specialty: '음악', categories: ['music'] },
   { id: 'kids-english-village', name: '어린이영어마을도서관', sido: '대전', specialty: '어린이 영어', categories: ['kids'] },
   { id: 'munhak-village', name: '문학마을도서관', sido: '대전', specialty: '문학', categories: ['humanities'] },
-  { id: 'munhak-village-small', name: '문학마을작은도서관', sido: '대전', specialty: '역사', categories: ['history'] },
   { id: 'byeoldongbyeol-science', name: '별똥별과학도서관', sido: '대전', specialty: '과학·우주', categories: ['science'] },
 
   /* ── 충청 ──────────────────────────────────────────────── */
@@ -154,12 +153,12 @@ const SEEDS: Seed[] = [
 
   /* ── 경상 ──────────────────────────────────────────────── */
   { id: 'gyeongbuk-library', name: '경북도서관', sido: '경상', specialty: '경북 랜드마크', categories: ['landmark'], landmark: true },
-  { id: 'gyeongnam-library', name: '경남도서관', sido: '경상', specialty: '경남 랜드마크', categories: ['landmark'], landmark: true },
+  { id: 'gyeongnam-library', name: '경남대표도서관', sido: '경상', specialty: '경남 랜드마크', categories: ['landmark'], landmark: true },
   { id: 'gyeongju-city', name: '경주시립도서관', sido: '경상', specialty: '역사', categories: ['history'] },
   { id: 'poeun-heunghae', name: '포은흥해도서관', sido: '경상', specialty: '음악', categories: ['music'] },
   { id: 'sangju-dodream', name: '상주 두드림 시립도서관', sido: '경상', specialty: '만화·웹툰', categories: ['comics'] },
   { id: 'hadong-library', name: '하동도서관', sido: '경상', specialty: '녹차', categories: ['food'] },
-  { id: 'namhaegak-sea', name: '남해각 바다도서관', sido: '경상', specialty: '바다·여행', categories: ['travel'] },
+  { id: 'guryongpo-library', name: '구룡포도서관', sido: '경상', specialty: '여행·바다', categories: ['travel'] },
   { id: 'kkumirang-library', name: '꿈이랑도서관', sido: '경상', specialty: '미각·음식', categories: ['food'] },
   { id: 'haman-library', name: '함안도서관', sido: '경상', specialty: '아라가야 정신·지역문화', categories: ['history'] },
   { id: 'sancheong-jirisan', name: '산청지리산도서관', sido: '경상', specialty: '자연', categories: ['nature'] },
