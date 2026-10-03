@@ -32,7 +32,7 @@ import type { CategoryId, Library } from '@/types';
  */
 export default function SearchScreen() {
   const router = useRouter();
-  const params = useLocalSearchParams<{ category?: string }>();
+  const params = useLocalSearchParams<{ category?: string; open?: string }>();
   const layout = useLayout();
   const { t } = useT();
 
@@ -65,10 +65,21 @@ export default function SearchScreen() {
     const incoming = params.category;
     if (!incoming || !CATEGORY_MAP[incoming]) return;
     setCategory(incoming as CategoryId);
+    setMode('libraries');
     // 주제를 새로 고른 것은 새로 둘러보겠다는 뜻이다. 이전 검색어는 비운다.
     setKeyword('');
     router.setParams({ category: '' });
   }, [params.category, router]);
+
+  // 홈 날씨 카드의 "지금 문 연 도서관 보기" — 운영중 필터를 켜고 들어온다 (읽고 나면 지운다)
+  useEffect(() => {
+    if (params.open !== '1') return;
+    setMode('libraries');
+    setOpenNow(true);
+    setCategory(undefined);
+    setKeyword('');
+    router.setParams({ open: '' });
+  }, [params.open, router]);
 
   // 전체 목록을 한 번만 받아 오고, 필터는 클라이언트에서 처리한다.
   // (전국 도서관이 수천 곳 규모가 되면 서버 사이드 필터로 옮겨야 한다)

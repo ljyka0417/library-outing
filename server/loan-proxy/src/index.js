@@ -18,6 +18,7 @@
  *     대출 상태가 10분 사이에 바뀔 수는 있어서, 앱은 "방금 확인" 이라고만 말한다.
  */
 import LIBS from './libs.js';
+import { weather } from './weather.js';
 
 const ALLOWED = new Set(LIBS);
 const MAX_BOOKS = 10;
@@ -34,13 +35,21 @@ const json = (body, status = 200, extra = {}) =>
   });
 
 /** 정보나루에 한 권 묻기. 실패하면 null (지어내지 않는다) */
+/*
+ * 같은 질문은 이 서버의 메모리에 10분 기억한다.
+ *
+ * 처음엔 Cloudflare Cache API 에 담았는데, 무료 요금제는 한 번 부를 때 바깥 요청을 50번까지만
+ * 허락하고 캐시 읽기·쓰기도 그 수에 든다. 책 한 권(판본 3개)을 도서관 11곳에 물으면
+ * 33 × 3 = 99번이 되어 전부 실패했다(부산, 2026-10-03). 메모리는 그 수에 들지 않는다.
+ * 서버가 새로 뜨면 비워지지만, 기억은 덤일 뿐이라 괜찮다.
+ */
+const MEM = new Map();
+const MEM_MAX = 5000;
+
 async function askOne(env, lib, isbn) {
-  const cache = typeof caches !== 'undefined' ? caches.default : null;
-  const cacheKey = new Request(`https://loan-cache.internal/${lib}/${isbn}`);
-  if (cache) {
-    const hit = await cache.match(cacheKey);
-    if (hit) return hit.json();
-  }
+  const memKey = `${lib}|${isbn}`;
+  const hit = MEM.get(memKey);
+  if (hit && Date.now() - hit.at < CACHE_SECONDS * 1000) return hit.value;
   const url =
     `https://data4library.kr/api/bookExist?authKey=${encodeURIComponent(env.DATA4LIBRARY_KEY)}` +
     `&libCode=${lib}&isbn13=${isbn}&format=json`;
@@ -51,12 +60,8 @@ async function askOne(env, lib, isbn) {
     const result = (await res.json())?.response?.result;
     if (!result || (result.hasBook !== 'Y' && result.hasBook !== 'N')) return null;
     const value = { hasBook: result.hasBook === 'Y', loanAvailable: result.loanAvailable === 'Y' };
-    if (cache) {
-      await cache.put(
-        cacheKey,
-        new Response(JSON.stringify(value), { headers: { 'Cache-Control': `max-age=${CACHE_SECONDS}` } })
-      );
-    }
+    if (MEM.size >= MEM_MAX) MEM.delete(MEM.keys().next().value);
+    MEM.set(memKey, { at: Date.now(), value });
     return value;
   } catch {
     return null;
@@ -68,6 +73,8 @@ export async function handle(request, env) {
   if (request.method !== 'GET') return json({ error: 'GET 만 받습니다' }, 405);
 
   const url = new URL(request.url);
+  // 날씨는 기상청 키(DATA_GO_KR_KEY)를 쓴다 — 정보나루 키 검사보다 먼저
+  if (url.pathname === '/weather') return weather(url, env, json);
   if (!env.DATA4LIBRARY_KEY) return json({ error: '서버에 DATA4LIBRARY_KEY 가 설정되지 않았습니다' }, 500);
   if (url.pathname === '/where') return where(url, env);
   if (url.pathname === '/search') return search(url, env);
@@ -96,6 +103,8 @@ export async function handle(request, env) {
  * 앱은 한 지역의 도서관(많아야 11곳)만 묻는다. 그래도 넉넉히 20곳까지 받는다.
  */
 const MAX_LIBS = 20;
+/** 무료 요금제의 바깥 요청 한도(50) 아래로: 도서관 수 × 판본 수 */
+const MAX_ASKS = 45;
 const MAX_EDITIONS = 3;
 async function where(url, env) {
   const isbns = [...new Set((url.searchParams.get('isbn') ?? '').split(',').map((s) => s.trim()).filter(Boolean))];
@@ -105,6 +114,9 @@ async function where(url, env) {
   const libs = [...new Set((url.searchParams.get('libs') ?? '').split(',').map((s) => s.trim()).filter(Boolean))];
   if (libs.length === 0 || libs.length > MAX_LIBS) return json({ error: `도서관 코드를 1~${MAX_LIBS}개 쉼표로 이어 주세요` }, 400);
   if (libs.some((l) => !ALLOWED.has(l))) return json({ error: '이 앱에 실린 도서관이 아닌 코드가 있습니다' }, 400);
+  if (libs.length * isbns.length > MAX_ASKS) {
+    return json({ error: `도서관 수 × 판본 수가 ${MAX_ASKS}을 넘습니다. 나눠서 물어 주세요` }, 400);
+  }
 
   const results = {};
   await Promise.all(libs.map(async (lib) => {
@@ -147,7 +159,7 @@ async function search(url, env) {
   if (squash(q).length < 2) return json({ error: '검색어를 두 글자 이상 주세요' }, 400);
 
   const cache = typeof caches !== 'undefined' ? caches.default : null;
-  const cacheKey = new Request(`https://loan-cache.internal/search-v2/${encodeURIComponent(squash(q))}`);
+  const cacheKey = new Request(`https://loan-cache.internal/search-v3/${encodeURIComponent(squash(q))}`);
   if (cache) {
     const hit = await cache.match(cacheKey);
     if (hit) return json(await hit.json(), 200, { 'Cache-Control': 'no-store' });
@@ -159,7 +171,13 @@ async function search(url, env) {
   try {
     const res = await fetch(api);
     if (!res.ok) return json({ error: '정보나루가 답하지 않습니다' }, 502);
-    docs = ((await res.json())?.response?.docs ?? []).map((d) => d.doc).filter((b) => b?.bookname && /^\d{13}$/.test(b.isbn13 ?? ''));
+    const response = (await res.json())?.response;
+    // 하루 호출 한도(500건)를 넘기면 정보나루가 결과 대신 오류를 준다. 그걸 "검색 결과 없음"으로
+    // 하루 동안 기억해 버린 적이 있다 — 오류는 오류로 돌려주고 기억하지 않는다
+    if (response?.error || response?.errCode) {
+      return json({ error: response.errCode === 'outOflimit' ? 'quota' : '정보나루 오류' }, 503);
+    }
+    docs = (response?.docs ?? []).map((d) => d.doc).filter((b) => b?.bookname && /^\d{13}$/.test(b.isbn13 ?? ''));
   } catch {
     return json({ error: '정보나루가 답하지 않습니다' }, 502);
   }

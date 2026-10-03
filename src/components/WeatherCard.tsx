@@ -1,0 +1,118 @@
+import React, { useEffect, useState } from 'react';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { Mascot, type MascotPose } from './Mascot';
+import { fetchWeather, WEATHER_ICON, weatherEnabled, weatherMood, type Weather, type WeatherMood } from '@/api/weather';
+import { useT, type MessageKey } from '@/i18n';
+import { colors, radius, spacing, typography } from '@/theme';
+import type { Coordinates } from '@/types';
+
+/**
+ * 홈의 "오늘 날씨 + 달곰이 한마디".
+ *
+ * 어디 날씨인지는 부르는 쪽이 정한다(최근 본 도서관, 없으면 서울도서관 자리).
+ * 비·눈·더위·추위엔 실내에서 오래 머물기 좋은 도서관을, 맑은 날엔 공원·호수 옆
+ * 자연·환경 도서관을 권한다. 날씨를 모르면 카드를 아예 그리지 않는다.
+ */
+const POSE: Record<WeatherMood, MascotPose> = {
+  wet: 'reading',
+  snow: 'reading',
+  hot: 'coffee',
+  cold: 'coffee',
+  nice: 'walk',
+  cloudy: 'books',
+};
+
+export function WeatherCard({
+  coords,
+  place,
+  onAction,
+}: {
+  coords: Coordinates;
+  /** 어디 날씨인지 (도서관 이름이나 지역) */
+  place: string;
+  /** 권하는 쪽으로 가기 — 맑은 날은 'nature', 그 밖엔 'indoor' */
+  onAction: (kind: 'nature' | 'indoor') => void;
+}) {
+  const { t } = useT();
+  const [w, setW] = useState<Weather | null>(null);
+  const key = `${coords.lat},${coords.lng}`;
+
+  useEffect(() => {
+    setW(null);
+    if (!weatherEnabled) return;
+    let alive = true;
+    void fetchWeather(coords).then((r) => {
+      if (alive) setW(r);
+    });
+    return () => {
+      alive = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key]);
+
+  if (!w) return null;
+  const mood = weatherMood(w);
+  const kind = mood === 'nice' ? 'nature' : 'indoor';
+  const sky = t(`weather.${w.condition}` as MessageKey);
+
+  return (
+    <View style={styles.card}>
+      <View style={{ flex: 1 }}>
+        <View style={styles.top}>
+          <Ionicons name={WEATHER_ICON[w.condition]} size={18} color={colors.primary} />
+          <Text style={styles.now} numberOfLines={1}>
+            {t('weather.now', { place, temp: w.temp !== undefined ? String(Math.round(w.temp)) : '–', sky })}
+          </Text>
+        </View>
+        <Text style={styles.tip}>{t(`weather.tip.${mood}` as MessageKey)}</Text>
+        <Pressable
+          onPress={() => onAction(kind)}
+          style={({ pressed }) => [styles.action, pressed && { opacity: 0.7 }]}
+          accessibilityRole="button"
+        >
+          <Text style={styles.actionText}>{t(kind === 'nature' ? 'weather.goNature' : 'weather.goIndoor')}</Text>
+          <Ionicons name="chevron-forward" size={14} color={colors.primary} />
+        </Pressable>
+      </View>
+      <Mascot pose={POSE[mood]} size={72} />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  card: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.md,
+    padding: spacing.lg,
+    borderRadius: radius.md,
+    backgroundColor: colors.primarySoft,
+  },
+  top: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  now: {
+    ...typography.captionBold,
+    color: colors.text,
+    flexShrink: 1,
+  },
+  tip: {
+    ...typography.body,
+    color: colors.text,
+    marginTop: 4,
+  },
+  action: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 2,
+    marginTop: spacing.sm,
+    alignSelf: 'flex-start',
+  },
+  actionText: {
+    ...typography.captionBold,
+    color: colors.primary,
+  },
+});

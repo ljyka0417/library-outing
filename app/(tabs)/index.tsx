@@ -10,7 +10,8 @@ import { Mascot } from '@/components/Mascot';
 import { SearchBar } from '@/components/SearchBar';
 import { SectionHeader } from '@/components/common';
 import { LanguageButton } from '@/components/LanguageButton';
-import { useT } from '@/i18n';
+import { regionName, useT } from '@/i18n';
+import { WeatherCard } from '@/components/WeatherCard';
 import { libraryApi } from '@/api/libraryApi';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
@@ -33,7 +34,7 @@ const HomeContent = memo(function HomeContent() {
   const router = useRouter();
   const recentIds = useAppStore((s) => s.recentLibraryIds);
   const tabPad = useTabBarPadding();
-  const { t } = useT();
+  const { t, lang } = useT();
   const layout = useLayout();
 
   const featured = useAsync(() => libraryApi.featured(), [], { cacheKey: 'featured' });
@@ -45,6 +46,15 @@ const HomeContent = memo(function HomeContent() {
     .sort((a, b) => recentIds.indexOf(a.id) - recentIds.indexOf(b.id));
 
   const startRegion = recentLibraries[0]?.region.sido ?? '서울';
+
+  // 날씨를 볼 자리: 최근 본 도서관, 없으면 서울도서관
+  const recentWithCoords = recentLibraries.find((l) => l.coords);
+  const seoul = (all.data ?? []).find((l) => l.id === 'seoul-library');
+  const weatherSpot = recentWithCoords
+    ? { coords: recentWithCoords.coords, place: recentWithCoords.name }
+    : seoul?.coords
+      ? { coords: seoul.coords, place: regionName(lang, '서울') }
+      : undefined;
 
   const goCategory = useCallback(
     (id: CategoryId) => router.push(`/search?category=${id}`),
@@ -96,6 +106,17 @@ const HomeContent = memo(function HomeContent() {
             <Text style={styles.qrBody}>{t('home.qrBody')}</Text>
           </View>
         </View>
+
+        {/* 오늘 날씨 + 달곰이 한마디 — 최근 본 도서관 자리(없으면 서울도서관 자리). 날씨를 모르면 안 그린다 */}
+        {weatherSpot ? (
+          <View style={{ marginHorizontal: layout.gutter, marginBottom: spacing.xxl }}>
+            <WeatherCard
+              coords={weatherSpot.coords!}
+              place={weatherSpot.place}
+              onAction={(kind) => router.push(kind === 'nature' ? '/search?category=nature' : '/search?open=1')}
+            />
+          </View>
+        ) : null}
 
         {/* 주제별 도서관 */}
         <View style={styles.section}>

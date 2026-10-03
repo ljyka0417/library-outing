@@ -16,6 +16,7 @@ import { loanDataVersion } from '@/data/books.mock';
 import { bookPrograms } from '@/data/bookPrograms';
 import { googleQueryFor } from '@/data/googleMaps';
 import { fetchLoanStatus, loanLookupEnabled, type LoanStatus } from '@/api/loanStatus';
+import { WeatherChip } from './WeatherChip';
 import { FEATURES } from '@/config/features';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
@@ -233,6 +234,9 @@ export const LibraryDetail = memo(function LibraryDetail({
           <Text style={styles.openSub}>· {todayHoursLabel(library.hours, lang, now)}</Text>
         </View>
       ) : null}
+
+      {/* 그 도서관 자리의 지금 날씨 (기상청). 모르면 그리지 않는다 */}
+      <WeatherChip coords={library.coords} />
 
       {library.description ? (
         <Text style={styles.description} numberOfLines={expanded ? undefined : 3}>

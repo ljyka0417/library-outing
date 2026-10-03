@@ -4,6 +4,7 @@ import { booksForLibrary } from '@/data/books.mock';
 import { nearbyApi } from '@/api/nearbyApi';
 import { isOpenNow, todayHoursLabel } from './openingHours';
 import { holidayName } from '@/data/holidays';
+import { fetchWeather, weatherEnabled, weatherMood } from '@/api/weather';
 import { regionName, translate, type Lang, type MessageKey } from '@/i18n';
 import {
   CHIP_COUNT,
@@ -533,6 +534,9 @@ function answerBrowse(
  */
 const ASK_TIME = /(지금|현재|오늘)\s*(몇\s*시|시간|시각)|몇\s*시야\s*\??$|몇\s*시\s*\??$|\bwhat time is it\b|\bcurrent time\b|今何時|いま何時|現在の時刻|现在几点|几点了|现在时间/;
 
+/** 날씨를 묻는 말 */
+const ASK_WEATHER = /날씨|기온|몇\s*도|비\s*(와|오|올)|눈\s*(와|오|올)|우산|\bweather\b|\btemperature\b|\brain(ing|y)?\b|天気|気温|雨|天气|气温|下雨/;
+
 const WEEKDAYS: Record<Lang, string[]> = {
   ko: ['일', '월', '화', '수', '목', '금', '토'],
   en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
@@ -637,6 +641,35 @@ export async function ask(
         (holiday ? tr('bot.timeHoliday', { name: holiday }) : '') +
         (openCount > 0 ? tr('bot.timeOpen', { n: openCount }) : tr('bot.timeOpenNone')),
       suggestions: [tr('bot.sugOpen'), ...starterQuestions(lang, ctx.seed, ctx.avoid)].slice(0, CHIP_COUNT),
+    };
+  }
+
+  // "오늘 날씨 어때?" — 도서관을 말하면 그 자리, 지역을 말하면 그 지역 대표 도서관 자리, 아니면 서울
+  if (weatherEnabled && ASK_WEATHER.test(text)) {
+    const lib = findLibrary(q);
+    const sido = lib ? undefined : findSido(q);
+    const spot =
+      (lib?.coords && { coords: lib.coords, place: lib.name }) ||
+      (() => {
+        const region = sido ?? '서울';
+        const rep =
+          MOCK_LIBRARIES.find((l) => l.region.sido === region && l.isLandmark && l.coords) ??
+          MOCK_LIBRARIES.find((l) => l.region.sido === region && l.coords);
+        return rep?.coords ? { coords: rep.coords, place: regionName(lang, region) } : undefined;
+      })();
+    const w = spot ? await fetchWeather(spot.coords) : null;
+    if (!spot || !w) return { text: tr('bot.weatherUnknown') };
+    const mood = weatherMood(w);
+    return {
+      text:
+        tr('weather.now', {
+          place: spot.place,
+          temp: w.temp !== undefined ? String(Math.round(w.temp)) : '–',
+          sky: tr(`weather.${w.condition}` as MessageKey),
+        }) +
+        '\n' +
+        tr(`weather.tip.${mood}` as MessageKey),
+      suggestions: (mood === 'nice' ? [tr('weather.sugNature'), tr('bot.sugOpen')] : [tr('bot.sugOpen'), tr('weather.sugIndoor')]).slice(0, CHIP_COUNT),
     };
   }
 
