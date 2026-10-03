@@ -7,10 +7,13 @@ import { BookCard } from './BookCard';
 import { LibraryImage } from './LibraryImage';
 import { MapButtons } from './MapButtons';
 import { NearbySection } from './NearbySection';
+import { ProgramCard } from './ProgramCard';
 import { Badge, EmptyState, InfoRow, SectionHeader } from './common';
 import { libraryApi } from '@/api/libraryApi';
 import { CATEGORY_MAP } from '@/data/categories';
 import { loanDataVersion } from '@/data/books.mock';
+import { bookPrograms } from '@/data/bookPrograms';
+import { FEATURES } from '@/config/features';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
 import { bleedRow, centered, useLayout } from '@/hooks/useLayout';
@@ -288,6 +291,43 @@ export const LibraryDetail = memo(function LibraryDetail({
     </View>
   );
 
+  /**
+   * 운영 프로그램 (시험 중 — FEATURES.bookPrograms 로 끈다).
+   * 책에 실린 이름만 보여 주고, 철마다 바뀌는 일정은 홈페이지로 넘긴다.
+   * 책에 프로그램이 없는 도서관은 칸 자체를 그리지 않는다.
+   */
+  const programs = FEATURES.bookPrograms ? bookPrograms(library.id) : [];
+  const programsSection = (inset: number) =>
+    programs.length ? (
+      <View style={styles.section}>
+        <SectionHeader title={t('lib.programsTitle')} subtitle={t('lib.programsSub')} inset={inset} />
+        {/* 대출 순위 책 줄과 같은 가로 카드 줄. 폰에서는 화면 끝까지 흐르고,
+            두 단 배치의 오른쪽 칸 안에서는 칸 안에서만 넘긴다. */}
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={inset ? bleedRow(layout).style : undefined}
+          contentContainerStyle={[styles.bookList, inset ? bleedRow(layout).content : null]}
+        >
+          {programs.map((name, i) => (
+            <ProgramCard key={`${i}-${name}`} name={name} />
+          ))}
+        </ScrollView>
+        <View style={{ paddingHorizontal: inset }}>
+          {library.homepage ? (
+            <Pressable
+              onPress={() => void openWeb(library.homepage!)}
+              style={({ pressed }) => [styles.programLink, pressed && { opacity: 0.6 }]}
+              accessibilityRole="link"
+            >
+              <Text style={styles.programLinkText}>{t('lib.programsSchedule')}</Text>
+              <Ionicons name="open-outline" size={14} color={colors.primary} />
+            </Pressable>
+          ) : null}
+        </View>
+      </View>
+    ) : null;
+
   const checkin = (inset: number) => (
     <View style={{ paddingHorizontal: inset, marginTop: spacing.lg }}>
       <Pressable
@@ -358,7 +398,10 @@ export const LibraryDetail = memo(function LibraryDetail({
                 {checkin(0)}
               </View>
 
-              <View style={[styles.wideCard, { flex: 1 }]}>{summary}</View>
+              <View style={{ flex: 1 }}>
+                <View style={styles.wideCard}>{summary}</View>
+                {programsSection(0)}
+              </View>
             </View>
 
             {shelves}
@@ -378,6 +421,7 @@ export const LibraryDetail = memo(function LibraryDetail({
 
           <View style={[styles.card, { padding: gutter }]}>{summary}</View>
 
+          {programsSection(gutter)}
           {mapSection(gutter)}
           {shelves}
           {checkin(gutter)}
@@ -498,6 +542,19 @@ const styles = StyleSheet.create({
   bookList: {
     // 좌우 여백은 bleedRow 가 준다
     gap: spacing.lg,
+  },
+  /* 운영 프로그램 */
+  programLink: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 4,
+    paddingVertical: spacing.md,
+    marginTop: spacing.xs,
+  },
+  programLinkText: {
+    ...typography.captionBold,
+    color: colors.primary,
   },
   checkin: {
     flexDirection: 'row',

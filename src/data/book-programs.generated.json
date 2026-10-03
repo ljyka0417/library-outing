@@ -1,0 +1,986 @@
+{
+  "source": "가이드북 『오늘 도서관 갈래?』 (2026년 9월 9일 초판)",
+  "generatedAt": "2026-10-03T06:42:50.625Z",
+  "byId": {
+    "seoul-library": {
+      "programs": [
+        "작가힙톡",
+        "서울형책방",
+        "미디어 리터러시"
+      ],
+      "bookCode": "1-1"
+    },
+    "national-library": {
+      "programs": [
+        "중장년 AI 리터러시",
+        "월간 인문학",
+        "북 큐레이션"
+      ],
+      "bookCode": "1-2"
+    },
+    "assembly-library": {
+      "programs": [
+        "NAL 아카데미아",
+        "북토크",
+        "문화 콘서트"
+      ],
+      "bookCode": "1-3"
+    },
+    "gangseo-gayang": {
+      "programs": [
+        "글쓰기",
+        "불쑥북스",
+        "댄스 챌린지"
+      ],
+      "bookCode": "1-5"
+    },
+    "urisori-library": {
+      "programs": [
+        "조선의 인문학",
+        "사계절 토지",
+        "우리소리와 배프"
+      ],
+      "bookCode": "1-7"
+    },
+    "nonhyeon-maru": {
+      "programs": [
+        "리딩 산책",
+        "웹소설 작법",
+        "어린이 아트랩"
+      ],
+      "bookCode": "1-8"
+    },
+    "cheongun-lit": {
+      "programs": [
+        "길 위의 인문학",
+        "책 속 생각",
+        "책마루"
+      ],
+      "bookCode": "1-9"
+    },
+    "national-children-library": {
+      "programs": [
+        "동화구연",
+        "부커부커",
+        "증강현실"
+      ],
+      "bookCode": "1-10"
+    },
+    "songpa-kids-english": {
+      "programs": [
+        "Book Club",
+        "빛과 그림자",
+        "독후활동"
+      ],
+      "bookCode": "1-11"
+    },
+    "dongjak-english": {
+      "programs": [
+        "스마트폰 활용 교육",
+        "영어책 독후활동",
+        "영문 캘리그라피"
+      ],
+      "bookCode": "1-12"
+    },
+    "gyeonggi-library": {
+      "programs": [
+        "스튜디오 투어",
+        "명랑한 은둔자",
+        "AI 독서토론"
+      ],
+      "bookCode": "2-1"
+    },
+    "goyang-hwajeong": {
+      "programs": [
+        "음악마술",
+        "꽃 에코백 만들기",
+        "AI 동화 만들기"
+      ],
+      "bookCode": "2-2"
+    },
+    "court-library": {
+      "programs": [
+        "범죄심리 이해",
+        "한국경제 대전망",
+        "법의학 강연"
+      ],
+      "bookCode": "2-3"
+    },
+    "uijeongbu-art": {
+      "programs": [
+        "손수건 꾸미기",
+        "작은 땅 트레이",
+        "도서관 투어"
+      ],
+      "bookCode": "2-4"
+    },
+    "uijeongbu-music": {
+      "programs": [
+        "유쾌한 오페라",
+        "도서관 투어",
+        "사운드 콜라주"
+      ],
+      "bookCode": "2-5"
+    },
+    "ansan-media": {
+      "programs": [
+        "영어회화",
+        "미디어 특화",
+        "10주년 행사"
+      ],
+      "bookCode": "2-6"
+    },
+    "leeseokyoung-media": {
+      "programs": [
+        "퇴근길 인문살롱",
+        "스페인 500년展",
+        "어떤가요"
+      ],
+      "bookCode": "2-7"
+    },
+    "gwacheon-it": {
+      "programs": [
+        "열린 천문대",
+        "AI 키즈 CEO",
+        "별 ‘볼꾸’ 야(夜)"
+      ],
+      "bookCode": "2-8"
+    },
+    "uijeongbu-english": {
+      "programs": [
+        "영리더",
+        "키캡 키링 꾸미기",
+        "영어 필사"
+      ],
+      "bookCode": "2-9"
+    },
+    "juyeop-kids": {
+      "programs": [
+        "도시 어린이 농부",
+        "아이패드 드로잉",
+        "그림책 여행"
+      ],
+      "bookCode": "2-10"
+    },
+    "pangyo-kids": {
+      "programs": [
+        "레고 사이언스",
+        "세계탐험",
+        "코딩 놀이터"
+      ],
+      "bookCode": "2-11"
+    },
+    "songdo-intl": {
+      "programs": [
+        "기록하는 한글",
+        "금융습관",
+        "세계의 변화"
+      ],
+      "bookCode": "3-1"
+    },
+    "incheon-library": {
+      "programs": [
+        "유럽 미술관 여행",
+        "식물 인문학",
+        "어른의 미술감상"
+      ],
+      "bookCode": "3-2"
+    },
+    "majeon-library": {
+      "programs": [
+        "도서관에서",
+        "북스타트 데이",
+        "환경 수호대"
+      ],
+      "bookCode": "3-3"
+    },
+    "cheongna-intl": {
+      "programs": [
+        "어반스케치",
+        "필사노트",
+        "작가와의 만남"
+      ],
+      "bookCode": "3-4"
+    },
+    "yeongjong-sky": {
+      "programs": [
+        "매직쇼",
+        "자격증 취득",
+        "캘리그라피"
+      ],
+      "bookCode": "3-5"
+    },
+    "yulmok-library": {
+      "programs": [
+        "피해방지 보호",
+        "이야기원정대",
+        "신년음악회"
+      ],
+      "bookCode": "3-6"
+    },
+    "dongchun-narae": {
+      "programs": [
+        "나만의 굿즈 만들기",
+        "그림책 놀이터",
+        "웹툰 제작"
+      ],
+      "bookCode": "3-7"
+    },
+    "songdo-kids": {
+      "programs": [
+        "유네스코 세계유산",
+        "체스 톡톡",
+        "원어민 영어 교육"
+      ],
+      "bookCode": "3-8"
+    },
+    "kkumdream-kids-english": {
+      "programs": [
+        "원어민 영어회화",
+        "꿈영도",
+        "영어 독서 퀴즈"
+      ],
+      "bookCode": "3-9"
+    },
+    "cheongna-lake": {
+      "programs": [
+        "SF 인문학",
+        "건강 인문학",
+        "작가와의 만남"
+      ],
+      "bookCode": "3-10"
+    },
+    "seonhak-starlight": {
+      "programs": [
+        "과학실험교실",
+        "생각톡톡",
+        "규방공예"
+      ],
+      "bookCode": "3-11"
+    },
+    "wonju-central": {
+      "programs": [
+        "감각 인문학",
+        "도서관 아카데미",
+        "엑셀 기초 수업"
+      ],
+      "bookCode": "4-1"
+    },
+    "jungcheon-philosophy": {
+      "programs": [
+        "화요 철학 강좌",
+        "한시작법",
+        "목요 철학 강좌"
+      ],
+      "bookCode": "4-2"
+    },
+    "gangneung-moru": {
+      "programs": [
+        "몸·물건·마음",
+        "베스트셀러 읽기",
+        "오일파스텔 동화"
+      ],
+      "bookCode": "4-3"
+    },
+    "chuncheon-city": {
+      "programs": [
+        "실크로드의 시크릿",
+        "문학열차 100人",
+        "독서 골든벨"
+      ],
+      "bookCode": "4-4"
+    },
+    "sokcho-kids-english": {
+      "programs": [
+        "영어동화 여행",
+        "영어 놀이터",
+        "원어민 영어동화"
+      ],
+      "bookCode": "4-5"
+    },
+    "inje-miracle": {
+      "programs": [
+        "어린이가족극",
+        "청소년 인문학",
+        "명사초청"
+      ],
+      "bookCode": "4-6"
+    },
+    "wondeok-library": {
+      "programs": [
+        "작가 강연",
+        "보물찾기",
+        "책 처방전"
+      ],
+      "bookCode": "4-7"
+    },
+    "mangsang-beach": {
+      "programs": [
+        "세계여행",
+        "그림책 작가",
+        "작가 강연"
+      ],
+      "bookCode": "4-8"
+    },
+    "chungnam-library": {
+      "programs": [
+        "3D프린터",
+        "레고 메이커",
+        "책이랑 놀기"
+      ],
+      "bookCode": "5-1"
+    },
+    "chungju-city": {
+      "programs": [
+        "그림책 Art",
+        "영어 그림책 놀이",
+        "주인공 그리기"
+      ],
+      "bookCode": "5-2"
+    },
+    "baebang-library": {
+      "programs": [
+        "꽃과 나의 이야기",
+        "2027년 달력",
+        "온라인 필사"
+      ],
+      "bookCode": "5-3"
+    },
+    "cheongju-ochang-lake": {
+      "programs": [
+        "스마트폰 교육",
+        "어린이 리더",
+        "그림책 인문학"
+      ],
+      "bookCode": "5-4"
+    },
+    "eumbong-eoulsaem": {
+      "programs": [
+        "코딩 탐험대",
+        "미래과학 놀이터",
+        "작가와의 만남"
+      ],
+      "bookCode": "5-5"
+    },
+    "cheonan-jiksan": {
+      "programs": [
+        "곤충과 일촌맺기",
+        "북퍼퓸 만들기",
+        "상상열매"
+      ],
+      "bookCode": "5-6"
+    },
+    "dunpo-library": {
+      "programs": [
+        "꽃꽂이 클래스",
+        "금융교육",
+        "왁뿌 만들기"
+      ],
+      "bookCode": "5-7"
+    },
+    "baebang-wolcheon": {
+      "programs": [
+        "작가와의 만남",
+        "뉴트의 초록우주",
+        "나의 메이크업"
+      ],
+      "bookCode": "5-8"
+    },
+    "asan-central": {
+      "programs": [
+        "영상창작",
+        "책 읽기",
+        "이혈테라피"
+      ],
+      "bookCode": "5-9"
+    },
+    "kkumsaem-kids": {
+      "programs": [
+        "팝업북 만들기",
+        "초보 수세미 뜨기",
+        "키캡 키링 만들기"
+      ],
+      "bookCode": "5-10"
+    },
+    "sejong-city-library": {
+      "programs": [
+        "AI가 바꾸는 미래",
+        "시와 삶",
+        "영미 문학 명장면"
+      ],
+      "bookCode": "6-1"
+    },
+    "hanbat-library": {
+      "programs": [
+        "꼬꼬마 인형극",
+        "AI 로봇 놀이터",
+        "유럽미술관 기행"
+      ],
+      "bookCode": "7-1"
+    },
+    "munhak-village": {
+      "programs": [
+        "책으로 활짝",
+        "작가와의 만남",
+        "작가와의 만남2"
+      ],
+      "bookCode": "7-2"
+    },
+    "dongdaejeon-library": {
+      "programs": [
+        "음악 산책",
+        "밴드 앙상블",
+        "북 파우치 만들기"
+      ],
+      "bookCode": "7-3"
+    },
+    "byeoldongbyeol-science": {
+      "programs": [
+        "356꿈돌이",
+        "캘리그라피",
+        "체험 한마당"
+      ],
+      "bookCode": "7-4"
+    },
+    "kids-english-village": {
+      "programs": [
+        "영어 모험",
+        "영어 동화 구연",
+        "신나는 할로윈"
+      ],
+      "bookCode": "7-5"
+    },
+    "jeonbuk-provincial": {
+      "programs": [
+        "마술공연",
+        "초보 작가 강연",
+        "인문학 이야기"
+      ],
+      "bookCode": "8-1"
+    },
+    "jeonnam-library": {
+      "programs": [
+        "독서동아리",
+        "미디어 리터러시",
+        "시민강좌"
+      ],
+      "bookCode": "8-2"
+    },
+    "hanok-village-library": {
+      "programs": [
+        "목걸이 만들기",
+        "향수 만들기"
+      ],
+      "bookCode": "8-3"
+    },
+    "yeonhwajeong-library": {
+      "programs": [
+        "한땀 한땀",
+        "강사 특강",
+        "클래식 공연"
+      ],
+      "bookCode": "8-4"
+    },
+    "jindo-cheolma": {
+      "programs": [
+        "그림책 미술교실",
+        "영어뮤지컬",
+        "길위의인문학"
+      ],
+      "bookCode": "8-5"
+    },
+    "dongmun-usedbook": {
+      "programs": [
+        "작가 강연",
+        "역사 수집가 강연",
+        "작가 강연 2"
+      ],
+      "bookCode": "8-6"
+    },
+    "gochang-hwangyunseok": {
+      "programs": [
+        "나는 나!",
+        "어린이 독서회",
+        "에세이 쓰기"
+      ],
+      "bookCode": "8-7"
+    },
+    "dunsan-english": {
+      "programs": [
+        "사랑과 인생",
+        "교수 특강",
+        "토요 그림책"
+      ],
+      "bookCode": "8-8"
+    },
+    "galdaesup-small": {
+      "programs": [
+        "토탈공예",
+        "뜨개질"
+      ],
+      "bookCode": "8-9"
+    },
+    "jorye-lake": {
+      "programs": [
+        "이야기 속 실타래",
+        "호수정원사",
+        "작가와의 만남"
+      ],
+      "bookCode": "8-10"
+    },
+    "muju-manna-small": {
+      "programs": [
+        "디퓨저 만들기",
+        "인문학 강연",
+        "입욕제 만들기"
+      ],
+      "bookCode": "8-11"
+    },
+    "mudeung-library": {
+      "programs": [
+        "시민인문학",
+        "열기구 행잉",
+        "감성 가방 만들기"
+      ],
+      "bookCode": "9-1"
+    },
+    "seochang-hanok": {
+      "programs": [
+        "서구문화탐방",
+        "실감형 독서",
+        "문화강좌"
+      ],
+      "bookCode": "9-2"
+    },
+    "gwangju-braille": {
+      "programs": [
+        "잉크아트",
+        "글라스아트",
+        "나만의 점자"
+      ],
+      "bookCode": "9-3"
+    },
+    "jangdeok-library": {
+      "programs": [
+        "뜨개소품 만들기",
+        "랜드마크 세계사",
+        "보드게임 시간여행"
+      ],
+      "bookCode": "9-4"
+    },
+    "iyagikkot-library": {
+      "programs": [
+        "우리가족 그림책",
+        "팝업스토리",
+        "글쓰기 놀이터"
+      ],
+      "bookCode": "9-5"
+    },
+    "chaekdori-library": {
+      "programs": [
+        "작가초청",
+        "내가 만드는 도서관",
+        "일요일은 내가 요리사"
+      ],
+      "bookCode": "9-6"
+    },
+    "unam-library": {
+      "programs": [
+        "작가강연",
+        "그림책 놀이터",
+        "주역공부"
+      ],
+      "bookCode": "9-7"
+    },
+    "kids-eco-library": {
+      "programs": [
+        "버킷백 만들기",
+        "지구를 지켜라",
+        "책갈피 만들기"
+      ],
+      "bookCode": "9-8"
+    },
+    "unnam-kids": {
+      "programs": [
+        "꿀잼 영어",
+        "문해력 탐험대",
+        "우리 역사"
+      ],
+      "bookCode": "9-9"
+    },
+    "pureungil-library": {
+      "programs": [
+        "북크닉",
+        "보드게임",
+        "걱정마! 글쓰기"
+      ],
+      "bookCode": "9-10"
+    },
+    "uknow-yunho": {
+      "programs": [
+        "헬로우 통기타"
+      ],
+      "bookCode": "9-11"
+    },
+    "gyeongbuk-library": {
+      "programs": [
+        "도서관 이용자 교육",
+        "국악 한마당",
+        "어린이 한국사"
+      ],
+      "bookCode": "10-1"
+    },
+    "gyeongnam-library": {
+      "programs": [
+        "공감에 관하여",
+        "AI 활용법",
+        "출판체험"
+      ],
+      "bookCode": "10-2"
+    },
+    "gyeongju-city": {
+      "programs": [
+        "북크닉",
+        "독서 골든벨",
+        "북셀러"
+      ],
+      "bookCode": "10-3"
+    },
+    "haman-library": {
+      "programs": [
+        "나의 최고 동물왕",
+        "가을 바람",
+        "우리말 작명소"
+      ],
+      "bookCode": "10-4"
+    },
+    "poeun-heunghae": {
+      "programs": [
+        "사운드자서전",
+        "음악 수강생 모집",
+        "어린이 독서회"
+      ],
+      "bookCode": "10-5"
+    },
+    "sangju-dodream": {
+      "programs": [
+        "재즈콘서트",
+        "판타지 연극",
+        "인문학 특강"
+      ],
+      "bookCode": "10-6"
+    },
+    "hadong-library": {
+      "programs": [
+        "작가 강연",
+        "그림책아트테라피",
+        "차분데이"
+      ],
+      "bookCode": "10-7"
+    },
+    "kkumirang-library": {
+      "programs": [
+        "토박이 향토음식",
+        "요알못 탈출",
+        "떡 디저트 만들기"
+      ],
+      "bookCode": "10-8"
+    },
+    "guryongpo-library": {
+      "programs": [
+        "그림책 놀이 세상",
+        "구룡포 여행",
+        "구룡포 비행기"
+      ],
+      "bookCode": "10-9"
+    },
+    "sancheong-jirisan": {
+      "programs": [
+        "우산 만들기",
+        "책 읽기 대회",
+        "원데이 클래스"
+      ],
+      "bookCode": "10-10"
+    },
+    "daegu-library": {
+      "programs": [
+        "우리 그림 이야기",
+        "입체낭독극",
+        "지혜학교"
+      ],
+      "bookCode": "11-1"
+    },
+    "gukchae-library": {
+      "programs": [
+        "한글날 행사",
+        "목요시민책마당",
+        "북크닉"
+      ],
+      "bookCode": "11-2"
+    },
+    "feb28-library": {
+      "programs": [
+        "독서 동아리",
+        "동화구연",
+        "나와 닮은 그림책"
+      ],
+      "bookCode": "11-3"
+    },
+    "dalseong-gunlib": {
+      "programs": [
+        "청소년 생각 발전소",
+        "수학코칭",
+        "논술학교"
+      ],
+      "bookCode": "11-4"
+    },
+    "suseongmot-picturebook": {
+      "programs": [
+        "로봇 대작전",
+        "에코 로봇",
+        "여름 독서교실"
+      ],
+      "bookCode": "11-5"
+    },
+    "dalseo-family": {
+      "programs": [
+        "길 위의 인문학",
+        "명화 콘서트",
+        "목요 문학살롱"
+      ],
+      "bookCode": "11-6"
+    },
+    "dowon-library": {
+      "programs": [
+        "책이랑 놀자",
+        "교양역사",
+        "뮤직가튼"
+      ],
+      "bookCode": "11-7"
+    },
+    "daegu-seogu-english": {
+      "programs": [
+        "영어독서",
+        "펀펀 유레카",
+        "동화 속 소품"
+      ],
+      "bookCode": "11-8"
+    },
+    "daegu-seogu-kids-english": {
+      "programs": [
+        "오디세이 모험",
+        "쪽집게 여행 영어",
+        "영어 환경 교육"
+      ],
+      "bookCode": "11-9"
+    },
+    "dalseong-kids-forest": {
+      "programs": [
+        "코딩 첫걸음",
+        "숲지기 모집",
+        "영어캠프"
+      ],
+      "bookCode": "11-10"
+    },
+    "wagle-kids": {
+      "programs": [
+        "독서연구소",
+        "필사 노트",
+        "돈 공부"
+      ],
+      "bookCode": "11-11"
+    },
+    "ulsan-library": {
+      "programs": [
+        "독서의 달",
+        "도서관에 온 공룡",
+        "별빛책마당"
+      ],
+      "bookCode": "12-1"
+    },
+    "dosan-library": {
+      "programs": [
+        "길 위의 인문학",
+        "여름방학 특강",
+        "초록도깨비 연극"
+      ],
+      "bookCode": "12-2"
+    },
+    "ulju-cheonsang": {
+      "programs": [
+        "이모티콘 & 팝업",
+        "창의코딩 교실",
+        "우리의 마블"
+      ],
+      "bookCode": "12-3"
+    },
+    "wolbong-library": {
+      "programs": [
+        "팝업북 만들기",
+        "독서 포트폴리오",
+        "미술놀이터"
+      ],
+      "bookCode": "12-4"
+    },
+    "ulsan-jonggatjip": {
+      "programs": [
+        "북퍼퓸 만들기",
+        "매직 버블쇼",
+        "체험형 동화구연"
+      ],
+      "bookCode": "12-5"
+    },
+    "sanjeon-comics": {
+      "programs": [
+        "나도 웹툰 작가",
+        "나만의 일러스트",
+        "로블록스 개발"
+      ],
+      "bookCode": "12-6"
+    },
+    "sinbok-library": {
+      "programs": [
+        "힐링과 치유의 여행",
+        "아이조아 그림책",
+        "어반스케치"
+      ],
+      "bookCode": "12-7"
+    },
+    "gangdong-sea": {
+      "programs": [
+        "나만의 힐링드로잉",
+        "AI브릭 네오쏘코",
+        "그림책"
+      ],
+      "bookCode": "12-8"
+    },
+    "cheolsae-village": {
+      "programs": [
+        "감성 라인 아트",
+        "조선 보물 탐정단",
+        "동화창작반"
+      ],
+      "bookCode": "12-9"
+    },
+    "okhyeon-kids": {
+      "programs": [
+        "영어 그림책 여행",
+        "자동차 코딩",
+        "큐브 교실"
+      ],
+      "bookCode": "12-10"
+    },
+    "ulsan-kids-youth": {
+      "programs": [
+        "AI 놀이터",
+        "4컷 웹툰",
+        "SLAM 연구소"
+      ],
+      "bookCode": "12-11"
+    },
+    "busan-library": {
+      "programs": [
+        "미디어 탐험대",
+        "실감형 동화체험",
+        "금요필사"
+      ],
+      "bookCode": "13-1"
+    },
+    "dongnae-eupseong": {
+      "programs": [
+        "이야기 극장",
+        "명화 산책",
+        "독서문화강좌"
+      ],
+      "bookCode": "13-2"
+    },
+    "haeundae-humanities": {
+      "programs": [
+        "그림책 인문학",
+        "독서·글쓰기",
+        "음악 여행"
+      ],
+      "bookCode": "13-3"
+    },
+    "geumjeong-library": {
+      "programs": [
+        "달빛야독",
+        "태국어 기초회화",
+        "세계인문특강"
+      ],
+      "bookCode": "13-4"
+    },
+    "busanjin-kids-youth": {
+      "programs": [
+        "AI 글쓰기",
+        "SNS리포터",
+        "보드게임 수학"
+      ],
+      "bookCode": "13-5"
+    },
+    "mandeok-library": {
+      "programs": [
+        "창의 배움터",
+        "독서피크닉",
+        "레터링 풍선"
+      ],
+      "bookCode": "13-6"
+    },
+    "jeonggwan-library": {
+      "programs": [
+        "꼼지락창작소",
+        "향토인문기행",
+        "에너지 탐험대"
+      ],
+      "bookCode": "13-7"
+    },
+    "seogu-ami-dream": {
+      "programs": [
+        "공예로 잇는 문화",
+        "그림책 놀이터",
+        "재미난 수학"
+      ],
+      "bookCode": "13-8"
+    },
+    "yeongdo-library": {
+      "programs": [
+        "레고 로봇 코딩",
+        "체험형 동화구연",
+        "길 위의 인문학"
+      ],
+      "bookCode": "13-9"
+    },
+    "donggu-library": {
+      "programs": [
+        "퀴즈온더북",
+        "토닥토닥, 내 마음",
+        "찾아가는 도서관"
+      ],
+      "bookCode": "13-10"
+    },
+    "busan-namgu-library": {
+      "programs": [
+        "손그림 굿즈",
+        "스토리 마술학교",
+        "재즈 한 곡"
+      ],
+      "bookCode": "13-11"
+    },
+    "tamna-library": {
+      "programs": [
+        "문화 연결 큐레이션",
+        "첫 여름, 완주",
+        "AI 독서"
+      ],
+      "bookCode": "14-2"
+    },
+    "kimyoungsu-library": {
+      "programs": [
+        "필담",
+        "그림책 공작소",
+        "마음성장"
+      ],
+      "bookCode": "14-3"
+    }
+  }
+}
