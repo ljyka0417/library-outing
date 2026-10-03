@@ -28,6 +28,7 @@ import { useT } from '@/i18n';
 import { colors, radius, spacing, typography } from '@/theme';
 import { formatDistance, walkingMinutes } from '@/utils/openingHours';
 import { openKakaoMap } from '@/utils/mapLinks';
+import { libText } from '@/i18n/libraryText';
 
 interface Message {
   id: string;
@@ -342,6 +343,7 @@ interface BubbleProps {
 }
 
 function Bubble({ message, onOpenLibrary, favorites, onToggleFavorite }: BubbleProps) {
+  const { t, lang } = useT();
   const mine = message.role === 'user';
 
   if (mine) {
@@ -401,7 +403,7 @@ function Bubble({ message, onOpenLibrary, favorites, onToggleFavorite }: BubbleP
             <View style={{ flex: 1 }}>
               <Text style={styles.placeName}>{p.name}</Text>
               <Text style={styles.placeSub}>
-                {p.subCategory} · 걸어서 {walkingMinutes(p.distanceMeters)}분 (
+                {libText(p.subCategory, lang)} · {t('nearby.walk', { n: walkingMinutes(p.distanceMeters) })} (
                 {formatDistance(p.distanceMeters)})
               </Text>
             </View>

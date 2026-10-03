@@ -1,6 +1,7 @@
 import { translate, type Lang } from '@/i18n';
 import type { DayHours, OperatingHours } from '@/types';
 import { holidayName } from '@/data/holidays';
+import { holidayText, libText } from '@/i18n/libraryText';
 
 /**
  * "지금 운영중" 판정.
@@ -51,10 +52,10 @@ export function todayHoursLabel(
   now = new Date()
 ): string {
   if (!hours) return translate(lang, 'hours.unknown');
-  if (!hours.byDay || hours.byDay.length !== 7) return hours.label;
+  if (!hours.byDay || hours.byDay.length !== 7) return libText(hours.label, lang);
   const { range: today, holiday } = todayRange(hours, now);
   if (!today) {
-    return holiday ? translate(lang, 'hours.closedHoliday', { name: holiday }) : translate(lang, 'hours.closedToday');
+    return holiday ? translate(lang, 'hours.closedHoliday', { name: holidayText(holiday, lang) }) : translate(lang, 'hours.closedToday');
   }
   return translate(lang, 'hours.today', {
     from: formatMinutes(today.open),

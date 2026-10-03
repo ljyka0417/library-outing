@@ -158,10 +158,12 @@ interface InfoRowProps {
   icon: keyof typeof Ionicons.glyphMap;
   label: string;
   value: string;
+  /** 값 밑에 작게 붙이는 한 줄 — 외국어 화면의 주소 밑 한국어 원문(택시 기사에게 보여 줄 수 있게) */
+  note?: string;
   onPress?: () => void;
 }
 
-export function InfoRow({ icon, label, value, onPress }: InfoRowProps) {
+export function InfoRow({ icon, label, value, note, onPress }: InfoRowProps) {
   const body = (
     <View style={styles.infoRow}>
       <View style={styles.infoIcon}>
@@ -170,9 +172,20 @@ export function InfoRow({ icon, label, value, onPress }: InfoRowProps) {
       <Text style={styles.infoLabel}>{label}</Text>
       {/* 책 운영시간처럼 긴 문구는 끝까지 보여 준다. 잘린 운영시간은 헛걸음을 부른다.
           누르는 줄(전화·홈페이지)만 두 줄에서 자른다 — 긴 주소창 글자는 다 읽을 필요가 없다 */}
-      <Text style={[styles.infoValue, onPress && styles.infoValueLink]} numberOfLines={onPress ? 2 : undefined}>
-        {value}
-      </Text>
+      {note ? (
+        <View style={styles.infoValueBox}>
+          <Text style={[styles.infoValue, onPress && styles.infoValueLink]} numberOfLines={onPress ? 2 : undefined}>
+            {value}
+          </Text>
+          <Text style={styles.infoNote} selectable>
+            {note}
+          </Text>
+        </View>
+      ) : (
+        <Text style={[styles.infoValue, onPress && styles.infoValueLink]} numberOfLines={onPress ? 2 : undefined}>
+          {value}
+        </Text>
+      )}
     </View>
   );
 
@@ -300,6 +313,15 @@ const styles = StyleSheet.create({
     flex: 1,
     // 띄어쓰기 없는 긴 홈페이지 주소도 칸 안에서 줄을 바꾸게 (없으면 카드 밖으로 삐져나갔다)
     minWidth: 0,
+  },
+  infoValueBox: {
+    flex: 1,
+    minWidth: 0,
+    gap: 2,
+  },
+  infoNote: {
+    ...typography.caption,
+    color: colors.textMuted,
   },
   infoValueLink: {
     color: colors.primary,

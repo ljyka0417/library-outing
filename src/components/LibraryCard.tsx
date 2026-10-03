@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Badge } from './common';
 import { LibraryImage } from './LibraryImage';
 import { regionName, useT, type Lang } from '@/i18n';
+import { libText } from '@/i18n/libraryText';
 import { readableName } from '@/utils/romanize';
 import { colors, radius, shadow, spacing, typography } from '@/theme';
 import { isOpenNow } from '@/utils/openingHours';
@@ -17,11 +18,10 @@ import { CATEGORY_MAP } from '@/data/categories';
  *
  * 시·도는 쓰는 말로 옮긴다. 검색 화면의 지역 단추는 이미 「ソウル」이라고
  * 쓰는데 그 아래 카드만 「서울」로 남아 한 화면에서 말이 갈렸다.
- * 시/군/구는 옮기지 않는다 — 네 말 모두의 표기를 가진 표가 우리에게 없고,
- * 없는 이름을 지어내느니 도서관 이름과 똑같이 원문으로 두는 편이 낫다.
+ * 시/군/구도 표준 표기(영문 로마자·한자)로 옮긴다 (src/i18n/library-text/misc.json).
  */
 function regionLabel(library: Library, lang: Lang) {
-  return [regionName(lang, library.region.sido), library.region.sigungu]
+  return [regionName(lang, library.region.sido), libText(library.region.sigungu, lang)]
     .filter(Boolean)
     .join(' ');
 }

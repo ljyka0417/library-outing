@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Mascot } from './Mascot';
 import { useT } from '@/i18n';
+import { libText } from '@/i18n/libraryText';
 import { programKind, PROGRAM_LOOK } from '@/utils/programKind';
 import { categoryColors, colors, radius, spacing, typography } from '@/theme';
 
@@ -12,7 +13,8 @@ import { categoryColors, colors, radius, spacing, typography } from '@/theme';
  * 출처가 도서관 홈페이지·블로그라 앱에 싣지 않는다(programKind.ts 참고).
  */
 export function ProgramCard({ name }: { name: string }) {
-  const { t } = useT();
+  const { t, lang } = useT();
+  // 갈래는 원문(한국어) 이름으로 가른다
   const kind = programKind(name);
   const look = PROGRAM_LOOK[kind];
   const palette = categoryColors[look.palette] ?? { bg: colors.surfaceAlt, fg: colors.textMuted };
@@ -26,7 +28,7 @@ export function ProgramCard({ name }: { name: string }) {
         </View>
       </View>
       <Text style={styles.title} numberOfLines={2}>
-        {name}
+        {libText(name, lang)}
       </Text>
     </View>
   );

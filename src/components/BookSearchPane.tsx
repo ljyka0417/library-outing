@@ -37,6 +37,9 @@ export function BookSearchPane() {
     return recent && REGIONS.includes(recent.region.sido) ? recent.region.sido : '서울';
   }, [recentIds]);
   const [region, setRegion] = useState(startRegion);
+  // 칩 차례: 처음 지역(내 지역) → 나머지. 고른 칩이 오른쪽 끝에 숨어 안 보이던 것을 고쳤다
+  // (전국 칩은 뺐다 — 한 번 누를 때마다 정보나루 하루 한도 500건 중 80건을 쓴다)
+  const chips = [startRegion, ...REGIONS.filter((r) => r !== startRegion)];
 
   const [query, setQuery] = useState('');
   const [state, setState] = useState<'idle' | 'loading' | 'done' | 'failed' | 'quota'>('idle');
@@ -87,8 +90,13 @@ export function BookSearchPane() {
 
       <Text style={[styles.label, { paddingHorizontal: layout.gutter }]}>{t('bookSearch.region')}</Text>
       <ChipRow contentStyle={styles.filterRow} style={styles.filterRowSpacing}>
-        {REGIONS.map((r) => (
-          <Chip key={r} label={regionName(lang, r)} selected={region === r} onPress={() => setRegion(r)} />
+        {chips.map((r) => (
+          <Chip
+            key={r}
+            label={regionName(lang, r)}
+            selected={region === r}
+            onPress={() => setRegion(r)}
+          />
         ))}
       </ChipRow>
 

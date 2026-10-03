@@ -15,6 +15,7 @@ import { glassSupport } from '@/components/GlassSurface';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { centered, useLayout } from '@/hooks/useLayout';
 import { useT } from '@/i18n';
+import { libText } from '@/i18n/libraryText';
 import { colors, radius, spacing, typography } from '@/theme';
 
 export default function MyPageScreen() {
@@ -22,7 +23,7 @@ export default function MyPageScreen() {
   const { data } = useAsync(() => libraryApi.list(), [], { cacheKey: 'all-libraries' });
   const tabPad = useTabBarPadding();
   const layout = useLayout();
-  const { t } = useT();
+  const { t, lang } = useT();
 
   const visitedNames = visits
     .slice(0, 5)
@@ -90,7 +91,7 @@ export default function MyPageScreen() {
               {t('my.creditsBody', {
                 libs: libraryPhotoCount,
                 places: nearbyDataStatus.photoCount,
-                who: photoCredits.join(', ') || '한국관광공사',
+                who: (photoCredits.length ? photoCredits : ['한국관광공사']).map((c) => libText(c, lang)).join(', '),
               })}
             </Text>
           </View>
@@ -190,7 +191,7 @@ function GlassTest() {
  * npm run geocode / enrich / collect-nearby 를 돌린 뒤 여기서 확인한다.
  */
 /** 기기에 들어간 코드를 눈으로 확인하는 표시. 새 코드를 올릴 때마다 바꾼다 */
-const BUILD_MARK = '10-04 조회 한도 안내';
+const BUILD_MARK = '10-04 도서관 정보 번역';
 
 function DataStatus() {
   const d = dataCompleteness();

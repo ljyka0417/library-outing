@@ -25,6 +25,7 @@ import { useAppStore } from '@/store/useAppStore';
 import { bleedRow, centered, useLayout } from '@/hooks/useLayout';
 import { regionName, translate, useT, type Lang, type MessageKey } from '@/i18n';
 import { readableName } from '@/utils/romanize';
+import { libText, specialtyCategory } from '@/i18n/libraryText';
 import { colors, radius, shadow, spacing, typography } from '@/theme';
 import { callPhone, openWeb } from '@/utils/mapLinks';
 import { isOpenNow, todayHoursLabel } from '@/utils/openingHours';
@@ -33,7 +34,7 @@ import type { Book, Library } from '@/types';
 
 /** 시/군/구는 확인된 곳만 있으므로 있을 때만 붙인다. 옮기는 기준은 LibraryCard 와 같다. */
 function regionLabel(library: Library, lang: Lang) {
-  return [regionName(lang, library.region.sido), library.region.sigungu]
+  return [regionName(lang, library.region.sido), libText(library.region.sigungu, lang)]
     .filter(Boolean)
     .join(' ');
 }
@@ -250,21 +251,31 @@ export const LibraryDetail = memo(function LibraryDetail({
           아직 확인되지 않은 항목은 아예 렌더하지 않는다. "정보 없음" 을 줄줄이
           띄우는 것보다 조용히 비는 편이 신뢰를 덜 깎는다. */}
       <View style={styles.infoBlock}>
-        <InfoRow icon="sparkles-outline" label={t('lib.specialty')} value={library.specialty} />
+        <InfoRow
+          icon="sparkles-outline"
+          label={t('lib.specialty')}
+          value={specialtyCategory(library.specialty) ? t(`cat.${specialtyCategory(library.specialty)}` as MessageKey) : libText(library.specialty, lang)}
+        />
         <View style={styles.hr} />
         <InfoRow icon="map-outline" label={t('lib.region')} value={regionLabel(library, lang)} />
 
         {library.address ? (
           <>
             <View style={styles.hr} />
-            <InfoRow icon="location-outline" label={t('lib.address')} value={library.address} />
+            <InfoRow
+              icon="location-outline"
+              label={t('lib.address')}
+              value={libText(library.address, lang)}
+              // 외국어 화면에서는 한국어 주소를 밑에 둔다 — 택시·길 묻기에는 이쪽을 보여 주면 된다
+              note={lang !== 'ko' ? library.address : undefined}
+            />
           </>
         ) : null}
 
         {library.hours ? (
           <>
             <View style={styles.hr} />
-            <InfoRow icon="time-outline" label={t('lib.hours')} value={library.hours.label} />
+            <InfoRow icon="time-outline" label={t('lib.hours')} value={libText(library.hours.label, lang)} />
           </>
         ) : null}
 
@@ -272,7 +283,7 @@ export const LibraryDetail = memo(function LibraryDetail({
         {library.closedDays && !library.hours?.label.includes(library.closedDays) ? (
           <>
             <View style={styles.hr} />
-            <InfoRow icon="close-circle-outline" label={t('lib.closedDays')} value={library.closedDays} />
+            <InfoRow icon="close-circle-outline" label={t('lib.closedDays')} value={libText(library.closedDays, lang)} />
           </>
         ) : null}
 
@@ -304,28 +315,28 @@ export const LibraryDetail = memo(function LibraryDetail({
         {library.opened ? (
           <>
             <View style={styles.hr} />
-            <InfoRow icon="calendar-outline" label={t('lib.opened')} value={library.opened} />
+            <InfoRow icon="calendar-outline" label={t('lib.opened')} value={libText(library.opened, lang)} />
           </>
         ) : null}
 
         {library.holdings ? (
           <>
             <View style={styles.hr} />
-            <InfoRow icon="book-outline" label={t('lib.holdings')} value={library.holdings} />
+            <InfoRow icon="book-outline" label={t('lib.holdings')} value={libText(library.holdings, lang)} />
           </>
         ) : null}
 
         {library.transit ? (
           <>
             <View style={styles.hr} />
-            <InfoRow icon="bus-outline" label={t('lib.transit')} value={library.transit} />
+            <InfoRow icon="bus-outline" label={t('lib.transit')} value={libText(library.transit, lang)} />
           </>
         ) : null}
       </View>
 
       {!library.address && !library.hours ? (
         <Text style={styles.pending}>
-          상세 정보는 준비 중이에요. 지도에서 위치를 먼저 확인해 보세요.
+          {t('lib.pending')}
         </Text>
       ) : null}
 

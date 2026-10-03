@@ -15,6 +15,7 @@ import { colors, radius, spacing, typography } from '@/theme';
 import { formatDistance, walkingMinutes } from '@/utils/openingHours';
 import { openKakaoMap } from '@/utils/mapLinks';
 import { useT } from '@/i18n';
+import { libText } from '@/i18n/libraryText';
 import { bleedRow, useLayout } from '@/hooks/useLayout';
 import type { Coordinates, NearbyPlace, NearbyType } from '@/types';
 
@@ -129,7 +130,7 @@ export function NearbySection({ libraryId, coords }: Props) {
 }
 
 function PlaceCard({ place }: { place: NearbyPlace }) {
-  const { t } = useT();
+  const { t, lang } = useT();
 
   return (
     <Pressable
@@ -151,7 +152,7 @@ function PlaceCard({ place }: { place: NearbyPlace }) {
           {place.credit ? (
             <View style={styles.creditBar}>
               <Text style={styles.creditText} numberOfLines={1}>
-                {place.credit}
+                {libText(place.credit, lang)}
               </Text>
             </View>
           ) : null}
@@ -179,7 +180,7 @@ function PlaceCard({ place }: { place: NearbyPlace }) {
           {place.name}
         </Text>
         <Text style={styles.cardSub} numberOfLines={1}>
-          {place.subCategory}
+          {libText(place.subCategory, lang)}
         </Text>
         <View style={styles.cardMeta}>
           <Ionicons name="walk-outline" size={12} color={colors.primary} />

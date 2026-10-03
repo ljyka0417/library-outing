@@ -55,17 +55,35 @@ export async function fetchWhereToBorrow(
   isbnList: string[],
   libCodes: string[]
 ): Promise<Record<string, LoanStatus> | null> {
-  const libs = [...new Set(libCodes.filter(Boolean))].slice(0, 20);
+  const libs = [...new Set(libCodes.filter(Boolean))];
   // 같은 책의 판본 여러 개(최대 3개) — 어느 판본이든 있으면 "있음"으로 합쳐서 돌아온다
-  const isbn = [...new Set(isbnList.filter((s) => /^\d{13}$/.test(s)))].slice(0, 3).join(',');
-  if (!LOAN_PROXY_URL || !isbn || libs.length === 0) return null;
+  const isbns = [...new Set(isbnList.filter((s) => /^\d{13}$/.test(s)))].slice(0, 3);
+  if (!LOAN_PROXY_URL || isbns.length === 0 || libs.length === 0) return null;
 
-  const key = `where:${isbn}:${libs.join(',')}`;
+  const key = `where:${isbns.join(',')}:${libs.join(',')}`;
   const hit = memo.get(key);
   if (hit && Date.now() - hit.at < MEMO_MS) return hit.value;
 
+  /*
+   * 중계 서버는 한 번에 "도서관 수 × 판본 수"를 45까지만 받는다(무료 요금제 한도).
+   * 그보다 많으면(전국 80곳 등) 나눠서 한꺼번에 묻고 합친다.
+   */
+  const perCall = Math.max(1, Math.min(20, Math.floor(45 / isbns.length)));
+  const chunks: string[][] = [];
+  for (let i = 0; i < libs.length; i += perCall) chunks.push(libs.slice(i, i + perCall));
+
+  const answers = await Promise.all(chunks.map((chunk) => whereOnce(isbns.join(','), chunk)));
+  if (answers.every((a) => a === null)) return null;
+  const value: Record<string, LoanStatus> = Object.assign({}, ...answers.filter(Boolean));
+  // 한 곳도 답하지 않았으면 "없어요"가 아니라 "확인할 수 없어요"다 (하루 500건 한도를 넘긴 날 등)
+  if (Object.keys(value).length === 0) return null;
+  memo.set(key, { at: Date.now(), value });
+  return value;
+}
+
+async function whereOnce(isbn: string, libs: string[]): Promise<Record<string, LoanStatus> | null> {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 8000);
+  const timer = setTimeout(() => controller.abort(), 10000);
   try {
     const res = await fetch(
       `${LOAN_PROXY_URL.replace(/\/$/, '')}/where?isbn=${isbn}&libs=${libs.join(',')}`,
@@ -75,9 +93,6 @@ export async function fetchWhereToBorrow(
     const body = (await res.json()) as { results?: Record<string, LoanStatus | null> };
     const value: Record<string, LoanStatus> = {};
     for (const [lib, r] of Object.entries(body.results ?? {})) if (r) value[lib] = r;
-    // 한 곳도 답하지 않았으면 "없어요"가 아니라 "확인할 수 없어요"다 (하루 500건 한도를 넘긴 날 등)
-    if (Object.keys(value).length === 0) return null;
-    memo.set(key, { at: Date.now(), value });
     return value;
   } catch {
     return null;

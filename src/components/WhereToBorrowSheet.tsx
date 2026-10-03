@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { fetchWhereToBorrow, type LoanStatus } from '@/api/loanStatus';
 import { MOCK_LIBRARIES } from '@/data/libraries.mock';
 import { regionName, useT } from '@/i18n';
+import { libText } from '@/i18n/libraryText';
 import { colors, radius, spacing, typography } from '@/theme';
 import type { Book, Library } from '@/types';
 
@@ -14,6 +15,7 @@ import type { Book, Library } from '@/types';
  * 대출 가능 → 대출 중 순으로 보여 준다. 책이 없는 곳은 이름 대신 곳 수만 적는다
  * (없는 곳을 줄줄이 늘어놓으면 정작 빌릴 수 있는 곳이 묻힌다).
  */
+
 export function WhereToBorrowSheet({
   book,
   region,
@@ -26,12 +28,14 @@ export function WhereToBorrowSheet({
   onOpenLibrary: (id: string) => void;
 }) {
   const { t, lang } = useT();
-  const libs: Library[] = MOCK_LIBRARIES.filter((l) => l.region.sido === region && l.sourceApiId);
+  const libs: Library[] = MOCK_LIBRARIES.filter((l) => l.sourceApiId && l.region.sido === region);
   const [state, setState] = useState<'loading' | 'done' | 'failed'>('loading');
   const [results, setResults] = useState<Record<string, LoanStatus>>({});
   const codesKey = libs.map((l) => l.sourceApiId).join(',');
   // 책 검색에서 온 책은 판본 ISBN 이 여럿이다 — 함께 물어 어느 판본이든 있으면 "있음"
-  const isbnKey = (book?.isbns?.length ? book.isbns : book?.isbn ? [book.isbn] : []).join(',');
+  const isbnKey = (book?.isbns?.length ? book.isbns : book?.isbn ? [book.isbn] : [])
+    .slice(0, 3)
+    .join(',');
 
   useEffect(() => {
     if (!isbnKey || !codesKey) return;
@@ -40,7 +44,8 @@ export function WhereToBorrowSheet({
     setResults({});
     void fetchWhereToBorrow(isbnKey.split(','), codesKey.split(',')).then((r) => {
       if (!alive) return;
-      if (r) {
+      // 한 곳도 답을 못 받았으면(정보나루 하루 한도·인터넷) "없어요"가 아니라 "확인할 수 없어요"
+      if (r && Object.keys(r).length > 0) {
         setResults(r);
         setState('done');
       } else setState('failed');
@@ -56,6 +61,8 @@ export function WhereToBorrowSheet({
   const available = libs.filter((l) => statusOf(l)?.hasBook && statusOf(l)?.loanAvailable);
   const onLoan = libs.filter((l) => statusOf(l)?.hasBook && !statusOf(l)?.loanAvailable);
   const notOwned = libs.filter((l) => statusOf(l) && !statusOf(l)!.hasBook);
+  // 답을 못 받은 곳 — 없다고 단정하지 않고 따로 센다
+  const unknown = libs.filter((l) => !statusOf(l));
 
   const row = (l: Library, ok: boolean) => (
     <Pressable
@@ -67,7 +74,11 @@ export function WhereToBorrowSheet({
       <View style={[styles.dot, { backgroundColor: ok ? colors.open : colors.closed }]} />
       <View style={{ flex: 1 }}>
         <Text style={styles.libName} numberOfLines={1}>{l.name}</Text>
-        {l.region.sigungu ? <Text style={styles.libSub}>{l.region.sigungu}</Text> : null}
+        {l.region.sigungu ? (
+          <Text style={styles.libSub}>
+            {libText(l.region.sigungu, lang)}
+          </Text>
+        ) : null}
       </View>
       <Text style={[styles.status, { color: ok ? colors.open : colors.closed }]}>
         {ok ? t('loan.available') : t('loan.onLoan')}
@@ -109,9 +120,14 @@ export function WhereToBorrowSheet({
               <ScrollView style={{ maxHeight: 360 }}>
                 {available.map((l) => row(l, true))}
                 {onLoan.map((l) => row(l, false))}
-                {available.length + onLoan.length === 0 ? <Text style={styles.note}>{t('where.none')}</Text> : null}
+                {available.length + onLoan.length === 0 && unknown.length === 0 ? (
+                  <Text style={styles.note}>{t('where.none')}</Text>
+                ) : null}
                 {notOwned.length > 0 && available.length + onLoan.length > 0 ? (
                   <Text style={styles.notOwned}>{t('where.notOwned', { n: String(notOwned.length) })}</Text>
+                ) : null}
+                {unknown.length > 0 ? (
+                  <Text style={styles.notOwned}>{t('where.unknown', { n: String(unknown.length) })}</Text>
                 ) : null}
               </ScrollView>
             </>
