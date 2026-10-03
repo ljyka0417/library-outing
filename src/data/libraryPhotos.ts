@@ -32,6 +32,7 @@
  */
 
 import generated from './library-photos.generated.json';
+import extraJson from './library-photos.extra.json';
 
 export interface LibraryPhoto {
   /** 앱에 넣어 둔 사진 — require() 결과 */
@@ -43,6 +44,8 @@ export interface LibraryPhoto {
 }
 
 export const PHOTOS: Record<string, LibraryPhoto> = {
+  // 만든 사람이 직접 찍은 사진 — 저작권이 우리에게 있어 출처 표기가 필요 없다
+  'dongjak-english': { source: require('../../assets/libraries/dongjak-english.jpg') },
   // 예시 — assets/libraries/seoul-library.jpg 를 넣은 뒤 주석을 푸세요
   // 'seoul-library': {
   //   source: require('../../assets/libraries/seoul-library.jpg'),
@@ -65,6 +68,12 @@ export const PHOTOS: Record<string, LibraryPhoto> = {
  */
 const remote = (generated as { byId?: Record<string, RemotePhoto> }).byId ?? {};
 
+/**
+ * 관광공사 이름 검색이 못 찾은 곳 — 관광공사 위치 검색과 위키미디어 공용(사람이 확인한 파일).
+ * 공용 사진은 지은이·라이선스(CC BY-SA 등)를 credit 에 함께 적는다. 수집: npm run collect-more-library-photos
+ */
+const extra = (extraJson as { byId?: Record<string, { url: string; credit: string }> }).byId ?? {};
+
 interface RemotePhoto {
   url: string;
   credit: string;
@@ -82,7 +91,7 @@ interface RemotePhoto {
 export function getPhoto(libraryId: string): LibraryPhoto | undefined {
   if (PHOTOS[libraryId]) return PHOTOS[libraryId];
 
-  const r = remote[libraryId];
+  const r = remote[libraryId] ?? extra[libraryId];
   if (!r) return undefined;
   return { uri: secureUrl(r.url), credit: r.credit };
 }
@@ -104,11 +113,15 @@ export function photoCredits(): { libraryId: string; credit: string }[] {
   return [
     ...Object.entries(PHOTOS).filter(([, p]) => p.credit),
     ...Object.entries(remote),
+    ...Object.entries(extra),
   ].map(([libraryId, p]) => ({ libraryId, credit: p.credit! }));
 }
 
 /** 실사진이 붙은 도서관 수. 개발 중 상태 확인용. */
-export const libraryPhotoCount = Object.keys(PHOTOS).length + Object.keys(remote).length;
+export const libraryPhotoCount = new Set([...Object.keys(PHOTOS), ...Object.keys(remote), ...Object.keys(extra)]).size;
+
+/** 위키미디어 공용 사진이 있나 (마이 > 사진 출처에 함께 밝힌다) */
+export const hasCommonsPhotos = Object.values(extra).some((p) => /Wikimedia Commons/.test(p.credit));
 
 /** 실사진이 있는 도서관 id (달곰이 꾸미기의 도서관 배경) */
-export const photoLibraryIds = [...new Set([...Object.keys(PHOTOS), ...Object.keys(remote)])];
+export const photoLibraryIds = [...new Set([...Object.keys(PHOTOS), ...Object.keys(remote), ...Object.keys(extra)])];

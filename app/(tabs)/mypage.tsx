@@ -12,7 +12,7 @@ import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
 import { nearbyDataStatus, photoCredits } from '@/api/nearbyApi';
 import { dataCompleteness } from '@/data/libraries.mock';
-import { libraryPhotoCount } from '@/data/libraryPhotos';
+import { hasCommonsPhotos, libraryPhotoCount } from '@/data/libraryPhotos';
 import { loanBookStatus } from '@/data/books.mock';
 import { chatIdeasStatus } from '@/utils/chatIdeas';
 import { glassSupport } from '@/components/GlassSurface';
@@ -127,7 +127,7 @@ export default function MyPageScreen() {
               {t('my.creditsBody', {
                 libs: libraryPhotoCount,
                 places: nearbyDataStatus.photoCount,
-                who: (photoCredits.length ? photoCredits : ['한국관광공사']).map((c) => libText(c, lang)).join(', '),
+                who: [...(photoCredits.length ? photoCredits : ['한국관광공사']).map((c) => libText(c, lang)), ...(hasCommonsPhotos ? ['Wikimedia Commons'] : [])].join(', '),
               })}
             </Text>
           </View>
@@ -227,7 +227,7 @@ function GlassTest() {
  * npm run geocode / enrich / collect-nearby 를 돌린 뒤 여기서 확인한다.
  */
 /** 기기에 들어간 코드를 눈으로 확인하는 표시. 새 코드를 올릴 때마다 바꾼다 */
-const BUILD_MARK = '10-04 달곰이 꾸미기 2';
+const BUILD_MARK = '10-04 새 아이콘·문구';
 
 function DataStatus() {
   const d = dataCompleteness();

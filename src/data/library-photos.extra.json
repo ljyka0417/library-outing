@@ -1,0 +1,78 @@
+{
+  "_readme": "관광공사 이름 검색이 못 찾은 도서관 사진 — 관광공사 위치 검색과 위키미디어 공용(사람이 확인한 파일). npm run collect-more-library-photos 가 덮어씁니다.",
+  "_generatedAt": "2026-10-03T19:05:30.773Z",
+  "byId": {
+    "ansan-media": {
+      "url": "https://tong.visitkorea.or.kr/cms/resource/98/3450098_image2_1.jpg",
+      "credit": "한국관광공사",
+      "license": "KOGL Type 1",
+      "source": "tour:안산미디어도서관"
+    },
+    "jeonbuk-provincial": {
+      "url": "https://tong.visitkorea.or.kr/cms/resource/48/3561848_image2_1.jpg",
+      "credit": "한국관광공사",
+      "license": "KOGL Type 1",
+      "source": "tour:전북도청도서관"
+    },
+    "yeonhwajeong-library": {
+      "url": "https://tong.visitkorea.or.kr/cms/resource/93/3380293_image2_1.jpg",
+      "credit": "한국관광공사",
+      "license": "KOGL Type 1",
+      "source": "tour:전주 연화정 도서관"
+    },
+    "seoul-library": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Seoul_Metropolitan_Library_20191221_01.jpg/1280px-Seoul_Metropolitan_Library_20191221_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "credit": "Ahmed · CC0 · Wikimedia Commons",
+      "license": "CC0",
+      "source": "https://commons.wikimedia.org/wiki/File:Seoul_Metropolitan_Library_20191221_01.jpg"
+    },
+    "pangyo-kids": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/%ED%8C%90%EA%B5%90%EC%96%B4%EB%A6%B0%EC%9D%B4%EB%8F%84%EC%84%9C%EA%B4%80_%281%29.JPG/1280px-%ED%8C%90%EA%B5%90%EC%96%B4%EB%A6%B0%EC%9D%B4%EB%8F%84%EC%84%9C%EA%B4%80_%281%29.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "credit": "Jocelyndurrey · CC BY-SA 4.0 · Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:%ED%8C%90%EA%B5%90%EC%96%B4%EB%A6%B0%EC%9D%B4%EB%8F%84%EC%84%9C%EA%B4%80_(1).JPG"
+    },
+    "songdo-kids": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d2/%EC%86%A1%EB%8F%84%EA%B5%AD%EC%A0%9C%EC%96%B4%EB%A6%B0%EC%9D%B4%EB%8F%84%EC%84%9C%EA%B4%80.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "credit": "동대문 · CC BY-SA 4.0 · Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:%EC%86%A1%EB%8F%84%EA%B5%AD%EC%A0%9C%EC%96%B4%EB%A6%B0%EC%9D%B4%EB%8F%84%EC%84%9C%EA%B4%80.png"
+    },
+    "seonhak-starlight": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/8e/%EC%84%A0%ED%95%99%EB%B3%84%EB%B9%9B%EB%8F%84%EC%84%9C%EA%B4%80.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "credit": "Mins0708 · CC BY-SA 4.0 · Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:%EC%84%A0%ED%95%99%EB%B3%84%EB%B9%9B%EB%8F%84%EC%84%9C%EA%B4%80.jpg"
+    },
+    "jungcheon-philosophy": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/Jungcheon_Philosophy_Library.jpg/1280px-Jungcheon_Philosophy_Library.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "credit": "Youngjin · CC BY-SA 4.0 · Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Jungcheon_Philosophy_Library.jpg"
+    },
+    "dongdaejeon-library": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/Dongdaejeon_Library_%2825031102%29.jpg/1280px-Dongdaejeon_Library_%2825031102%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "credit": "대전광역시 한밭도서관 · KOGL Type 1 · Wikimedia Commons",
+      "license": "KOGL Type 1",
+      "source": "https://commons.wikimedia.org/wiki/File:Dongdaejeon_Library_(25031102).jpg"
+    },
+    "gyeongju-city": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/Korea-Gyeongju-Gyeongju_Municipal_Library_at_Hwangseong_Park-01.jpg/1280px-Korea-Gyeongju-Gyeongju_Municipal_Library_at_Hwangseong_Park-01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "credit": "Alain Seguin from Ottawa, Canada · CC BY-SA 3.0 · Wikimedia Commons",
+      "license": "CC BY-SA 3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Korea-Gyeongju-Gyeongju_Municipal_Library_at_Hwangseong_Park-01.jpg"
+    },
+    "halla-library": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Halla_Library.jpeg/1280px-Halla_Library.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "credit": "Nt · CC BY-SA 4.0 · Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Halla_Library.jpeg"
+    },
+    "unnam-kids": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/%EC%9A%B4%EB%82%A8%EC%96%B4%EB%A6%B0%EC%9D%B4%EB%8F%84%EC%84%9C%EA%B4%80_1.jpg/1280px-%EC%9A%B4%EB%82%A8%EC%96%B4%EB%A6%B0%EC%9D%B4%EB%8F%84%EC%84%9C%EA%B4%80_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "credit": "Motoko C. K. · CC BY-SA 3.0 · Wikimedia Commons",
+      "license": "CC BY-SA 3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:%EC%9A%B4%EB%82%A8%EC%96%B4%EB%A6%B0%EC%9D%B4%EB%8F%84%EC%84%9C%EA%B4%80_1.jpg"
+    }
+  }
+}

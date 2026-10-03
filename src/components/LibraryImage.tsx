@@ -78,7 +78,12 @@ export function LibraryImage({ library, variant, style, framed = false }: Props)
     if (variant !== 'hero') return;
 
     if (photo?.source) {
-      const asset = Image.resolveAssetSource(photo.source);
+      // 웹에는 resolveAssetSource 가 없다 — 그때는 require 결과에 실린 크기를 쓴다
+      const resolve = (Image as unknown as { resolveAssetSource?: (s: number) => { width?: number; height?: number } | null }).resolveAssetSource;
+      const asset =
+        typeof resolve === 'function'
+          ? resolve(photo.source)
+          : (photo.source as unknown as { width?: number; height?: number } | null);
       if (asset?.width && asset?.height) setRatio(asset.width / asset.height);
       return;
     }
