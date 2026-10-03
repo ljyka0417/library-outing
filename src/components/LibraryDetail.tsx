@@ -14,6 +14,7 @@ import { libraryApi } from '@/api/libraryApi';
 import { CATEGORY_MAP } from '@/data/categories';
 import { loanDataVersion } from '@/data/books.mock';
 import { bookPrograms } from '@/data/bookPrograms';
+import { googleQueryFor } from '@/data/googleMaps';
 import { FEATURES } from '@/config/features';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
@@ -314,7 +315,14 @@ export const LibraryDetail = memo(function LibraryDetail({
     <View style={styles.section}>
       <SectionHeader title={t('lib.mapTitle')} subtitle={t('lib.mapSub')} inset={inset} />
       <View style={{ paddingHorizontal: inset }}>
-        <MapButtons target={{ name: library.name, coords: library.coords, address: library.address }} />
+        <MapButtons
+          target={{
+            name: library.name,
+            coords: library.coords,
+            address: library.address,
+            googleQuery: googleQueryFor(library.id),
+          }}
+        />
       </View>
     </View>
   );

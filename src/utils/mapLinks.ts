@@ -27,6 +27,13 @@ export interface MapTarget {
    */
   coords?: Coordinates;
   address?: string;
+  /**
+   * 구글 지도 검색어를 따로 정해 둔 곳 (src/data/googleMaps.ts).
+   *   문자열 — 이 말로 찾아야 구글이 그 도서관 장소 카드를 연다
+   *   null   — 어떤 말로도 장소 카드가 안 떠서 좌표로 연다 (엉뚱한 곳보다 낫다)
+   *   없음   — 기본값 "이름 + 주소"
+   */
+  googleQuery?: string | null;
 }
 
 type MapProvider = 'naver' | 'kakao';
@@ -142,13 +149,16 @@ export const openKakaoMap = (target: MapTarget) => openInMap('kakao', target);
  * 구글 지도 앱이 있으면 iOS·안드로이드가 알아서 앱으로 열고, 없으면 브라우저로 연다.
  * 그래서 "앱이 없어요" 안내도 필요 없다. 외국인 이용자는 대개 이쪽을 쓴다.
  *
- * 좌표가 있으면 좌표로 연다. "남구도서관"처럼 전국에 같은 이름이 있는 곳을
- * 이름으로 찾으면 엉뚱한 도시가 먼저 나올 수 있다.
+ * 좌표가 아니라 "도서관 이름 + 주소"로 찾는다.
+ * 좌표로 열었더니 장소 카드 대신 「37°29'50.7"N …」 같은 숫자 핀만 떠서
+ * 도서관 이름·운영시간·전화가 안 나왔다. 이름만 넣으면 "남구도서관"처럼
+ * 전국에 같은 이름이 있는 곳에서 엉뚱한 도시가 먼저 나올 수 있어 주소를 붙인다.
  */
 export function googleMapsUrl(target: MapTarget): string {
-  const query = target.coords
-    ? `${target.coords.lat},${target.coords.lng}`
-    : [target.name, target.address].filter(Boolean).join(' ');
+  const query =
+    target.googleQuery === null && target.coords
+      ? `${target.coords.lat},${target.coords.lng}`
+      : target.googleQuery || [target.name, target.address].filter(Boolean).join(' ');
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 }
 
