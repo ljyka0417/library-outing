@@ -18,6 +18,7 @@ import { googleQueryFor } from '@/data/googleMaps';
 import { fetchLoanStatus, loanLookupEnabled, type LoanStatus } from '@/api/loanStatus';
 import { WeatherChip } from './WeatherChip';
 import { BarrierFreeSection } from './BarrierFreeSection';
+import { CultureEventsSection } from './CultureEventsSection';
 import { FEATURES } from '@/config/features';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
@@ -451,6 +452,9 @@ export const LibraryDetail = memo(function LibraryDetail({
           {Object.keys(loans).length > 0 ? <Text style={[styles.loanNote, { paddingHorizontal: layout.gutter }]}>{t('loan.checked')}</Text> : null}
         </View>
       ) : null}
+
+      {/* 근처 공연·전시. 행사가 없거나 못 불러오면 칸이 스스로 숨는다 */}
+      {library.coords ? <CultureEventsSection libraryName={library.name} coords={library.coords} /> : null}
 
       {/* 주변 정보. 좌표를 모르면 반경 검색을 할 수 없으므로 섹션 자체를 생략한다. */}
       {library.coords ? (

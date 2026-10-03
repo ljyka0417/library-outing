@@ -3,6 +3,9 @@
 앱이 "이 도서관에 이 책 지금 빌릴 수 있나"를 묻는 곳. 정보나루 키는 여기에만 둔다
 (앱에 넣으면 누구나 앱 파일에서 꺼낼 수 있다). 자세한 동작은 `src/index.js` 맨 위 설명.
 
+같은 서버가 공공데이터포털 키(`DATA_GO_KR_KEY`)로 날씨(`/weather`, `src/weather.js`)와
+도서관 근처 공연·전시(`/culture`, `/culture/detail`, `src/culture.js`)도 중계한다.
+
 ## 처음 올리기 (한 번만)
 
 1. Cloudflare 가입 (무료): https://dash.cloudflare.com/sign-up
@@ -18,7 +21,9 @@
 4. 정보나루 키를 비밀 변수로 넣기 (채팅·코드에 붙여 넣지 않는다). 물어보면 키를 붙여 넣는다
    ```
    npx wrangler secret put DATA4LIBRARY_KEY
+   npx wrangler secret put DATA_GO_KR_KEY
    ```
+   공공데이터포털 키는 기상청 단기예보, 한국문화정보원 한눈에보는문화정보를 각각 활용신청해 둬야 한다
 5. 3번에서 나온 주소를 `src/config/loanProxy.ts` 의 `LOAN_PROXY_URL` 에 넣는다
 
 ## 고친 뒤 다시 올리기

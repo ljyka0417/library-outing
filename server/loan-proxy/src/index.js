@@ -19,6 +19,7 @@
  */
 import LIBS from './libs.js';
 import { weather } from './weather.js';
+import { culture } from './culture.js';
 
 const ALLOWED = new Set(LIBS);
 const MAX_BOOKS = 10;
@@ -73,8 +74,9 @@ export async function handle(request, env) {
   if (request.method !== 'GET') return json({ error: 'GET 만 받습니다' }, 405);
 
   const url = new URL(request.url);
-  // 날씨는 기상청 키(DATA_GO_KR_KEY)를 쓴다 — 정보나루 키 검사보다 먼저
+  // 날씨·문화 행사는 공공데이터포털 키(DATA_GO_KR_KEY)를 쓴다 — 정보나루 키 검사보다 먼저
   if (url.pathname === '/weather') return weather(url, env, json);
+  if (url.pathname === '/culture' || url.pathname === '/culture/detail') return culture(url, env, json);
   if (!env.DATA4LIBRARY_KEY) return json({ error: '서버에 DATA4LIBRARY_KEY 가 설정되지 않았습니다' }, 500);
   if (url.pathname === '/where') return where(url, env);
   if (url.pathname === '/search') return search(url, env);
