@@ -1,7 +1,7 @@
 {
   "expo": {
-    "//name": "홈 화면 아이콘 아래에 뜨는 이름이자 앱스토어 검색어. 가이드북 『오늘 도서관 갈래?』가 '도서관 지도'를 검색하라고 안내한다. 「갈피」는 같은 이름의 독서 앱이 여럿 있어 접었다.",
-    "name": "도서관 지도",
+    "//name": "홈 화면 아이콘 아래에 뜨는 이름 (라이브러리 + 아카이브, 영어 Larchive). 가이드북 『오늘 도서관 갈래?』 24~25쪽이 앱스토어에서 '도서관 지도'를 검색하라고 안내하므로, 스토어 등록 이름에는 「도서관 지도」를 꼭 함께 넣는다 (예: 라키브 - 도서관 지도). 「갈피」는 같은 이름의 독서 앱이 여럿 있어 접었다.",
+    "name": "라키브",
     "//slug": "EAS 프로젝트를 가리키는 값이라 바꾸면 빌드가 다른 프로젝트로 붙는다. 표시 이름과 무관하므로 그대로 둔다.",
     "slug": "library-outing",
     "version": "0.1.0",
@@ -10,6 +10,7 @@
     "newArchEnabled": true,
     "//scheme": "책자 QR에 인코딩되는 딥링크 스킴. 예) libraryapp://library/seoul-music",
     "scheme": "libraryapp",
+    "//icon": "아이콘: 크림 바탕에 에메랄드 책갈피+지도 핀. 원본은 assets/icon-src/*.svg (그라데이션은 문양 전체에 하나로 칠해 이음새 색이 어긋나지 않게). iOS 18+ 는 어두운 모드·틴트 모드 아이콘을 따로 쓴다 — 어두운 모드는 바탕을 시스템이 깔도록 투명, 틴트는 애플 권장대로 검은 바탕에 흰~회색 문양.",
     "icon": "./assets/icon.png",
     "//splash": "이미지는 npm run app-images 로 생성합니다. backgroundColor 는 splash.png 의 배경과 같아야 letterbox 이음매가 안 보입니다.",
     "splash": {
@@ -19,6 +20,11 @@
     },
     "ios": {
       "supportsTablet": true,
+      "icon": {
+        "light": "./assets/icon.png",
+        "dark": "./assets/icon-dark.png",
+        "tinted": "./assets/icon-tinted.png"
+      },
       "bundleIdentifier": "com.libraryouting.app",
       "infoPlist": {
         "//": "canOpenURL 로 지도앱 설치 여부를 확인하려면 iOS 는 반드시 화이트리스트 등록이 필요하다.",
@@ -37,12 +43,12 @@
     },
     "android": {
       "package": "com.libraryouting.app",
-      "//adaptiveIcon": "시험 중: 아이콘은 한 줄 책갈피 + 지도 핀 점(assets/icon-src/galpi-line*.svg 에서 뽑음). npm run icon 을 돌리면 예전 핀 아이콘으로 덮어쓰니 주의. monochromeImage 는 안드로이드 13+ 테마 아이콘(벽지 색으로 칠함)용 단색 이미지. backgroundColor 는 backgroundImage 가 안 먹는 환경을 위한 대비값.",
+      "//adaptiveIcon": "아이콘 원본은 assets/icon-src/adaptive-*.svg. 문양은 가운데 66% 안전영역 안에 있다. npm run icon 을 돌리면 예전 핀 아이콘으로 덮어쓰니 주의. monochromeImage 는 안드로이드 13+ 테마 아이콘(벽지 색으로 칠함)용 단색 이미지. backgroundColor 는 backgroundImage 가 안 먹는 환경을 위한 대비값.",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundImage": "./assets/adaptive-background.png",
         "monochromeImage": "./assets/adaptive-icon-monochrome.png",
-        "backgroundColor": "#000000"
+        "backgroundColor": "#F8F0DF"
       },
       "intentFilters": [
         {
