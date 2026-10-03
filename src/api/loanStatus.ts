@@ -45,3 +45,39 @@ export async function fetchLoanStatus(libCode: string, isbns: string[]): Promise
     clearTimeout(timer);
   }
 }
+
+/**
+ * 책 한 권을 여러 도서관에 묻는다 — "이 책 어디서 빌릴 수 있어?"
+ * 돌려주는 값: 도서관 코드 → 상태. 정보나루가 답하지 않은 도서관은 빠진다.
+ * 실패하면 null — 화면은 "지금은 확인할 수 없어요"를 보여 준다(빈 결과와 구별하려고).
+ */
+export async function fetchWhereToBorrow(
+  isbn: string,
+  libCodes: string[]
+): Promise<Record<string, LoanStatus> | null> {
+  const libs = [...new Set(libCodes.filter(Boolean))].slice(0, 20);
+  if (!LOAN_PROXY_URL || !/^\d{13}$/.test(isbn) || libs.length === 0) return null;
+
+  const key = `where:${isbn}:${libs.join(',')}`;
+  const hit = memo.get(key);
+  if (hit && Date.now() - hit.at < MEMO_MS) return hit.value;
+
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8000);
+  try {
+    const res = await fetch(
+      `${LOAN_PROXY_URL.replace(/\/$/, '')}/where?isbn=${isbn}&libs=${libs.join(',')}`,
+      { signal: controller.signal }
+    );
+    if (!res.ok) return null;
+    const body = (await res.json()) as { results?: Record<string, LoanStatus | null> };
+    const value: Record<string, LoanStatus> = {};
+    for (const [lib, r] of Object.entries(body.results ?? {})) if (r) value[lib] = r;
+    memo.set(key, { at: Date.now(), value });
+    return value;
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}

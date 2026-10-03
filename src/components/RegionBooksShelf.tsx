@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import { BookCard } from './BookCard';
+import { WhereToBorrowSheet } from './WhereToBorrowSheet';
+import { loanLookupEnabled } from '@/api/loanStatus';
 import { booksForRegion, regionsWithBooks } from '@/data/regionBooks';
 import { SIDO_LIST } from '@/data/categories';
 import { bleedRow, useLayout } from '@/hooks/useLayout';
 import { regionName, useT } from '@/i18n';
 import { colors, radius, spacing, typography } from '@/theme';
+import type { Book } from '@/types';
 
 /**
  * 홈의 "지역별 많이 빌린 책" 줄. 제목 옆 단추로 지역을 바꾼다.
@@ -20,6 +24,9 @@ export function RegionBooksShelf({ initialRegion }: { initialRegion: string }) {
   const regions = SIDO_LIST.filter((r) => regionsWithBooks.includes(r));
   const [region, setRegion] = useState(regions.includes(initialRegion) ? initialRegion : regions[0]);
   const [picking, setPicking] = useState(false);
+  // 누른 책 — "어디서 빌릴 수 있나요?" 판을 띄운다
+  const [asking, setAsking] = useState<Book | null>(null);
+  const router = useRouter();
   const books = booksForRegion(region);
   if (!region || books.length === 0) return null;
 
@@ -51,10 +58,35 @@ export function RegionBooksShelf({ initialRegion }: { initialRegion: string }) {
         style={bleedRow(layout).style}
         contentContainerStyle={[styles.row, bleedRow(layout).content]}
       >
-        {books.map((b) => (
-          <BookCard key={b.id} book={b} />
-        ))}
+        {books.map((b) =>
+          loanLookupEnabled && b.isbn ? (
+            <Pressable
+              key={b.id}
+              onPress={() => setAsking(b)}
+              style={({ pressed }) => pressed && { opacity: 0.7 }}
+              accessibilityRole="button"
+              accessibilityHint={t('home.regionBooksHint')}
+            >
+              <BookCard book={b} />
+            </Pressable>
+          ) : (
+            <BookCard key={b.id} book={b} />
+          )
+        )}
       </ScrollView>
+      {loanLookupEnabled ? (
+        <Text style={[styles.hint, { paddingHorizontal: layout.gutter }]}>{t('home.regionBooksHint')}</Text>
+      ) : null}
+
+      <WhereToBorrowSheet
+        book={asking}
+        region={region}
+        onClose={() => setAsking(null)}
+        onOpenLibrary={(id) => {
+          setAsking(null);
+          router.push(`/library/${id}`);
+        }}
+      />
 
       {/* 지역 고르기 — 아래에서 올라오는 판 */}
       <Modal visible={picking} transparent animationType="fade" onRequestClose={() => setPicking(false)}>
@@ -121,6 +153,11 @@ const styles = StyleSheet.create({
   },
   row: {
     gap: spacing.lg,
+  },
+  hint: {
+    ...typography.tiny,
+    color: colors.textMuted,
+    marginTop: spacing.sm,
   },
   backdrop: {
     flex: 1,

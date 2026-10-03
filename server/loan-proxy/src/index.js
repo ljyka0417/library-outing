@@ -68,8 +68,9 @@ export async function handle(request, env) {
   if (request.method !== 'GET') return json({ error: 'GET 만 받습니다' }, 405);
 
   const url = new URL(request.url);
-  if (url.pathname !== '/loan') return json({ error: '없는 주소입니다. /loan?lib=…&isbn=… 로 물어 주세요' }, 404);
   if (!env.DATA4LIBRARY_KEY) return json({ error: '서버에 DATA4LIBRARY_KEY 가 설정되지 않았습니다' }, 500);
+  if (url.pathname === '/where') return where(url, env);
+  if (url.pathname !== '/loan') return json({ error: '없는 주소입니다. /loan 또는 /where 로 물어 주세요' }, 404);
 
   const lib = url.searchParams.get('lib') ?? '';
   if (!ALLOWED.has(lib)) return json({ error: '이 앱에 실린 도서관이 아닙니다' }, 400);
@@ -82,6 +83,25 @@ export async function handle(request, env) {
   const answers = await Promise.all(isbns.map((isbn) => askOne(env, lib, isbn)));
   const results = Object.fromEntries(isbns.map((isbn, i) => [isbn, answers[i]]));
   return json({ lib, checkedAt: new Date().toISOString(), results }, 200, { 'Cache-Control': 'no-store' });
+}
+
+/**
+ * 책 한 권을 여러 도서관에 묻는다 — "이 책 어디서 빌릴 수 있어?"
+ *   GET /where?isbn=9788936434120&libs=111314,111071
+ *   → { isbn, checkedAt, results: { "111314": { hasBook, loanAvailable }, ... } }
+ * 앱은 한 지역의 도서관(많아야 11곳)만 묻는다. 그래도 넉넉히 20곳까지 받는다.
+ */
+const MAX_LIBS = 20;
+async function where(url, env) {
+  const isbn = url.searchParams.get('isbn') ?? '';
+  if (!/^\d{13}$/.test(isbn)) return json({ error: 'ISBN 은 숫자 13자리로 주세요' }, 400);
+  const libs = [...new Set((url.searchParams.get('libs') ?? '').split(',').map((s) => s.trim()).filter(Boolean))];
+  if (libs.length === 0 || libs.length > MAX_LIBS) return json({ error: `도서관 코드를 1~${MAX_LIBS}개 쉼표로 이어 주세요` }, 400);
+  if (libs.some((l) => !ALLOWED.has(l))) return json({ error: '이 앱에 실린 도서관이 아닌 코드가 있습니다' }, 400);
+
+  const answers = await Promise.all(libs.map((lib) => askOne(env, lib, isbn)));
+  const results = Object.fromEntries(libs.map((lib, i) => [lib, answers[i]]));
+  return json({ isbn, checkedAt: new Date().toISOString(), results }, 200, { 'Cache-Control': 'no-store' });
 }
 
 export default { fetch: handle };
