@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Mascot, type MascotPose } from './Mascot';
 import { fetchWeather, WEATHER_ICON, weatherEnabled, weatherMood, type Weather, type WeatherMood } from '@/api/weather';
+import { AIR_COLOR, airEnabled, airIsBad, fetchAir, stationName, type Air } from '@/api/air';
 import { useT, type MessageKey } from '@/i18n';
 import { colors, radius, spacing, typography } from '@/theme';
 import type { Coordinates } from '@/types';
@@ -12,7 +13,8 @@ import type { Coordinates } from '@/types';
  *
  * 어디 날씨인지는 부르는 쪽이 정한다(최근 본 도서관, 없으면 서울도서관 자리).
  * 비·눈·더위·추위엔 실내에서 오래 머물기 좋은 도서관을, 맑은 날엔 공원·호수 옆
- * 자연·환경 도서관을 권한다. 날씨를 모르면 카드를 아예 그리지 않는다.
+ * 자연·환경 도서관을 권한다. 미세먼지가 나쁨 이상이면 맑아도 실내를 권한다(에어코리아).
+ * 날씨를 모르면 카드를 아예 그리지 않는다.
  */
 const POSE: Record<WeatherMood, MascotPose> = {
   wet: 'reading',
@@ -34,17 +36,20 @@ export function WeatherCard({
   /** 권하는 쪽으로 가기 — 맑은 날은 'nature', 그 밖엔 'indoor' */
   onAction: (kind: 'nature' | 'indoor') => void;
 }) {
-  const { t } = useT();
+  const { t, lang } = useT();
   const [w, setW] = useState<Weather | null>(null);
+  const [air, setAir] = useState<Air | null>(null);
   const key = `${coords.lat},${coords.lng}`;
 
   useEffect(() => {
     setW(null);
+    setAir(null);
     if (!weatherEnabled) return;
     let alive = true;
     void fetchWeather(coords).then((r) => {
       if (alive) setW(r);
     });
+    if (airEnabled) void fetchAir(coords).then((r) => alive && setAir(r));
     return () => {
       alive = false;
     };
@@ -53,7 +58,8 @@ export function WeatherCard({
 
   if (!w) return null;
   const mood = weatherMood(w);
-  const kind = mood === 'nice' ? 'nature' : 'indoor';
+  const badAir = airIsBad(air);
+  const kind = mood === 'nice' && !badAir ? 'nature' : 'indoor';
   const sky = t(`weather.${w.condition}` as MessageKey);
 
   return (
@@ -65,7 +71,16 @@ export function WeatherCard({
             {t('weather.now', { place, temp: w.temp !== undefined ? String(Math.round(w.temp)) : '–', sky })}
           </Text>
         </View>
-        <Text style={styles.tip}>{t(`weather.tip.${mood}` as MessageKey)}</Text>
+        {air ? (
+          <Text style={[styles.air, { color: AIR_COLOR[air.grade].fg }]}>
+            {t('air.line', {
+              pm10: air.pm10Grade ? t(`air.grade.${air.pm10Grade}` as MessageKey) : '–',
+              pm25: air.pm25Grade ? t(`air.grade.${air.pm25Grade}` as MessageKey) : '–',
+              station: stationName(air, lang),
+            })}
+          </Text>
+        ) : null}
+        <Text style={styles.tip}>{badAir ? t('air.tip.bad') : t(`weather.tip.${mood}` as MessageKey)}</Text>
         <Pressable
           onPress={() => onAction(kind)}
           style={({ pressed }) => [styles.action, pressed && { opacity: 0.7 }]}
@@ -75,7 +90,7 @@ export function WeatherCard({
           <Ionicons name="chevron-forward" size={14} color={colors.primary} />
         </Pressable>
       </View>
-      <Mascot pose={POSE[mood]} size={72} />
+      <Mascot pose={badAir ? 'reading' : POSE[mood]} size={72} />
     </View>
   );
 }
@@ -98,6 +113,10 @@ const styles = StyleSheet.create({
     ...typography.captionBold,
     color: colors.text,
     flexShrink: 1,
+  },
+  air: {
+    ...typography.captionBold,
+    marginTop: 2,
   },
   tip: {
     ...typography.body,

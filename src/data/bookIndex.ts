@@ -49,3 +49,18 @@ export function searchLocalBooks(query: string, limit = 15): FoundBook[] {
   scored.sort((a, b) => a.rank - b.rank || b.loans - a.loans);
   return scored.slice(0, limit).map((s) => toFound(s.row));
 }
+
+// ISBN → 표지 (함께 빌린 책처럼 표지 없이 오는 책에 붙인다)
+let coverByIsbn: Map<string, string> | null = null;
+export function coverForIsbn(isbn: string): string | undefined {
+  if (!coverByIsbn) {
+    coverByIsbn = new Map();
+    for (const row of DATA.books) {
+      const cover = row[4];
+      if (!cover) continue;
+      const url = cover.startsWith('http') ? cover : DATA.coverPrefix + cover;
+      for (const i of row[2].split(',')) coverByIsbn.set(i, url);
+    }
+  }
+  return coverByIsbn.get(isbn);
+}

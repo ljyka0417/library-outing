@@ -37,7 +37,9 @@
     "collect-holidays": "node scripts/collect-holidays.mjs",
     "collect-barrier-free": "node scripts/collect-barrier-free.mjs",
     "collect-trend-books": "node scripts/collect-trend-books.mjs",
-    "collect-book-index": "node scripts/collect-book-index.mjs"
+    "collect-book-index": "node scripts/collect-book-index.mjs",
+    "collect-air-stations": "node scripts/collect-air-stations.mjs",
+    "collect-parking": "node scripts/collect-parking.mjs"
   },
   "dependencies": {
     "@expo/metro-runtime": "~57.0.15",

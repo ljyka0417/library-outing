@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Image, Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { fetchWhereToBorrow, type LoanStatus } from '@/api/loanStatus';
+import { fetchRelated, fetchWhereToBorrow, type FoundBook, type LoanStatus } from '@/api/loanStatus';
 import { MOCK_LIBRARIES } from '@/data/libraries.mock';
 import { regionName, useT } from '@/i18n';
 import { libText } from '@/i18n/libraryText';
@@ -14,10 +14,13 @@ import type { Book, Library } from '@/types';
  * 그 지역에서 정보나루에 등록된 도서관(많아야 11곳)에 한 번에 묻고,
  * 대출 가능 → 대출 중 순으로 보여 준다. 책이 없는 곳은 이름 대신 곳 수만 적는다
  * (없는 곳을 줄줄이 늘어놓으면 정작 빌릴 수 있는 곳이 묻힌다).
+ *
+ * 아래에는 "이 책을 빌린 사람들이 함께 빌린 책"(정보나루)을 둔다. 누르면 판이 그 책으로 바뀌어
+ * 다시 어디서 빌릴지 묻는다 — 책 구경이 판 안에서 이어진다.
  */
 
 export function WhereToBorrowSheet({
-  book,
+  book: startBook,
   region,
   onClose,
   onOpenLibrary,
@@ -28,6 +31,10 @@ export function WhereToBorrowSheet({
   onOpenLibrary: (id: string) => void;
 }) {
   const { t, lang } = useT();
+  // 지금 보는 책 — 함께 빌린 책을 누르면 바뀐다. 밖에서 다른 책을 주면 그 책으로 돌아간다
+  const [book, setBook] = useState<Book | null>(startBook);
+  useEffect(() => setBook(startBook), [startBook]);
+  const [related, setRelated] = useState<FoundBook[]>([]);
   const libs: Library[] = MOCK_LIBRARIES.filter((l) => l.sourceApiId && l.region.sido === region);
   const [state, setState] = useState<'loading' | 'done' | 'failed'>('loading');
   const [results, setResults] = useState<Record<string, LoanStatus>>({});
@@ -55,7 +62,32 @@ export function WhereToBorrowSheet({
     };
   }, [isbnKey, codesKey]);
 
+  // 함께 빌린 책 — 대출 많은 판본 하나로 묻는다 (서버가 7일 기억한다)
+  const firstIsbn = isbnKey.split(',')[0];
+  useEffect(() => {
+    setRelated([]);
+    if (!firstIsbn) return;
+    let alive = true;
+    void fetchRelated(firstIsbn).then((r) => {
+      if (alive && Array.isArray(r)) setRelated(r);
+    });
+    return () => {
+      alive = false;
+    };
+  }, [firstIsbn]);
+
   if (!book) return null;
+
+  const openRelated = (b: FoundBook) =>
+    setBook({
+      id: `related-${b.isbns[0]}`,
+      title: b.title,
+      author: b.author,
+      coverImageUrl: b.coverImageUrl,
+      isbn: b.isbns[0],
+      isbns: b.isbns,
+      category: 'humanities',
+    });
 
   const statusOf = (l: Library) => results[l.sourceApiId!];
   const available = libs.filter((l) => statusOf(l)?.hasBook && statusOf(l)?.loanAvailable);
@@ -117,7 +149,7 @@ export function WhereToBorrowSheet({
               <Text style={styles.sub}>
                 {t('where.sub', { region: regionName(lang, region), n: String(libs.length) })}
               </Text>
-              <ScrollView style={{ maxHeight: 360 }}>
+              <ScrollView style={{ maxHeight: related.length ? 260 : 360 }}>
                 {available.map((l) => row(l, true))}
                 {onLoan.map((l) => row(l, false))}
                 {available.length + onLoan.length === 0 && unknown.length === 0 ? (
@@ -132,6 +164,32 @@ export function WhereToBorrowSheet({
               </ScrollView>
             </>
           )}
+
+          {related.length ? (
+            <View style={styles.related}>
+              <Text style={styles.relatedTitle}>{t('where.related')}</Text>
+              <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.relatedRow}>
+                {related.map((b) => (
+                  <Pressable
+                    key={b.isbns[0]}
+                    onPress={() => openRelated(b)}
+                    style={({ pressed }) => [styles.relatedItem, pressed && { opacity: 0.7 }]}
+                    accessibilityRole="button"
+                    accessibilityLabel={`${b.title}, ${b.author}`}
+                  >
+                    {b.coverImageUrl ? (
+                      <Image source={{ uri: b.coverImageUrl }} style={styles.relatedCover} />
+                    ) : (
+                      <View style={[styles.relatedCover, styles.relatedCoverEmpty]}>
+                        <Ionicons name="book" size={18} color={colors.textMuted} />
+                      </View>
+                    )}
+                    <Text style={styles.relatedName} numberOfLines={2}>{b.title}</Text>
+                  </Pressable>
+                ))}
+              </ScrollView>
+            </View>
+          ) : null}
         </Pressable>
       </Pressable>
     </Modal>
@@ -139,6 +197,38 @@ export function WhereToBorrowSheet({
 }
 
 const styles = StyleSheet.create({
+  related: {
+    marginTop: spacing.lg,
+    paddingTop: spacing.md,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: colors.border,
+  },
+  relatedTitle: {
+    ...typography.captionBold,
+    color: colors.textSub,
+    marginBottom: spacing.sm,
+  },
+  relatedRow: {
+    gap: spacing.md,
+  },
+  relatedItem: {
+    width: 72,
+  },
+  relatedCover: {
+    width: 72,
+    height: 102,
+    borderRadius: radius.sm,
+    backgroundColor: colors.surfaceAlt,
+  },
+  relatedCoverEmpty: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  relatedName: {
+    ...typography.tiny,
+    color: colors.text,
+    marginTop: 4,
+  },
   backdrop: {
     flex: 1,
     backgroundColor: 'rgba(30,26,22,0.35)',

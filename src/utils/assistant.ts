@@ -6,6 +6,7 @@ import { isOpenNow, todayHoursLabel } from './openingHours';
 import { holidayName } from '@/data/holidays';
 import { holidayText, libText, specialtyCategory } from '@/i18n/libraryText';
 import { fetchWeather, weatherEnabled, weatherMood } from '@/api/weather';
+import { airEnabled, airIsBad, fetchAir, stationName } from '@/api/air';
 import { BF_GROUPS, barrierFreeFor, bfHas } from '@/data/barrierFree';
 import { fetchWhereToBorrow, loanLookupEnabled, searchBooks } from '@/api/loanStatus';
 import { searchLocalBooks } from '@/data/bookIndex';
@@ -542,6 +543,8 @@ const ASK_TIME = /(지금|현재|오늘)\s*(몇\s*시|시간|시각)|몇\s*시�
 const ASK_ACCESS = /휠체어|장애인|무장애|유모차|수유실|기저귀|엘리베이터|점자|수어|\bwheelchairs?\b|\baccessib(le|ility)\b|\bstrollers?\b|\bbraille\b|\bsign language\b|バリアフリー|車いす|車椅子|ベビーカー|点字|手話|无障碍|轮椅|婴儿车|盲文|手语/;
 
 /** 날씨를 묻는 말 */
+/** 미세먼지·공기 — 날씨보다 먼저 본다 */
+const ASK_AIR = /미세\s*먼지|초미세|황사|공기\s*(질|어때|어떄|좋|나빠|나쁘|상태)|대기\s*(질|오염|상태)|\bair\s*quality\b|\bfine\s*dust\b|\bpm\s*(2\.?5|10)\b|\bdust\b|\bsmog\b|大気|黄砂|空気|PM2\.5|PM10|雾霾|空气质量|空气怎么样|微尘|粉尘/i;
 const ASK_WEATHER = /날씨|기온|몇\s*도|비\s*(와|오|올)|눈\s*(와|오|올)|우산|\bweather\b|\btemperature\b|\brain(ing|y)?\b|天気|気温|雨|天气|气温|下雨/;
 
 const WEEKDAYS: Record<Lang, string[]> = {
@@ -801,18 +804,43 @@ export async function ask(
   }
 
   // "오늘 날씨 어때?" — 도서관을 말하면 그 자리, 지역을 말하면 그 지역 대표 도서관 자리, 아니면 서울
-  if (weatherEnabled && ASK_WEATHER.test(text)) {
+  // 날씨·미세먼지를 볼 자리: 도서관을 말하면 그 자리, 지역을 말하면 그 지역 대표 도서관 자리, 아니면 서울
+  const spotFor = () => {
     const lib = findLibrary(q);
     const sido = lib ? undefined : findSido(q);
-    const spot =
-      (lib?.coords && { coords: lib.coords, place: lib.name }) ||
-      (() => {
-        const region = sido ?? '서울';
-        const rep =
-          MOCK_LIBRARIES.find((l) => l.region.sido === region && l.isLandmark && l.coords) ??
-          MOCK_LIBRARIES.find((l) => l.region.sido === region && l.coords);
-        return rep?.coords ? { coords: rep.coords, place: regionName(lang, region) } : undefined;
-      })();
+    if (lib?.coords) return { coords: lib.coords, place: lib.name };
+    const region = sido ?? '서울';
+    const rep =
+      MOCK_LIBRARIES.find((l) => l.region.sido === region && l.isLandmark && l.coords) ??
+      MOCK_LIBRARIES.find((l) => l.region.sido === region && l.coords);
+    return rep?.coords ? { coords: rep.coords, place: regionName(lang, region) } : undefined;
+  };
+
+  // "미세먼지 어때?" — 가장 가까운 에어코리아 측정소 값 (날씨보다 먼저: "공기"·"먼지"는 날씨 말이 아니다)
+  if (airEnabled && ASK_AIR.test(text)) {
+    const spot = spotFor();
+    const a = spot ? await fetchAir(spot.coords) : null;
+    if (!spot || !a) return { text: tr('bot.airUnknown') };
+    const g = (v?: number) => (v ? tr(`air.grade.${v}` as MessageKey) : '–');
+    return {
+      text:
+        tr('bot.air', {
+          place: spot.place,
+          pm10: g(a.pm10Grade),
+          pm10v: a.pm10 !== undefined ? String(a.pm10) : '–',
+          pm25: g(a.pm25Grade),
+          pm25v: a.pm25 !== undefined ? String(a.pm25) : '–',
+          station: stationName(a, lang),
+          time: a.dataTime?.slice(11, 16) ?? '',
+        }) +
+        '\n' +
+        (airIsBad(a) ? tr('air.tip.bad') : tr('bot.airGood')),
+      suggestions: (airIsBad(a) ? [tr('bot.sugOpen'), tr('weather.sugIndoor')] : [tr('weather.sugNature'), tr('bot.sugOpen')]).slice(0, CHIP_COUNT),
+    };
+  }
+
+  if (weatherEnabled && ASK_WEATHER.test(text)) {
+    const spot = spotFor();
     const w = spot ? await fetchWeather(spot.coords) : null;
     if (!spot || !w) return { text: tr('bot.weatherUnknown') };
     const mood = weatherMood(w);
@@ -825,7 +853,7 @@ export async function ask(
         }) +
         '\n' +
         tr(`weather.tip.${mood}` as MessageKey),
-      suggestions: (mood === 'nice' ? [tr('weather.sugNature'), tr('bot.sugOpen')] : [tr('bot.sugOpen'), tr('weather.sugIndoor')]).slice(0, CHIP_COUNT),
+      suggestions: [...(mood === 'nice' ? [tr('weather.sugNature'), tr('bot.sugOpen')] : [tr('bot.sugOpen'), tr('weather.sugIndoor')]), ...(airEnabled ? [tr('bot.sugAir')] : [])].slice(0, CHIP_COUNT),
     };
   }
 

@@ -20,6 +20,7 @@
 import LIBS from './libs.js';
 import { weather } from './weather.js';
 import { culture } from './culture.js';
+import { air } from './air.js';
 
 const ALLOWED = new Set(LIBS);
 const MAX_BOOKS = 10;
@@ -128,13 +129,15 @@ export async function handle(request, env) {
   if (request.method !== 'GET') return json({ error: 'GET 만 받습니다' }, 405);
 
   const url = new URL(request.url);
-  // 날씨·문화 행사는 공공데이터포털 키(DATA_GO_KR_KEY)를 쓴다 — 정보나루 키 검사보다 먼저
+  // 날씨·미세먼지·문화 행사는 공공데이터포털 키(DATA_GO_KR_KEY)를 쓴다 — 정보나루 키 검사보다 먼저
   if (url.pathname === '/weather') return weather(url, env, json);
+  if (url.pathname === '/air') return air(url, env, json);
   if (url.pathname === '/culture' || url.pathname === '/culture/detail') return culture(url, env, json);
   if (!env.DATA4LIBRARY_KEY) return json({ error: '서버에 DATA4LIBRARY_KEY 가 설정되지 않았습니다' }, 500);
   if (url.pathname === '/where') return where(url, env);
   if (url.pathname === '/search') return search(url, env);
-  if (url.pathname !== '/loan') return json({ error: '없는 주소입니다. /loan · /where · /search 로 물어 주세요' }, 404);
+  if (url.pathname === '/related') return related(url, env);
+  if (url.pathname !== '/loan') return json({ error: '없는 주소입니다. /loan · /where · /search · /related 로 물어 주세요' }, 404);
 
   const lib = url.searchParams.get('lib') ?? '';
   if (!ALLOWED.has(lib)) return json({ error: '이 앱에 실린 도서관이 아닙니다' }, 400);
@@ -278,3 +281,58 @@ async function search(url, env) {
 }
 
 export default { fetch: handle };
+
+/* ── 함께 빌린 책 ────────────────────────────────────────── */
+
+/**
+ * GET /related?isbn=9788936434120
+ *   → { books: [{ title, author, coverImageUrl, isbns: [...최대 3] }, ...최대 10] }
+ * 정보나루 도서별 이용 분석(usageAnalysisList)의 "함께 대출된 도서". 같은 책의 판본은 한 권으로 묶고,
+ * 물어본 책 자신(다른 판본)은 뺀다. 이 통계는 천천히 바뀌어서 모두가 함께 쓰는 KV 에 7일 기억한다.
+ */
+async function related(url, env) {
+  const isbn = (url.searchParams.get('isbn') ?? '').trim();
+  if (!/^\d{13}$/.test(isbn)) return json({ error: 'ISBN(숫자 13자리)을 주세요' }, 400);
+  const kvKey = `related:v1:${isbn}`;
+  try {
+    const hit = env.LOAN_KV ? await env.LOAN_KV.get(kvKey, 'json') : null;
+    if (hit) return json(hit, 200, { 'Cache-Control': 'no-store' });
+  } catch {
+    // 기억을 못 읽으면 정보나루에 묻는다
+  }
+
+  let response;
+  try {
+    const res = await fetch(`https://data4library.kr/api/usageAnalysisList?authKey=${encodeURIComponent(env.DATA4LIBRARY_KEY)}&isbn13=${isbn}&format=json`);
+    if (!res.ok) return json({ error: '정보나루가 답하지 않습니다' }, 502);
+    response = (await res.json())?.response;
+  } catch {
+    return json({ error: '정보나루가 답하지 않습니다' }, 502);
+  }
+  // 한도 초과·오류는 기억하지 않는다 (빈 결과로 7일 굳어 버리지 않게)
+  if (response?.error || response?.errCode) {
+    return json({ error: response.errCode === 'outOflimit' ? 'quota' : '정보나루 오류' }, 503);
+  }
+
+  const self = response?.book ? squash(cleanTitle(response.book.bookname ?? '')) : '';
+  const groups = new Map();
+  for (const item of response?.coLoanBooks ?? []) {
+    const b = item?.book;
+    if (!b?.bookname || !/^\d{13}$/.test(b.isbn13 ?? '')) continue;
+    const title = cleanTitle(b.bookname);
+    if (!title || squash(title) === self) continue;
+    const author = cleanAuthor(b.authors);
+    const key = `${squash(title)}|${squash(author)}`;
+    const g = groups.get(key) ?? { title, author, coverImageUrl: undefined, isbns: [] };
+    if (g.isbns.length < MAX_EDITIONS) g.isbns.push(b.isbn13);
+    if (!g.coverImageUrl && b.bookImageURL) g.coverImageUrl = b.bookImageURL.replace(/^http:/, 'https:');
+    groups.set(key, g);
+  }
+  const body = { isbn, books: [...groups.values()].slice(0, 10) };
+  try {
+    if (env.LOAN_KV) await env.LOAN_KV.put(kvKey, JSON.stringify(body), { expirationTtl: 7 * 24 * 3600 });
+  } catch {
+    // 못 적어도 답은 준다
+  }
+  return json(body, 200, { 'Cache-Control': 'no-store' });
+}

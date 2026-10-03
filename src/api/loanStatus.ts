@@ -1,4 +1,5 @@
 import { LOAN_PROXY_URL } from '@/config/loanProxy';
+import { coverForIsbn } from '@/data/bookIndex';
 
 /** 한 권의 대출 상태. 정보나루가 답하지 않으면 그 책은 결과에 없다 */
 export interface LoanStatus {
@@ -138,6 +139,37 @@ export async function searchBooks(query: string): Promise<FoundBook[] | null | '
     const body = (await res.json()) as { books?: FoundBook[] };
     const books = (body.books ?? []).filter((b) => b.title && b.isbns?.length);
     searchMemo.set(q, books);
+    return books;
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/**
+ * 이 책을 빌린 사람들이 함께 빌린 책 (정보나루 도서별 이용 분석, 중계 서버 /related — 서버가 7일 기억한다).
+ * 표지는 정보나루가 주지 않아서, 앱에 담아 둔 많이 빌린 책 목록에서 ISBN 으로 찾아 붙인다.
+ */
+const relatedMemo = new Map<string, FoundBook[]>();
+export async function fetchRelated(isbn: string): Promise<FoundBook[] | null | 'quota'> {
+  if (!LOAN_PROXY_URL || !/^\d{13}$/.test(isbn)) return null;
+  const hit = relatedMemo.get(isbn);
+  if (hit) return hit;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8000);
+  try {
+    const res = await fetch(`${LOAN_PROXY_URL.replace(/\/$/, '')}/related?isbn=${isbn}`, { signal: controller.signal });
+    if (res.status === 503) {
+      const err = (await res.json().catch(() => ({}))) as { error?: string };
+      if (err.error === 'quota') return 'quota';
+    }
+    if (!res.ok) return null;
+    const body = (await res.json()) as { books?: FoundBook[] };
+    const books = (body.books ?? [])
+      .filter((b) => b.title && b.isbns?.length)
+      .map((b) => ({ ...b, coverImageUrl: b.coverImageUrl ?? b.isbns.map(coverForIsbn).find(Boolean) }));
+    relatedMemo.set(isbn, books);
     return books;
   } catch {
     return null;

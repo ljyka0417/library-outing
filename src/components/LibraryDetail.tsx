@@ -19,6 +19,7 @@ import { fetchLoanStatus, loanLookupEnabled, type LoanStatus } from '@/api/loanS
 import { WeatherChip } from './WeatherChip';
 import { BarrierFreeSection } from './BarrierFreeSection';
 import { CultureEventsSection } from './CultureEventsSection';
+import { ParkingSection } from './ParkingSection';
 import { FEATURES } from '@/config/features';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
@@ -507,6 +508,7 @@ export const LibraryDetail = memo(function LibraryDetail({
                 <View style={styles.wideCard}>{summary}</View>
                 {programsSection(0)}
                 <BarrierFreeSection libraryId={library.id} />
+                <ParkingSection libraryId={library.id} />
               </View>
             </View>
 
@@ -530,6 +532,7 @@ export const LibraryDetail = memo(function LibraryDetail({
 
           {programsSection(gutter)}
           <BarrierFreeSection libraryId={library.id} inset={gutter} />
+          <ParkingSection libraryId={library.id} inset={gutter} />
           {mapSection(gutter)}
           {shelves}
           {checkin(gutter)}

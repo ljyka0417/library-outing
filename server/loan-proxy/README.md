@@ -3,7 +3,8 @@
 앱이 "이 도서관에 이 책 지금 빌릴 수 있나"를 묻는 곳. 정보나루 키는 여기에만 둔다
 (앱에 넣으면 누구나 앱 파일에서 꺼낼 수 있다). 자세한 동작은 `src/index.js` 맨 위 설명.
 
-같은 서버가 공공데이터포털 키(`DATA_GO_KR_KEY`)로 날씨(`/weather`, `src/weather.js`)와
+같은 서버가 공공데이터포털 키(`DATA_GO_KR_KEY`)로 날씨(`/weather`, `src/weather.js`), 미세먼지(`/air`, `src/air.js` —
+측정소 위치는 `npm run collect-air-stations` 로 받은 `src/air-stations.js`)와
 도서관 근처 공연·전시(`/culture`, `/culture/detail`, `src/culture.js`)도 중계한다.
 
 ## 처음 올리기 (한 번만)
@@ -23,7 +24,7 @@
    npx wrangler secret put DATA4LIBRARY_KEY
    npx wrangler secret put DATA_GO_KR_KEY
    ```
-   공공데이터포털 키는 기상청 단기예보, 한국문화정보원 한눈에보는문화정보를 각각 활용신청해 둬야 한다
+   공공데이터포털 키는 기상청 단기예보, 에어코리아 대기오염정보·측정소정보, 한국문화정보원 한눈에보는문화정보를 각각 활용신청해 둬야 한다
 5. 3번에서 나온 주소를 `src/config/loanProxy.ts` 의 `LOAN_PROXY_URL` 에 넣는다
 
 ## 고친 뒤 다시 올리기
