@@ -1,0 +1,7 @@
+# 라키브 대출 가능 여부 중계 서버 — 올리는 법은 server/loan-proxy/README.md
+name = "larchive-loan"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+# 정보나루 키는 여기 적지 않는다. 비밀 변수로 따로 넣는다:
+#   npx wrangler secret put DATA4LIBRARY_KEY

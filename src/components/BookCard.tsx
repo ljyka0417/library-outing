@@ -3,6 +3,8 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { categoryColors, colors, radius, spacing, typography } from '@/theme';
 import type { Book } from '@/types';
+import type { LoanStatus } from '@/api/loanStatus';
+import { useT } from '@/i18n';
 
 /**
  * 추천 도서 카드.
@@ -12,7 +14,8 @@ import type { Book } from '@/types';
  * 실제 표지가 필요하면 알라딘/교보 OpenAPI 로 ISBN 기반 표지를 받아
  * coverImageUrl 을 채우면 이 컴포넌트가 자동으로 그걸 쓴다.
  */
-export function BookCard({ book }: { book: Book }) {
+export function BookCard({ book, loan }: { book: Book; loan?: LoanStatus }) {
+  const { t } = useT();
   const palette = categoryColors[book.category] ?? {
     bg: colors.surfaceAlt,
     fg: colors.textMuted,
@@ -47,9 +50,22 @@ export function BookCard({ book }: { book: Book }) {
       <Text style={styles.author} numberOfLines={1}>
         {book.author}
       </Text>
+
+      {/* 이 도서관에서 지금 빌릴 수 있는지 (정보나루 실시간). 모르면 아무것도 안 그린다 */}
+      {loan ? (
+        <View style={styles.loanRow}>
+          <View style={[styles.loanDot, { backgroundColor: loanColor(loan) }]} />
+          <Text style={[styles.loanText, { color: loanColor(loan) }]} numberOfLines={1}>
+            {!loan.hasBook ? t('loan.notOwned') : loan.loanAvailable ? t('loan.available') : t('loan.onLoan')}
+          </Text>
+        </View>
+      ) : null}
     </View>
   );
 }
+
+const loanColor = (l: LoanStatus) =>
+  !l.hasBook ? colors.textMuted : l.loanAvailable ? colors.open : colors.closed;
 
 const styles = StyleSheet.create({
   card: {
@@ -109,5 +125,20 @@ const styles = StyleSheet.create({
   author: {
     ...typography.tiny,
     color: colors.textSub,
+  },
+  loanRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    marginTop: 3,
+  },
+  loanDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+  },
+  loanText: {
+    ...typography.tiny,
+    fontWeight: '700',
   },
 });

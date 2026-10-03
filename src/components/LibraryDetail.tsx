@@ -15,6 +15,7 @@ import { CATEGORY_MAP } from '@/data/categories';
 import { loanDataVersion } from '@/data/books.mock';
 import { bookPrograms } from '@/data/bookPrograms';
 import { googleQueryFor } from '@/data/googleMaps';
+import { fetchLoanStatus, loanLookupEnabled, type LoanStatus } from '@/api/loanStatus';
 import { FEATURES } from '@/config/features';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
@@ -130,6 +131,26 @@ export const LibraryDetail = memo(function LibraryDetail({
     [id],
     { cacheKey: `books-${id}-${loanDataVersion}`, enabled: !!id }
   );
+
+  /*
+   * 대출 가능 여부 (정보나루 실시간, 중계 서버 경유).
+   * 정보나루 코드가 있는 도서관에서, ISBN 이 있는 책(대출 순위)만 묻는다.
+   * 기기 캐시에 담아 두지 않는다 — 어제의 "대출 가능"은 오늘 틀린 말이다.
+   */
+  const [loans, setLoans] = useState<Record<string, LoanStatus>>({});
+  const libCode = library?.sourceApiId;
+  const isbnKey = (books ?? []).map((b) => b.isbn).filter(Boolean).join(',');
+  useEffect(() => {
+    setLoans({});
+    if (!loanLookupEnabled || !libCode || !isbnKey) return;
+    let alive = true;
+    void fetchLoanStatus(libCode, isbnKey.split(',')).then((r) => {
+      if (alive) setLoans(r);
+    });
+    return () => {
+      alive = false;
+    };
+  }, [libCode, isbnKey]);
 
   // 상세를 실제로 본 시점에만 "최근 본 도서관"에 기록한다.
   useEffect(() => {
@@ -418,9 +439,10 @@ export const LibraryDetail = memo(function LibraryDetail({
             contentContainerStyle={[styles.bookList, bleedRow(layout).content]}
           >
             {books.map((b) => (
-              <BookCard key={b.id} book={b} />
+              <BookCard key={b.id} book={b} loan={b.isbn ? loans[b.isbn] : undefined} />
             ))}
           </ScrollView>
+          {Object.keys(loans).length > 0 ? <Text style={[styles.loanNote, { paddingHorizontal: layout.gutter }]}>{t('loan.checked')}</Text> : null}
         </View>
       ) : null}
 
@@ -606,6 +628,11 @@ const styles = StyleSheet.create({
   bookList: {
     // 좌우 여백은 bleedRow 가 준다
     gap: spacing.lg,
+  },
+  loanNote: {
+    ...typography.tiny,
+    color: colors.textMuted,
+    marginTop: spacing.sm,
   },
   /* 운영 프로그램 */
   programLink: {

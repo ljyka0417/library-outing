@@ -5,6 +5,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { CategoryGrid } from '@/components/CategoryGrid';
 import { LibraryCard } from '@/components/LibraryCard';
+import { LoanShelf, pickLoanLibrary } from '@/components/LoanShelf';
 import { Mascot } from '@/components/Mascot';
 import { SearchBar } from '@/components/SearchBar';
 import { SectionHeader } from '@/components/common';
@@ -42,6 +43,11 @@ const HomeContent = memo(function HomeContent() {
     .filter((lib) => recentIds.includes(lib.id))
     // 최근 본 순서를 유지한다
     .sort((a, b) => recentIds.indexOf(a.id) - recentIds.indexOf(b.id));
+
+  // "많이 빌린 책" 줄의 도서관: 최근 본 곳 → 즐겨찾기 → 추천 도서관 순서로 찾는다
+  const favoriteIds = useAppStore((s) => s.favorites);
+  const favoriteLibraries = (all.data ?? []).filter((lib) => favoriteIds.includes(lib.id));
+  const loanLibrary = pickLoanLibrary([...recentLibraries, ...favoriteLibraries, ...(featured.data ?? [])]);
 
   const goCategory = useCallback(
     (id: CategoryId) => router.push(`/search?category=${id}`),
@@ -132,6 +138,11 @@ const HomeContent = memo(function HomeContent() {
             </ScrollView>
           )}
         </View>
+
+        {/* 도서관 한 곳의 실제 대출 순위 + 지금 빌릴 수 있는지 */}
+        {loanLibrary ? (
+          <LoanShelf library={loanLibrary} onOpen={() => router.push(`/library/${loanLibrary.id}`)} />
+        ) : null}
 
         {/* 최근 본 도서관 */}
         {recentLibraries.length > 0 ? (

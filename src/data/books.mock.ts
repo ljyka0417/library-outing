@@ -140,6 +140,7 @@ export function booksForLibrary(libraryId: string, categories: CategoryId[]): Bo
       title: b.title,
       author: b.author ?? '',
       coverImageUrl: b.coverImageUrl,
+      isbn: b.isbn,
       // 대출 순위 기반이라 주제 분류는 도서관의 대표 주제를 따른다
       category: categories[0],
       rank: i + 1,

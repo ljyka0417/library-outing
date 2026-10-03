@@ -104,6 +104,8 @@ export interface Book {
   author: string;
   publisher?: string;
   coverImageUrl?: string;
+  /** ISBN-13. 대출 가능 여부를 물을 때 쓴다 (대출 순위 책만 있다) */
+  isbn?: string;
   /** 이 책이 어울리는 주제 */
   category: CategoryId;
   /** 실제 대출 순위. 주제별 일반 추천에는 없다. */
