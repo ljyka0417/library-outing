@@ -192,7 +192,8 @@ export const LibraryDetail = memo(function LibraryDetail({
   const summary = (
     <>
       <View style={styles.badgeRow}>
-        {library.isLandmark ? <Badge label={t('lib.landmark')} tone="brown" /> : null}
+        {/* "지역 대표" 배지는 뺐다. 책 분류를 따르면서 랜드마크 주제 = 지역 대표가 되어,
+            같은 말이 배지 두 개로 나란히 찍혔다 */}
         {library.categories.map((c) =>
           // 부제(LP·IT 같은 예시어)는 붙이지 않는다. 그 분류의 한 예일 뿐이라
           // 이 도서관 이야기인 것처럼 읽힌다. 특화는 아래 "특화" 줄에 있다.
