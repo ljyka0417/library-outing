@@ -17,7 +17,7 @@ import { isOpenNow } from '@/utils/openingHours';
 import { useNow } from '@/hooks/useNow';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { LayoutWidth, centered, useLayout } from '@/hooks/useLayout';
-import { colors, spacing, typography } from '@/theme';
+import { colors, spacing, typography, themedStyles } from '@/theme';
 import type { CategoryId, Library } from '@/types';
 
 /**
@@ -374,7 +374,7 @@ const ResultsPane = memo(function ResultsPane({
   );
 });
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   safe: {
     flex: 1,
     backgroundColor: colors.background,
@@ -456,4 +456,4 @@ const styles = StyleSheet.create({
     paddingBottom: spacing.xl,
     gap: spacing.md,
   },
-});
+}));

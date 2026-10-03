@@ -5,7 +5,7 @@ import { CATEGORIES } from '@/data/categories';
 import { MOCK_LIBRARIES } from '@/data/libraries.mock';
 import { useT } from '@/i18n';
 import { useLayout } from '@/hooks/useLayout';
-import { categoryColors, colors, radius, spacing, typography } from '@/theme';
+import { categoryColors, colors, radius, spacing, typography, themedStyles } from '@/theme';
 import type { CategoryId } from '@/types';
 
 /**
@@ -84,7 +84,7 @@ export function CategoryGrid({ onSelect, selected }: Props) {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -112,4 +112,4 @@ const styles = StyleSheet.create({
     ...typography.tiny,
     color: colors.textSub,
   },
-});
+}));

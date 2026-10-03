@@ -15,6 +15,16 @@ import type { Lang } from '@/i18n';
 
 const MAX_RECENT = 10;
 
+export type ThemePref = 'system' | 'light' | 'dark';
+
+/** 달곰이 꾸미기에서 고르는 것 — pose 는 Mascot 의 포즈 이름, bg 는 배경 색 열쇠 */
+export interface Buddy {
+  pose: string;
+  bg: string;
+  name: string;
+}
+export const DEFAULT_BUDDY: Buddy = { pose: 'hello', bg: 'mint', name: '' };
+
 interface AppState {
   favorites: string[];
   recentLibraryIds: string[];
@@ -47,6 +57,12 @@ interface AppState {
    */
   language: Lang;
 
+  /** 화면 모드 — 시스템 설정을 따르거나, 늘 밝게·어둡게. 저장한다 */
+  themePref: ThemePref;
+
+  /** 달곰이 꾸미기 — 고른 모습·배경 색·이름. 마이 화면 위쪽에 보인다. 저장한다 */
+  buddy: Buddy;
+
   toggleFavorite: (libraryId: string) => void;
   isFavorite: (libraryId: string) => boolean;
   pushRecent: (libraryId: string) => void;
@@ -55,6 +71,8 @@ interface AppState {
   setGlassTest: (on: boolean) => void;
   setNativeTabs: (on: boolean) => void;
   setLanguage: (lang: Lang) => void;
+  setThemePref: (pref: ThemePref) => void;
+  setBuddy: (buddy: Buddy) => void;
   resetAll: () => void;
 
   /** persist 복원 완료 여부. 스플래시를 언제 내릴지 판단하는 데 쓴다. */
@@ -72,6 +90,8 @@ export const useAppStore = create<AppState>()(
       glassTest: false,
       nativeTabs: true,
       language: 'ko',
+      themePref: 'system',
+      buddy: DEFAULT_BUDDY,
       _hydrated: false,
 
       toggleFavorite: (libraryId) =>
@@ -113,6 +133,10 @@ export const useAppStore = create<AppState>()(
 
       setLanguage: (lang) => set({ language: lang }),
 
+      setThemePref: (pref) => set({ themePref: pref }),
+
+      setBuddy: (buddy) => set({ buddy }),
+
       resetAll: () =>
         set({ favorites: [], recentLibraryIds: [], visits: [], hasSeenOnboarding: false }),
 
@@ -130,6 +154,8 @@ export const useAppStore = create<AppState>()(
         language: state.language,
         // 애플 탭바를 끈 선택은 남긴다 (기본이 켜짐이라 저장하지 않으면 다시 켜진다)
         nativeTabs: state.nativeTabs,
+        themePref: state.themePref,
+        buddy: state.buddy,
       }),
       // 복원에 실패하더라도 반드시 hydrated 를 켠다.
       // 그러지 않으면 루트 레이아웃이 null 을 계속 반환해 스플래시에서 멈춘다.

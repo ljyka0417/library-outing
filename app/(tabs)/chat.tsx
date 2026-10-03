@@ -25,7 +25,7 @@ import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { centered, sideSpace, useLayout } from '@/hooks/useLayout';
 import { ChipRow } from '@/components/common';
 import { useT } from '@/i18n';
-import { colors, radius, spacing, typography } from '@/theme';
+import { colors, radius, spacing, typography, themedStyles } from '@/theme';
 import { formatDistance, walkingMinutes } from '@/utils/openingHours';
 import { openKakaoMap } from '@/utils/mapLinks';
 import { libText } from '@/i18n/libraryText';
@@ -415,7 +415,7 @@ function Bubble({ message, onOpenLibrary, favorites, onToggleFavorite }: BubbleP
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   safe: { flex: 1, backgroundColor: colors.background },
   /** 위 흰 띠. 바탕은 화면 끝까지 간다. */
   headerBar: {
@@ -549,4 +549,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+}));

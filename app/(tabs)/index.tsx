@@ -18,7 +18,7 @@ import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { bleedRow, centered, useLayout } from '@/hooks/useLayout';
-import { colors, radius, spacing, typography } from '@/theme';
+import { colors, radius, spacing, typography, themedStyles } from '@/theme';
 import type { CategoryId } from '@/types';
 
 /*
@@ -198,7 +198,7 @@ const HomeContent = memo(function HomeContent() {
   );
 });
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   safe: {
     flex: 1,
     backgroundColor: colors.background,
@@ -273,4 +273,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingHorizontal: spacing.xl,
   },
-});
+}));

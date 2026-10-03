@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { SectionHeader } from './common';
 import { parkingFor, type ParkingLot } from '@/data/parking';
 import { useT, type Lang, type MessageKey } from '@/i18n';
-import { colors, radius, spacing, typography } from '@/theme';
+import { colors, radius, spacing, typography, themedStyles } from '@/theme';
 import { openGoogleMap, openKakaoMap } from '@/utils/mapLinks';
 import { formatDistance, walkingMinutes } from '@/utils/openingHours';
 
@@ -80,7 +80,7 @@ export function ParkingSection({ libraryId, inset = 0 }: { libraryId: string; in
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   section: {
     marginBottom: spacing.xxl,
   },
@@ -130,4 +130,4 @@ const styles = StyleSheet.create({
     ...typography.tiny,
     color: colors.textMuted,
   },
-});
+}));

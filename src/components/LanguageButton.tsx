@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { LANGUAGES, useT } from '@/i18n';
 import { Flag } from './Flag';
 import { useAppStore } from '@/store/useAppStore';
-import { colors, radius, spacing, typography } from '@/theme';
+import { colors, radius, spacing, typography, themedStyles } from '@/theme';
 
 /**
  * 홈 우측 상단의 언어 단추. 누르면 아래에서 4개 국기가 올라온다.
@@ -85,7 +85,7 @@ export function LanguageButton() {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   button: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -132,4 +132,4 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     marginTop: spacing.md,
   },
-});
+}));

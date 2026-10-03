@@ -25,7 +25,7 @@ import { CategoryIcon } from './CategoryIcon';
 import { Mascot } from './Mascot';
 import { CATEGORIES } from '@/data/categories';
 import { useT, type MessageKey } from '@/i18n';
-import { categoryColors, colors, radius, spacing } from '@/theme';
+import { categoryColors, colors, radius, spacing, themedStyles, currentScheme } from '@/theme';
 
 /**
  * 태블릿의 이동 메뉴. 아이패드 기본 앱(App Store, 설정)과 같은 두 모양이다.
@@ -380,15 +380,15 @@ export function TabletTopBar({ onToggle }: { onToggle: () => void }) {
 /* ─────────────────────────────────────────────────────────────── 모양 */
 
 /** 사이드바 바탕. 내용 바탕보다 한 톤 짙은 따뜻한 회색이라 칸막이 선 없이도 나뉜다 */
-const SIDEBAR_BG = '#F1ECE4';
+const sidebarBg = () => (currentScheme() === 'dark' ? '#1D1A17' : '#F1ECE4');
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   sidebar: {
     // flex: 1 을 주면 내용과 나란히 놓일 때 폭까지 반씩 나눠 가져 화면 절반을 먹었다.
     // 폭은 못 박고, 높이만 틀을 채운다.
     width: SIDEBAR_WIDTH,
     height: '100%',
-    backgroundColor: SIDEBAR_BG,
+    backgroundColor: sidebarBg(),
   },
   sidebarHead: {
     flexDirection: 'row',
@@ -562,9 +562,9 @@ const styles = StyleSheet.create({
   topLabelActive: {
     color: colors.primary,
   },
-});
+}));
 
-const glyph = StyleSheet.create({
+const glyph = themedStyles(() => ({
   frame: {
     width: 22,
     height: 17,
@@ -585,4 +585,4 @@ const glyph = StyleSheet.create({
     height: 1.4,
     borderRadius: 1,
   },
-});
+}));

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, radius, spacing, typography } from '@/theme';
+import { colors, radius, spacing, typography, themedStyles } from '@/theme';
 
 interface Props {
   value?: string;
@@ -63,7 +63,7 @@ export function SearchBar({
   return content;
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   wrap: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -81,4 +81,4 @@ const styles = StyleSheet.create({
     color: colors.text,
     padding: 0,
   },
-});
+}));

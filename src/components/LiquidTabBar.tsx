@@ -13,7 +13,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { GlassSurface } from '@/components/GlassSurface';
 import { useAppStore } from '@/store/useAppStore';
 import { TAB_BAR } from '@/hooks/useTabBarPadding';
-import { colors, typography } from '@/theme';
+import { colors, typography, themedStyles, currentScheme } from '@/theme';
 
 /**
  * 탭바가 실제로 쓰는 것만 적는다.
@@ -268,7 +268,7 @@ export function LiquidTabBar({ state, descriptors, navigation }: TabBarProps) {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   wrap: {
     position: 'absolute',
     left: TAB_BAR.side,
@@ -320,7 +320,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     // 얇은 흰 선을 둬야 렌즈의 가장자리가 보인다
     borderWidth: StyleSheet.hairlineWidth,
-    borderColor: 'rgba(255,255,255,0.7)',
+    borderColor: currentScheme() === 'dark' ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.7)',
   },
   item: {
     flex: 1,
@@ -335,4 +335,4 @@ const styles = StyleSheet.create({
     lineHeight: 14,
     fontWeight: '600',
   },
-});
+}));

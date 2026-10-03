@@ -5,7 +5,7 @@ import { fetchRelated, fetchWhereToBorrow, type FoundBook, type LoanStatus } fro
 import { MOCK_LIBRARIES } from '@/data/libraries.mock';
 import { regionName, useT } from '@/i18n';
 import { libText } from '@/i18n/libraryText';
-import { colors, radius, spacing, typography } from '@/theme';
+import { colors, radius, spacing, typography, themedStyles } from '@/theme';
 import type { Book, Library } from '@/types';
 
 /**
@@ -196,7 +196,7 @@ export function WhereToBorrowSheet({
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   related: {
     marginTop: spacing.lg,
     paddingTop: spacing.md,
@@ -314,4 +314,4 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     paddingTop: spacing.md,
   },
-});
+}));

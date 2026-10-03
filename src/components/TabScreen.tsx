@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { SafeAreaView as ControllerSafeAreaView } from 'react-native-screens/experimental';
 import { LayoutWidth } from '@/hooks/useLayout';
 import { useNativeTabs } from '@/hooks/useNativeTabs';
+import { themedStyles } from '@/theme';
 
 /**
  * 탭 화면의 바깥 틀. 위쪽 안전 영역만큼 내려서 시작한다.
@@ -71,8 +72,8 @@ export function TabScreen({
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   fill: {
     flex: 1,
   },
-});
+}));

@@ -6,7 +6,7 @@ import { LibraryImage } from './LibraryImage';
 import { regionName, useT, type Lang } from '@/i18n';
 import { libText } from '@/i18n/libraryText';
 import { readableName } from '@/utils/romanize';
-import { colors, radius, shadow, spacing, typography } from '@/theme';
+import { colors, radius, shadow, spacing, typography, themedStyles } from '@/theme';
 import { isOpenNow } from '@/utils/openingHours';
 import { useNow } from '@/hooks/useNow';
 import { useLayout } from '@/hooks/useLayout';
@@ -157,7 +157,7 @@ export function LibraryCard({
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   card: {
     flexDirection: 'row',
     backgroundColor: colors.surface,
@@ -231,4 +231,4 @@ const styles = StyleSheet.create({
     ...typography.captionBold,
     color: colors.text,
   },
-});
+}));

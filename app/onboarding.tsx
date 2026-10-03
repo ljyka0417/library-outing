@@ -15,7 +15,7 @@ import { Mascot } from '@/components/Mascot';
 import { useAppStore } from '@/store/useAppStore';
 import { centered, useLayout } from '@/hooks/useLayout';
 import { useT } from '@/i18n';
-import { colors, radius, spacing, typography } from '@/theme';
+import { colors, radius, spacing, typography, themedStyles } from '@/theme';
 
 /**
  * 가이드북 → 앱으로 이어지는 사용 흐름 3단계.
@@ -109,7 +109,7 @@ export default function OnboardingScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   safe: {
     flex: 1,
     backgroundColor: colors.background,
@@ -186,4 +186,4 @@ const styles = StyleSheet.create({
     ...typography.bodyBold,
     color: colors.white,
   },
-});
+}));

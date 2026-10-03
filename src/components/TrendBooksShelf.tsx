@@ -17,7 +17,7 @@ import {
 import { libText } from '@/i18n/libraryText';
 import { bleedRow, useLayout } from '@/hooks/useLayout';
 import { regionName, useT, type MessageKey } from '@/i18n';
-import { colors, radius, spacing, typography } from '@/theme';
+import { colors, radius, spacing, typography, themedStyles } from '@/theme';
 import type { Book } from '@/types';
 
 const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -151,7 +151,7 @@ export function TrendBooksShelf({ region }: { region: string }) {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   section: {
     marginBottom: spacing.xxl,
   },
@@ -214,4 +214,4 @@ const styles = StyleSheet.create({
     ...typography.caption,
     color: colors.textMuted,
   },
-});
+}));

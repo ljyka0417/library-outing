@@ -13,7 +13,7 @@ import { useAppStore } from '@/store/useAppStore';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { useLayout } from '@/hooks/useLayout';
 import { regionName, useT } from '@/i18n';
-import { colors, radius, spacing, typography } from '@/theme';
+import { colors, radius, spacing, typography, themedStyles } from '@/theme';
 import type { Book } from '@/types';
 
 const squash = (s: string) => s.toLowerCase().replace(/[\s\p{P}\p{S}]/gu, '');
@@ -205,7 +205,7 @@ export function BookSearchPane() {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   more: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -288,4 +288,4 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginTop: 4,
   },
-});
+}));

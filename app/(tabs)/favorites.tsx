@@ -10,7 +10,7 @@ import { useAppStore } from '@/store/useAppStore';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { centered, useLayout } from '@/hooks/useLayout';
 import { useT } from '@/i18n';
-import { colors, spacing, typography } from '@/theme';
+import { colors, spacing, typography, themedStyles } from '@/theme';
 
 export default function FavoritesScreen() {
   const router = useRouter();
@@ -76,7 +76,7 @@ export default function FavoritesScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   safe: {
     flex: 1,
     backgroundColor: colors.background,
@@ -103,4 +103,4 @@ const styles = StyleSheet.create({
     gap: spacing.md,
     flexGrow: 1,
   },
-});
+}));

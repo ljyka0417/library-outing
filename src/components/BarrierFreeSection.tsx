@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { SectionHeader } from './common';
 import { BF_GROUPS, barrierFreeFor, bfHighlights, type BfGroup } from '@/data/barrierFree';
 import { useT, type MessageKey } from '@/i18n';
-import { colors, radius, spacing, typography } from '@/theme';
+import { colors, radius, spacing, typography, themedStyles } from '@/theme';
 
 const CHIP_ICON = {
   wheelchair: 'accessibility',
@@ -86,7 +86,7 @@ export function BarrierFreeSection({ libraryId, inset = 0 }: { libraryId: string
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   section: {
     marginBottom: spacing.xxl,
   },
@@ -158,4 +158,4 @@ const styles = StyleSheet.create({
     ...typography.tiny,
     color: colors.textMuted,
   },
-});
+}));

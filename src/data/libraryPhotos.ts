@@ -109,3 +109,6 @@ export function photoCredits(): { libraryId: string; credit: string }[] {
 
 /** 실사진이 붙은 도서관 수. 개발 중 상태 확인용. */
 export const libraryPhotoCount = Object.keys(PHOTOS).length + Object.keys(remote).length;
+
+/** 실사진이 있는 도서관 id (달곰이 꾸미기의 도서관 배경) */
+export const photoLibraryIds = [...new Set([...Object.keys(PHOTOS), ...Object.keys(remote)])];

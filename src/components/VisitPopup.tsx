@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Animated, Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Mascot } from './Mascot';
 import { useT } from '@/i18n';
-import { colors, radius, shadow, spacing, typography } from '@/theme';
+import { colors, radius, shadow, spacing, typography, themedStyles } from '@/theme';
 
 interface Props {
   visible: boolean;
@@ -66,7 +66,7 @@ export function VisitPopup({ visible, fresh, libraryName, count, onClose }: Prop
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   backdrop: {
     flex: 1,
     backgroundColor: 'rgba(30,26,22,0.35)',
@@ -120,4 +120,4 @@ const styles = StyleSheet.create({
     ...typography.bodyBold,
     color: colors.white,
   },
-});
+}));

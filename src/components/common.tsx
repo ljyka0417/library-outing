@@ -3,7 +3,7 @@ import { Pressable, ScrollView, StyleSheet, Text, View, type ViewStyle } from 'r
 import { Ionicons } from '@expo/vector-icons';
 import { Mascot, type MascotPose } from './Mascot';
 import { useLayout } from '@/hooks/useLayout';
-import { categoryColors, colors, radius, spacing, typography } from '@/theme';
+import { categoryColors, colors, radius, spacing, typography, themedStyles, currentScheme } from '@/theme';
 import type { CategoryId } from '@/types';
 
 /* ------------------------------------------------------------------ 뱃지 */
@@ -22,9 +22,9 @@ export function Badge({ label, category, tone = 'primary' }: BadgeProps) {
     : tone === 'brown'
       ? { bg: colors.brownSoft, fg: colors.brown }
       : tone === 'open'
-        ? { bg: '#E6F4EC', fg: colors.open }
+        ? { bg: currentScheme() === 'dark' ? '#1C3528' : '#E6F4EC', fg: colors.open }
         : tone === 'closed'
-          ? { bg: '#FBEAE7', fg: colors.closed }
+          ? { bg: currentScheme() === 'dark' ? '#3A2420' : '#FBEAE7', fg: colors.closed }
           : { bg: colors.primarySoft, fg: colors.primary };
 
   return (
@@ -197,7 +197,7 @@ export function InfoRow({ icon, label, value, note, onPress }: InfoRowProps) {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   /** 폰: 옆으로 넘기는 줄. 세로로 늘어나 목록 자리를 먹지 않게 묶는다. */
   chipScroll: { flexGrow: 0, flexShrink: 0 },
   chipLine: { alignItems: 'center' },
@@ -327,4 +327,4 @@ const styles = StyleSheet.create({
     color: colors.primary,
     fontWeight: '600',
   },
-});
+}));

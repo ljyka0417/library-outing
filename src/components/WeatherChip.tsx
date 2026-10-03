@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { fetchWeather, WEATHER_ICON, weatherEnabled, type Weather } from '@/api/weather';
 import { AIR_COLOR, airEnabled, fetchAir, type Air } from '@/api/air';
 import { useT, type MessageKey } from '@/i18n';
-import { colors, radius, spacing, typography } from '@/theme';
+import { colors, radius, spacing, typography, themedStyles } from '@/theme';
 import type { Coordinates } from '@/types';
 
 /**
@@ -59,7 +59,7 @@ export function WeatherChip({ coords }: { coords?: Coordinates }) {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   row: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -79,4 +79,4 @@ const styles = StyleSheet.create({
     ...typography.captionBold,
     color: colors.textSub,
   },
-});
+}));

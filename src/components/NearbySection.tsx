@@ -11,7 +11,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { EmptyState } from './common';
 import { nearbyApi } from '@/api/nearbyApi';
-import { colors, radius, spacing, typography } from '@/theme';
+import { colors, radius, spacing, typography, themedStyles } from '@/theme';
 import { formatDistance, walkingMinutes } from '@/utils/openingHours';
 import { openKakaoMap } from '@/utils/mapLinks';
 import { useT } from '@/i18n';
@@ -199,7 +199,7 @@ function PlaceCard({ place }: { place: NearbyPlace }) {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   tabs: {
     flexDirection: 'row',
     gap: spacing.sm,
@@ -301,4 +301,4 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     marginTop: 3,
   },
-});
+}));

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
 import type { Lang } from '@/i18n';
+import { themedStyles } from '@/theme';
 
 /**
  * 국기.
@@ -40,10 +41,10 @@ export function Flag({ code, size = 1 }: { code: Lang; size?: number }) {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   flag: {
     // 흰 바탕 국기(태극기·일장기·성조기)가 밝은 배경에 묻히지 않게 테두리를 준다
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: 'rgba(0,0,0,0.18)',
   },
-});
+}));

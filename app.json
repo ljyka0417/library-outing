@@ -6,7 +6,7 @@
     "slug": "library-outing",
     "version": "0.1.0",
     "orientation": "portrait",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "//scheme": "책자 QR에 인코딩되는 딥링크 스킴. 예) libraryapp://library/seoul-music",
     "scheme": "libraryapp",

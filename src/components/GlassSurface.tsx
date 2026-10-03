@@ -1,5 +1,6 @@
 import React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
+import { currentScheme } from '@/theme';
 
 /**
  * 유리 표면. 뒤 내용이 비쳐 보이게 한다.
@@ -87,7 +88,8 @@ export function GlassSurface({ tint = 'light', variant = 'regular' }: Props) {
     <View
       style={[
         StyleSheet.absoluteFill,
-        { backgroundColor: `rgba(255,255,255,${variant === 'clear' ? 0.4 : 0.88})` },
+        // 다크 모드에서는 바탕색(짙은 갈색)으로
+        { backgroundColor: currentScheme() === 'dark' ? `rgba(34,31,28,${variant === 'clear' ? 0.5 : 0.92})` : `rgba(255,255,255,${variant === 'clear' ? 0.4 : 0.88})` },
       ]}
     />
   );

@@ -9,7 +9,7 @@ import { booksForRegion, regionsWithBooks } from '@/data/regionBooks';
 import { SIDO_LIST } from '@/data/categories';
 import { bleedRow, useLayout } from '@/hooks/useLayout';
 import { regionName, useT } from '@/i18n';
-import { colors, radius, spacing, typography } from '@/theme';
+import { colors, radius, spacing, typography, themedStyles } from '@/theme';
 import type { Book } from '@/types';
 
 /**
@@ -118,7 +118,7 @@ export function RegionBooksShelf({ initialRegion }: { initialRegion: string }) {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   section: {
     marginBottom: spacing.xxl,
   },
@@ -201,4 +201,4 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontWeight: '700',
   },
-});
+}));

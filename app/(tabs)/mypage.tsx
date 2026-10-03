@@ -3,6 +3,10 @@ import { Alert, Platform, Pressable, ScrollView, StyleSheet, Text, View } from '
 import { TabScreen } from '@/components/TabScreen';
 import { Ionicons } from '@expo/vector-icons';
 import { Mascot } from '@/components/Mascot';
+import { useRouter } from 'expo-router';
+import { buddyName, buddyTitle } from '@/data/buddy';
+import { BuddyStage } from '@/components/BuddyStage';
+import type { ThemePref } from '@/store/useAppStore';
 import { libraryApi } from '@/api/libraryApi';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
@@ -14,9 +18,9 @@ import { chatIdeasStatus } from '@/utils/chatIdeas';
 import { glassSupport } from '@/components/GlassSurface';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { centered, useLayout } from '@/hooks/useLayout';
-import { useT } from '@/i18n';
+import { useT, type Lang } from '@/i18n';
 import { libText } from '@/i18n/libraryText';
-import { colors, radius, spacing, typography } from '@/theme';
+import { colors, radius, spacing, typography, themedStyles } from '@/theme';
 
 export default function MyPageScreen() {
   const { favorites, visits, recentLibraryIds, resetAll } = useAppStore();
@@ -24,6 +28,10 @@ export default function MyPageScreen() {
   const tabPad = useTabBarPadding();
   const layout = useLayout();
   const { t, lang } = useT();
+  const router = useRouter();
+  const buddy = useAppStore((s) => s.buddy);
+  const themePref = useAppStore((s) => s.themePref);
+  const setThemePref = useAppStore((s) => s.setThemePref);
 
   const visitedNames = visits
     .slice(0, 5)
@@ -48,8 +56,15 @@ export default function MyPageScreen() {
             contentContainerStyle 에 직접 넣으면 왼쪽에 붙은 채로 남는다. */}
         <View style={[styles.inner, centered(layout, true), { paddingHorizontal: layout.gutter }]}>
         <View style={styles.profile}>
-          <Mascot size={110} pose="hello" />
-          <Text style={styles.name}>{t('my.tagline')}</Text>
+          {/* 달곰이 꾸미기에서 고른 모습·배경 색·이름 */}
+          <Pressable onPress={() => router.push('/dress-up')} accessibilityRole="button" accessibilityLabel={t('my.dressUp')}>
+            <BuddyStage pose={buddy.pose || 'hello'} bg={buddy.bg || 'mint'} size={150} />
+          </Pressable>
+          <Text style={styles.name}>{taglineFor(buddyName(buddy.name, lang), lang, t('my.tagline', { name: buddyName(buddy.name, lang) }))}</Text>
+          <View style={styles.rankChip}>
+            <Ionicons name="ribbon" size={13} color={colors.primary} />
+            <Text style={styles.rankText}>{t(buddyTitle(visits.length) as never)}</Text>
+          </View>
           <Text style={styles.sub}>{t('my.taglineSub')}</Text>
         </View>
 
@@ -77,7 +92,28 @@ export default function MyPageScreen() {
           <Text style={styles.cardTitle}>{t('my.settings')}</Text>
           <MenuRow icon="notifications-outline" label={t('my.notifications')} comingSoon />
           <MenuRow icon="person-add-outline" label={t('my.login')} comingSoon />
-          <MenuRow icon="color-wand-outline" label={t('my.dressUp')} comingSoon />
+          {/* 화면 모드 — 시스템 · 밝게 · 어둡게 */}
+          <View style={styles.menuRow}>
+            <Ionicons name="contrast-outline" size={18} color={colors.textSub} />
+            <Text style={styles.menuLabel}>{t('my.theme')}</Text>
+            <View style={styles.segment}>
+              {(['system', 'light', 'dark'] as ThemePref[]).map((p) => {
+                const on = p === themePref;
+                return (
+                  <Pressable
+                    key={p}
+                    onPress={() => setThemePref(p)}
+                    style={[styles.segItem, on && styles.segOn]}
+                    accessibilityRole="button"
+                    accessibilityState={{ selected: on }}
+                  >
+                    <Text style={[styles.segText, on && styles.segTextOn]}>{t(`my.theme.${p}` as never)}</Text>
+                  </Pressable>
+                );
+              })}
+            </View>
+          </View>
+          <MenuRow icon="color-wand-outline" label={t('my.dressUp')} onPress={() => router.push('/dress-up')} />
           <MenuRow icon="trash-outline" label={t('my.reset')} onPress={confirmReset} danger />
         </View>
 
@@ -191,7 +227,7 @@ function GlassTest() {
  * npm run geocode / enrich / collect-nearby 를 돌린 뒤 여기서 확인한다.
  */
 /** 기기에 들어간 코드를 눈으로 확인하는 표시. 새 코드를 올릴 때마다 바꾼다 */
-const BUILD_MARK = '10-04 프로그램 자리';
+const BUILD_MARK = '10-04 달곰이 꾸미기 2';
 
 function DataStatus() {
   const d = dataCompleteness();
@@ -253,6 +289,14 @@ function Stat({ label, value }: { label: string; value: number }) {
   );
 }
 
+/** "○○와 도서관 나들이 중" — 한국어는 이름 받침에 맞춰 와/과 */
+function taglineFor(name: string, lang: Lang, translated: string): string {
+  if (lang !== 'ko') return translated;
+  const code = name.charCodeAt(name.length - 1) - 0xac00;
+  const josa = code >= 0 && code <= 11171 && code % 28 !== 0 ? '과' : '와';
+  return `${name}${josa} 도서관 나들이 중`;
+}
+
 interface MenuRowProps {
   icon: keyof typeof Ionicons.glyphMap;
   label: string;
@@ -281,7 +325,7 @@ function MenuRow({ icon, label, onPress, comingSoon, danger }: MenuRowProps) {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   safe: { flex: 1, backgroundColor: colors.background },
   content: { paddingVertical: spacing.xl, paddingBottom: spacing.xxxl },
   /** 태블릿에서 가운데로 모이는 본문 (폰에서는 화면 폭 그대로) */
@@ -310,6 +354,38 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
     padding: spacing.lg,
   },
+  rankChip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    paddingHorizontal: spacing.md,
+    paddingVertical: 3,
+    borderRadius: radius.pill,
+    backgroundColor: colors.primarySoft,
+  },
+  rankText: { ...typography.captionBold, color: colors.primary },
+  segment: {
+    flexDirection: 'row',
+    backgroundColor: colors.surfaceAlt,
+    borderRadius: radius.pill,
+    padding: 3,
+  },
+  segItem: {
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 4,
+    borderRadius: radius.pill,
+  },
+  segOn: {
+    backgroundColor: colors.surface,
+  },
+  segText: {
+    ...typography.tiny,
+    color: colors.textSub,
+  },
+  segTextOn: {
+    color: colors.primary,
+    fontWeight: '700',
+  },
   cardTitle: { ...typography.captionBold, color: colors.textSub, marginBottom: spacing.sm },
   creditText: { ...typography.caption, color: colors.textSub, lineHeight: 20 },
   visitRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, paddingVertical: 6 },
@@ -333,4 +409,4 @@ const styles = StyleSheet.create({
   glassRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.md },
   devTitle: { ...typography.tiny, color: colors.textSub, fontWeight: '700', marginBottom: 2 },
   devText: { ...typography.tiny, color: colors.textMuted },
-});
+}));

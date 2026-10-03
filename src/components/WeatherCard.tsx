@@ -5,7 +5,7 @@ import { Mascot, type MascotPose } from './Mascot';
 import { fetchWeather, WEATHER_ICON, weatherEnabled, weatherMood, type Weather, type WeatherMood } from '@/api/weather';
 import { AIR_COLOR, airEnabled, airIsBad, fetchAir, stationName, type Air } from '@/api/air';
 import { useT, type MessageKey } from '@/i18n';
-import { colors, radius, spacing, typography } from '@/theme';
+import { colors, radius, spacing, typography, themedStyles } from '@/theme';
 import type { Coordinates } from '@/types';
 
 /**
@@ -95,7 +95,7 @@ export function WeatherCard({
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   card: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -134,4 +134,4 @@ const styles = StyleSheet.create({
     ...typography.captionBold,
     color: colors.primary,
   },
-});
+}));

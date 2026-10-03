@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { Platform } from 'react-native';
-import { Stack, useRouter, useSegments } from 'expo-router';
+import React, { useEffect, useRef } from 'react';
+import { Appearance, Platform, useColorScheme } from 'react-native';
+import { Stack, usePathname, useRouter, useSegments } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useAppStore } from '@/store/useAppStore';
-import { colors } from '@/theme';
+import { applyScheme, colors, currentScheme } from '@/theme';
 
 // 로컬 저장소 복원이 끝날 때까지 스플래시를 유지한다.
 void SplashScreen.preventAutoHideAsync();
@@ -50,6 +50,35 @@ export default function RootLayout() {
   const hasSeenOnboarding = useAppStore((s) => s.hasSeenOnboarding);
   const router = useRouter();
   const segments = useSegments();
+  const pathname = usePathname();
+
+  /*
+   * 다크 모드. 시스템을 따르면 기기 설정(useColorScheme), 아니면 고른 쪽.
+   * 색(colors)을 바꾸고 화면 전체를 새로 그린다(아래 key). 새로 그리면 내비게이션이 처음으로
+   * 돌아가므로, 바꾸기 직전에 보던 화면으로 다시 데려다 놓는다.
+   */
+  const themePref = useAppStore((s) => s.themePref);
+  const system = useColorScheme();
+  const scheme = themePref === 'system' ? (system === 'dark' ? 'dark' : 'light') : themePref;
+  const before = currentScheme();
+  applyScheme(scheme);
+  const lastPath = useRef(pathname);
+  const backTo = useRef<string | null>(null);
+  if (before !== scheme) backTo.current = lastPath.current;
+  useEffect(() => {
+    lastPath.current = pathname;
+  }, [pathname]);
+  useEffect(() => {
+    // 애플 기본 탭바·키보드·알림창 같은 네이티브 부분도 같은 모드로
+    Appearance.setColorScheme?.(themePref === 'system' ? 'unspecified' : themePref);
+  }, [themePref]);
+  useEffect(() => {
+    if (backTo.current && backTo.current !== '/') {
+      const to = backTo.current;
+      backTo.current = null;
+      setTimeout(() => router.replace(to as never), 0);
+    }
+  }, [scheme, router]);
 
   useEffect(() => {
     if (!hydrated) return;
@@ -86,8 +115,9 @@ export default function RootLayout() {
     /* 바탕색을 창 맨 밑에도 깔아 둔다. 애플 기본 탭바를 쓰면 화면 칸이 상태 표시줄
        아래에서 시작해, 그 위가 기기 기본 회색으로 남았다. */
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: colors.background }}>
-      <StatusBar style="dark" />
+      <StatusBar style={scheme === 'dark' ? 'light' : 'dark'} />
       <Stack
+        key={scheme}
         screenOptions={{
           headerStyle: { backgroundColor: colors.background },
           headerTitleStyle: { fontSize: 17, fontWeight: '700', color: colors.text },

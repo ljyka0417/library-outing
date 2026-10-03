@@ -2,7 +2,7 @@ import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useT } from '@/i18n';
-import { colors, radius, spacing, typography } from '@/theme';
+import { colors, radius, spacing, typography, themedStyles } from '@/theme';
 import { openGoogleMap, openKakaoMap, openNaverMap, type MapTarget } from '@/utils/mapLinks';
 
 /**
@@ -86,7 +86,7 @@ function BrandMark({ color, tint }: { color: string; tint: string }) {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   row: {
     gap: spacing.sm,
   },
@@ -123,4 +123,4 @@ const styles = StyleSheet.create({
     color: colors.textSub,
     marginTop: 1,
   },
-});
+}));

@@ -4,7 +4,7 @@ import { Mascot } from './Mascot';
 import { useT } from '@/i18n';
 import { libText } from '@/i18n/libraryText';
 import { programKind, PROGRAM_LOOK } from '@/utils/programKind';
-import { categoryColors, colors, radius, spacing, typography } from '@/theme';
+import { categoryColors, colors, radius, spacing, typography, themedStyles } from '@/theme';
 
 /**
  * 운영 프로그램 카드 — 대출 순위 책 카드(BookCard)와 같은 자리·크기의 가로 줄 카드.
@@ -34,7 +34,7 @@ export function ProgramCard({ name }: { name: string }) {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   card: {
     width: 128,
     gap: 2,
@@ -66,4 +66,4 @@ const styles = StyleSheet.create({
     ...typography.captionBold,
     color: colors.text,
   },
-});
+}));

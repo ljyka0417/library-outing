@@ -15,7 +15,7 @@ import {
 import { LayoutWidth, SIDEBAR_DOCK, navKind } from '@/hooks/useLayout';
 import { useNativeTabs } from '@/hooks/useNativeTabs';
 import { useT } from '@/i18n';
-import { colors } from '@/theme';
+import { colors, themedStyles } from '@/theme';
 
 /**
  * 탭 구성.
@@ -215,7 +215,7 @@ function OurTabs() {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   frame: {
     flex: 1,
     backgroundColor: colors.background,
@@ -226,4 +226,4 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
   },
-});
+}));

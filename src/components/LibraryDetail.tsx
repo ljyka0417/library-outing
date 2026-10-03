@@ -27,7 +27,7 @@ import { bleedRow, centered, useLayout } from '@/hooks/useLayout';
 import { regionName, translate, useT, type Lang, type MessageKey } from '@/i18n';
 import { readableName } from '@/utils/romanize';
 import { libText, specialtyCategory } from '@/i18n/libraryText';
-import { colors, radius, shadow, spacing, typography } from '@/theme';
+import { colors, radius, shadow, spacing, typography, themedStyles } from '@/theme';
 import { callPhone, openWeb } from '@/utils/mapLinks';
 import { isOpenNow, todayHoursLabel } from '@/utils/openingHours';
 import { useNow } from '@/hooks/useNow';
@@ -545,7 +545,7 @@ export const LibraryDetail = memo(function LibraryDetail({
   );
 });
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   center: {
     flex: 1,
     alignItems: 'center',
@@ -699,4 +699,4 @@ const styles = StyleSheet.create({
     ...typography.bodyBold,
     color: colors.white,
   },
-});
+}));

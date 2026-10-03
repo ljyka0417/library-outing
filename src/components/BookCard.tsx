@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { categoryColors, colors, radius, spacing, typography } from '@/theme';
+import { categoryColors, colors, radius, spacing, typography, themedStyles } from '@/theme';
 import type { Book } from '@/types';
 import type { LoanStatus } from '@/api/loanStatus';
 import { useT } from '@/i18n';
@@ -67,7 +67,7 @@ export function BookCard({ book, loan }: { book: Book; loan?: LoanStatus }) {
 const loanColor = (l: LoanStatus) =>
   !l.hasBook ? colors.textMuted : l.loanAvailable ? colors.open : colors.closed;
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   card: {
     width: 104,
     gap: 2,
@@ -141,4 +141,4 @@ const styles = StyleSheet.create({
     ...typography.tiny,
     fontWeight: '700',
   },
-});
+}));

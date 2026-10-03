@@ -13,7 +13,7 @@ import {
 import { useAsync } from '@/hooks/useAsync';
 import { bleedRow, useLayout } from '@/hooks/useLayout';
 import { useT, type Lang, type MessageKey } from '@/i18n';
-import { colors, radius, spacing, typography } from '@/theme';
+import { colors, radius, spacing, typography, themedStyles } from '@/theme';
 import { callPhone, openGoogleMap, openKakaoMap, openWeb } from '@/utils/mapLinks';
 import { formatDistance, walkingMinutes } from '@/utils/openingHours';
 import type { Coordinates } from '@/types';
@@ -218,7 +218,7 @@ function EventSheet({ event, libraryName, onClose }: { event: CultureEvent | nul
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   // 위 책 줄(이름 밑 지은이)에 붙어 보이지 않게 위쪽을 띄운다 — 다른 칸들과 같은 간격
   section: {
     marginTop: spacing.xxl,
@@ -385,4 +385,4 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     marginTop: spacing.sm,
   },
-});
+}));

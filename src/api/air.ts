@@ -2,6 +2,7 @@ import { LOAN_PROXY_URL } from '@/config/loanProxy';
 import type { Coordinates } from '@/types';
 import type { Lang } from '@/i18n';
 import { readableName } from '@/utils/romanize';
+import { currentScheme } from '@/theme';
 
 /**
  * 지금 미세먼지 (에어코리아, 중계 서버 /air 경유 — 그 자리에서 가장 가까운 측정소).
@@ -26,12 +27,22 @@ export interface Air {
 }
 
 /** 등급 색 — 우리나라 대기 정보에서 흔히 쓰는 차례(좋음 파랑 · 보통 초록 · 나쁨 주황 · 매우나쁨 빨강) */
-export const AIR_COLOR: Record<AirGrade, { bg: string; fg: string }> = {
+const AIR_LIGHT: Record<AirGrade, { bg: string; fg: string }> = {
   1: { bg: '#E3EEFB', fg: '#2F6FC0' },
   2: { bg: '#E3F2E6', fg: '#2E8B57' },
   3: { bg: '#FDEBD8', fg: '#C46A12' },
   4: { bg: '#FBE0DE', fg: '#C0392B' },
 };
+const AIR_DARK: Record<AirGrade, { bg: string; fg: string }> = {
+  1: { bg: '#1D2B3D', fg: '#7FB2EE' },
+  2: { bg: '#1C3324', fg: '#6FCB93' },
+  3: { bg: '#3A2A17', fg: '#F0A45C' },
+  4: { bg: '#3D1F1C', fg: '#F08A7E' },
+};
+/** 다크 모드에서는 어두운 판에 밝은 글자 */
+export const AIR_COLOR = new Proxy(AIR_LIGHT, {
+  get: (_t, k) => (currentScheme() === 'dark' ? AIR_DARK : AIR_LIGHT)[k as unknown as AirGrade],
+});
 
 const MEMO_MS = 15 * 60 * 1000;
 const memo = new Map<string, { at: number; value: Air }>();

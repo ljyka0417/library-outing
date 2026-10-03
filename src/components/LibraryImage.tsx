@@ -13,7 +13,7 @@ import { Mascot } from './Mascot';
 import { CATEGORY_MAP } from '@/data/categories';
 import { getPhoto } from '@/data/libraryPhotos';
 import { useT } from '@/i18n';
-import { categoryColors, colors, typography } from '@/theme';
+import { categoryColors, colors, typography, themedStyles } from '@/theme';
 import type { Library } from '@/types';
 
 /**
@@ -154,7 +154,7 @@ export function LibraryImage({ library, variant, style, framed = false }: Props)
   );
 }
 
-const styles = StyleSheet.create({
+const styles = themedStyles(() => ({
   fill: {
     width: '100%',
     height: '100%',
@@ -222,4 +222,4 @@ const styles = StyleSheet.create({
     marginTop: 6,
     opacity: 0.85,
   },
-});
+}));

@@ -1,3 +1,5 @@
+import { StyleSheet } from 'react-native';
+
 /**
  * 디자인 토큰
  *
@@ -6,7 +8,8 @@
  * 살짝 미색이 도는 배경을 기본으로 쓴다.
  */
 
-export const colors = {
+/** 밝은 화면 */
+const LIGHT = {
   // 배경
   background: '#FBF8F3',
   surface: '#FFFFFF',
@@ -37,7 +40,47 @@ export const colors = {
 
   white: '#FFFFFF',
   black: '#000000',
-} as const;
+};
+
+/**
+ * 어두운 화면 — 같은 따뜻한 톤을 밤에 맞춰 낮췄다. 순검정 대신 짙은 갈색빛 바탕이라
+ * 종이책 느낌이 남는다. white 는 민트 단추 위 글자에 쓰여서 그대로 흰색이다.
+ */
+const DARK: typeof LIGHT = {
+  background: '#171513',
+  surface: '#221F1C',
+  surfaceAlt: '#2C2824',
+
+  primary: '#5DBBA8',
+  primaryLight: '#7CC4B4',
+  primarySoft: '#1E3531',
+
+  brown: '#C4A48C',
+  brownSoft: '#33291F',
+
+  text: '#F2EDE6',
+  textSub: '#B9B0A5',
+  textMuted: '#857C72',
+
+  border: '#38332D',
+  divider: '#2E2A25',
+
+  open: '#4CB884',
+  closed: '#E58A7E',
+  heart: '#F06D66',
+
+  white: '#FFFFFF',
+  black: '#000000',
+};
+
+export type Palette = typeof LIGHT;
+export type ColorScheme = 'light' | 'dark';
+
+/**
+ * 지금 화면의 색. 다크 모드로 바꾸면 이 객체의 값이 통째로 바뀐다(applyScheme).
+ * 화면 코드는 그대로 colors.text 처럼 읽으면 된다 — 다시 그릴 때 새 값을 읽는다.
+ */
+export const colors: Palette = { ...LIGHT };
 
 /**
  * 마스코트 "달곰이(Dalgomi)" 전용 팔레트.
@@ -73,7 +116,7 @@ export const dalgomi = {
  * 카테고리별 파스텔 배경/포인트 색. 홈 그리드와 뱃지에서 공유한다.
  * types 의 CategoryId 13종과 키가 1:1로 대응해야 한다.
  */
-export const categoryColors: Record<string, { bg: string; fg: string }> = {
+const LIGHT_CATEGORY: Record<string, { bg: string; fg: string }> = {
   landmark: { bg: '#E3F2EE', fg: '#3F8E7E' },
   kids: { bg: '#FFF1DC', fg: '#C98A3C' },
   language: { bg: '#E6F0FB', fg: '#3F7CB8' },
@@ -90,6 +133,69 @@ export const categoryColors: Record<string, { bg: string; fg: string }> = {
   // 교육은 예전 역사 칸의 흙빛을 물려받았다. 남은 열두 색과 겹치지 않는다.
   education: { bg: '#F1EBE2', fg: '#8B6F5C' },
 };
+
+/** 두 색을 t 만큼 섞는다 (#RRGGBB) */
+function mix(a: string, b: string, t: number): string {
+  const p = (h: string) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+  const [x, y] = [p(a), p(b)];
+  return '#' + x.map((v, i) => Math.round(v + (y[i] - v) * t).toString(16).padStart(2, '0')).join('');
+}
+
+/** 어두운 화면의 카테고리 색 — 같은 색을 바탕 쪽으로 낮추고 글자는 밝게 */
+const DARK_CATEGORY: Record<string, { bg: string; fg: string }> = Object.fromEntries(
+  Object.entries(LIGHT_CATEGORY).map(([k, v]) => [k, { bg: mix(v.fg, DARK.background, 0.78), fg: mix(v.fg, '#FFFFFF', 0.3) }])
+);
+
+export const categoryColors: Record<string, { bg: string; fg: string }> = Object.fromEntries(
+  Object.entries(LIGHT_CATEGORY).map(([k, v]) => [k, { ...v }])
+);
+
+/* ── 다크 모드 ────────────────────────────────────────────── */
+
+let schemeNow: ColorScheme = 'light';
+let version = 0;
+
+export function currentScheme(): ColorScheme {
+  return schemeNow;
+}
+
+/** 색을 바꾼다. 바꾼 뒤 화면을 다시 그려야 보인다 (app/_layout.tsx 가 한다) */
+export function applyScheme(scheme: ColorScheme) {
+  if (scheme === schemeNow) return;
+  schemeNow = scheme;
+  version++;
+  Object.assign(colors, scheme === 'dark' ? DARK : LIGHT);
+  const table = scheme === 'dark' ? DARK_CATEGORY : LIGHT_CATEGORY;
+  for (const k of Object.keys(table)) categoryColors[k] = { ...table[k] };
+}
+
+/**
+ * StyleSheet.create 대신 쓴다 — 색이 바뀌면 다음에 읽을 때 새 색으로 다시 만든다.
+ *
+ * StyleSheet.create 는 파일을 처음 읽을 때 한 번 만들어져서 다크 모드로 바꿔도 옛 색이 남는다.
+ * 그래서 만드는 법(factory)을 들고 있다가, 색이 바뀐 뒤 처음 읽힐 때 다시 만든다.
+ */
+export function themedStyles<T extends StyleSheet.NamedStyles<T> | StyleSheet.NamedStyles<any>>(
+  factory: () => T & StyleSheet.NamedStyles<any>
+): T {
+  let cache = factory();
+  let made = version;
+  return new Proxy({} as T, {
+    get(_t, key) {
+      if (made !== version) {
+        cache = factory();
+        made = version;
+      }
+      return (cache as Record<string | symbol, unknown>)[key];
+    },
+    ownKeys() {
+      return Reflect.ownKeys(cache);
+    },
+    getOwnPropertyDescriptor(_t, key) {
+      return Object.getOwnPropertyDescriptor(cache, key);
+    },
+  });
+}
 
 export const spacing = {
   xs: 4,
