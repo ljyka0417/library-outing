@@ -16,3 +16,6 @@ await ask('/loan?lib=111314&isbn=123');             // ISBN 형식 → 400
 await ask('/other');                                 // 없는 주소 → 404
 await ask('/where?isbn=9788936434120&libs=111314,111071,111102');   // 한 권을 여러 도서관에
 await ask('/where?isbn=9788936434120&libs=999999');                 // 앱에 없는 도서관 → 400
+await ask('/search?q=' + encodeURIComponent('소년이 온다'));
+await ask('/search?q=' + encodeURIComponent('흔한남매'));
+await ask('/where?isbn=9788936434120,9788936473235&libs=111314,111102');   // 판본 둘을 합쳐서

@@ -30,13 +30,15 @@ export function WhereToBorrowSheet({
   const [state, setState] = useState<'loading' | 'done' | 'failed'>('loading');
   const [results, setResults] = useState<Record<string, LoanStatus>>({});
   const codesKey = libs.map((l) => l.sourceApiId).join(',');
+  // 책 검색에서 온 책은 판본 ISBN 이 여럿이다 — 함께 물어 어느 판본이든 있으면 "있음"
+  const isbnKey = (book?.isbns?.length ? book.isbns : book?.isbn ? [book.isbn] : []).join(',');
 
   useEffect(() => {
-    if (!book?.isbn || !codesKey) return;
+    if (!isbnKey || !codesKey) return;
     let alive = true;
     setState('loading');
     setResults({});
-    void fetchWhereToBorrow(book.isbn, codesKey.split(',')).then((r) => {
+    void fetchWhereToBorrow(isbnKey.split(','), codesKey.split(',')).then((r) => {
       if (!alive) return;
       if (r) {
         setResults(r);
@@ -46,7 +48,7 @@ export function WhereToBorrowSheet({
     return () => {
       alive = false;
     };
-  }, [book?.isbn, codesKey]);
+  }, [isbnKey, codesKey]);
 
   if (!book) return null;
 

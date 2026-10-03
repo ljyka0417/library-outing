@@ -1,10 +1,12 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { TabScreen } from '@/components/TabScreen';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { LibraryCard } from '@/components/LibraryCard';
 import { LibraryDetail } from '@/components/LibraryDetail';
 import { SearchBar } from '@/components/SearchBar';
+import { BookSearchPane } from '@/components/BookSearchPane';
+import { loanLookupEnabled } from '@/api/loanStatus';
 import { Chip, ChipRow, EmptyState } from '@/components/common';
 import { CATEGORIES, CATEGORY_MAP, SIDO_LIST } from '@/data/categories';
 import { regionName, useT } from '@/i18n';
@@ -40,6 +42,8 @@ export default function SearchScreen() {
   );
   const [sido, setSido] = useState<string | undefined>();
   const [openNow, setOpenNow] = useState(false);
+  /** 도서관을 찾을지, 책 제목으로 "어디서 빌릴 수 있는지" 찾을지 */
+  const [mode, setMode] = useState<'libraries' | 'books'>('libraries');
   // "지금 운영중" 필터도 분이 바뀌면 다시 걸러진다
   const now = useNow();
 
@@ -114,6 +118,8 @@ export default function SearchScreen() {
 
   const list = (
     <ResultsPane
+      mode={mode}
+      onMode={setMode}
       keyword={keyword}
       onKeyword={setKeyword}
       category={category}
@@ -178,6 +184,8 @@ export default function SearchScreen() {
 }
 
 interface ResultsPaneProps {
+  mode: 'libraries' | 'books';
+  onMode: (m: 'libraries' | 'books') => void;
   keyword: string;
   onKeyword: (v: string) => void;
   category?: CategoryId;
@@ -208,6 +216,8 @@ interface ResultsPaneProps {
  * 읽어 넘기면 부모의 넓은 폭 기준으로 두 줄 카드를 좁은 칸에 욱여넣는다.
  */
 const ResultsPane = memo(function ResultsPane({
+  mode,
+  onMode,
   keyword,
   onKeyword,
   category,
@@ -235,8 +245,37 @@ const ResultsPane = memo(function ResultsPane({
     ? t('search.countInCategory', { c: t(`cat.${category}`), n: results.length })
     : t('search.count', { n: results.length });
 
+  /* 도서관 | 책 — 책 모드는 대출 여부 중계 서버가 있을 때만 */
+  const modeSwitch = loanLookupEnabled ? (
+    <View style={[styles.modeRow, { marginHorizontal: layout.gutter }]} accessibilityRole="tablist">
+      {(['libraries', 'books'] as const).map((m) => (
+        <Pressable
+          key={m}
+          onPress={() => onMode(m)}
+          style={[styles.modeBtn, mode === m && styles.modeBtnOn]}
+          accessibilityRole="tab"
+          accessibilityState={{ selected: mode === m }}
+        >
+          <Text style={[styles.modeText, mode === m && styles.modeTextOn]}>
+            {m === 'libraries' ? t('search.modeLibraries') : t('search.modeBooks')}
+          </Text>
+        </Pressable>
+      ))}
+    </View>
+  ) : null;
+
+  if (mode === 'books' && loanLookupEnabled) {
+    return (
+      <>
+        {modeSwitch}
+        <BookSearchPane />
+      </>
+    );
+  }
+
   return (
     <>
+      {modeSwitch}
       <View style={[styles.searchWrap, { paddingHorizontal: layout.gutter }]}>
         <SearchBar value={keyword} onChangeText={onKeyword} placeholder={t('search.placeholder')} />
       </View>
@@ -354,6 +393,29 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
+  modeRow: {
+    flexDirection: 'row',
+    marginTop: spacing.md,
+    padding: 3,
+    borderRadius: 999,
+    backgroundColor: colors.surfaceAlt,
+  },
+  modeBtn: {
+    flex: 1,
+    alignItems: 'center',
+    paddingVertical: spacing.sm,
+    borderRadius: 999,
+  },
+  modeBtnOn: {
+    backgroundColor: colors.surface,
+  },
+  modeText: {
+    ...typography.captionBold,
+    color: colors.textSub,
+  },
+  modeTextOn: {
+    color: colors.primary,
+  },
   searchWrap: {
     paddingTop: spacing.md,
     paddingBottom: spacing.lg,

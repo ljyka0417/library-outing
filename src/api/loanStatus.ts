@@ -52,11 +52,13 @@ export async function fetchLoanStatus(libCode: string, isbns: string[]): Promise
  * 실패하면 null — 화면은 "지금은 확인할 수 없어요"를 보여 준다(빈 결과와 구별하려고).
  */
 export async function fetchWhereToBorrow(
-  isbn: string,
+  isbnList: string[],
   libCodes: string[]
 ): Promise<Record<string, LoanStatus> | null> {
   const libs = [...new Set(libCodes.filter(Boolean))].slice(0, 20);
-  if (!LOAN_PROXY_URL || !/^\d{13}$/.test(isbn) || libs.length === 0) return null;
+  // 같은 책의 판본 여러 개(최대 3개) — 어느 판본이든 있으면 "있음"으로 합쳐서 돌아온다
+  const isbn = [...new Set(isbnList.filter((s) => /^\d{13}$/.test(s)))].slice(0, 3).join(',');
+  if (!LOAN_PROXY_URL || !isbn || libs.length === 0) return null;
 
   const key = `where:${isbn}:${libs.join(',')}`;
   const hit = memo.get(key);
@@ -75,6 +77,43 @@ export async function fetchWhereToBorrow(
     for (const [lib, r] of Object.entries(body.results ?? {})) if (r) value[lib] = r;
     memo.set(key, { at: Date.now(), value });
     return value;
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/**
+ * 책 제목으로 찾기 (정보나루 도서 검색, 중계 서버 경유).
+ * 같은 책의 판본은 한 권으로 묶여 오고, isbns 에 판본 ISBN 이 대출 많은 순으로 들어 있다.
+ * 실패하면 null — 화면은 "지금은 찾을 수 없어요"를 보여 준다.
+ */
+export interface FoundBook {
+  title: string;
+  author: string;
+  coverImageUrl?: string;
+  isbns: string[];
+}
+const searchMemo = new Map<string, FoundBook[]>();
+
+export async function searchBooks(query: string): Promise<FoundBook[] | null> {
+  const q = query.trim();
+  if (!LOAN_PROXY_URL || q.replace(/\s/g, '').length < 2) return null;
+  const hit = searchMemo.get(q);
+  if (hit) return hit;
+
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8000);
+  try {
+    const res = await fetch(`${LOAN_PROXY_URL.replace(/\/$/, '')}/search?q=${encodeURIComponent(q)}`, {
+      signal: controller.signal,
+    });
+    if (!res.ok) return null;
+    const body = (await res.json()) as { books?: FoundBook[] };
+    const books = (body.books ?? []).filter((b) => b.title && b.isbns?.length);
+    searchMemo.set(q, books);
+    return books;
   } catch {
     return null;
   } finally {
