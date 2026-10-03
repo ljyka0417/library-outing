@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Animated, Easing, Modal, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Animated, Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Mascot } from './Mascot';
 import { useT } from '@/i18n';
 import { colors, radius, shadow, spacing, typography } from '@/theme';
@@ -40,7 +40,7 @@ export function VisitPopup({ visible, fresh, libraryName, count, onClose }: Prop
     ],
   };
   const cardStyle = {
-    opacity: pop.interpolate({ inputRange: [0, 0.4, 1], outputRange: [0, 1, 1], easing: Easing.out(Easing.quad) }),
+    opacity: pop.interpolate({ inputRange: [0, 0.4, 1], outputRange: [0, 1, 1] }),
   };
 
   return (
