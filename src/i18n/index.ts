@@ -71,7 +71,7 @@ const ko = {
   'where.none': '이 지역 도서관에는 이 책이 없어요',
   'where.notOwned': '이 책이 없는 곳 {n}곳',
   'where.unsupported': '이 지역에는 대출 정보를 확인할 수 있는 도서관이 없어요',
-  'where.failed': '지금은 확인할 수 없어요. 인터넷 연결을 확인해 주세요.',
+  'where.failed': '지금은 확인할 수 없어요. 오늘 조회 한도(하루 500건)를 다 썼거나 연결이 불안정해요. 잠시 뒤에 다시 눌러 주세요.',
   'home.regionBooksHint': '책을 누르면 어디서 빌릴 수 있는지 알려 드려요',
   'home.offline': '네트워크가 불안정해 마지막으로 본 정보를 보여드리고 있어요',
 
@@ -242,6 +242,7 @@ const ko = {
     '저는 이 앱에 담긴 {count}곳 정보로만 답해요. 이런 걸 물어보세요.\n\n· 어린이 도서관 추천해줘\n· 부산에 있는 도서관\n· 지금 문 연 도서관\n· 서울도서관 몇 시까지 해?\n· 한밭도서관 주변 카페\n· 울산종갓집도서관에서 많이 빌린 책\n\n모르는 건 지어내지 않고 모른다고 말할게요.',
   'bot.hello': '안녕하세요, 달곰이예요. 전국 도서관 {count}곳을 알고 있어요. 무엇을 찾아드릴까요?',
   'bot.thanks': '천만에요! 또 궁금한 게 있으면 물어보세요.',
+  'loan.quota': "오늘 도서관 정보나루 조회 한도(하루 500건)를 다 썼어요. 자정이 지나면 다시 찾을 수 있어요.",
   'culture.title': "근처 공연·전시",
   'culture.sub': "걸어서 갈 만한 곳, 두 달 안의 행사",
   'culture.show': "공연",
@@ -453,7 +454,7 @@ const en: Messages = {
   'where.none': 'No library in this region has this book',
   'where.notOwned': '{n} libraries without this book',
   'where.unsupported': 'No library in this region shares loan data',
-  'where.failed': 'Unable to check right now. Please check your connection.',
+  'where.failed': 'Unable to check right now. The daily lookup limit (500) may be used up, or the connection is unstable. Please try again later.',
   'home.regionBooksHint': 'Tap a book to see where you can borrow it',
   'home.offline': 'The network is unstable, so we are showing what you saw last.',
 
@@ -622,6 +623,7 @@ const en: Messages = {
     'I answer only from the {count} libraries in this app. Try asking things like this.\n\n· Recommend kids libraries\n· Libraries in Busan\n· Libraries open now\n· 서울도서관 hours\n· Cafes near 한밭도서관\n· Popular books at 울산종갓집도서관\n\nIf I do not know something, I will say so instead of making it up.',
   'bot.hello': 'Hello, I am Dalgomi. I know {count} libraries across Korea. What can I find for you?',
   'bot.thanks': 'You are welcome! Ask me anything else.',
+  'loan.quota': "Today's Data4Library lookup limit (500 per day) has been used up. Please try again after midnight.",
   'culture.title': "Shows & exhibitions nearby",
   'culture.sub': "Within walking distance, next two months",
   'culture.show': "Performance",
@@ -831,7 +833,7 @@ const ja: Messages = {
   'where.none': 'この地域の図書館にはこの本がありません',
   'where.notOwned': '所蔵なし {n}館',
   'where.unsupported': 'この地域には貸出情報を確認できる図書館がありません',
-  'where.failed': '今は確認できません。接続を確認してください。',
+  'where.failed': '今は確認できません。1日の照会上限（500件）に達したか、接続が不安定です。しばらくしてからもう一度お試しください。',
   'home.regionBooksHint': '本をタップすると借りられる図書館が分かります',
   'home.offline': '通信が不安定なため、最後に見た情報を表示しています',
 
@@ -998,6 +1000,7 @@ const ja: Messages = {
   'bot.hello':
     'こんにちは、ダルゴミです。韓国じゅうの図書館{count}館を知っています。何をお探しですか？',
   'bot.thanks': 'どういたしまして！ほかにも気になることがあれば聞いてください。',
+  'loan.quota': "今日の図書館情報ナルの照会上限（1日500件）に達しました。午前0時を過ぎるとまた検索できます。",
   'culture.title': "近くの公演・展示",
   'culture.sub': "歩いて行ける距離、2か月以内のイベント",
   'culture.show': "公演",
@@ -1206,7 +1209,7 @@ const zh: Messages = {
   'where.none': '本地区图书馆都没有这本书',
   'where.notOwned': '未收藏 {n}家',
   'where.unsupported': '本地区没有可查询借阅信息的图书馆',
-  'where.failed': '暂时无法查询，请检查网络连接。',
+  'where.failed': '暂时无法查询。可能是今天的查询次数（每天500次）已用完，或网络不稳定，请稍后再试。',
   'home.regionBooksHint': '点按书籍查看哪里可以借到',
   'home.offline': '网络不稳定，正在显示您上次查看的信息',
 
@@ -1370,6 +1373,7 @@ const zh: Messages = {
     '我只根据这个应用里的 {count} 家图书馆资料回答。可以这样问我。\n\n· 推荐儿童图书馆\n· 釜山的图书馆\n· 现在开放的图书馆\n· 서울도서관 开放时间\n· 한밭도서관 周边咖啡\n· 울산종갓집도서관 借阅最多的书\n\n不知道的事情我不会编造，会直接说不知道。',
   'bot.hello': '你好，我是达尔戈米。我知道韩国各地的 {count} 家图书馆。想找什么呢？',
   'bot.thanks': '不客气！还有想问的随时说。',
+  'loan.quota': "今天的图书馆信息平台查询次数（每天500次）已用完，过了午夜就能再查。",
   'culture.title': "附近的演出与展览",
   'culture.sub': "步行可到，两个月内的活动",
   'culture.show': "演出",

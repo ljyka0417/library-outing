@@ -75,6 +75,8 @@ export async function fetchWhereToBorrow(
     const body = (await res.json()) as { results?: Record<string, LoanStatus | null> };
     const value: Record<string, LoanStatus> = {};
     for (const [lib, r] of Object.entries(body.results ?? {})) if (r) value[lib] = r;
+    // 한 곳도 답하지 않았으면 "없어요"가 아니라 "확인할 수 없어요"다 (하루 500건 한도를 넘긴 날 등)
+    if (Object.keys(value).length === 0) return null;
     memo.set(key, { at: Date.now(), value });
     return value;
   } catch {
@@ -97,7 +99,11 @@ export interface FoundBook {
 }
 const searchMemo = new Map<string, FoundBook[]>();
 
-export async function searchBooks(query: string): Promise<FoundBook[] | null> {
+/**
+ * 정보나루는 하루 500건까지만 답한다(그 이상은 고정 IP 등록이 필요한데, Cloudflare 는 IP 가 고정이 아니다).
+ * 한도를 넘긴 날은 'quota' — 화면이 "오늘 조회 한도를 다 썼어요"라고 말하게.
+ */
+export async function searchBooks(query: string): Promise<FoundBook[] | null | 'quota'> {
   const q = query.trim();
   if (!LOAN_PROXY_URL || q.replace(/\s/g, '').length < 2) return null;
   const hit = searchMemo.get(q);
@@ -109,6 +115,10 @@ export async function searchBooks(query: string): Promise<FoundBook[] | null> {
     const res = await fetch(`${LOAN_PROXY_URL.replace(/\/$/, '')}/search?q=${encodeURIComponent(q)}`, {
       signal: controller.signal,
     });
+    if (res.status === 503) {
+      const err = (await res.json().catch(() => ({}))) as { error?: string };
+      if (err.error === 'quota') return 'quota';
+    }
     if (!res.ok) return null;
     const body = (await res.json()) as { books?: FoundBook[] };
     const books = (body.books ?? []).filter((b) => b.title && b.isbns?.length);

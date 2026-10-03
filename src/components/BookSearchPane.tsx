@@ -39,7 +39,7 @@ export function BookSearchPane() {
   const [region, setRegion] = useState(startRegion);
 
   const [query, setQuery] = useState('');
-  const [state, setState] = useState<'idle' | 'loading' | 'done' | 'failed'>('idle');
+  const [state, setState] = useState<'idle' | 'loading' | 'done' | 'failed' | 'quota'>('idle');
   const [books, setBooks] = useState<FoundBook[]>([]);
   const [asking, setAsking] = useState<Book | null>(null);
 
@@ -55,7 +55,8 @@ export function BookSearchPane() {
     const timer = setTimeout(() => {
       void searchBooks(q).then((r) => {
         if (!alive) return;
-        if (r) {
+        if (r === 'quota') setState('quota');
+        else if (r) {
           setBooks(r);
           setState('done');
         } else setState('failed');
@@ -98,8 +99,12 @@ export function BookSearchPane() {
           <ActivityIndicator color={colors.primary} />
           <Text style={styles.loadingText}>{t('bookSearch.loading')}</Text>
         </View>
-      ) : state === 'failed' ? (
-        <EmptyState pose="faceWink" title={t('search.errorTitle')} description={t('bookSearch.failed')} />
+      ) : state === 'failed' || state === 'quota' ? (
+        <EmptyState
+          pose="faceWink"
+          title={t('search.errorTitle')}
+          description={state === 'quota' ? t('loan.quota') : t('bookSearch.failed')}
+        />
       ) : (
         <FlatList
           data={books}
