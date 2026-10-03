@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
@@ -8,6 +8,7 @@ import { LibraryImage } from './LibraryImage';
 import { MapButtons } from './MapButtons';
 import { NearbySection } from './NearbySection';
 import { ProgramCard } from './ProgramCard';
+import { VisitPopup } from './VisitPopup';
 import { Badge, EmptyState, InfoRow, SectionHeader } from './common';
 import { libraryApi } from '@/api/libraryApi';
 import { CATEGORY_MAP } from '@/data/categories';
@@ -110,6 +111,10 @@ export const LibraryDetail = memo(function LibraryDetail({
   const toggleFavorite = useAppStore((s) => s.toggleFavorite);
   const pushRecent = useAppStore((s) => s.pushRecent);
   const addVisit = useAppStore((s) => s.addVisit);
+  const visits = useAppStore((s) => s.visits);
+  /** "여기 다녀왔어요" 를 누른 뒤 뜨는 창 */
+  const [visitPopup, setVisitPopup] = useState<{ fresh: boolean; count: number } | null>(null);
+  const closeVisitPopup = useCallback(() => setVisitPopup(null), []);
 
   const { data: library, loading, error } = useAsync(
     () => libraryApi.detail(id),
@@ -328,10 +333,36 @@ export const LibraryDetail = memo(function LibraryDetail({
       </View>
     ) : null;
 
+  /**
+   * "여기 다녀왔어요".
+   * 같은 날 같은 도서관은 한 번만 기록한다 — 여러 번 눌러도 마이 탭의 "다녀온 곳"
+   * 숫자가 부풀지 않게. 두 번째부터는 기록하지 않고 "오늘은 이미 기록했어요"만 띄운다.
+   */
+  const onCheckin = () => {
+    const today = new Date().toDateString();
+    const already = visits.some(
+      (v) => v.libraryId === library.id && new Date(v.visitedAt).toDateString() === today
+    );
+    if (!already) addVisit(library.id);
+    const places = new Set(visits.map((v) => v.libraryId));
+    places.add(library.id);
+    setVisitPopup({ fresh: !already, count: places.size });
+  };
+
+  const popup = (
+    <VisitPopup
+      visible={!!visitPopup}
+      fresh={visitPopup?.fresh ?? true}
+      libraryName={library.name}
+      count={visitPopup?.count ?? 0}
+      onClose={closeVisitPopup}
+    />
+  );
+
   const checkin = (inset: number) => (
     <View style={{ paddingHorizontal: inset, marginTop: spacing.lg }}>
       <Pressable
-        onPress={() => addVisit(library.id)}
+        onPress={onCheckin}
         style={({ pressed }) => [styles.checkin, pressed && { opacity: 0.85 }]}
       >
         <Ionicons name="footsteps-outline" size={18} color={colors.primary} />
@@ -407,6 +438,7 @@ export const LibraryDetail = memo(function LibraryDetail({
             {shelves}
           </View>
         </ScrollView>
+        {popup}
       </View>
     );
   }
@@ -427,6 +459,7 @@ export const LibraryDetail = memo(function LibraryDetail({
           {checkin(gutter)}
         </View>
       </ScrollView>
+      {popup}
     </View>
   );
 });
