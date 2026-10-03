@@ -565,16 +565,16 @@ function formatNow(d: Date, lang: Lang): string {
  */
 const ME_TOPICS = ['who', 'job', 'mbti', 'hobby', 'talent', 'likes', 'dislikes', 'bag', 'profile'] as const;
 type MeTopic = (typeof ME_TOPICS)[number];
-const ME_WORD = /달곰|너는|너의|너가|네가|니가|넌|^너\b|\byou\b|\byour\b|ダルゴミ|あなた|君は|达尔戈米|你是|你的|你喜欢|你讨厌/;
+const ME_WORD = /달곰|너는|너의|너가|네가|니가|넌|^너\b|\byou\b|\byour\b|\bdalgomi\b|ダルゴミ|あなた|君は|达尔戈米|你是|你的|你喜欢|你讨厌/;
 const ME_ASK: [MeTopic, RegExp][] = [
   ['bag', /가방|배낭|\bbag\b|\bbackpack\b|かばん|リュック|背包|包里/],
   ['mbti', /mbti|엠비티아이|성격/],
   ['hobby', /취미|\bhobb(y|ies)\b|趣味|爱好/],
-  ['talent', /특기|잘하는|잘해|\btalents?\b|\bgood at\b|得意|特长|擅长/],
-  ['dislikes', /싫어|싫은|\bdislikes?\b|\bhate\b|嫌い|讨厌|不喜欢/],
+  ['talent', /특기|잘하는|잘해|\btalents?\b|\bgood at\b|特技|得意|特长|擅长/],
+  ['dislikes', /싫어|싫은|\bdislikes?\b|\bhate\b|嫌い|苦手|讨厌|不喜欢/],
   ['likes', /좋아하|좋아해|\blikes?\b|\bfavorite\b|好き|喜欢/],
-  ['job', /하는 일|무슨 일|뭐 해|뭐해|무엇을 해|역할|\bwhat do you do\b|\brole\b|仕事|何をする|做什么/],
-  ['who', /누구|어떤 친구|소개|\bwho are you\b|\bintroduce\b|誰|自己紹介|是谁|介绍/],
+  ['job', /하는 일|무슨 일|뭐 해|뭐해|무엇을 해|역할|\bwhat do(es)? (you|dalgomi) do\b|\brole\b|仕事|何をする|何をしている|做什么|干什么/],
+  ['who', /누구|어떤 친구|소개|\bwho are you\b|\bwho is dalgomi\b|\bintroduce\b|誰|自己紹介|どんな友だち|どんな子|是谁|介绍|什么样的朋友/],
   ['profile', /프로필|정보|\bprofile\b|プロフィール|资料/],
 ];
 function askAboutMe(text: string): MeTopic | undefined {
