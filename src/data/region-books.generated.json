@@ -1,0 +1,906 @@
+{
+  "_readme": "정보나루 지역별 대출 순위(최근 3개월). 직접 고치지 마세요 — npm run collect-region-books 가 덮어씁니다.",
+  "_generatedAt": "2026-10-03T12:07:38.610Z",
+  "_period": {
+    "start": "2026-07-05",
+    "end": "2026-10-03"
+  },
+  "regions": {
+    "서울": {
+      "books": [
+        {
+          "title": "혼모노",
+          "author": "성해나",
+          "isbn": "9788936439743",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36101/66/cover200/893643974x_1.jpg"
+        },
+        {
+          "title": "소년이 온다",
+          "author": "한강",
+          "isbn": "9788936434120",
+          "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+        },
+        {
+          "title": "안녕이라 그랬어",
+          "author": "김애란",
+          "isbn": "9791141602376",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36566/52/cover200/k462039240_1.jpg"
+        },
+        {
+          "title": "모순",
+          "author": "양귀자",
+          "isbn": "9788998441012",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/071/902/07190270.jpg?type=m1&udate=20170801"
+        },
+        {
+          "title": "절창",
+          "author": "구병모",
+          "isbn": "9791141602451",
+          "coverImageUrl": "https://image.aladin.co.kr/product/37172/36/cover200/k662031678_1.jpg"
+        },
+        {
+          "title": "작별하지 않는다",
+          "author": "한강",
+          "isbn": "9788954682152",
+          "coverImageUrl": "https://image.aladin.co.kr/product/27877/5/cover/8954682154_1.jpg"
+        },
+        {
+          "title": "괴테는 모든 것을 말했다",
+          "author": "스즈키 유이",
+          "isbn": "9791194530701",
+          "coverImageUrl": "https://image.aladin.co.kr/product/37676/59/cover200/k212032349_1.jpg"
+        },
+        {
+          "title": "홍학의 자리",
+          "author": "정해연",
+          "isbn": "9788954681155",
+          "coverImageUrl": "https://image.aladin.co.kr/product/27587/94/cover/8954681158_1.jpg"
+        },
+        {
+          "title": "이중 하나는 거짓말",
+          "author": "김애란",
+          "isbn": "9791141601300",
+          "coverImageUrl": "https://image.aladin.co.kr/product/34474/76/cover200/k292932634_1.jpg"
+        },
+        {
+          "title": "자몽살구클럽",
+          "author": "한로로",
+          "isbn": "9791199305304",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36808/37/cover200/k082030009_1.jpg"
+        }
+      ]
+    },
+    "경기": {
+      "books": [
+        {
+          "title": "소년이 온다",
+          "author": "한강",
+          "isbn": "9788936434120",
+          "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+        },
+        {
+          "title": "불편한 편의점",
+          "author": "김호연",
+          "isbn": "9791161571188",
+          "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+        },
+        {
+          "title": "안녕이라 그랬어",
+          "author": "김애란",
+          "isbn": "9791141602376",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36566/52/cover200/k462039240_1.jpg"
+        },
+        {
+          "title": "혼모노",
+          "author": "성해나",
+          "isbn": "9788936439743",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36101/66/cover200/893643974x_1.jpg"
+        },
+        {
+          "title": "작별하지 않는다",
+          "author": "한강",
+          "isbn": "9788954682152",
+          "coverImageUrl": "https://image.aladin.co.kr/product/27877/5/cover/8954682154_1.jpg"
+        },
+        {
+          "title": "모순",
+          "author": "양귀자",
+          "isbn": "9788998441012",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/071/902/07190270.jpg?type=m1&udate=20170801"
+        },
+        {
+          "title": "절창",
+          "author": "구병모",
+          "isbn": "9791141602451",
+          "coverImageUrl": "https://image.aladin.co.kr/product/37172/36/cover200/k662031678_1.jpg"
+        },
+        {
+          "title": "홍학의 자리",
+          "author": "정해연",
+          "isbn": "9788954681155",
+          "coverImageUrl": "https://image.aladin.co.kr/product/27587/94/cover/8954681158_1.jpg"
+        },
+        {
+          "title": "흔한남매",
+          "author": "흔한남매",
+          "isbn": "9791168418011",
+          "coverImageUrl": "https://image.aladin.co.kr/product/33815/12/cover200/k832930683_1.jpg"
+        },
+        {
+          "title": "달러구트 꿈 백화점",
+          "author": "이미예",
+          "isbn": "9791165341909",
+          "coverImageUrl": "https://image.aladin.co.kr/product/24512/70/cover/k392630952_1.jpg"
+        }
+      ]
+    },
+    "인천": {
+      "books": [
+        {
+          "title": "소년이 온다",
+          "author": "한강",
+          "isbn": "9788936434120",
+          "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+        },
+        {
+          "title": "불편한 편의점",
+          "author": "김호연",
+          "isbn": "9791161571188",
+          "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+        },
+        {
+          "title": "혼모노",
+          "author": "성해나",
+          "isbn": "9788936439743",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36101/66/cover200/893643974x_1.jpg"
+        },
+        {
+          "title": "작별하지 않는다",
+          "author": "한강",
+          "isbn": "9788954682152",
+          "coverImageUrl": "https://image.aladin.co.kr/product/27877/5/cover/8954682154_1.jpg"
+        },
+        {
+          "title": "모순",
+          "author": "양귀자",
+          "isbn": "9788998441012",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/071/902/07190270.jpg?type=m1&udate=20170801"
+        },
+        {
+          "title": "흔한남매",
+          "author": "흔한남매",
+          "isbn": "9791164134267",
+          "coverImageUrl": "https://image.aladin.co.kr/product/22327/46/cover/k782636924_1.jpg"
+        },
+        {
+          "title": "홍학의 자리",
+          "author": "정해연",
+          "isbn": "9788954681155",
+          "coverImageUrl": "https://image.aladin.co.kr/product/27587/94/cover/8954681158_1.jpg"
+        },
+        {
+          "title": "절창",
+          "author": "구병모",
+          "isbn": "9791141602451",
+          "coverImageUrl": "https://image.aladin.co.kr/product/37172/36/cover200/k662031678_1.jpg"
+        },
+        {
+          "title": "안녕이라 그랬어",
+          "author": "김애란",
+          "isbn": "9791141602376",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36566/52/cover200/k462039240_1.jpg"
+        },
+        {
+          "title": "나의 완벽한 장례식",
+          "author": "조현선",
+          "isbn": "9791124038192",
+          "coverImageUrl": "https://image.aladin.co.kr/product/38357/53/cover200/k952135368_1.jpg"
+        }
+      ]
+    },
+    "강원": {
+      "books": [
+        {
+          "title": "흔한남매",
+          "author": "흔한남매",
+          "isbn": "9791168418011",
+          "coverImageUrl": "https://image.aladin.co.kr/product/33815/12/cover200/k832930683_1.jpg"
+        },
+        {
+          "title": "긴긴밤",
+          "author": "루리",
+          "isbn": "9788954677158",
+          "coverImageUrl": "https://image.aladin.co.kr/product/26302/71/cover/8954677150_1.jpg"
+        },
+        {
+          "title": "흔한남매 과학 탐험대 4",
+          "author": "흔한남매",
+          "isbn": "9788934930549",
+          "coverImageUrl": "https://image.aladin.co.kr/product/28932/34/cover/8934930543_1.jpg"
+        },
+        {
+          "title": "절창",
+          "author": "구병모",
+          "isbn": "9791141602451",
+          "coverImageUrl": "https://image.aladin.co.kr/product/37172/36/cover200/k662031678_1.jpg"
+        },
+        {
+          "title": "안 흔한 일기",
+          "author": "흔한남매",
+          "isbn": "9791164134649",
+          "coverImageUrl": "https://image.aladin.co.kr/product/23331/23/cover/k012637918_1.jpg"
+        },
+        {
+          "title": "설민석의 한국사 대모험",
+          "author": "설민석",
+          "isbn": "9791193031742",
+          "coverImageUrl": "https://image.aladin.co.kr/product/35261/46/cover200/k252934544_1.jpg"
+        },
+        {
+          "title": "시끌벅적 우리 몸",
+          "author": "박승준",
+          "isbn": "9791199841512",
+          "coverImageUrl": "https://image.aladin.co.kr/product/38948/48/cover200/k552137111_2.jpg"
+        },
+        {
+          "title": "내 이름은 태풍",
+          "author": "이지유",
+          "isbn": "9788901205434",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/539/09753922.jpg?type=m1&udate=20151114"
+        },
+        {
+          "title": "급류",
+          "author": "정대건",
+          "isbn": "9788937473401",
+          "coverImageUrl": "https://image.aladin.co.kr/product/30769/24/cover/8937473402_1.jpg"
+        },
+        {
+          "title": "지구를 망치는 기후 악당을 잡아라!",
+          "author": "모니크 페르묄런",
+          "isbn": "9788964964392",
+          "coverImageUrl": "https://image.aladin.co.kr/product/26645/59/cover/896496439x_1.jpg"
+        }
+      ]
+    },
+    "충청": {
+      "books": [
+        {
+          "title": "안녕이라 그랬어",
+          "author": "김애란",
+          "isbn": "9791141602376",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36566/52/cover200/k462039240_1.jpg"
+        },
+        {
+          "title": "혼모노",
+          "author": "성해나",
+          "isbn": "9788936439743",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36101/66/cover200/893643974x_1.jpg"
+        },
+        {
+          "title": "흔한남매",
+          "author": "흔한남매",
+          "isbn": "9791173479939",
+          "coverImageUrl": "https://image.aladin.co.kr/product/37191/81/cover200/k042031295_1.jpg"
+        },
+        {
+          "title": "소년이 온다",
+          "author": "한강",
+          "isbn": "9788936434120",
+          "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+        },
+        {
+          "title": "모순",
+          "author": "양귀자",
+          "isbn": "9788998441012",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/071/902/07190270.jpg?type=m1&udate=20170801"
+        },
+        {
+          "title": "불편한 편의점",
+          "author": "김호연",
+          "isbn": "9791161571188",
+          "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+        },
+        {
+          "title": "절창",
+          "author": "구병모",
+          "isbn": "9791141602451",
+          "coverImageUrl": "https://image.aladin.co.kr/product/37172/36/cover200/k662031678_1.jpg"
+        },
+        {
+          "title": "프로젝트 헤일메리",
+          "author": "앤디 위어",
+          "isbn": "9788925588735",
+          "coverImageUrl": "https://image.aladin.co.kr/product/27045/43/cover/8925588730_1.jpg"
+        },
+        {
+          "title": "홍학의 자리",
+          "author": "정해연",
+          "isbn": "9788954681155",
+          "coverImageUrl": "https://image.aladin.co.kr/product/27587/94/cover/8954681158_1.jpg"
+        },
+        {
+          "title": "흔한남매의 흔한 호기심",
+          "author": "흔한남매",
+          "isbn": "9791168419018",
+          "coverImageUrl": "https://image.aladin.co.kr/product/34875/95/cover200/k482933053_1.jpg"
+        }
+      ]
+    },
+    "대전": {
+      "books": [
+        {
+          "title": "흔한남매",
+          "author": "흔한남매",
+          "isbn": "9791168417199",
+          "coverImageUrl": "https://image.aladin.co.kr/product/32991/71/cover/k502936654_1.jpg"
+        },
+        {
+          "title": "소년이 온다",
+          "author": "한강",
+          "isbn": "9788936434120",
+          "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+        },
+        {
+          "title": "흔한남매의 흔한 호기심",
+          "author": "흔한남매",
+          "isbn": "9791168411852",
+          "coverImageUrl": "https://image.aladin.co.kr/product/29541/3/cover/k292837956_1.jpg"
+        },
+        {
+          "title": "혼모노",
+          "author": "성해나",
+          "isbn": "9788936439743",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36101/66/cover200/893643974x_1.jpg"
+        },
+        {
+          "title": "안녕이라 그랬어",
+          "author": "김애란",
+          "isbn": "9791141602376",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36566/52/cover200/k462039240_1.jpg"
+        },
+        {
+          "title": "모순",
+          "author": "양귀자",
+          "isbn": "9788998441012",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/071/902/07190270.jpg?type=m1&udate=20170801"
+        },
+        {
+          "title": "작별하지 않는다",
+          "author": "한강",
+          "isbn": "9788954682152",
+          "coverImageUrl": "https://image.aladin.co.kr/product/27877/5/cover/8954682154_1.jpg"
+        },
+        {
+          "title": "흔한남매 이무기",
+          "author": "흔한남매",
+          "isbn": "9791168415577",
+          "coverImageUrl": "https://image.aladin.co.kr/product/32095/72/cover/k502834901_1.jpg"
+        },
+        {
+          "title": "흔한남매 과학 탐험대",
+          "author": "흔한남매",
+          "isbn": "9788934946625",
+          "coverImageUrl": "https://image.aladin.co.kr/product/32890/49/cover/8934946628_1.jpg"
+        },
+        {
+          "title": "절창",
+          "author": "구병모",
+          "isbn": "9791141602451",
+          "coverImageUrl": "https://image.aladin.co.kr/product/37172/36/cover200/k662031678_1.jpg"
+        }
+      ]
+    },
+    "세종": {
+      "books": [
+        {
+          "title": "흔한남매",
+          "author": "흔한남매",
+          "isbn": "9791164134267",
+          "coverImageUrl": "https://image.aladin.co.kr/product/22327/46/cover/k782636924_1.jpg"
+        },
+        {
+          "title": "소년이 온다",
+          "author": "한강",
+          "isbn": "9788936434120",
+          "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+        },
+        {
+          "title": "흔한남매의 흔한 호기심",
+          "author": "흔한남매",
+          "isbn": "9791164136032",
+          "coverImageUrl": "https://image.aladin.co.kr/product/25055/39/cover/k002632646_1.jpg"
+        },
+        {
+          "title": "고양이 해결사 깜냥",
+          "author": "홍민정 동화",
+          "isbn": "9788936447694",
+          "coverImageUrl": "https://image.aladin.co.kr/product/23651/80/cover/8936447696_1.jpg"
+        },
+        {
+          "title": "나미야 잡화점의 기적",
+          "author": "히가시노 게이고",
+          "isbn": "9788972756194",
+          "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+        },
+        {
+          "title": "흔한남매 이상한 나라의 고전 읽기",
+          "author": "최재훈",
+          "isbn": "9791168413955",
+          "coverImageUrl": "https://image.aladin.co.kr/product/30340/91/cover/k052839448_1.jpg"
+        },
+        {
+          "title": "괴테는 모든 것을 말했다",
+          "author": "스즈키 유이",
+          "isbn": "9791194530701",
+          "coverImageUrl": "https://image.aladin.co.kr/product/37676/59/cover200/k212032349_1.jpg"
+        },
+        {
+          "title": "흔한남매 과학 탐험대",
+          "author": "흔한남매",
+          "isbn": "9788934944546",
+          "coverImageUrl": "https://image.aladin.co.kr/product/31325/63/cover/8934944544_1.jpg"
+        },
+        {
+          "title": "흔한남매 이무기",
+          "author": "흔한남매",
+          "isbn": "9791168415577",
+          "coverImageUrl": "https://image.aladin.co.kr/product/32095/72/cover/k502834901_1.jpg"
+        },
+        {
+          "title": "흔한남매 과학 탐험대 4",
+          "author": "흔한남매",
+          "isbn": "9788934930549",
+          "coverImageUrl": "https://image.aladin.co.kr/product/28932/34/cover/8934930543_1.jpg"
+        }
+      ]
+    },
+    "전라": {
+      "books": [
+        {
+          "title": "혼모노",
+          "author": "성해나",
+          "isbn": "9788936439743",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36101/66/cover200/893643974x_1.jpg"
+        },
+        {
+          "title": "소년이 온다",
+          "author": "한강",
+          "isbn": "9788936434120",
+          "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+        },
+        {
+          "title": "안녕이라 그랬어",
+          "author": "김애란",
+          "isbn": "9791141602376",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36566/52/cover200/k462039240_1.jpg"
+        },
+        {
+          "title": "흔한남매",
+          "author": "흔한남매",
+          "isbn": "9791168411685",
+          "coverImageUrl": "https://image.aladin.co.kr/product/29286/99/cover/k082837005_1.jpg"
+        },
+        {
+          "title": "모순",
+          "author": "양귀자",
+          "isbn": "9788998441012",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/071/902/07190270.jpg?type=m1&udate=20170801"
+        },
+        {
+          "title": "프로젝트 헤일메리",
+          "author": "앤디 위어",
+          "isbn": "9788925588735",
+          "coverImageUrl": "https://image.aladin.co.kr/product/27045/43/cover/8925588730_1.jpg"
+        },
+        {
+          "title": "자몽살구클럽",
+          "author": "한로로",
+          "isbn": "9791199305304",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36808/37/cover200/k082030009_1.jpg"
+        },
+        {
+          "title": "절창",
+          "author": "구병모",
+          "isbn": "9791141602451",
+          "coverImageUrl": "https://image.aladin.co.kr/product/37172/36/cover200/k662031678_1.jpg"
+        },
+        {
+          "title": "급류",
+          "author": "정대건",
+          "isbn": "9788937473401",
+          "coverImageUrl": "https://image.aladin.co.kr/product/30769/24/cover/8937473402_1.jpg"
+        },
+        {
+          "title": "홍학의 자리",
+          "author": "정해연",
+          "isbn": "9788954681155",
+          "coverImageUrl": "https://image.aladin.co.kr/product/27587/94/cover/8954681158_1.jpg"
+        }
+      ]
+    },
+    "광주": {
+      "books": [
+        {
+          "title": "소년이 온다",
+          "author": "한강",
+          "isbn": "9788936434120",
+          "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+        },
+        {
+          "title": "흔한남매",
+          "author": "흔한남매",
+          "isbn": "9791168415232",
+          "coverImageUrl": "https://image.aladin.co.kr/product/31527/55/cover/k812832343_1.jpg"
+        },
+        {
+          "title": "모순",
+          "author": "양귀자",
+          "isbn": "9788998441012",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/071/902/07190270.jpg?type=m1&udate=20170801"
+        },
+        {
+          "title": "작별하지 않는다",
+          "author": "한강",
+          "isbn": "9788954682152",
+          "coverImageUrl": "https://image.aladin.co.kr/product/27877/5/cover/8954682154_1.jpg"
+        },
+        {
+          "title": "채식주의자",
+          "author": "한강",
+          "isbn": "9788936434595",
+          "coverImageUrl": "https://image.aladin.co.kr/product/29137/2/cover/8936434594_1.jpg"
+        },
+        {
+          "title": "혼모노",
+          "author": "성해나",
+          "isbn": "9788936439743",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36101/66/cover200/893643974x_1.jpg"
+        },
+        {
+          "title": "불편한 편의점",
+          "author": "김호연",
+          "isbn": "9791161571188",
+          "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+        },
+        {
+          "title": "안녕이라 그랬어",
+          "author": "김애란",
+          "isbn": "9791141602376",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36566/52/cover200/k462039240_1.jpg"
+        },
+        {
+          "title": "흔한남매 이상한 나라의 고전 읽기",
+          "author": "최재훈",
+          "isbn": "9791168416314",
+          "coverImageUrl": "https://image.aladin.co.kr/product/32387/47/cover/k882935883_1.jpg"
+        },
+        {
+          "title": "흔한남매의 흔한 호기심",
+          "author": "흔한남매",
+          "isbn": "9791164137121",
+          "coverImageUrl": "https://image.aladin.co.kr/product/25812/8/cover/k352736335_1.jpg"
+        }
+      ]
+    },
+    "경상": {
+      "books": [
+        {
+          "title": "안녕이라 그랬어",
+          "author": "김애란",
+          "isbn": "9791141602376",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36566/52/cover200/k462039240_1.jpg"
+        },
+        {
+          "title": "불편한 편의점",
+          "author": "김호연",
+          "isbn": "9791161571188",
+          "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+        },
+        {
+          "title": "소년이 온다",
+          "author": "한강",
+          "isbn": "9788936434120",
+          "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+        },
+        {
+          "title": "흔한남매",
+          "author": "흔한남매",
+          "isbn": "9791173479939",
+          "coverImageUrl": "https://image.aladin.co.kr/product/37191/81/cover200/k042031295_1.jpg"
+        },
+        {
+          "title": "모순",
+          "author": "양귀자",
+          "isbn": "9788998441012",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/071/902/07190270.jpg?type=m1&udate=20170801"
+        },
+        {
+          "title": "자몽살구클럽",
+          "author": "한로로",
+          "isbn": "9791199305304",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36808/37/cover200/k082030009_1.jpg"
+        },
+        {
+          "title": "혼모노",
+          "author": "성해나",
+          "isbn": "9788936439743",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36101/66/cover200/893643974x_1.jpg"
+        },
+        {
+          "title": "프로젝트 헤일메리",
+          "author": "앤디 위어",
+          "isbn": "9788925588735",
+          "coverImageUrl": "https://image.aladin.co.kr/product/27045/43/cover/8925588730_1.jpg"
+        },
+        {
+          "title": "절창",
+          "author": "구병모",
+          "isbn": "9791141602451",
+          "coverImageUrl": "https://image.aladin.co.kr/product/37172/36/cover200/k662031678_1.jpg"
+        },
+        {
+          "title": "4×4의 세계",
+          "author": "조우리",
+          "isbn": "9788936443412",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36020/60/cover200/8936443410_3.jpg"
+        }
+      ]
+    },
+    "대구": {
+      "books": [
+        {
+          "title": "안녕이라 그랬어",
+          "author": "김애란",
+          "isbn": "9791141602376",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36566/52/cover200/k462039240_1.jpg"
+        },
+        {
+          "title": "소년이 온다",
+          "author": "한강",
+          "isbn": "9788936434120",
+          "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+        },
+        {
+          "title": "흔한남매",
+          "author": "흔한남매",
+          "isbn": "9791164131686",
+          "coverImageUrl": "https://image.aladin.co.kr/product/19404/61/cover/k712635217_1.jpg"
+        },
+        {
+          "title": "모순",
+          "author": "양귀자",
+          "isbn": "9788998441012",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/071/902/07190270.jpg?type=m1&udate=20170801"
+        },
+        {
+          "title": "혼모노",
+          "author": "성해나",
+          "isbn": "9788936439743",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36101/66/cover200/893643974x_1.jpg"
+        },
+        {
+          "title": "홍학의 자리",
+          "author": "정해연",
+          "isbn": "9788954681155",
+          "coverImageUrl": "https://image.aladin.co.kr/product/27587/94/cover/8954681158_1.jpg"
+        },
+        {
+          "title": "불편한 편의점",
+          "author": "김호연",
+          "isbn": "9791161571188",
+          "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+        },
+        {
+          "title": "절창",
+          "author": "구병모",
+          "isbn": "9791141602451",
+          "coverImageUrl": "https://image.aladin.co.kr/product/37172/36/cover200/k662031678_1.jpg"
+        },
+        {
+          "title": "순례 주택",
+          "author": "유은실",
+          "isbn": "9788949123493",
+          "coverImageUrl": "https://image.aladin.co.kr/product/26674/56/cover/8949123495_1.jpg"
+        },
+        {
+          "title": "프로젝트 헤일메리",
+          "author": "앤디 위어",
+          "isbn": "9788925588735",
+          "coverImageUrl": "https://image.aladin.co.kr/product/27045/43/cover/8925588730_1.jpg"
+        }
+      ]
+    },
+    "울산": {
+      "books": [
+        {
+          "title": "안녕이라 그랬어",
+          "author": "김애란",
+          "isbn": "9791141602376",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36566/52/cover200/k462039240_1.jpg"
+        },
+        {
+          "title": "4×4의 세계",
+          "author": "조우리",
+          "isbn": "9788936443412",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36020/60/cover200/8936443410_3.jpg"
+        },
+        {
+          "title": "아웃렛",
+          "author": "송광용",
+          "isbn": "9791161572123",
+          "coverImageUrl": "https://image.aladin.co.kr/product/35839/26/cover200/k922037863_1.jpg"
+        },
+        {
+          "title": "순례 주택",
+          "author": "유은실",
+          "isbn": "9788949123493",
+          "coverImageUrl": "https://image.aladin.co.kr/product/26674/56/cover/8949123495_1.jpg"
+        },
+        {
+          "title": "흔한남매",
+          "author": "흔한남매",
+          "isbn": "9791173479939",
+          "coverImageUrl": "https://image.aladin.co.kr/product/37191/81/cover200/k042031295_1.jpg"
+        },
+        {
+          "title": "비스킷",
+          "author": "김선미",
+          "isbn": "9791168127630",
+          "coverImageUrl": "https://image.aladin.co.kr/product/32443/92/cover/k002935195_1.jpg"
+        },
+        {
+          "title": "소년이 온다",
+          "author": "한강",
+          "isbn": "9788936434120",
+          "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+        },
+        {
+          "title": "홍학의 자리",
+          "author": "정해연",
+          "isbn": "9788954681155",
+          "coverImageUrl": "https://image.aladin.co.kr/product/27587/94/cover/8954681158_1.jpg"
+        },
+        {
+          "title": "혼모노",
+          "author": "성해나",
+          "isbn": "9788936439743",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36101/66/cover200/893643974x_1.jpg"
+        },
+        {
+          "title": "도넛을 나누는 기분",
+          "author": "김소형",
+          "isbn": "9791165703264",
+          "coverImageUrl": "https://image.aladin.co.kr/product/35937/32/cover200/k632037701_1.jpg"
+        }
+      ]
+    },
+    "부산": {
+      "books": [
+        {
+          "title": "불편한 편의점",
+          "author": "김호연",
+          "isbn": "9791161571188",
+          "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+        },
+        {
+          "title": "모순",
+          "author": "양귀자",
+          "isbn": "9788998441012",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/071/902/07190270.jpg?type=m1&udate=20170801"
+        },
+        {
+          "title": "프로젝트 헤일메리",
+          "author": "앤디 위어",
+          "isbn": "9788925588735",
+          "coverImageUrl": "https://image.aladin.co.kr/product/27045/43/cover/8925588730_1.jpg"
+        },
+        {
+          "title": "사피엔스",
+          "author": "유발 하라리",
+          "isbn": "9788934972464",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/097/807/09780781.jpg?type=m1&udate=20180721"
+        },
+        {
+          "title": "지식 브리핑",
+          "author": "김진",
+          "isbn": "9791124038413",
+          "coverImageUrl": "https://image.aladin.co.kr/product/39244/75/cover200/k782138107_1.jpg"
+        },
+        {
+          "title": "안녕이라 그랬어",
+          "author": "김애란",
+          "isbn": "9791141602376",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36566/52/cover200/k462039240_1.jpg"
+        },
+        {
+          "title": "쿠키런 과학상식 1~35 세트",
+          "author": "임우영",
+          "isbn": "9791164386727",
+          "coverImageUrl": "https://image.aladin.co.kr/product/23831/26/cover/k032639287_1.jpg"
+        },
+        {
+          "title": "그만 배우기의 기술",
+          "author": "팻 플린",
+          "isbn": "9791167742698",
+          "coverImageUrl": "https://image.aladin.co.kr/product/38541/58/cover200/k812135439_1.jpg"
+        },
+        {
+          "title": "돈의 심리학",
+          "author": "모건 하우절",
+          "isbn": "9791191056372",
+          "coverImageUrl": "https://image.aladin.co.kr/product/25967/85/cover/k412737326_1.jpg"
+        },
+        {
+          "title": "살찌지 않는 몸",
+          "author": "우창윤",
+          "isbn": "9788901299532",
+          "coverImageUrl": "https://image.aladin.co.kr/product/38758/47/cover200/8901299534_1.jpg"
+        }
+      ]
+    },
+    "제주": {
+      "books": [
+        {
+          "title": "소년이 온다",
+          "author": "한강",
+          "isbn": "9788936434120",
+          "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+        },
+        {
+          "title": "작별하지 않는다",
+          "author": "한강",
+          "isbn": "9788954682152",
+          "coverImageUrl": "https://image.aladin.co.kr/product/27877/5/cover/8954682154_1.jpg"
+        },
+        {
+          "title": "긴긴밤",
+          "author": "루리",
+          "isbn": "9788954677158",
+          "coverImageUrl": "https://image.aladin.co.kr/product/26302/71/cover/8954677150_1.jpg"
+        },
+        {
+          "title": "불편한 편의점",
+          "author": "김호연",
+          "isbn": "9791161571188",
+          "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+        },
+        {
+          "title": "혼모노",
+          "author": "성해나",
+          "isbn": "9788936439743",
+          "coverImageUrl": "https://image.aladin.co.kr/product/36101/66/cover200/893643974x_1.jpg"
+        },
+        {
+          "title": "모순",
+          "author": "양귀자",
+          "isbn": "9788998441012",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/071/902/07190270.jpg?type=m1&udate=20170801"
+        },
+        {
+          "title": "엄마가 유령이 되었어!",
+          "author": "노부미",
+          "isbn": "9788955823509",
+          "coverImageUrl": "https://image.aladin.co.kr/product/8350/97/cover/8955823509_1.jpg"
+        },
+        {
+          "title": "흔한남매",
+          "author": "흔한남매",
+          "isbn": "9791168417199",
+          "coverImageUrl": "https://image.aladin.co.kr/product/32991/71/cover/k502936654_1.jpg"
+        },
+        {
+          "title": "절창",
+          "author": "구병모",
+          "isbn": "9791141602451",
+          "coverImageUrl": "https://image.aladin.co.kr/product/37172/36/cover200/k662031678_1.jpg"
+        },
+        {
+          "title": "푸른 사자 와니니",
+          "author": "이현",
+          "isbn": "9788936442804",
+          "coverImageUrl": "https://image.aladin.co.kr/product/6232/31/cover/8936442805_1.jpg"
+        }
+      ]
+    }
+  }
+}
