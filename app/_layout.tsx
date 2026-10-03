@@ -124,6 +124,8 @@ export default function RootLayout() {
           headerTintColor: colors.text,
           headerShadowVisible: false,
           contentStyle: { backgroundColor: colors.background },
+          // 뒤로가기는 화살표만 — 이전 화면 이름이 폴더 이름 「(tabs)」 로 나와서 (달곰이 꾸미기 등 모든 화면)
+          headerBackButtonDisplayMode: 'minimal',
         }}
       >
         <Stack.Screen name="onboarding" options={{ headerShown: false }} />
