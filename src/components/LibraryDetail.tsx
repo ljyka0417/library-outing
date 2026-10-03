@@ -501,12 +501,13 @@ export const LibraryDetail = memo(function LibraryDetail({
               <View style={{ width: left }}>
                 <LibraryImage library={library} variant="hero" framed style={styles.wideHero} />
                 {mapSection(0)}
+                {/* 운영 프로그램은 지도 아래 */}
+                {programsSection(0)}
                 {checkin(0)}
               </View>
 
               <View style={{ flex: 1 }}>
                 <View style={styles.wideCard}>{summary}</View>
-                {programsSection(0)}
                 <BarrierFreeSection libraryId={library.id} />
                 <ParkingSection libraryId={library.id} />
               </View>
@@ -530,10 +531,11 @@ export const LibraryDetail = memo(function LibraryDetail({
 
           <View style={[styles.card, { padding: gutter }]}>{summary}</View>
 
-          {programsSection(gutter)}
           <BarrierFreeSection libraryId={library.id} inset={gutter} />
           <ParkingSection libraryId={library.id} inset={gutter} />
           {mapSection(gutter)}
+          {/* 운영 프로그램은 지도 아래 */}
+          {programsSection(gutter)}
           {shelves}
           {checkin(gutter)}
         </View>

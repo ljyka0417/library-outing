@@ -219,8 +219,9 @@ function EventSheet({ event, libraryName, onClose }: { event: CultureEvent | nul
 }
 
 const styles = StyleSheet.create({
+  // 위 책 줄(이름 밑 지은이)에 붙어 보이지 않게 위쪽을 띄운다 — 다른 칸들과 같은 간격
   section: {
-    marginBottom: spacing.xxl,
+    marginTop: spacing.xxl,
   },
   list: {
     gap: spacing.md,
