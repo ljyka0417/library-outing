@@ -8,6 +8,7 @@ import { holidayText, libText, specialtyCategory } from '@/i18n/libraryText';
 import { fetchWeather, weatherEnabled, weatherMood } from '@/api/weather';
 import { BF_GROUPS, barrierFreeFor, bfHas } from '@/data/barrierFree';
 import { fetchWhereToBorrow, loanLookupEnabled, searchBooks } from '@/api/loanStatus';
+import { searchLocalBooks } from '@/data/bookIndex';
 import { regionName, translate, type Lang, type MessageKey } from '@/i18n';
 import {
   CHIP_COUNT,
@@ -651,7 +652,11 @@ async function answerBorrow(q: string, lang: Lang): Promise<Answer> {
     };
   }
 
-  const found = await searchBooks(title);
+  // 앱에 담아 둔 많이 빌린 책에 제목이 그대로(또는 그 말로 시작하는) 있으면 서버에 묻지 않는다
+  const local = searchLocalBooks(title, 5);
+  const squashed = title.toLowerCase().replace(/[\s\p{P}\p{S}]/gu, '');
+  const localHit = local.find((b) => b.title.toLowerCase().replace(/[\s\p{P}\p{S}]/gu, '').startsWith(squashed));
+  const found = localHit ? [localHit] : await searchBooks(title);
   if (found === 'quota') return { text: tr('loan.quota') };
   if (found === null) return { text: tr('bot.borrowFailed') };
   if (found.length === 0) return { text: tr('bot.borrowNoBook', { title }) };

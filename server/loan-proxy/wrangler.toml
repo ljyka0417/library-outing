@@ -5,3 +5,9 @@ compatibility_date = "2026-09-01"
 
 # 정보나루 키는 여기 적지 않는다. 비밀 변수로 따로 넣는다:
 #   npx wrangler secret put DATA4LIBRARY_KEY
+
+# 모든 사용자가 함께 쓰는 기억 (대출 상태·책 검색). 정보나루 하루 500건 한도를 아낀다.
+#   npx wrangler kv namespace create LOAN_KV 로 만들었다. id 는 비밀이 아니다.
+[[kv_namespaces]]
+binding = "LOAN_KV"
+id = "5a175265d50640debb8a20eb734753bf"

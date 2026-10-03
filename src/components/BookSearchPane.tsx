@@ -6,6 +6,7 @@ import { SearchBar } from './SearchBar';
 import { Chip, ChipRow, EmptyState } from './common';
 import { WhereToBorrowSheet } from './WhereToBorrowSheet';
 import { searchBooks, type FoundBook } from '@/api/loanStatus';
+import { searchLocalBooks } from '@/data/bookIndex';
 import { SIDO_LIST } from '@/data/categories';
 import { MOCK_LIBRARIES } from '@/data/libraries.mock';
 import { useAppStore } from '@/store/useAppStore';
@@ -15,13 +16,21 @@ import { regionName, useT } from '@/i18n';
 import { colors, radius, spacing, typography } from '@/theme';
 import type { Book } from '@/types';
 
+const squash = (s: string) => s.toLowerCase().replace(/[\s\p{P}\p{S}]/gu, '');
+/** 앱 목록 먼저, 서버에서 온 것 중 같은 책(제목+지은이)은 빼고 뒤에 */
+function mergeBooks(local: FoundBook[], server: FoundBook[]): FoundBook[] {
+  const seen = new Set(local.map((b) => `${squash(b.title)}|${squash(b.author)}`));
+  return [...local, ...server.filter((b) => !seen.has(`${squash(b.title)}|${squash(b.author)}`))];
+}
+
 /** 정보나루에 등록돼 대출 여부를 물을 수 있는 도서관이 있는 지역만 고를 수 있게 한다 */
 const REGIONS = SIDO_LIST.filter((r) => MOCK_LIBRARIES.some((l) => l.region.sido === r && l.sourceApiId));
 
 /**
  * 검색 탭의 "책" 모드 — 책 제목으로 찾고, 고른 지역에서 어디서 빌릴 수 있는지 본다.
  *
- * 제목을 치면 잠깐 기다렸다가(타자 칠 때마다 묻지 않게) 정보나루 도서 검색을 부른다.
+ * 제목을 치면 먼저 앱에 담아 둔 많이 빌린 책(src/data/bookIndex.ts)에서 찾고, 모자라면
+ * 잠깐 기다렸다가(타자 칠 때마다 묻지 않게) 정보나루 도서 검색을 부른다.
  * 책을 누르면 "어디서 빌릴 수 있나요?" 판이 그 지역 도서관에 판본까지 함께 묻는다.
  */
 export function BookSearchPane() {
@@ -45,6 +54,24 @@ export function BookSearchPane() {
   const [state, setState] = useState<'idle' | 'loading' | 'done' | 'failed' | 'quota'>('idle');
   const [books, setBooks] = useState<FoundBook[]>([]);
   const [asking, setAsking] = useState<Book | null>(null);
+  // 앱에 담긴 목록만으로 보여 주는 중이면 'local' — 아래에 "더 찾아보기"(서버)를 단다
+  const [more, setMore] = useState<'local' | 'loading' | 'done' | 'failed' | 'quota'>('done');
+
+  /** 서버(정보나루)에 물어서 앱 목록 뒤에 붙인다. 서버가 안 되면 앱 목록만 남긴다 */
+  const askServer = (q: string, local: FoundBook[], isAlive: () => boolean) => {
+    void searchBooks(q).then((r) => {
+      if (!isAlive()) return;
+      if (Array.isArray(r)) {
+        setBooks(mergeBooks(local, r));
+        setState('done');
+        setMore('done');
+      } else if (local.length) {
+        setBooks(local);
+        setState('done');
+        setMore(r === 'quota' ? 'quota' : 'failed');
+      } else setState(r === 'quota' ? 'quota' : 'failed');
+    });
+  };
 
   useEffect(() => {
     const q = query.trim();
@@ -53,18 +80,18 @@ export function BookSearchPane() {
       setBooks([]);
       return;
     }
+    // 먼저 앱에 담아 둔 많이 빌린 책에서 찾는다 — 세 권 이상이거나 제목이 똑같은 책이 있으면
+    // 서버에 묻지 않는다 (하루 500건 한도). 모자라면 아래 "더 찾아보기"로 서버에 물을 수 있다
+    const local = searchLocalBooks(q);
+    if (local.length >= 3 || local.some((b) => squash(b.title) === squash(q))) {
+      setBooks(local);
+      setState('done');
+      setMore('local');
+      return;
+    }
     setState('loading');
     let alive = true;
-    const timer = setTimeout(() => {
-      void searchBooks(q).then((r) => {
-        if (!alive) return;
-        if (r === 'quota') setState('quota');
-        else if (r) {
-          setBooks(r);
-          setState('done');
-        } else setState('failed');
-      });
-    }, 450);
+    const timer = setTimeout(() => askServer(q, local, () => alive), 450);
     return () => {
       alive = false;
       clearTimeout(timer);
@@ -121,6 +148,25 @@ export function BookSearchPane() {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={[styles.list, { paddingHorizontal: layout.gutter, paddingBottom: tabPad }]}
           ListEmptyComponent={<EmptyState title={t('search.emptyTitle')} description={t('bookSearch.empty')} />}
+          ListFooterComponent={
+            more === 'local' ? (
+              <Pressable
+                onPress={() => {
+                  setMore('loading');
+                  askServer(query.trim(), books, () => true);
+                }}
+                style={({ pressed }) => [styles.more, pressed && { opacity: 0.7 }]}
+                accessibilityRole="button"
+              >
+                <Ionicons name="search" size={15} color={colors.primary} />
+                <Text style={styles.moreText}>{t('bookSearch.more')}</Text>
+              </Pressable>
+            ) : more === 'loading' ? (
+              <ActivityIndicator color={colors.primary} style={styles.moreLoading} />
+            ) : more === 'quota' || more === 'failed' ? (
+              <Text style={styles.moreNote}>{more === 'quota' ? t('loan.quota') : t('bookSearch.failed')}</Text>
+            ) : null
+          }
           renderItem={({ item }) => (
             <Pressable
               onPress={() => open(item)}
@@ -160,6 +206,26 @@ export function BookSearchPane() {
 }
 
 const styles = StyleSheet.create({
+  more: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    paddingVertical: spacing.lg,
+  },
+  moreText: {
+    ...typography.captionBold,
+    color: colors.primary,
+  },
+  moreLoading: {
+    marginVertical: spacing.lg,
+  },
+  moreNote: {
+    ...typography.tiny,
+    color: colors.textMuted,
+    textAlign: 'center',
+    paddingVertical: spacing.lg,
+  },
   searchWrap: {
     paddingTop: spacing.md,
     paddingBottom: spacing.md,

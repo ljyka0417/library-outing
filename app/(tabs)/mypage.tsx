@@ -191,7 +191,7 @@ function GlassTest() {
  * npm run geocode / enrich / collect-nearby 를 돌린 뒤 여기서 확인한다.
  */
 /** 기기에 들어간 코드를 눈으로 확인하는 표시. 새 코드를 올릴 때마다 바꾼다 */
-const BUILD_MARK = '10-04 도서관 정보 번역';
+const BUILD_MARK = '10-04 책 검색 앱 안에서·공용 기억';
 
 function DataStatus() {
   const d = dataCompleteness();

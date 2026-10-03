@@ -16,6 +16,8 @@ const { libText, hasLibText, specialtyCategory } = load('src/i18n/libraryText.ts
 const progs = require('../src/data/book-programs.generated.json').byId;
 // 주변 장소 종류·사진 출처 (도서관 화면의 주변 카드)
 const nearbyText = JSON.stringify(require('../src/data/nearby.generated.json')) + JSON.stringify(require('../src/data/tour-photos.generated.json'));
+// 이달의 키워드 (홈) — npm run collect-trend-books 로 바뀌면 새 낱말의 번역이 필요하다
+const keywordItems = require('../src/data/trend-books.generated.json').keywords.items.map((k) => ['keywords', k.word]);
 const nearbyItems = [...nearbyText.matchAll(/"(subCategory|credit)":"([^"]+)"/g)].map((m) => ['nearby', m[2]]);
 
 const H = /[가-힣]/;
@@ -28,7 +30,7 @@ for (const l of MOCK_LIBRARIES) {
   items.push(['hours', l.hours?.label], ['sigungu', l.region.sigungu]);
   for (const p of progs[l.id]?.programs ?? []) items.push(['programs', p]);
   if (!specialtyCategory(l.specialty)) items.push(['specialty', l.specialty]);
-  if (l === MOCK_LIBRARIES[0]) items.push(...nearbyItems);
+  if (l === MOCK_LIBRARIES[0]) items.push(...nearbyItems, ...keywordItems);
   for (const [f, v] of items) {
     if (!v || !H.test(v) || seen.has(v)) continue;
     seen.add(v);

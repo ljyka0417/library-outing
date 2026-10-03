@@ -14,8 +14,8 @@
  * 지키는 것
  *   - 앱에 실린 도서관만 받는다 (libs.js). 남이 우리 키로 정보나루를 마구 부르지 못하게.
  *   - 한 번에 책 10권까지, ISBN 은 숫자 13자리만.
- *   - 같은 질문은 10분 동안 기억해 둔다. 정보나루 하루 호출 한도를 아끼고 더 빨리 답한다.
- *     대출 상태가 10분 사이에 바뀔 수는 있어서, 앱은 "방금 확인" 이라고만 말한다.
+ *   - 같은 질문은 기억해 둔다(메모리 + 모두가 함께 쓰는 KV, 아래 askMany).
+ *     정보나루 하루 호출 한도(500건)를 아끼고 더 빨리 답한다.
  */
 import LIBS from './libs.js';
 import { weather } from './weather.js';
@@ -23,7 +23,6 @@ import { culture } from './culture.js';
 
 const ALLOWED = new Set(LIBS);
 const MAX_BOOKS = 10;
-const CACHE_SECONDS = 600;
 const CORS = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, OPTIONS',
@@ -35,22 +34,35 @@ const json = (body, status = 200, extra = {}) =>
     headers: { 'Content-Type': 'application/json; charset=utf-8', ...CORS, ...extra },
   });
 
-/** 정보나루에 한 권 묻기. 실패하면 null (지어내지 않는다) */
 /*
- * 같은 질문은 이 서버의 메모리에 10분 기억한다.
+ * 같은 질문은 두 겹으로 기억한다.
+ *
+ *  1) 이 서버의 메모리 — 가장 빠르지만 서버(인스턴스)가 여럿이고 새로 뜨면 비워진다.
+ *  2) KV(LOAN_KV) — 모든 사용자·모든 서버가 함께 쓴다. 누가 「부산에서 소년이 온다」를 물었으면
+ *     잠시 뒤 같은 것을 묻는 사람은 정보나루 한도를 쓰지 않는다.
+ *
+ * 기억하는 시간: 그 도서관에 책이 없으면 3일(소장은 잘 바뀌지 않는다), 있으면 30분(대출 상태는 바뀐다).
+ * 그래서 앱은 "방금"이 아니라 "30분 안에 확인"이라고 말한다.
  *
  * 처음엔 Cloudflare Cache API 에 담았는데, 무료 요금제는 한 번 부를 때 바깥 요청을 50번까지만
- * 허락하고 캐시 읽기·쓰기도 그 수에 든다. 책 한 권(판본 3개)을 도서관 11곳에 물으면
- * 33 × 3 = 99번이 되어 전부 실패했다(부산, 2026-10-03). 메모리는 그 수에 들지 않는다.
- * 서버가 새로 뜨면 비워지지만, 기억은 덤일 뿐이라 괜찮다.
+ * 허락하고 캐시 읽기·쓰기도 그 수에 들어 전부 실패했다(부산, 2026-10-03). 그래서 KV 는
+ * 한 번에 여러 개를 읽고(최대 100개씩), 쓰기는 실패해도 답에는 영향이 없게 한다.
  */
 const MEM = new Map();
 const MEM_MAX = 5000;
+const TTL_OWNED = 30 * 60;
+const TTL_NOT_OWNED = 3 * 24 * 3600;
+const ttlOf = (v) => (v.hasBook ? TTL_OWNED : TTL_NOT_OWNED);
+const pairKey = (lib, isbn) => `${lib}|${isbn}`;
+const kvKey = (lib, isbn) => `loan:${lib}:${isbn}`;
 
-async function askOne(env, lib, isbn) {
-  const memKey = `${lib}|${isbn}`;
-  const hit = MEM.get(memKey);
-  if (hit && Date.now() - hit.at < CACHE_SECONDS * 1000) return hit.value;
+function remember(key, value) {
+  if (MEM.size >= MEM_MAX) MEM.delete(MEM.keys().next().value);
+  MEM.set(key, { until: Date.now() + ttlOf(value) * 1000, value });
+}
+
+/** 정보나루에 한 권 묻기. 실패하면 null (지어내지 않는다) */
+async function fetchOne(env, lib, isbn) {
   const url =
     `https://data4library.kr/api/bookExist?authKey=${encodeURIComponent(env.DATA4LIBRARY_KEY)}` +
     `&libCode=${lib}&isbn13=${isbn}&format=json`;
@@ -60,13 +72,55 @@ async function askOne(env, lib, isbn) {
     if (!res.ok) return null;
     const result = (await res.json())?.response?.result;
     if (!result || (result.hasBook !== 'Y' && result.hasBook !== 'N')) return null;
-    const value = { hasBook: result.hasBook === 'Y', loanAvailable: result.loanAvailable === 'Y' };
-    if (MEM.size >= MEM_MAX) MEM.delete(MEM.keys().next().value);
-    MEM.set(memKey, { at: Date.now(), value });
-    return value;
+    return { hasBook: result.hasBook === 'Y', loanAvailable: result.loanAvailable === 'Y' };
   } catch {
     return null;
   }
+}
+
+/** [도서관, ISBN] 여럿을 한꺼번에 — 메모리 → KV → 정보나루 차례로. 돌려주는 Map 의 키는 pairKey */
+async function askMany(env, pairs) {
+  const out = new Map();
+  const now = Date.now();
+  let missing = [];
+  for (const [lib, isbn] of pairs) {
+    const hit = MEM.get(pairKey(lib, isbn));
+    if (hit && hit.until > now) out.set(pairKey(lib, isbn), hit.value);
+    else missing.push([lib, isbn]);
+  }
+  if (missing.length && env.LOAN_KV) {
+    try {
+      const got = new Map();
+      const keys = missing.map(([lib, isbn]) => kvKey(lib, isbn));
+      for (let i = 0; i < keys.length; i += 100) {
+        const part = await env.LOAN_KV.get(keys.slice(i, i + 100), 'json');
+        for (const [k, v] of part) if (v) got.set(k, v);
+      }
+      missing = missing.filter(([lib, isbn]) => {
+        const v = got.get(kvKey(lib, isbn));
+        if (!v) return true;
+        out.set(pairKey(lib, isbn), v);
+        remember(pairKey(lib, isbn), v);
+        return false;
+      });
+    } catch {
+      // KV 가 안 되면 정보나루에 바로 묻는다
+    }
+  }
+  // 기억에서 꺼낸 수 — 응답에 실어 한도를 얼마나 아꼈는지 볼 수 있게
+  out.cached = pairs.length - missing.length;
+  const fresh = await Promise.all(missing.map(([lib, isbn]) => fetchOne(env, lib, isbn)));
+  const writes = [];
+  missing.forEach(([lib, isbn], i) => {
+    const v = fresh[i];
+    out.set(pairKey(lib, isbn), v);
+    if (!v) return;
+    remember(pairKey(lib, isbn), v);
+    if (env.LOAN_KV) writes.push(env.LOAN_KV.put(kvKey(lib, isbn), JSON.stringify(v), { expirationTtl: ttlOf(v) }));
+  });
+  // 쓰기는 실패해도(한도 등) 답에는 영향이 없다
+  await Promise.allSettled(writes);
+  return out;
 }
 
 export async function handle(request, env) {
@@ -90,9 +144,9 @@ export async function handle(request, env) {
     return json({ error: `ISBN(숫자 13자리)을 1~${MAX_BOOKS}개 쉼표로 이어 주세요` }, 400);
   }
 
-  const answers = await Promise.all(isbns.map((isbn) => askOne(env, lib, isbn)));
-  const results = Object.fromEntries(isbns.map((isbn, i) => [isbn, answers[i]]));
-  return json({ lib, checkedAt: new Date().toISOString(), results }, 200, { 'Cache-Control': 'no-store' });
+  const answers = await askMany(env, isbns.map((isbn) => [lib, isbn]));
+  const results = Object.fromEntries(isbns.map((isbn) => [isbn, answers.get(pairKey(lib, isbn)) ?? null]));
+  return json({ lib, checkedAt: new Date().toISOString(), cached: answers.cached, results }, 200, { 'Cache-Control': 'no-store' });
 }
 
 /**
@@ -120,14 +174,15 @@ async function where(url, env) {
     return json({ error: `도서관 수 × 판본 수가 ${MAX_ASKS}을 넘습니다. 나눠서 물어 주세요` }, 400);
   }
 
+  const all = await askMany(env, libs.flatMap((lib) => isbns.map((isbn) => [lib, isbn])));
   const results = {};
-  await Promise.all(libs.map(async (lib) => {
-    const answers = (await Promise.all(isbns.map((isbn) => askOne(env, lib, isbn)))).filter(Boolean);
+  for (const lib of libs) {
+    const answers = isbns.map((isbn) => all.get(pairKey(lib, isbn))).filter(Boolean);
     results[lib] = answers.length
       ? { hasBook: answers.some((a) => a.hasBook), loanAvailable: answers.some((a) => a.hasBook && a.loanAvailable) }
       : null;
-  }));
-  return json({ isbn: isbns.join(','), checkedAt: new Date().toISOString(), results }, 200, { 'Cache-Control': 'no-store' });
+  }
+  return json({ isbn: isbns.join(','), checkedAt: new Date().toISOString(), cached: all.cached, results }, 200, { 'Cache-Control': 'no-store' });
 }
 
 /* ── 책 검색 ─────────────────────────────────────────────── */
@@ -160,11 +215,15 @@ async function search(url, env) {
   const q = (url.searchParams.get('q') ?? '').trim().slice(0, 60);
   if (squash(q).length < 2) return json({ error: '검색어를 두 글자 이상 주세요' }, 400);
 
-  const cache = typeof caches !== 'undefined' ? caches.default : null;
+  // 같은 검색은 모두가 함께 쓰는 KV 에 하루 동안 기억한다 (KV 가 없으면 Cache API)
+  const kvSearchKey = `search:v4:${squash(q)}`;
+  const cache = !env.LOAN_KV && typeof caches !== 'undefined' ? caches.default : null;
   const cacheKey = new Request(`https://loan-cache.internal/search-v3/${encodeURIComponent(squash(q))}`);
-  if (cache) {
-    const hit = await cache.match(cacheKey);
-    if (hit) return json(await hit.json(), 200, { 'Cache-Control': 'no-store' });
+  try {
+    const hit = env.LOAN_KV ? await env.LOAN_KV.get(kvSearchKey, 'json') : cache ? await (await cache.match(cacheKey))?.json() : null;
+    if (hit) return json(hit, 200, { 'Cache-Control': 'no-store' });
+  } catch {
+    // 기억을 못 읽으면 정보나루에 묻는다
   }
 
   const api = `https://data4library.kr/api/srchBooks?authKey=${encodeURIComponent(env.DATA4LIBRARY_KEY)}` +
@@ -209,8 +268,11 @@ async function search(url, env) {
     .slice(0, 15);
 
   const body = { q, books };
-  if (cache) {
-    await cache.put(cacheKey, new Response(JSON.stringify(body), { headers: { 'Cache-Control': 'max-age=86400' } }));
+  try {
+    if (env.LOAN_KV) await env.LOAN_KV.put(kvSearchKey, JSON.stringify(body), { expirationTtl: 86400 });
+    else if (cache) await cache.put(cacheKey, new Response(JSON.stringify(body), { headers: { 'Cache-Control': 'max-age=86400' } }));
+  } catch {
+    // 못 적어도 답은 준다
   }
   return json(body, 200, { 'Cache-Control': 'no-store' });
 }

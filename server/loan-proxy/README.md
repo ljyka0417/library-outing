@@ -30,4 +30,8 @@
 
 - 도서관 목록이 바뀌면: `npm run loan-proxy-libs` 후 `npx wrangler deploy`
 - 내 컴퓨터에서 먼저 시험: `node --env-file=../../.env test-local.mjs`
-- 무료 사용량: 하루 10만 번 요청. 같은 질문은 10분 동안 기억해 정보나루 호출을 아낀다
+- 무료 사용량: 하루 10만 번 요청.
+- 같은 질문은 모든 사용자가 함께 쓰는 KV(LOAN_KV)에 기억한다 — 책이 없는 도서관은 3일, 있는 곳은 30분,
+  책 검색은 하루. 정보나루 하루 500건 한도를 아낀다. KV 무료 한도는 읽기 하루 10만, 쓰기 하루 1천
+  (쓰기는 정보나루에 실제로 물은 만큼만 생기므로 500건 한도보다 적다). 처음 만들 때:
+  `npx wrangler kv namespace create LOAN_KV` 로 만들고 나온 id 를 wrangler.toml 에 적는다

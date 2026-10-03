@@ -5,6 +5,7 @@ import transit from './library-text/transit.json';
 import programs from './library-text/programs.json';
 import misc from './library-text/misc.json';
 import nearby from './library-text/nearby.json';
+import keywords from './library-text/keywords.json';
 import { CATEGORIES } from '@/data/categories';
 
 /**
@@ -28,6 +29,7 @@ const DICT: Dict = {
   ...(transit as unknown as Dict),
   ...(programs as unknown as Dict),
   ...(nearby as unknown as Dict),
+  ...(keywords as unknown as Dict),
 };
 const COL: Record<Exclude<Lang, 'ko'>, number> = { en: 0, ja: 1, zh: 2 };
 
