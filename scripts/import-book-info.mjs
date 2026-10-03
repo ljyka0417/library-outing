@@ -128,6 +128,24 @@ function parseHours(text) {
 }
 
 /**
+ * 공휴일 규칙 (책 원문에서 읽는다 — 괄호 속 「주말·공휴일 ~18:00」까지 봐야 해서).
+ *   'weekend'  공휴일엔 주말(일요일) 시간으로 연다   「주말·공휴일 09:00~19:00」
+ *   'closed'   공휴일엔 쉰다                        「월·공휴일 휴관」「법정공휴일 휴관」
+ *   [이름…]    그 명절만 쉰다                       「월·신정·설·추석 휴관」
+ * 이름은 특일 정보 API 의 dateName 과 맞춘다(신정 = "1월1일").
+ * 책이 공휴일을 말하지 않은 곳은 규칙을 두지 않는다 — 평소 요일대로 판정한다.
+ */
+function holidayRule(text) {
+  if (/공휴일\s*[~\d]/.test(text)) return 'weekend';
+  const closure = text.replace(/12\/31/g, '12월 31일').split(/[/|]/).find((s) => s.includes('휴관') && !s.includes('휴관일')) ?? '';
+  if (/공휴일/.test(closure)) return 'closed';
+  const names = [['신정', '1월1일'], ['설', '설날'], ['추석', '추석']].filter(([w]) => closure.includes(w)).map(([, n]) => n);
+  return names.length ? names : undefined;
+}
+/** 해마다 같은 날 쉬는 날 ('MM-DD') — 「12월 31일 휴관」 */
+const closedDatesOf = (text) => (/12월\s*31일|12\/31/.test(text) ? ['12-31'] : undefined);
+
+/**
  * 운영시간 문구에서 휴관 부분만 떼어 낸다 (「… / 월·공휴일 휴관」 → 「월·공휴일」).
  * 달곰이가 "휴관일은 언제야?"에 답할 때 쓴다. 책이 휴관일을 적지 않은 곳은 비운다.
  */
@@ -167,7 +185,9 @@ for (const b of book) {
     else {
       const parsed = HOURS_UNKNOWN.has(b.code) ? null : parseHours(HOURS_FOR_PARSE[b.code] ?? b.hours);
       if (!parsed) hoursHidden.push(`${b.code} ${b.name}`);
-      hours = { label: b.hours, ...(parsed ?? {}) };
+      const holidays = parsed ? holidayRule(b.hours) : undefined;
+      const closedDates = parsed ? closedDatesOf(b.hours) : undefined;
+      hours = { label: b.hours, ...(parsed ?? {}), ...(holidays ? { holidays } : {}), ...(closedDates ? { closedDates } : {}) };
     }
   }
 

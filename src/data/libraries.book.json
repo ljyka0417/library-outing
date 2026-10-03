@@ -1,7 +1,7 @@
 {
   "source": "가이드북 『오늘 도서관 갈래?』 (2026년 9월 9일 초판) 도서관별 기본 정보 표",
   "_readme": "직접 고치지 마세요 — npm run import-book-info 가 덮어씁니다. 고칠 값은 libraries.manual.json 이 아니라 책 자료(docs-내부자료)나 이 스크립트에서.",
-  "generatedAt": "2026-10-03T08:27:57.556Z",
+  "generatedAt": "2026-10-03T12:13:18.013Z",
   "entries": {
     "seoul-library": {
       "bookCode": "1-1",
@@ -104,7 +104,8 @@
               4
             ]
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "둘째·넷째 토요일·공휴일",
       "homepage": "https://www.nanet.go.kr/",
@@ -146,7 +147,8 @@
             "open": 570,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월요일·법정공휴일",
       "homepage": "https://botanicpark.seoul.go.kr/lib/",
@@ -200,7 +202,8 @@
               3
             ]
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "매월 1,3째 금요일, 법정공휴일",
       "homepage": "https://gylib.sen.go.kr/",
@@ -280,7 +283,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "매주 일요일 및 법정공휴일",
       "homepage": "https://www.jfac.or.kr/site/main/content/woorisr01",
@@ -322,7 +326,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://library.gangnam.go.kr/nmmlib/index.do",
@@ -364,7 +369,8 @@
             "open": 540,
             "close": 1140
           }
-        ]
+        ],
+        "holidays": "weekend"
       },
       "closedDays": "월요일",
       "homepage": "https://www.jfac.or.kr/site/main/content/chungwoon01",
@@ -418,7 +424,8 @@
               4
             ]
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "둘째·넷째 월·공휴일",
       "homepage": "https://www.nlcy.go.kr/",
@@ -460,7 +467,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://www.splib.or.kr/spelib/index.do",
@@ -502,7 +510,8 @@
             "open": 540,
             "close": 1020
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://lib.dongjak.go.kr/dj/html.do?menu_idx=78",
@@ -598,7 +607,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "금·공휴일",
       "homepage": "https://www.goyanglib.or.kr/ME/index.do",
@@ -651,7 +661,8 @@
               -1
             ]
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "마지막 월·공휴일",
       "homepage": "https://library.scourt.go.kr/",
@@ -693,7 +704,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://www.uilib.go.kr/art/index.do",
@@ -776,7 +788,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "금·공휴일",
       "homepage": "https://lib.ansan.go.kr/medialib/",
@@ -872,7 +885,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "금·공휴일",
       "homepage": "https://www.gclib.go.kr/lib/index.do",
@@ -914,7 +928,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://www.uilib.go.kr/english/index.do",
@@ -956,7 +971,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "금·공휴일",
       "homepage": "https://www.goyanglib.or.kr/MG/index.do",
@@ -998,7 +1014,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://www.snlib.go.kr/cpg/index.do",
@@ -1040,7 +1057,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://www.yspubliclib.go.kr/conts/view.do?mnidx=99",
@@ -1082,7 +1100,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "금·공휴일",
       "homepage": "https://www.incheonlib.go.kr/mch/main.do",
@@ -1124,7 +1143,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "금·공휴일",
       "homepage": "https://www.incheonlib.go.kr/maj/main.do",
@@ -1166,7 +1186,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://www.incheonlib.go.kr/cni/main.do",
@@ -1208,7 +1229,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "금·공휴일",
       "homepage": "https://www.incheonlib.go.kr/yjs/main.do",
@@ -1250,7 +1272,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://www.imla.kr/ym/index.do",
@@ -1292,7 +1315,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://www.yspubliclib.go.kr/conts/view.do?mnidx=105",
@@ -1334,7 +1358,8 @@
             "open": 600,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://www.yspubliclib.go.kr/conts/view.do?mnidx=102",
@@ -1376,7 +1401,8 @@
             "open": 540,
             "close": 1020
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "금·공휴일",
       "homepage": "https://lib.jemulpo.go.kr/dream/",
@@ -1418,7 +1444,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "금·공휴일",
       "homepage": "https://www.incheonlib.go.kr/cnl/main.do",
@@ -1460,7 +1487,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://www.yspubliclib.go.kr/conts/view.do?mnidx=104",
@@ -1502,7 +1530,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://lib.wonju.go.kr/ja/main",
@@ -1544,6 +1573,10 @@
             "open": 540,
             "close": 1080
           }
+        ],
+        "holidays": "closed",
+        "closedDates": [
+          "12-31"
         ]
       },
       "closedDays": "월·공휴일·12월 31일",
@@ -1586,7 +1619,8 @@
             "open": 540,
             "close": 1320
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://www.gnslib.or.kr/moru",
@@ -1628,7 +1662,8 @@
             "open": 540,
             "close": 1320
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "매주 금요일·공휴일",
       "homepage": "https://library.chuncheon.go.kr/",
@@ -1670,6 +1705,10 @@
             "open": 540,
             "close": 1080
           }
+        ],
+        "holidays": "closed",
+        "closedDates": [
+          "12-31"
         ]
       },
       "closedDays": "매주 월요일·법정공휴일·12월 31일",
@@ -1712,7 +1751,8 @@
             "open": 540,
             "close": 1320
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "금·공휴일",
       "homepage": "https://lib.inje.go.kr/main/",
@@ -1793,7 +1833,8 @@
             "open": 600,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "매주 월·화요일, 법정공휴일",
       "homepage": "https://www.dh.go.kr/msbook/index.do",
@@ -1877,7 +1918,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://lib.chungju.go.kr/web/index.do",
@@ -1919,7 +1961,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://ascl.asan.go.kr/content/index.php?page_id=46",
@@ -1961,7 +2004,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://library.cheongju.go.kr/",
@@ -2003,7 +2047,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://ascl.asan.go.kr/content/index.php?page_id=329",
@@ -2089,7 +2134,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://ascl.asan.go.kr/content/index.php?page_id=56",
@@ -2131,7 +2177,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://ascl.asan.go.kr/content/index.php?page_id=339",
@@ -2173,7 +2220,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://ascl.asan.go.kr/content/index.php?page_id=17",
@@ -2215,7 +2263,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://ascl.asan.go.kr/content/index.php?page_id=64",
@@ -2257,7 +2306,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://lib.sejong.go.kr/main/main.do",
@@ -2299,7 +2349,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "매주 월·공휴일",
       "homepage": "https://www.daejeon.go.kr/hanbatlibrary/index.do",
@@ -2420,7 +2471,8 @@
             "open": 600,
             "close": 1020
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·일·공휴일",
       "homepage": "https://small.u-library.kr/libGuide/detail/26",
@@ -2459,7 +2511,8 @@
             "open": 600,
             "close": 1020
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·일·공휴일",
       "homepage": "https://small.u-library.kr/libGuide/detail/15",
@@ -2498,7 +2551,8 @@
             "close": 1080
           },
           null
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "토·일·공휴일",
       "homepage": "https://library.jeonbuk.go.kr/main/main.php",
@@ -2552,7 +2606,8 @@
               3
             ]
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "매월 1·3주 수·공휴일",
       "homepage": "https://jnlib.jeonnam-gwangju.go.kr/main.php",
@@ -2594,7 +2649,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://lib.jeonju.go.kr/",
@@ -2678,7 +2734,8 @@
             "open": 540,
             "close": 1020
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "금·공휴일",
       "homepage": "https://jindo.go.kr/library/",
@@ -2720,7 +2777,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://lib.jeonju.go.kr/",
@@ -2762,7 +2820,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://www.gochang.go.kr/library/index.gochang",
@@ -2804,7 +2863,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "일·공휴일",
       "homepage": "https://lib.wanju.go.kr/",
@@ -2896,7 +2956,8 @@
             "close": 1080
           },
           null
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "토·일·공휴일",
       "homepage": "https://library.muju.go.kr/main/contents.do?idx=1454",
@@ -2950,7 +3011,8 @@
               4
             ]
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "둘째·넷째 월·공휴일",
       "homepage": "https://citylib.gwangju.kr/main",
@@ -3031,7 +3093,8 @@
             "close": 1080
           },
           null
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "주말·공휴일",
       "homepage": "https://citylib.gwangju.kr/braille",
@@ -3085,7 +3148,8 @@
               3
             ]
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "첫째·셋째 월·공휴일",
       "homepage": "https://newlib.gwangsan.go.kr/JD/",
@@ -3139,7 +3203,8 @@
               3
             ]
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "첫째·셋째 월·공휴일",
       "homepage": "https://newlib.gwangsan.go.kr/IG/",
@@ -3235,7 +3300,8 @@
               4
             ]
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "둘째·넷째 월·공휴일",
       "homepage": "https://lib.bukgu.gwangju.kr/",
@@ -3289,7 +3355,8 @@
               4
             ]
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "매월 2·4주 월요일·공휴일",
       "homepage": "https://library.seogu.gwangju.kr/",
@@ -3343,7 +3410,8 @@
               4
             ]
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "둘째·넷째 월·공휴일",
       "homepage": "https://newlib.gwangsan.go.kr/UN/",
@@ -3429,6 +3497,11 @@
             "open": 600,
             "close": 1080
           }
+        ],
+        "holidays": [
+          "1월1일",
+          "설날",
+          "추석"
         ]
       },
       "closedDays": "월·신정·설·추석",
@@ -3483,7 +3556,8 @@
               3
             ]
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "첫째·셋째 월·공휴일",
       "homepage": "https://www.gb.go.kr/lib/main.tc",
@@ -3525,7 +3599,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "금·공휴일",
       "homepage": "https://lib.gyeongnam.go.kr/",
@@ -3567,7 +3642,8 @@
             "open": 540,
             "close": 1020
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://library.gyeongju.go.kr/",
@@ -3609,7 +3685,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://hmlib.gne.go.kr/",
@@ -3663,7 +3740,8 @@
               4
             ]
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "매월 2·4째 월·공휴일",
       "homepage": "https://www.phlib.or.kr/",
@@ -3717,7 +3795,8 @@
               3
             ]
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "첫째·셋째 월·공휴일",
       "homepage": "https://www.sangju.go.kr/lib/main.tc",
@@ -3759,7 +3838,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://hdlib.gne.go.kr/",
@@ -3855,7 +3935,8 @@
               3
             ]
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "매월 첫째·셋째 월·공휴일",
       "homepage": "https://phlib.pohang.go.kr/phlib/html.do?menu_idx=357",
@@ -3897,7 +3978,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://sjlib.gne.go.kr/",
@@ -3939,7 +4021,8 @@
             "open": 540,
             "close": 1020
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://www.gbelib.kr/ul/index.do",
@@ -3981,7 +4064,8 @@
             "open": 540,
             "close": 1020
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://library.daegu.go.kr/dglib/index.do",
@@ -4035,7 +4119,8 @@
               3
             ]
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "첫째·셋째 월·공휴일",
       "homepage": "https://library.daegu.go.kr/gukbo/index.do",
@@ -4077,7 +4162,8 @@
             "open": 540,
             "close": 1020
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://www.228.or.kr/",
@@ -4119,7 +4205,8 @@
             "open": 540,
             "close": 1020
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://library.daegu.go.kr/dalseonglib/index.do",
@@ -4161,7 +4248,8 @@
             "open": 540,
             "close": 1260
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://library.daegu.go.kr/yonghak/index.do",
@@ -4203,7 +4291,8 @@
             "open": 540,
             "close": 1020
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://library.daegu.go.kr/dalseolib/index.do",
@@ -4245,7 +4334,8 @@
             "open": 540,
             "close": 1020
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://library.daegu.go.kr/dalseolib/index.do",
@@ -4287,7 +4377,8 @@
             "open": 540,
             "close": 1020
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://library.daegu.go.kr/seogulib/index.do",
@@ -4329,7 +4420,8 @@
             "open": 540,
             "close": 1020
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://library.daegu.go.kr/seogulib/index.do",
@@ -4371,7 +4463,8 @@
             "open": 540,
             "close": 1020
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "매주 월요일·공휴일",
       "homepage": "https://library.daegu.go.kr/dalseongchild/index.do",
@@ -4455,7 +4548,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://library.ulsan.go.kr/lib/portal/main.do",
@@ -4497,7 +4591,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "매주 월·공휴일",
       "homepage": "https://www.ulsannamgu.go.kr/library/main.do",
@@ -4539,7 +4634,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://uljulib.ulju.ulsan.kr/",
@@ -4623,7 +4719,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://lib.junggu.ulsan.kr/",
@@ -4707,7 +4804,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "매주 월·공휴일",
       "homepage": "https://www.ulsannamgu.go.kr/library/main.do",
@@ -4749,7 +4847,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://usbl.bukgu.ulsan.kr/main/",
@@ -4833,7 +4932,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "매주 월요일·공휴일",
       "homepage": "https://www.ulsannamgu.go.kr/library/main.do",
@@ -4875,7 +4975,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://library.ulsan.go.kr/lib/clib/main.do",
@@ -4917,7 +5018,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://library.busan.go.kr/busanlibrary/index.do",
@@ -4959,7 +5061,8 @@
             "open": 540,
             "close": 1020
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://dongnae.go.kr/lib/dongnae/",
@@ -5001,7 +5104,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://www.haeundae.go.kr/library/index.do",
@@ -5043,7 +5147,8 @@
             "open": 540,
             "close": 1020
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://library.geumjeong.go.kr/",
@@ -5085,7 +5190,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://www.busanjin.go.kr/library/index.busanjin",
@@ -5171,7 +5277,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "weekend"
       },
       "homepage": "https://library.gijang.go.kr/jglib/main.do",
       "phone": "051-709-3901",
@@ -5212,7 +5319,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://www.bsseogu.go.kr/amlib/main.do",
@@ -5295,7 +5403,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "월·공휴일",
       "homepage": "https://www.bsdonggu.go.kr/library/index.donggu",
@@ -5402,7 +5511,8 @@
             "open": 540,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "weekend"
       },
       "closedDays": "월 등",
       "homepage": "https://www.jeju.go.kr/lib/lib/tamra.htm",
@@ -5444,7 +5554,8 @@
             "open": 600,
             "close": 1080
           }
-        ]
+        ],
+        "holidays": "closed"
       },
       "closedDays": "화·공휴일",
       "homepage": "https://www.jejuregen.org/index.php/contents/space/room/youngsu",

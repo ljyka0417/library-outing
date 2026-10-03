@@ -201,6 +201,7 @@ const ko = {
 
   'hours.unknown': '운영시간 정보 준비중',
   'hours.closedToday': '오늘은 휴관일이에요',
+  'hours.closedHoliday': '오늘은 {name}이라 휴관해요',
   'hours.today': '오늘 {from} - {to}',
 
   'ob.skip': '건너뛰기',
@@ -465,6 +466,7 @@ const en: Messages = {
 
   'hours.unknown': 'Opening hours not confirmed yet',
   'hours.closedToday': 'Closed today',
+  'hours.closedHoliday': 'Closed today for a public holiday ({name})',
   'hours.today': 'Today {from} - {to}',
 
   'ob.skip': 'Skip',
@@ -724,6 +726,7 @@ const ja: Messages = {
 
   'hours.unknown': '開館時間は確認中です',
   'hours.closedToday': '本日は休館日です',
+  'hours.closedHoliday': '本日は祝日（{name}）のため休館です',
   'hours.today': '本日 {from} - {to}',
 
   'ob.skip': 'スキップ',
@@ -979,6 +982,7 @@ const zh: Messages = {
 
   'hours.unknown': '开放时间待确认',
   'hours.closedToday': '今天闭馆',
+  'hours.closedHoliday': '今天是公休日（{name}），闭馆',
   'hours.today': '今天 {from} - {to}',
 
   'ob.skip': '跳过',

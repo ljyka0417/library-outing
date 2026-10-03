@@ -1,5 +1,6 @@
 import { translate, type Lang } from '@/i18n';
-import type { OperatingHours } from '@/types';
+import type { DayHours, OperatingHours } from '@/types';
+import { holidayName } from '@/data/holidays';
 
 /**
  * "지금 운영중" 판정.
@@ -10,11 +11,32 @@ import type { OperatingHours } from '@/types';
 export function isOpenNow(hours: OperatingHours | undefined, now = new Date()): boolean | null {
   if (!hours?.byDay || hours.byDay.length !== 7) return null;
 
-  const today = hours.byDay[now.getDay()];
-  if (today === null || closedByWeek(hours, now)) return false; // 휴관일
+  const today = todayRange(hours, now).range;
+  if (!today) return false; // 휴관일
 
   const minutes = now.getHours() * 60 + now.getMinutes();
   return minutes >= today.open && minutes < today.close;
+}
+
+/**
+ * 오늘의 운영 시각. 쉬는 날이면 range 가 null, 공휴일 때문에 쉬면 holiday 에 이름.
+ *
+ * 차례: 해마다 쉬는 날(12월 31일) → 공휴일 규칙 → 격주 휴관 → 요일별 시간.
+ * 공휴일 규칙이 없는 도서관(책이 공휴일을 말하지 않은 곳)은 공휴일도 평소 요일대로 본다.
+ */
+function todayRange(hours: OperatingHours, now: Date): { range: DayHours | null; holiday?: string } {
+  const byDay = hours.byDay!;
+  const mmdd = `${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+  if (hours.closedDates?.includes(mmdd)) return { range: null };
+
+  const holiday = holidayName(now);
+  if (holiday && hours.holidays) {
+    if (hours.holidays === 'closed') return { range: null, holiday };
+    if (hours.holidays === 'weekend') return { range: byDay[0] };
+    if (hours.holidays.includes(holiday)) return { range: null, holiday };
+  }
+  if (closedByWeek(hours, now)) return { range: null };
+  return { range: byDay[now.getDay()] };
 }
 
 /**
@@ -29,9 +51,11 @@ export function todayHoursLabel(
   now = new Date()
 ): string {
   if (!hours) return translate(lang, 'hours.unknown');
-  const today = hours.byDay?.[now.getDay()];
-  if (today === undefined) return hours.label;
-  if (today === null || closedByWeek(hours, now)) return translate(lang, 'hours.closedToday');
+  if (!hours.byDay || hours.byDay.length !== 7) return hours.label;
+  const { range: today, holiday } = todayRange(hours, now);
+  if (!today) {
+    return holiday ? translate(lang, 'hours.closedHoliday', { name: holiday }) : translate(lang, 'hours.closedToday');
+  }
   return translate(lang, 'hours.today', {
     from: formatMinutes(today.open),
     to: formatMinutes(today.close),

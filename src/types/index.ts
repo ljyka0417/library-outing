@@ -51,6 +51,14 @@ export interface OperatingHours {
    * weeks 의 -1 은 그달 마지막 주. byDay 로는 "월요일은 열지만 둘째 주만 쉰다"를 못 적어서 따로 둔다.
    */
   closedNth?: { day: number; weeks: number[] }[];
+  /**
+   * 공휴일에 어떻게 하는지 (책 문구에서 읽음).
+   *   'closed'  쉰다 · 'weekend' 일요일 시간으로 연다 · [이름…] 그 명절만 쉰다("설날", "추석", "1월1일")
+   * 없으면 공휴일도 평소 요일대로 본다.
+   */
+  holidays?: 'closed' | 'weekend' | string[];
+  /** 해마다 쉬는 날 'MM-DD' (예: 12월 31일 → '12-31') */
+  closedDates?: string[];
   /** 화면에 그대로 노출할 사람이 읽는 형태의 요약 */
   label: string;
 }

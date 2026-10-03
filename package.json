@@ -33,7 +33,8 @@
     "import-book-programs": "node scripts/import-book-programs.mjs",
     "import-book-info": "node scripts/import-book-info.mjs",
     "loan-proxy-libs": "node scripts/loan-proxy-libs.mjs",
-    "collect-region-books": "node scripts/collect-region-books.mjs"
+    "collect-region-books": "node scripts/collect-region-books.mjs",
+    "collect-holidays": "node scripts/collect-holidays.mjs"
   },
   "dependencies": {
     "@expo/metro-runtime": "~57.0.15",
