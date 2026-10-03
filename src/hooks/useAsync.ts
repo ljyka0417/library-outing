@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LIBRARY_DATA_VERSION } from '@/data/dataVersion';
 
 /**
  * 비동기 조회 + 로컬 캐시 훅.
@@ -29,7 +30,8 @@ interface Result<T> {
   refetch: () => void;
 }
 
-const CACHE_PREFIX = 'cache:';
+// 도서관 데이터가 바뀌면 옛 캐시를 쓰지 않도록 지문을 섞는다 (src/data/dataVersion.ts)
+const CACHE_PREFIX = `cache:${LIBRARY_DATA_VERSION}:`;
 
 export function useAsync<T>(
   fn: () => Promise<T>,

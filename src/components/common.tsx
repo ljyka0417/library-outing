@@ -16,7 +16,8 @@ interface BadgeProps {
 }
 
 export function Badge({ label, category, tone = 'primary' }: BadgeProps) {
-  const palette = category
+  // 모르는 주제(옛 데이터의 "역사" 등)가 와도 멈추지 않고 기본 색으로 그린다
+  const palette = category && categoryColors[category]
     ? categoryColors[category]
     : tone === 'brown'
       ? { bg: colors.brownSoft, fg: colors.brown }
