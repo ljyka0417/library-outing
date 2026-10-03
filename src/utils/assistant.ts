@@ -3,6 +3,7 @@ import { LIBRARY_COUNT, LIBRARY_HOURS_COUNT, MOCK_LIBRARIES } from '@/data/libra
 import { booksForLibrary } from '@/data/books.mock';
 import { nearbyApi } from '@/api/nearbyApi';
 import { isOpenNow, todayHoursLabel } from './openingHours';
+import { holidayName } from '@/data/holidays';
 import { regionName, translate, type Lang, type MessageKey } from '@/i18n';
 import {
   CHIP_COUNT,
@@ -527,6 +528,59 @@ function answerBrowse(
 }
 
 /**
+ * "지금 몇 시야?" — 도서관 운영시간("서울도서관 몇 시까지야?")과 헷갈리지 않게
+ * "지금/현재"가 붙거나 "몇 시야"로 끝나는 꼴만 받고, 도서관 이야기가 섞이면 넘긴다.
+ */
+const ASK_TIME = /(지금|현재|오늘)\s*(몇\s*시|시간|시각)|몇\s*시야\s*\??$|몇\s*시\s*\??$|\bwhat time is it\b|\bcurrent time\b|今何時|いま何時|現在の時刻|现在几点|几点了|现在时间/;
+
+const WEEKDAYS: Record<Lang, string[]> = {
+  ko: ['일', '월', '화', '수', '목', '금', '토'],
+  en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+  ja: ['日', '月', '火', '水', '木', '金', '土'],
+  zh: ['日', '一', '二', '三', '四', '五', '六'],
+};
+const MONTHS_EN = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+/** 기기 시각을 그 언어에 맞게. Intl 은 기기마다 들쭉날쭉해서 직접 짠다 */
+function formatNow(d: Date, lang: Lang): string {
+  const M = d.getMonth() + 1, D = d.getDate(), h = d.getHours(), m = d.getMinutes();
+  const mm = String(m).padStart(2, '0');
+  const w = WEEKDAYS[lang][d.getDay()];
+  if (lang === 'ko') return `${M}월 ${D}일 ${w}요일 ${h < 12 ? '오전' : '오후'} ${h % 12 || 12}시 ${m}분`;
+  if (lang === 'en') return `${w}, ${MONTHS_EN[M - 1]} ${D}, ${h % 12 || 12}:${mm} ${h < 12 ? 'AM' : 'PM'}`;
+  if (lang === 'ja') return `${M}月${D}日(${w}) ${h}時${m}分`;
+  return `${M}月${D}日 星期${w} ${h}:${mm}`;
+}
+
+/**
+ * 달곰이에게 달곰이 이야기를 묻는지.
+ *
+ * 답은 가이드북 「달곰이를 소개합니다!」 쪽(이름·MBTI·취미·특기·좋아하는 것·싫어하는 것,
+ * 어떤 친구인지, 책 속에서 하는 일, 가방 속 준비물)을 그대로 옮겼다 (i18n 의 me.*).
+ * "달곰이/너" 같은 말이 있어야 한다 — "좋아하는 도서관 추천" 같은 도서관 질문을 가로채지 않게.
+ */
+const ME_TOPICS = ['who', 'job', 'mbti', 'hobby', 'talent', 'likes', 'dislikes', 'bag', 'profile'] as const;
+type MeTopic = (typeof ME_TOPICS)[number];
+const ME_WORD = /달곰|너는|너의|너가|네가|니가|넌|^너\b|\byou\b|\byour\b|ダルゴミ|あなた|君は|达尔戈米|你是|你的|你喜欢|你讨厌/;
+const ME_ASK: [MeTopic, RegExp][] = [
+  ['bag', /가방|배낭|\bbag\b|\bbackpack\b|かばん|リュック|背包|包里/],
+  ['mbti', /mbti|엠비티아이|성격/],
+  ['hobby', /취미|\bhobb(y|ies)\b|趣味|爱好/],
+  ['talent', /특기|잘하는|잘해|\btalents?\b|\bgood at\b|得意|特长|擅长/],
+  ['dislikes', /싫어|싫은|\bdislikes?\b|\bhate\b|嫌い|讨厌|不喜欢/],
+  ['likes', /좋아하|좋아해|\blikes?\b|\bfavorite\b|好き|喜欢/],
+  ['job', /하는 일|무슨 일|뭐 해|뭐해|무엇을 해|역할|\bwhat do you do\b|\brole\b|仕事|何をする|做什么/],
+  ['who', /누구|어떤 친구|소개|\bwho are you\b|\bintroduce\b|誰|自己紹介|是谁|介绍/],
+  ['profile', /프로필|정보|\bprofile\b|プロフィール|资料/],
+];
+function askAboutMe(text: string): MeTopic | undefined {
+  if (!ME_WORD.test(text)) return undefined;
+  // "달곰이가 좋아하는 도서관 알려줘" 는 도서관 추천 질문이다
+  if (/도서관|librar|図書館|图书馆/.test(text) && !/누구|소개|하는 일|무슨 일|who|introduce/.test(text)) return undefined;
+  return ME_ASK.find(([, re]) => re.test(text))?.[0];
+}
+
+/**
  * 질문 하나에 답한다.
  *
  * 순서가 중요하다. 도서관 이름이 들어 있으면 그 도서관 이야기로 본다.
@@ -570,6 +624,31 @@ export async function ask(
   }
   if (ASK.help.test(text)) {
     return { text: tr('bot.help', { count: LIBRARY_COUNT }) };
+  }
+
+  // "지금 몇 시야?" — 지금 시각 + 오늘이 공휴일이면 그 이름 + 지금 문 연 도서관 수
+  if (ASK_TIME.test(text) && !/도서관|librar|図書館|图书馆/.test(text)) {
+    const now = new Date();
+    const holiday = holidayName(now);
+    const openCount = MOCK_LIBRARIES.filter((l) => isOpenNow(l.hours, now) === true).length;
+    return {
+      text:
+        tr('bot.timeNow', { when: formatNow(now, lang) }) +
+        (holiday ? tr('bot.timeHoliday', { name: holiday }) : '') +
+        (openCount > 0 ? tr('bot.timeOpen', { n: openCount }) : tr('bot.timeOpenNone')),
+      suggestions: [tr('bot.sugOpen'), ...starterQuestions(lang, ctx.seed, ctx.avoid)].slice(0, CHIP_COUNT),
+    };
+  }
+
+  // 달곰이 자기 이야기 — 가이드북 「달곰이를 소개합니다!」 쪽 내용 그대로
+  const aboutMe = askAboutMe(text);
+  if (aboutMe) {
+    return {
+      text: tr(`me.${aboutMe}` as MessageKey),
+      suggestions: ME_TOPICS.filter((k) => k !== aboutMe && k !== 'profile')
+        .slice(0, CHIP_COUNT)
+        .map((k) => tr(`me.sug.${k}` as MessageKey)),
+    };
   }
 
   /**
@@ -647,7 +726,11 @@ export function starterQuestions(lang: Lang, seed = 1, avoid: string[] = []): st
     tr('bot.sugHours', { name: '서울도서관' }),
     tr('bot.sugCafe', { name: '한밭도서관' }),
   ];
-  return starterIdeas({ lang, seed, avoid }, fixed);
+  const ideas = starterIdeas({ lang, seed, avoid }, fixed);
+  // 달곰이 자기소개도 하나 섞는다 — 물어볼 수 있다는 걸 처음 보는 사람도 알게
+  const meChip = tr(`me.sug.${ME_TOPICS[seed % (ME_TOPICS.length - 1)]}` as MessageKey);
+  if (avoid.includes(meChip) || ideas.includes(meChip)) return ideas;
+  return [...ideas.slice(0, Math.max(0, ideas.length - 1)), meChip];
 }
 
 /** 개발 중 상태 확인용 */
