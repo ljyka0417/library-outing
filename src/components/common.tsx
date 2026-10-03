@@ -167,7 +167,9 @@ export function InfoRow({ icon, label, value, onPress }: InfoRowProps) {
         <Ionicons name={icon} size={16} color={colors.primary} />
       </View>
       <Text style={styles.infoLabel}>{label}</Text>
-      <Text style={[styles.infoValue, onPress && styles.infoValueLink]} numberOfLines={2}>
+      {/* 책 운영시간처럼 긴 문구는 끝까지 보여 준다. 잘린 운영시간은 헛걸음을 부른다.
+          누르는 줄(전화·홈페이지)만 두 줄에서 자른다 — 긴 주소창 글자는 다 읽을 필요가 없다 */}
+      <Text style={[styles.infoValue, onPress && styles.infoValueLink]} numberOfLines={onPress ? 2 : undefined}>
         {value}
       </Text>
     </View>
@@ -286,13 +288,17 @@ const styles = StyleSheet.create({
   infoLabel: {
     ...typography.caption,
     color: colors.textSub,
-    width: 60,
+    // 긴 주소(URL)가 옆 칸을 밀면 이 칸이 줄어들어 「홈페이지」가 두 줄로 꺾였다
+    width: 66,
+    flexShrink: 0,
     paddingTop: 3,
   },
   infoValue: {
     ...typography.body,
     color: colors.text,
     flex: 1,
+    // 띄어쓰기 없는 긴 홈페이지 주소도 칸 안에서 줄을 바꾸게 (없으면 카드 밖으로 삐져나갔다)
+    minWidth: 0,
   },
   infoValueLink: {
     color: colors.primary,

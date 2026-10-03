@@ -244,12 +244,18 @@ const all = argv.includes('--all');
 const limitArg = argv.indexOf('--limit');
 const limit = limitArg >= 0 ? Number(argv[limitArg + 1]) : null;
 
+// --only 아이디[,아이디] : 새로 넣은 도서관만 돈다 (하루 호출 한도 1,000회를 아끼려고)
+const onlyArg = argv.indexOf('--only');
+const only = onlyArg >= 0 ? new Set(argv[onlyArg + 1].split(',')) : null;
+
 const libraries = readLibraries();
-const targets = all
-  ? libraries
-  : limit
-    ? libraries.slice(0, limit)
-    : libraries.filter((l) => l.landmark);
+const targets = only
+  ? libraries.filter((l) => only.has(l.id))
+  : all
+    ? libraries
+    : limit
+      ? libraries.slice(0, limit)
+      : libraries.filter((l) => l.landmark);
 
 if (targets.length === 0) {
   console.error('좌표가 있는 도서관을 찾지 못했습니다. npm run geocode 를 먼저 돌리세요.');

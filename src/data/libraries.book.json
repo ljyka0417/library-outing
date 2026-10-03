@@ -1,0 +1,5457 @@
+{
+  "source": "가이드북 『오늘 도서관 갈래?』 (2026년 9월 9일 초판) 도서관별 기본 정보 표",
+  "_readme": "직접 고치지 마세요 — npm run import-book-info 가 덮어씁니다. 고칠 값은 libraries.manual.json 이 아니라 책 자료(docs-내부자료)나 이 스크립트에서.",
+  "generatedAt": "2026-10-03T08:27:57.556Z",
+  "entries": {
+    "seoul-library": {
+      "bookCode": "1-1",
+      "specialty": "랜드마크",
+      "category": "landmark",
+      "address": "서울특별시 중구 세종대로 110",
+      "hours": {
+        "label": "화~금 09:00~21:00 / 토,일 09:00~18:00 / 월요일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월요일",
+      "homepage": "https://lib.seoul.go.kr",
+      "phone": "02-2133-0300",
+      "opened": "2012년 10월 26일",
+      "holdings": "575,670권 (2026년 8월 31일 기준)",
+      "transit": "지하철 1,2호선 시청역 5번 출구"
+    },
+    "national-library": {
+      "bookCode": "1-2",
+      "specialty": "랜드마크",
+      "category": "landmark",
+      "address": "서울특별시 서초구 반포대로 201(서초동)",
+      "hours": {
+        "label": "09:00~18:00 / 매주 수요일 야간도서관 18:00~21:00 / 휴관일·공휴일 제외"
+      },
+      "homepage": "https://www.nl.go.kr",
+      "phone": "02-590-0500",
+      "opened": "1945년 10월 15일",
+      "holdings": "15,091,683책·점 (2025년 12월 기준)",
+      "transit": "지하철 서초역 6번 출구 도보 10분 / 고속터미널역 5번 출구 도보 10분"
+    },
+    "assembly-library": {
+      "bookCode": "1-3",
+      "specialty": "법률",
+      "category": "law",
+      "address": "서울특별시 영등포구 의사당대로 1",
+      "hours": {
+        "label": "평일 09:00~18:00 / 주말 09:00~17:00 / 둘째·넷째 토요일·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ],
+        "closedNth": [
+          {
+            "day": 6,
+            "weeks": [
+              2,
+              4
+            ]
+          }
+        ]
+      },
+      "closedDays": "둘째·넷째 토요일·공휴일",
+      "homepage": "https://www.nanet.go.kr/",
+      "phone": "02-6788-4211",
+      "opened": "1988년 2월 20일",
+      "holdings": "9,051,303책·점 (2026년 8월 31일 기준)",
+      "transit": "지하철 9호선 국회의사당역 6번 출구 도보 5분"
+    },
+    "seoul-botanic-plant": {
+      "bookCode": "1-4",
+      "specialty": "자연·환경",
+      "category": "nature",
+      "address": "서울특별시 강서구 마곡동로 161, 서울식물원 식물문화센터 2층",
+      "hours": {
+        "label": "화~일 09:30~18:00 / 월요일·법정공휴일 휴관",
+        "byDay": [
+          {
+            "open": 570,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 570,
+            "close": 1080
+          },
+          {
+            "open": 570,
+            "close": 1080
+          },
+          {
+            "open": 570,
+            "close": 1080
+          },
+          {
+            "open": 570,
+            "close": 1080
+          },
+          {
+            "open": 570,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월요일·법정공휴일",
+      "homepage": "https://botanicpark.seoul.go.kr/lib/",
+      "phone": "02-2104-9794",
+      "opened": "2019년 5월 1일",
+      "holdings": "10,734건 (2025.12.31.기준)",
+      "transit": "9호선·공항철도 마곡나루역 3·4번 출구는 열린숲과 연결"
+    },
+    "gangseo-gayang": {
+      "bookCode": "1-5",
+      "specialty": "자연·환경",
+      "category": "nature",
+      "address": "서울특별시 강서구 양천로55길 46",
+      "hours": {
+        "label": "평일 09:00~20:00 / 주말 09:00~17:00 / 매월 1,3째 금요일, 법정공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ],
+        "closedNth": [
+          {
+            "day": 5,
+            "weeks": [
+              1,
+              3
+            ]
+          }
+        ]
+      },
+      "closedDays": "매월 1,3째 금요일, 법정공휴일",
+      "homepage": "https://gylib.sen.go.kr/",
+      "phone": "02-3219-7043",
+      "opened": "2025년 7월 31일",
+      "holdings": "32,680건 (2026.8.31. 기준)",
+      "transit": "지하철 9호선 가양역 1번 출구에서 도보 약 9분"
+    },
+    "nongshim-food": {
+      "bookCode": "1-6",
+      "specialty": "음식",
+      "category": "food",
+      "address": "서울특별시 동작구 여의대방로 112(신대방동)",
+      "hours": {
+        "label": "월~금 시간(09:00~18:00)(12:00~13:00 제외)",
+        "byDay": [
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null
+        ]
+      },
+      "homepage": "http://library.nongshim.com/",
+      "phone": "02-820-8299",
+      "opened": "2009년 4월",
+      "holdings": "42,855건 (2023.09.01 기준)",
+      "transit": "지하철 7호선 보라매역 2번 출구 하차 후 도보 5분"
+    },
+    "urisori-library": {
+      "bookCode": "1-7",
+      "specialty": "음악",
+      "category": "music",
+      "address": "서울특별시 종로구 삼일대로30길 47, 4·5층",
+      "hours": {
+        "label": "월~토 09:00~18:00. 휴관: 매주 일요일 및 법정공휴일",
+        "byDay": [
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "매주 일요일 및 법정공휴일",
+      "homepage": "https://www.jfac.or.kr/site/main/content/woorisr01",
+      "phone": "070-4550-5015",
+      "opened": "2017년 12월 14일",
+      "holdings": "도서 6,522권·비도서 1,206점(2025.12.31. 기준)",
+      "transit": "지하철 1,3,5호선 종로3가역 6번 출구 하차 후 도보 5분"
+    },
+    "nonhyeon-maru": {
+      "bookCode": "1-8",
+      "specialty": "예술",
+      "category": "art",
+      "address": "서울특별시 강남구 논현로131길 40",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 주말 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://library.gangnam.go.kr/nmmlib/index.do",
+      "phone": "02-512-8580",
+      "opened": "2024년 1월 2일",
+      "holdings": "26,734권 (2025년 12월 1일 기준)",
+      "transit": "지하철 7호선 학동역 6번 출구 도보 5분"
+    },
+    "cheongun-lit": {
+      "bookCode": "1-9",
+      "specialty": "인문",
+      "category": "humanities",
+      "address": "서울특별시 종로구 자하문로36길 40",
+      "hours": {
+        "label": "화~금 09:00~21:00 / 주말·공휴일 09:00~19:00 / 월요일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1140
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1140
+          }
+        ]
+      },
+      "closedDays": "월요일",
+      "homepage": "https://www.jfac.or.kr/site/main/content/chungwoon01",
+      "phone": "070-4680-4032",
+      "opened": "2014년 11월 19일",
+      "holdings": "39,172권 (2024.12.31. 기준)",
+      "transit": "윤동주문학관 정류장에서 하차 도보로 5분 이내"
+    },
+    "national-children-library": {
+      "bookCode": "1-10",
+      "specialty": "어린이",
+      "category": "kids",
+      "address": "서울특별시 강남구 테헤란로7길 21",
+      "hours": {
+        "label": "09:00~18:00 / 둘째·넷째 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ],
+        "closedNth": [
+          {
+            "day": 1,
+            "weeks": [
+              2,
+              4
+            ]
+          }
+        ]
+      },
+      "closedDays": "둘째·넷째 월·공휴일",
+      "homepage": "https://www.nlcy.go.kr/",
+      "phone": "02-3413-4800",
+      "opened": "2006년 6월 28일",
+      "holdings": "856,959권 (2026년 8월 31일 기준)",
+      "transit": "지하철 2호선·신분당선 강남역 12번 출구에서 도보 약 7~8분"
+    },
+    "songpa-kids-english": {
+      "bookCode": "1-11",
+      "specialty": "어학",
+      "category": "language",
+      "address": "서울 송파구 오금로 1 신천빗물펌프장 4,5층",
+      "hours": {
+        "label": "화~일 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://www.splib.or.kr/spelib/index.do",
+      "phone": "02-415-3567",
+      "opened": "2011년 12월 28일",
+      "holdings": "33,792권 (2026년 9월 1일 기준)",
+      "transit": "2호선 잠실나루역 4번 출구에서 320m"
+    },
+    "dongjak-english": {
+      "bookCode": "1-12",
+      "specialty": "어학",
+      "category": "language",
+      "address": "서울특별시 동작구 장승배기로16길 98",
+      "hours": {
+        "label": "화~금 09:00~18:00 / 주말 09:00~17:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://lib.dongjak.go.kr/dj/html.do?menu_idx=78",
+      "phone": "02-823-6750",
+      "opened": "2023년 11월 30일",
+      "holdings": "43,227권 (2026년 6월 30일 기준)",
+      "transit": "7호선 장승배기역 6번 출구 도보 10분"
+    },
+    "gyeonggi-library": {
+      "bookCode": "2-1",
+      "specialty": "랜드마크",
+      "category": "landmark",
+      "address": "경기도 수원시 영통구 도청로 40",
+      "hours": {
+        "label": "평일 10:00~21:00 / 주말 10:00~18:00 / 둘째·넷째 월 휴관",
+        "byDay": [
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1260
+          },
+          {
+            "open": 600,
+            "close": 1260
+          },
+          {
+            "open": 600,
+            "close": 1260
+          },
+          {
+            "open": 600,
+            "close": 1260
+          },
+          {
+            "open": 600,
+            "close": 1260
+          },
+          {
+            "open": 600,
+            "close": 1080
+          }
+        ],
+        "closedNth": [
+          {
+            "day": 1,
+            "weeks": [
+              2,
+              4
+            ]
+          }
+        ]
+      },
+      "closedDays": "둘째·넷째 월",
+      "homepage": "https://www.library.kr/ggl/",
+      "phone": "031-8008-5300",
+      "opened": "2025년 10월 25일(토)",
+      "holdings": "404,386권·점 (2026년 05월 31일 기준)",
+      "transit": "광교중앙역 4번 출구에서 182m"
+    },
+    "goyang-hwajeong": {
+      "bookCode": "2-2",
+      "specialty": "예술",
+      "category": "art",
+      "address": "경기도 고양시 덕양구 은빛로77번길 8",
+      "hours": {
+        "label": "월~목 09:00~22:00 / 주말 09:00~18:00 / 금·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "금·공휴일",
+      "homepage": "https://www.goyanglib.or.kr/ME/index.do",
+      "phone": "031-8075-9215",
+      "opened": "2003년 9월 4일",
+      "holdings": "150,534권 (2026년 6월 30일 기준)",
+      "transit": "3호선 화정역 4번 출구에서 700m"
+    },
+    "court-library": {
+      "bookCode": "2-3",
+      "specialty": "법률",
+      "category": "law",
+      "address": "경기도 고양시 일산동구 호수로 550",
+      "hours": {
+        "label": "평일 09:00~18:00 / 주말 09:30~17:30 / 마지막 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 570,
+            "close": 1050
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 570,
+            "close": 1050
+          }
+        ],
+        "closedNth": [
+          {
+            "day": 1,
+            "weeks": [
+              -1
+            ]
+          }
+        ]
+      },
+      "closedDays": "마지막 월·공휴일",
+      "homepage": "https://library.scourt.go.kr/",
+      "phone": "031-920-3700 (대표)",
+      "opened": "1989년 9월 1일 법원도서관 개관 / 2018년 12월 12일 고양 이전·법마루 개관",
+      "holdings": "519,922권 (공공데이터 공개치)",
+      "transit": "3호선 마두역 2·3번 출구에서 도보 5분"
+    },
+    "uijeongbu-art": {
+      "bookCode": "2-4",
+      "specialty": "예술",
+      "category": "art",
+      "address": "경기도 의정부시 민락로 248(민락동)",
+      "hours": {
+        "label": "화~금 09:00~21:00 / 주말 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://www.uilib.go.kr/art/index.do",
+      "phone": "031-828-8870",
+      "opened": "2019년 11월 29일",
+      "holdings": "57,871권 (2026년 8월 기준)",
+      "transit": "버스 23-1번 송산사지·송민학교 입구 정류장 하차 후 도보 약 5분"
+    },
+    "uijeongbu-music": {
+      "bookCode": "2-5",
+      "specialty": "음악",
+      "category": "music",
+      "address": "경기도 의정부시 장곡로 280(신곡동 724-1)",
+      "hours": {
+        "label": "화요일부터 금요일까지는 오전 9시부터 오후 9시, 주말 오전 9시부터 오후 6시",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "homepage": "https://www.uilib.go.kr/music/index.do",
+      "phone": "031-828-4850",
+      "opened": "2021년 6월 3일",
+      "holdings": "13,874권 ( 2026년 8월 기준)",
+      "transit": "의정부경전철 발곡역(1,2번 출구) 하차 후 도보 2분"
+    },
+    "ansan-media": {
+      "bookCode": "2-6",
+      "specialty": "미디어",
+      "category": "media",
+      "address": "경기도 안산시 단원구 광덕1로 198",
+      "hours": {
+        "label": "월~목 09:00~22:00 / 주말 09:00~18:00 / 금·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "금·공휴일",
+      "homepage": "https://lib.ansan.go.kr/medialib/",
+      "phone": "031-481-3961",
+      "opened": "2016년 6월 30일",
+      "holdings": "45,739권 (2026년 05월 28일 기준)",
+      "transit": "지하철4호선 중앙역-시내버스 77번 폴리타운 하차"
+    },
+    "leeseokyoung-media": {
+      "bookCode": "2-7",
+      "specialty": "미디어",
+      "category": "media",
+      "address": "경기도 남양주시 화도읍 맷돌로 84",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 09:00~18:00 / 둘째·넷째 금 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ],
+        "closedNth": [
+          {
+            "day": 5,
+            "weeks": [
+              2,
+              4
+            ]
+          }
+        ]
+      },
+      "closedDays": "둘째·넷째 금",
+      "homepage": "https://lib.nyj.go.kr/lsy/index.do",
+      "phone": "031-595-8390",
+      "opened": "2021년 1월 14일",
+      "holdings": "69,618권 (2026년 6월 30일 기준)",
+      "transit": "경춘선 마석역 하차 (도보25분)"
+    },
+    "gwacheon-it": {
+      "bookCode": "2-8",
+      "specialty": "과학",
+      "category": "science",
+      "address": "경기도 과천시 중앙로 24(갈현동)",
+      "hours": {
+        "label": "월~목 09:00~22:00 / 주말 09:00~18:00 / 금·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "금·공휴일",
+      "homepage": "https://www.gclib.go.kr/lib/index.do",
+      "phone": "02-2150-3008",
+      "opened": "2002년 5월",
+      "holdings": "330,887권 (2026년 9월 기준)",
+      "transit": "4호선 정부과천청사역 5번 출구 하차 후 도보로 10분"
+    },
+    "uijeongbu-english": {
+      "bookCode": "2-9",
+      "specialty": "어학",
+      "category": "language",
+      "address": "경기도 의정부시 회룡로 79(호원동)",
+      "hours": {
+        "label": "화~금 09:00~21:00 / 주말 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://www.uilib.go.kr/english/index.do",
+      "phone": "031-828-8710",
+      "opened": "2022년 6월",
+      "holdings": "40,683권 (2026. 8. 31.기준)",
+      "transit": "회룡역 2번출구 하차 후 호원2동 주민센터 방향 도보 5분"
+    },
+    "juyeop-kids": {
+      "bookCode": "2-10",
+      "specialty": "어린이",
+      "category": "kids",
+      "address": "경기도 고양시 일산서구 주엽로 104",
+      "hours": {
+        "label": "월~목·주말 09:00~18:00 / 금·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "금·공휴일",
+      "homepage": "https://www.goyanglib.or.kr/MG/index.do",
+      "phone": "031-8075-9168",
+      "opened": "2007년 6월 28일",
+      "holdings": "115,590권 (2026년 6월 30일 기준)",
+      "transit": "3호선 주엽역 3·4번 출구에서 750m"
+    },
+    "pangyo-kids": {
+      "bookCode": "2-11",
+      "specialty": "어린이",
+      "category": "kids",
+      "address": "경기도 성남시 분당구 판교역로 75(백현동)",
+      "hours": {
+        "label": "평일 09:00~20:00(동절기 ~18:00) / 주말 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://www.snlib.go.kr/cpg/index.do",
+      "phone": "031-729-8880",
+      "opened": "2015년 4월 20일",
+      "holdings": "132,000권 (2026.08.31 기준)",
+      "transit": "판교역 3번출구에서 도보 10분"
+    },
+    "songdo-intl": {
+      "bookCode": "3-1",
+      "specialty": "랜드마크",
+      "category": "landmark",
+      "address": "인천광역시 연수구 아카데미로 166",
+      "hours": {
+        "label": "화~금 09:00~21:00 / 주말 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://www.yspubliclib.go.kr/conts/view.do?mnidx=99",
+      "phone": "032-749-8270",
+      "opened": "2025년 10월 30일",
+      "holdings": "28,247권 (2026. 7. 31. 기준)",
+      "transit": "인천대입구역 → 4401번 버스 환승 → ‘송도국제도서관’ 정류장 하차"
+    },
+    "incheon-library": {
+      "bookCode": "3-2",
+      "specialty": "랜드마크",
+      "category": "landmark",
+      "address": "인천광역시 남동구 인주대로776번길 53",
+      "hours": {
+        "label": "월~목 09:00~22:00 / 주말 09:00~18:00 / 금·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "금·공휴일",
+      "homepage": "https://www.incheonlib.go.kr/mch/main.do",
+      "phone": "032-462-3900",
+      "opened": "2009년 6월 23일 현 청사 미추홀도서관 개관 / 2025년 9월 29일 명칭 변경",
+      "holdings": "746,496권 (2026. 7. 31. 기준)",
+      "transit": "국철1호선 동암남부역 → 지선버스 536번 → 인천도서관 정류장 하차"
+    },
+    "majeon-library": {
+      "bookCode": "3-3",
+      "specialty": "자연·환경",
+      "category": "nature",
+      "address": "인천광역시 검단구 원당대로 563",
+      "hours": {
+        "label": "월~목 09:00~22:00 / 주말 09:00~18:00 / 금·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "금·공휴일",
+      "homepage": "https://www.incheonlib.go.kr/maj/main.do",
+      "phone": "032-590-2800",
+      "opened": "2019년 11월 21일",
+      "holdings": "76,563권 (2026. 7. 31. 기준)",
+      "transit": "인천2호선 마전역 2번 출구 도보 10분"
+    },
+    "cheongna-intl": {
+      "bookCode": "3-4",
+      "specialty": "어학",
+      "category": "language",
+      "address": "인천광역시 서해구 담지로 24",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 주말 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://www.incheonlib.go.kr/cni/main.do",
+      "phone": "032-562-6823",
+      "opened": "2015년 6월 29일",
+      "holdings": "114,323권 (2026.08.31 기준)",
+      "transit": "공항철도 청라국제도시역 → 인천e음84·85 → 청라국제도서관 하차"
+    },
+    "yeongjong-sky": {
+      "bookCode": "3-5",
+      "specialty": "예술",
+      "category": "art",
+      "address": "인천광역시 영종구 하늘중앙로 132",
+      "hours": {
+        "label": "월~목 09:00~22:00 / 주말 09:00~18:00 / 금·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "금·공휴일",
+      "homepage": "https://www.incheonlib.go.kr/yjs/main.do",
+      "phone": "032-746-9143",
+      "opened": "2015년 7월 10일",
+      "holdings": "107,690권 (2026. 1. 31. 기준)",
+      "transit": "공항철도 영종역 → 223번 → 영종하늘도서관 하차(도보3분)"
+    },
+    "yulmok-library": {
+      "bookCode": "3-6",
+      "specialty": "인문",
+      "category": "humanities",
+      "address": "인천광역시 제물포구 답동로24번길 17(율목동)",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 주말 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://www.imla.kr/ym/index.do",
+      "phone": "032-770-3800",
+      "opened": "2011년 7월 8일",
+      "holdings": "90,848권 (2026.08.31 기준)",
+      "transit": "동인천역 도보 15분"
+    },
+    "dongchun-narae": {
+      "bookCode": "3-7",
+      "specialty": "예술",
+      "category": "art",
+      "address": "인천광역시 연수구 봉재산로54번길 30, 국제언어체험센터 2층",
+      "hours": {
+        "label": "화~일 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://www.yspubliclib.go.kr/conts/view.do?mnidx=105",
+      "phone": "032-749-8240",
+      "opened": "2019년 10월 29일",
+      "holdings": "36,383권 (2026년 8월 31일 기준)",
+      "transit": "인천1호선 동막역 3번출구 → 인천e음45 → 대림3차아파트301동앞 하차"
+    },
+    "songdo-kids": {
+      "bookCode": "3-8",
+      "specialty": "어린이",
+      "category": "kids",
+      "address": "인천광역시 연수구 컨벤시아대로 43",
+      "hours": {
+        "label": "화·수·금~일 10:00~18:00 / 목 ~20:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 600,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1200
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://www.yspubliclib.go.kr/conts/view.do?mnidx=102",
+      "phone": "032-749-8220",
+      "opened": "2011년 9월 30일",
+      "holdings": "73,819권 (2026.08.31 기준)",
+      "transit": "캠퍼스타운역4번출구 도보 약30분"
+    },
+    "kkumdream-kids-english": {
+      "bookCode": "3-9",
+      "specialty": "어학",
+      "category": "language",
+      "address": "인천광역시 제물포구 새천년로 93, 2층",
+      "hours": {
+        "label": "월~목 09:00~18:00 / 주말 09:00~17:00 / 금·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "금·공휴일",
+      "homepage": "https://lib.jemulpo.go.kr/dream/",
+      "phone": "032-766-0725",
+      "opened": "2024년 7월 30일",
+      "holdings": "24,829권 (2026년 5월 31일 기준)",
+      "transit": "1호선 동인천역 4번 출구 → 12·28번 버스 환승(동산고 하차) → 도보 4분"
+    },
+    "cheongna-lake": {
+      "bookCode": "3-10",
+      "specialty": "자연·환경",
+      "category": "nature",
+      "address": "인천광역시 서해구 크리스탈로 59",
+      "hours": {
+        "label": "월~목 09:00~22:00 / 주말 09:00~18:00 / 금·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "금·공휴일",
+      "homepage": "https://www.incheonlib.go.kr/cnl/main.do",
+      "phone": "032-563-9579",
+      "opened": "2015년 6월 29일",
+      "holdings": "131,012권 (2025. 12. 31. 기준)",
+      "transit": "청라국제도시역 ⇒ 202, 72, 44번 버스 환승 ⇒ 한일베라체 정류장 하차"
+    },
+    "seonhak-starlight": {
+      "bookCode": "3-11",
+      "specialty": "과학",
+      "category": "science",
+      "address": "인천광역시 연수구 넘말로 30",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 주말 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://www.yspubliclib.go.kr/conts/view.do?mnidx=104",
+      "phone": "032-749-6710",
+      "opened": "2018년 7월 20일",
+      "holdings": "35,000권 (2026.08.31 기준)",
+      "transit": "인천1호선 선학역 4번출구 도보 약7분"
+    },
+    "wonju-central": {
+      "bookCode": "4-1",
+      "specialty": "랜드마크",
+      "category": "landmark",
+      "address": "강원특별자치도 원주시 서원대로 472-12(단구동)",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 주말 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://lib.wonju.go.kr/ja/main",
+      "phone": "033-737-4360",
+      "opened": "2016년 03월 25일",
+      "holdings": "382,654권 (2026. 6. 30. 기준)",
+      "transit": "동보타워골드 정류장(56027): 2-1·8·16·41·51-1·52·52-1·55·59번 등"
+    },
+    "jungcheon-philosophy": {
+      "bookCode": "4-2",
+      "specialty": "인문",
+      "category": "humanities",
+      "address": "강원특별자치도 원주시 흥업면 남원로 105",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 주말 09:00~18:00 / 월·공휴일·12/31 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일·12월 31일",
+      "homepage": "https://lib.wonju.go.kr/jc/main",
+      "phone": "033-737-4476",
+      "opened": "2015년 10월 28일",
+      "holdings": "44,156권 (2026. 6. 30. 기준)",
+      "transit": "강릉원주대학교 정류장(36048): 31·34번"
+    },
+    "gangneung-moru": {
+      "bookCode": "4-3",
+      "specialty": "예술",
+      "category": "art",
+      "address": "강원특별자치도 강릉시 율곡로 2923-12(교동)",
+      "hours": {
+        "label": "화~토 09:00~22:00 / 일 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://www.gnslib.or.kr/moru",
+      "phone": "033-660-3252",
+      "opened": "2009년 6월 22일",
+      "holdings": "122,631권 (2015년 말 공개자료 기준)",
+      "transit": "이명사거리 정류장 (103,200) 버스 하차 후 도보 1분"
+    },
+    "chuncheon-city": {
+      "bookCode": "4-4",
+      "specialty": "어린이",
+      "category": "kids",
+      "address": "강원특별자치도 춘천시 우석로 100",
+      "hours": {
+        "label": "토~목 09:00~22:00 (어린이·장난감 18:00까지) / 매주 금요일·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          }
+        ]
+      },
+      "closedDays": "매주 금요일·공휴일",
+      "homepage": "https://library.chuncheon.go.kr/",
+      "phone": "033-245-5102",
+      "opened": "2017년 09월 09일",
+      "holdings": "286,281권 (2026년 9월 기준)",
+      "transit": "남춘천역 1번 출구 → 300번 버스 환승 후 도보 1분"
+    },
+    "sokcho-kids-english": {
+      "bookCode": "4-5",
+      "specialty": "어학",
+      "category": "language",
+      "address": "강원특별자치도 속초시 엑스포로 132",
+      "hours": {
+        "label": "화~일 09:00~18:00 / 매주 월요일·법정공휴일·12월 31일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "매주 월요일·법정공휴일·12월 31일",
+      "homepage": "https://library.sokcho.go.kr/",
+      "phone": "033-635-0351",
+      "opened": "2026년 03월 25일",
+      "holdings": "15,947권 (2026-08-26 기준)",
+      "transit": "속초시외버스터미널 → 시내버스(‘아남프라자’ 하차) → 도보 5분"
+    },
+    "inje-miracle": {
+      "bookCode": "4-6",
+      "specialty": "어린이",
+      "category": "kids",
+      "address": "강원특별자치도 인제군 인제읍 인제로140번길 52-7",
+      "hours": {
+        "label": "자료실 09:00~22:00 / 어린이 09:00~18:00 / 금·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          }
+        ]
+      },
+      "closedDays": "금·공휴일",
+      "homepage": "https://lib.inje.go.kr/main/",
+      "phone": "033-460-4321",
+      "opened": "2023년 6월 28일",
+      "holdings": "30,737권 (2026. 6. 30. 기준)",
+      "transit": "인제시외버스터미널 하차 → 도보 10분"
+    },
+    "wondeok-library": {
+      "bookCode": "4-7",
+      "specialty": "자연·환경",
+      "category": "nature",
+      "address": "강원특별자치도 삼척시 원덕읍 삼척로 446-11",
+      "hours": {
+        "label": "09:00~18:00 / 월요일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월요일",
+      "homepage": "https://www.samcheok.go.kr/specialty/00465/01176.web",
+      "phone": "033-572-4819",
+      "opened": "2014년 10월 23일",
+      "holdings": "78,635권 (일반 46,572권 / 아동 31,600권 / 큰글자 463권 / 연속간행물 50종)",
+      "transit": "호산시외버스터미널 하차 → 도보 5분"
+    },
+    "mangsang-beach": {
+      "bookCode": "4-8",
+      "specialty": "여행",
+      "category": "travel",
+      "address": "강원특별자치도 동해시 동해대로 6261 (망상동)",
+      "hours": {
+        "label": "수~일 10:00~18:00 / 매주 월·화요일, 법정공휴일 휴관",
+        "byDay": [
+          {
+            "open": 600,
+            "close": 1080
+          },
+          null,
+          null,
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "매주 월·화요일, 법정공휴일",
+      "homepage": "https://www.dh.go.kr/msbook/index.do",
+      "phone": "033-532-6896",
+      "opened": "2019년 11월 1일",
+      "holdings": "약 5,000권 내외 (여행 특화 도서 및 그림책 중심)",
+      "transit": "망상해수욕장 정류장 하차 ⇒ 도보 5분"
+    },
+    "chungnam-library": {
+      "bookCode": "5-1",
+      "specialty": "랜드마크",
+      "category": "landmark",
+      "address": "충청남도 홍성군 홍북읍 도청대로 577",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 주말 09:00~18:00 / 월요일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월요일",
+      "homepage": "https://library.chungnam.go.kr/",
+      "phone": "041-635-8000",
+      "opened": "2018년 4월 25일",
+      "holdings": "309,680권 (2026. 1. 1. 기준)",
+      "transit": "홍성역 또는 삽교역에서 택시로 10~15분 소요(금액 1만원 내외)"
+    },
+    "chungju-city": {
+      "bookCode": "5-2",
+      "specialty": "인문",
+      "category": "humanities",
+      "address": "충청북도 충주시 예성로 207(교현동)",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 주말 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://lib.chungju.go.kr/web/index.do",
+      "phone": "043-850-3970",
+      "opened": "2006년 6월 20일",
+      "holdings": "274,469권 (2026.06.30 기준)",
+      "transit": "충주공용버스터미널 ⇒ 시내버스 환승(‘제일우체국’ 하차) ⇒ 도보 5분"
+    },
+    "baebang-library": {
+      "bookCode": "5-3",
+      "specialty": "예술",
+      "category": "art",
+      "address": "충청남도 아산시 배방읍 모산로 182-14",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 주말 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://ascl.asan.go.kr/content/index.php?page_id=46",
+      "phone": "041-537-3956",
+      "opened": "2024년 4월 18일",
+      "holdings": "123,217권 (2025년 12월 기준)",
+      "transit": "1호선 배방역 1번 출구 ⇒ 도보 10분"
+    },
+    "cheongju-ochang-lake": {
+      "bookCode": "5-4",
+      "specialty": "예술",
+      "category": "art",
+      "address": "충청북도 청주시 청원구 오창읍 오창공원로 102",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 주말 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://library.cheongju.go.kr/",
+      "phone": "043-201-4096",
+      "opened": "2016년 5월 3일",
+      "holdings": "160,074권 (2026.08.31 기준)",
+      "transit": "‘오창호수공원’ 정류장 하차 ⇒ 도보 3분"
+    },
+    "eumbong-eoulsaem": {
+      "bookCode": "5-5",
+      "specialty": "과학",
+      "category": "science",
+      "address": "충청남도 아산시 음봉면 음봉로 515-36",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 주말 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://ascl.asan.go.kr/content/index.php?page_id=329",
+      "phone": "041-530-6450",
+      "opened": "2024년 10월 8일",
+      "holdings": "34,679권 (2025년 12월 기준)",
+      "transit": "시내버스 탑승 ⇒ ‘월랑초교’ 정류장 하차 ⇒ 도보 3분"
+    },
+    "cheonan-jiksan": {
+      "bookCode": "5-6",
+      "specialty": "자연·환경",
+      "category": "nature",
+      "address": "충청남도 천안시 서북구 직산읍 삼은4길 12",
+      "hours": {
+        "label": "평일 09:00~20:00 / 주말 09:00~18:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "homepage": "https://www.cheonan.go.kr/lib/sub03_02_09_01.do",
+      "phone": "041-521-3886",
+      "opened": "2024년 12월 24일",
+      "holdings": "20,903권 (2026.5.31. 기준)",
+      "transit": "1호선 직산역 1번 출구 ⇒ 시내버스 환승 또는 도보 15분"
+    },
+    "dunpo-library": {
+      "bookCode": "5-7",
+      "specialty": "어린이",
+      "category": "kids",
+      "address": "충청남도 아산시 둔포면 둔포중앙로161번길 27-6",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 주말 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://ascl.asan.go.kr/content/index.php?page_id=56",
+      "phone": "041-536-8595",
+      "opened": "1995년 01월 30일",
+      "holdings": "99,282권 (2025년 12월 기준)",
+      "transit": "시내버스 탑승 ⇒ ‘둔포오거리’ 정류장 하차 ⇒ 도보 4분"
+    },
+    "baebang-wolcheon": {
+      "bookCode": "5-8",
+      "specialty": "교육",
+      "category": "education",
+      "address": "충청남도 아산시 배방읍 월천5길 13",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 주말 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://ascl.asan.go.kr/content/index.php?page_id=339",
+      "phone": "041-530-6380",
+      "opened": "2024년 12월 27일",
+      "holdings": "33,566권 (2025년 12월 기준)",
+      "transit": "1호선 배방역 ⇒ 시내버스(‘월천지구’ 하차) 도보 5분"
+    },
+    "asan-central": {
+      "bookCode": "5-9",
+      "specialty": "어학",
+      "category": "language",
+      "address": "충청남도 아산시 남부로 229(용화동)",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 주말 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://ascl.asan.go.kr/content/index.php?page_id=17",
+      "phone": "041-530-6610",
+      "opened": "2018년 02월 06일",
+      "holdings": "262,446권 (2025년 12월 기준)",
+      "transit": "온양온천역 ⇒ 시내버스(‘중앙도서관’ 하차) 도보 3분"
+    },
+    "kkumsaem-kids": {
+      "bookCode": "5-10",
+      "specialty": "어린이",
+      "category": "kids",
+      "address": "충청남도 아산시 시민로 500(권곡동)",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 주말 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://ascl.asan.go.kr/content/index.php?page_id=64",
+      "phone": "041-530-6722",
+      "opened": "2021년 1월 28일",
+      "holdings": "110,755권 (2025년 12월 기준)",
+      "transit": "온양온천역 ⇒ 시내버스 환승(‘청소년교육문화센터’ 하차) ⇒ 도보 3분"
+    },
+    "sejong-city-library": {
+      "bookCode": "6-1",
+      "specialty": "랜드마크",
+      "category": "landmark",
+      "address": "세종특별자치시 세종로 1207(고운동 2103)",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 주말 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://lib.sejong.go.kr/main/main.do",
+      "phone": "044-301-4300",
+      "opened": "2021년 11월 11일",
+      "holdings": "211,701권 (2026. 7. 31. 기준)",
+      "transit": "B5·1000번 → 시립도서관·대법원등기정보센터 하차→ 도보 이동"
+    },
+    "hanbat-library": {
+      "bookCode": "7-1",
+      "specialty": "랜드마크",
+      "category": "landmark",
+      "address": "대전광역시 중구 서문로 10(문화동)",
+      "hours": {
+        "label": "화~일 09:00~18:00 (열람실 ~22:00) / 매주 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "매주 월·공휴일",
+      "homepage": "https://www.daejeon.go.kr/hanbatlibrary/index.do",
+      "phone": "042-270-7420",
+      "opened": "1989년 12월 20일",
+      "holdings": "929,588권 (2026-08-31 기준)",
+      "transit": "1호선 서대전네거리역 ⇒ 시내버스 환승(‘한밭도서관’ 하차) ⇒ 도보 2분"
+    },
+    "munhak-village": {
+      "bookCode": "7-2",
+      "specialty": "자연·환경",
+      "category": "nature",
+      "address": "대전광역시 유성구 어은로 22(봉명동), 유림공원 내",
+      "hours": {
+        "label": "화~일 10:00~17:00",
+        "byDay": [
+          {
+            "open": 600,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          }
+        ]
+      },
+      "homepage": "https://cafe.naver.com/literaturelibrary",
+      "phone": "070-4192-1677",
+      "opened": "2017년 10월 21일",
+      "holdings": "11,086권 (2026년 공개 공공데이터 기준)",
+      "transit": "대전 1호선 유성온천역 ⇒ 시내버스 환승(‘유림공원’ 하차) ⇒ 도보 2분"
+    },
+    "dongdaejeon-library": {
+      "bookCode": "7-3",
+      "specialty": "음악",
+      "category": "music",
+      "address": "대전광역시 동구 우암로277번길 70",
+      "hours": {
+        "label": "토~목 09:00~18:00 (종합·청소년자료실 평일 연장 운영)",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "homepage": "https://www.daejeon.go.kr/ddj/",
+      "phone": "042-270-7590",
+      "opened": "2025년 05월 01일",
+      "holdings": "51,478권 (2026-03-29 기준)",
+      "transit": "시내버스 ‘가양2동행정복지센터’ 하차 ⇒ 도보 4분"
+    },
+    "byeoldongbyeol-science": {
+      "bookCode": "7-4",
+      "specialty": "과학",
+      "category": "science",
+      "address": "대전광역시 유성구 죽동로 322, 죽동문화센터 2층",
+      "hours": {
+        "label": "화~토 10:00~17:00 / 월·일·공휴일 휴관",
+        "byDay": [
+          null,
+          null,
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월·일·공휴일",
+      "homepage": "https://small.u-library.kr/libGuide/detail/26",
+      "phone": "042-825-6987",
+      "opened": "2016년 7월 12일",
+      "holdings": "16,091권(2023. 1. 1. 기준)",
+      "transit": "죽동예미지아파트 정류장 → 도보 약 3~4분"
+    },
+    "kids-english-village": {
+      "bookCode": "7-5",
+      "specialty": "어학",
+      "category": "language",
+      "address": "대전광역시 유성구 지족동로 145, 노은3동행정복지센터",
+      "hours": {
+        "label": "화~토 10:00~17:00 / 월·일·공휴일 휴관",
+        "byDay": [
+          null,
+          null,
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          },
+          {
+            "open": 600,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월·일·공휴일",
+      "homepage": "https://small.u-library.kr/libGuide/detail/15",
+      "phone": "042-611-6962",
+      "opened": "2015년 7월 20일",
+      "holdings": "21,388권 (2026.02.13 기준)",
+      "transit": "해랑숲마을6단지 정류장 → 도보 약 2분"
+    },
+    "jeonbuk-provincial": {
+      "bookCode": "8-1",
+      "specialty": "랜드마크",
+      "category": "landmark",
+      "address": "전북특별자치도 전주시 완산구 효자로 225",
+      "hours": {
+        "label": "월~금 09:00~18:00 / 토·일·공휴일 휴관",
+        "byDay": [
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null
+        ]
+      },
+      "closedDays": "토·일·공휴일",
+      "homepage": "https://library.jeonbuk.go.kr/main/main.php",
+      "phone": "063-280-2454",
+      "opened": "2009년 2월 24일",
+      "holdings": "97,432권 (2026년 8월 31일 기준)",
+      "transit": "효자로전북도청 정류장 → 도보 약 5분"
+    },
+    "jeonnam-library": {
+      "bookCode": "8-2",
+      "specialty": "미디어",
+      "category": "media",
+      "address": "전남광주통합특별시 무안군 삼향읍 남악로 210",
+      "hours": {
+        "label": "09:00~22:00 (일 ~18:00) | 매월 1·3주 수·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          }
+        ],
+        "closedNth": [
+          {
+            "day": 3,
+            "weeks": [
+              1,
+              3
+            ]
+          }
+        ]
+      },
+      "closedDays": "매월 1·3주 수·공휴일",
+      "homepage": "https://jnlib.jeonnam-gwangju.go.kr/main.php",
+      "phone": "061-288-5200",
+      "opened": "2012년 1월",
+      "holdings": "398,015권 (2025년 10월 31일 기준)",
+      "transit": "전남도립도서관 정류장 → 도보 약 1분"
+    },
+    "hanok-village-library": {
+      "bookCode": "8-3",
+      "specialty": "인문",
+      "category": "humanities",
+      "address": "전북특별자치도 전주시 완산구 한지길 68-3",
+      "hours": {
+        "label": "화~일 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://lib.jeonju.go.kr/",
+      "phone": "063-714-3531",
+      "opened": "2022년 11월 8일",
+      "holdings": "2,488권 (2025년 12월 기준)",
+      "transit": "오목대·한옥마을 정류장 → 도보 약 4분"
+    },
+    "yeonhwajeong-library": {
+      "bookCode": "8-4",
+      "specialty": "예술",
+      "category": "art",
+      "address": "전북특별자치도 전주시 덕진구 권삼득로 390-1, 덕진공원",
+      "hours": {
+        "label": "10:00~19:00 / 월 휴관",
+        "byDay": [
+          {
+            "open": 600,
+            "close": 1140
+          },
+          null,
+          {
+            "open": 600,
+            "close": 1140
+          },
+          {
+            "open": 600,
+            "close": 1140
+          },
+          {
+            "open": 600,
+            "close": 1140
+          },
+          {
+            "open": 600,
+            "close": 1140
+          },
+          {
+            "open": 600,
+            "close": 1140
+          }
+        ]
+      },
+      "closedDays": "월",
+      "homepage": "https://lib.jeonju.go.kr/",
+      "phone": "063-714-3527",
+      "opened": "2022년 6월 2일",
+      "holdings": "2,750권 (2025년 12월 기준)",
+      "transit": "기린대로덕진공원 정류장 → 도보 약 11분"
+    },
+    "jindo-cheolma": {
+      "bookCode": "8-5",
+      "specialty": "인문",
+      "category": "humanities",
+      "address": "전남광주통합특별시 진도군 진도읍 철마길 25",
+      "hours": {
+        "label": "월~목 09:00~18:00 / 주말 ~17:00 / 금·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "금·공휴일",
+      "homepage": "https://jindo.go.kr/library/",
+      "phone": "061-540-3062",
+      "opened": "2010년 12월 27일",
+      "holdings": "65,937권(2026년 09월 27일 기준)",
+      "transit": "진도실업고교 정류장 → 도보 이동"
+    },
+    "dongmun-usedbook": {
+      "bookCode": "8-6",
+      "specialty": "미디어",
+      "category": "media",
+      "address": "전북특별자치도 전주시 완산구 동문길 51",
+      "hours": {
+        "label": "화~일 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://lib.jeonju.go.kr/",
+      "phone": "063-714-3529",
+      "opened": "2022년 12월 1일",
+      "holdings": "5,261권 (2025년 12월 기준)",
+      "transit": "동부시장 정류장 → 도보 약 4분"
+    },
+    "gochang-hwangyunseok": {
+      "bookCode": "8-7",
+      "specialty": "인문",
+      "category": "humanities",
+      "address": "전북특별자치도 고창군 고창읍 중앙로 340",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 주말 ~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://www.gochang.go.kr/library/index.gochang",
+      "phone": "063-560-2420",
+      "opened": "2025년 12월 3일",
+      "holdings": "74,631권 (2026년 9월 기준)",
+      "transit": "상월·하월 정류장 → 도보 약 5분"
+    },
+    "dunsan-english": {
+      "bookCode": "8-8",
+      "specialty": "어학",
+      "category": "language",
+      "address": "전북특별자치도 완주군 봉동읍 둔산2로 62",
+      "hours": {
+        "label": "월~토 09:00~18:00 / 일·공휴일 휴관",
+        "byDay": [
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "일·공휴일",
+      "homepage": "https://lib.wanju.go.kr/",
+      "phone": "063-290-3866",
+      "opened": "2013년 6월 20일",
+      "holdings": "67,434권 (2026년 9월 기준)",
+      "transit": "둔산라송아파트 정류장 → 도보 약 4분"
+    },
+    "galdaesup-small": {
+      "bookCode": "8-9",
+      "specialty": "예술",
+      "category": "art",
+      "address": "전북특별자치도 부안군 줄포면 서빈1길 10-13",
+      "hours": {
+        "label": "화~토 09:00~18:00 / 일·월 휴관",
+        "byDay": [
+          null,
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "일·월",
+      "homepage": "https://lib.buan.go.kr/main/contents.do?idx=2516",
+      "phone": "063-581-2336",
+      "opened": "2021년 1월 19일",
+      "holdings": "5,500권 (2026년 9월 기준)",
+      "transit": "줄포상설시장 정류장 → 도보 약 5분"
+    },
+    "jorye-lake": {
+      "bookCode": "8-10",
+      "specialty": "자연·환경",
+      "category": "nature",
+      "address": "전남광주통합특별시 순천시 조례2길 31",
+      "hours": {
+        "label": "자료실 09:00~22:00 (열람실 08:00~22:00)"
+      },
+      "homepage": "https://library.suncheon.go.kr/lib/index.do?siteLib=MC",
+      "phone": "061-749-8891",
+      "opened": "2010년 3월 12일",
+      "holdings": "85,405권 (2025.12.31 기준)",
+      "transit": "조례호수도서관 정류장 → 도보 이동"
+    },
+    "muju-manna-small": {
+      "bookCode": "8-11",
+      "specialty": "어린이",
+      "category": "kids",
+      "address": "전북특별자치도 무주군 안성면 진성로 2393",
+      "hours": {
+        "label": "월~금 10:00~18:00 / 토·일·공휴일 휴관",
+        "byDay": [
+          null,
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          null
+        ]
+      },
+      "closedDays": "토·일·공휴일",
+      "homepage": "https://library.muju.go.kr/main/contents.do?idx=1454",
+      "phone": "070-8802-6000",
+      "opened": "2011년 11월 8일",
+      "holdings": "15,838권 (2024년 3월 기준)",
+      "transit": "진원 정류장 → 도보 약 4분"
+    },
+    "mudeung-library": {
+      "bookCode": "9-1",
+      "specialty": "랜드마크",
+      "category": "landmark",
+      "address": "전남광주통합특별시 북구 면앙로 130",
+      "hours": {
+        "label": "평일 09:00~22:00 / 주말 ~17:00 / 둘째·넷째 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ],
+        "closedNth": [
+          {
+            "day": 1,
+            "weeks": [
+              2,
+              4
+            ]
+          }
+        ]
+      },
+      "closedDays": "둘째·넷째 월·공휴일",
+      "homepage": "https://citylib.gwangju.kr/main",
+      "phone": "062-613-7753",
+      "opened": "1981년 12월 15일",
+      "holdings": "377,929권 (2026년 6월 30일 기준)",
+      "transit": "무등도서관 정류장 → 도보 약 3분"
+    },
+    "seochang-hanok": {
+      "bookCode": "9-2",
+      "specialty": "인문",
+      "category": "humanities",
+      "address": "전남광주통합특별시 서구 세동1길 27-1",
+      "hours": {
+        "label": "10:00~18:00 / 월 휴관",
+        "byDay": [
+          {
+            "open": 600,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월",
+      "homepage": "https://library.seogu.gwangju.kr/",
+      "phone": "062-385-9073",
+      "opened": "2018년 8월 30일",
+      "holdings": "1,697권 (2021년 9월 기준)",
+      "transit": "서창동행정복지센터 정류장 → 도보 약 2분"
+    },
+    "gwangju-braille": {
+      "bookCode": "9-3",
+      "specialty": "미디어",
+      "category": "media",
+      "address": "전남광주통합특별시 남구 천변좌로370번길 3",
+      "hours": {
+        "label": "평일 09:00~18:00 / 주말·공휴일 휴관",
+        "byDay": [
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null
+        ]
+      },
+      "closedDays": "주말·공휴일",
+      "homepage": "https://citylib.gwangju.kr/braille",
+      "phone": "062-672-9534",
+      "opened": "2023년 8월 14일",
+      "holdings": "8,477권 (2026년 9월 기준)",
+      "transit": "사직공원앞 정류장 → 도보 약 6분"
+    },
+    "jangdeok-library": {
+      "bookCode": "9-4",
+      "specialty": "예술",
+      "category": "art",
+      "address": "전남광주통합특별시 광산구 풍영로 179",
+      "hours": {
+        "label": "평일 09:00~18:00 / 주말 ~17:00 / 첫째·셋째 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ],
+        "closedNth": [
+          {
+            "day": 1,
+            "weeks": [
+              1,
+              3
+            ]
+          }
+        ]
+      },
+      "closedDays": "첫째·셋째 월·공휴일",
+      "homepage": "https://newlib.gwangsan.go.kr/JD/",
+      "phone": "062-960-3997",
+      "opened": "2013년 12월 27일",
+      "holdings": "85,062권 (2025. 12. 31 기준)",
+      "transit": "수완새한포유 정류장 → 도보 약 2분"
+    },
+    "iyagikkot-library": {
+      "bookCode": "9-5",
+      "specialty": "예술",
+      "category": "art",
+      "address": "전남광주통합특별시 광산구 선운중앙로67번길 6",
+      "hours": {
+        "label": "평일 09:00~18:00 / 주말 ~17:00 / 첫째·셋째 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ],
+        "closedNth": [
+          {
+            "day": 1,
+            "weeks": [
+              1,
+              3
+            ]
+          }
+        ]
+      },
+      "closedDays": "첫째·셋째 월·공휴일",
+      "homepage": "https://newlib.gwangsan.go.kr/IG/",
+      "phone": "062-960-6818",
+      "opened": "2016년 10월 29일",
+      "holdings": "63,800권 (2025년 12월 기준)",
+      "transit": "선운휴먼시아 정류장 → 도보 약 3분"
+    },
+    "chaekdori-library": {
+      "bookCode": "9-6",
+      "specialty": "예술",
+      "category": "art",
+      "address": "전남광주통합특별시 북구 우치로 235, 2~3층",
+      "hours": {
+        "label": "월~토 11:00~17:00 / 일 휴관",
+        "byDay": [
+          null,
+          {
+            "open": 660,
+            "close": 1020
+          },
+          {
+            "open": 660,
+            "close": 1020
+          },
+          {
+            "open": 660,
+            "close": 1020
+          },
+          {
+            "open": 660,
+            "close": 1020
+          },
+          {
+            "open": 660,
+            "close": 1020
+          },
+          {
+            "open": 660,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "일",
+      "homepage": "https://cde7279.winbook.kr/",
+      "phone": "062-266-7279",
+      "opened": "2008년 12월 23일",
+      "holdings": "14,379권 (2026년 9월 기준)",
+      "transit": "오치한전(북) 정류장 → 도보 약 1분"
+    },
+    "unam-library": {
+      "bookCode": "9-7",
+      "specialty": "자연·환경",
+      "category": "nature",
+      "address": "전남광주통합특별시 북구 북문대로 118",
+      "hours": {
+        "label": "평일 09:00~18:00 / 주말 ~17:00 / 둘째·넷째 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ],
+        "closedNth": [
+          {
+            "day": 1,
+            "weeks": [
+              2,
+              4
+            ]
+          }
+        ]
+      },
+      "closedDays": "둘째·넷째 월·공휴일",
+      "homepage": "https://lib.bukgu.gwangju.kr/",
+      "phone": "062-410-6961",
+      "opened": "2012년 4월 18일",
+      "holdings": "105,485권 (2026년 7월 기준)",
+      "transit": "운암도서관 정류장 → 도보 약 5분"
+    },
+    "kids-eco-library": {
+      "bookCode": "9-8",
+      "specialty": "자연·환경",
+      "category": "nature",
+      "address": "전남광주통합특별시 서구 풍암공원로 8",
+      "hours": {
+        "label": "평일 09:00~18:00, 주말 ~17:00 / 매월 2·4주 월요일·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ],
+        "closedNth": [
+          {
+            "day": 1,
+            "weeks": [
+              2,
+              4
+            ]
+          }
+        ]
+      },
+      "closedDays": "매월 2·4주 월요일·공휴일",
+      "homepage": "https://library.seogu.gwangju.kr/",
+      "phone": "062-350-4584",
+      "opened": "2008년 11월 26일",
+      "holdings": "67,865권 (2026년 6월 기준)",
+      "transit": "원광대한방병원 정류장 → 도보 약 7분"
+    },
+    "unnam-kids": {
+      "bookCode": "9-9",
+      "specialty": "어린이",
+      "category": "kids",
+      "address": "전남광주통합특별시 광산구 목련로217번길 10",
+      "hours": {
+        "label": "평일 09:00~18:00 / 주말 ~17:00 / 둘째·넷째 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ],
+        "closedNth": [
+          {
+            "day": 1,
+            "weeks": [
+              2,
+              4
+            ]
+          }
+        ]
+      },
+      "closedDays": "둘째·넷째 월·공휴일",
+      "homepage": "https://newlib.gwangsan.go.kr/UN/",
+      "phone": "062-960-8302",
+      "opened": "2008년 12월 18일",
+      "holdings": "61,200권 (2025년 12월 31일 기준)",
+      "transit": "운남동행정복지센터 정류장 → 도보 약 4분"
+    },
+    "pureungil-library": {
+      "bookCode": "9-10",
+      "specialty": "어린이",
+      "category": "kids",
+      "address": "전남광주통합특별시 남구 금당로 140",
+      "hours": {
+        "label": "평일 09:00~22:00(어린이 ~18:00), 주말 09:00~17:00",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "homepage": "https://lib.namgu.gwangju.kr/",
+      "phone": "062-607-2538",
+      "opened": "2013년 12월 19일",
+      "holdings": "63,329권 (2026년 9월 기준)",
+      "transit": "호남삼육고 정류장 → 도보 약 3분"
+    },
+    "uknow-yunho": {
+      "bookCode": "9-11",
+      "specialty": "예술",
+      "category": "art",
+      "address": "전남광주통합특별시 광산구 소촌로85번길 14-9",
+      "hours": {
+        "label": "화~일 10:00~18:00 / 월·신정·설·추석 휴관",
+        "byDay": [
+          {
+            "open": 600,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 600,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·신정·설·추석",
+      "homepage": "https://www.gwangsan.go.kr/sochon/",
+      "phone": "062-960-3689",
+      "opened": "2018년 6월 30일",
+      "holdings": "4,010권 (2026년 9월 기준)",
+      "transit": "정광고입구 정류장 → 도보 약 4분"
+    },
+    "gyeongbuk-library": {
+      "bookCode": "10-1",
+      "specialty": "랜드마크",
+      "category": "landmark",
+      "address": "경상북도 예천군 호명읍 도청대로 200",
+      "hours": {
+        "label": "평일 09:00~21:00 / 주말 ~18:00 / 첫째·셋째 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ],
+        "closedNth": [
+          {
+            "day": 1,
+            "weeks": [
+              1,
+              3
+            ]
+          }
+        ]
+      },
+      "closedDays": "첫째·셋째 월·공휴일",
+      "homepage": "https://www.gb.go.kr/lib/main.tc",
+      "phone": "054-650-3900",
+      "opened": "2019년 11월 14일",
+      "holdings": "262,849권 (2025년 6월말 기준)",
+      "transit": "아이파크 정류장 → 도보 약 5분"
+    },
+    "gyeongnam-library": {
+      "bookCode": "10-2",
+      "specialty": "랜드마크",
+      "category": "landmark",
+      "address": "경상남도 창원시 의창구 사림로45번길 59",
+      "hours": {
+        "label": "월~목 09:00~20:00 / 주말 ~18:00 / 금·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "금·공휴일",
+      "homepage": "https://lib.gyeongnam.go.kr/",
+      "phone": "055-254-4811",
+      "opened": "2018년 2월 12일",
+      "holdings": "298,242권 (2025년 12월 기준)",
+      "transit": "경남대표도서관입구 정류장 → 도보 약 6분"
+    },
+    "gyeongju-city": {
+      "bookCode": "10-3",
+      "specialty": "인문",
+      "category": "humanities",
+      "address": "경상북도 경주시 원화로 431-12",
+      "hours": {
+        "label": "화~금 09:00~21:00 / 주말 ~17:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://library.gyeongju.go.kr/",
+      "phone": "054-779-8913",
+      "opened": "1989년 9월 22일",
+      "holdings": "204,555권 (2026년 9월 기준)",
+      "transit": "황성공원·시립도서관 정류장 → 도보 약 2분"
+    },
+    "haman-library": {
+      "bookCode": "10-4",
+      "specialty": "인문",
+      "category": "humanities",
+      "address": "경상남도 함안군 가야읍 선왕길 16",
+      "hours": {
+        "label": "화~토 09:00~18:00 / 일 ~17:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://hmlib.gne.go.kr/",
+      "phone": "055-583-6919",
+      "opened": "2023년 2월 28일",
+      "holdings": "89,038권 (2026년 8월 1일 기준)",
+      "transit": "함안중고교 정류장 → 도보 이동"
+    },
+    "poeun-heunghae": {
+      "bookCode": "10-5",
+      "specialty": "음악",
+      "category": "music",
+      "address": "경상북도 포항시 북구 흥해읍 흥해로81번길 46",
+      "hours": {
+        "label": "평일 09~22시(어린이 ~18시), 주말 ~18시 / 매월 2·4째 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ],
+        "closedNth": [
+          {
+            "day": 1,
+            "weeks": [
+              2,
+              4
+            ]
+          }
+        ]
+      },
+      "closedDays": "매월 2·4째 월·공휴일",
+      "homepage": "https://www.phlib.or.kr/",
+      "phone": "054-270-4390",
+      "opened": "2025년 3월 18일",
+      "holdings": "45,055권 (2026년 8월 기준)",
+      "transit": "마산사거리(방통대) 정류장 → 도보 약 2분"
+    },
+    "sangju-dodream": {
+      "bookCode": "10-6",
+      "specialty": "미디어",
+      "category": "media",
+      "address": "경상북도 상주시 복룡2길 22",
+      "hours": {
+        "label": "평일 09:00~21:00 / 주말 ~18:00 / 첫째·셋째 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ],
+        "closedNth": [
+          {
+            "day": 1,
+            "weeks": [
+              1,
+              3
+            ]
+          }
+        ]
+      },
+      "closedDays": "첫째·셋째 월·공휴일",
+      "homepage": "https://www.sangju.go.kr/lib/main.tc",
+      "phone": "054-537-6740",
+      "opened": "2024년 4월 27일",
+      "holdings": "30,000권 (2026년 9월 기준)",
+      "transit": "성동초등학교 정류장 → 도보 약 5분"
+    },
+    "hadong-library": {
+      "bookCode": "10-7",
+      "specialty": "음식",
+      "category": "food",
+      "address": "경상남도 하동군 하동읍 경서대로 80",
+      "hours": {
+        "label": "화~일 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://hdlib.gne.go.kr/",
+      "phone": "055-884-7981",
+      "opened": "2014년 5월 20일",
+      "holdings": "95,384권 (2026.7.1.기준)",
+      "transit": "하동고등학교/하동도서관 정류장 → 도보 약 2분"
+    },
+    "kkumirang-library": {
+      "bookCode": "10-8",
+      "specialty": "음식",
+      "category": "food",
+      "address": "경상남도 통영시 산양읍 둔전길 155",
+      "hours": {
+        "label": "화~일 09:00~18:00 / 월 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월",
+      "homepage": "https://www.tongyeonglib.or.kr/",
+      "phone": "055-650-2500",
+      "opened": "2021년 5월 22일",
+      "holdings": "29,387권 (2026.01.01.기준)",
+      "transit": "산양중학교 정류장 → 도보 약 2분"
+    },
+    "guryongpo-library": {
+      "bookCode": "10-9",
+      "specialty": "여행",
+      "category": "travel",
+      "address": "경상북도 포항시 남구 구룡포읍 병포길52번길 17",
+      "hours": {
+        "label": "09:00~18:00 / 매월 첫째·셋째 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ],
+        "closedNth": [
+          {
+            "day": 1,
+            "weeks": [
+              1,
+              3
+            ]
+          }
+        ]
+      },
+      "closedDays": "매월 첫째·셋째 월·공휴일",
+      "homepage": "https://phlib.pohang.go.kr/phlib/html.do?menu_idx=357",
+      "phone": "054-270-5629",
+      "opened": "2021년 6월 9일",
+      "holdings": "25,349권 (2026년 8월 기준)",
+      "transit": "병포리여성회관 정류장 → 도보 약 10분"
+    },
+    "sancheong-jirisan": {
+      "bookCode": "10-10",
+      "specialty": "인문",
+      "category": "humanities",
+      "address": "경상남도 산청군 신안면 원지강변로 101",
+      "hours": {
+        "label": "화~일 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://sjlib.gne.go.kr/",
+      "phone": "055-974-1611",
+      "opened": "2020년 10월 27일",
+      "holdings": "57,432권 (2026.07.01 기준)",
+      "transit": "원지시외버스정류소 → 도보 약 5분"
+    },
+    "ulleung-library": {
+      "bookCode": "10-11",
+      "specialty": "인문",
+      "category": "humanities",
+      "address": "경상북도 울릉군 울릉읍 봉래길 128-10",
+      "hours": {
+        "label": "화~금 09:00~18:00 / 주말 ~17:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://www.gbelib.kr/ul/index.do",
+      "phone": "054-791-9043",
+      "opened": "1974년 4월 10일",
+      "holdings": "78,631권 (2026.07.01·도서)",
+      "transit": "저동초등학교 정류장 → 도보 약 1분"
+    },
+    "daegu-library": {
+      "bookCode": "11-1",
+      "specialty": "랜드마크",
+      "category": "landmark",
+      "address": "대구광역시 남구 중앙대로22길 26",
+      "hours": {
+        "label": "화~금 09:00~20:00 / 주말 ~17:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://library.daegu.go.kr/dglib/index.do",
+      "phone": "053-803-8700",
+      "opened": "2025년 11월 5일",
+      "holdings": "251,625권 (2026년 9월 기준)",
+      "transit": "영대병원역 2번 출구 → 도보 약 7분"
+    },
+    "gukchae-library": {
+      "bookCode": "11-2",
+      "specialty": "인문",
+      "category": "humanities",
+      "address": "대구광역시 중구 공평로10길 25",
+      "hours": {
+        "label": "평일 09:00~20:00 / 주말 ~17:00 / 첫째·셋째 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ],
+        "closedNth": [
+          {
+            "day": 1,
+            "weeks": [
+              1,
+              3
+            ]
+          }
+        ]
+      },
+      "closedDays": "첫째·셋째 월·공휴일",
+      "homepage": "https://library.daegu.go.kr/gukbo/index.do",
+      "phone": "053-231-2000",
+      "opened": "2023년 7월 31일(리모델링)",
+      "holdings": "266,613권 (2026. 9. 1. 기준)",
+      "transit": "2호선 경대병원역 → 도보 약 9분"
+    },
+    "feb28-library": {
+      "bookCode": "11-3",
+      "specialty": "인문",
+      "category": "humanities",
+      "address": "대구광역시 중구 2·28길 9, 기념회관 3층",
+      "hours": {
+        "label": "화~금 09~19시, 토·일 ~17시/월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1140
+          },
+          {
+            "open": 540,
+            "close": 1140
+          },
+          {
+            "open": 540,
+            "close": 1140
+          },
+          {
+            "open": 540,
+            "close": 1140
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://www.228.or.kr/",
+      "phone": "053-257-2280",
+      "opened": "2013년 2월 28일",
+      "holdings": "56,796권 (2026년 4월 1일기준)",
+      "transit": "명덕역 2번 출구 → 도보 약 3분"
+    },
+    "dalseong-gunlib": {
+      "bookCode": "11-4",
+      "specialty": "인문",
+      "category": "humanities",
+      "address": "대구광역시 달성군 다사읍 달구벌대로174길 10-13",
+      "hours": {
+        "label": "평일 09:00~22:00, 주말 09:00~17:00/월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://library.daegu.go.kr/dalseonglib/index.do",
+      "phone": "053-584-0011",
+      "opened": "2014년 3월 20일",
+      "holdings": "108,056권 (2026년 05월 31일 기준)",
+      "transit": "대실역 2번 출구 → 도보 약 5분"
+    },
+    "suseongmot-picturebook": {
+      "bookCode": "11-5",
+      "specialty": "예술",
+      "category": "art",
+      "address": "대구광역시 수성구 무학로 112",
+      "hours": {
+        "label": "화~일 09:00~21:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1260
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://library.daegu.go.kr/yonghak/index.do",
+      "phone": "053-668-1770",
+      "opened": "2024년 9월 29일",
+      "holdings": "8,368권 (2026.08.31·도서)",
+      "transit": "수성못역 1번 출구 → 도보 약 8분"
+    },
+    "dalseo-family": {
+      "bookCode": "11-6",
+      "specialty": "어린이",
+      "category": "kids",
+      "address": "대구광역시 달서구 조암남로 137",
+      "hours": {
+        "label": "화~금 09:00~20:00 / 주말 ~17:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://library.daegu.go.kr/dalseolib/index.do",
+      "phone": "053-667-4970",
+      "opened": "2018년 4월 12일",
+      "holdings": "85,922권 (2026.01.01 기준)",
+      "transit": "월배힐스테이트건너 정류장 → 도보 약 1분"
+    },
+    "dowon-library": {
+      "bookCode": "11-7",
+      "specialty": "인문",
+      "category": "humanities",
+      "address": "대구광역시 달서구 한실로 113",
+      "hours": {
+        "label": "화~금 09:00~20:00 / 주말 ~17:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://library.daegu.go.kr/dalseolib/index.do",
+      "phone": "053-667-4840",
+      "opened": "2006년 3월 28일",
+      "holdings": "107,655권 (2026년 1월 1일 기준)",
+      "transit": "대곡사계절타운건너 정류장 → 도보 약 3분"
+    },
+    "daegu-seogu-english": {
+      "bookCode": "11-8",
+      "specialty": "어학",
+      "category": "language",
+      "address": "대구광역시 서구 평리로35길 90-6",
+      "hours": {
+        "label": "화~금 09:00~18:00 / 주말 ~17:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://library.daegu.go.kr/seogulib/index.do",
+      "phone": "053-663-3861",
+      "opened": "2018년 4월 27일",
+      "holdings": "20,150권 (26.1.1.기준)",
+      "transit": "평리5동행정복지센터앞 229m, 도보 3분 소요"
+    },
+    "daegu-seogu-kids-english": {
+      "bookCode": "11-9",
+      "specialty": "어학",
+      "category": "language",
+      "address": "대구광역시 서구 문화로 160, 3층",
+      "hours": {
+        "label": "화~금 09:00~18:00 / 주말 ~17:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://library.daegu.go.kr/seogulib/index.do",
+      "phone": "053-663-3951",
+      "opened": "2024년 10월 10일",
+      "holdings": "15,098권 (2024년 10월 기준)",
+      "transit": "평리5동행정복지센터앞 정류장 → 도보 약 3분"
+    },
+    "dalseong-kids-forest": {
+      "bookCode": "11-10",
+      "specialty": "어린이",
+      "category": "kids",
+      "address": "대구광역시 달성군 현풍읍 테크노중앙대로 231",
+      "hours": {
+        "label": "평일 09:00~19:00, 주말 09:00~17:00 / 매주 월요일·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1140
+          },
+          {
+            "open": 540,
+            "close": 1140
+          },
+          {
+            "open": 540,
+            "close": 1140
+          },
+          {
+            "open": 540,
+            "close": 1140
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "매주 월요일·공휴일",
+      "homepage": "https://library.daegu.go.kr/dalseongchild/index.do",
+      "phone": "053-615-0011",
+      "opened": "2025년 7월",
+      "holdings": "37,081권 (2026년 7월 31일 기준)",
+      "transit": "현풍경남은행앞 정류장 → 도보 약 3분"
+    },
+    "wagle-kids": {
+      "bookCode": "11-11",
+      "specialty": "어린이",
+      "category": "kids",
+      "address": "대구광역시 동구 숙천로 20",
+      "hours": {
+        "label": "화~일 09:00~18:00 / 월 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월",
+      "homepage": "https://library.daegu.go.kr/dww/index.do",
+      "phone": "053-217-6116",
+      "opened": "2025년 7월 29일",
+      "holdings": "5,038권 (문화체육관광부 작은도서관 등록 기준)",
+      "transit": "대구한의대병원역 → 도보 약 15분"
+    },
+    "ulsan-library": {
+      "bookCode": "12-1",
+      "specialty": "랜드마크",
+      "category": "landmark",
+      "address": "울산광역시 남구 꽃대나리로 140",
+      "hours": {
+        "label": "화~금 09:00~21:00 / 주말 ~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://library.ulsan.go.kr/lib/portal/main.do",
+      "phone": "052-266-5670",
+      "opened": "2018년 4월 26일",
+      "holdings": "319,580권 (2026.07.31·도서)",
+      "transit": "울산도서관 정류장 → 도보 약 3분"
+    },
+    "dosan-library": {
+      "bookCode": "12-2",
+      "specialty": "랜드마크",
+      "category": "landmark",
+      "address": "울산광역시 남구 번영로54번길 6",
+      "hours": {
+        "label": "화~일 09:00~18:00 (평일 ~20:00)/매주 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "매주 월·공휴일",
+      "homepage": "https://www.ulsannamgu.go.kr/library/main.do",
+      "phone": "052-226-5710",
+      "opened": "2003년 4월 18일",
+      "holdings": "54,602권 (2026년 9월 27일 기준)",
+      "transit": "롯데인벤스앞 정류장 → 도보 약 2분"
+    },
+    "ulju-cheonsang": {
+      "bookCode": "12-3",
+      "specialty": "과학",
+      "category": "science",
+      "address": "울산광역시 울주군 범서읍 천상길 60",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 주말 ~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://uljulib.ulju.ulsan.kr/",
+      "phone": "052-243-9096",
+      "opened": "2019년 7월 25일",
+      "holdings": "59,579권 (2026.01.01·도서)",
+      "transit": "천상청구제네스아파트 정류장 → 도보 약 3분"
+    },
+    "wolbong-library": {
+      "bookCode": "12-4",
+      "specialty": "예술",
+      "category": "art",
+      "address": "울산광역시 남구 돋질로139번길 23",
+      "hours": {
+        "label": "화~일 09:00~18:00 / 월 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월",
+      "homepage": "https://www.ulsannamgu.go.kr/library/main.do",
+      "phone": "052-226-2377",
+      "opened": "2009년 7월 24일",
+      "holdings": "24,153권 (2026년 3월 17일 기준)",
+      "transit": "신정5동행정복지센터앞 정류장 → 도보 약 3분"
+    },
+    "ulsan-jonggatjip": {
+      "bookCode": "12-5",
+      "specialty": "자연·환경",
+      "category": "nature",
+      "address": "울산광역시 중구 종가3길 29",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 주말 ~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://lib.junggu.ulsan.kr/",
+      "phone": "052-700-5230",
+      "opened": "2024년 10월 24일",
+      "holdings": "96,073권 (2026. 1. 1. 기준)",
+      "transit": "함월고등학교 정류장 → 도보 약 2분"
+    },
+    "sanjeon-comics": {
+      "bookCode": "12-6",
+      "specialty": "예술",
+      "category": "art",
+      "address": "울산광역시 중구 산전6길 32-1, 산전마루 2층",
+      "hours": {
+        "label": "화~일 09:00~18:00 / 월 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월",
+      "homepage": "https://lib.junggu.ulsan.kr/lib/main.do",
+      "phone": "052-290-4859",
+      "opened": "2021년 12월 23일",
+      "holdings": "10,343권 (2026. 6. 16. 기준)",
+      "transit": "산전교앞 정류장 → 도보 약 2분"
+    },
+    "sinbok-library": {
+      "bookCode": "12-7",
+      "specialty": "여행",
+      "category": "travel",
+      "address": "울산광역시 남구 신복로72번길 18-13",
+      "hours": {
+        "label": "화~일 09:00~18:00 (평일 ~20:00)/매주 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "매주 월·공휴일",
+      "homepage": "https://www.ulsannamgu.go.kr/library/main.do",
+      "phone": "052-226-2365",
+      "opened": "2012년 12월 28일",
+      "holdings": "57,302권(2026년 9월 4일 기준)",
+      "transit": "신복초등학교 정류장 → 도보 약 2분"
+    },
+    "gangdong-sea": {
+      "bookCode": "12-8",
+      "specialty": "여행",
+      "category": "travel",
+      "address": "울산광역시 북구 산하중앙3로 62",
+      "hours": {
+        "label": "화~금 09:00~20:00 / 주말 ~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://usbl.bukgu.ulsan.kr/main/",
+      "phone": "052-241-7480",
+      "opened": "2023년 9월 1일",
+      "holdings": "33,286권 (2026. 8. 31. 기준)",
+      "transit": "강동초등학교 정류장 → 도보 약 2분"
+    },
+    "cheolsae-village": {
+      "bookCode": "12-9",
+      "specialty": "자연·환경",
+      "category": "nature",
+      "address": "울산광역시 남구 삼호로149번길 22, 3층",
+      "hours": {
+        "label": "화~일 09:00~18:00 / 월 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월",
+      "homepage": "https://www.ulsannamgu.go.kr/library/main.do",
+      "phone": "052-226-2387",
+      "opened": "2021년 11월 10일",
+      "holdings": "8,711권 (2026년 8월 13일 기준)",
+      "transit": "옥현초등학교앞 정류장 → 도보 약 5분"
+    },
+    "okhyeon-kids": {
+      "bookCode": "12-10",
+      "specialty": "어린이",
+      "category": "kids",
+      "address": "울산광역시 남구 옥현로58번길 40",
+      "hours": {
+        "label": "화~일 09:00~18:00 / 매주 월요일·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "매주 월요일·공휴일",
+      "homepage": "https://www.ulsannamgu.go.kr/library/main.do",
+      "phone": "052-226-2370",
+      "opened": "2014년 10월 14일",
+      "holdings": "32,692권 (2026년 9월 18일 기준)",
+      "transit": "옥현중학교 정류장 → 도보 약 7분"
+    },
+    "ulsan-kids-youth": {
+      "bookCode": "12-11",
+      "specialty": "어린이",
+      "category": "kids",
+      "address": "울산광역시 남구 봉월로38번길 32, 종하이노베이션센터 1·2층",
+      "hours": {
+        "label": "화~일 09:00~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://library.ulsan.go.kr/lib/clib/main.do",
+      "phone": "052-266-5990",
+      "opened": "2025년 4월 16일",
+      "holdings": "54,996권 (2026.06.30기준)",
+      "transit": "농업인회관 정류장 → 도보 약 2분"
+    },
+    "busan-library": {
+      "bookCode": "13-1",
+      "specialty": "랜드마크",
+      "category": "landmark",
+      "address": "부산광역시 사상구 사상로310번길 33",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 주말 ~18:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://library.busan.go.kr/busanlibrary/index.do",
+      "phone": "051-310-5400",
+      "opened": "2020년 11월",
+      "holdings": "525,026권 (2026.08.31·도서)",
+      "transit": "2호선 덕포역 2번 출구 → 도보 약 3분"
+    },
+    "dongnae-eupseong": {
+      "bookCode": "13-2",
+      "specialty": "인문",
+      "category": "humanities",
+      "address": "부산광역시 동래구 동래로159번길 153",
+      "hours": {
+        "label": "화~금 09:00~22:00, 주말 09:00~17:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://dongnae.go.kr/lib/dongnae/",
+      "phone": "051-550-6901",
+      "opened": "2015년 10월 29일",
+      "holdings": "63,681권 (2026년 8월 20일 기준)",
+      "transit": "4호선 명장역 → 도보 약 15분"
+    },
+    "haeundae-humanities": {
+      "bookCode": "13-3",
+      "specialty": "인문",
+      "category": "humanities",
+      "address": "부산광역시 해운대구 반여로 132",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 토 ~18:00 / 일 ~17:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://www.haeundae.go.kr/library/index.do",
+      "phone": "051-749-6580",
+      "opened": "2018년 3월 16일",
+      "holdings": "145,897권 (2026. 8. 31. 기준)",
+      "transit": "인지중학교 정류장 → 도보 약 4분"
+    },
+    "geumjeong-library": {
+      "bookCode": "13-4",
+      "specialty": "어학",
+      "category": "language",
+      "address": "부산광역시 금정구 금정도서관로 33",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 주말 09:00~17:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1020
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://library.geumjeong.go.kr/",
+      "phone": "051-519-5600",
+      "opened": "1996년 12월",
+      "holdings": "138,154권 (26.1.31.기준)",
+      "transit": "1호선 범어사역 2번 출구 → 도보 약 5분"
+    },
+    "busanjin-kids-youth": {
+      "bookCode": "13-5",
+      "specialty": "어린이",
+      "category": "kids",
+      "address": "부산광역시 부산진구 백양순환로110번길 25, 부암3동주민센터 3~5층",
+      "hours": {
+        "label": "화~금 09:00~22:00 (토 ~18:00, 일 ~17:00) / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://www.busanjin.go.kr/library/index.busanjin",
+      "phone": "051-605-5801",
+      "opened": "2016년 1월",
+      "holdings": "121,374권 (2026. 8. 31.기준)",
+      "transit": "부암3동주민센터 정류장 → 도보 약 1분"
+    },
+    "mandeok-library": {
+      "bookCode": "13-6",
+      "specialty": "과학",
+      "category": "science",
+      "address": "부산광역시 북구 은행나무로 26",
+      "hours": {
+        "label": "화~금 09~22시(어린이 ~20시), 토 ~18시, 일 ~17시",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "homepage": "https://www.bsbukgu.go.kr/mdlib/index.bsbukgu",
+      "phone": "051-309-2097",
+      "opened": "2002년",
+      "holdings": "152,179권 (2026.5.31.기준)",
+      "transit": "만덕도서관 정류장 → 도보 약 2분"
+    },
+    "jeonggwan-library": {
+      "bookCode": "13-7",
+      "specialty": "과학",
+      "category": "science",
+      "address": "부산광역시 기장군 정관읍 정관중앙로 100",
+      "hours": {
+        "label": "월~일 09:00~22:00 (주말·공휴일 ~18:00 / 열람실 07~24시)",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "homepage": "https://library.gijang.go.kr/jglib/main.do",
+      "phone": "051-709-3901",
+      "opened": "2015년 8월 4일",
+      "holdings": "226,221권 (2026. 4. 30. 기준)",
+      "transit": "정관읍사무소·기장소방서 정류장 → 도보 약 3분"
+    },
+    "seogu-ami-dream": {
+      "bookCode": "13-8",
+      "specialty": "과학",
+      "category": "science",
+      "address": "부산광역시 서구 까치고개로80번길 10",
+      "hours": {
+        "label": "화~금 09:00~20:00 / 토 ~18:00 / 일 ~17:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1200
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://www.bsseogu.go.kr/amlib/main.do",
+      "phone": "051-290-5720",
+      "opened": "2025년 11월 22일",
+      "holdings": "43,486권(2026. 7. 31.기준)",
+      "transit": "아미까치공영주차장 정류장 → 도보 약 3분"
+    },
+    "yeongdo-library": {
+      "bookCode": "13-9",
+      "specialty": "자연·환경",
+      "category": "nature",
+      "address": "부산광역시 영도구 함지로79번길 6",
+      "hours": {
+        "label": "화~금 09:00~22:00 (토 ~18:00, 일 ~17:00)",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "homepage": "https://www.yeongdo.go.kr/library.web",
+      "phone": "051-419-4821",
+      "opened": "1996년 7월 1일 / 현 건물 2009년 10월 20일",
+      "holdings": "180,132권 (2026.6.30.기준)",
+      "transit": "절영아파트 정류장 → 도보 약 3분"
+    },
+    "donggu-library": {
+      "bookCode": "13-10",
+      "specialty": "여행",
+      "category": "travel",
+      "address": "부산광역시 동구 성북로36번길 54",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 토 ~18:00 / 일 ~17:00 / 월·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월·공휴일",
+      "homepage": "https://www.bsdonggu.go.kr/library/index.donggu",
+      "phone": "051-440-6411",
+      "opened": "1998년 4월",
+      "holdings": "139,501권 (2026. 6. 30.기준)",
+      "transit": "서광교회 정류장 → 도보 약 6분"
+    },
+    "busan-namgu-library": {
+      "bookCode": "13-11",
+      "specialty": "미디어",
+      "category": "media",
+      "address": "부산광역시 남구 수영로267번길 61",
+      "hours": {
+        "label": "화~금 09:00~22:00 (토 ~18:00, 일 ~17:00)",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1020
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "homepage": "https://library.bsnamgu.go.kr/Main.do",
+      "phone": "051-621-8160",
+      "opened": "1997년 7월 1일/2020년 2월 21일(리모델링 재개관)",
+      "holdings": "190,751권 (2026.08.31.기준)",
+      "transit": "대연동제일은행 정류장 → 도보 약 4분"
+    },
+    "halla-library": {
+      "bookCode": "14-1",
+      "specialty": "랜드마크",
+      "category": "landmark",
+      "address": "제주특별자치도 제주시 오남로 221",
+      "hours": {
+        "label": "본관 휴관: 2026.07.01~2027년 10월 예정",
+        "byDay": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "closedDays": "본관 휴관 중 (2026.07.01~2027년 10월 예정)",
+      "homepage": "https://www.jeju.go.kr/lib/lib/halla.htm",
+      "phone": "064-710-8666",
+      "opened": "2008년 11월 13일",
+      "holdings": "283,240권 (2026.07.31·도서)",
+      "transit": "한라도서관 정류장 하차(본관 휴관)"
+    },
+    "tamna-library": {
+      "bookCode": "14-2",
+      "specialty": "인문",
+      "category": "humanities",
+      "address": "제주특별자치도 제주시 정원로 50",
+      "hours": {
+        "label": "화~금 09:00~22:00 / 주말·공휴일 ~18:00 / 월 등 휴관",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          null,
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "월 등",
+      "homepage": "https://www.jeju.go.kr/lib/lib/tamra.htm",
+      "phone": "064-728-1506",
+      "opened": "1989년 6월 30일 (재개관 2025년 9월 24일)",
+      "holdings": "230,238권 (2026.08.31·도서)",
+      "transit": "탐라도서관 정류장 → 도보 약 4분"
+    },
+    "kimyoungsu-library": {
+      "bookCode": "14-3",
+      "specialty": "어린이",
+      "category": "kids",
+      "address": "제주특별자치도 제주시 중앙로8길 18, 제주북초등학교 내",
+      "hours": {
+        "label": "월·수~금 17:00~21:00 / 주말 10:00~18:00 / 화·공휴일 휴관",
+        "byDay": [
+          {
+            "open": 600,
+            "close": 1080
+          },
+          {
+            "open": 1020,
+            "close": 1260
+          },
+          null,
+          {
+            "open": 1020,
+            "close": 1260
+          },
+          {
+            "open": 1020,
+            "close": 1260
+          },
+          {
+            "open": 1020,
+            "close": 1260
+          },
+          {
+            "open": 600,
+            "close": 1080
+          }
+        ]
+      },
+      "closedDays": "화·공휴일",
+      "homepage": "https://www.jejuregen.org/index.php/contents/space/room/youngsu",
+      "phone": "064-717-3358",
+      "opened": "2019년 5월 31일",
+      "holdings": "17,913권 (학교알리미 학교마을도서관 공시 기준)",
+      "transit": "관덕정 정류장 → 도보 약 5분"
+    }
+  }
+}

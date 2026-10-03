@@ -10,6 +10,7 @@ import { isOpenNow } from '@/utils/openingHours';
 import { useNow } from '@/hooks/useNow';
 import { useLayout } from '@/hooks/useLayout';
 import type { Library } from '@/types';
+import { CATEGORY_MAP } from '@/data/categories';
 
 /**
  * 시/군/구는 확인된 곳만 있으므로 있을 때만 붙인다.
@@ -129,9 +130,12 @@ export function LibraryCard({
         <Text style={styles.region} numberOfLines={1}>
           {regionLabel(library, lang)}
         </Text>
-        <Text style={styles.services} numberOfLines={1}>
-          {library.specialty}
-        </Text>
+        {/* 특화 설명이 배지의 주제 이름과 똑같으면(책 주제로 바꾼 곳) 같은 말을 두 번 쓰지 않는다 */}
+        {library.specialty !== CATEGORY_MAP[mainCategory]?.name ? (
+          <Text style={styles.services} numberOfLines={1}>
+            {library.specialty}
+          </Text>
+        ) : null}
       </View>
 
       {onToggleFavorite ? (

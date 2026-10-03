@@ -681,15 +681,15 @@
     },
     "gyeongnam-library": {
       "source": "kakao",
-      "confidence": "medium",
-      "matchedName": "상남도서관",
-      "address": "경남 창원시 성산구 원이대로 810",
-      "phone": "055-225-7411",
+      "confidence": "high",
+      "matchedName": "경남대표도서관",
+      "address": "경남 창원시 의창구 사림로45번길 59",
+      "phone": "055-254-4811",
       "coords": {
-        "lat": 35.2141080216863,
-        "lng": 128.695262235356
+        "lat": 35.2495276473926,
+        "lng": 128.681782898725
       },
-      "placeUrl": "http://place.map.kakao.com/12335192"
+      "note": "예전에 상남도서관(성산구 원이대로 810)으로 잘못 맞춰졌던 것을 가이드북 주소로 바로잡음 (2026-10-03)"
     },
     "gyeongju-city": {
       "source": "kakao",
@@ -1445,6 +1445,18 @@
         "lng": 129.55027628584438
       },
       "placeUrl": "http://place.map.kakao.com/1960419035"
+    },
+    "ulleung-library": {
+      "source": "kakao",
+      "confidence": "high",
+      "matchedName": "경상북도교육청 울릉도서관",
+      "address": "경북 울릉군 울릉읍 봉래길 128-10",
+      "phone": "054-791-9043",
+      "coords": {
+        "lat": 37.4960260776179,
+        "lng": 130.903989651771
+      },
+      "note": "가이드북 주소를 카카오 주소 검색으로 찾음 (2026-10-03)"
     }
   }
 }

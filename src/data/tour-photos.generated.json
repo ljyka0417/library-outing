@@ -1,9 +1,107 @@
 {
-  "_readme": "한국관광공사 TourAPI 로 빌드 타임에 수집한 \"사진 있는 주변 장소\" 입니다. 직접 고치지 마세요. 다시 모으려면 npm run collect-tour.",
-  "_generatedAt": "2026-09-11T12:39:43.432Z",
+  "_readme": "한국관광공사 TourAPI 로 빌드 타임에 수집한 \"사진 있는 주변 장소\" 입니다. 직접 고치지 마세요. 다시 모으려면 npm run collect-tour. 이번에 못 받은 곳은 지난 결과를 그대로 둡니다.",
+  "_generatedAt": "2026-10-03T08:30:11.168Z",
   "_radiusMeters": 1500,
   "_source": "한국관광공사 (공공누리 제1·3유형 사진만)",
   "byLibrary": {
+    "ulleung-library": [
+      {
+        "id": "tour-1506145",
+        "libraryId": "ulleung-library",
+        "type": "culture",
+        "name": "저동항",
+        "subCategory": "관광지",
+        "address": "경상북도 울릉군 울릉읍 저동리",
+        "coords": {
+          "lat": 37.4962526269,
+          "lng": 130.9100397491
+        },
+        "distanceMeters": 538,
+        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/97/3575297_image2_1.jpg",
+        "credit": "한국관광공사",
+        "copyright": "Type1"
+      },
+      {
+        "id": "tour-2832105",
+        "libraryId": "ulleung-library",
+        "type": "restaurant",
+        "name": "천금수산",
+        "subCategory": "음식점",
+        "address": "경상북도 울릉군 봉래길 6",
+        "coords": {
+          "lat": 37.494172302,
+          "lng": 130.9096592959
+        },
+        "distanceMeters": 544,
+        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/96/2832096_image2_1.jpg",
+        "credit": "한국관광공사",
+        "copyright": "Type3"
+      },
+      {
+        "id": "tour-2831646",
+        "libraryId": "ulleung-library",
+        "type": "restaurant",
+        "name": "명가식당",
+        "subCategory": "음식점",
+        "address": "경상북도 울릉군 울릉순환로 212-21",
+        "coords": {
+          "lat": 37.4929252241,
+          "lng": 130.9097371075
+        },
+        "distanceMeters": 616,
+        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/37/2831637_image2_1.jpg",
+        "credit": "한국관광공사",
+        "copyright": "Type3"
+      },
+      {
+        "id": "tour-2831686",
+        "libraryId": "ulleung-library",
+        "type": "restaurant",
+        "name": "정애분식",
+        "subCategory": "음식점",
+        "address": "경상북도 울릉군 울릉순환로 212-10",
+        "coords": {
+          "lat": 37.4927696897,
+          "lng": 130.9099148756
+        },
+        "distanceMeters": 639,
+        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/78/2831678_image2_1.jpg",
+        "credit": "한국관광공사",
+        "copyright": "Type3"
+      },
+      {
+        "id": "tour-2831621",
+        "libraryId": "ulleung-library",
+        "type": "cafe",
+        "name": "글림",
+        "subCategory": "카페",
+        "address": "경상북도 울릉군 울릉순환로 213-1",
+        "coords": {
+          "lat": 37.4922169705,
+          "lng": 130.9096926904
+        },
+        "distanceMeters": 660,
+        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/91/2831591_image2_1.jpg",
+        "credit": "한국관광공사",
+        "copyright": "Type3"
+      },
+      {
+        "id": "tour-2614676",
+        "libraryId": "ulleung-library",
+        "type": "culture",
+        "name": "행남 저동 해안산책로 (울릉도, 독도 국가지질공원)",
+        "subCategory": "관광지",
+        "address": "경상북도 울릉군 울릉읍 도동리",
+        "coords": {
+          "lat": 37.4897506666,
+          "lng": 130.9135396547
+        },
+        "distanceMeters": 1098,
+        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/23/3576423_image2_1.jpg",
+        "credit": "한국관광공사",
+        "copyright": "Type1"
+      }
+    ],
     "seoul-library": [
       {
         "id": "tour-1605981",
@@ -4104,68 +4202,100 @@
     ],
     "gyeongnam-library": [
       {
-        "id": "tour-126171",
+        "id": "tour-2370290",
         "libraryId": "gyeongnam-library",
         "type": "culture",
-        "name": "불곡사(창원)",
-        "subCategory": "관광지",
-        "address": "경상남도 창원시 성산구 대암로 55 (대방동)",
+        "name": "창원역사민속관",
+        "subCategory": "문화시설",
+        "address": "경상남도 창원시 의창구 창이대로397번길 25 (사림동)",
         "coords": {
-          "lat": 35.2154262755,
-          "lng": 128.7018074229
+          "lat": 35.2450586828,
+          "lng": 128.6810695433
         },
-        "distanceMeters": 600,
-        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/29/3070229_image2_1.JPG",
+        "distanceMeters": 500,
+        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/99/3050199_image2_1.JPG",
         "credit": "한국관광공사",
         "copyright": "Type3"
       },
       {
-        "id": "tour-2783785",
+        "id": "tour-2851529",
         "libraryId": "gyeongnam-library",
-        "type": "culture",
-        "name": "기업사랑공원",
-        "subCategory": "관광지",
-        "address": "경상남도 창원시 성산구 가음정로 38",
+        "type": "cafe",
+        "name": "보타미",
+        "subCategory": "카페",
+        "address": "경상남도 창원시 성산구 외동반림로 270-1",
         "coords": {
-          "lat": 35.2088767556,
-          "lng": 128.6877838243
+          "lat": 35.2406647335,
+          "lng": 128.6811807634
         },
-        "distanceMeters": 883,
-        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/20/3565820_image2_1.jpg",
+        "distanceMeters": 985,
+        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/08/2851508_image2_1.JPG",
         "credit": "한국관광공사",
-        "copyright": "Type1"
+        "copyright": "Type3"
       },
       {
-        "id": "tour-2842164",
+        "id": "tour-2851493",
+        "libraryId": "gyeongnam-library",
+        "type": "cafe",
+        "name": "오프트",
+        "subCategory": "카페",
+        "address": "경상남도 창원시 성산구 외동반림로248번길 7-1",
+        "coords": {
+          "lat": 35.2388510351,
+          "lng": 128.6804530982
+        },
+        "distanceMeters": 1191,
+        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/79/2851479_image2_1.JPG",
+        "credit": "한국관광공사",
+        "copyright": "Type3"
+      },
+      {
+        "id": "tour-2838551",
+        "libraryId": "gyeongnam-library",
+        "type": "cafe",
+        "name": "1997영국집",
+        "subCategory": "카페",
+        "address": "경상남도 창원시 성산구 외동반림로248번길 25",
+        "coords": {
+          "lat": 35.2379372776,
+          "lng": 128.6820418731
+        },
+        "distanceMeters": 1287,
+        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/45/2838545_image2_1.JPG",
+        "credit": "한국관광공사",
+        "copyright": "Type3"
+      },
+      {
+        "id": "tour-2838789",
         "libraryId": "gyeongnam-library",
         "type": "restaurant",
-        "name": "신월낙지한마리수제비 창원본점",
+        "name": "토도스",
         "subCategory": "음식점",
-        "address": "경상남도 창원시 성산구 동산로 207",
+        "address": "경상남도 창원시 성산구 용호로 116 부일빌딩",
         "coords": {
-          "lat": 35.2256889119,
-          "lng": 128.6962492968
+          "lat": 35.2380595189,
+          "lng": 128.6838417127
         },
-        "distanceMeters": 1288,
-        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/43/2842143_image2_1.JPG",
+        "distanceMeters": 1286,
+        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/79/2838779_image2_1.JPG",
         "credit": "한국관광공사",
         "copyright": "Type3"
       },
       {
-        "id": "tour-2783911",
+        "id": "tour-2838380",
         "libraryId": "gyeongnam-library",
-        "type": "culture",
-        "name": "남산녹지공원",
-        "subCategory": "관광지",
-        "address": "경상남도 창원시 성산구 가음정로 170",
+        "type": "restaurant",
+        "name": "투핸즈",
+        "subCategory": "음식점",
+        "address": "경상남도 창원시 성산구 창이대로460번길 16-1 (용호동)",
         "coords": {
-          "lat": 35.2023082687,
-          "lng": 128.6999051661
+          "lat": 35.237978976,
+          "lng": 128.6840389196
         },
-        "distanceMeters": 1373,
-        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/27/3565627_image2_1.jpg",
+        "distanceMeters": 1297,
+        "imageUrl": "https://tong.visitkorea.or.kr/cms/resource/67/2838367_image2_1.JPG",
         "credit": "한국관광공사",
-        "copyright": "Type1"
+        "copyright": "Type3"
       }
     ],
     "gyeongju-city": [

@@ -6662,6 +6662,60 @@
           "coverImageUrl": "https://image.aladin.co.kr/product/25813/3/cover/k172736336_1.jpg"
         }
       ]
+    },
+    "ulleung-library": {
+      "scope": "region",
+      "region": "경북",
+      "books": [
+        {
+          "title": "나미야 잡화점의 기적",
+          "author": "히가시노 게이고",
+          "isbn": "9788972756194",
+          "coverImageUrl": "https://image.aladin.co.kr/product/15848/6/cover/k622533431_1.jpg"
+        },
+        {
+          "title": "수박 수영장",
+          "author": "안녕달",
+          "isbn": "9788936446819",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/093/451/09345174.jpg?type=m1&udate=20180718"
+        },
+        {
+          "title": "채식주의자",
+          "author": "한강",
+          "isbn": "9788936433598",
+          "coverImageUrl": "https://bookthumb-phinf.pstatic.net/cover/033/094/03309417.jpg?type=m1&udate=20180609"
+        },
+        {
+          "title": "푸루와 마법 가루",
+          "author": "배현주",
+          "isbn": "9788993242300",
+          "coverImageUrl": "https://image.aladin.co.kr/product/5006/34/cover150/1185564233_1.jpg"
+        },
+        {
+          "title": "불편한 편의점",
+          "author": "김호연",
+          "isbn": "9791161571188",
+          "coverImageUrl": "https://image.aladin.co.kr/product/26942/84/cover/k582730818_1.jpg"
+        },
+        {
+          "title": "소년이 온다",
+          "author": "한강",
+          "isbn": "9788936434120",
+          "coverImageUrl": "https://image.aladin.co.kr/product/4086/97/cover/8936434128_2.jpg"
+        },
+        {
+          "title": "흔한남매 2권",
+          "author": "원작: 흔한남매",
+          "isbn": "9791164132454",
+          "coverImageUrl": "https://image.aladin.co.kr/product/20398/4/cover/k002635150_1.jpg"
+        },
+        {
+          "title": "흔한남매 1권",
+          "author": "원작: 흔한남매",
+          "isbn": "9791164131686",
+          "coverImageUrl": "https://image.aladin.co.kr/product/19404/61/cover/k712635217_1.jpg"
+        }
+      ]
     }
   }
 }

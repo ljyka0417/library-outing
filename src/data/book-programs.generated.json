@@ -1,6 +1,6 @@
 {
   "source": "가이드북 『오늘 도서관 갈래?』 (2026년 9월 9일 초판)",
-  "generatedAt": "2026-10-03T06:42:50.625Z",
+  "generatedAt": "2026-10-03T08:28:14.087Z",
   "byId": {
     "seoul-library": {
       "programs": [
@@ -701,6 +701,14 @@
         "원데이 클래스"
       ],
       "bookCode": "10-10"
+    },
+    "ulleung-library": {
+      "programs": [
+        "모두의 필사",
+        "자개 모빌 만들기",
+        "트레이 만들기"
+      ],
+      "bookCode": "10-11"
     },
     "daegu-library": {
       "programs": [

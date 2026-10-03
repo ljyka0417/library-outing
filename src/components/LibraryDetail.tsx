@@ -239,10 +239,24 @@ export const LibraryDetail = memo(function LibraryDetail({
           </>
         ) : null}
 
-        {library.closedDays ? (
+        {/* 책 운영시간 문구에 휴관일이 이미 들어 있으면 같은 말을 한 줄 더 쓰지 않는다 */}
+        {library.closedDays && !library.hours?.label.includes(library.closedDays) ? (
           <>
             <View style={styles.hr} />
             <InfoRow icon="close-circle-outline" label={t('lib.closedDays')} value={library.closedDays} />
+          </>
+        ) : null}
+
+        {/* 아래 다섯 줄은 가이드북 기본 정보 표와 같은 차례다 (홈페이지 · 연락처 · 개관일 · 장서 수 · 교통) */}
+        {library.homepage ? (
+          <>
+            <View style={styles.hr} />
+            <InfoRow
+              icon="globe-outline"
+              label={t('lib.homepage')}
+              value={library.homepage.replace(/^https?:\/\//, '').replace(/\/$/, '')}
+              onPress={() => void openWeb(library.homepage!)}
+            />
           </>
         ) : null}
 
@@ -258,15 +272,24 @@ export const LibraryDetail = memo(function LibraryDetail({
           </>
         ) : null}
 
-        {expanded && library.homepage ? (
+        {library.opened ? (
           <>
             <View style={styles.hr} />
-            <InfoRow
-              icon="globe-outline"
-              label={t('lib.homepage')}
-              value={library.homepage}
-              onPress={() => void openWeb(library.homepage!)}
-            />
+            <InfoRow icon="calendar-outline" label={t('lib.opened')} value={library.opened} />
+          </>
+        ) : null}
+
+        {library.holdings ? (
+          <>
+            <View style={styles.hr} />
+            <InfoRow icon="book-outline" label={t('lib.holdings')} value={library.holdings} />
+          </>
+        ) : null}
+
+        {library.transit ? (
+          <>
+            <View style={styles.hr} />
+            <InfoRow icon="bus-outline" label={t('lib.transit')} value={library.transit} />
           </>
         ) : null}
       </View>
@@ -277,7 +300,7 @@ export const LibraryDetail = memo(function LibraryDetail({
         </Text>
       ) : null}
 
-      {library.description || library.homepage ? (
+      {library.description ? (
         <Pressable onPress={() => setExpanded(!expanded)} style={styles.moreButton}>
           <Text style={styles.moreText}>{expanded ? t('lib.less') : t('lib.more')}</Text>
           <Ionicons name={expanded ? 'chevron-up' : 'chevron-down'} size={15} color={colors.primary} />

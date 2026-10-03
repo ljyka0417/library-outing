@@ -45,5 +45,5 @@ export const PROGRAM_LOOK: Record<ProgramKind, { pose: MascotPose; palette: stri
   kids: { pose: 'read', palette: 'kids' },
   talk: { pose: 'side', palette: 'humanities' },
   reading: { pose: 'reading', palette: 'landmark' },
-  other: { pose: 'books', palette: 'history' },
+  other: { pose: 'books', palette: 'education' },
 };

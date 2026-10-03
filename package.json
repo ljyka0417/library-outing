@@ -30,7 +30,8 @@
     "test-hours": "node scripts/test-hours.mjs",
     "chat-ideas": "node scripts/chat-ideas.mjs",
     "collect-hours": "node scripts/collect-standard-hours.mjs",
-    "import-book-programs": "node scripts/import-book-programs.mjs"
+    "import-book-programs": "node scripts/import-book-programs.mjs",
+    "import-book-info": "node scripts/import-book-info.mjs"
   },
   "dependencies": {
     "@expo/metro-runtime": "~57.0.15",

@@ -3,6 +3,7 @@ import geocodedJson from './libraries.geocoded.json';
 import enrichedJson from './libraries.enriched.json';
 import standardJson from './libraries.standard.json';
 import manualJson from './libraries.manual.json';
+import bookJson from './libraries.book.json';
 
 /**
  * 졸업작품 선정 도서관 목록.
@@ -68,19 +69,18 @@ const APPROX_COORDS: Record<string, Coordinates> = {
  *   「만화」를 눌렀는데 어린이 도서관이 섞여 나왔다. 고른 주제 하나만
  *   보고 싶은 사람에게는 빠뜨린 목록으로 보인다. 그래서 하나로 줄였다.
  *
- *   둘 다 해당하는 곳은 이렇게 정한다:
- *     1. 이름에 주제어가 있으면 그것을 따른다. 사람들이 읽는 건 이름이다.
- *        (부산진구어린이청소년도서관은 특화가 영화지만 어린이로 둔다)
- *     2. 아니면 specialty 의 첫 낱말을 따른다.
- *   두 번째 성격은 specialty 문자열에 그대로 남아 화면에 나온다.
- *   예: 강릉모루도서관은 주제가 음악, 특화 표기는 '음악·예술'.
+ *   **주제는 가이드북 『오늘 도서관 갈래?』의 특화 분류를 그대로 따른다.**
+ *   책의 도서관 쪽마다 이름 위에 찍힌 특화(랜드마크·인문·어린이 …)가 곧 categories 다.
+ *   책을 들고 앱을 연 사람에게 같은 도서관이 다른 주제로 보이면 안 된다.
+ *   specialty 는 그 주제보다 구체적인 설명이다. 앱이 원래 갖고 있던 설명이
+ *   책 주제와 어긋나는 곳(춘천시립도서관: 음식 → 책은 어린이)은 책 주제 이름으로 바꿨다.
  */
 const SEEDS: Seed[] = [
   /* ── 서울 ──────────────────────────────────────────────── */
   { id: 'seoul-library', name: '서울도서관', sido: '서울', specialty: '서울 랜드마크', categories: ['landmark'], landmark: true },
   { id: 'national-library', name: '국립중앙도서관', sido: '서울', specialty: '국가대표 도서관', categories: ['landmark'], landmark: true },
   { id: 'assembly-library', name: '국회도서관', sido: '서울', specialty: '법률', categories: ['law'] },
-  { id: 'seoul-botanic-plant', name: '서울식물원 식물전문도서관', sido: '서울', specialty: '식물·자연', categories: ['nature'] },
+  { id: 'seoul-botanic-plant', name: '식물전문도서관', sido: '서울', specialty: '식물·자연', categories: ['nature'] },
   { id: 'nongshim-food', name: '농심식문화전문도서관', sido: '서울', specialty: '음식·식문화', categories: ['food'] },
   { id: 'urisori-library', name: '우리소리도서관', sido: '서울', specialty: '국악·우리 소리', categories: ['music'] },
   { id: 'national-children-library', name: '국립어린이청소년도서관', sido: '서울', specialty: '어린이·청소년', categories: ['kids'] },
@@ -88,9 +88,6 @@ const SEEDS: Seed[] = [
   { id: 'cheongun-lit', name: '청운문학도서관', sido: '서울', specialty: '한옥·문학', categories: ['humanities'] },
   { id: 'songpa-kids-english', name: '송파어린이영어도서관', sido: '서울', specialty: '어린이 영어', categories: ['language'] },
   { id: 'dongjak-english', name: '동작영어마루도서관', sido: '서울', specialty: '영어·어학', categories: ['language'] },
-  // 특화 분류에 '환경' 은 따로 두지 않았다. 한 곳만 담기는 분류는 필터로 쓸모가
-  // 없어서다(이 파일 위 설계 원칙). 가장 가까운 '자연' 에 넣고, 환경이라는 말은
-  // specialty 에 그대로 남겨 카드와 상세에 보이게 한다.
   { id: 'gangseo-gayang', name: '강서도서관 가양관', sido: '서울', sigungu: '강서구', specialty: '환경·생태', categories: ['nature'] },
 
   /* ── 경기 ──────────────────────────────────────────────── */
@@ -122,18 +119,18 @@ const SEEDS: Seed[] = [
   /* ── 강원 ──────────────────────────────────────────────── */
   { id: 'wonju-central', name: '원주시립중앙도서관', sido: '강원', specialty: '강원 랜드마크', categories: ['landmark'], landmark: true },
   { id: 'jungcheon-philosophy', name: '중천철학도서관', sido: '강원', specialty: '철학', categories: ['humanities'] },
-  { id: 'gangneung-moru', name: '강릉모루도서관', sido: '강원', specialty: '음악·예술', categories: ['music'] },
-  { id: 'chuncheon-city', name: '춘천시립도서관', sido: '강원', specialty: '음식', categories: ['food'] },
-  { id: 'sokcho-kids-english', name: '속초 어린이영어도서관', sido: '강원', specialty: '어린이 영어', categories: ['kids'] },
+  { id: 'gangneung-moru', name: '강릉모루도서관', sido: '강원', specialty: '예술', categories: ['art'] },
+  { id: 'chuncheon-city', name: '춘천시립도서관', sido: '강원', specialty: '어린이', categories: ['kids'] },
+  { id: 'sokcho-kids-english', name: '속초 어린이영어도서관', sido: '강원', specialty: '어학', categories: ['language'] },
   { id: 'inje-miracle', name: '인제 기적의도서관', sido: '강원', specialty: '어린이', categories: ['kids'] },
   { id: 'wondeok-library', name: '원덕도서관', sido: '강원', specialty: '자연', categories: ['nature'] },
-  { id: 'mangsang-beach', name: '망상해뜰책뜰 바닷가작은도서관', sido: '강원', specialty: '바닷가·여행', categories: ['travel'] },
+  { id: 'mangsang-beach', name: '해뜰책뜰 바닷가작은도서관', sido: '강원', specialty: '바닷가·여행', categories: ['travel'] },
 
   /* ── 대전 ──────────────────────────────────────────────── */
   { id: 'hanbat-library', name: '한밭도서관', sido: '대전', specialty: '대전 랜드마크', categories: ['landmark'], landmark: true },
   { id: 'dongdaejeon-library', name: '동대전도서관', sido: '대전', specialty: '음악', categories: ['music'] },
-  { id: 'kids-english-village', name: '어린이영어마을도서관', sido: '대전', specialty: '어린이 영어', categories: ['kids'] },
-  { id: 'munhak-village', name: '문학마을도서관', sido: '대전', specialty: '문학', categories: ['humanities'] },
+  { id: 'kids-english-village', name: '어린이영어마을도서관', sido: '대전', specialty: '어학', categories: ['language'] },
+  { id: 'munhak-village', name: '문학마을도서관', sido: '대전', specialty: '자연·환경', categories: ['nature'] },
   { id: 'byeoldongbyeol-science', name: '별똥별과학도서관', sido: '대전', specialty: '과학·우주', categories: ['science'] },
 
   /* ── 충청 ──────────────────────────────────────────────── */
@@ -143,10 +140,10 @@ const SEEDS: Seed[] = [
   { id: 'cheongju-ochang-lake', name: '청주오창호수도서관', sido: '충청', specialty: '예술·디지털', categories: ['art'] },
   { id: 'eumbong-eoulsaem', name: '음봉어울샘도서관', sido: '충청', specialty: '미래과학', categories: ['science'] },
   { id: 'kkumsaem-kids', name: '꿈샘어린이청소년도서관', sido: '충청', specialty: '어린이·그림책', categories: ['kids'] },
-  { id: 'chungju-city', name: '충주시립도서관', sido: '충청', specialty: '역사', categories: ['history'] },
+  { id: 'chungju-city', name: '충주시립도서관', sido: '충청', specialty: '인문', categories: ['humanities'] },
   { id: 'cheonan-jiksan', name: '천안 직산도서관', sido: '충청', specialty: '환경', categories: ['nature'] },
-  { id: 'dunpo-library', name: '둔포도서관', sido: '충청', specialty: '경제', categories: ['humanities'] },
-  { id: 'baebang-wolcheon', name: '배방월천도서관', sido: '충청', specialty: '교육', categories: ['humanities'] },
+  { id: 'dunpo-library', name: '둔포도서관', sido: '충청', specialty: '어린이', categories: ['kids'] },
+  { id: 'baebang-wolcheon', name: '배방월천도서관', sido: '충청', specialty: '교육', categories: ['education'] },
 
   /* ── 세종 ──────────────────────────────────────────────── */
   { id: 'sejong-city-library', name: '세종시립도서관', sido: '세종', specialty: '세종 랜드마크', categories: ['landmark'], landmark: true },
@@ -154,52 +151,51 @@ const SEEDS: Seed[] = [
   /* ── 경상 ──────────────────────────────────────────────── */
   { id: 'gyeongbuk-library', name: '경북도서관', sido: '경상', specialty: '경북 랜드마크', categories: ['landmark'], landmark: true },
   { id: 'gyeongnam-library', name: '경남대표도서관', sido: '경상', specialty: '경남 랜드마크', categories: ['landmark'], landmark: true },
-  { id: 'gyeongju-city', name: '경주시립도서관', sido: '경상', specialty: '역사', categories: ['history'] },
+  { id: 'gyeongju-city', name: '경주시립도서관', sido: '경상', specialty: '인문', categories: ['humanities'] },
   { id: 'poeun-heunghae', name: '포은흥해도서관', sido: '경상', specialty: '음악', categories: ['music'] },
-  { id: 'sangju-dodream', name: '상주 두드림 시립도서관', sido: '경상', specialty: '만화·웹툰', categories: ['comics'] },
+  { id: 'sangju-dodream', name: '상주 두드림 시립도서관', sido: '경상', specialty: '미디어', categories: ['media'] },
   { id: 'hadong-library', name: '하동도서관', sido: '경상', specialty: '녹차', categories: ['food'] },
   { id: 'guryongpo-library', name: '구룡포도서관', sido: '경상', specialty: '여행·바다', categories: ['travel'] },
   { id: 'kkumirang-library', name: '꿈이랑도서관', sido: '경상', specialty: '미각·음식', categories: ['food'] },
-  { id: 'haman-library', name: '함안도서관', sido: '경상', specialty: '아라가야 정신·지역문화', categories: ['history'] },
-  { id: 'sancheong-jirisan', name: '산청지리산도서관', sido: '경상', specialty: '자연', categories: ['nature'] },
+  { id: 'haman-library', name: '함안도서관', sido: '경상', specialty: '인문', categories: ['humanities'] },
+  { id: 'sancheong-jirisan', name: '산청지리산도서관', sido: '경상', specialty: '인문', categories: ['humanities'] },
+  { id: 'ulleung-library', name: '울릉도서관', sido: '경상', specialty: '인문', categories: ['humanities'] },
 
   /* ── 울산 ──────────────────────────────────────────────── */
   { id: 'ulsan-library', name: '울산도서관', sido: '울산', specialty: '울산 대표', categories: ['landmark'], landmark: true },
   { id: 'ulju-cheonsang', name: '울주천상도서관', sido: '울산', specialty: '미래교육', categories: ['science'] },
-  { id: 'dosan-library', name: '도산도서관', sido: '울산', specialty: '역사', categories: ['history'] },
+  { id: 'dosan-library', name: '도산도서관', sido: '울산', specialty: '랜드마크', categories: ['landmark'], landmark: true },
   { id: 'sinbok-library', name: '신복도서관', sido: '울산', specialty: '여행', categories: ['travel'] },
   { id: 'okhyeon-kids', name: '옥현어린이도서관', sido: '울산', specialty: '어린이 영어', categories: ['kids'] },
   { id: 'wolbong-library', name: '월봉도서관', sido: '울산', specialty: '미술', categories: ['art'] },
-  { id: 'cheolsae-village', name: '철새마을도서관', sido: '울산', specialty: '동화·동화작가 양성', categories: ['kids'] },
-  { id: 'sanjeon-comics', name: '산전만화도서관', sido: '울산', specialty: '만화·웹툰', categories: ['comics'] },
-  { id: 'ulsan-jonggatjip', name: '울산종갓집도서관', sido: '울산', specialty: '음악·LP', categories: ['music'] },
+  { id: 'cheolsae-village', name: '철새마을도서관', sido: '울산', specialty: '자연·환경', categories: ['nature'] },
+  { id: 'sanjeon-comics', name: '산전만화도서관', sido: '울산', specialty: '예술', categories: ['art'] },
+  { id: 'ulsan-jonggatjip', name: '울산종갓집도서관', sido: '울산', specialty: '자연·환경', categories: ['nature'] },
   { id: 'ulsan-kids-youth', name: '울산어린이청소년도서관', sido: '울산', specialty: '어린이·청소년·AI', categories: ['kids'] },
   { id: 'gangdong-sea', name: '강동바다도서관', sido: '울산', specialty: '바다·힐링', categories: ['travel'] },
 
   /* ── 부산 ──────────────────────────────────────────────── */
   { id: 'busan-library', name: '부산도서관', sido: '부산', specialty: '부산 대표', categories: ['landmark'], landmark: true },
   { id: 'donggu-library', name: '동구도서관', sido: '부산', sigungu: '동구', specialty: '레저스포츠·관광', categories: ['travel'] },
-  { id: 'yeongdo-library', name: '영도도서관', sido: '부산', sigungu: '영도구', specialty: '해양·수산', categories: ['travel'] },
-  // 특화는 영화지만 이름이 「어린이청소년」이다. 어린이를 눌렀는데 이름에
-  // 어린이가 든 도서관이 안 나오면 빠뜨린 것처럼 보인다. 이름을 따른다.
-  { id: 'busanjin-kids-youth', name: '부산진구어린이청소년도서관', sido: '부산', sigungu: '부산진구', specialty: '영화', categories: ['kids'] },
-  { id: 'dongnae-eupseong', name: '동래읍성도서관', sido: '부산', sigungu: '동래구', specialty: '동래 역사', categories: ['history'] },
-  { id: 'busan-namgu-library', name: '남구도서관', sido: '부산', sigungu: '남구', specialty: '청소년', categories: ['kids'] },
+  { id: 'yeongdo-library', name: '영도도서관', sido: '부산', sigungu: '영도구', specialty: '자연·환경', categories: ['nature'] },
+  { id: 'busanjin-kids-youth', name: '부산진어린이청소년도서관', sido: '부산', sigungu: '부산진구', specialty: '영화', categories: ['kids'] },
+  { id: 'dongnae-eupseong', name: '동래읍성도서관', sido: '부산', sigungu: '동래구', specialty: '인문', categories: ['humanities'] },
+  { id: 'busan-namgu-library', name: '남구도서관', sido: '부산', sigungu: '남구', specialty: '미디어', categories: ['media'] },
   { id: 'mandeok-library', name: '만덕도서관', sido: '부산', specialty: '정보화·AI', categories: ['science'] },
   { id: 'haeundae-humanities', name: '해운대인문학도서관', sido: '부산', sigungu: '해운대구', specialty: '인문학', categories: ['humanities'] },
-  { id: 'geumjeong-library', name: '금정도서관', sido: '부산', sigungu: '금정구', specialty: '다문화', categories: ['humanities'] },
+  { id: 'geumjeong-library', name: '금정도서관', sido: '부산', sigungu: '금정구', specialty: '어학', categories: ['language'] },
   { id: 'jeonggwan-library', name: '정관도서관', sido: '부산', specialty: '에너지', categories: ['science'] },
   { id: 'seogu-ami-dream', name: '서구아미드림도서관', sido: '부산', sigungu: '서구', specialty: '의학', categories: ['science'] },
 
   /* ── 대구 ──────────────────────────────────────────────── */
   { id: 'daegu-library', name: '대구도서관', sido: '대구', specialty: '대구 대표', categories: ['landmark'], landmark: true },
   { id: 'dalseong-gunlib', name: '달성군립도서관', sido: '대구', sigungu: '달성군', specialty: '다양성·다문화', categories: ['humanities'] },
-  { id: 'suseongmot-picturebook', name: '수성못그림책도서관', sido: '대구', sigungu: '수성구', specialty: '그림책', categories: ['kids'] },
+  { id: 'suseongmot-picturebook', name: '수성못그림책도서관', sido: '대구', sigungu: '수성구', specialty: '예술', categories: ['art'] },
   { id: 'daegu-seogu-english', name: '서구영어도서관', sido: '대구', sigungu: '서구', specialty: '영어', categories: ['language'] },
-  { id: 'daegu-seogu-kids-english', name: '서구어린이영어도서관', sido: '대구', sigungu: '서구', specialty: '어린이 영어', categories: ['kids'] },
+  { id: 'daegu-seogu-kids-english', name: '서구어린이영어도서관', sido: '대구', sigungu: '서구', specialty: '어학', categories: ['language'] },
   { id: 'dalseong-kids-forest', name: '달성어린이숲도서관', sido: '대구', sigungu: '달성군', specialty: '어린이·숲', categories: ['kids'] },
-  { id: 'dalseo-family', name: '달서가족문화도서관', sido: '대구', sigungu: '달서구', specialty: '가족문화', categories: ['humanities'] },
-  { id: 'gukchae-library', name: '국채보상운동기념도서관', sido: '대구', specialty: '국채보상운동·역사', categories: ['history'] },
+  { id: 'dalseo-family', name: '달서가족문화도서관', sido: '대구', sigungu: '달서구', specialty: '어린이', categories: ['kids'] },
+  { id: 'gukchae-library', name: '국채보상운동기념도서관', sido: '대구', specialty: '인문', categories: ['humanities'] },
   { id: 'feb28-library', name: '2·28민주운동기념회관 도서관', sido: '대구', specialty: '민주주의·2·28민주운동', categories: ['humanities'] },
   { id: 'dowon-library', name: '도원도서관', sido: '대구', specialty: '테마형 특성화', categories: ['humanities'] },
   { id: 'wagle-kids', name: '와글와글아이세상 어린이도서관', sido: '대구', specialty: '영유아·어린이', categories: ['kids'] },
@@ -211,40 +207,43 @@ const SEEDS: Seed[] = [
 
   /* ── 전라 ──────────────────────────────────────────────── */
   { id: 'jeonbuk-provincial', name: '전북특별자치도청도서관', sido: '전라', specialty: '전북 랜드마크', categories: ['landmark'], landmark: true },
-  { id: 'hanok-village-library', name: '한옥마을도서관', sido: '전라', specialty: '한옥', categories: ['history'] },
-  { id: 'yeonhwajeong-library', name: '연화정도서관', sido: '전라', specialty: '역사', categories: ['history'] },
+  { id: 'hanok-village-library', name: '한옥마을도서관', sido: '전라', specialty: '인문', categories: ['humanities'] },
+  { id: 'yeonhwajeong-library', name: '연화정도서관', sido: '전라', specialty: '예술', categories: ['art'] },
   { id: 'gochang-hwangyunseok', name: '고창황윤석도서관', sido: '전라', specialty: '문예원 픽', categories: ['humanities'] },
-  { id: 'dongmun-usedbook', name: '동문헌책도서관', sido: '전라', specialty: '헌책·기록문화', categories: ['humanities'] },
+  { id: 'dongmun-usedbook', name: '동문헌책도서관', sido: '전라', specialty: '미디어', categories: ['media'] },
   { id: 'dunsan-english', name: '둔산영어도서관', sido: '전라', specialty: '영어', categories: ['language'] },
-  { id: 'galdaesup-small', name: '갈대숲 작은도서관', sido: '전라', specialty: '자연', categories: ['nature'] },
-  { id: 'muju-manna-small', name: '무주만나작은도서관', sido: '전라', specialty: '농촌', categories: ['nature'] },
-  { id: 'jeonnam-library', name: '전남도서관', sido: '전라', specialty: '전남 랜드마크', categories: ['landmark'], landmark: true },
+  { id: 'galdaesup-small', name: '갈대숲 작은도서관', sido: '전라', specialty: '예술', categories: ['art'] },
+  { id: 'muju-manna-small', name: '무주만나작은도서관', sido: '전라', specialty: '어린이', categories: ['kids'] },
+  { id: 'jeonnam-library', name: '전남도서관', sido: '전라', specialty: '미디어', categories: ['media'] },
   { id: 'jorye-lake', name: '조례호수도서관', sido: '전라', specialty: '자연', categories: ['nature'] },
-  { id: 'jindo-cheolma', name: '진도철마도서관', sido: '전라', specialty: '역사', categories: ['history'] },
+  { id: 'jindo-cheolma', name: '진도철마도서관', sido: '전라', specialty: '인문', categories: ['humanities'] },
 
   /* ── 광주 ──────────────────────────────────────────────── */
   { id: 'mudeung-library', name: '무등도서관', sido: '광주', specialty: '광주 대표', categories: ['landmark'], landmark: true },
-  { id: 'iyagikkot-library', name: '이야기꽃도서관', sido: '광주', sigungu: '광산구', specialty: '그림책·그림책 창작', categories: ['kids'] },
-  { id: 'kids-eco-library', name: '어린이생태학습도서관', sido: '광주', sigungu: '서구', specialty: '생태·환경·어린이', categories: ['kids'] },
-  { id: 'chaekdori-library', name: '책돌이도서관', sido: '광주', sigungu: '북구', specialty: '그림책·독서문화', categories: ['kids'] },
-  { id: 'unam-library', name: '운암도서관', sido: '광주', sigungu: '북구', specialty: '정보과학·어린이', categories: ['science'] },
+  { id: 'iyagikkot-library', name: '이야기꽃도서관', sido: '광주', sigungu: '광산구', specialty: '예술', categories: ['art'] },
+  { id: 'kids-eco-library', name: '어린이생태학습도서관', sido: '광주', sigungu: '서구', specialty: '자연·환경', categories: ['nature'] },
+  { id: 'chaekdori-library', name: '책돌이도서관', sido: '광주', sigungu: '북구', specialty: '예술', categories: ['art'] },
+  { id: 'unam-library', name: '운암도서관', sido: '광주', sigungu: '북구', specialty: '자연·환경', categories: ['nature'] },
   { id: 'jangdeok-library', name: '장덕도서관', sido: '광주', sigungu: '광산구', specialty: '미술·전시·문화예술', categories: ['art'] },
-  { id: 'seochang-hanok', name: '서창한옥작은도서관', sido: '광주', sigungu: '서구', specialty: '한옥·전통·마을', categories: ['history'] },
-  { id: 'gwangju-braille', name: '광주광역시립점자도서관', sido: '광주', sigungu: '북구', specialty: '점자·시각장애인 독서', categories: ['humanities'] },
+  { id: 'seochang-hanok', name: '서창한옥작은도서관', sido: '광주', sigungu: '서구', specialty: '인문', categories: ['humanities'] },
+  { id: 'gwangju-braille', name: '광주시립점자도서관', sido: '광주', sigungu: '남구', specialty: '미디어', categories: ['media'] },
   { id: 'unnam-kids', name: '운남어린이도서관', sido: '광주', sigungu: '광산구', specialty: '어린이·아동독서', categories: ['kids'] },
-  { id: 'pureungil-library', name: '푸른길도서관', sido: '광주', sigungu: '남구', specialty: '푸른길·공원·지역밀착', categories: ['nature'] },
+  { id: 'pureungil-library', name: '푸른길도서관', sido: '광주', sigungu: '남구', specialty: '어린이', categories: ['kids'] },
   { id: 'uknow-yunho', name: '유노윤호 작은도서관', sido: '광주', sigungu: '광산구', specialty: '문화예술·팬기부형', categories: ['art'] },
 ];
 
 /**
  * 상세 정보 병합
  *
- * 네 곳에서 오고, 뒤쪽이 앞쪽을 덮는다:
+ * 다섯 곳에서 오고, 뒤쪽이 앞쪽을 덮는다:
  *   1) APPROX_COORDS  — 시연용 근사 좌표 (임시)
  *   2) geocoded.json  — 카카오 로컬 API 자동 수집 (npm run geocode)
  *   3) enriched.json  — 정보나루 API 자동 수집 (npm run enrich).
  *                       공식 데이터이므로 카카오 검색 결과보다 우선한다.
- *   4) manual.json    — 손으로 채운 값. 사람이 확인한 것이므로 가장 우선.
+ *   4) manual.json    — 손으로 채운 값. 사람이 확인한 것.
+ *   5) book.json      — 가이드북 『오늘 도서관 갈래?』의 기본 정보 표 (npm run import-book-info).
+ *                       지은이가 도서관마다 직접 확인해 인쇄한 값이라 가장 우선한다.
+ *                       책을 보고 앱을 연 사람이 다른 전화번호·운영시간을 보면 안 된다.
  *
  * 편집 정보(이름·지역·특화 태그·분류)는 위 SEEDS 에서 사람이 관리하고,
  * 사실 정보(주소·전화·운영시간·좌표)는 파일에서 온다. 이렇게 나눠 두면
@@ -256,8 +255,11 @@ interface Enrichment {
   homepage?: string;
   coords?: { lat: number; lng: number };
   closedDays?: string;
-  hours?: { label: string; byDay: ({ open: number; close: number } | null)[] };
+  hours?: Library['hours'];
   sourceApiId?: string;
+  opened?: string;
+  holdings?: string;
+  transit?: string;
 }
 
 type EntryMap = { entries?: Record<string, Enrichment> };
@@ -265,6 +267,7 @@ const geocodedEntries = (geocodedJson as EntryMap).entries ?? {};
 const enrichedEntries = (enrichedJson as EntryMap).entries ?? {};
 const standardEntries = (standardJson as EntryMap).entries ?? {};
 const manualEntries = (manualJson as EntryMap).entries ?? {};
+const bookEntries = (bookJson as unknown as EntryMap).entries ?? {};
 
 /**
  * 휴관일 문구를 읽기 좋게 다듬는다.
@@ -309,7 +312,14 @@ function toLibrary(seed: Seed): Library {
      */
     ...standardEntries[seed.id],
     ...manualEntries[seed.id],
+    ...bookEntries[seed.id],
   };
+  /*
+   * 책에 운영시간이 있으면 휴관일도 책 문구에서 뗀 값만 쓴다(「… / 월·공휴일 휴관」 → 「월·공휴일」).
+   * 책이 휴관일을 적지 않았는데 다른 자료의 휴관일을 끼워 넣으면 책과 어긋날 수 있다.
+   */
+  const book = bookEntries[seed.id];
+  const fromBook = Boolean(book?.hours);
 
   return {
     id: seed.id,
@@ -322,9 +332,12 @@ function toLibrary(seed: Seed): Library {
     address: extra.address,
     phone: extra.phone,
     homepage: extra.homepage,
-    closedDays: tidyClosedDays(extra.closedDays),
+    closedDays: fromBook ? book?.closedDays : tidyClosedDays(extra.closedDays),
     hours: extra.hours,
     sourceApiId: extra.sourceApiId,
+    opened: extra.opened,
+    holdings: extra.holdings,
+    transit: extra.transit,
     // 수집한 좌표가 있으면 그걸 쓰고, 없으면 시연용 근사값으로 떨어진다.
     coords: extra.coords ?? APPROX_COORDS[seed.id],
 

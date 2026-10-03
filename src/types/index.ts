@@ -6,15 +6,14 @@ export type CategoryId =
   | 'language'
   | 'music'
   | 'art'
-  | 'history'
   | 'nature'
   | 'science'
-  | 'comics'
   | 'food'
   | 'travel'
   | 'humanities'
   | 'law'
-  | 'media';
+  | 'media'
+  | 'education';
 
 export interface Category {
   id: CategoryId;
@@ -42,8 +41,16 @@ export interface DayHours {
 }
 
 export interface OperatingHours {
-  /** 0=일요일 ... 6=토요일. null 이면 그날은 휴관. */
-  byDay: (DayHours | null)[];
+  /**
+   * 0=일요일 ... 6=토요일. null 이면 그날은 휴관.
+   * 문구를 요일별로 풀 수 없었던 곳은 비어 있다 — 그때는 "지금 운영중"을 판정하지 않는다.
+   */
+  byDay?: (DayHours | null)[];
+  /**
+   * 달마다 몇째 주만 쉬는 요일 (예: 둘째·넷째 월요일 → { day: 1, weeks: [2, 4] }).
+   * weeks 의 -1 은 그달 마지막 주. byDay 로는 "월요일은 열지만 둘째 주만 쉰다"를 못 적어서 따로 둔다.
+   */
+  closedNth?: { day: number; weeks: number[] }[];
   /** 화면에 그대로 노출할 사람이 읽는 형태의 요약 */
   label: string;
 }
@@ -83,6 +90,12 @@ export interface Library {
   homepage?: string;
   /** 도서관 정보나루 API 의 원본 식별자 (실 API 연동 시 매핑용) */
   sourceApiId?: string;
+  /** 개관일 — 가이드북 표기 그대로 (예: "2012년 10월 26일") */
+  opened?: string;
+  /** 장서 수 — 가이드북 표기 그대로, 기준일 포함 */
+  holdings?: string;
+  /** 찾아가는 길 (대중교통) — 가이드북 표기 그대로 */
+  transit?: string;
 }
 
 export interface Book {

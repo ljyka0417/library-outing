@@ -71,7 +71,7 @@ export const dalgomi = {
 
 /**
  * 카테고리별 파스텔 배경/포인트 색. 홈 그리드와 뱃지에서 공유한다.
- * types 의 CategoryId 12종과 키가 1:1로 대응해야 한다.
+ * types 의 CategoryId 13종과 키가 1:1로 대응해야 한다.
  */
 export const categoryColors: Record<string, { bg: string; fg: string }> = {
   landmark: { bg: '#E3F2EE', fg: '#3F8E7E' },
@@ -79,16 +79,16 @@ export const categoryColors: Record<string, { bg: string; fg: string }> = {
   language: { bg: '#E6F0FB', fg: '#3F7CB8' },
   music: { bg: '#FDE8EC', fg: '#C9536B' },
   art: { bg: '#FBE9E1', fg: '#C46B47' },
-  history: { bg: '#F1EBE2', fg: '#8B6F5C' },
   nature: { bg: '#E4F3E6', fg: '#4C8F5A' },
   science: { bg: '#E9E7FB', fg: '#6B5FC4' },
-  comics: { bg: '#FBE7F3', fg: '#B4508C' },
   food: { bg: '#FDF0DC', fg: '#B98A33' },
   travel: { bg: '#E0F0F5', fg: '#3C8296' },
   humanities: { bg: '#EFEDE7', fg: '#6F6A5E' },
   // 법률은 남색, 미디어는 푸른 회색. 이미 쓰는 열두 색과 겹치지 않는 자리를 골랐다.
   law: { bg: '#E7EAF4', fg: '#5A61A8' },
   media: { bg: '#E9EDEF', fg: '#4F707E' },
+  // 교육은 예전 역사 칸의 흙빛을 물려받았다. 남은 열두 색과 겹치지 않는다.
+  education: { bg: '#F1EBE2', fg: '#8B6F5C' },
 };
 
 export const spacing = {

@@ -12375,169 +12375,253 @@
         "id": "gyeongnam-library-restaurant-0",
         "libraryId": "gyeongnam-library",
         "type": "restaurant",
-        "name": "까투리 토월성원점",
-        "subCategory": "호프,요리주점",
-        "address": "경남 창원시 성산구 동산로48번길 79",
+        "name": "장터국밥",
+        "subCategory": "한식",
+        "address": "경남 창원시 의창구 사림로71번길 23-1",
         "coords": {
-          "lat": 35.21422176430417,
-          "lng": 128.6943476538187
+          "lat": 35.24829745590145,
+          "lng": 128.6813767116327
         },
-        "distanceMeters": 84,
-        "placeUrl": "http://place.map.kakao.com/1065209724"
+        "distanceMeters": 141,
+        "placeUrl": "http://place.map.kakao.com/1605975443"
       },
       {
         "id": "gyeongnam-library-restaurant-1",
         "libraryId": "gyeongnam-library",
         "type": "restaurant",
-        "name": "새벽김밥",
-        "subCategory": "분식",
-        "address": "경남 창원시 성산구 동산로48번길 79",
+        "name": "사림정",
+        "subCategory": "샤브샤브",
+        "address": "경남 창원시 의창구 사림로99번길 42",
         "coords": {
-          "lat": 35.21425690732856,
-          "lng": 128.694283593953
+          "lat": 35.2484469389021,
+          "lng": 128.68501288211
         },
-        "distanceMeters": 90,
-        "placeUrl": "http://place.map.kakao.com/591410974"
+        "distanceMeters": 317,
+        "placeUrl": "http://place.map.kakao.com/10442972"
       },
       {
         "id": "gyeongnam-library-restaurant-2",
         "libraryId": "gyeongnam-library",
         "type": "restaurant",
-        "name": "BBQ 창원상남점",
-        "subCategory": "BBQ",
-        "address": "경남 창원시 성산구 동산로48번길 79",
+        "name": "토궁",
+        "subCategory": "한식",
+        "address": "경남 창원시 의창구 사림로 59",
         "coords": {
-          "lat": 35.2142587400191,
-          "lng": 128.694281435771
+          "lat": 35.2469288633701,
+          "lng": 128.679079873309
         },
-        "distanceMeters": 90,
-        "placeUrl": "http://place.map.kakao.com/1175205886"
+        "distanceMeters": 379,
+        "placeUrl": "http://place.map.kakao.com/10895743"
       },
       {
         "id": "gyeongnam-library-restaurant-3",
         "libraryId": "gyeongnam-library",
         "type": "restaurant",
-        "name": "북경중화요리",
-        "subCategory": "중국요리",
-        "address": "경남 창원시 성산구 동산로48번길 79",
+        "name": "부자식당",
+        "subCategory": "한식",
+        "address": "경남 창원시 의창구 사림로 59",
         "coords": {
-          "lat": 35.21426052656447,
-          "lng": 128.69428257104224
+          "lat": 35.24685496953101,
+          "lng": 128.679079448057
         },
-        "distanceMeters": 90,
-        "placeUrl": "http://place.map.kakao.com/580884370"
+        "distanceMeters": 385,
+        "placeUrl": "http://place.map.kakao.com/768235729"
       },
       {
         "id": "gyeongnam-library-restaurant-4",
         "libraryId": "gyeongnam-library",
         "type": "restaurant",
-        "name": "장수정산더미오리대패삼겹",
-        "subCategory": "육류,고기",
-        "address": "경남 창원시 성산구 동산로48번길 79",
+        "name": "김밥천국 사림점",
+        "subCategory": "분식",
+        "address": "경남 창원시 의창구 사림로 53",
         "coords": {
-          "lat": 35.21426052656447,
-          "lng": 128.69428257104224
+          "lat": 35.2472174601642,
+          "lng": 128.678545319383
         },
-        "distanceMeters": 90,
-        "placeUrl": "http://place.map.kakao.com/181788609"
+        "distanceMeters": 390,
+        "placeUrl": "http://place.map.kakao.com/15340935"
       },
       {
         "id": "gyeongnam-library-restaurant-5",
         "libraryId": "gyeongnam-library",
         "type": "restaurant",
-        "name": "앨리스의토끼굴 창원상남점",
-        "subCategory": "샐러드",
-        "address": "경남 창원시 성산구 동산로48번길 79",
+        "name": "경주돼지국밥",
+        "subCategory": "국밥",
+        "address": "경남 창원시 의창구 사림로 53",
         "coords": {
-          "lat": 35.21426342920686,
-          "lng": 128.69426835554142
+          "lat": 35.2472174601642,
+          "lng": 128.678545319383
         },
-        "distanceMeters": 92,
-        "placeUrl": "http://place.map.kakao.com/742303259"
+        "distanceMeters": 390,
+        "placeUrl": "http://place.map.kakao.com/11112072"
       },
       {
         "id": "gyeongnam-library-cafe-0",
         "libraryId": "gyeongnam-library",
         "type": "cafe",
-        "name": "커피버튼",
-        "subCategory": "커피전문점",
-        "address": "경남 창원시 성산구 동산로48번길 79",
+        "name": "경남대표도서관 북카페",
+        "subCategory": "북카페",
+        "address": "경남 창원시 의창구 사림로45번길 59",
         "coords": {
-          "lat": 35.2142099961746,
-          "lng": 128.694287011541
+          "lat": 35.2492505478956,
+          "lng": 128.682636731086
         },
-        "distanceMeters": 89,
-        "placeUrl": "http://place.map.kakao.com/1605619354"
+        "distanceMeters": 83,
+        "placeUrl": "http://place.map.kakao.com/383191186"
       },
       {
         "id": "gyeongnam-library-cafe-1",
         "libraryId": "gyeongnam-library",
         "type": "cafe",
-        "name": "컴포즈커피 창원성원중앙상가점",
-        "subCategory": "컴포즈커피",
-        "address": "경남 창원시 성산구 원이대로 776",
+        "name": "어라운드10",
+        "subCategory": "카페",
+        "address": "경남 창원시 의창구 사림로99번길 61",
         "coords": {
-          "lat": 35.2164035916611,
-          "lng": 128.694027313693
+          "lat": 35.2504492013221,
+          "lng": 128.684900514826
         },
-        "distanceMeters": 278,
-        "placeUrl": "http://place.map.kakao.com/1594071509"
+        "distanceMeters": 301,
+        "placeUrl": "http://place.map.kakao.com/488310801"
       },
       {
         "id": "gyeongnam-library-cafe-2",
         "libraryId": "gyeongnam-library",
         "type": "cafe",
-        "name": "텐퍼센트커피 창원성원중앙상가점",
-        "subCategory": "텐퍼센트커피",
-        "address": "경남 창원시 성산구 원이대로 776",
+        "name": "가로수",
+        "subCategory": "카페",
+        "address": "경남 창원시 의창구 사림로99번길 36",
         "coords": {
-          "lat": 35.216530626427826,
-          "lng": 128.69402995374162
+          "lat": 35.2480786818272,
+          "lng": 128.684794329752
         },
-        "distanceMeters": 291,
-        "placeUrl": "http://place.map.kakao.com/921576254"
+        "distanceMeters": 317,
+        "placeUrl": "http://place.map.kakao.com/2120168827"
       },
       {
         "id": "gyeongnam-library-cafe-3",
         "libraryId": "gyeongnam-library",
         "type": "cafe",
-        "name": "카페징코",
+        "name": "폴라리스카페",
         "subCategory": "카페",
-        "address": "경남 창원시 성산구 가음로13번길 15",
+        "address": "경남 창원시 의창구 사림로99번길 46",
         "coords": {
-          "lat": 35.2121680916964,
-          "lng": 128.699219022497
+          "lat": 35.2487466311078,
+          "lng": 128.685236608929
         },
-        "distanceMeters": 419,
-        "placeUrl": "http://place.map.kakao.com/223170784"
+        "distanceMeters": 326,
+        "placeUrl": "http://place.map.kakao.com/424624830"
       },
       {
         "id": "gyeongnam-library-cafe-4",
         "libraryId": "gyeongnam-library",
         "type": "cafe",
-        "name": "커피로망",
-        "subCategory": "디저트카페",
-        "address": "경남 창원시 성산구 가음로13번길 15",
+        "name": "함께걷는 알베로",
+        "subCategory": "카페",
+        "address": "경남 창원시 의창구 사림로 63",
         "coords": {
-          "lat": 35.21215566196873,
-          "lng": 128.69933406510174
+          "lat": 35.2467944594202,
+          "lng": 128.679348451505
         },
-        "distanceMeters": 429,
-        "placeUrl": "http://place.map.kakao.com/1986439330"
+        "distanceMeters": 375,
+        "placeUrl": "http://place.map.kakao.com/710099216"
       },
       {
         "id": "gyeongnam-library-cafe-5",
         "libraryId": "gyeongnam-library",
         "type": "cafe",
-        "name": "카페모퉁이",
-        "subCategory": "카페",
-        "address": "경남 창원시 성산구 단정로98번길 3-27",
+        "name": "갤러리다옴",
+        "subCategory": "전통찻집",
+        "address": "경남 창원시 의창구 사림로 83",
         "coords": {
-          "lat": 35.214868987809,
-          "lng": 128.690340782095
+          "lat": 35.2459560206925,
+          "lng": 128.681382190787
         },
-        "distanceMeters": 456,
-        "placeUrl": "http://place.map.kakao.com/1201723557"
+        "distanceMeters": 397,
+        "placeUrl": "http://place.map.kakao.com/171935228"
+      },
+      {
+        "id": "gyeongnam-library-culture-0",
+        "libraryId": "gyeongnam-library",
+        "type": "culture",
+        "name": "한국사격역사관",
+        "subCategory": "전시관",
+        "address": "경남 창원시 의창구 사림로99번길 63",
+        "coords": {
+          "lat": 35.2510618508793,
+          "lng": 128.684913194553
+        },
+        "distanceMeters": 331,
+        "placeUrl": "http://place.map.kakao.com/27041697"
+      },
+      {
+        "id": "gyeongnam-library-culture-1",
+        "libraryId": "gyeongnam-library",
+        "type": "culture",
+        "name": "로그캠프",
+        "subCategory": "전시관",
+        "address": "경남 창원시 의창구 사림로99번길 44-11",
+        "coords": {
+          "lat": 35.2485448947638,
+          "lng": 128.68574438308
+        },
+        "distanceMeters": 376,
+        "placeUrl": "http://place.map.kakao.com/1764088304"
+      },
+      {
+        "id": "gyeongnam-library-culture-2",
+        "libraryId": "gyeongnam-library",
+        "type": "culture",
+        "name": "창원역사민속관",
+        "subCategory": "전시관",
+        "address": "경남 창원시 의창구 창이대로397번길 25",
+        "coords": {
+          "lat": 35.245020392526214,
+          "lng": 128.68074548126665
+        },
+        "distanceMeters": 508,
+        "placeUrl": "http://place.map.kakao.com/17504666"
+      },
+      {
+        "id": "gyeongnam-library-culture-3",
+        "libraryId": "gyeongnam-library",
+        "type": "culture",
+        "name": "인사이드갤러리",
+        "subCategory": "전시관",
+        "address": "경남 창원시 의창구 퇴촌로25번길 10-20",
+        "coords": {
+          "lat": 35.2426608204962,
+          "lng": 128.688913751443
+        },
+        "distanceMeters": 1000,
+        "placeUrl": "http://place.map.kakao.com/1943007013"
+      },
+      {
+        "id": "gyeongnam-library-culture-4",
+        "libraryId": "gyeongnam-library",
+        "type": "culture",
+        "name": "프로젝트아이",
+        "subCategory": "전시관",
+        "address": "경남 창원시 성산구 외동반림로262번길 13",
+        "coords": {
+          "lat": 35.2395621541165,
+          "lng": 128.681687378011
+        },
+        "distanceMeters": 1105,
+        "placeUrl": "http://place.map.kakao.com/890672832"
+      },
+      {
+        "id": "gyeongnam-library-culture-5",
+        "libraryId": "gyeongnam-library",
+        "type": "culture",
+        "name": "바인딩",
+        "subCategory": "전시관",
+        "address": "경남 창원시 성산구 외동반림로258번길 15",
+        "coords": {
+          "lat": 35.2388898576741,
+          "lng": 128.681945918271
+        },
+        "distanceMeters": 1180,
+        "placeUrl": "http://place.map.kakao.com/103722045"
       }
     ],
     "gyeongju-city": [
@@ -26412,6 +26496,190 @@
         },
         "distanceMeters": 524,
         "placeUrl": "http://place.map.kakao.com/1034894562"
+      }
+    ],
+    "ulleung-library": [
+      {
+        "id": "ulleung-library-restaurant-0",
+        "libraryId": "ulleung-library",
+        "type": "restaurant",
+        "name": "경상도식당",
+        "subCategory": "한식",
+        "address": "경북 울릉군 울릉읍 봉래길 37",
+        "coords": {
+          "lat": 37.4940830404073,
+          "lng": 130.907800044226
+        },
+        "distanceMeters": 400,
+        "placeUrl": "http://place.map.kakao.com/1908035152"
+      },
+      {
+        "id": "ulleung-library-restaurant-1",
+        "libraryId": "ulleung-library",
+        "type": "restaurant",
+        "name": "수작",
+        "subCategory": "일본식주점",
+        "address": "경북 울릉군 울릉읍 봉래길 29",
+        "coords": {
+          "lat": 37.4938761362087,
+          "lng": 130.908255985937
+        },
+        "distanceMeters": 447,
+        "placeUrl": "http://place.map.kakao.com/498546743"
+      },
+      {
+        "id": "ulleung-library-restaurant-2",
+        "libraryId": "ulleung-library",
+        "type": "restaurant",
+        "name": "남영당",
+        "subCategory": "제과,베이커리",
+        "address": "경북 울릉군 울릉읍 봉래길 29",
+        "coords": {
+          "lat": 37.4938583449862,
+          "lng": 130.908249406828
+        },
+        "distanceMeters": 447,
+        "placeUrl": "http://place.map.kakao.com/1085705107"
+      },
+      {
+        "id": "ulleung-library-restaurant-3",
+        "libraryId": "ulleung-library",
+        "type": "restaurant",
+        "name": "세진식당",
+        "subCategory": "한식",
+        "address": "경북 울릉군 울릉읍 저동1길 36-91",
+        "coords": {
+          "lat": 37.49698896573145,
+          "lng": 130.90893720225804
+        },
+        "distanceMeters": 451,
+        "placeUrl": "http://place.map.kakao.com/15970653"
+      },
+      {
+        "id": "ulleung-library-restaurant-4",
+        "libraryId": "ulleung-library",
+        "type": "restaurant",
+        "name": "스모프치킨 저동점",
+        "subCategory": "스모프양념통닭",
+        "address": "경북 울릉군 울릉읍 봉래2길 39-2",
+        "coords": {
+          "lat": 37.49381719976026,
+          "lng": 130.9085128369817
+        },
+        "distanceMeters": 469,
+        "placeUrl": "http://place.map.kakao.com/334452020"
+      },
+      {
+        "id": "ulleung-library-restaurant-5",
+        "libraryId": "ulleung-library",
+        "type": "restaurant",
+        "name": "골드비어",
+        "subCategory": "호프,요리주점",
+        "address": "경북 울릉군 울릉읍 봉래길 14-7",
+        "coords": {
+          "lat": 37.4945342931094,
+          "lng": 130.90901926805
+        },
+        "distanceMeters": 475,
+        "placeUrl": "http://place.map.kakao.com/1106810723"
+      },
+      {
+        "id": "ulleung-library-cafe-0",
+        "libraryId": "ulleung-library",
+        "type": "cafe",
+        "name": "저동커피",
+        "subCategory": "카페",
+        "address": "경북 울릉군 울릉읍 울릉순환로 164-2",
+        "coords": {
+          "lat": 37.49628268555709,
+          "lng": 130.90951739582283
+        },
+        "distanceMeters": 490,
+        "placeUrl": "http://place.map.kakao.com/435276036"
+      },
+      {
+        "id": "ulleung-library-cafe-1",
+        "libraryId": "ulleung-library",
+        "type": "cafe",
+        "name": "따미카페",
+        "subCategory": "카페",
+        "address": "경북 울릉군 울릉읍 봉래길 6-5",
+        "coords": {
+          "lat": 37.49429044985098,
+          "lng": 130.90939417170728
+        },
+        "distanceMeters": 516,
+        "placeUrl": "http://place.map.kakao.com/1293028404"
+      },
+      {
+        "id": "ulleung-library-cafe-2",
+        "libraryId": "ulleung-library",
+        "type": "cafe",
+        "name": "엔더커피",
+        "subCategory": "커피전문점",
+        "address": "경북 울릉군 울릉읍 봉래2길 32-14",
+        "coords": {
+          "lat": 37.494039918643,
+          "lng": 130.909400304635
+        },
+        "distanceMeters": 527,
+        "placeUrl": "http://place.map.kakao.com/1157486159"
+      },
+      {
+        "id": "ulleung-library-cafe-3",
+        "libraryId": "ulleung-library",
+        "type": "cafe",
+        "name": "뉴욕뉴욕",
+        "subCategory": "카페",
+        "address": "경북 울릉군 울릉읍 봉래길 5-17",
+        "coords": {
+          "lat": 37.493768272698965,
+          "lng": 130.90958163337464
+        },
+        "distanceMeters": 555,
+        "placeUrl": "http://place.map.kakao.com/7742292"
+      },
+      {
+        "id": "ulleung-library-cafe-4",
+        "libraryId": "ulleung-library",
+        "type": "cafe",
+        "name": "안녕저동카페",
+        "subCategory": "카페",
+        "address": "경북 울릉군 울릉읍 울릉순환로 212-37",
+        "coords": {
+          "lat": 37.4934833978498,
+          "lng": 130.909618746054
+        },
+        "distanceMeters": 573,
+        "placeUrl": "http://place.map.kakao.com/942877182"
+      },
+      {
+        "id": "ulleung-library-cafe-5",
+        "libraryId": "ulleung-library",
+        "type": "cafe",
+        "name": "153독도강치커피 본점",
+        "subCategory": "카페",
+        "address": "경북 울릉군 울릉읍 울릉순환로 212-31",
+        "coords": {
+          "lat": 37.493344701797014,
+          "lng": 130.90956517063964
+        },
+        "distanceMeters": 576,
+        "placeUrl": "http://place.map.kakao.com/1262672715"
+      },
+      {
+        "id": "ulleung-library-culture-0",
+        "libraryId": "ulleung-library",
+        "type": "culture",
+        "name": "울릉한마음회관",
+        "subCategory": "공연장,연극극장",
+        "address": "경북 울릉군 울릉읍 울릉순환로 286",
+        "coords": {
+          "lat": 37.4902707059677,
+          "lng": 130.904258389997
+        },
+        "distanceMeters": 639,
+        "placeUrl": "http://place.map.kakao.com/24054531"
       }
     ]
   }

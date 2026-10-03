@@ -6,8 +6,8 @@
  * 원본: docs-내부자료/책-최종본-도서관.json (책 PDF 에서 뽑은 127곳)
  * 결과: src/data/book-programs.generated.json  { byId: { 앱도서관id: { programs: [...] } } }
  *
- * 책과 앱은 몇 곳의 이름 표기가 다르다(책 「식물전문도서관」 ↔ 앱 「서울식물원 식물전문도서관」 등).
- * 공백을 빼고 똑같은 이름 → 한쪽이 다른 쪽을 포함 → 아래 ALIAS 순으로 짝을 짓는다.
+ * 앱 이름은 책 표기에 맞춰 두었다(2026-10-03). 그래도 공백을 빼고 똑같은 이름 →
+ * 한쪽이 다른 쪽을 포함 → 아래 ALIAS 순으로 짝을 짓는다 — 나중에 이름이 갈라져도 버티게.
  * 짝을 못 찾은 곳은 지어내지 않고 건너뛰며, 마지막에 목록으로 알려 준다.
  */
 import { createRequire } from 'node:module';
@@ -22,12 +22,8 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = path.join(root, 'docs-내부자료', '책-최종본-도서관.json');
 const OUT = path.join(root, 'src', 'data', 'book-programs.generated.json');
 
-/** 책 표기 → 앱 id (자동으로 못 맞추는 곳만) */
-const ALIAS = {
-  해뜰책뜰바닷가작은도서관: 'mangsang-beach',
-  광주시립점자도서관: 'gwangju-braille',
-  부산진어린이청소년도서관: 'busanjin-kids-youth',
-};
+/** 책 표기 → 앱 id (자동으로 못 맞추는 곳만). 지금은 없다 */
+const ALIAS = {};
 
 /**
  * PDF 에서 뽑을 때 디자인상 조각난 이름을 바로잡는다 (책 지면 기준).
