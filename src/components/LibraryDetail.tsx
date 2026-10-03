@@ -17,6 +17,7 @@ import { bookPrograms } from '@/data/bookPrograms';
 import { googleQueryFor } from '@/data/googleMaps';
 import { fetchLoanStatus, loanLookupEnabled, type LoanStatus } from '@/api/loanStatus';
 import { WeatherChip } from './WeatherChip';
+import { BarrierFreeSection } from './BarrierFreeSection';
 import { FEATURES } from '@/config/features';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
@@ -490,6 +491,7 @@ export const LibraryDetail = memo(function LibraryDetail({
               <View style={{ flex: 1 }}>
                 <View style={styles.wideCard}>{summary}</View>
                 {programsSection(0)}
+                <BarrierFreeSection libraryId={library.id} />
               </View>
             </View>
 
@@ -512,6 +514,7 @@ export const LibraryDetail = memo(function LibraryDetail({
           <View style={[styles.card, { padding: gutter }]}>{summary}</View>
 
           {programsSection(gutter)}
+          <BarrierFreeSection libraryId={library.id} inset={gutter} />
           {mapSection(gutter)}
           {shelves}
           {checkin(gutter)}

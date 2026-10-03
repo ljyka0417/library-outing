@@ -1,0 +1,287 @@
+{
+  "_readme": "한국관광공사 무장애 여행 정보. 직접 고치지 마세요 — npm run collect-barrier-free 가 덮어씁니다.",
+  "_source": "한국관광공사 무장애 여행 정보 (KorWithService2)",
+  "_generatedAt": "2026-10-03T13:54:41.531Z",
+  "byLibrary": {
+    "seoul-library": {
+      "contentId": "130183",
+      "title": "서울도서관",
+      "info": {
+        "wheelchair": "무료대여(2대,1층 장애인자료실)",
+        "elevator": "엘리베이터 있음",
+        "restroom": "장애인 전용 화장실 있음(각 층)",
+        "parking": "장애인 전용 주차구역 있음(시청 공동)_무장애 편의시설평일-유료,주말-무료이용",
+        "exit": "주출입구는 단차가 없어 평지로 연결됨(후문)",
+        "route": "정문은 계단으로 되어있으나 후문은 단차가 없이 평지와 연결 됨",
+        "handicapetc": "발달장애인 도서,책장 넘기는 도구 있음",
+        "blindhandicapetc": "시각장애인을 위한 컨텐츠 있음_시각장애인 편의시설점자도서,점자라벨도서,촉각도서,화면해설자료,큰글자도서,오디오북장애인 보조기기 있음독서확대기,휴대독서확대기,보이스아이,점자단말기,음성변환출력기,점자플린터,점자라벨출력기,센스리더,모니터 암",
+        "hearinghandicapetc": "청각장애인을 위한 컨텐츠 있음_청각장애인 편의시설수화영상자료,자막영상자료,보청기,골전도이어폰,수화영상 전화"
+      }
+    },
+    "national-library": {
+      "contentId": "130303",
+      "title": "국립중앙도서관",
+      "info": {
+        "elevator": "장애인 전용 엘리베이터 있음",
+        "restroom": "장애인 전용 화장실 있음",
+        "parking": "장애인 전용 주차구역 있음(14대,구내식당 앞)_무장애 편의시설",
+        "exit": "주출입구는 단차가 없어 휠체어 접근 가능함",
+        "route": "출입구까지 단차가 없어 휠체어 접근 가능함",
+        "handicapetc": "장애인정보누리센터 운영"
+      }
+    },
+    "assembly-library": {
+      "contentId": "3428697",
+      "title": "국회도서관",
+      "info": {
+        "wheelchair": "휠체어 사용 가능, 휠체어 대여 가능",
+        "elevator": "엘리베이터 있음",
+        "restroom": "1층 게이트 통과하고 우측 사이드접이식 문손잡이, 등받이, 자동물내림, 비상 호출벨 있음",
+        "exit": "자동문",
+        "audioguide": "음성 안내 서비스 있음",
+        "bigprint": "촉지도식 점자 안내판 있음",
+        "blindhandicapetc": "종합안내 촉지도 있음",
+        "lactationroom": "수유실, 어린이방 있음",
+        "infantsfamilyetc": "1층에 어린이방, 모성보호실 있음"
+      }
+    },
+    "urisori-library": {
+      "contentId": "3457702",
+      "title": "우리소리도서관",
+      "info": {
+        "elevator": "엘리베이터 있음",
+        "restroom": "장애인 화장실 있음",
+        "exit": "자동문",
+        "bigprint": "큰활자홍보물 있음",
+        "brailepromotion": "점자홍보물 있음",
+        "infantsfamilyetc": "기저귀교환대 있음영유아거치대 있음"
+      }
+    },
+    "nonhyeon-maru": {
+      "contentId": "3432213",
+      "title": "논현문화마루도서관",
+      "info": {
+        "elevator": "엘리베이터 있음",
+        "restroom": "장애인 화장실 있음 (1층,4층,5층)",
+        "parking": "장애인 주차장 있음 (지하2층 2면, 지하3층 2면)",
+        "braileblock": "점자블록 있음",
+        "audioguide": "음성 안내 서비스",
+        "brailepromotion": "촉지도식 점자 안내판",
+        "lactationroom": "수유실 있음"
+      }
+    },
+    "cheongun-lit": {
+      "contentId": "2692866",
+      "title": "청운문학도서관",
+      "info": {
+        "elevator": "엘리베이터 있음",
+        "parking": "장애인 주차장 있음(1대)_무장애 편의시설",
+        "exit": "주출입구는 턱이 없어 휠체어 접근 가능함(자동문)",
+        "route": "출입구까지 턱이 없어 휠체어 접근 가능함",
+        "braileblock": "점자블록 있음(주출입구)_시각장애인 편의시설"
+      }
+    },
+    "uijeongbu-art": {
+      "contentId": "2705299",
+      "title": "의정부미술도서관",
+      "info": {
+        "elevator": "엘리베이터 있음",
+        "restroom": "장애인 화장실 있음",
+        "parking": "장애인 주차장 있음_무장애 편의시설",
+        "exit": "주출입구는 턱이 없어 휠체어 접근 가능함(자동문)",
+        "route": "출입구까지 턱이 없어 휠체어 접근 가능함",
+        "blindhandicapetc": "점자 안내판 있음",
+        "lactationroom": "수유실 있음"
+      }
+    },
+    "uijeongbu-music": {
+      "contentId": "2841316",
+      "title": "의정부음악도서관",
+      "info": {
+        "elevator": "엘리베이터 있음",
+        "restroom": "장애인 화장실 있음",
+        "parking": "장애인 주차장 있음_무장애 편의시설",
+        "exit": "주출입구는 턱이 없어 휠체어 접근 가능함(자동문)",
+        "route": "출입구까지 턱이 없어 휠체어 접근 가능함",
+        "brailepromotion": "점자안내판 있음",
+        "lactationroom": "수유실 있음(1층)"
+      }
+    },
+    "juyeop-kids": {
+      "contentId": "1694495",
+      "title": "고양시립주엽어린이도서관",
+      "info": {
+        "wheelchair": "대여가능 (1대)",
+        "elevator": "엘리베이터 있음",
+        "restroom": "장애인 화장실 있음(1~3층)",
+        "parking": "장애인 주차장 있음(1대)",
+        "exit": "주출입구는 경사로가 있어 휠체어 접근 가능함",
+        "route": "출입구까지 경사로가 설치되어 있음",
+        "handicapetc": "책나래(장애인 도서 무료택배)서비스",
+        "lactationroom": "수유실 있음 (3층)"
+      }
+    },
+    "incheon-library": {
+      "contentId": "130785",
+      "title": "인천도서관",
+      "info": {
+        "wheelchair": "무료대여(1대,나눔터)",
+        "elevator": "엘리베이터 있음",
+        "restroom": "장애인 전용 화장실 있음",
+        "parking": "장애인 전용 주차구역 있음(지상2대,지하4대)_무장애 편의시설",
+        "exit": "주출입구는 경사로가 있어 휠체어 접근 가능함",
+        "route": "출입구까지 경사로가 설치되어 있음",
+        "handicapetc": "장애인 나눔터 운영(저시력용 독서기,음성지원 컴퓨터,소리증폭기,이동보조기 등이 설치되어 있음),디지털@터 높낮이 조절 책상 있음"
+      }
+    },
+    "wonju-central": {
+      "contentId": "2556193",
+      "title": "원주시립중앙도서관",
+      "info": {
+        "wheelchair": "1층 안내데스크에 휠체어 1대 보유",
+        "elevator": "장애인용 엘리베이터 있음",
+        "restroom": "장애인 화장실 있음",
+        "parking": "장애인 주차장 있음(원주시립중앙도서관주차장3 4대)",
+        "exit": "주출입구는 턱이 없어 휠체어 접근 가능함(자동문,수동문)",
+        "route": "출입구까지 턱이 없어 휠체어 접근 가능함",
+        "handicapetc": "장애인 정보누리터 운영",
+        "brailepromotion": "점자안내판 있음(입구)",
+        "infantsfamilyetc": "어린이실 있음"
+      }
+    },
+    "chuncheon-city": {
+      "contentId": "130833",
+      "title": "춘천시립도서관(장난감도서관)",
+      "info": {
+        "wheelchair": "대여 가능(안내데스크 문의)",
+        "elevator": "엘리베이터 있음(점자표시 있음)",
+        "restroom": "장애인 화장실 있음(각 층에 위치/자동문 버튼)",
+        "parking": "장애인 주차장 있음(6대)_무장애 편의시설",
+        "exit": "주 출입구는 턱이 없어 휠체어 접근 가능함(자동문)",
+        "route": "출입구까지 경사로가 설치되어 있음(완만함)_무장애 편의시설",
+        "publictransport": "경춘선 남춘천역 1번 출구에서 100번 버스, 춘천지방법원에서 10번 버스",
+        "handicapetc": "의자식 테이블 있음(1F 카페) 높낮이 조절 가능한 장애인 전용 열람석 있음, 독서보조기기 있음, 전동휠체어 급속충전기 있음",
+        "braileblock": "점자블록 있음(주출입구, 엘리베이터, 계단)_시각장애인 편의시설",
+        "helpdog": "동반가능",
+        "guidehuman": "안내요원 있음(1층 로비)",
+        "audioguide": "인쇄물음성출력기, 화면낭독 서비스, 공공이용보청기 있음",
+        "bigprint": "큰활조홍보물 있음(큰 글자 도서)",
+        "brailepromotion": "점자홍보물 있음(1층 입구)",
+        "blindhandicapetc": "탁상용 독서확대기, 인쇄물 음성출력기, 장애인용 PC 있음 장애인 전용 열람석 있음(화면 낭독 서비스)",
+        "videoguide": "휴대용 독서 청각 보조기 있음, 오디오북 있음",
+        "lactationroom": "수유실 있음(소파, 기저귀교환대, 전자레인지, 정수기, 세면대)",
+        "infantsfamilyetc": "유아용 화장실 있음(1층, 남녀구분), 유아 놀이방 있음, 유아차 보관대 있음"
+      }
+    },
+    "hanbat-library": {
+      "contentId": "130760",
+      "title": "대전한밭도서관",
+      "info": {
+        "elevator": "엘리베이터 있음",
+        "restroom": "장애인 전용 화장실 있음(1층 엘리베이터 옆)",
+        "parking": "장애인 전용 주차구역 있음",
+        "exit": "주출입구는 단차가 없어 휠체어 접근 가능함",
+        "route": "출입구까지 경사로가 설치되어 있음",
+        "brailepromotion": "점자안내판 있음",
+        "blindhandicapetc": "시각장애인실 운영 (열람석 24석, 문의 042-270-7492~3)",
+        "hearinghandicapetc": "녹음도서 이용가능(시각장애인실 내)"
+      }
+    },
+    "chungju-city": {
+      "contentId": "130758",
+      "title": "충주시립도서관",
+      "info": {
+        "elevator": "장애인용 엘리베이터 있음",
+        "restroom": "장애인 전용 화장실 칸이 있음(각 층)",
+        "parking": "장애인 전용 주차가능(2대)_무장애 편의시설",
+        "exit": "주출입구는 경사로가 있어 휠체어 접근 가능함(자동문,수동문)",
+        "route": "출입구까지 경사로가 설치되어 있음",
+        "handicapetc": "장애인 열람실에 높낮이 조절 가능한 시설 있음",
+        "braileblock": "점자블록 있음_시각장애인 편의시설",
+        "blindhandicapetc": "장애인 열람실 이용가능(점자도서,청각자료,좌석점자블록)"
+      }
+    },
+    "donggu-library": {
+      "contentId": "130798",
+      "title": "부산 동구도서관",
+      "info": {
+        "elevator": "엘리베이터 있음",
+        "restroom": "장애인 전용 화장실 있음",
+        "parking": "장애인 전용 주차구역 있음(1대)_무장애 편의시설",
+        "exit": "주출입구는 단차가 없어 휠체어 접근 가능함",
+        "route": "출입구까지 경사로가 설치되어 있음",
+        "braileblock": "점자블록 있음(주출입구)_시각장애인 편의시설",
+        "infantsfamilyetc": "어린이실 있음"
+      }
+    },
+    "yeongdo-library": {
+      "contentId": "130793",
+      "title": "부산광역시 영도도서관",
+      "info": {
+        "elevator": "엘리베이터 있음",
+        "restroom": "장애인 전용 화장실 있음",
+        "parking": "장애인 전용 주차구역 있음(2대)_무장애 편의시설",
+        "exit": "주출입구는 단차가 없어 휠체어 접근 가능함",
+        "route": "출입구까지 단차가 없어 휠체어 접근 가능함",
+        "braileblock": "점자블록 있음(접근로,주출입구)_시각장애인 편의시설"
+      }
+    },
+    "geumjeong-library": {
+      "contentId": "130483",
+      "title": "부산금정도서관",
+      "info": {
+        "elevator": "장애인용 엘리베이터 있음",
+        "restroom": "장애인 화장실 있음",
+        "parking": "장애인 전용 주차구역 있음(1대)_무장애 편의시설",
+        "exit": "주출입구는 계단이 있으나 보조출입구로 턱 없이 접근 가능함",
+        "route": "장애인 주차구역 옆 턱이 없는 보조출입구 이용가능",
+        "brailepromotion": "점자안내판 있음",
+        "infantsfamilyetc": "유아실,어린이자료실 있음"
+      }
+    },
+    "dalseong-gunlib": {
+      "contentId": "3427637",
+      "title": "달성군립도서관",
+      "info": {
+        "wheelchair": "휠체어 대여 서비스 있음",
+        "elevator": "엘리베이터 있음",
+        "restroom": "층 별 각 1개씩 장애인 화장실 있음",
+        "parking": "장애인 주차장 있음(달성군립도서관 주차장 1대)",
+        "exit": "자동문",
+        "route": "경사 및 단차 없음",
+        "publictransport": "대중교통 이용가능 : 다사고등학교건너 정류장저상버스 : 425, 520, 527, 564, 655, 725, 달서1, 성서1, 성서1-1번",
+        "blindhandicapetc": "점자블록 및 음성 안내 서비스 있음점자책 있음독서보조기기 있음",
+        "hearinghandicapetc": "회원증 및 신분증 제출 후 도서관 내 이용 가능한 의사소통보조 기기/보청기 있음",
+        "lactationroom": "1층, 수유실 내 기저귀 교환대 있음"
+      }
+    },
+    "gukchae-library": {
+      "contentId": "130746",
+      "title": "국채보상운동기념도서관",
+      "info": {
+        "wheelchair": "무료대여(1대)",
+        "elevator": "엘리베이터 있음",
+        "restroom": "장애인 전용 화장실 있음(1층)",
+        "parking": "장애인 전용 주차구역 있음(1대)_무장애 편의시설",
+        "exit": "출입구까지 단차가 없어 휠체어 접근 가능함",
+        "route": "출입구까지 단차가 없어 휠체어 접근 가능함",
+        "handicapetc": "장애인 무료 도서택배 서비스,정보검색용 컴퓨터1대 있음<br/> 장애인열람실 있음",
+        "braileblock": "점자블록 있음(접근로부터 출입구 앞까지)_시각장애인 편의시설",
+        "blindhandicapetc": "저시력 장애인용 독서화상기,프린트기 있음"
+      }
+    },
+    "mudeung-library": {
+      "contentId": "130810",
+      "title": "전남광주통합특별시무등도서관",
+      "info": {
+        "wheelchair": "로비에 휠체어 1대 보유",
+        "elevator": "장애인리프트 있음",
+        "restroom": "장애인 전용 화장실 있음",
+        "parking": "장애인 전용 주차구역 있음(3대)_무장애 편의시설",
+        "exit": "주출입구는 경사로가 있어 휠체어 접근 가능함",
+        "route": "출입구까지 경사로가 설치되어 있음",
+        "handicapetc": "책나래(장애인 도서 택배무료)서비스,장애인실 있음"
+      }
+    }
+  }
+}

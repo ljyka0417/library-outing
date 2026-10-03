@@ -5,6 +5,7 @@ import { nearbyApi } from '@/api/nearbyApi';
 import { isOpenNow, todayHoursLabel } from './openingHours';
 import { holidayName } from '@/data/holidays';
 import { fetchWeather, weatherEnabled, weatherMood } from '@/api/weather';
+import { BF_GROUPS, barrierFreeFor, bfHas } from '@/data/barrierFree';
 import { regionName, translate, type Lang, type MessageKey } from '@/i18n';
 import {
   CHIP_COUNT,
@@ -534,6 +535,9 @@ function answerBrowse(
  */
 const ASK_TIME = /(지금|현재|오늘)\s*(몇\s*시|시간|시각)|몇\s*시야\s*\??$|몇\s*시\s*\??$|\bwhat time is it\b|\bcurrent time\b|今何時|いま何時|現在の時刻|现在几点|几点了|现在时间/;
 
+/** 휠체어·유모차·점자·수어 같은 편의를 묻는 말 */
+const ASK_ACCESS = /휠체어|장애인|무장애|유모차|수유실|기저귀|엘리베이터|점자|수어|\bwheelchairs?\b|\baccessib(le|ility)\b|\bstrollers?\b|\bbraille\b|\bsign language\b|バリアフリー|車いす|車椅子|ベビーカー|点字|手話|无障碍|轮椅|婴儿车|盲文|手语/;
+
 /** 날씨를 묻는 말 */
 const ASK_WEATHER = /날씨|기온|몇\s*도|비\s*(와|오|올)|눈\s*(와|오|올)|우산|\bweather\b|\btemperature\b|\brain(ing|y)?\b|天気|気温|雨|天气|气温|下雨/;
 
@@ -670,6 +674,42 @@ export async function ask(
         '\n' +
         tr(`weather.tip.${mood}` as MessageKey),
       suggestions: (mood === 'nice' ? [tr('weather.sugNature'), tr('bot.sugOpen')] : [tr('bot.sugOpen'), tr('weather.sugIndoor')]).slice(0, CHIP_COUNT),
+    };
+  }
+
+  // 휠체어·유모차·점자 — 한국관광공사 무장애 정보가 있는 도서관만 (지어내지 않는다)
+  if (ASK_ACCESS.test(text)) {
+    const want: 'family' | 'visual' | 'hearing' | 'physical' = /유모차|수유|기저귀|아이|아기|stroller|baby|nursing|ベビー|授乳|婴儿|母婴|哺乳/.test(text)
+      ? 'family'
+      : /점자|시각|braille|blind|visual|点字|視覚|盲/.test(text)
+        ? 'visual'
+        : /수어|청각|sign language|hearing|deaf|手話|聴覚|手语|听障/.test(text)
+          ? 'hearing'
+          : 'physical';
+    const lib = findLibrary(q);
+    if (lib) {
+      const info = barrierFreeFor(lib.id);
+      if (!info) return { text: tr('bot.bfUnknownLib', { nameTopic: josa(lib.name, '은는') }), libraries: [lib] };
+      const lines = BF_GROUPS[want].filter((f) => info[f]).map((f) => `· ${tr(`bf.f.${f}` as MessageKey)}: ${info[f]}`);
+      return {
+        text: lines.length
+          ? `${tr('bot.bfLib', { name: lib.name, group: tr(`bf.group.${want}` as MessageKey) })}\n${lines.join('\n')}`
+          : tr('bot.bfLibNoGroup', { name: lib.name, group: tr(`bf.group.${want}` as MessageKey) }),
+        libraries: [lib],
+      };
+    }
+    const sido = findSido(q);
+    const matches = MOCK_LIBRARIES.filter((l) => {
+      const info = barrierFreeFor(l.id);
+      if (!info || (sido && l.region.sido !== sido)) return false;
+      return want === 'physical' ? bfHas(info.wheelchair) || bfHas(info.elevator) : BF_GROUPS[want].some((f) => bfHas(info[f]));
+    });
+    return {
+      text: matches.length
+        ? tr('bot.bfList', { group: tr(`bf.group.${want}` as MessageKey), n: matches.length })
+        : tr('bot.bfNone', { group: tr(`bf.group.${want}` as MessageKey) }),
+      libraries: matches.slice(0, 5),
+      suggestions: matches.slice(0, 2).map((l) => tr('bot.sugBf', { name: l.name })),
     };
   }
 
