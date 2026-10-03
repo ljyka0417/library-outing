@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { SearchBar } from './SearchBar';
 import { Chip, ChipRow, EmptyState } from './common';
-import { WhereToBorrowSheet } from './WhereToBorrowSheet';
+import { NATIONWIDE, WhereToBorrowSheet } from './WhereToBorrowSheet';
 import { searchBooks, type FoundBook } from '@/api/loanStatus';
 import { SIDO_LIST } from '@/data/categories';
 import { MOCK_LIBRARIES } from '@/data/libraries.mock';
@@ -37,9 +37,11 @@ export function BookSearchPane() {
     return recent && REGIONS.includes(recent.region.sido) ? recent.region.sido : '서울';
   }, [recentIds]);
   const [region, setRegion] = useState(startRegion);
+  // 칩 차례: 전국 → 처음 지역(내 지역) → 나머지. 고른 칩이 오른쪽 끝에 숨어 안 보이던 것을 고쳤다
+  const chips = [NATIONWIDE, startRegion, ...REGIONS.filter((r) => r !== startRegion)];
 
   const [query, setQuery] = useState('');
-  const [state, setState] = useState<'idle' | 'loading' | 'done' | 'failed'>('idle');
+  const [state, setState] = useState<'idle' | 'loading' | 'done' | 'failed' | 'quota'>('idle');
   const [books, setBooks] = useState<FoundBook[]>([]);
   const [asking, setAsking] = useState<Book | null>(null);
 
@@ -55,7 +57,8 @@ export function BookSearchPane() {
     const timer = setTimeout(() => {
       void searchBooks(q).then((r) => {
         if (!alive) return;
-        if (r) {
+        if (r === 'quota') setState('quota');
+        else if (r) {
           setBooks(r);
           setState('done');
         } else setState('failed');
@@ -86,8 +89,13 @@ export function BookSearchPane() {
 
       <Text style={[styles.label, { paddingHorizontal: layout.gutter }]}>{t('bookSearch.region')}</Text>
       <ChipRow contentStyle={styles.filterRow} style={styles.filterRowSpacing}>
-        {REGIONS.map((r) => (
-          <Chip key={r} label={regionName(lang, r)} selected={region === r} onPress={() => setRegion(r)} />
+        {chips.map((r) => (
+          <Chip
+            key={r}
+            label={r === NATIONWIDE ? t('search.nationwide') : regionName(lang, r)}
+            selected={region === r}
+            onPress={() => setRegion(r)}
+          />
         ))}
       </ChipRow>
 
@@ -98,8 +106,12 @@ export function BookSearchPane() {
           <ActivityIndicator color={colors.primary} />
           <Text style={styles.loadingText}>{t('bookSearch.loading')}</Text>
         </View>
-      ) : state === 'failed' ? (
-        <EmptyState pose="faceWink" title={t('search.errorTitle')} description={t('bookSearch.failed')} />
+      ) : state === 'failed' || state === 'quota' ? (
+        <EmptyState
+          pose="faceWink"
+          title={t('search.errorTitle')}
+          description={state === 'quota' ? t('loan.quota') : t('bookSearch.failed')}
+        />
       ) : (
         <FlatList
           data={books}

@@ -4,6 +4,7 @@ import { booksForLibrary } from '@/data/books.mock';
 import { nearbyApi } from '@/api/nearbyApi';
 import { isOpenNow, todayHoursLabel } from './openingHours';
 import { holidayName } from '@/data/holidays';
+import { fetchWhereToBorrow, loanLookupEnabled, searchBooks } from '@/api/loanStatus';
 import { regionName, translate, type Lang, type MessageKey } from '@/i18n';
 import {
   CHIP_COUNT,
@@ -552,6 +553,136 @@ function formatNow(d: Date, lang: Lang): string {
   return `${M}月${D}日 星期${w} ${h}:${mm}`;
 }
 
+/* ── 책 빌리기 ("소년이 온다 어디서 빌려?") ──────────────────── */
+
+const ASK_BORROW =
+  /어디서\s*빌|어디에서\s*빌|빌릴\s*수\s*있|빌려\s*(줘|요|볼|야|\?|$)|빌리고\s*싶|빌릴래|대출\s*가능|대출할\s*수|있는\s*도서관|소장(한|하는|하고\s*있는)\s*도서관|\bwhere can i (borrow|find|get)\b|\bborrow\b|借りられ|借りたい|在哪(里|儿)?(能|可以)?借|哪里(能|可以)借/;
+
+/** 책 제목만 남기려고 떼어 낼 말들 */
+const BORROW_NOISE =
+  /어디서|어디에서|어디|빌릴\s*수\s*있(어|나요|나|을까|을까요|는\s*곳|는\s*데)?|빌려\s*(줘|요|볼래|야)?|빌리고\s*싶(어|어요)?|빌릴래|대출\s*가능(해|한\s*곳|한\s*도서관)?|대출할\s*수\s*있(어|나)?|(있는|소장한|소장하는)\s*도서관|도서관|알려\s*줘|찾아\s*줘|좀|지금|책|\bwhere can i (borrow|find|get)\b|\bcan i (borrow|find|get)\b|\bborrow\b|\bthe book\b|借りられる(図書館)?|借りたい|どこで|在哪(里|儿)?(能|可以)?借|哪里(能|可以)借|[?？!！.。'"“”‘’『』「」《》]/gi;
+
+/** "소년이 온다를" → "소년이 온다" — 받침에 맞는 조사가 끝에 붙었을 때만 뗀다 */
+function stripTrailingJosa(s: string): string {
+  const m = /^(.*[가-힣])(을|를|은|는|이|가|도)$/.exec(s);
+  if (!m || m[1].length < 2) return s;
+  const code = m[1].charCodeAt(m[1].length - 1) - 0xac00;
+  const hasBatchim = code % 28 !== 0;
+  const ok = hasBatchim ? /^(을|은|이|도)$/.test(m[2]) : /^(를|는|가|도)$/.test(m[2]);
+  return ok ? m[1] : s;
+}
+
+async function answerBorrow(q: string, lang: Lang): Promise<Answer> {
+  const tr = (key: MessageKey, vars?: Vars) => translate(lang, key, vars);
+  // 대소문자는 살린다 — 정보나루 검색이 "the vegetarian" 은 못 찾고 "The Vegetarian" 은 찾는다
+  let rest = q.replace(/\s+/g, ' ').trim();
+
+  // 어디서: 도서관 한 곳("서울도서관에서") > 지역("부산에서") — 둘 다 없으면 되묻는다
+  const lib = findLibrary(rest);
+  const libScoped = lib && /에서|에 있|\bat\b|\bin\b|で|在/i.test(rest) ? lib : undefined;
+  if (libScoped) {
+    const name = libScoped.name;
+    rest = rest
+      .replace(name, ' ')
+      .replace(name.replace(/\s/g, ''), ' ')
+      // 이름을 뗀 자리에 남은 조사 ("서울도서관에서 혼모노" → "혼모노")
+      .replace(/^\s*(에서|에 있는|에)\s*/, ' ')
+      .replace(/\s(에서|에 있는|에)\s/, ' ');
+  }
+  // 지역은 "부산에서", "부산 지역" 처럼 조사가 붙을 때만 — 「고양이 해결사 깜냥」의 '고양'을 경기로 잡지 않게
+  let sido: string | undefined;
+  if (!libScoped) {
+    for (const s of SIDO_LIST) {
+      const re = new RegExp(`${s}\\s*(에서|에 있는|에|지역|쪽|근처)\\s*`);
+      if (re.test(rest)) {
+        sido = s;
+        rest = rest.replace(re, ' ');
+        break;
+      }
+    }
+    const en = /\bin (seoul|busan|incheon|daegu|daejeon|gwangju|ulsan|sejong|jeju|gyeonggi|gangwon)\b/i.exec(rest);
+    if (!sido && en) {
+      sido = SIDO_WORDS.find(([, re]) => re.test(en[1].toLowerCase()))?.[0];
+      rest = rest.replace(en[0], ' ');
+    }
+  }
+
+  const title = stripTrailingJosa(rest.replace(BORROW_NOISE, ' ').replace(/\s+/g, ' ').trim());
+  if (title.replace(/\s/g, '').length < 2) return { text: tr('bot.borrowNeedTitle') };
+
+  if (libScoped && !libScoped.sourceApiId) {
+    return { text: tr('bot.borrowLibUnsupported', { nameTopic: josa(libScoped.name, '은는') }), libraries: [libScoped] };
+  }
+
+  /*
+   * 어디서 찾을지 말하지 않았으면 되묻는다.
+   * 전국 80곳을 다 물으면 한 번에 정보나루 160건 — 하루 한도(500건)의 3분의 1이다.
+   */
+  if (!libScoped && !sido) {
+    const home = ['서울', '경기', '부산', '인천'];
+    return {
+      text: tr('bot.borrowAskRegion', { title }),
+      suggestions: home.map((r) => tr('bot.sugBorrowIn', { region: regionName(lang, r), title })),
+    };
+  }
+
+  const found = await searchBooks(title);
+  if (found === 'quota') return { text: tr('loan.quota') };
+  if (found === null) return { text: tr('bot.borrowFailed') };
+  if (found.length === 0) return { text: tr('bot.borrowNoBook', { title }) };
+  const book = found[0];
+  const bookLabel = book.author ? `『${book.title}』 (${book.author})` : `『${book.title}』`;
+
+  const nationwide = false;
+  const libs = libScoped
+    ? [libScoped]
+    : MOCK_LIBRARIES.filter((l) => l.sourceApiId && (nationwide || l.region.sido === sido));
+  if (libs.length === 0) return { text: tr('where.unsupported') };
+
+  const res = await fetchWhereToBorrow(book.isbns.slice(0, nationwide ? 2 : 3), libs.map((l) => l.sourceApiId!));
+  if (!res) return { text: tr('bot.borrowFailed') };
+
+  const statusOf = (l: Library) => res[l.sourceApiId!];
+  const available = libs.filter((l) => statusOf(l)?.hasBook && statusOf(l)?.loanAvailable);
+  const onLoan = libs.filter((l) => statusOf(l)?.hasBook && !statusOf(l)?.loanAvailable);
+  // 답을 못 받은 곳 — "없다"고 단정하지 않는다
+  const unknown = libs.filter((l) => !statusOf(l));
+  if (unknown.length === libs.length) return { text: tr('bot.borrowFailed') };
+  const where = nationwide ? tr('search.nationwide') : sido ? regionName(lang, sido) : '';
+  const shortTitle = book.title;
+
+  // 다음에 물어볼 만한 것: 다른 지역에서 같은 책
+  const suggestions = ['서울', '부산', '경기']
+    .filter((r) => r !== sido)
+    .slice(0, 2)
+    .map((r) => tr('bot.sugBorrowIn', { region: regionName(lang, r), title: shortTitle }));
+
+  if (libScoped) {
+    const s = statusOf(libScoped);
+    const key: MessageKey = !s ? 'bot.borrowFailed' : !s.hasBook ? 'bot.borrowLibNo' : s.loanAvailable ? 'bot.borrowLibYes' : 'bot.borrowLibOnLoan';
+    return { text: tr(key, { book: bookLabel, name: libScoped.name }), libraries: [libScoped], suggestions };
+  }
+  if (available.length) {
+    const names = available.slice(0, 5).map((l) => l.name).join(', ');
+    const more = available.length > 5 ? tr('bot.borrowMore', { n: available.length - 5 }) : '';
+    return {
+      text: tr('bot.borrowYes', { book: bookLabel, where, total: libs.length, n: available.length, names: names + more }),
+      libraries: available.slice(0, 5),
+      suggestions,
+    };
+  }
+  if (onLoan.length) {
+    return { text: tr('bot.borrowAllOnLoan', { book: bookLabel, where, n: onLoan.length }), libraries: onLoan.slice(0, 5), suggestions };
+  }
+  if (unknown.length) {
+    return {
+      text: tr('bot.borrowNonePartial', { book: bookLabel, where, n: libs.length - unknown.length, m: unknown.length }),
+      suggestions,
+    };
+  }
+  return { text: tr('bot.borrowNone', { book: bookLabel, where, total: libs.length }), suggestions };
+}
+
 /**
  * 달곰이에게 달곰이 이야기를 묻는지.
  *
@@ -638,6 +769,11 @@ export async function ask(
         (openCount > 0 ? tr('bot.timeOpen', { n: openCount }) : tr('bot.timeOpenNone')),
       suggestions: [tr('bot.sugOpen'), ...starterQuestions(lang, ctx.seed, ctx.avoid)].slice(0, CHIP_COUNT),
     };
+  }
+
+  // "소년이 온다 어디서 빌려?" — 책을 찾아 도서관에 지금 빌릴 수 있는지 묻는다
+  if (loanLookupEnabled && ASK_BORROW.test(text)) {
+    return answerBorrow(q, lang);
   }
 
   // 달곰이 자기 이야기 — 가이드북 「달곰이를 소개합니다!」 쪽 내용 그대로
