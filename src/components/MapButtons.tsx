@@ -3,14 +3,15 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useT } from '@/i18n';
 import { colors, radius, spacing, typography } from '@/theme';
-import { openKakaoMap, openNaverMap, type MapTarget } from '@/utils/mapLinks';
+import { openGoogleMap, openKakaoMap, openNaverMap, type MapTarget } from '@/utils/mapLinks';
 
 /**
- * 네이버지도 / 카카오맵 바로 열기 버튼.
- * 사용자가 어떤 지도앱을 쓰는지 모르므로 둘 다 동등한 비중으로 노출한다.
+ * 네이버지도 / 카카오맵 / 구글 지도 바로 열기 버튼.
+ * 사용자가 어떤 지도앱을 쓰는지 모르므로 셋 다 동등한 비중으로 노출한다.
+ * 구글 지도는 외국인 이용자(앱은 4개 언어)를 위해 둔다.
  *
  * ⚠️ 로고에 대하여
- * 네이버·카카오 로고는 각 사의 등록상표이고, 제휴 서비스가 쓸 수 있는 공식
+ * 네이버·카카오·구글 로고는 각 사의 등록상표이고, 제휴 서비스가 쓸 수 있는 공식
  * 버튼 에셋과 사용 규정(최소 여백·크기·변형 금지 등)이 따로 있다.
  * 임의로 흉내 낸 마크를 쓰면 상표 문제가 생기므로, 지금은 중립적인 지도 아이콘을
  * 쓰고 브랜드 컬러만 액센트로 반영해 두었다.
@@ -34,6 +35,11 @@ export function MapButtons({ target }: { target: MapTarget }) {
         brandColor="#FEE500"
         markTint={colors.text}
         onPress={() => void openKakaoMap(target)}
+      />
+      <MapButton
+        label={t('map.google')}
+        brandColor="#4285F4"
+        onPress={() => void openGoogleMap(target)}
       />
     </View>
   );

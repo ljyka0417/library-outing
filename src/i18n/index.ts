@@ -162,6 +162,7 @@ const ko = {
 
   'map.naver': '네이버 지도',
   'map.kakao': '카카오맵',
+  'map.google': '구글 지도',
   'map.open': '{app} 앱에서 이 도서관 위치 보기',
   'map.openNow': '바로 열기',
   'map.opensApp': '지도 앱이 열립니다',
@@ -394,6 +395,7 @@ const en: Messages = {
 
   'map.naver': 'Naver Map',
   'map.kakao': 'KakaoMap',
+  'map.google': 'Google Maps',
   'map.open': 'See this library in {app}',
   'map.openNow': 'Open now',
   'map.opensApp': 'The map app will open',
@@ -621,6 +623,7 @@ const ja: Messages = {
 
   'map.naver': 'Naver Map',
   'map.kakao': 'KakaoMap',
+  'map.google': 'Googleマップ',
   'map.open': '{app} でこの図書館の場所を見る',
   'map.openNow': 'すぐ開く',
   'map.opensApp': '地図アプリが開きます',
@@ -844,6 +847,7 @@ const zh: Messages = {
 
   'map.naver': 'Naver Map',
   'map.kakao': 'KakaoMap',
+  'map.google': '谷歌地图',
   'map.open': '在 {app} 中查看这家图书馆的位置',
   'map.openNow': '立即打开',
   'map.opensApp': '将打开地图应用',

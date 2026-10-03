@@ -134,6 +134,33 @@ export async function openInMap(provider: MapProvider, target: MapTarget): Promi
 export const openNaverMap = (target: MapTarget) => openInMap('naver', target);
 export const openKakaoMap = (target: MapTarget) => openInMap('kakao', target);
 
+/**
+ * 구글 지도.
+ *
+ * 네이버·카카오와 달리 앱 스킴을 따로 확인하지 않는다. 구글이 공식으로 권하는
+ * "Maps URLs"(https://www.google.com/maps/search/?api=1…) 하나로 충분하다.
+ * 구글 지도 앱이 있으면 iOS·안드로이드가 알아서 앱으로 열고, 없으면 브라우저로 연다.
+ * 그래서 "앱이 없어요" 안내도 필요 없다. 외국인 이용자는 대개 이쪽을 쓴다.
+ *
+ * 좌표가 있으면 좌표로 연다. "남구도서관"처럼 전국에 같은 이름이 있는 곳을
+ * 이름으로 찾으면 엉뚱한 도시가 먼저 나올 수 있다.
+ */
+export function googleMapsUrl(target: MapTarget): string {
+  const query = target.coords
+    ? `${target.coords.lat},${target.coords.lng}`
+    : [target.name, target.address].filter(Boolean).join(' ');
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+}
+
+export async function openGoogleMap(target: MapTarget): Promise<boolean> {
+  try {
+    await Linking.openURL(googleMapsUrl(target));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 /** 전화 걸기 (도서관 상세의 전화번호 탭) */
 export async function callPhone(phone: string) {
   const url = `tel:${phone.replace(/[^0-9+]/g, '')}`;
