@@ -421,6 +421,9 @@ const styles = themedStyles(() => ({
   },
   input: {
     ...typography.body,
+    // 입력칸에는 줄 높이를 주지 않는다 — iOS 는 한 줄 입력칸에 lineHeight 를 주면 글자를 아래로 밀어 받침이 잘린다
+    lineHeight: undefined,
+    minHeight: 50,
     color: colors.text,
     backgroundColor: colors.surface,
     borderWidth: 1,

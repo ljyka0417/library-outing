@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, AppState, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { TabScreen } from '@/components/TabScreen';
-import { useRouter } from 'expo-router';
+import { useFocusEffect, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { CategoryGrid } from '@/components/CategoryGrid';
 import { LibraryCard } from '@/components/LibraryCard';
@@ -56,14 +56,19 @@ const HomeContent = memo(function HomeContent() {
   useEffect(() => setPickedRegion(null), [startRegion]);
   const bookRegion = pickedRegion ?? startRegion;
 
-  // 날씨를 볼 자리: 최근 본 도서관, 없으면 서울도서관
-  const recentWithCoords = recentLibraries.find((l) => l.coords);
-  const seoul = (all.data ?? []).find((l) => l.id === 'seoul-library');
-  const weatherSpot = recentWithCoords
-    ? { coords: recentWithCoords.coords, place: recentWithCoords.name }
-    : seoul?.coords
-      ? { coords: seoul.coords, place: regionName(lang, '서울') }
-      : undefined;
+  /*
+   * 날씨를 볼 자리 — 홈에 올 때마다(탭을 다시 누르거나 앱으로 돌아올 때) 127곳 중 한 곳을 새로 뽑는다.
+   * 예전엔 최근 본 도서관으로 고정이라 늘 같은 도서관 날씨만 보였다. 여러 도서관을 구경시키는 자리로 쓴다.
+   */
+  const [spotRoll, setSpotRoll] = useState(() => Math.random());
+  useFocusEffect(useCallback(() => setSpotRoll(Math.random()), []));
+  useEffect(() => {
+    const sub = AppState.addEventListener('change', (s) => s === 'active' && setSpotRoll(Math.random()));
+    return () => sub.remove();
+  }, []);
+  const withCoords = (all.data ?? []).filter((l) => l.coords);
+  const spotLib = withCoords.length ? withCoords[Math.floor(spotRoll * withCoords.length) % withCoords.length] : undefined;
+  const weatherSpot = spotLib?.coords ? { coords: spotLib.coords, place: spotLib.name } : undefined;
 
   const goCategory = useCallback(
     (id: CategoryId) => router.push(`/search?category=${id}`),
@@ -116,7 +121,7 @@ const HomeContent = memo(function HomeContent() {
           </View>
         </View>
 
-        {/* 오늘 날씨 + 달곰이 한마디 — 최근 본 도서관 자리(없으면 서울도서관 자리). 날씨를 모르면 안 그린다 */}
+        {/* 오늘 날씨 + 달곰이 한마디 — 홈에 올 때마다 무작위로 고른 도서관 자리. 날씨를 모르면 안 그린다 */}
         {weatherSpot ? (
           <View style={{ marginHorizontal: layout.gutter, marginBottom: spacing.xxl }}>
             <WeatherCard
