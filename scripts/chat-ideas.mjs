@@ -23,10 +23,36 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(root, 'src/data/chat-ideas.generated.json');
 const checkOnly = process.argv.includes('--check');
 
+/*
+ * 책 빌리기 칩은 정보나루 하루 한도(500건)를 쓰지 않고 검사한다.
+ * 대출 상태(/where)는 "모두 대출 가능"으로 꾸며 돌려주고, 제목 검색(/search)은 막는다 —
+ * 칩의 책은 앱에 담아 둔 목록에서 바로 찾아져야 하고(서버 검색 없이), 달곰이가 질문에서
+ * 제목과 지역을 제대로 떼어 내는지만 보면 된다. 미세먼지·날씨는 실제로 묻는다(우리 서버가 30분 기억).
+ */
+const realFetch = globalThis.fetch;
+globalThis.fetch = async (url, init) => {
+  const u = String(url);
+  if (u.includes('/where?')) {
+    const libs = new URL(u).searchParams.get('libs')?.split(',') ?? [];
+    const results = Object.fromEntries(libs.map((c) => [c, { hasBook: true, loanAvailable: true }]));
+    return new Response(JSON.stringify({ results }), { status: 200, headers: { 'content-type': 'application/json' } });
+  }
+  if (u.includes('/search?')) return new Response('{"error":"blocked in check"}', { status: 503 });
+  // 비슷한 책(/related)도 한도를 쓰지 않게 한 권짜리 답으로 꾸민다 — 제목을 제대로 떼어 냈는지만 본다
+  if (u.includes('/related?')) {
+    const books = [{ title: '검사용 책', author: '', isbns: ['9780000000002'] }];
+    return new Response(JSON.stringify({ books }), { status: 200, headers: { 'content-type': 'application/json' } });
+  }
+  return realFetch(url, init);
+};
+
 const { ask } = load('src/utils/assistant.ts');
 const { candidateIdeas, ideaText } = load('src/utils/chatIdeas.ts');
 const { MOCK_LIBRARIES } = load('src/data/libraries.mock.ts');
-const { translate } = load('src/i18n/index.ts');
+const { translate, regionName } = load('src/i18n/index.ts');
+const { booksForRegion } = load('src/data/regionBooks.ts');
+const { libText } = load('src/i18n/libraryText.ts');
+const { booksForAge, keywordItems } = load('src/data/trendBooks.ts');
 
 const LANGS = ['ko', 'en', 'ja', 'zh'];
 const libById = new Map(MOCK_LIBRARIES.map((l) => [l.id, l]));
@@ -48,21 +74,65 @@ function judge(idea, answer, lang) {
       if (places.some((p) => p.type !== NEARBY_TYPE[idea.k])) return `다른 종류가 나옴(${places[0].type})`;
       return null;
     }
+    // 주차장·공연·전시는 카드 대신 지도에서 열 곳(spots)으로 답한다
+    if (idea.k === 'parking' || idea.k === 'events') {
+      if (!(answer.spots ?? []).length) return `${idea.k === 'parking' ? '주차장' : '행사'}이 안 나옴: ${text.slice(0, 40)}`;
+      return text.includes(lib.name) ? null : `다른 도서관으로 답함: ${text.slice(0, 40)}`;
+    }
+    // 운영시간·휴관일·주소는 그 말로 옮겨서 답한다 — 원문 또는 옮긴 글자가 있으면 맞다
+    const has = (v) => text.includes(v) || text.includes(libText(v, lang));
     const card = answer.libraries?.[0];
     if (!card || card.id !== lib.id) return `다른 도서관으로 답함(${card?.name ?? '없음'})`;
     switch (idea.k) {
       case 'hours':
-        return text.includes(lib.hours.label) ? null : `운영시간이 안 나옴: ${text.slice(0, 40)}`;
+        return has(lib.hours.label) ? null : `운영시간이 안 나옴: ${text.slice(0, 40)}`;
       case 'closed':
-        return text.includes(lib.closedDays) ? null : `휴관일이 안 나옴: ${text.slice(0, 40)}`;
+        return has(lib.closedDays) ? null : `휴관일이 안 나옴: ${text.slice(0, 40)}`;
       case 'phone':
         return text.includes(lib.phone) ? null : `전화번호가 안 나옴: ${text.slice(0, 40)}`;
       case 'where':
-        return text.includes(lib.address) ? null : `주소가 안 나옴: ${text.slice(0, 40)}`;
+        return has(lib.address) ? null : `주소가 안 나옴: ${text.slice(0, 40)}`;
       case 'books':
         return (answer.books ?? []).length > 0 ? null : `책이 안 나옴: ${text.slice(0, 40)}`;
       default:
         return `모르는 종류 ${idea.k}`;
+    }
+  }
+
+  if (idea.k === 'air' || idea.k === 'weather') {
+    const unknown = translate(lang, idea.k === 'air' ? 'bot.airUnknown' : 'bot.weatherUnknown');
+    if (text === unknown) return `값을 못 받음: ${text.slice(0, 40)}`;
+    const place = regionName(lang, idea.s);
+    return text.includes(place) ? null : `다른 곳으로 답함: ${text.slice(0, 40)}`;
+  }
+
+  if (idea.k === 'borrow') {
+    const title = booksForRegion(idea.s).find((b) => b.isbn === idea.b)?.title;
+    const libs = answer.libraries ?? [];
+    if (!title || !text.includes(title)) return `책을 못 찾음: ${text.slice(0, 40)}`;
+    if (libs.length === 0) return `도서관이 안 나옴: ${text.slice(0, 40)}`;
+    if (libs.some((l) => l.region.sido !== idea.s)) return `다른 지역이 섞임: ${text.slice(0, 40)}`;
+    return null;
+  }
+
+  switch (idea.k) {
+    case 'today':
+      return (answer.libraries ?? []).length ? null : `도서관을 안 골라 줌: ${text.slice(0, 40)}`;
+    case 'keywords':
+      return (answer.books ?? []).length && text.includes(keywordItems[0].word) ? null : `키워드 책이 안 나옴: ${text.slice(0, 40)}`;
+    case 'closedToday': {
+      // 쉬는 곳이 없는 날도 있다 — 목록으로 답했거나 "없어요" 문장이면 맞게 알아들은 것
+      const none = translate(lang, 'bot.closedTodayNone', { where: '', known: '' }).slice(0, 8);
+      return (answer.libraries ?? []).length || text.startsWith(none) ? null : `오늘 쉬는 곳으로 답하지 않음: ${text.slice(0, 40)}`;
+    }
+    case 'myVisits':
+      // 검사에는 방문 기록이 없다 → "아직 기록이 없어요" 가 나와야 맞다
+      return text === translate(lang, 'bot.myVisitsNone') ? null : `방문 기록으로 답하지 않음: ${text.slice(0, 40)}`;
+    case 'trendAge':
+      return (answer.books ?? []).length && text.includes(translate(lang, `trend.age.${idea.a}`)) ? null : `그 나이대 책이 안 나옴: ${text.slice(0, 40)}`;
+    case 'similar': {
+      const title = booksForAge(idea.a, 'all').find((b) => b.isbn === idea.b)?.title;
+      return (answer.books ?? []).length && title && text.includes(title) ? null : `비슷한 책이 안 나옴: ${text.slice(0, 40)}`;
     }
   }
 

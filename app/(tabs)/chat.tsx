@@ -44,6 +44,12 @@ interface Message {
 
 const newSeed = () => Math.floor(Math.random() * 2 ** 31);
 
+/** 달곰이가 쓰는 이 기기의 기록 — 최근 본 도서관(날씨·"오늘 어디 갈까"의 기준 자리)과 방문 기록 */
+const personal = () => {
+  const s = useAppStore.getState();
+  return { recentLibraryId: s.recentLibraryIds[0], visitedIds: s.visits.map((v) => v.libraryId) };
+};
+
 /** 이 메시지들 중 사람이 물은 질문 글자들. 칩으로 다시 권하지 않는다 */
 const askedTexts = (list: Message[]) => list.filter((m) => m.role === 'user').map((m) => m.text);
 
@@ -102,7 +108,7 @@ export default function ChatScreen() {
         { id: `u-${Date.now()}`, role: 'user', text: question, seed },
       ]);
 
-      const answer = await ask(question, lang, { seed, avoid });
+      const answer = await ask(question, lang, { seed, avoid, ...personal() });
 
       setMessages((prev) => [
         ...prev,
@@ -142,7 +148,7 @@ export default function ChatScreen() {
     void (async () => {
       const rebuilt: Message[] = [GREETING];
       for (const q of asked) {
-        const answer = await ask(q.text, lang, { seed: q.seed, avoid: askedTexts(rebuilt) });
+        const answer = await ask(q.text, lang, { seed: q.seed, avoid: askedTexts(rebuilt), ...personal() });
         rebuilt.push(q, { id: `d-${q.id}`, role: 'dalgomi', text: answer.text, answer });
       }
       if (cancelled) return;
@@ -393,6 +399,21 @@ function Bubble({ message, onOpenLibrary, favorites, onToggleFavorite }: BubbleP
             ))}
           </ScrollView>
         ) : null}
+
+        {/* 주차장·공연·전시 — 누르면 지도에서 연다 */}
+        {a?.spots?.map((p) => (
+          <Pressable
+            key={p.id}
+            onPress={() => void openKakaoMap({ name: p.name, coords: p.coords })}
+            style={({ pressed }) => [styles.place, pressed && { opacity: 0.7 }]}
+          >
+            <View style={{ flex: 1 }}>
+              <Text style={styles.placeName}>{p.name}</Text>
+              <Text style={styles.placeSub}>{p.sub}</Text>
+            </View>
+            <Ionicons name="open-outline" size={16} color={colors.textMuted} />
+          </Pressable>
+        ))}
 
         {a?.places?.map((p) => (
           <Pressable

@@ -20,6 +20,15 @@ export function isOpenNow(hours: OperatingHours | undefined, now = new Date()): 
 }
 
 /**
+ * 오늘 하루 쉬는 날인지 (휴관일·공휴일·격주 휴관). 요일별 시간을 못 푼 곳은 null — 단정하지 않는다.
+ * 달곰이의 "오늘 쉬는 도서관" 이 쓴다.
+ */
+export function isClosedToday(hours: OperatingHours | undefined, now = new Date()): boolean | null {
+  if (!hours?.byDay || hours.byDay.length !== 7) return null;
+  return todayRange(hours, now).range === null;
+}
+
+/**
  * 오늘의 운영 시각. 쉬는 날이면 range 가 null, 공휴일 때문에 쉬면 holiday 에 이름.
  *
  * 차례: 해마다 쉬는 날(12월 31일) → 공휴일 규칙 → 격주 휴관 → 요일별 시간.

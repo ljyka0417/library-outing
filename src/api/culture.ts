@@ -50,11 +50,19 @@ async function getJson<T>(path: string): Promise<T | null> {
   }
 }
 
+/** 같은 자리를 10분 안에 또 물으면 서버에 다시 묻지 않는다 (달곰이가 말을 바꿔 다시 답할 때 등) */
+const eventsMemo = new Map<string, { at: number; events: CultureEvent[] }>();
+
 export async function fetchNearbyEvents(coords: Coordinates): Promise<CultureEvent[] | null> {
+  const key = `${coords.lat},${coords.lng}`;
+  const hit = eventsMemo.get(key);
+  if (hit && Date.now() - hit.at < 10 * 60 * 1000) return hit.events;
   const body = await getJson<{ events?: CultureEvent[] }>(
     `/culture?lat=${coords.lat}&lng=${coords.lng}&r=${CULTURE_RADIUS}`
   );
-  return Array.isArray(body?.events) ? body!.events : null;
+  if (!Array.isArray(body?.events)) return null;
+  eventsMemo.set(key, { at: Date.now(), events: body!.events });
+  return body!.events;
 }
 
 const detailMemo = new Map<string, CultureEventDetail>();

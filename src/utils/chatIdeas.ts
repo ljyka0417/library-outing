@@ -1,6 +1,9 @@
 import { CATEGORIES, SIDO_LIST } from '@/data/categories';
 import { MOCK_LIBRARIES } from '@/data/libraries.mock';
 import { booksForLibrary } from '@/data/books.mock';
+import { booksForRegion } from '@/data/regionBooks';
+import { parkingFor } from '@/data/parking';
+import { agesWithBooks, booksForAge, keywordItems, type AgeKey } from '@/data/trendBooks';
 import { hasNearby } from '@/api/nearbyApi';
 import { regionName, translate, type Lang, type MessageKey } from '@/i18n';
 import type { CategoryId, Library } from '@/types';
@@ -44,7 +47,21 @@ export type IdeaKind =
   | 'category'
   | 'region'
   | 'regionCategory'
-  | 'open';
+  | 'open'
+  // 달곰이가 이미 답하는데 칩이 없던 것들 — 지역 미세먼지·날씨, 휠체어로 갈 수 있는 곳, 책 빌리기
+  | 'air'
+  | 'weather'
+  | 'access'
+  | 'borrow'
+  // 앱에 이미 있는 자료로 새로 답하게 된 것들
+  | 'today'
+  | 'parking'
+  | 'events'
+  | 'trendAge'
+  | 'keywords'
+  | 'closedToday'
+  | 'myVisits'
+  | 'similar';
 
 export interface Idea {
   k: IdeaKind;
@@ -54,9 +71,13 @@ export interface Idea {
   c?: CategoryId;
   /** 지역 칩 (한국어 원문) */
   s?: string;
+  /** 책 칩 (ISBN) — 그 지역에서(또는 그 나이대가) 많이 빌린 책 */
+  b?: string;
+  /** 나이대 칩 */
+  a?: AgeKey;
 }
 
-const LIBRARY_KINDS: IdeaKind[] = ['hours', 'closed', 'phone', 'where', 'books', 'cafe', 'food', 'culture'];
+const LIBRARY_KINDS: IdeaKind[] = ['hours', 'closed', 'phone', 'where', 'books', 'cafe', 'food', 'culture', 'parking', 'events'];
 
 const libById = new Map(MOCK_LIBRARIES.map((l) => [l.id, l]));
 
@@ -82,6 +103,11 @@ function libraryHas(lib: Library, kind: IdeaKind): boolean {
       return !!lib.coords && hasNearby(lib.id, 'restaurant');
     case 'culture':
       return !!lib.coords && hasNearby(lib.id, 'culture');
+    case 'parking':
+      return parkingFor(lib.id).length > 0;
+    case 'events':
+      // 행사는 날마다 바뀐다 — 검사 날 근처에 행사가 있는 곳만 통과한다
+      return !!lib.coords;
     default:
       return false;
   }
@@ -107,7 +133,55 @@ export function candidateIdeas(): Idea[] {
   for (const s of SIDO_LIST) {
     for (const c of CATEGORIES) if (count(c.id, s) >= 2) out.push({ k: 'regionCategory', c: c.id, s });
   }
+
+  // 지역 미세먼지·날씨 — 그 지역 도서관 자리로 본다(좌표가 있어야)
+  for (const s of SIDO_LIST) {
+    if (!MOCK_LIBRARIES.some((l) => l.region.sido === s && l.coords)) continue;
+    out.push({ k: 'air', s }, { k: 'weather', s });
+  }
+
+  // 휠체어로 갈 수 있는 도서관 — 전국 하나 + 지역마다 (무장애 정보가 없는 지역은 검사에서 빠진다)
+  out.push({ k: 'access' });
+  for (const s of SIDO_LIST) if (count(undefined, s) > 0) out.push({ k: 'access', s });
+
+  // 책 빌리기 — 그 지역에서 많이 빌린 책 중 제목이 짧은 첫 권 (칩이 길어지지 않게)
+  for (const s of SIDO_LIST) {
+    if (!MOCK_LIBRARIES.some((l) => l.region.sido === s && l.sourceApiId)) continue;
+    const book = booksForRegion(s).find((b) => b.isbn && b.title.length <= 12);
+    if (book?.isbn) out.push({ k: 'borrow', s, b: book.isbn });
+  }
+
+  out.push({ k: 'today' }, { k: 'keywords' }, { k: 'closedToday' }, { k: 'myVisits' });
+  if (!keywordItems.length) out.splice(out.findIndex((i) => i.k === 'keywords'), 1);
+  for (const a of agesWithBooks) out.push({ k: 'trendAge', a });
+
+  // 비슷한 책 — 20대·30대가 많이 빌린 책 중 제목이 짧은 것 몇 권
+  const seen = new Set<string>();
+  for (const a of ['20s', '30s'] as AgeKey[]) {
+    for (const b of booksForAge(a, 'all')) {
+      if (seen.size >= 6) break;
+      if (!b.isbn || b.title.length > 10 || seen.has(b.isbn)) continue;
+      seen.add(b.isbn);
+      out.push({ k: 'similar', a, b: b.isbn });
+    }
+  }
   return out;
+}
+
+/** 비슷한 책 칩의 제목 (나이대 순위에서 찾는다) */
+function similarTitle(idea: Idea): string | undefined {
+  return idea.a && idea.b ? booksForAge(idea.a, 'all').find((b) => b.isbn === idea.b)?.title : undefined;
+}
+
+/** 한국어 '와/과' — 받침이 있으면 과 */
+function wa(word: string): string {
+  const code = word.charCodeAt(word.length - 1) - 0xac00;
+  return code >= 0 && code <= 11171 && code % 28 !== 0 ? '과' : '와';
+}
+
+/** 책 칩의 제목 (지역 순위에서 찾는다) */
+function borrowTitle(idea: Idea): string | undefined {
+  return idea.s && idea.b ? booksForRegion(idea.s).find((b) => b.isbn === idea.b)?.title : undefined;
 }
 
 /* ── 글자로 ───────────────────────────────────────────────── */
@@ -121,6 +195,8 @@ const LIBRARY_TEXT: Record<string, MessageKey> = {
   cafe: 'bot.sugCafe',
   food: 'bot.sugFood',
   culture: 'bot.sugCulture',
+  parking: 'bot.sugParking',
+  events: 'bot.sugEvents',
 };
 
 /** 칩에 적을 문장. 도서관 이름은 어느 말에서든 한글 그대로다 — 옮기면 달곰이가 못 찾는다 */
@@ -145,6 +221,35 @@ export function ideaText(idea: Idea, lang: Lang): string | undefined {
       return sido ? tr('bot.sugSido', { sido }) : undefined;
     case 'regionCategory':
       return cat && sido ? tr('bot.sugSidoCat', { cat, sido }) : undefined;
+    case 'air':
+      return sido ? tr('bot.sugAirSido', { sido }) : undefined;
+    case 'weather':
+      return sido ? tr('bot.sugWeatherSido', { sido }) : undefined;
+    case 'access':
+      return sido ? tr('bot.sugAccessSido', { sido }) : tr('bot.sugAccess');
+    case 'borrow': {
+      // 책 제목은 한국어 그대로 (옮기면 찾을 수 없다). 영어는 낫표 대신 따옴표
+      const title = borrowTitle(idea);
+      if (!title || !sido) return undefined;
+      return tr('bot.sugBorrowIn', { region: sido, title: lang === 'en' ? `"${title}"` : `「${title}」` });
+    }
+    case 'today':
+      return tr('bot.sugToday');
+    case 'keywords':
+      return tr('bot.sugKeywords');
+    case 'closedToday':
+      return tr('bot.sugClosedToday');
+    case 'myVisits':
+      return tr('bot.sugMyVisits');
+    case 'trendAge':
+      return idea.a ? tr('bot.sugTrendAge', { age: tr(`trend.age.${idea.a}` as MessageKey) }) : undefined;
+    case 'similar': {
+      const title = similarTitle(idea);
+      if (!title) return undefined;
+      // 한국어는 "「소년이 온다」와 비슷한 책" 처럼 조사를 붙여 넘긴다
+      const t = lang === 'en' ? `"${title}"` : `「${title}」`;
+      return tr('bot.sugSimilar', { title: lang === 'ko' ? `${t}${wa(title)}` : t });
+    }
     default:
       return undefined;
   }
@@ -163,7 +268,12 @@ const VERIFIED: Idea[] = (() => {
   try {
     const list = (verifiedJson as unknown as { ideas?: unknown }).ideas;
     if (!Array.isArray(list)) return [];
-    return list.filter(isIdea).filter((i) => !i.id || libById.has(i.id));
+    return list
+      .filter(isIdea)
+      .filter((i) => !i.id || libById.has(i.id))
+      // 순위가 바뀌어 그 책이 빠졌으면 책 칩도 뺀다
+      .filter((i) => i.k !== 'borrow' || !!borrowTitle(i))
+      .filter((i) => i.k !== 'similar' || !!similarTitle(i));
   } catch {
     return [];
   }
@@ -353,14 +463,22 @@ function compose(ctx: PickContext, related: Idea[], salt: number): string[] {
   return texts(fillTo(ctx, [...head, ...rest], () => true, salt + 9), ctx.lang);
 }
 
-/** 처음 화면. 둘러보기 둘 + 도서관 이야기 셋 */
+/**
+ * 도서관 목록·도서관 이야기 말고 이런 것도 물을 수 있다는 걸 알리는 칩들
+ * (미세먼지·날씨·오늘 어디 갈까·연령별 책 …). 개수가 적어서 그냥 섞으면 거의 안 나온다.
+ */
+const FEATURE_KINDS = new Set<IdeaKind>(['today', 'air', 'weather', 'access', 'borrow', 'trendAge', 'keywords', 'closedToday', 'myVisits', 'similar']);
+const isFeatureIdea = (i: Idea) => FEATURE_KINDS.has(i.k);
+
+/** 처음 화면. 새 기능 하나 + 둘러보기 하나 + 도서관 이야기 셋 */
 export function starterIdeas(ctx: PickContext, fallback: () => string[]): string[] {
   return safely(
     ctx,
     () => {
-      const browse = pick(ctx, isBrowseIdea, 2, 31);
-      const lib = pick(ctx, isLibraryIdea, CHIP_COUNT - browse.length, 37, browse);
-      return texts(fillTo(ctx, [...browse, ...lib], () => true, 39), ctx.lang);
+      const feature = pick(ctx, isFeatureIdea, 1, 29);
+      const browse = pick(ctx, (i) => isBrowseIdea(i) && !isFeatureIdea(i), 1, 31, feature);
+      const lib = pick(ctx, isLibraryIdea, CHIP_COUNT - feature.length - browse.length, 37, [...feature, ...browse]);
+      return texts(fillTo(ctx, [...feature, ...browse, ...lib], () => true, 39), ctx.lang);
     },
     fallback
   );

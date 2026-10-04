@@ -14,6 +14,13 @@ const path = require('path');
 
 require('sucrase/register/ts');
 
+// 그림 파일(require('…jpg'))은 달곰이의 답과 상관없다 — 앱 번들처럼 숫자 하나로 바꿔 둔다
+for (const ext of ['.jpg', '.jpeg', '.png', '.webp', '.gif']) {
+  require.extensions[ext] = (m) => {
+    m.exports = 1;
+  };
+}
+
 const root = path.resolve(__dirname, '..', '..');
 const STUBS = new Set(['react', '@/store/useAppStore']);
 

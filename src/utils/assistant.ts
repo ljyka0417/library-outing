@@ -2,13 +2,17 @@ import { CATEGORIES, SIDO_LIST } from '@/data/categories';
 import { LIBRARY_COUNT, LIBRARY_HOURS_COUNT, MOCK_LIBRARIES } from '@/data/libraries.mock';
 import { booksForLibrary } from '@/data/books.mock';
 import { nearbyApi } from '@/api/nearbyApi';
-import { isOpenNow, todayHoursLabel } from './openingHours';
+import { formatDistance, isClosedToday, isOpenNow, todayHoursLabel, walkingMinutes } from './openingHours';
+import { parkingFor } from '@/data/parking';
+import { fetchNearbyEvents, isOngoing } from '@/api/culture';
+import { AGE_KEYS, booksForAge, keywordItems, keywordMonth, type AgeKey, type GenderKey } from '@/data/trendBooks';
+import { buddyTitle } from '@/data/buddy';
 import { holidayName } from '@/data/holidays';
 import { holidayText, libText, specialtyCategory } from '@/i18n/libraryText';
 import { fetchWeather, weatherEnabled, weatherMood } from '@/api/weather';
 import { airEnabled, airIsBad, fetchAir, stationName } from '@/api/air';
 import { BF_GROUPS, barrierFreeFor, bfHas } from '@/data/barrierFree';
-import { fetchWhereToBorrow, loanLookupEnabled, searchBooks } from '@/api/loanStatus';
+import { fetchRelated, fetchWhereToBorrow, loanLookupEnabled, searchBooks } from '@/api/loanStatus';
 import { searchLocalBooks } from '@/data/bookIndex';
 import { regionName, translate, type Lang, type MessageKey } from '@/i18n';
 import {
@@ -43,8 +47,18 @@ export interface Answer {
   libraries?: Library[];
   books?: Book[];
   places?: NearbyPlace[];
+  /** 주차장·공연·전시처럼 지도에서 열어 볼 곳 (이름 + 한 줄 설명) */
+  spots?: Spot[];
   /** 이어서 물어볼 만한 것들 */
   suggestions?: string[];
+}
+
+export interface Spot {
+  id: string;
+  name: string;
+  /** "공영 · 무료 · 도보 3분 (240m)" 같은 한 줄 */
+  sub: string;
+  coords: { lat: number; lng: number };
 }
 
 /** 문장 틀에 끼워 넣는 값들 */
@@ -325,6 +339,64 @@ async function answerAboutLibrary(
   ];
   const more = (asked: IdeaKind | undefined, fallback: string[] = fixedChips) =>
     libraryFollowUps(ctx, lib.id, asked, () => [...fallback, ...fixedChips]);
+  const walk = (m: number) => `${tr('nearby.walk', { n: walkingMinutes(m) })} (${formatDistance(m)})`;
+
+  /*
+   * 주차 — 전국주차장정보표준데이터에서 도서관 800m 안에 등록된 곳.
+   * 운영시간보다 먼저 본다 ("주차 시간" 의 '시간' 이 운영시간으로 가지 않게).
+   */
+  if (ASK_PARKING.test(text)) {
+    const lots = parkingFor(lib.id);
+    if (lots.length === 0) return { text: tr('bot.parkingNone', who), libraries: cards, suggestions: more('parking') };
+    return {
+      text: tr('bot.parkingFound', { ...who, n: lots.length }),
+      spots: lots.slice(0, 4).map((p, i) => ({
+        id: `park-${lib.id}-${i}`,
+        name: p.name,
+        // 공영·무료 같은 낱말은 근처 주차장 칸과 같은 번역을 쓴다 (모르는 값은 뺀다)
+        sub: [
+          p.se === '공영' || p.se === '민영' ? tr(`park.se.${p.se}` as MessageKey) : undefined,
+          p.fee === '무료' || p.fee === '유료' || p.fee === '혼합' ? tr(`park.fee.${p.fee}` as MessageKey) : undefined,
+          p.spaces ? tr('park.spaces', { n: p.spaces }) : undefined,
+          walk(p.distance),
+        ]
+          .filter(Boolean)
+          .join(' · '),
+        coords: p.coords,
+      })),
+      suggestions: more('parking'),
+    };
+  }
+
+  /*
+   * 근처 공연·전시 (한국문화정보원). 오늘 열려 있거나 곧 시작하는 것, 가까운 순.
+   * '전시관'(주변 볼거리) 은 아래 주변 장소 쪽으로 간다.
+   */
+  if (ASK_EVENTS.test(text)) {
+    if (!lib.coords) return { text: tr('bot.noCoords', who), libraries: cards };
+    const events = await fetchNearbyEvents(lib.coords);
+    if (!events) return { text: tr('bot.eventsFailed'), libraries: cards };
+    if (events.length === 0) return { text: tr('bot.eventsNone', who), libraries: cards, suggestions: more('events') };
+    const today = new Date().toISOString().slice(0, 10);
+    const md = (d?: string) => (d ? `${Number(d.slice(5, 7))}.${Number(d.slice(8, 10))}` : '');
+    return {
+      text: tr('bot.eventsFound', { ...who, n: events.length }),
+      spots: events.slice(0, 5).map((e) => ({
+        id: `ev-${e.seq}`,
+        name: e.title,
+        sub: [
+          isOngoing(e, today) ? tr('bot.eventsNow') : undefined,
+          e.start ? `${md(e.start)}–${md(e.end)}` : undefined,
+          e.place,
+          walk(e.dist),
+        ]
+          .filter(Boolean)
+          .join(' · '),
+        coords: { lat: e.lat, lng: e.lng },
+      })),
+      suggestions: more('events'),
+    };
+  }
 
   // 주변 장소
   for (const [type, re, kindKey] of NEARBY_WORDS) {
@@ -539,6 +611,50 @@ function answerBrowse(
  */
 const ASK_TIME = /(지금|현재|오늘)\s*(몇\s*시|시간|시각)|몇\s*시야\s*\??$|몇\s*시\s*\??$|\bwhat time is it\b|\bcurrent time\b|今何時|いま何時|現在の時刻|现在几点|几点了|现在时间/;
 
+/** 도서관 근처 주차 */
+const ASK_PARKING = /주차|\bparking\b|\bpark (my|the) car\b|駐車|停车/;
+
+/** 근처 공연·전시 ('전시관' 은 주변 볼거리 쪽이라 뺀다) */
+const ASK_EVENTS =
+  /공연|전시(?!관)|행사|축제|연극|뮤지컬|콘서트|\bexhibitions?\b|\bshows\b|\bconcerts?\b|\bevents?\b|\bperformances?\b|\bfestivals?\b|展示|展覧会|公演|イベント|コンサート|展览|演出|演唱会|音乐会|活动/;
+
+/** "오늘 어느 도서관 갈까?" */
+const ASK_TODAY =
+  /(어디|어느\s*도서관|무슨\s*도서관)\s*(갈까|가지|가면\s*좋|갈래|가볼까)|갈\s*만한\s*(도서관|곳)|\bwhere should (i|we) go\b|\bwhich library should (i|we)\b|\bwhere to go today\b|どこに行こう|どこへ行こう|どの図書館に行こう|どこ行こう|今天去哪|去哪(个|座|家)?图书馆|该去哪/;
+
+/** 연령별 인기 책 — 책 이야기여야 한다 ("어린이 도서관 추천" 은 주제 둘러보기) */
+// 중국어 '图书馆'(도서관) 안에도 '书' 가 있다 — 뒤에 '馆' 이 오면 건물 이름이다
+const ASK_TREND_BOOK = /책|도서(?!관)|\bbooks?\b|本|书(?!馆)/;
+const AGE_WORDS: Record<AgeKey, RegExp> = {
+  kids: /유아|영유아|아기|\btoddlers?\b|\bbab(y|ies)\b|幼児|幼儿/,
+  children: /어린이|초등|\bkids?\b|\bchildren\b|こども|子ども|子供|小学生|儿童/,
+  teens: /청소년|10대|중학생|고등학생|\bteens?\b|\bteenagers?\b|中高生|10代|青少年/,
+  '20s': /20대|\b20s\b|\btwenties\b|20代|20多岁|二十多岁/,
+  '30s': /30대|\b30s\b|\bthirties\b|30代|30多岁|三十多岁/,
+  '40s': /40대|\b40s\b|\bforties\b|40代|40多岁|四十多岁/,
+  '50s': /50대|\b50s\b|\bfifties\b|50代|50多岁|五十多岁/,
+  '60s': /60대|\b60s\b|\b60\+|\bseniors?\b|60代|60岁以上|老年/,
+};
+const FEMALE = /여성|여자|\bwom[ae]n\b|\bfemales?\b|女性|女生|女的/;
+const MALE = /남성|남자|\bm[ae]n\b|\bmales?\b|男性|男生|男的/;
+
+/** 이달의 키워드 */
+const ASK_KEYWORDS = /키워드|많이\s*찾은\s*(낱말|단어)|\bkeywords?\b|キーワード|关键词|关键字/;
+
+/** 오늘 쉬는 도서관 */
+const ASK_CLOSED_TODAY = /(오늘|금일)\s*(쉬는|휴관|문\s*닫)|\bclosed today\b|今日(は)?(休館|休み)|今天(闭馆|休馆|休息)/;
+
+/** 내 방문 기록 */
+const ASK_MY_VISITS =
+  /몇\s*(곳|군데)\s*(다녀|가\s*봤|갔|방문)|방문\s*기록|다녀온\s*(곳|도서관)|\bhow many (libraries )?(have i|did i)\b|\bmy visits\b|何か所|訪問記録|行った図書館|我去过|去过(几|多少)|访问记录/;
+
+/** 비슷한 책 (함께 빌린 책) */
+const ASK_SIMILAR =
+  /비슷한\s*(책|거|도서)|같이\s*빌린|함께\s*빌린|\bsimilar\b|\bbooks like\b|似た本|似ている本|一緒に借り|类似的书|相似的书|一起借/;
+/** 비슷한 책 질문에서 제목만 남기려고 떼어 낼 말들 */
+const SIMILAR_NOISE =
+  /(이?랑|과|와|하고)?\s*비슷한\s*(책|거|도서)?|(같이|함께)\s*빌린\s*(책)?|추천\s*해\s*줘|추천해줘|추천|알려\s*줘|찾아\s*줘|있어|뭐\s*있어|\bsimilar( books)?( to)?\b|\bbooks? like\b|\bbooks?\b|\brecommend\b|\bsuggest\b|\bplease\b|\bany\b|に似た本|似た本|似ている本|を教えて|教えて|おすすめ|と一緒に借りた本|一緒に借りた本|和|跟|类似的书|相似的书|推荐|一起借的书|[?？!！.。'"“”‘’『』「」《》]/gi;
+
 /** 휠체어·유모차·점자·수어 같은 편의를 묻는 말 */
 const ASK_ACCESS = /휠체어|장애인|무장애|유모차|수유실|기저귀|엘리베이터|점자|수어|\bwheelchairs?\b|\baccessib(le|ility)\b|\bstrollers?\b|\bbraille\b|\bsign language\b|バリアフリー|車いす|車椅子|ベビーカー|点字|手話|无障碍|轮椅|婴儿车|盲文|手语/;
 
@@ -618,7 +734,7 @@ async function answerBorrow(q: string, lang: Lang): Promise<Answer> {
         break;
       }
     }
-    const en = /\bin (seoul|busan|incheon|daegu|daejeon|gwangju|ulsan|sejong|jeju|gyeonggi|gangwon)\b/i.exec(rest);
+    const en = /\bin (seoul|busan|incheon|daegu|daejeon|gwangju|ulsan|sejong|jeju|gyeonggi|gangwon|chungcheong|jeolla|gyeongsang)\b/i.exec(rest);
     if (!sido && en) {
       sido = SIDO_WORDS.find(([, re]) => re.test(en[1].toLowerCase()))?.[0];
       rest = rest.replace(en[0], ' ');
@@ -716,6 +832,49 @@ async function answerBorrow(q: string, lang: Lang): Promise<Answer> {
 }
 
 /**
+ * "「채식주의자」랑 비슷한 책" — 그 책을 빌린 사람들이 함께 빌린 책.
+ * 책은 앱에 담아 둔 목록에서 먼저 찾고(한도 안 씀), 없으면 정보나루 검색.
+ */
+async function answerSimilar(q: string, lang: Lang, more: () => string[]): Promise<Answer> {
+  const tr = (key: MessageKey, vars?: Vars) => translate(lang, key, vars);
+  const title = stripTrailingJosa(
+    q
+      .replace(SIMILAR_NOISE, ' ')
+      // 홀로 선 '책' 만 뗀다 (「책 먹는 여우」의 책은 남긴다)
+      .replace(/(^|\s)책(?=\s|$)/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+  );
+  if (title.replace(/\s/g, '').length < 2) return { text: tr('bot.similarNeedTitle'), suggestions: more() };
+
+  const squashed = title.toLowerCase().replace(/[\s\p{P}\p{S}]/gu, '');
+  const localHit = searchLocalBooks(title, 5).find((b) => b.title.toLowerCase().replace(/[\s\p{P}\p{S}]/gu, '').startsWith(squashed));
+  const found = localHit ? [localHit] : await searchBooks(title);
+  if (found === 'quota') return { text: tr('loan.quota') };
+  if (found === null) return { text: tr('bot.similarFailed') };
+  if (found.length === 0) return { text: tr('bot.borrowNoBook', { title }), suggestions: more() };
+  const book = found[0];
+
+  const related = await fetchRelated(book.isbns[0]);
+  if (related === 'quota') return { text: tr('loan.quota') };
+  if (related === null) return { text: tr('bot.similarFailed') };
+  if (related.length === 0) return { text: tr('bot.similarNone', { title: book.title }), suggestions: more() };
+  return {
+    text: tr('bot.similarFound', { title: book.title }),
+    books: related.slice(0, 6).map((b) => ({
+      id: `similar-${b.isbns[0]}`,
+      title: b.title,
+      author: b.author,
+      coverImageUrl: b.coverImageUrl,
+      isbn: b.isbns[0],
+      isbns: b.isbns,
+      category: 'humanities' as CategoryId,
+    })),
+    suggestions: [tr('bot.sugBorrowIn', { region: regionName(lang, '서울'), title: `「${book.title}」` }), ...more()].slice(0, CHIP_COUNT),
+  };
+}
+
+/**
  * 달곰이에게 달곰이 이야기를 묻는지.
  *
  * 답은 가이드북 「달곰이를 소개합니다!」 쪽(이름·MBTI·취미·특기·좋아하는 것·싫어하는 것,
@@ -758,6 +917,10 @@ export interface AskOptions {
   seed?: number;
   /** 이 대화에서 이미 물어본 질문들. 칩으로 다시 권하지 않는다 */
   avoid?: string[];
+  /** 최근 본 도서관 — 자리를 말하지 않은 날씨·미세먼지·"오늘 어디 갈까"의 기준 자리 */
+  recentLibraryId?: string;
+  /** "여기 다녀왔어요"를 누른 기록 (새것부터, 같은 곳이 여러 번 있을 수 있다) */
+  visitedIds?: string[];
 }
 
 export async function ask(
@@ -803,18 +966,55 @@ export async function ask(
     };
   }
 
-  // "오늘 날씨 어때?" — 도서관을 말하면 그 자리, 지역을 말하면 그 지역 대표 도서관 자리, 아니면 서울
-  // 날씨·미세먼지를 볼 자리: 도서관을 말하면 그 자리, 지역을 말하면 그 지역 대표 도서관 자리, 아니면 서울
+  /*
+   * 날씨·미세먼지를 볼 자리: 도서관을 말하면 그 자리, 지역을 말하면 그 지역 대표 도서관 자리,
+   * 둘 다 없으면 최근 본 도서관, 그것도 없으면 서울.
+   */
+  const recent = options.recentLibraryId ? MOCK_LIBRARIES.find((l) => l.id === options.recentLibraryId) : undefined;
   const spotFor = () => {
     const lib = findLibrary(q);
     const sido = lib ? undefined : findSido(q);
-    if (lib?.coords) return { coords: lib.coords, place: lib.name };
+    if (lib?.coords) return { coords: lib.coords, place: lib.name, sido: lib.region.sido };
+    if (!sido && recent?.coords) return { coords: recent.coords, place: recent.name, sido: recent.region.sido };
     const region = sido ?? '서울';
     const rep =
       MOCK_LIBRARIES.find((l) => l.region.sido === region && l.isLandmark && l.coords) ??
       MOCK_LIBRARIES.find((l) => l.region.sido === region && l.coords);
-    return rep?.coords ? { coords: rep.coords, place: regionName(lang, region) } : undefined;
+    return rep?.coords ? { coords: rep.coords, place: regionName(lang, region), sido: region } : undefined;
   };
+  const moreStarters = () => starterQuestions(lang, ctx.seed, ctx.avoid);
+
+  /*
+   * "오늘 어느 도서관 갈까?" — 날씨·미세먼지를 보고 고른다 (홈의 날씨 카드와 같은 기준).
+   * 맑고 공기가 괜찮으면 자연·환경, 아니면 오래 머물기 좋은 랜드마크 도서관. 지금 문 연 곳을 먼저.
+   */
+  if (ASK_TODAY.test(text)) {
+    const spot = spotFor();
+    const [w, a] = spot
+      ? await Promise.all([weatherEnabled ? fetchWeather(spot.coords) : null, airEnabled ? fetchAir(spot.coords) : null])
+      : [null, null];
+    const sido = spot?.sido ?? '서울';
+    const where = regionName(lang, sido);
+    const kind: CategoryId | undefined = w ? (weatherMood(w) === 'nice' && !(a && airIsBad(a)) ? 'nature' : 'landmark') : undefined;
+    const openFirst = (libs: Library[]) =>
+      [...libs].sort((x, y) => Number(isOpenNow(y.hours) === true) - Number(isOpenNow(x.hours) === true));
+    const inRegion = MOCK_LIBRARIES.filter((l) => l.region.sido === sido);
+    let picks = kind ? openFirst(inRegion.filter((l) => l.categories.includes(kind))) : [];
+    let pickKey: MessageKey = kind === 'nature' ? 'bot.todayNature' : 'bot.todayIndoor';
+    if (picks.length === 0) {
+      picks = openFirst(inRegion);
+      pickKey = 'bot.todayAny';
+    }
+    const g = (v?: number) => (v ? tr(`air.grade.${v}` as MessageKey) : '–');
+    const lines = [
+      w && spot
+        ? tr('weather.now', { place: spot.place, temp: w.temp !== undefined ? String(Math.round(w.temp)) : '–', sky: tr(`weather.${w.condition}` as MessageKey) })
+        : undefined,
+      a ? tr('bot.todayAirLine', { pm10: g(a.pm10Grade), pm25: g(a.pm25Grade) }) : undefined,
+      tr(pickKey, { where }),
+    ].filter(Boolean);
+    return { text: lines.join('\n'), libraries: picks.slice(0, 3), suggestions: moreStarters() };
+  }
 
   // "미세먼지 어때?" — 가장 가까운 에어코리아 측정소 값 (날씨보다 먼저: "공기"·"먼지"는 날씨 말이 아니다)
   if (airEnabled && ASK_AIR.test(text)) {
@@ -858,7 +1058,13 @@ export async function ask(
   }
 
   // 휠체어·유모차·점자 — 한국관광공사 무장애 정보가 있는 도서관만 (지어내지 않는다)
-  if (ASK_ACCESS.test(text)) {
+  /*
+   * 도서관 이름에 든 말은 빼고 본다. 「광주시립점자도서관 운영시간」 의 '점자' 때문에
+   * 운영시간 대신 무장애 정보로 답하던 것.
+   */
+  const named = findLibrary(q);
+  const accessText = named ? text.split(norm(named.name)).join(' ') : text;
+  if (ASK_ACCESS.test(accessText)) {
     const want: 'family' | 'visual' | 'hearing' | 'physical' = /유모차|수유|기저귀|아이|아기|stroller|baby|nursing|ベビー|授乳|婴儿|母婴|哺乳/.test(text)
       ? 'family'
       : /점자|시각|braille|blind|visual|点字|視覚|盲/.test(text)
@@ -890,6 +1096,74 @@ export async function ask(
         : tr('bot.bfNone', { group: tr(`bf.group.${want}` as MessageKey) }),
       libraries: matches.slice(0, 5),
       suggestions: matches.slice(0, 2).map((l) => tr('bot.sugBf', { name: l.name })),
+    };
+  }
+
+  const namedLib = findLibrary(q);
+
+  // "20대가 많이 빌린 책" — 전국 연령별 대출 순위 (미리 모아 둔 것). 도서관 이름이 있으면 그 도서관 이야기로 간다
+  const age = !namedLib && ASK_TREND_BOOK.test(text) ? AGE_KEYS.find((k) => AGE_WORDS[k].test(text)) : undefined;
+  if (age) {
+    const gender: GenderKey = FEMALE.test(text) ? 'female' : MALE.test(text) ? 'male' : 'all';
+    const books = booksForAge(age, gender);
+    const ageLabel = tr(`trend.age.${age}` as MessageKey);
+    const whoLabel = gender === 'all' ? ageLabel : `${ageLabel} ${tr(`trend.gender.${gender}` as MessageKey)}`;
+    if (books.length === 0) return { text: tr('trend.empty'), suggestions: moreStarters() };
+    return {
+      text: tr('bot.trendAge', { who: whoLabel, whoSubj: josa(whoLabel, '이가') }),
+      books: books.slice(0, 5),
+      suggestions: AGE_KEYS.filter((k) => k !== age && booksForAge(k, 'all').length)
+        .slice(0, 2)
+        .map((k) => tr('bot.sugTrendAge', { age: tr(`trend.age.${k}` as MessageKey) }))
+        .concat(moreStarters())
+        .slice(0, CHIP_COUNT),
+    };
+  }
+
+  // "이번 달 인기 키워드" — 정보나루 이달의 키워드 (미리 모아 둔 것)
+  if (ASK_KEYWORDS.test(text) && keywordItems.length) {
+    const monthNum = Number(keywordMonth.slice(5, 7));
+    const month = lang === 'en' ? MONTHS_EN[monthNum - 1] ?? String(monthNum) : String(monthNum);
+    const words = keywordItems.slice(0, 8).map((k) => `#${libText(k.word, lang)}`).join(' ');
+    const first = keywordItems[0];
+    return {
+      text: tr('bot.keywords', { month, words, first: lang === 'ko' ? first.word : `${first.word} (${libText(first.word, lang)})` }),
+      books: first.books.slice(0, 5),
+      suggestions: moreStarters(),
+    };
+  }
+
+  // "「채식주의자」랑 비슷한 책" — 그 책을 빌린 사람들이 함께 빌린 책 (정보나루, 서버가 7일 기억)
+  if (loanLookupEnabled && ASK_SIMILAR.test(text)) {
+    return answerSimilar(q, lang, moreStarters);
+  }
+
+  // "내가 몇 곳 다녀왔어?" — 이 기기에 적힌 방문 기록
+  if (ASK_MY_VISITS.test(text)) {
+    const ids = [...new Set(options.visitedIds ?? [])];
+    if (ids.length === 0) return { text: tr('bot.myVisitsNone'), suggestions: moreStarters() };
+    const libs = ids.map((id) => MOCK_LIBRARIES.find((l) => l.id === id)).filter((l): l is Library => !!l);
+    return {
+      text: tr('bot.myVisits', { n: ids.length, title: tr(buddyTitle(ids.length) as MessageKey) }),
+      libraries: libs.slice(0, 3),
+      suggestions: moreStarters(),
+    };
+  }
+
+  // "오늘 쉬는 도서관" — 휴관일·공휴일·격주 휴관을 따져서. 요일별 시간을 모르는 곳은 세지 않는다
+  if (!namedLib && ASK_CLOSED_TODAY.test(text)) {
+    const sido = findSido(q);
+    const pool = MOCK_LIBRARIES.filter((l) => !sido || l.region.sido === sido);
+    const known = pool.filter((l) => isClosedToday(l.hours) !== null);
+    const closed = known.filter((l) => isClosedToday(l.hours) === true);
+    const where = sido ? tr('bot.whereIn', { sido: regionName(lang, sido) }) : '';
+    if (closed.length === 0) {
+      return { text: tr('bot.closedTodayNone', { where, known: known.length }), suggestions: [tr('bot.sugOpen'), ...moreStarters()].slice(0, CHIP_COUNT) };
+    }
+    return {
+      text: tr('bot.closedTodayList', { where, n: closed.length, known: known.length }) + (closed.length > MAX_CARDS ? tr('bot.browseTail', { n: MAX_CARDS }) : ''),
+      libraries: pick(closed),
+      suggestions: [tr('bot.sugOpen'), ...moreStarters()].slice(0, CHIP_COUNT),
     };
   }
 
