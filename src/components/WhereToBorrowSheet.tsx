@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, Image, Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Image, Modal, Pressable, ScrollView, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { fetchRelated, fetchWhereToBorrow, type FoundBook, type LoanStatus } from '@/api/loanStatus';
 import { fetchBookInfo, type BookInfo } from '@/api/bookInfo';
+import { openWeb } from '@/utils/mapLinks';
 import { MOCK_LIBRARIES } from '@/data/libraries.mock';
 import { SIDO_LIST } from '@/data/categories';
 import { regionName, useT } from '@/i18n';
@@ -20,6 +22,18 @@ import type { Book, Library } from '@/types';
  * 아래에는 "이 책을 빌린 사람들이 함께 빌린 책"(정보나루)을 둔다. 누르면 판이 그 책으로 바뀌어
  * 다시 어디서 빌릴지 묻는다 — 책 구경이 판 안에서 이어진다.
  */
+
+/**
+ * 카카오 소개 글은 250자쯤에서 문장 중간에 잘려 온다("…깨닫게 될").
+ * 마지막으로 끝난 문장까지만 보여 준다(전체는 "전체 소개 보기"로 다음 책 페이지에서). 끝난 문장이 너무 짧게
+ * 남으면(30% 미만 — 첫 문장부터 아주 긴 글) 그대로 두고 … 를 붙인다.
+ */
+function aboutText(raw: string): string {
+  const text = raw.replace(/\s+/g, ' ').trim();
+  let end = -1;
+  for (const m of text.matchAll(/[.!?。][”"'’』」)]?(?=\s|$)/g)) end = m.index! + m[0].length;
+  return end >= text.length * 0.3 ? text.slice(0, end) : `${text}…`;
+}
 
 /** 대출 상태를 물을 수 있는 지역 (정보나루에 등록된 도서관이 있는 곳) */
 const REGIONS = SIDO_LIST.filter((r) => MOCK_LIBRARIES.some((l) => l.region.sido === r && l.sourceApiId));
@@ -49,6 +63,8 @@ export function WhereToBorrowSheet({
    */
   const [region, setRegion] = useState(startRegion);
   const regionScroll = useRef<ScrollView>(null);
+  const { height: winH } = useWindowDimensions();
+  const insets = useSafeAreaInsets();
   useEffect(() => setRegion(startRegion), [startRegion, startBook]);
   const pickRegion = (r: string) => {
     setRegion(r);
@@ -158,7 +174,8 @@ export function WhereToBorrowSheet({
   return (
     <Modal visible transparent animationType="fade" onRequestClose={onClose}>
       <Pressable style={styles.backdrop} onPress={onClose}>
-        <Pressable style={styles.sheet} onPress={() => {}}>
+        {/* 판 높이는 화면 안까지 — 책 소개를 펼쳐도 닫기(X)가 위로 밀려 나가지 않게. 머리는 고정, 아래만 스크롤 */}
+        <Pressable style={[styles.sheet, { maxHeight: winH - insets.top - 12 }]} onPress={() => {}}>
           <View style={styles.head}>
             {book.coverImageUrl ? <Image source={{ uri: book.coverImageUrl }} style={styles.cover} /> : null}
             <View style={{ flex: 1 }}>
@@ -176,6 +193,7 @@ export function WhereToBorrowSheet({
             </Pressable>
           </View>
 
+          <ScrollView style={styles.body} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
           {/* 책 소개 — 세 줄로 접어 두고 누르면 펼친다. 소개 글은 카카오가 준 앞부분이라 끝에 … */}
           {info?.contents ? (
             <Pressable
@@ -186,8 +204,14 @@ export function WhereToBorrowSheet({
             >
               <Text style={styles.aboutTitle}>{t('where.about')}</Text>
               <Text style={styles.aboutText} numberOfLines={aboutOpen ? undefined : 3}>
-                {info.contents.replace(/\s+/g, ' ')}…
+                {aboutText(info.contents)}
               </Text>
+              {/* 카카오는 소개 글 앞부분만 준다 — 전체는 다음 책 페이지에서 */}
+              {aboutOpen && info.url ? (
+                <Pressable onPress={() => void openWeb(info.url!)} hitSlop={6} accessibilityRole="link">
+                  <Text style={styles.aboutFull}>{t('where.aboutFull')} ↗</Text>
+                </Pressable>
+              ) : null}
               <View style={styles.aboutFoot}>
                 <Text style={styles.aboutSource}>{t('where.aboutSource')}</Text>
                 <Text style={styles.aboutMore}>{aboutOpen ? t('where.aboutLess') : t('where.aboutMore')}</Text>
@@ -236,7 +260,7 @@ export function WhereToBorrowSheet({
               <Text style={styles.sub}>
                 {t('where.sub', { region: regionName(lang, region), n: String(libs.length) })}
               </Text>
-              <ScrollView style={{ maxHeight: related.length ? 260 : 360 }}>
+              <View>
                 {available.map((l) => row(l, true))}
                 {onLoan.map((l) => row(l, false))}
                 {available.length + onLoan.length === 0 && unknown.length === 0 ? (
@@ -248,7 +272,7 @@ export function WhereToBorrowSheet({
                 {unknown.length > 0 ? (
                   <Text style={styles.notOwned}>{t('where.unknown', { n: String(unknown.length) })}</Text>
                 ) : null}
-              </ScrollView>
+              </View>
             </>
           )}
 
@@ -277,6 +301,7 @@ export function WhereToBorrowSheet({
               </ScrollView>
             </View>
           ) : null}
+          </ScrollView>
         </Pressable>
       </Pressable>
     </Modal>
@@ -284,6 +309,9 @@ export function WhereToBorrowSheet({
 }
 
 const styles = themedStyles(() => ({
+  body: {
+    flexShrink: 1,
+  },
   pub: {
     ...typography.tiny,
     color: colors.textMuted,
@@ -308,6 +336,11 @@ const styles = themedStyles(() => ({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  aboutFull: {
+    ...typography.tiny,
+    color: colors.primary,
+    fontWeight: '700',
   },
   aboutSource: {
     ...typography.tiny,

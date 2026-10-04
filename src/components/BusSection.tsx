@@ -11,7 +11,7 @@ import type { Coordinates } from '@/types';
 /**
  * 도서관 화면의 "가까운 버스 정류장" — 정류장 두 곳과 실시간 도착 예정 버스 (국토교통부 TAGO).
  * 서울은 TAGO 에 없고, 근처에 정류장이 없으면 칸을 그리지 않는다.
- * 도착 시간은 서버가 1분 기억한다. "새로 보기" 를 누르면 다시 묻는다.
+ * 도착 시간은 서버가 1분 기억한다. "새로고침" 을 누르면 다시 묻는다.
  */
 export function BusSection({ coords, inset = 0 }: { coords?: Coordinates; inset?: number }) {
   const { t } = useT();
