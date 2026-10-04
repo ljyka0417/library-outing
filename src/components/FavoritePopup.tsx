@@ -106,7 +106,7 @@ export function FavoritePopupHost() {
           <Pressable
             onPress={() => {
               hide();
-              router.push('/favorites');
+              router.push('/records?tab=favorites');
             }}
             style={({ pressed }) => [styles.linkButton, pressed && { opacity: 0.6 }]}
           >

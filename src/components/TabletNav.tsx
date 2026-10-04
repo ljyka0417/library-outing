@@ -43,9 +43,9 @@ import { categoryColors, colors, radius, spacing, themedStyles, currentScheme } 
 
 export interface TabDef {
   /** (tabs) 안의 파일 이름 */
-  name: 'index' | 'search' | 'chat' | 'favorites' | 'mypage';
+  name: 'index' | 'search' | 'chat' | 'nearby' | 'mypage';
   /** 이동할 주소 */
-  href: '/' | '/search' | '/chat' | '/favorites' | '/mypage';
+  href: '/' | '/search' | '/chat' | '/nearby' | '/mypage';
   titleKey: MessageKey;
   icon: keyof typeof Ionicons.glyphMap;
   iconOutline: keyof typeof Ionicons.glyphMap;
@@ -56,7 +56,8 @@ export const TABS: TabDef[] = [
   { name: 'index', href: '/', titleKey: 'tab.home', icon: 'home', iconOutline: 'home-outline' },
   { name: 'search', href: '/search', titleKey: 'tab.search', icon: 'search', iconOutline: 'search-outline' },
   { name: 'chat', href: '/chat', titleKey: 'tab.chat', icon: 'chatbubble-ellipses', iconOutline: 'chatbubble-ellipses-outline' },
-  { name: 'favorites', href: '/favorites', titleKey: 'tab.favorites', icon: 'heart', iconOutline: 'heart-outline' },
+  // 즐겨찾기 자리 → 내 주변 (2026-10-04). 즐겨찾기는 설정 → 내 기록에서 본다
+  { name: 'nearby', href: '/nearby', titleKey: 'tab.nearby', icon: 'navigate', iconOutline: 'navigate-outline' },
   { name: 'mypage', href: '/mypage', titleKey: 'tab.mypage', icon: 'settings', iconOutline: 'settings-outline' },
 ];
 

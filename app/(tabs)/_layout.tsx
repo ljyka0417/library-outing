@@ -115,9 +115,10 @@ function AppleTabs() {
         />
         <NativeTabs.Trigger.Label>{t('tab.chat')}</NativeTabs.Trigger.Label>
       </NativeTabs.Trigger>
-      <NativeTabs.Trigger name="favorites" disableAutomaticContentInsets contentStyle={tabContent()}>
-        <NativeTabs.Trigger.Icon sf={{ default: 'heart', selected: 'heart.fill' }} />
-        <NativeTabs.Trigger.Label>{t('tab.favorites')}</NativeTabs.Trigger.Label>
+      {/* 즐겨찾기 자리 → 내 주변 지도. 즐겨찾기는 설정 → 내 기록에 있다 */}
+      <NativeTabs.Trigger name="nearby" disableAutomaticContentInsets contentStyle={tabContent()}>
+        <NativeTabs.Trigger.Icon sf={{ default: 'location', selected: 'location.fill' }} />
+        <NativeTabs.Trigger.Label>{t('tab.nearby')}</NativeTabs.Trigger.Label>
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="mypage" disableAutomaticContentInsets contentStyle={tabContent()}>
         <NativeTabs.Trigger.Icon sf={{ default: 'gearshape', selected: 'gearshape.fill' }} />
