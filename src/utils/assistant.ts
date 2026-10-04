@@ -1107,7 +1107,16 @@ export async function ask(
     const gender: GenderKey = FEMALE.test(text) ? 'female' : MALE.test(text) ? 'male' : 'all';
     const books = booksForAge(age, gender);
     const ageLabel = tr(`trend.age.${age}` as MessageKey);
-    const whoLabel = gender === 'all' ? ageLabel : `${ageLabel} ${tr(`trend.gender.${gender}` as MessageKey)}`;
+    // 나이대 + 성별: "20대 여성" · "30代女性" · "30多岁男性" · "30s (women)"
+    const genderLabel = tr(`trend.gender.${gender}` as MessageKey);
+    const whoLabel =
+      gender === 'all'
+        ? ageLabel
+        : lang === 'en'
+          ? `${ageLabel} (${genderLabel.toLowerCase()})`
+          : lang === 'ko'
+            ? `${ageLabel} ${genderLabel}`
+            : `${ageLabel}${genderLabel}`;
     if (books.length === 0) return { text: tr('trend.empty'), suggestions: moreStarters() };
     return {
       text: tr('bot.trendAge', { who: whoLabel, whoSubj: josa(whoLabel, '이가') }),
