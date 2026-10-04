@@ -73,9 +73,8 @@ export default function TabsLayout() {
  * 선택 표시가 물방울처럼 옮겨 가고, 탭바를 끌어 고르기, 스크롤하면 작아지기가
  * 모두 애플 앱과 같게 움직인다.
  *
- *   검색     role="search" 로 두면 iOS 26 이 탭 묶음 오른쪽에 동그란 유리 단추로
- *            떼어 놓는다(App Store·음악 앱 모양). 그래서 맨 끝에 둔다.
- *            이름은 시스템이 기기 언어로 붙인다.
+ *   검색     role="search" 를 주면 iOS 26 이 오른쪽에 동그란 단추로 떼어 놓는데(App Store 모양),
+ *            탭바가 두 덩어리로 따로 놀아 보여서 일부러 안 준다 — 다섯 탭이 알약 하나에 (인스타 모양).
  *   아이패드  sidebarAdaptable 로 App Store 처럼 위쪽 탭바 ⇄ 사이드바를 오간다.
  *   여백     화면 안의 스크롤 목록 하나에만 자동으로 여백이 붙는 방식이라, 검색처럼
  *            가로 칩 줄이 먼저 나오는 화면에서는 엉뚱한 곳에 붙는다. 끄고
@@ -124,8 +123,8 @@ function AppleTabs() {
         <NativeTabs.Trigger.Icon sf={{ default: 'gearshape', selected: 'gearshape.fill' }} />
         <NativeTabs.Trigger.Label>{t('tab.mypage')}</NativeTabs.Trigger.Label>
       </NativeTabs.Trigger>
-      <NativeTabs.Trigger name="search" role="search" disableAutomaticContentInsets contentStyle={tabContent()}>
-        <NativeTabs.Trigger.Icon sf="magnifyingglass" />
+      <NativeTabs.Trigger name="search" disableAutomaticContentInsets contentStyle={tabContent()}>
+        <NativeTabs.Trigger.Icon sf={{ default: 'magnifyingglass', selected: 'magnifyingglass' }} />
         <NativeTabs.Trigger.Label>{t('tab.search')}</NativeTabs.Trigger.Label>
       </NativeTabs.Trigger>
     </NativeTabs>
