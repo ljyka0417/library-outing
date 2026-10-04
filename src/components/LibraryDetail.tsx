@@ -579,6 +579,8 @@ const styles = themedStyles(() => ({
     backgroundColor: colors.surface,
     borderRadius: radius.xl,
     padding: spacing.xl,
+    // 아래에 오는 편의 시설·근처 주차장 칸과 띄운다 (그 칸들은 아래 여백만 있어 카드에 붙어 보였다)
+    marginBottom: spacing.xxl,
     ...shadow.card,
   },
 
