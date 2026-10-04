@@ -62,17 +62,31 @@ export default function RootLayout() {
   const system = useColorScheme();
   const scheme = themePref === 'system' ? (system === 'dark' ? 'dark' : 'light') : themePref;
   const before = currentScheme();
-  applyScheme(scheme);
+  /*
+   * 저장된 설정을 읽은 뒤에만 색을 바꾼다. 읽기 전(themePref 가 기본값 'system')에 기기 설정(다크)을
+   * 먼저 칠했다가 곧 저장된 쪽(밝게)으로 되돌리는 사이에, 아이패드에서 일부만 다크로 남는 일이 있었다.
+   */
+  if (hydrated) applyScheme(scheme);
   const lastPath = useRef(pathname);
   const backTo = useRef<string | null>(null);
-  if (before !== scheme) backTo.current = lastPath.current;
+  if (hydrated && before !== scheme) backTo.current = lastPath.current;
   useEffect(() => {
     lastPath.current = pathname;
   }, [pathname]);
+  // 앱이 네이티브 모드를 덮어썼는지 — 덮어쓴 적이 없으면 "시스템"일 때 다시 묻지 않는다
+  // (괜히 되돌리면 그 순간 밝게↔어둡게가 한 번 깜빡여 화면이 두 번 칠해진다)
+  const overridden = useRef(false);
   useEffect(() => {
+    if (!hydrated) return;
     // 애플 기본 탭바·키보드·알림창 같은 네이티브 부분도 같은 모드로
-    Appearance.setColorScheme?.(themePref === 'system' ? 'unspecified' : themePref);
-  }, [themePref]);
+    if (themePref === 'system') {
+      if (overridden.current) Appearance.setColorScheme?.('unspecified');
+      overridden.current = false;
+    } else {
+      Appearance.setColorScheme?.(themePref);
+      overridden.current = true;
+    }
+  }, [themePref, hydrated]);
   useEffect(() => {
     // 앱 창 맨 밑 바탕(키보드·화면 전환 때 비치는 곳)도 같은 색으로
     void SystemUI.setBackgroundColorAsync(colors.background).catch(() => {});
