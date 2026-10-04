@@ -172,7 +172,7 @@ export function TabletSidebar({ onToggle, onPicked }: SidebarProps) {
                 style={({ pressed }) => [styles.row, pressed && styles.rowPressed]}
               >
                 <View style={[styles.topicIcon, { backgroundColor: categoryColors[c.id].bg }]}>
-                  <CategoryIcon category={c} size={16} color={categoryColors[c.id].fg} />
+                  <CategoryIcon category={c} size={22} color={categoryColors[c.id].fg} />
                 </View>
                 <Text style={styles.rowLabel} numberOfLines={1}>
                   {t(`cat.${c.id}` as MessageKey)}

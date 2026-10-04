@@ -71,7 +71,7 @@ export function CategoryGrid({ onSelect, selected }: Props) {
                 isSelected && { borderColor: palette.fg, borderWidth: 2 },
               ]}
             >
-              <CategoryIcon category={cat} size={Math.round(box * 0.43)} color={palette.fg} />
+              <CategoryIcon category={cat} size={Math.round(box * 0.56)} color={palette.fg} />
             </View>
             <Text numberOfLines={1} style={styles.name}>
               {name}

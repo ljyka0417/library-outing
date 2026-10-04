@@ -153,7 +153,7 @@ export function LibraryImage({ library, variant, style, framed = false }: Props)
           <Text style={[styles.heroText, { color: palette.fg }]}>{t('image.preparing')}</Text>
         </>
       ) : (
-        <CategoryIcon category={cat} size={variant === 'card' ? 28 : 34} color={palette.fg} />
+        <CategoryIcon category={cat} size={variant === 'card' ? 34 : 40} color={palette.fg} />
       )}
     </View>
   );
