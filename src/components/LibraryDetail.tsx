@@ -522,8 +522,9 @@ export const LibraryDetail = memo(function LibraryDetail({
   }
 
   /* ── 폰 배치 (목록 옆 칸도 여기) ──────────────────────────── */
+  // 사진 아래 흰 카드가 페이지 끝까지 이어지게 바탕도 흰색(surface) — 카드가 중간에 끝나 잘려 보이던 것
   return (
-    <View style={{ flex: 1, backgroundColor: colors.background }}>
+    <View style={{ flex: 1, backgroundColor: colors.surface }}>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.content}>
         <View style={centered(layout)}>
           {/* 대표 이미지. 실사진이 없으면 주제 색 플레이스홀더가 나온다. */}
@@ -555,12 +556,13 @@ const styles = themedStyles(() => ({
   content: {
     paddingBottom: spacing.xxxl,
   },
+  // 그림자는 두지 않는다 — 아래 칸들과 같은 흰 바탕이라 카드 밑변 그림자가 잘린 선처럼 보였다
   card: {
     backgroundColor: colors.surface,
     marginTop: -spacing.xl,
+    marginBottom: spacing.lg,
     borderTopLeftRadius: radius.xl,
     borderTopRightRadius: radius.xl,
-    ...shadow.card,
   },
 
   /* 두 단 */

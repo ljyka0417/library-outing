@@ -3,6 +3,7 @@ import { Appearance, Platform, useColorScheme } from 'react-native';
 import { Stack, usePathname, useRouter, useSegments } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
+import * as SystemUI from 'expo-system-ui';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useAppStore } from '@/store/useAppStore';
 import { applyScheme, colors, currentScheme } from '@/theme';
@@ -72,6 +73,10 @@ export default function RootLayout() {
     // 애플 기본 탭바·키보드·알림창 같은 네이티브 부분도 같은 모드로
     Appearance.setColorScheme?.(themePref === 'system' ? 'unspecified' : themePref);
   }, [themePref]);
+  useEffect(() => {
+    // 앱 창 맨 밑 바탕(키보드·화면 전환 때 비치는 곳)도 같은 색으로
+    void SystemUI.setBackgroundColorAsync(colors.background).catch(() => {});
+  }, [scheme]);
   useEffect(() => {
     if (backTo.current && backTo.current !== '/') {
       const to = backTo.current;
@@ -143,6 +148,8 @@ export default function RootLayout() {
              * headerBackTitle: '' 로는 안 없어지고, 이 옵션이라야 화살표만 남는다.
              */
             headerBackButtonDisplayMode: 'minimal',
+            // 내리면 투명하던 위쪽 바에 바탕이 깔린다 — 도서관 화면 본문(흰 surface)과 같은 색이라야 띠가 안 생긴다
+            headerStyle: { backgroundColor: colors.surface },
           }}
         />
       </Stack>
