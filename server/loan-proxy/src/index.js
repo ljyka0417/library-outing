@@ -62,14 +62,34 @@ function remember(key, value) {
   MEM.set(key, { until: Date.now() + ttlOf(value) * 1000, value });
 }
 
+/**
+ * 정보나루 부르기.
+ *
+ * 하루 500건을 넘기려면 정보나루에 "부르는 서버의 IP" 를 등록해야 한다(하루 3만 건). Worker 는 나가는 IP 가
+ * 매번 바뀌어 등록할 수 없으므로, 고정 IP 서버의 중계(server/relay)를 거친다. 키는 중계 서버에만 있고
+ * 여기서는 비밀값(RELAY_SECRET)만 보낸다. 중계가 없거나 답이 없으면 예전처럼 직접 부른다(하루 500건).
+ */
+async function d4l(env, api, params) {
+  const qs = new URLSearchParams({ ...params, format: 'json' });
+  if (env.RELAY_URL && env.RELAY_SECRET) {
+    try {
+      const res = await fetch(`${env.RELAY_URL.replace(/\/$/, '')}/api/${api}?${qs}`, {
+        headers: { 'x-relay-secret': env.RELAY_SECRET },
+      });
+      if (res.status < 500) return res;
+    } catch {
+      // 중계가 멈췄으면 직접
+    }
+  }
+  qs.set('authKey', env.DATA4LIBRARY_KEY);
+  return fetch(`https://data4library.kr/api/${api}?${qs}`);
+}
+
 /** 정보나루에 한 권 묻기. 실패하면 null (지어내지 않는다) */
 async function fetchOne(env, lib, isbn) {
-  const url =
-    `https://data4library.kr/api/bookExist?authKey=${encodeURIComponent(env.DATA4LIBRARY_KEY)}` +
-    `&libCode=${lib}&isbn13=${isbn}&format=json`;
   try {
     // Accept 헤더를 붙이면 정보나루가 406 을 돌려준다 (format=json 으로 충분하다)
-    const res = await fetch(url);
+    const res = await d4l(env, 'bookExist', { libCode: lib, isbn13: isbn });
     if (!res.ok) return null;
     const result = (await res.json())?.response?.result;
     if (!result || (result.hasBook !== 'Y' && result.hasBook !== 'N')) return null;
@@ -229,11 +249,10 @@ async function search(url, env) {
     // 기억을 못 읽으면 정보나루에 묻는다
   }
 
-  const api = `https://data4library.kr/api/srchBooks?authKey=${encodeURIComponent(env.DATA4LIBRARY_KEY)}` +
-    `&title=${encodeURIComponent(q)}&pageSize=40&format=json`;
+
   let docs = [];
   try {
-    const res = await fetch(api);
+    const res = await d4l(env, 'srchBooks', { title: q, pageSize: '40' });
     if (!res.ok) return json({ error: '정보나루가 답하지 않습니다' }, 502);
     const response = (await res.json())?.response;
     // 하루 호출 한도(500건)를 넘기면 정보나루가 결과 대신 오류를 준다. 그걸 "검색 결과 없음"으로
@@ -303,7 +322,7 @@ async function related(url, env) {
 
   let response;
   try {
-    const res = await fetch(`https://data4library.kr/api/usageAnalysisList?authKey=${encodeURIComponent(env.DATA4LIBRARY_KEY)}&isbn13=${isbn}&format=json`);
+    const res = await d4l(env, 'usageAnalysisList', { isbn13: isbn });
     if (!res.ok) return json({ error: '정보나루가 답하지 않습니다' }, 502);
     response = (await res.json())?.response;
   } catch {
