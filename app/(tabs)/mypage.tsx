@@ -1,6 +1,6 @@
 import React from 'react';
 import { Alert, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { TabScreen } from '@/components/TabScreen';
+import { TabScreen, useBleed } from '@/components/TabScreen';
 import { Ionicons } from '@expo/vector-icons';
 import { Mascot } from '@/components/Mascot';
 import { useRouter } from 'expo-router';
@@ -26,6 +26,7 @@ export default function MyPageScreen() {
   const { favorites, visits, recentLibraryIds, resetAll } = useAppStore();
   const { data } = useAsync(() => libraryApi.list(), [], { cacheKey: 'all-libraries' });
   const tabPad = useTabBarPadding();
+  const bleed = useBleed();
   const layout = useLayout();
   const { t, lang } = useT();
   const router = useRouter();
@@ -46,11 +47,14 @@ export default function MyPageScreen() {
   };
 
   return (
-    <TabScreen style={styles.safe}>
+    <TabScreen style={styles.safe} bleed>
       <ScrollView
         directionalLockEnabled
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={[styles.content, { paddingBottom: tabPad }]}
+        contentContainerStyle={[
+          styles.content,
+          bleed.on ? { paddingTop: bleed.top + spacing.xl, paddingBottom: bleed.bottom } : { paddingBottom: tabPad },
+        ]}
       >
         {/* 태블릿에서는 이 안쪽을 가운데로 모은다. ScrollView 의
             contentContainerStyle 에 직접 넣으면 왼쪽에 붙은 채로 남는다. */}
@@ -228,7 +232,7 @@ function GlassTest() {
  * npm run geocode / enrich / collect-nearby 를 돌린 뒤 여기서 확인한다.
  */
 /** 기기에 들어간 코드를 눈으로 확인하는 표시. 새 코드를 올릴 때마다 바꾼다 */
-const BUILD_MARK = '10-05 탭바 한 덩어리';
+const BUILD_MARK = '10-05 화면 끝까지(홈·설정·지도)';
 
 function DataStatus() {
   const d = dataCompleteness();

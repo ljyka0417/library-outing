@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, AppState, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { TabScreen } from '@/components/TabScreen';
+import { TabScreen, useBleed } from '@/components/TabScreen';
 import { useFocusEffect, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { CategoryGrid } from '@/components/CategoryGrid';
@@ -35,6 +35,7 @@ const HomeContent = memo(function HomeContent() {
   const router = useRouter();
   const recentIds = useAppStore((s) => s.recentLibraryIds);
   const tabPad = useTabBarPadding();
+  const bleed = useBleed();
   const { t, lang } = useT();
   const layout = useLayout();
 
@@ -76,13 +77,16 @@ const HomeContent = memo(function HomeContent() {
   );
 
   return (
-    <TabScreen style={styles.safe}>
+    <TabScreen style={styles.safe} bleed>
       {/* 태블릿에서는 본문을 가운데로 모은다. 폰에서는 화면 폭 그대로라
           centered() 가 아무 일도 하지 않는다. */}
       <ScrollView
         directionalLockEnabled
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={[styles.content, { paddingBottom: tabPad }]}
+        contentContainerStyle={[
+          styles.content,
+          bleed.on ? { paddingTop: bleed.top, paddingBottom: bleed.bottom } : { paddingBottom: tabPad },
+        ]}
       >
         <View style={centered(layout)}>
         {/* 인사 + 검색 */}

@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { FlatList, Linking, Pressable, Text, View, useWindowDimensions } from 'react-native';
 import { useFocusEffect, useRouter } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import * as Location from 'expo-location';
 import { TabScreen } from '@/components/TabScreen';
@@ -10,7 +11,7 @@ import { Mascot } from '@/components/Mascot';
 import { CATEGORY_MAP } from '@/data/categories';
 import { MOCK_LIBRARIES } from '@/data/libraries.mock';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
-import { useLayout } from '@/hooks/useLayout';
+import { useLayout, navKind } from '@/hooks/useLayout';
 import { useT, type MessageKey } from '@/i18n';
 import { libText } from '@/i18n/libraryText';
 import { distanceMeters } from '@/utils/geo';
@@ -37,6 +38,7 @@ export default function NearbyScreen() {
   const layout = useLayout();
   const tabPad = useTabBarPadding();
   const { width } = useWindowDimensions();
+  const insets = useSafeAreaInsets();
   const map = useRef<NearbyMapHandle>(null);
   const list = useRef<FlatList<Row>>(null);
 
@@ -104,10 +106,29 @@ export default function NearbyScreen() {
 
   const showCards = perm === 'granted' ? !!me : true;
 
+  /*
+   * 지도는 화면 끝까지 — 상태 표시줄과 탭바 밑까지 깔고, 그 위에 유리 탭바·카드가 뜬다(애플 지도 앱 모양).
+   * 그래서 지도는 TabScreen(안전 영역 틀) 바깥에 두고, 틀은 손가락을 지도로 흘려보낸다(overlay).
+   * 애플 로고·법적 고지는 가리면 안 되므로 상태 표시줄·탭바만큼 안쪽으로.
+   */
+  const mapPadding = {
+    top: insets.top,
+    left: 0,
+    right: 0,
+    bottom: insets.bottom + (navKind(width) === 'bottom' ? 56 : 0),
+  };
+
   return (
-    <TabScreen style={styles.safe}>
-      <View style={styles.mapWrap}>
-        <NearbyMap ref={map} libraries={LIBS} user={me} selectedId={selected} onSelect={(id) => select(id, 'map')} />
+    <View style={styles.safe}>
+      <NearbyMap
+        ref={map}
+        libraries={LIBS}
+        user={me}
+        selectedId={selected}
+        onSelect={(id) => select(id, 'map')}
+        padding={mapPadding}
+      />
+      <TabScreen style={styles.mapWrap} overlay>
 
         {/* 위: 제목 + 내 위치로 */}
         <View style={[styles.top, { paddingHorizontal: layout.gutter }]} pointerEvents="box-none">
@@ -177,8 +198,8 @@ export default function NearbyScreen() {
             />
           ) : null}
         </View>
-      </View>
-    </TabScreen>
+      </TabScreen>
+    </View>
   );
 }
 

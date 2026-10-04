@@ -1,10 +1,29 @@
 import React, { useState, type ReactNode } from 'react';
 import { StyleSheet, View, useWindowDimensions, type StyleProp, type ViewStyle } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { BlurView } from 'expo-blur';
 import { SafeAreaView as ControllerSafeAreaView } from 'react-native-screens/experimental';
-import { LayoutWidth } from '@/hooks/useLayout';
+import { LayoutWidth, navKind } from '@/hooks/useLayout';
 import { useNativeTabs } from '@/hooks/useNativeTabs';
-import { themedStyles } from '@/theme';
+import { currentScheme, themedStyles } from '@/theme';
+
+/** 애플 탭바(폰)가 홈 인디케이터 위로 차지하는 높이 — 알약과 그 아래위 틈 */
+const NATIVE_BAR = 50;
+
+/**
+ * 화면 끝까지 깔기(bleed). 폰에서 애플 탭바를 쓸 때만 켜진다.
+ *
+ * 인스타처럼 글이 유리 탭바 **밑으로** 지나가고 시계 자리 밑으로도 올라간다. 틀이 위아래를
+ * 잘라 내지 않는 대신, 스크롤 목록이 처음과 끝에 top / bottom 만큼 비워 둔다.
+ * 아이패드는 탭바가 위에 있고 사이드바도 있어 예전처럼 틀이 비운다(on = false).
+ */
+export function useBleed() {
+  const native = useNativeTabs();
+  const insets = useSafeAreaInsets();
+  const { width } = useWindowDimensions();
+  const on = native && navKind(width) === 'bottom';
+  return { on, top: on ? insets.top : 0, bottom: on ? insets.bottom + NATIVE_BAR + 16 : 0 };
+}
 
 /**
  * 탭 화면의 바깥 틀. 위쪽 안전 영역만큼 내려서 시작한다.
@@ -36,19 +55,30 @@ export function TabScreen({
   style,
   children,
   bottomEdge = true,
+  overlay = false,
+  bleed = false,
 }: {
   style?: StyleProp<ViewStyle>;
   children: ReactNode;
   /** 아래쪽 안전 영역(탭바 자리)을 비울지. 키보드가 올라온 동안에는 끈다 */
   bottomEdge?: boolean;
+  /**
+   * 화면 뒤에 따로 깐 것(내 주변 지도)이 비쳐 보이고 만져지게 — 틀은 손가락을 받지 않고
+   * 안쪽 단추·카드만 받는다. 바탕색도 칠하지 않는다.
+   */
+  overlay?: boolean;
+  /** 화면 끝까지 깔기 — useBleed 참고. 스크롤 목록이 useBleed().top / bottom 을 비워야 한다 */
+  bleed?: boolean;
 }) {
   const native = useNativeTabs();
   const { width: windowWidth } = useWindowDimensions();
   const [width, setWidth] = useState<number | null>(null);
+  const edge = useBleed();
+  const full = bleed && edge.on;
 
   if (!native) {
     return (
-      <SafeAreaView style={style} edges={['top']}>
+      <SafeAreaView style={style} edges={['top']} pointerEvents={overlay ? 'box-none' : 'auto'}>
         {children}
       </SafeAreaView>
     );
@@ -57,10 +87,12 @@ export function TabScreen({
   return (
     <ControllerSafeAreaView
       style={style}
-      edges={{ top: true, left: true, right: true, bottom: bottomEdge }}
+      edges={{ top: !full, left: true, right: true, bottom: bottomEdge && !full }}
+      pointerEvents={overlay ? 'box-none' : 'auto'}
     >
       <View
         style={styles.fill}
+        pointerEvents={overlay ? 'box-none' : 'auto'}
         onLayout={(e) => {
           const w = Math.round(e.nativeEvent.layout.width);
           if (w > 0 && w !== width) setWidth(w);
@@ -68,6 +100,15 @@ export function TabScreen({
       >
         <LayoutWidth width={width ?? windowWidth}>{children}</LayoutWidth>
       </View>
+      {/* 시계 자리 — 글이 밑으로 지나갈 때 겹쳐 읽히지 않게 살짝 흐린 유리 */}
+      {full ? (
+        <BlurView
+          pointerEvents="none"
+          intensity={40}
+          tint={currentScheme() === 'dark' ? 'dark' : 'light'}
+          style={[styles.statusGlass, { height: edge.top }]}
+        />
+      ) : null}
     </ControllerSafeAreaView>
   );
 }
@@ -76,4 +117,5 @@ const styles = themedStyles(() => ({
   fill: {
     flex: 1,
   },
+  statusGlass: { position: 'absolute', top: 0, left: 0, right: 0 },
 }));

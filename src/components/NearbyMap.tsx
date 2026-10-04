@@ -25,9 +25,11 @@ interface Props {
   user: Coordinates | null;
   selectedId: string | null;
   onSelect: (id: string) => void;
+  /** 지도를 화면 끝까지 깔 때, 상태 표시줄·탭바에 가리지 않게 애플 로고·법적 고지를 안쪽으로 */
+  padding?: { top: number; right: number; bottom: number; left: number };
 }
 
-export const NearbyMap = forwardRef<NearbyMapHandle, Props>(function NearbyMap({ libraries, user, selectedId, onSelect }, ref) {
+export const NearbyMap = forwardRef<NearbyMapHandle, Props>(function NearbyMap({ libraries, user, selectedId, onSelect, padding }, ref) {
   const map = useRef<MapView>(null);
   useImperativeHandle(ref, () => ({
     focus: (c, delta = 0.04) =>
@@ -38,6 +40,7 @@ export const NearbyMap = forwardRef<NearbyMapHandle, Props>(function NearbyMap({
     <MapView
       ref={map}
       style={StyleSheet.absoluteFill}
+      mapPadding={padding}
       initialRegion={{ latitude: KOREA_CENTER.lat, longitude: KOREA_CENTER.lng, latitudeDelta: 5.5, longitudeDelta: 5.5 }}
       showsUserLocation={false}
       showsPointsOfInterests={false}
