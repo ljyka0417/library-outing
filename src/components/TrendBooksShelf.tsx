@@ -16,7 +16,7 @@ import {
 } from '@/data/trendBooks';
 import { libText } from '@/i18n/libraryText';
 import { bleedRow, useLayout } from '@/hooks/useLayout';
-import { regionName, useT, type MessageKey } from '@/i18n';
+import { useT, type MessageKey } from '@/i18n';
 import { colors, radius, spacing, typography, themedStyles } from '@/theme';
 import type { Book } from '@/types';
 
@@ -137,11 +137,6 @@ export function TrendBooksShelf({
               <BookRow books={keyword.books} rowKey={keyword.word} onAsk={setAsking} />
             </>
           ) : null}
-          {loanLookupEnabled ? (
-            <Text style={[styles.hint, { paddingHorizontal: layout.gutter }]}>
-              {t('trend.hint', { region: regionName(lang, region) })}
-            </Text>
-          ) : null}
         </View>
       ) : null}
 
@@ -212,11 +207,6 @@ const styles = themedStyles(() => ({
     ...typography.caption,
     color: colors.textSub,
     marginBottom: spacing.sm,
-  },
-  hint: {
-    ...typography.tiny,
-    color: colors.textMuted,
-    marginTop: spacing.sm,
   },
   empty: {
     ...typography.caption,

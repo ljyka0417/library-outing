@@ -46,9 +46,9 @@ export function BookSearchPane() {
     return recent && REGIONS.includes(recent.region.sido) ? recent.region.sido : '서울';
   }, [recentIds]);
   const [region, setRegion] = useState(startRegion);
-  // 칩 차례: 처음 지역(내 지역) → 나머지. 고른 칩이 오른쪽 끝에 숨어 안 보이던 것을 고쳤다
-  // (전국 칩은 뺐다 — 한 번 누를 때마다 정보나루 하루 한도 500건 중 80건을 쓴다)
-  const chips = [startRegion, ...REGIONS.filter((r) => r !== startRegion)];
+  // 전국 칩은 뺐다 — 한 번 누를 때마다 정보나루에 80곳을 묻는다
+  // 칩은 늘 같은 차례(서울 · 경기 · 인천 …). 고른 지역이 뒤쪽이면 칩 줄이 그 자리로 넘어가 보이게 한다
+  const chips = REGIONS;
 
   const [query, setQuery] = useState('');
   const [state, setState] = useState<'idle' | 'loading' | 'done' | 'failed' | 'quota'>('idle');
@@ -116,7 +116,7 @@ export function BookSearchPane() {
       </View>
 
       <Text style={[styles.label, { paddingHorizontal: layout.gutter }]}>{t('bookSearch.region')}</Text>
-      <ChipRow contentStyle={styles.filterRow} style={styles.filterRowSpacing}>
+      <ChipRow contentStyle={styles.filterRow} style={styles.filterRowSpacing} focusIndex={chips.indexOf(startRegion)}>
         {chips.map((r) => (
           <Chip
             key={r}

@@ -132,9 +132,25 @@ interface ChipRowProps {
  * 것처럼 보였다. 칩은 카드와 달리 짧고, 태블릿은 폭이 넉넉하다. 숨겨 두고
  * 넘기게 할 이유가 없어서 한 번에 다 펼친다 — 고를 수 있는 게 전부 보인다.
  */
-export function ChipRow({ children, contentStyle, style }: ChipRowProps) {
+export function ChipRow({ children, contentStyle, style, focusIndex }: ChipRowProps & { focusIndex?: number }) {
   const layout = useLayout();
   const pad = { paddingHorizontal: layout.gutter };
+  const scroll = React.useRef<ScrollView>(null);
+  const xs = React.useRef<number[]>([]);
+  const scrolled = React.useRef<number | undefined>(undefined);
+
+  /*
+   * 고른 칩이 오른쪽 끝에 숨어 있으면 그 칩이 보이게 넘겨 둔다 (focusIndex).
+   * 예전엔 고른 칩을 맨 앞으로 빼서 보이게 했는데, 그러면 "대구 · 서울 · 경기 …" 처럼
+   * 순서가 뒤섞여 버그처럼 보였다. 순서는 그대로 두고 그 자리로 넘긴다.
+   */
+  const focus = (i?: number) => {
+    if (i === undefined || i < 0 || scrolled.current === i) return;
+    const x = xs.current[i];
+    if (x === undefined) return;
+    scrolled.current = i;
+    scroll.current?.scrollTo({ x: Math.max(0, x - layout.gutter), animated: false });
+  };
 
   if (layout.isTablet) {
     return <View style={[styles.chipWrap, contentStyle, pad, style]}>{children}</View>;
@@ -142,12 +158,24 @@ export function ChipRow({ children, contentStyle, style }: ChipRowProps) {
 
   return (
     <ScrollView
+      ref={scroll}
       horizontal
       showsHorizontalScrollIndicator={false}
       style={[styles.chipScroll, style]}
       contentContainerStyle={[styles.chipLine, contentStyle, pad]}
     >
-      {children}
+      {focusIndex === undefined
+        ? children
+        : React.Children.map(children, (child, i) => (
+            <View
+              onLayout={(e) => {
+                xs.current[i] = e.nativeEvent.layout.x;
+                if (i === focusIndex) focus(i);
+              }}
+            >
+              {child}
+            </View>
+          ))}
     </ScrollView>
   );
 }

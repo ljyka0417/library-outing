@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, Image, Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { fetchRelated, fetchWhereToBorrow, type FoundBook, type LoanStatus } from '@/api/loanStatus';
+import { fetchBookInfo, type BookInfo } from '@/api/bookInfo';
 import { MOCK_LIBRARIES } from '@/data/libraries.mock';
 import { SIDO_LIST } from '@/data/categories';
 import { regionName, useT } from '@/i18n';
@@ -47,6 +48,7 @@ export function WhereToBorrowSheet({
    * 최근 본 도서관의 지역(예: 원주 → 강원)으로만 묻고 바꿀 수가 없었다. 판 안에서 고르게 한다.
    */
   const [region, setRegion] = useState(startRegion);
+  const regionScroll = useRef<ScrollView>(null);
   useEffect(() => setRegion(startRegion), [startRegion, startBook]);
   const pickRegion = (r: string) => {
     setRegion(r);
@@ -88,6 +90,22 @@ export function WhereToBorrowSheet({
     let alive = true;
     void fetchRelated(firstIsbn).then((r) => {
       if (alive && Array.isArray(r)) setRelated(r);
+    });
+    return () => {
+      alive = false;
+    };
+  }, [firstIsbn]);
+
+  // 책 소개 — 카카오 책 검색(서버가 30일 기억). 못 찾으면 칸을 그리지 않는다
+  const [info, setInfo] = useState<BookInfo | null>(null);
+  const [aboutOpen, setAboutOpen] = useState(false);
+  useEffect(() => {
+    setInfo(null);
+    setAboutOpen(false);
+    if (!firstIsbn) return;
+    let alive = true;
+    void fetchBookInfo(firstIsbn).then((r) => {
+      if (alive) setInfo(r);
     });
     return () => {
       alive = false;
@@ -147,14 +165,39 @@ export function WhereToBorrowSheet({
               <Text style={styles.kicker}>{t('where.title')}</Text>
               <Text style={styles.bookTitle} numberOfLines={2}>{book.title}</Text>
               {book.author ? <Text style={styles.author} numberOfLines={1}>{book.author}</Text> : null}
+              {info && (info.publisher || info.year) ? (
+                <Text style={styles.pub} numberOfLines={1}>
+                  {[info.publisher, info.year && t('where.year', { y: info.year })].filter(Boolean).join(' · ')}
+                </Text>
+              ) : null}
             </View>
             <Pressable onPress={onClose} hitSlop={10} accessibilityRole="button" accessibilityLabel={t('visit.close')}>
               <Ionicons name="close" size={22} color={colors.textSub} />
             </Pressable>
           </View>
 
+          {/* 책 소개 — 세 줄로 접어 두고 누르면 펼친다. 소개 글은 카카오가 준 앞부분이라 끝에 … */}
+          {info?.contents ? (
+            <Pressable
+              onPress={() => setAboutOpen(!aboutOpen)}
+              style={styles.about}
+              accessibilityRole="button"
+              accessibilityState={{ expanded: aboutOpen }}
+            >
+              <Text style={styles.aboutTitle}>{t('where.about')}</Text>
+              <Text style={styles.aboutText} numberOfLines={aboutOpen ? undefined : 3}>
+                {info.contents.replace(/\s+/g, ' ')}…
+              </Text>
+              <View style={styles.aboutFoot}>
+                <Text style={styles.aboutSource}>{t('where.aboutSource')}</Text>
+                <Text style={styles.aboutMore}>{aboutOpen ? t('where.aboutLess') : t('where.aboutMore')}</Text>
+              </View>
+            </Pressable>
+          ) : null}
+
           {/* 지역 고르기 — 고르면 그 지역 도서관에 다시 묻는다 */}
           <ScrollView
+            ref={regionScroll}
             horizontal
             showsHorizontalScrollIndicator={false}
             style={styles.regionScroll}
@@ -166,6 +209,8 @@ export function WhereToBorrowSheet({
               return (
                 <Pressable
                   key={r}
+                  // 고른 지역이 뒤쪽(대구·부산 …)이면 판이 열릴 때 그 칩이 보이게 넘긴다
+                  onLayout={on ? (e) => regionScroll.current?.scrollTo({ x: Math.max(0, e.nativeEvent.layout.x - 16), animated: false }) : undefined}
                   onPress={() => pickRegion(r)}
                   style={({ pressed }) => [styles.regionChip, on && styles.regionChipOn, pressed && { opacity: 0.7 }]}
                   accessibilityRole="button"
@@ -239,6 +284,40 @@ export function WhereToBorrowSheet({
 }
 
 const styles = themedStyles(() => ({
+  pub: {
+    ...typography.tiny,
+    color: colors.textMuted,
+    marginTop: 2,
+  },
+  about: {
+    backgroundColor: colors.surfaceAlt,
+    borderRadius: radius.md,
+    padding: spacing.md,
+    marginBottom: spacing.md,
+    gap: 4,
+  },
+  aboutTitle: {
+    ...typography.captionBold,
+    color: colors.text,
+  },
+  aboutText: {
+    ...typography.caption,
+    color: colors.textSub,
+  },
+  aboutFoot: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  aboutSource: {
+    ...typography.tiny,
+    color: colors.textMuted,
+  },
+  aboutMore: {
+    ...typography.tiny,
+    color: colors.primary,
+    fontWeight: '700',
+  },
   regionScroll: {
     flexGrow: 0,
     marginBottom: spacing.md,
