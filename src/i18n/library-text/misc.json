@@ -308,5 +308,15 @@
     "Buk-gu",
     "北区",
     "北区"
+  ],
+  "매월 둘째·넷째 월요일 / 공휴일 (국립중앙도서관 이용안내)": [
+    "2nd & 4th Mondays of the month / public holidays (National Library of Korea guide)",
+    "毎月第2・第4月曜 / 祝日（国立中央図書館の利用案内）",
+    "每月第二、四个周一 / 公休日（国立中央图书馆使用指南）"
+  ],
+  "매월 첫째 월요일 / 공휴일 (전국도서관표준데이터)": [
+    "1st Monday of the month / public holidays (National Library Standard Data)",
+    "毎月第1月曜 / 祝日（全国図書館標準データ）",
+    "每月第一个周一 / 公休日（全国图书馆标准数据）"
   ]
 }

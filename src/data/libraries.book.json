@@ -1,7 +1,7 @@
 {
   "source": "가이드북 『오늘 도서관 갈래?』 (2026년 9월 9일 초판) 도서관별 기본 정보 표",
   "_readme": "직접 고치지 마세요 — npm run import-book-info 가 덮어씁니다. 고칠 값은 libraries.manual.json 이 아니라 책 자료(docs-내부자료)나 이 스크립트에서.",
-  "generatedAt": "2026-10-03T12:13:18.013Z",
+  "generatedAt": "2026-10-04T03:23:19.731Z",
   "entries": {
     "seoul-library": {
       "bookCode": "1-1",
@@ -51,8 +51,49 @@
       "category": "landmark",
       "address": "서울특별시 서초구 반포대로 201(서초동)",
       "hours": {
-        "label": "09:00~18:00 / 매주 수요일 야간도서관 18:00~21:00 / 휴관일·공휴일 제외"
+        "label": "09:00~18:00 / 매주 수요일 야간도서관 18:00~21:00 / 휴관일·공휴일 제외",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1260
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          },
+          {
+            "open": 540,
+            "close": 1080
+          }
+        ],
+        "closedNth": [
+          {
+            "day": 1,
+            "weeks": [
+              2,
+              4
+            ]
+          }
+        ],
+        "holidays": "closed"
       },
+      "closedDays": "매월 둘째·넷째 월요일 / 공휴일 (국립중앙도서관 이용안내)",
       "homepage": "https://www.nl.go.kr",
       "phone": "02-590-0500",
       "opened": "1945년 10월 15일",
@@ -2918,8 +2959,48 @@
       "category": "nature",
       "address": "전남광주통합특별시 순천시 조례2길 31",
       "hours": {
-        "label": "자료실 09:00~22:00 (열람실 08:00~22:00)"
+        "label": "자료실 09:00~22:00 (열람실 08:00~22:00)",
+        "byDay": [
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          },
+          {
+            "open": 540,
+            "close": 1320
+          }
+        ],
+        "closedNth": [
+          {
+            "day": 1,
+            "weeks": [
+              1
+            ]
+          }
+        ],
+        "holidays": "closed"
       },
+      "closedDays": "매월 첫째 월요일 / 공휴일 (전국도서관표준데이터)",
       "homepage": "https://library.suncheon.go.kr/lib/index.do?siteLib=MC",
       "phone": "061-749-8891",
       "opened": "2010년 3월 12일",

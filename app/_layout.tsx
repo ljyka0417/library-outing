@@ -7,6 +7,7 @@ import * as SystemUI from 'expo-system-ui';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useAppStore } from '@/store/useAppStore';
 import { applyScheme, colors, currentScheme } from '@/theme';
+import { FavoritePopupHost } from '@/components/FavoritePopup';
 
 // 로컬 저장소 복원이 끝날 때까지 스플래시를 유지한다.
 void SplashScreen.preventAutoHideAsync();
@@ -167,6 +168,8 @@ export default function RootLayout() {
           }}
         />
       </Stack>
+      {/* 하트로 즐겨찾기에 담았을 때 뜨는 창 — 하트가 여러 화면에 있어서 여기 하나만 둔다 */}
+      <FavoritePopupHost />
     </GestureHandlerRootView>
   );
 }

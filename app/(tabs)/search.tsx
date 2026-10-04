@@ -19,6 +19,7 @@ import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { LayoutWidth, centered, useLayout } from '@/hooks/useLayout';
 import { colors, spacing, typography, themedStyles } from '@/theme';
 import type { CategoryId, Library } from '@/types';
+import { useFavoriteToggle } from '@/components/FavoritePopup';
 
 /**
  * 검색.
@@ -248,7 +249,8 @@ const ResultsPane = memo(function ResultsPane({
   const layout = useLayout();
   const tabPad = useTabBarPadding();
   const favorites = useAppStore((s) => s.favorites);
-  const toggleFavorite = useAppStore((s) => s.toggleFavorite);
+  // 담으면 "즐겨찾기에 담았어요" 창이 뜬다 (FavoritePopup)
+  const toggleFavorite = useFavoriteToggle();
 
   // 지역 이름(서울, 경기…)은 옮기지 않는다. 주소에 적힌 원문이고,
   // 현지에서 길을 물을 때도 그 글자가 있어야 통한다.

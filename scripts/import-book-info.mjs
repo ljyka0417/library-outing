@@ -56,7 +56,29 @@ const HOURS_FOR_PARSE = {
   '13-11': '화~금 09:00~22:00 / 토 09:00~18:00 / 일 09:00~17:00',
 };
 /** 휴관일을 책이 밝히지 않아 "지금 운영중"을 판정하지 않는 곳 */
-const HOURS_UNKNOWN = new Set(['1-2', '8-10']);
+const HOURS_UNKNOWN = new Set([]);
+/**
+ * 책이 휴관일을 밝히지 않아 공식 자료로 채운 곳 (2026-10-04).
+ * 여는 시간은 책 그대로 두고, 책에 빠진 쉬는 날만 도서관 공식 안내에서 가져온다 — 책과 어긋나지 않는다.
+ * 예전엔 판정을 숨겼는데("지어내느니 비운다"), 근거가 있는 휴관일이라 채워서 운영중 배지를 띄운다.
+ *   parse       판정용으로만 고쳐 쓴 문구 (화면에는 책 원문)
+ *   closedDays  화면·달곰이가 말하는 휴관일 (출처를 함께 적는다)
+ *   holidays    공휴일 규칙 (둘 다 공휴일 휴관. 일요일과 겹친 공휴일은 열지만 규칙으로는 담지 못해 휴관으로 본다)
+ */
+const CLOSURE_FROM_OFFICIAL = {
+  // 국립중앙도서관 이용안내(nl.go.kr): 매월 둘째·넷째 월요일, 일요일을 제외한 관공서 공휴일 휴관. 수요일은 21:00까지
+  '1-2': {
+    parse: '수 09:00~21:00 / 09:00~18:00 / 둘째·넷째 월 휴관',
+    closedDays: '매월 둘째·넷째 월요일 / 공휴일 (국립중앙도서관 이용안내)',
+    holidays: 'closed',
+  },
+  // 전국도서관표준데이터·정보나루: 매월 첫째 월요일(정비의 날), 일요일을 제외한 공휴일 휴관. 자료실 09:00~22:00 (책)
+  '8-10': {
+    parse: '09:00~22:00 / 첫째 월 휴관',
+    closedDays: '매월 첫째 월요일 / 공휴일 (전국도서관표준데이터)',
+    holidays: 'closed',
+  },
+};
 /** 책이 "본관 휴관"이라 적은 곳 — 매일 휴관으로 본다 */
 const HOURS_CLOSED = new Set(['14-1']);
 
@@ -183,9 +205,10 @@ for (const b of book) {
   if (b.hours) {
     if (HOURS_CLOSED.has(b.code)) hours = { label: b.hours, byDay: Array(7).fill(null) };
     else {
-      const parsed = HOURS_UNKNOWN.has(b.code) ? null : parseHours(HOURS_FOR_PARSE[b.code] ?? b.hours);
+      const official = CLOSURE_FROM_OFFICIAL[b.code];
+      const parsed = HOURS_UNKNOWN.has(b.code) ? null : parseHours(official?.parse ?? HOURS_FOR_PARSE[b.code] ?? b.hours);
       if (!parsed) hoursHidden.push(`${b.code} ${b.name}`);
-      const holidays = parsed ? holidayRule(b.hours) : undefined;
+      const holidays = parsed ? official?.holidays ?? holidayRule(b.hours) : undefined;
       const closedDates = parsed ? closedDatesOf(b.hours) : undefined;
       hours = { label: b.hours, ...(parsed ?? {}), ...(holidays ? { holidays } : {}), ...(closedDates ? { closedDates } : {}) };
     }
@@ -202,7 +225,11 @@ for (const b of book) {
     category,
     ...(address ? { address } : {}),
     ...(hours ? { hours } : {}),
-    ...(hours && closedPart(b.code, b.hours) ? { closedDays: closedPart(b.code, b.hours) } : {}),
+    ...(hours && CLOSURE_FROM_OFFICIAL[b.code]
+      ? { closedDays: CLOSURE_FROM_OFFICIAL[b.code].closedDays }
+      : hours && closedPart(b.code, b.hours)
+        ? { closedDays: closedPart(b.code, b.hours) }
+        : {}),
     ...(homepage ? { homepage } : {}),
     ...(b.phone ? { phone: b.phone } : {}),
     ...(b.opened ? { opened: b.opened } : {}),

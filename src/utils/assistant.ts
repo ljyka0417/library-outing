@@ -51,6 +51,8 @@ export interface Answer {
   spots?: Spot[];
   /** 이어서 물어볼 만한 것들 */
   suggestions?: string[];
+  /** 칩이 곧 대답인 되물음("어느 지역에서 찾을까요?") — 섞지 않고 그대로 보여 준다 */
+  keepSuggestions?: boolean;
 }
 
 export interface Spot {
@@ -768,6 +770,7 @@ async function answerBorrow(q: string, lang: Lang): Promise<Answer> {
     return {
       text: tr('bot.borrowAskRegion', { title }),
       suggestions: home.map((r) => tr('bot.sugBorrowIn', { region: regionName(lang, r), title })),
+      keepSuggestions: true,
     };
   }
 
@@ -923,7 +926,80 @@ export interface AskOptions {
   visitedIds?: string[];
 }
 
-export async function ask(
+/** 이어지는 칩은 이만큼까지만 — 나머지는 아무 주제에서나 */
+const RELATED_MAX = 2;
+/** 칩 글자 속 도서관 찾기용 — 긴 이름부터 (「광주시립점자도서관」 안의 다른 이름에 먼저 걸리지 않게) */
+const LIBRARIES_LONGEST_FIRST = [...MOCK_LIBRARIES].sort((a, b) => b.name.length - a.name.length);
+
+/** 씨앗으로 섞기 (같은 씨앗이면 같은 순서 — 말을 바꿔 다시 답해도 같은 칩이 그 말로 바뀐다) */
+function seededShuffle<T>(items: T[], seed: number): T[] {
+  let a = seed >>> 0;
+  const r = () => {
+    a = (a + 0x6d2b79f5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  const out = items.slice();
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(r() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+}
+
+/**
+ * 모든 답의 칩을 마지막에 한 번 섞는다.
+ *
+ * 답마다 이어 물을 칩을 주는데, 몇몇 답은 같은 갈래만 다섯 개를 줬다 — 「달곰이 MBTI는?」 뒤에
+ * 달곰이 질문만 다섯 개가 이어져 한 주제에 갇혔다. 그래서 답이 준 칩에서는 많아야 둘만 (씨앗으로
+ * 골라) 남기고, 나머지는 검사를 통과한 칩 전체에서 아무렇게나 채운다. 네 말 모두 같은 규칙이다.
+ * "어느 지역에서 찾을까요?" 처럼 칩이 곧 대답인 되물음(keepSuggestions)은 그대로 둔다.
+ */
+function mixSuggestions(answer: Answer, lang: Lang, seed: number, avoid: string[]): Answer {
+  if (answer.keepSuggestions) return answer;
+  const squash = (s: string) => s.toLowerCase().replace(/\s+/g, '');
+  const asked = new Set(avoid.map(squash));
+  const meChips = new Set(ME_TOPICS.map((k) => squash(translate(lang, `me.sug.${k}` as MessageKey))));
+  const related = seededShuffle(answer.suggestions ?? [], seed)
+    .filter((s) => !asked.has(squash(s)))
+    .slice(0, RELATED_MAX);
+  const relatedHasMe = related.some((s) => meChips.has(squash(s)));
+  const out = [...related];
+  const seen = new Set(out.map(squash));
+  // 한 도서관 이야기는 다섯 칸 중 둘까지 (아무렇게나 채운 칩이 우연히 같은 도서관을 또 뽑는 일이 있었다)
+  const perLibrary = new Map<string, number>();
+  const libraryIn = (s: string) => LIBRARIES_LONGEST_FIRST.find((l) => s.includes(l.name))?.id;
+  for (const s of out) {
+    const id = libraryIn(s);
+    if (id) perLibrary.set(id, (perLibrary.get(id) ?? 0) + 1);
+  }
+  // 한 번 훑어 모자라면(이미 물어본 것이 많을 때) 씨앗을 바꿔 한 번 더
+  for (const pool of [starterQuestions(lang, seed + 7, avoid), starterQuestions(lang, seed + 13, avoid)]) {
+    for (const s of pool) {
+      if (out.length >= CHIP_COUNT) break;
+      const k = squash(s);
+      // 달곰이 이야기를 이미 이어 권했으면 하나 더 얹지 않는다
+      if (seen.has(k) || asked.has(k) || (relatedHasMe && meChips.has(k))) continue;
+      const id = libraryIn(s);
+      if (id && (perLibrary.get(id) ?? 0) >= RELATED_MAX) continue;
+      if (id) perLibrary.set(id, (perLibrary.get(id) ?? 0) + 1);
+      out.push(s);
+      seen.add(k);
+    }
+  }
+  return { ...answer, suggestions: out };
+}
+
+export async function ask(question: string, lang: Lang = 'ko', options: AskOptions = {}): Promise<Answer> {
+  const q = question.trim();
+  const seed = options.seed ?? seedFrom(norm(q));
+  const answer = await answerQuestion(question, lang, options);
+  return mixSuggestions(answer, lang, seed, [...(options.avoid ?? []), q]);
+}
+
+async function answerQuestion(
   question: string,
   lang: Lang = 'ko',
   options: AskOptions = {}

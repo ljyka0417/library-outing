@@ -32,6 +32,7 @@ import { callPhone, openWeb } from '@/utils/mapLinks';
 import { isOpenNow, todayHoursLabel } from '@/utils/openingHours';
 import { useNow } from '@/hooks/useNow';
 import type { Book, Library } from '@/types';
+import { useFavoriteToggle } from './FavoritePopup';
 
 /** 시/군/구는 확인된 곳만 있으므로 있을 때만 붙인다. 옮기는 기준은 LibraryCard 와 같다. */
 function regionLabel(library: Library, lang: Lang) {
@@ -115,7 +116,8 @@ export const LibraryDetail = memo(function LibraryDetail({
   const now = useNow();
 
   const favorites = useAppStore((s) => s.favorites);
-  const toggleFavorite = useAppStore((s) => s.toggleFavorite);
+  // 담으면 "즐겨찾기에 담았어요" 창이 뜬다 (FavoritePopup)
+  const toggleFavorite = useFavoriteToggle();
   const pushRecent = useAppStore((s) => s.pushRecent);
   const addVisit = useAppStore((s) => s.addVisit);
   const visits = useAppStore((s) => s.visits);

@@ -69,11 +69,12 @@ export default function MyPageScreen() {
         </View>
 
         <View style={styles.stats}>
-          <Stat label={t('my.statFavorites')} value={favorites.length} />
+          {/* 누르면 그 기록 목록(내 기록)이 열린다 */}
+          <Stat label={t('my.statFavorites')} value={favorites.length} onPress={() => router.push('/records?tab=favorites')} />
           <View style={styles.statDivider} />
-          <Stat label={t('my.statVisits')} value={visits.length} />
+          <Stat label={t('my.statVisits')} value={visits.length} onPress={() => router.push('/records?tab=visits')} />
           <View style={styles.statDivider} />
-          <Stat label={t('my.statRecent')} value={recentLibraryIds.length} />
+          <Stat label={t('my.statRecent')} value={recentLibraryIds.length} onPress={() => router.push('/records?tab=recent')} />
         </View>
 
         {visitedNames.length > 0 ? (
@@ -227,7 +228,7 @@ function GlassTest() {
  * npm run geocode / enrich / collect-nearby 를 돌린 뒤 여기서 확인한다.
  */
 /** 기기에 들어간 코드를 눈으로 확인하는 표시. 새 코드를 올릴 때마다 바꾼다 */
-const BUILD_MARK = '10-04 달곰이 새 질문';
+const BUILD_MARK = '10-04 칩 섞기';
 
 function DataStatus() {
   const d = dataCompleteness();
@@ -280,12 +281,20 @@ function DataStatus() {
   );
 }
 
-function Stat({ label, value }: { label: string; value: number }) {
+function Stat({ label, value, onPress }: { label: string; value: number; onPress: () => void }) {
   return (
-    <View style={styles.stat}>
+    <Pressable
+      onPress={onPress}
+      style={({ pressed }) => [styles.stat, pressed && { opacity: 0.6 }]}
+      accessibilityRole="button"
+      accessibilityLabel={`${label} ${value}`}
+    >
       <Text style={styles.statValue}>{value}</Text>
-      <Text style={styles.statLabel}>{label}</Text>
-    </View>
+      <View style={styles.statLabelRow}>
+        <Text style={styles.statLabel}>{label}</Text>
+        <Ionicons name="chevron-forward" size={11} color={colors.textMuted} />
+      </View>
+    </Pressable>
   );
 }
 
@@ -337,6 +346,7 @@ const styles = themedStyles(() => ({
   stat: { flex: 1, alignItems: 'center', gap: 2 },
   statValue: { ...typography.h2, color: colors.primary },
   statLabel: { ...typography.tiny, color: colors.textSub },
+  statLabelRow: { flexDirection: 'row', alignItems: 'center', gap: 2 },
   statDivider: { width: 1, backgroundColor: colors.divider, marginVertical: spacing.xs },
 
   card: {

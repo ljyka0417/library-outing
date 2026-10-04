@@ -29,6 +29,7 @@ import { colors, radius, spacing, typography, themedStyles } from '@/theme';
 import { formatDistance, walkingMinutes } from '@/utils/openingHours';
 import { openKakaoMap } from '@/utils/mapLinks';
 import { libText } from '@/i18n/libraryText';
+import { useFavoriteToggle } from '@/components/FavoritePopup';
 
 interface Message {
   id: string;
@@ -87,7 +88,8 @@ export default function ChatScreen() {
   const { t, lang } = useT();
 
   const favorites = useAppStore((s) => s.favorites);
-  const toggleFavorite = useAppStore((s) => s.toggleFavorite);
+  // 담으면 "즐겨찾기에 담았어요" 창이 뜬다 (FavoritePopup)
+  const toggleFavorite = useFavoriteToggle();
 
   const [messages, setMessages] = useState<Message[]>([GREETING]);
   const [input, setInput] = useState('');
