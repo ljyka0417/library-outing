@@ -70,11 +70,15 @@ $HOST {
   reverse_proxy 127.0.0.1:8787
 }
 CADDY
-# 오라클 Ubuntu 는 서버 안 방화벽이 80·443 을 막아 둔다 — 연다 (웹 콘솔의 보안 목록도 따로 열어야 한다)
+# 오라클 Ubuntu 는 서버 안 방화벽이 80·443 을 막아 둔다 — 연다 (웹 콘솔의 보안 규칙도 따로 열어야 한다)
+# 규칙은 위에서부터 걸린다. "나머지 거부(REJECT)" 줄보다 위에 넣어야 한다 — 번호를 못 박아 넣었다가
+# 규칙이 5줄뿐인 서버에서 거부 줄 아래로 들어가 80·443 이 계속 막혔다.
 for p in 80 443; do
-  iptables -C INPUT -p tcp --dport "$p" -m state --state NEW -j ACCEPT 2>/dev/null \
-    || iptables -I INPUT 6 -p tcp --dport "$p" -m state --state NEW -j ACCEPT 2>/dev/null \
-    || iptables -I INPUT 1 -p tcp --dport "$p" -m state --state NEW -j ACCEPT
+  while iptables -C INPUT -p tcp --dport "$p" -m state --state NEW -j ACCEPT 2>/dev/null; do
+    iptables -D INPUT -p tcp --dport "$p" -m state --state NEW -j ACCEPT
+  done
+  REJECT_AT="$(iptables -L INPUT --line-numbers -n | awk '/REJECT/{print $1; exit}')"
+  iptables -I INPUT "${REJECT_AT:-1}" -p tcp --dport "$p" -m state --state NEW -j ACCEPT
 done
 netfilter-persistent save >/dev/null 2>&1 || true
 systemctl restart caddy

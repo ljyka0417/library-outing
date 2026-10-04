@@ -29,12 +29,15 @@ if (!KEY || !SECRET) {
 }
 
 const secretOk = (got) => {
-  const a = Buffer.from(String(got ?? ''));
+  // 붙여 넣다 따라온 앞뒤 공백은 무시한다
+  const a = Buffer.from(String(got ?? '').trim());
   const b = Buffer.from(SECRET);
   return a.length === b.length && timingSafeEqual(a, b);
 };
 
 let served = 0;
+// 비밀값이 틀려 거절한 수 — Worker 설정이 어긋났는지 /health 로 바로 알 수 있게
+let rejected = 0;
 const today = () => new Date().toISOString().slice(0, 10);
 let day = today();
 
@@ -43,7 +46,7 @@ http
     const url = new URL(req.url ?? '/', 'http://relay');
     if (url.pathname === '/health') {
       res.writeHead(200, { 'content-type': 'text/plain; charset=utf-8' });
-      return res.end(`ok ${day} ${served}`);
+      return res.end(`ok ${day} ${served} rejected:${rejected}`);
     }
     const m = url.pathname.match(/^\/api\/([A-Za-z]+)$/);
     if (req.method !== 'GET' || !m || !ALLOWED.has(m[1])) {
@@ -51,6 +54,7 @@ http
       return res.end();
     }
     if (!secretOk(req.headers['x-relay-secret'])) {
+      rejected++;
       res.writeHead(403);
       return res.end();
     }
