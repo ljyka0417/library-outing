@@ -18,11 +18,20 @@ import type { Book } from '@/types';
  * 처음 지역은 부르는 쪽이 정한다(최근 본 도서관의 지역, 없으면 서울).
  * 지역 순위는 그 지역 도서관들을 합친 것이라 특정 도서관의 대출 가능 여부는 붙이지 않는다.
  */
-export function RegionBooksShelf({ initialRegion }: { initialRegion: string }) {
+export function RegionBooksShelf({
+  region: wanted,
+  onRegionChange,
+}: {
+  /** 홈의 책 줄들이 함께 쓰는 지역 (연령별 줄과 같은 지역) */
+  region: string;
+  onRegionChange: (region: string) => void;
+}) {
   const { t, lang } = useT();
   const layout = useLayout();
   const regions = SIDO_LIST.filter((r) => regionsWithBooks.includes(r));
-  const [region, setRegion] = useState(regions.includes(initialRegion) ? initialRegion : regions[0]);
+  // 순위가 모이지 않은 지역이면 첫 지역을 보여 준다
+  const region = regions.includes(wanted) ? wanted : regions[0];
+  const setRegion = onRegionChange;
   const [picking, setPicking] = useState(false);
   // 누른 책 — "어디서 빌릴 수 있나요?" 판을 띄운다
   const [asking, setAsking] = useState<Book | null>(null);
@@ -80,7 +89,9 @@ export function RegionBooksShelf({ initialRegion }: { initialRegion: string }) {
 
       <WhereToBorrowSheet
         book={asking}
-        region={region}
+        // 판에서 순위가 없는 지역을 골라도 되돌아가지 않게 고른 지역 그대로 넘긴다
+        region={wanted}
+        onRegionChange={onRegionChange}
         onClose={() => setAsking(null)}
         onOpenLibrary={(id) => {
           setAsking(null);

@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { TabScreen } from '@/components/TabScreen';
 import { useRouter } from 'expo-router';
@@ -47,6 +47,14 @@ const HomeContent = memo(function HomeContent() {
     .sort((a, b) => recentIds.indexOf(a.id) - recentIds.indexOf(b.id));
 
   const startRegion = recentLibraries[0]?.region.sido ?? '서울';
+  /*
+   * 책 줄들이 함께 쓰는 지역. 처음엔 최근 본 도서관의 지역이고, 지역별 줄의 단추나
+   * "어디서 빌릴 수 있나요?" 판에서 고르면 그 지역으로 바뀐다(연령별·키워드 줄도 같이).
+   * 다른 지역 도서관을 새로 보면 다시 그 지역으로 맞춘다.
+   */
+  const [pickedRegion, setPickedRegion] = useState<string | null>(null);
+  useEffect(() => setPickedRegion(null), [startRegion]);
+  const bookRegion = pickedRegion ?? startRegion;
 
   // 날씨를 볼 자리: 최근 본 도서관, 없으면 서울도서관
   const recentWithCoords = recentLibraries.find((l) => l.coords);
@@ -160,10 +168,10 @@ const HomeContent = memo(function HomeContent() {
 
         {/* 지역별 많이 빌린 책 — 제목 옆 단추로 지역을 바꾼다.
             처음 지역은 최근 본 도서관의 지역(없으면 서울). 그 값이 바뀌면 줄도 그 지역으로 맞춘다 */}
-        <RegionBooksShelf key={startRegion} initialRegion={startRegion} />
+        <RegionBooksShelf region={bookRegion} onRegionChange={setPickedRegion} />
 
-        {/* 나이대별 많이 빌린 책 · 이달의 키워드 (정보나루, 미리 모아 둔 것). 책을 누르면 처음 지역에서 어디서 빌릴지 */}
-        <TrendBooksShelf region={startRegion} />
+        {/* 나이대별 많이 빌린 책 · 이달의 키워드 (정보나루, 미리 모아 둔 것). 책을 누르면 고른 지역에서 어디서 빌릴지 */}
+        <TrendBooksShelf region={bookRegion} onRegionChange={setPickedRegion} />
 
         {/* 최근 본 도서관 */}
         {recentLibraries.length > 0 ? (

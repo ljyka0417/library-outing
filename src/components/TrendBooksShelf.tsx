@@ -58,7 +58,14 @@ function BookRow({ books, rowKey, onAsk }: { books: Book[]; rowKey: string; onAs
  * 둘 다 정보나루에서 미리 모아 둔 것이다(src/data/trendBooks.ts). 책을 누르면 홈에서 고른 지역의
  * 도서관 중 어디서 빌릴 수 있는지 묻는다 — 그때만 정보나루를 부른다.
  */
-export function TrendBooksShelf({ region }: { region: string }) {
+export function TrendBooksShelf({
+  region,
+  onRegionChange,
+}: {
+  region: string;
+  /** "어디서 빌릴 수 있나요?" 판에서 지역을 바꾸면 홈의 지역도 바뀐다 */
+  onRegionChange?: (region: string) => void;
+}) {
   const { t, lang } = useT();
   const layout = useLayout();
   const router = useRouter();
@@ -141,6 +148,7 @@ export function TrendBooksShelf({ region }: { region: string }) {
       <WhereToBorrowSheet
         book={asking}
         region={region}
+        onRegionChange={onRegionChange}
         onClose={() => setAsking(null)}
         onOpenLibrary={(id) => {
           setAsking(null);

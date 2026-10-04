@@ -41,7 +41,7 @@ const ko = {
   'tab.search': '검색',
   'tab.chat': '달곰이',
   'tab.favorites': '즐겨찾기',
-  'tab.mypage': '마이',
+  'tab.mypage': '설정',
 
   'home.greeting': '안녕하세요!',
   'home.headline': '어떤 도서관을\n찾고 계시나요?',
@@ -115,7 +115,6 @@ const ko = {
   'fav.emptyTitle': '아직 저장한 도서관이 없어요',
   'fav.emptyBody': '도서관 상세 화면의 하트를 눌러\n나만의 나들이 목록을 만들어 보세요',
 
-  'my.tagline': '{name}와 도서관 나들이 중',
   'my.taglineSub': '로그인 없이도 기록은 이 기기에 저장돼요',
   'my.statFavorites': '즐겨찾기',
   'my.statVisits': '방문 기록',
@@ -545,7 +544,7 @@ const en: Messages = {
   'tab.search': 'Search',
   'tab.chat': 'Dalgomi',
   'tab.favorites': 'Saved',
-  'tab.mypage': 'My',
+  'tab.mypage': 'Settings',
 
   'home.greeting': 'Hello!',
   'home.headline': 'Which library\nare you looking for?',
@@ -619,7 +618,6 @@ const en: Messages = {
   'fav.emptyTitle': 'Nothing saved yet',
   'fav.emptyBody': 'Tap the heart on a library page\nto build your own outing list',
 
-  'my.tagline': 'Out and about with {name}',
   'my.taglineSub': 'Your records stay on this device, no sign-in needed',
   'my.statFavorites': 'Saved',
   'my.statVisits': 'Visits',
@@ -1045,7 +1043,7 @@ const ja: Messages = {
   'tab.search': '検索',
   'tab.chat': 'ダルゴミ',
   'tab.favorites': 'お気に入り',
-  'tab.mypage': 'マイ',
+  'tab.mypage': '設定',
 
   'home.greeting': 'こんにちは！',
   'home.headline': 'どんな図書館を\nお探しですか？',
@@ -1119,7 +1117,6 @@ const ja: Messages = {
   'fav.emptyTitle': 'まだ保存した図書館がありません',
   'fav.emptyBody': '図書館ページのハートを押して\n自分だけのおでかけリストを作りましょう',
 
-  'my.tagline': '{name}と図書館めぐり中',
   'my.taglineSub': 'ログインなしでも記録はこの端末に保存されます',
   'my.statFavorites': 'お気に入り',
   'my.statVisits': '訪問記録',
@@ -1542,7 +1539,7 @@ const zh: Messages = {
   'tab.search': '搜索',
   'tab.chat': '达尔戈米',
   'tab.favorites': '收藏',
-  'tab.mypage': '我的',
+  'tab.mypage': '设置',
 
   'home.greeting': '你好！',
   'home.headline': '您在找\n哪座图书馆？',
@@ -1616,7 +1613,6 @@ const zh: Messages = {
   'fav.emptyTitle': '还没有收藏的图书馆',
   'fav.emptyBody': '在图书馆详情页点击爱心\n就能建立属于自己的出行清单',
 
-  'my.tagline': '正和{name}逛图书馆',
   'my.taglineSub': '无需登录，记录保存在这台设备上',
   'my.statFavorites': '收藏',
   'my.statVisits': '到访记录',

@@ -3,6 +3,7 @@ import { ActivityIndicator, Image, Modal, Pressable, ScrollView, StyleSheet, Tex
 import { Ionicons } from '@expo/vector-icons';
 import { fetchRelated, fetchWhereToBorrow, type FoundBook, type LoanStatus } from '@/api/loanStatus';
 import { MOCK_LIBRARIES } from '@/data/libraries.mock';
+import { SIDO_LIST } from '@/data/categories';
 import { regionName, useT } from '@/i18n';
 import { libText } from '@/i18n/libraryText';
 import { colors, radius, spacing, typography, themedStyles } from '@/theme';
@@ -19,21 +20,38 @@ import type { Book, Library } from '@/types';
  * 다시 어디서 빌릴지 묻는다 — 책 구경이 판 안에서 이어진다.
  */
 
+/** 대출 상태를 물을 수 있는 지역 (정보나루에 등록된 도서관이 있는 곳) */
+const REGIONS = SIDO_LIST.filter((r) => MOCK_LIBRARIES.some((l) => l.region.sido === r && l.sourceApiId));
+
 export function WhereToBorrowSheet({
   book: startBook,
-  region,
+  region: startRegion,
   onClose,
   onOpenLibrary,
+  onRegionChange,
 }: {
   book: Book | null;
+  /** 처음 물을 지역. 판 안에서 바꿀 수 있다 */
   region: string;
   onClose: () => void;
   onOpenLibrary: (id: string) => void;
+  /** 판 안에서 지역을 바꿨을 때 — 부르는 쪽도 그 지역을 기억하게 */
+  onRegionChange?: (region: string) => void;
 }) {
   const { t, lang } = useT();
   // 지금 보는 책 — 함께 빌린 책을 누르면 바뀐다. 밖에서 다른 책을 주면 그 책으로 돌아간다
   const [book, setBook] = useState<Book | null>(startBook);
   useEffect(() => setBook(startBook), [startBook]);
+  /*
+   * 어느 지역 도서관에 물을지. 홈의 연령별·키워드 줄은 전국 순위라 지역을 고를 곳이 없어서,
+   * 최근 본 도서관의 지역(예: 원주 → 강원)으로만 묻고 바꿀 수가 없었다. 판 안에서 고르게 한다.
+   */
+  const [region, setRegion] = useState(startRegion);
+  useEffect(() => setRegion(startRegion), [startRegion, startBook]);
+  const pickRegion = (r: string) => {
+    setRegion(r);
+    onRegionChange?.(r);
+  };
   const [related, setRelated] = useState<FoundBook[]>([]);
   const libs: Library[] = MOCK_LIBRARIES.filter((l) => l.sourceApiId && l.region.sido === region);
   const [state, setState] = useState<'loading' | 'done' | 'failed'>('loading');
@@ -135,6 +153,30 @@ export function WhereToBorrowSheet({
             </Pressable>
           </View>
 
+          {/* 지역 고르기 — 고르면 그 지역 도서관에 다시 묻는다 */}
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={styles.regionScroll}
+            contentContainerStyle={styles.regionRow}
+            accessibilityLabel={t('home.regionPick')}
+          >
+            {REGIONS.map((r) => {
+              const on = r === region;
+              return (
+                <Pressable
+                  key={r}
+                  onPress={() => pickRegion(r)}
+                  style={({ pressed }) => [styles.regionChip, on && styles.regionChipOn, pressed && { opacity: 0.7 }]}
+                  accessibilityRole="button"
+                  accessibilityState={{ selected: on }}
+                >
+                  <Text style={[styles.regionText, on && styles.regionTextOn]}>{regionName(lang, r)}</Text>
+                </Pressable>
+              );
+            })}
+          </ScrollView>
+
           {libs.length === 0 ? (
             <Text style={styles.note}>{t('where.unsupported')}</Text>
           ) : state === 'loading' ? (
@@ -197,6 +239,30 @@ export function WhereToBorrowSheet({
 }
 
 const styles = themedStyles(() => ({
+  regionScroll: {
+    flexGrow: 0,
+    marginBottom: spacing.md,
+  },
+  regionRow: {
+    gap: spacing.xs + 2,
+  },
+  regionChip: {
+    paddingHorizontal: spacing.md,
+    paddingVertical: 6,
+    borderRadius: radius.pill,
+    backgroundColor: colors.surfaceAlt,
+  },
+  regionChipOn: {
+    backgroundColor: colors.primary,
+  },
+  regionText: {
+    ...typography.caption,
+    color: colors.textSub,
+  },
+  regionTextOn: {
+    color: colors.white,
+    fontWeight: '700',
+  },
   related: {
     marginTop: spacing.lg,
     paddingTop: spacing.md,

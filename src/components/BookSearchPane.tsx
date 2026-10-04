@@ -195,6 +195,7 @@ export function BookSearchPane() {
       <WhereToBorrowSheet
         book={asking}
         region={region}
+        onRegionChange={setRegion}
         onClose={() => setAsking(null)}
         onOpenLibrary={(id) => {
           setAsking(null);

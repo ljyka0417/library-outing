@@ -57,7 +57,7 @@ export const TABS: TabDef[] = [
   { name: 'search', href: '/search', titleKey: 'tab.search', icon: 'search', iconOutline: 'search-outline' },
   { name: 'chat', href: '/chat', titleKey: 'tab.chat', icon: 'chatbubble-ellipses', iconOutline: 'chatbubble-ellipses-outline' },
   { name: 'favorites', href: '/favorites', titleKey: 'tab.favorites', icon: 'heart', iconOutline: 'heart-outline' },
-  { name: 'mypage', href: '/mypage', titleKey: 'tab.mypage', icon: 'person', iconOutline: 'person-outline' },
+  { name: 'mypage', href: '/mypage', titleKey: 'tab.mypage', icon: 'settings', iconOutline: 'settings-outline' },
 ];
 
 /** 펼친 사이드바의 폭 */
@@ -218,8 +218,15 @@ function SidebarTabRow({
   }));
   const shownWhenOn = useAnimatedStyle(() => ({ opacity: on.value }));
   const shownWhenOff = useAnimatedStyle(() => ({ opacity: 1 - on.value }));
+  /*
+   * ⚠️ 색은 글자(문자열)로 꺼내 넘긴다. colors 객체를 애니메이션 안에서 바로 읽으면
+   *   Reanimated 가 그 객체를 통째로 얼려서(개발 빌드) 다크 모드를 바꿔도 colors 가 안 바뀌었다.
+   *   아이패드에서 다크 → 밝게로 돌리면 사이드바 바탕만 밝아지고 글자·카드는 어둡게 남던 원인.
+   */
+  const textColor = colors.text;
+  const onColor = colors.white;
   const labelColor = useAnimatedStyle(() => ({
-    color: interpolateColor(on.value, [0, 1], [colors.text, colors.white]),
+    color: interpolateColor(on.value, [0, 1], [textColor, onColor]),
   }));
 
   return (

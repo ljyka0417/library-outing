@@ -164,7 +164,12 @@ export function applyScheme(scheme: ColorScheme) {
   if (scheme === schemeNow) return;
   schemeNow = scheme;
   version++;
-  Object.assign(colors, scheme === 'dark' ? DARK : LIGHT);
+  const palette = scheme === 'dark' ? DARK : LIGHT;
+  Object.assign(colors, palette);
+  // colors 를 애니메이션(worklet) 안에서 바로 읽으면 Reanimated 가 얼려 버려 위 줄이 소리 없이 무시된다
+  if (__DEV__ && colors.background !== palette.background) {
+    console.warn('[theme] colors 가 바뀌지 않았다 — worklet 안에서 colors 를 직접 읽는 곳이 있는지 확인');
+  }
   const table = scheme === 'dark' ? DARK_CATEGORY : LIGHT_CATEGORY;
   for (const k of Object.keys(table)) categoryColors[k] = { ...table[k] };
 }

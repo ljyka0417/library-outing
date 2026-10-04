@@ -120,7 +120,7 @@ function AppleTabs() {
         <NativeTabs.Trigger.Label>{t('tab.favorites')}</NativeTabs.Trigger.Label>
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="mypage" disableAutomaticContentInsets contentStyle={tabContent()}>
-        <NativeTabs.Trigger.Icon sf={{ default: 'person', selected: 'person.fill' }} />
+        <NativeTabs.Trigger.Icon sf={{ default: 'gearshape', selected: 'gearshape.fill' }} />
         <NativeTabs.Trigger.Label>{t('tab.mypage')}</NativeTabs.Trigger.Label>
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="search" role="search" disableAutomaticContentInsets contentStyle={tabContent()}>

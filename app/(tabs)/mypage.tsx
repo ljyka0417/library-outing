@@ -18,7 +18,7 @@ import { chatIdeasStatus } from '@/utils/chatIdeas';
 import { glassSupport } from '@/components/GlassSurface';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { centered, useLayout } from '@/hooks/useLayout';
-import { useT, type Lang } from '@/i18n';
+import { useT } from '@/i18n';
 import { libText } from '@/i18n/libraryText';
 import { colors, radius, spacing, typography, themedStyles } from '@/theme';
 
@@ -60,7 +60,7 @@ export default function MyPageScreen() {
           <Pressable onPress={() => router.push('/dress-up')} accessibilityRole="button" accessibilityLabel={t('my.dressUp')}>
             <BuddyStage pose={buddy.pose || 'hello'} bg={buddy.bg || 'mint'} size={150} />
           </Pressable>
-          <Text style={styles.name}>{taglineFor(buddyName(buddy.name, lang), lang, t('my.tagline', { name: buddyName(buddy.name, lang) }))}</Text>
+          <Text style={styles.name}>{buddyName(buddy.name, lang)}</Text>
           <View style={styles.rankChip}>
             <Ionicons name="ribbon" size={13} color={colors.primary} />
             <Text style={styles.rankText}>{t(buddyTitle(visits.length) as never)}</Text>
@@ -227,7 +227,7 @@ function GlassTest() {
  * npm run geocode / enrich / collect-nearby 를 돌린 뒤 여기서 확인한다.
  */
 /** 기기에 들어간 코드를 눈으로 확인하는 표시. 새 코드를 올릴 때마다 바꾼다 */
-const BUILD_MARK = '10-04 아이패드 다크 모드';
+const BUILD_MARK = '10-04 설정 탭';
 
 function DataStatus() {
   const d = dataCompleteness();
@@ -287,14 +287,6 @@ function Stat({ label, value }: { label: string; value: number }) {
       <Text style={styles.statLabel}>{label}</Text>
     </View>
   );
-}
-
-/** "○○와 도서관 나들이 중" — 한국어는 이름 받침에 맞춰 와/과 */
-function taglineFor(name: string, lang: Lang, translated: string): string {
-  if (lang !== 'ko') return translated;
-  const code = name.charCodeAt(name.length - 1) - 0xac00;
-  const josa = code >= 0 && code <= 11171 && code % 28 !== 0 ? '과' : '와';
-  return `${name}${josa} 도서관 나들이 중`;
 }
 
 interface MenuRowProps {
