@@ -23,6 +23,8 @@ export interface SubwayLive {
   last?: boolean;
   /** 열차 번호 */
   no?: string;
+  /** 이 방향 머리말 — 종착역 ("중앙보훈병원" · "소요산·광운대" · "내선순환") */
+  toward?: string;
 }
 export interface SubwayStation {
   /** "시청" (역 글자 없이) */

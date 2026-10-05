@@ -21,6 +21,77 @@ const LINE = {
   1092: '우이신설선', 1093: '서해선', 1094: '신림선', 1032: 'GTX-A',
 };
 
+/**
+ * 노선 양 끝 종착역 — 전광판 머리말을 "다음 역 방면"(노들 방면)이 아니라 "종착역 방면"(중앙보훈병원 방면)으로.
+ * 같은 방향 열차들의 행선지 가운데 종착역이 있으면 그 이름, 없으면(단축 운행만 보일 때) 반대 방향에서
+ * 알아낸 상행·하행 짝으로 정하고, 그래도 모르면 행선지 이름을 그대로 쓴다. 2호선은 내선·외선 순환.
+ */
+const TERMINALS = {
+  '1호선': ['소요산', '연천', '인천', '신창'],
+  '3호선': ['대화', '오금'],
+  '4호선': ['진접', '당고개', '오이도'],
+  '5호선': ['방화', '하남검단산', '마천'],
+  '6호선': ['응암', '신내'],
+  '7호선': ['장암', '석남'],
+  '8호선': ['별내', '모란'],
+  '9호선': ['개화', '중앙보훈병원'],
+  경의중앙선: ['문산', '지평', '용문'],
+  중앙선: ['문산', '지평', '용문'],
+  공항철도: ['서울역', '인천공항2터미널'],
+  경춘선: ['청량리', '상봉', '춘천'],
+  수인분당선: ['청량리', '인천'],
+  신분당선: ['신사', '광교'],
+  우이신설선: ['북한산우이', '신설동'],
+  신림선: ['샛강', '관악산'],
+  서해선: ['일산', '대곡', '원시'],
+  경강선: ['판교', '여주'],
+  'GTX-A': ['운정중앙', '동탄', '수서'],
+};
+/** 갈래가 많은 노선은 끝역 하나로 못 정한다 — 방향 묶음으로 (1호선: 소요산·광운대 쪽 / 인천·신창 쪽 — 어느 역에서나 앞쪽인 끝역 이름) */
+const DIRSETS = {
+  '1호선': [
+    { label: '소요산·광운대', set: ['소요산', '연천', '동두천', '양주', '의정부', '도봉산', '창동', '광운대', '청량리', '서울역', '용산', '동묘앞'] },
+    { label: '인천·신창', set: ['인천', '동인천', '부평', '구로', '광명', '수원', '병점', '서동탄', '천안', '신창', '영등포'] },
+  ],
+};
+const plain = (to) => String(to ?? '').replace(/행$/, '').replace(/\s*\(.*\)$/, '').trim();
+
+/** 같은 방향(group)마다 머리말 이름 — [{ group, line, ud, tos[] }] → Map(group → "개화") */
+function towardOf(groups) {
+  const out = new Map();
+  const udTerm = new Map(); // `${line}|${ud}` → 종착역 (짝 맞추기용)
+  for (const g of groups) {
+    if (g.line === '2호선' && /내선|외선/.test(g.ud)) {
+      out.set(g.group, `${g.ud.replace(/순환$/, '')}순환`);
+      continue;
+    }
+    const sets = DIRSETS[g.line];
+    if (sets) {
+      const tos = g.tos.map(plain);
+      const d = sets.find((x) => tos.some((t) => x.set.includes(t)));
+      if (d) {
+        out.set(g.group, d.label);
+        continue;
+      }
+    }
+    const ends = TERMINALS[g.line] ?? [];
+    const hit = g.tos.map(plain).find((t) => ends.includes(t));
+    if (hit) {
+      out.set(g.group, hit);
+      udTerm.set(`${g.line}|${g.ud}`, hit);
+    }
+  }
+  for (const g of groups) {
+    if (out.has(g.group)) continue;
+    // 반대 방향이 A 로 정해졌고 노선 끝이 둘뿐이면 이쪽은 B
+    const ends = TERMINALS[g.line] ?? [];
+    const other = [...udTerm.entries()].find(([k]) => k.startsWith(`${g.line}|`) && k !== `${g.line}|${g.ud}`)?.[1];
+    if (other && ends.length === 2) out.set(g.group, ends.find((e) => e !== other));
+    else out.set(g.group, [...new Set(g.tos.map(plain))].slice(0, 2).join('·'));
+  }
+  return out;
+}
+
 // 서울 실시간 API 가 다루는 수도권 (대략) — 부산·대구에도 "시청역" 이 있어 서울 열차가 잘못 나오지 않게
 const inCapital = (p) => p.lat > 36.9 && p.lat < 38.0 && p.lng > 126.4 && p.lng < 127.8;
 
@@ -84,7 +155,7 @@ function minutesOf(a) {
  *   express 급행·ITX · last 막차 · no 열차 번호
  */
 async function live(env, name) {
-  return remembered(env, `subway:live:v3:${name}`, LIVE_TTL, async () => {
+  return remembered(env, `subway:live:v6:${name}`, LIVE_TTL, async () => {
     try {
       const res = await fetch(
         `http://swopenapi.seoul.go.kr/api/subway/${encodeURIComponent(env.SEOUL_SUBWAY_KEY)}/json/realtimeStationArrival/0/40/${encodeURIComponent(name)}`
@@ -100,6 +171,7 @@ async function live(env, name) {
         const group = `${a.subwayId}|${a.updnLine}|${dir}`;
         const item = {
           group,
+          ud: String(a.updnLine ?? ''),
           line,
           dir,
           to: to || '',
@@ -113,10 +185,12 @@ async function live(env, name) {
         if (!groups.has(group)) groups.set(group, []);
         groups.get(group).push(item);
       }
+      // 머리말(종착역 방면)은 그 방향 열차 전부의 행선지로 정한다
+      const toward = towardOf([...groups.entries()].map(([group, tr]) => ({ group, line: tr[0].line, ud: tr[0].ud, tos: tr.map((x) => x.to) })));
       const out = [];
-      for (const trains of groups.values()) {
+      for (const [group, trains] of groups.entries()) {
         trains.sort((x, y) => (x.min ?? 999) - (y.min ?? 999));
-        out.push(...trains.slice(0, 2));
+        out.push(...trains.slice(0, 2).map(({ ud, ...x }) => ({ ...x, toward: toward.get(group) })));
       }
       // 노선 차례 → 방향 → 이번 열차가 빠른 방향 먼저
       const first = new Map();
@@ -226,6 +300,10 @@ async function scheduled(env, name, lines) {
       // 자정 넘은 막차(25시처럼 적힌 것)도 있어 sec 그대로 비교 — 방향마다 이번·다음 두 대
       const next = (tt ?? []).filter((x) => x.sec >= sec).slice(0, 2);
       const lastSec = tt?.length ? tt[tt.length - 1].sec : -1;
+      // 그 방향 하루 열차 중 가장 많이 가는 곳 = 종착역
+      const count = new Map();
+      for (const x of tt ?? []) if (x.to) count.set(x.to, (count.get(x.to) ?? 0) + 1);
+      const toward = [...count.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] ?? '';
       for (const n of next)
         out.push({
           group: `${id}|${ud}`,
@@ -234,6 +312,7 @@ async function scheduled(env, name, lines) {
           to: n.to ? `${n.to}행` : '',
           min: Math.round((n.sec - sec) / 60),
           msg: '',
+          toward: plain(toward),
           last: n.sec === lastSec,
         });
     }

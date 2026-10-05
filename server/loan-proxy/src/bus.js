@@ -104,6 +104,22 @@ function seoulMsg(msg) {
   return { min: Math.round((Number(min?.[1] ?? 0) * 60 + Number(sec?.[1] ?? 0)) / 60), prev: Number(prev?.[1] ?? 0) };
 }
 
+/**
+ * 노선 종류 → 화면 색 이름. 서울 routeType: 1 공항 · 2 마을 · 3 간선 · 4 지선 · 5 순환 · 6 광역 · 7 인천 · 8 경기 · 0 공용
+ * TAGO routetp: "간선버스" · "지선버스" · "좌석버스" · "마을버스" · "광역급행버스" · "일반버스" …
+ */
+const SEOUL_KIND = { 1: 'airport', 2: 'village', 3: 'trunk', 4: 'branch', 5: 'circle', 6: 'express' };
+function tagoKind(tp) {
+  const t = String(tp ?? '');
+  if (/광역|급행|직행|좌석/.test(t)) return 'express';
+  if (/간선/.test(t)) return 'trunk';
+  if (/지선/.test(t)) return 'branch';
+  if (/순환/.test(t)) return 'circle';
+  if (/마을/.test(t)) return 'village';
+  if (/공항/.test(t)) return 'airport';
+  return 'other';
+}
+
 async function seoulArrivals(env, ars) {
   const res = await fetch(`${SEOUL}/stationinfo/getStationByUid?serviceKey=${keyOf(env)}&arsId=${ars}&resultType=json`);
   if (!res.ok) return null;
@@ -111,25 +127,47 @@ async function seoulArrivals(env, ars) {
   for (const r of list((await res.json())?.msgBody?.itemList)) {
     const first = seoulMsg(r.arrmsg1);
     if (!first || !r.rtNm) continue;
-    out.push({ route: String(r.rtNm), min: first.min, prev: first.prev, type: r.busType1 === '1' ? '저상버스' : undefined });
+    const second = seoulMsg(r.arrmsg2);
+    out.push({
+      route: String(r.rtNm),
+      min: first.min,
+      prev: first.prev,
+      type: r.busType1 === '1' ? '저상버스' : undefined,
+      kind: SEOUL_KIND[r.routeType] ?? 'other',
+      // 종점 쪽 — "대방역" (방면)
+      toward: String(r.adirection ?? '').trim() || undefined,
+      next: second ? second.min : undefined,
+      last: String(r.isLast1 ?? '') === '1' || undefined,
+    });
   }
   return out;
 }
 
 async function arrivals(env, city, node) {
-  return remembered(env, `bus:arr:v1:${city}:${node}`, ARRIVAL_TTL, async () => {
+  return remembered(env, `bus:arr:v2:${city}:${node}`, ARRIVAL_TTL, async () => {
     try {
       if (city === 'seoul') return await seoulArrivals(env, node);
       const res = await fetch(
         `${BASE}/ArvlInfoInqireService/getSttnAcctoArvlPrearngeInfoList?serviceKey=${keyOf(env)}&cityCode=${city}&nodeId=${node}&numOfRows=30&_type=json`
       );
       if (!res.ok) return null;
-      return list((await res.json())?.response?.body?.items?.item).map((a) => ({
-        route: String(a.routeno ?? ''),
-        min: Math.max(0, Math.round(Number(a.arrtime) / 60)),
-        prev: Number(a.arrprevstationcnt) || 0,
-        type: a.vehicletp || undefined,
-      }));
+      // TAGO 는 같은 노선이 여러 줄(가까운 버스부터) 올 수 있다 — 노선마다 첫 버스 + 다음 버스
+      const byRoute = new Map();
+      for (const a of list((await res.json())?.response?.body?.items?.item)) {
+        const route = String(a.routeno ?? '');
+        const item = {
+          route,
+          min: Math.max(0, Math.round(Number(a.arrtime) / 60)),
+          prev: Number(a.arrprevstationcnt) || 0,
+          type: a.vehicletp || undefined,
+          kind: tagoKind(a.routetp),
+        };
+        const prev = byRoute.get(route);
+        if (!prev) byRoute.set(route, item);
+        else if (item.min < prev.min) byRoute.set(route, { ...item, next: prev.min });
+        else if (prev.next === undefined || item.min < prev.next) prev.next = item.min;
+      }
+      return [...byRoute.values()];
     } catch {
       return null;
     }

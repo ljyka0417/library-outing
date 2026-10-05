@@ -9,6 +9,20 @@ import { formatDistance, walkingMinutes } from '@/utils/openingHours';
 import type { Coordinates } from '@/types';
 
 /**
+ * 노선 종류 색 — 서울 버스 색(간선 파랑 · 지선 초록 · 순환 노랑 · 광역 빨강 · 마을 연두 · 공항 하늘).
+ * 다른 도시도 같은 갈래(TAGO 노선 종류)로 맞춘다. 모르는 종류는 회색.
+ */
+const BUS_KIND: Record<string, { bg: string }> = {
+  trunk: { bg: '#3D5BAB' },
+  branch: { bg: '#5BB025' },
+  circle: { bg: '#E5A400' },
+  express: { bg: '#E60012' },
+  village: { bg: '#79B33A' },
+  airport: { bg: '#00A0E9' },
+  other: { bg: '#6E7781' },
+};
+
+/**
  * 도서관 화면의 "가까운 버스 정류장" — 정류장 두 곳과 실시간 도착 예정 버스 (국토교통부 TAGO).
  * 서울은 TAGO 에 없고, 근처에 정류장이 없으면 칸을 그리지 않는다.
  * 도착 시간은 서버가 1분 기억한다. "새로고침" 을 누르면 다시 묻는다.
@@ -61,14 +75,33 @@ export function BusSection({ coords, inset = 0 }: { coords?: Coordinates; inset?
               <Text style={styles.empty}>{t('bus.none')}</Text>
             ) : (
               <View style={styles.list}>
-                {s.arrivals.map((a) => (
-                  <View key={a.route} style={styles.row}>
-                    <Text style={styles.route} numberOfLines={1}>{t('bus.route', { r: a.route })}</Text>
-                    {a.type?.includes('저상') ? <Ionicons name="accessibility" size={13} color={colors.primary} /> : null}
-                    <Text style={styles.when}>{a.min <= 1 ? t('bus.soon') : t('bus.min', { n: a.min })}</Text>
-                    {a.prev > 0 ? <Text style={styles.prev}>{t('bus.prev', { n: a.prev })}</Text> : null}
-                  </View>
-                ))}
+                {s.arrivals.map((a) => {
+                  const kc = BUS_KIND[a.kind ?? 'other'];
+                  return (
+                    <View key={a.route} style={styles.busRow}>
+                      <View style={styles.busLeft}>
+                        <View style={[styles.routePill, { backgroundColor: kc.bg }]}>
+                          <Text style={styles.routePillText} numberOfLines={1}>{a.route}</Text>
+                        </View>
+                        {a.type?.includes('저상') ? <Ionicons name="accessibility" size={13} color={colors.primary} /> : null}
+                        {a.last ? <Text style={styles.lastTag}>{t('subway.last')}</Text> : null}
+                      </View>
+                      <View style={styles.busMid}>
+                        {/* 좁은 폰에서 '10분 뒤' 가 두 줄로 꺾이지 않게 — 시간은 줄지 않고 옆 설명이 줄어든다 */}
+                        <Text style={[styles.when, styles.noShrink]} numberOfLines={1}>{a.min <= 1 ? t('bus.soon') : t('bus.min', { n: a.min })}</Text>
+                        <Text style={styles.prev} numberOfLines={1}>
+                          {[
+                            a.toward ? t('subway.toward', { name: a.toward }) : '',
+                            a.prev > 0 ? t('bus.prev', { n: a.prev }) : '',
+                            a.next !== undefined ? t('bus.next', { n: a.next }) : '',
+                          ]
+                            .filter(Boolean)
+                            .join(' · ')}
+                        </Text>
+                      </View>
+                    </View>
+                  );
+                })}
               </View>
             )}
           </View>
@@ -144,6 +177,21 @@ const styles = themedStyles(() => ({
     alignItems: 'center',
     gap: spacing.sm,
   },
+  noShrink: { flexShrink: 0 },
+  busRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, paddingVertical: 1 },
+  busLeft: { flexDirection: 'row', alignItems: 'center', gap: 4, minWidth: 92 },
+  busMid: { flex: 1, minWidth: 0, flexDirection: 'row', alignItems: 'baseline', gap: spacing.sm },
+  routePill: { borderRadius: 6, paddingHorizontal: 7, paddingVertical: 2, maxWidth: 76 },
+  routePillText: { ...typography.tiny, color: '#FFFFFF', fontWeight: '800' },
+  lastTag: {
+    ...typography.tiny,
+    fontWeight: '700',
+    color: colors.white,
+    backgroundColor: colors.textSub,
+    paddingHorizontal: 5,
+    borderRadius: 5,
+    overflow: 'hidden',
+  },
   route: {
     ...typography.captionBold,
     color: colors.text,
@@ -156,6 +204,7 @@ const styles = themedStyles(() => ({
   prev: {
     ...typography.tiny,
     color: colors.textMuted,
+    flexShrink: 1,
   },
   empty: {
     ...typography.tiny,

@@ -13,6 +13,14 @@ export interface BusArrival {
   prev: number;
   /** 저상버스 · 일반차량 … (원문) */
   type?: string;
+  /** 노선 종류 — 번호를 그 색으로 (서울 버스 색) */
+  kind?: 'trunk' | 'branch' | 'circle' | 'express' | 'village' | 'airport' | 'other';
+  /** 종점 쪽 — "대방역" (서울만) */
+  toward?: string;
+  /** 그다음 버스 몇 분 뒤 */
+  next?: number;
+  /** 막차 */
+  last?: boolean;
 }
 export interface BusStop {
   name: string;
