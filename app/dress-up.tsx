@@ -173,7 +173,7 @@ export default function DressUpScreen() {
                       accessibilityState={{ selected: on, disabled: !s.open }}
                       accessibilityLabel={libName}
                     >
-                      <Image source={{ uri: s.uri }} style={[styles.sceneImg, !s.open && styles.dim]} />
+                      <Image source={s.image} style={[styles.sceneImg, !s.open && styles.dim]} />
                       {!s.open ? (
                         <View style={styles.sceneLock}>
                           <Ionicons name="lock-closed" size={16} color={colors.white} />

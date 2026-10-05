@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Animated, Easing, Image, Text, View } from 'react-native';
 import { Mascot, type MascotPose } from './Mascot';
 import { BUDDY_BG, sceneLibrary } from '@/data/buddy';
-import { getPhoto } from '@/data/libraryPhotos';
+import { photoSource } from '@/data/libraryPhotos';
 import { radius, spacing, typography, themedStyles } from '@/theme';
 
 /**
@@ -26,7 +26,7 @@ export function BuddyStage({
   shape?: 'circle' | 'card';
 }) {
   const libraryId = sceneLibrary(bg);
-  const photo = libraryId ? getPhoto(libraryId)?.uri : undefined;
+  const photo = libraryId ? photoSource(libraryId) : undefined;
   const palette = BUDDY_BG[bg] ?? BUDDY_BG.mint;
 
   // 숨쉬기 (위아래 4px) + 바꿀 때 톡
@@ -55,7 +55,7 @@ export function BuddyStage({
     <View style={[styles.stage, { width: w, height: size, borderRadius: round, backgroundColor: palette.color }]}>
       {photo ? (
         <>
-          <Image source={{ uri: photo }} style={styles.fill} resizeMode="cover" />
+          <Image source={photo} style={styles.fill} resizeMode="cover" />
           {/* 사진 위에서도 달곰이가 묻히지 않게 아래쪽을 살짝 어둡게 */}
           <View style={[styles.photoShade, { height: size * 0.45 }]} />
         </>

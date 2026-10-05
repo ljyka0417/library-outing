@@ -5,7 +5,7 @@ import { SectionHeader } from './common';
 import { fetchBus, type BusInfo } from '@/api/bus';
 import { useT } from '@/i18n';
 import { colors, radius, spacing, typography, themedStyles } from '@/theme';
-import { formatDistance, walkingMinutes } from '@/utils/openingHours';
+import { formatDistance, koreaTime, walkingMinutes } from '@/utils/openingHours';
 import type { Coordinates } from '@/types';
 
 /**
@@ -57,7 +57,9 @@ export function BusSection({ coords, inset = 0 }: { coords?: Coordinates; inset?
 
   const stops = bus?.stops;
   if (!bus || !stops || stops.length === 0) return null;
-  const hhmm = checkedAt ? `${String(checkedAt.getHours()).padStart(2, '0')}:${String(checkedAt.getMinutes()).padStart(2, '0')}` : '';
+  // 도착 시각과 같은 한국 시각으로 — 해외 시간대 폰에서 "17:34 기준" 과 "05:22" 가 어긋났다
+  const kst = checkedAt ? koreaTime(checkedAt) : null;
+  const hhmm = kst ? `${String(kst.getHours()).padStart(2, '0')}:${String(kst.getMinutes()).padStart(2, '0')}` : '';
 
   return (
     <View style={styles.section}>

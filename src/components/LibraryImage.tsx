@@ -73,6 +73,12 @@ export function LibraryImage({ library, variant, style, framed = false }: Props)
    * 잘리는 편이 낫다.
    */
   const [ratio, setRatio] = useState(HERO_DEFAULT_RATIO);
+  /*
+   * 사진을 못 불러왔는지. 실패해도 그대로 두었더니 칸이 하얗게 빈 채로 남았다(안드로이드 서울도서관).
+   * 그때는 아래 주제 아이콘 칸으로 바꾼다. 사진이 바뀌면 다시 시도한다.
+   */
+  const [failed, setFailed] = useState(false);
+  useEffect(() => setFailed(false), [photo?.uri, photo?.source]);
 
   useEffect(() => {
     if (variant !== 'hero') return;
@@ -116,13 +122,17 @@ export function LibraryImage({ library, variant, style, framed = false }: Props)
    * 앱에 넣어 둔 사진(source)과 인터넷에서 불러오는 사진(uri) 둘 다 받는다.
    * 관광공사 사진은 uri 로 온다.
    */
-  if (photo?.source || photo?.uri) {
+  if ((photo?.source || photo?.uri) && !failed) {
     return (
       <View style={[shapeStyle, style]}>
         <Image
-          source={photo.source ? photo.source : { uri: photo.uri! }}
+          source={photo.source ? photo.source : { uri: photo.uri!, headers: IMAGE_HEADERS }}
           style={styles.fill}
           resizeMode="cover"
+          onError={(e) => {
+            if (__DEV__) console.warn('[LibraryImage] 사진을 못 불러옴', photo.uri, e.nativeEvent?.error);
+            setFailed(true);
+          }}
         />
         {/* 공공누리 사진은 출처를 밝혀야 한다.
             다만 목록 썸네일은 84픽셀이라 글자를 넣으면 읽히지도 않고 지저분하다.
@@ -158,6 +168,13 @@ export function LibraryImage({ library, variant, style, framed = false }: Props)
     </View>
   );
 }
+
+/*
+ * 사진을 받을 때 누가 받는지 밝힌다. 위키미디어는 이름표(User-Agent)가 흔한 라이브러리 이름(okhttp)이면
+ * 403 으로 거절해서 안드로이드에서 서울도서관 등 위키미디어 사진 12장이 전부 하얗게 비었다.
+ * 위키미디어 안내대로 앱 이름과 연락할 곳(저장소)을 적는다. 다른 사진 서버에는 아무 영향이 없다.
+ */
+const IMAGE_HEADERS = { 'User-Agent': 'Larchive/0.1 (https://github.com/ljyka0417/library-outing)' };
 
 const styles = themedStyles(() => ({
   fill: {

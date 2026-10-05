@@ -40,7 +40,11 @@ interface Props {
 export function CategoryGrid({ onSelect, selected }: Props) {
   const { t } = useT();
   const layout = useLayout();
-  const itemWidth = `${100 / layout.categoryColumns}%` as const;
+  /*
+   * 칸 폭은 소수 둘째 자리에서 버린다. 100/7 = 14.2857…% 를 그대로 주면 화면 점(px)으로 반올림하다
+   * 일곱 칸 합이 줄 폭을 살짝 넘어, 아이패드 미니 세로(744)에서 일곱째 칸이 다음 줄로 밀려 6·6·2 로 놓였다.
+   */
+  const itemWidth = `${Math.floor(10000 / layout.categoryColumns) / 100}%` as const;
   const box = layout.categoryIconSize;
 
   return (

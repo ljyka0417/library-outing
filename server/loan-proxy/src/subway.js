@@ -338,7 +338,16 @@ async function scheduled(env, name, lines) {
       // 그 방향 하루 열차 중 가장 많이 가는 곳 = 종착역
       const count = new Map();
       for (const x of tt ?? []) if (x.to) count.set(x.to, (count.get(x.to) ?? 0) + 1);
-      const toward = [...count.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] ?? '';
+      /*
+       * 2호선은 순환선이라 양쪽 다 "성수행" 이 가장 많아 두 방향이 똑같이 「성수 방면」 으로 나왔다.
+       * 실시간처럼 내선·외선 순환으로 쓴다 (서울교통공사 구분: 상행 = 내선, 하행 = 외선).
+       */
+      const toward =
+        line === '2호선'
+          ? ud === 'U'
+            ? '내선순환'
+            : '외선순환'
+          : ([...count.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] ?? '');
       for (const n of next)
         out.push({
           group: `${id}|${ud}`,
@@ -347,7 +356,7 @@ async function scheduled(env, name, lines) {
           to: n.to ? `${n.to}행` : '',
           min: Math.round((n.sec - sec) / 60),
           msg: '',
-          toward: plain(toward),
+          toward: /순환$/.test(toward) ? toward : plain(toward),
           last: n.sec === lastSec,
         });
     }

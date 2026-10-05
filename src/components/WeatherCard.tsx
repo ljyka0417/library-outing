@@ -5,6 +5,7 @@ import { Mascot, type MascotPose } from './Mascot';
 import { fetchWeather, WEATHER_ICON, weatherEnabled, weatherMood, type Weather, type WeatherMood } from '@/api/weather';
 import { AIR_COLOR, airEnabled, airIsBad, fetchAir, stationName, type Air } from '@/api/air';
 import { useT, type MessageKey } from '@/i18n';
+import { useLayout } from '@/hooks/useLayout';
 import { MOCK_LIBRARIES } from '@/data/libraries.mock';
 import { useNow } from '@/hooks/useNow';
 import { isOpenNow, koreaTime } from '@/utils/openingHours';
@@ -40,6 +41,7 @@ export function WeatherCard({
   onAction: (kind: 'nature' | 'indoor' | 'browse') => void;
 }) {
   const { t, lang } = useT();
+  const layout = useLayout();
   const [w, setW] = useState<Weather | null>(null);
   const [air, setAir] = useState<Air | null>(null);
   /*
@@ -81,7 +83,8 @@ export function WeatherCard({
       <View style={{ flex: 1 }}>
         <View style={styles.top}>
           <Ionicons name={icon} size={18} color={colors.primary} />
-          <Text style={styles.now} numberOfLines={1}>
+          {/* 두 줄까지 — 좁은 폰(폴드 바깥 화면 311)에서 "동대전도서관 지금 12° ·…" 로 날씨가 잘렸다 */}
+          <Text style={styles.now} numberOfLines={2}>
             {t('weather.now', { place, temp: w.temp !== undefined ? String(Math.round(w.temp)) : '–', sky })}
           </Text>
         </View>
@@ -104,7 +107,7 @@ export function WeatherCard({
           <Ionicons name="chevron-forward" size={14} color={colors.primary} />
         </Pressable>
       </View>
-      <Mascot pose={badAir || !anyOpen ? 'reading' : POSE[mood]} size={72} />
+      <Mascot pose={badAir || !anyOpen ? 'reading' : POSE[mood]} size={layout.isCompact ? 52 : 72} />
     </View>
   );
 }

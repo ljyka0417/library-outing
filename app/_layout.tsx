@@ -79,12 +79,25 @@ export default function RootLayout() {
    */
   useEffect(() => {
     if (Platform.OS !== 'android') return;
-    const { width, height } = Dimensions.get('screen');
-    const phone = Math.min(width, height) < 600;
-    void (phone
-      ? ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP)
-      : ScreenOrientation.unlockAsync()
-    ).catch(() => {});
+    /*
+     * 접는 폰(갤럭시 Z 폴드)은 앱을 켠 채로 화면이 바뀐다 — 바깥 화면(폰)에서 켜고 펼치면 안쪽 큰 화면(태블릿).
+     * 켤 때 한 번만 정했더니 접은 채 켜고 펼친 큰 화면에서도 세로 고정이 남아 돌아가지 않았다.
+     * 화면이 바뀔 때마다 다시 정한다. (같은 결론이면 다시 부르지 않는다)
+     */
+    let last: boolean | null = null;
+    const apply = () => {
+      const { width, height } = Dimensions.get('screen');
+      const phone = Math.min(width, height) < 600;
+      if (phone === last) return;
+      last = phone;
+      void (phone
+        ? ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP)
+        : ScreenOrientation.unlockAsync()
+      ).catch(() => {});
+    };
+    apply();
+    const sub = Dimensions.addEventListener('change', apply);
+    return () => sub.remove();
   }, []);
 
   useEffect(() => {

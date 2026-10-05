@@ -312,7 +312,7 @@ const ResultsPane = memo(function ResultsPane({
     <>
       {modeSwitch}
       <View style={[styles.searchWrap, { paddingHorizontal: layout.gutter }]}>
-        <SearchBar value={keyword} onChangeText={onKeyword} placeholder={t('search.placeholder')} />
+        <SearchBar value={keyword} onChangeText={onKeyword} placeholder={t('search.placeholder')} shortPlaceholder={t('search.placeholderShort')} />
       </View>
 
       {/* 필터: 주제 */}

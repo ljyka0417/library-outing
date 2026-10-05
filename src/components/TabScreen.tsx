@@ -83,6 +83,7 @@ export function TabScreen({
   const edge = useBleed();
   const full = bleed && edge.on;
   const overTop = useTopOverlay();
+  const insets = useSafeAreaInsets();
 
   // 떠 있는 태블릿 위쪽 탭바 — 보통 화면은 그만큼 내려서, 끝까지 까는 화면은 그대로(목록이 비운다)
   if (!native && overTop > 0) {
@@ -91,6 +92,16 @@ export function TabScreen({
         <View style={styles.fill} pointerEvents={overlay ? 'box-none' : 'auto'}>
           {children}
         </View>
+        {/* 시계 자리 막 — 끝까지 까는 화면에서 글이 시계·배터리와 겹쳐 읽혔다(폴드 펼친 화면·안드로이드 태블릿) */}
+        {full && !overlay && insets.top > 0 ? (
+          <View
+            pointerEvents="none"
+            style={[
+              styles.statusGlass,
+              { height: insets.top, backgroundColor: currentScheme() === 'dark' ? 'rgba(23,21,19,0.86)' : 'rgba(251,248,243,0.9)' },
+            ]}
+          />
+        ) : null}
       </View>
     );
   }

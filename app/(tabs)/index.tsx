@@ -108,6 +108,7 @@ const HomeContent = memo(function HomeContent() {
           <SearchBar
             readOnly
             placeholder={t('home.searchPlaceholder')}
+            shortPlaceholder={t('home.searchPlaceholderShort')}
             onPress={() => router.push('/search')}
           />
         </View>

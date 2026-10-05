@@ -1,5 +1,5 @@
 import { translate, type Lang } from '@/i18n';
-import { getPhoto, photoLibraryIds } from '@/data/libraryPhotos';
+import { photoLibraryIds, photoSource } from '@/data/libraryPhotos';
 
 /**
  * 달곰이 꾸미기 — 고를 수 있는 모습·배경과, 도서관을 다녀올수록 열리는 것들.
@@ -45,11 +45,15 @@ export const sceneLibrary = (bg: string) => (bg.startsWith('lib:') ? bg.slice(4)
  * 배경으로 쓸 수 있는 도서관 사진 — 다녀온 도서관이 먼저(열림), 그 밖은 잠김으로 몇 곳 보여 준다.
  * 사진은 한국관광공사(공공누리)라 화면에 출처를 함께 적는다.
  */
-export function buddyScenes(visitedIds: string[], limit = 8): { libraryId: string; uri: string; open: boolean }[] {
-  const withPhoto = photoLibraryIds.filter((id) => getPhoto(id)?.uri);
+export function buddyScenes(
+  visitedIds: string[],
+  limit = 8
+): { libraryId: string; image: number | { uri: string }; open: boolean }[] {
+  // 앱에 넣어 둔 사진(위키미디어 공용 등)도 배경이 된다 — 예전엔 인터넷 사진(uri)만 골랐다
+  const withPhoto = photoLibraryIds.filter((id) => photoSource(id));
   const open = withPhoto.filter((id) => visitedIds.includes(id));
   const locked = withPhoto.filter((id) => !visitedIds.includes(id)).slice(0, Math.max(0, limit - open.length));
-  return [...open, ...locked].map((id) => ({ libraryId: id, uri: getPhoto(id)!.uri!, open: visitedIds.includes(id) }));
+  return [...open, ...locked].map((id) => ({ libraryId: id, image: photoSource(id)!, open: visitedIds.includes(id) }));
 }
 
 /** 다녀온 수에 따른 칭호 (i18n 열쇠) */

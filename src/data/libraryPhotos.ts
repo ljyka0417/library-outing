@@ -74,6 +74,26 @@ const remote = (generated as { byId?: Record<string, RemotePhoto> }).byId ?? {};
  */
 const extra = (extraJson as { byId?: Record<string, { url: string; credit: string }> }).byId ?? {};
 
+/**
+ * 위키미디어 공용 사진은 앱 안에 넣어 둔 것을 쓴다 (assets/libraries/commons, 960px).
+ *
+ * 인터넷 주소로 불러왔더니 위키미디어가 안드로이드 앱의 요청을 403 으로 거절해서 사진 칸이 하얗게 비었다
+ * (이름표 User-Agent 를 붙여도 그대로). 위키미디어는 앱이 사진을 바로 끌어다 쓰는 것을 권하지 않는다.
+ * 라이선스(CC0·CC BY-SA·공공누리)는 복사해 넣는 것을 허락하고, 출처 표기는 credit 으로 그대로 한다.
+ * 사진을 새로 고르면(collect-more-library-photos) 여기 파일도 함께 받아 넣는다.
+ */
+const COMMONS_LOCAL: Record<string, number> = {
+  'seoul-library': require('../../assets/libraries/commons/seoul-library.jpg'),
+  'pangyo-kids': require('../../assets/libraries/commons/pangyo-kids.jpg'),
+  'songdo-kids': require('../../assets/libraries/commons/songdo-kids.png'),
+  'seonhak-starlight': require('../../assets/libraries/commons/seonhak-starlight.jpg'),
+  'jungcheon-philosophy': require('../../assets/libraries/commons/jungcheon-philosophy.jpg'),
+  'dongdaejeon-library': require('../../assets/libraries/commons/dongdaejeon-library.jpg'),
+  'gyeongju-city': require('../../assets/libraries/commons/gyeongju-city.jpg'),
+  'halla-library': require('../../assets/libraries/commons/halla-library.jpg'),
+  'unnam-kids': require('../../assets/libraries/commons/unnam-kids.jpg'),
+};
+
 interface RemotePhoto {
   url: string;
   credit: string;
@@ -93,6 +113,7 @@ export function getPhoto(libraryId: string): LibraryPhoto | undefined {
 
   const r = remote[libraryId] ?? extra[libraryId];
   if (!r) return undefined;
+  if (!remote[libraryId] && COMMONS_LOCAL[libraryId]) return { source: COMMONS_LOCAL[libraryId], credit: r.credit };
   return { uri: secureUrl(r.url), credit: r.credit };
 }
 
@@ -106,6 +127,17 @@ export function getPhoto(libraryId: string): LibraryPhoto | undefined {
  */
 export function secureUrl(url: string): string {
   return url.replace(/^http:\/\//, 'https://');
+}
+
+/**
+ * <Image source> 에 바로 넣을 값 — 앱에 넣은 사진이면 그대로, 인터넷 사진이면 { uri }.
+ * 사진이 없으면 undefined.
+ */
+export function photoSource(libraryId: string): number | { uri: string } | undefined {
+  const p = getPhoto(libraryId);
+  if (!p) return undefined;
+  if (p.source) return p.source;
+  return p.uri ? { uri: p.uri } : undefined;
 }
 
 /** 출처 표기가 필요한 사진 목록 (크레딧 화면용) */

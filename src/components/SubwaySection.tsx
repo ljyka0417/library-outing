@@ -5,7 +5,7 @@ import { SectionHeader } from './common';
 import { fetchSubway, type SubwayStation } from '@/api/subway';
 import { useT } from '@/i18n';
 import { colors, radius, spacing, typography, themedStyles } from '@/theme';
-import { formatDistance, walkingMinutes } from '@/utils/openingHours';
+import { formatDistance, koreaTime, walkingMinutes } from '@/utils/openingHours';
 import { lineColor } from '@/utils/subwayLineColor';
 import { approach } from '@/utils/subwayOrder';
 import type { Coordinates } from '@/types';
@@ -48,6 +48,15 @@ const sameEnd = (to: string, toward?: string) =>
   !!toward && to.replace(/행$/, '').replace(/\s*\(.*\)$/, '').trim() === toward;
 
 /** 열차가 지금 어디쯤 — "전역 출발 (잠원)" · "현재 옥수" (실시간만. 시간표는 빈칸) */
+/**
+ * 한 시간 넘게 남은 열차는 분 대신 시각으로 — 새벽엔 첫차가 "171분" 처럼 나와 읽히지 않았다.
+ * 역은 모두 한국에 있으니 한국 시각으로 센다.
+ */
+function clockAfter(min: number): string {
+  const d = koreaTime(new Date(Date.now() + min * 60000));
+  return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+}
+
 function where(a: Train, t: (k: 'subway.now', v: { at: string }) => string) {
   if (!a.at && !a.msg) return '';
   const positional = /전역|번째|당역|진입|도착|출발/.test(a.msg) && !/\d+분/.test(a.msg);
@@ -162,7 +171,9 @@ export function SubwaySection({ coords, inset = 0 }: { coords?: Coordinates; ins
   }, [load]);
 
   if (!stations || stations.length === 0) return null;
-  const hhmm = checkedAt ? `${String(checkedAt.getHours()).padStart(2, '0')}:${String(checkedAt.getMinutes()).padStart(2, '0')}` : '';
+  // 도착 시각과 같은 한국 시각으로 — 해외 시간대 폰에서 "17:34 기준" 과 "05:22" 가 어긋났다
+  const kst = checkedAt ? koreaTime(checkedAt) : null;
+  const hhmm = kst ? `${String(kst.getHours()).padStart(2, '0')}:${String(kst.getMinutes()).padStart(2, '0')}` : '';
   const kinds = new Set(stations.map((s) => s.kind).filter(Boolean));
   const hasTimes = kinds.size > 0;
   const source = [
@@ -243,9 +254,13 @@ export function SubwaySection({ coords, inset = 0 }: { coords?: Coordinates; ins
                         </View>
                         <View style={styles.dirRight}>
                           <Text style={styles.ledMin} numberOfLines={1}>
-                            {!first || first.min === null ? '' : first.min <= 0 ? t('bus.soon') : t('subway.minShort', { n: first.min })}
+                            {!first || first.min === null ? '' : first.min <= 0 ? t('bus.soon') : first.min >= 60 ? clockAfter(first.min) : t('subway.minShort', { n: first.min })}
                           </Text>
-                          {second && second.min !== null ? <Text style={styles.dirNext}>{t('bus.next', { n: second.min })}</Text> : null}
+                          {second && second.min !== null ? (
+                            <Text style={styles.dirNext}>
+                              {second.min >= 60 ? t('subway.nextAt', { time: clockAfter(second.min) }) : t('bus.next', { n: second.min })}
+                            </Text>
+                          ) : null}
                         </View>
                         <Ionicons name={isOpen ? 'chevron-up' : 'chevron-down'} size={14} color={colors.textMuted} />
                       </Pressable>

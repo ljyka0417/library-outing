@@ -64,6 +64,12 @@ export const NearbyMap = forwardRef<NearbyMapHandle, Props>(function NearbyMap({
    * (태블릿 위쪽 탭바 높이를 잰 직후처럼) GoogleMap 이 아직 없어 앱이 통째로 죽었다(NullPointerException).
    */
   const [ready, setReady] = useState(false);
+  /*
+   * 지도가 준비되기 전에 온 "여기로 옮겨" — 앱을 켜자마자 마지막 위치가 먼저 오면 옮기라는 말이 버려져서
+   * 내 위치를 아는데도 전국 지도 그대로였다(좁은 폰에서 자주). 준비되면 그때 옮긴다.
+   */
+  const pending = useRef<{ latitude: number; longitude: number; latitudeDelta: number; longitudeDelta: number } | null>(null);
+  const readyRef = useRef(false);
 
   /*
    * 핀 모양은 한 번 찍어 고정한다(tracksViewChanges=false — 핀 127개를 계속 다시 그리면 무겁다).
@@ -78,9 +84,18 @@ export const NearbyMap = forwardRef<NearbyMapHandle, Props>(function NearbyMap({
     return () => clearTimeout(t);
   }, [selectedId, user ? 1 : 0]);
   useImperativeHandle(ref, () => ({
-    focus: (c, delta = 0.04) =>
-      map.current?.animateToRegion({ latitude: c.lat, longitude: c.lng, latitudeDelta: delta, longitudeDelta: delta }, 450),
-    center: (c) => map.current?.animateCamera({ center: { latitude: c.lat, longitude: c.lng } }, { duration: 400 }),
+    focus: (c, delta = 0.04) => {
+      const region = { latitude: c.lat, longitude: c.lng, latitudeDelta: delta, longitudeDelta: delta };
+      if (!readyRef.current) pending.current = region;
+      else map.current?.animateToRegion(region, 450);
+    },
+    center: (c) => {
+      if (!readyRef.current) {
+        pending.current = { latitude: c.lat, longitude: c.lng, latitudeDelta: pending.current?.latitudeDelta ?? 0.04, longitudeDelta: pending.current?.longitudeDelta ?? 0.04 };
+        return;
+      }
+      map.current?.animateCamera({ center: { latitude: c.lat, longitude: c.lng } }, { duration: 400 });
+    },
   }));
 
   return (
@@ -88,7 +103,14 @@ export const NearbyMap = forwardRef<NearbyMapHandle, Props>(function NearbyMap({
       ref={map}
       style={StyleSheet.absoluteFill}
       mapPadding={ready ? padding : undefined}
-      onMapReady={() => setReady(true)}
+      onMapReady={() => {
+        readyRef.current = true;
+        setReady(true);
+        if (pending.current) {
+          map.current?.animateToRegion(pending.current, 0);
+          pending.current = null;
+        }
+      }}
       onPanDrag={onUserPan}
       initialRegion={{ latitude: KOREA_CENTER.lat, longitude: KOREA_CENTER.lng, latitudeDelta: 5.5, longitudeDelta: 5.5 }}
       showsUserLocation={false}
