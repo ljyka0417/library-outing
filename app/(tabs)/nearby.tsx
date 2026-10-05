@@ -270,7 +270,7 @@ export default function NearbyScreen() {
         <View style={[styles.top, { paddingHorizontal: layout.gutter }]} pointerEvents="box-none">
           {/* 태블릿은 애플 지도처럼 왼쪽 위 좁은 칸 — 폰 폭(560) 그대로 두면 화면 위를 가로질러 혼자 떠 보였다 */}
           <View style={[styles.searchBox, layout.isTablet && styles.tabletPanel, layout.isTablet && styles.tabletSearch]}>
-            <Ionicons name="search" size={18} color={colors.textMuted} />
+            <Ionicons name="search" size={layout.isTablet ? 22 : 18} color={colors.textMuted} />
             <TextInput
               value={query}
               onChangeText={setQuery}
@@ -287,7 +287,7 @@ export default function NearbyScreen() {
             />
             {searching ? (
               <Pressable onPress={closeSearch} hitSlop={10} accessibilityRole="button">
-                <Ionicons name="close-circle" size={20} color={colors.textMuted} />
+                <Ionicons name="close-circle" size={layout.isTablet ? 24 : 20} color={colors.textMuted} />
               </Pressable>
             ) : null}
           </View>
@@ -309,8 +309,8 @@ export default function NearbyScreen() {
                         <CategoryIcon category={CATEGORY_MAP[l.categories[0]] ?? { icon: 'library' }} size={18} color={palette.fg} />
                       </View>
                       <View style={{ flex: 1 }}>
-                        <Text style={styles.resultName} numberOfLines={1}>{libText(l.name, lang)}</Text>
-                        <Text style={styles.resultSub} numberOfLines={1}>{libText(l.region.sigungu ?? l.region.sido, lang)}</Text>
+                        <Text style={[styles.resultName, layout.isTablet && styles.tabletResultName]} numberOfLines={1}>{libText(l.name, lang)}</Text>
+                        <Text style={[styles.resultSub, layout.isTablet && styles.tabletResultSub]} numberOfLines={1}>{libText(l.region.sigungu ?? l.region.sido, lang)}</Text>
                       </View>
                     </Pressable>
                   );
@@ -326,8 +326,8 @@ export default function NearbyScreen() {
                       <Ionicons name="location-outline" size={18} color={colors.textSub} />
                     </View>
                     <View style={{ flex: 1 }}>
-                      <Text style={styles.resultName} numberOfLines={1}>{p.name}</Text>
-                      <Text style={styles.resultSub} numberOfLines={1}>{[p.category, p.address].filter(Boolean).join(' · ')}</Text>
+                      <Text style={[styles.resultName, layout.isTablet && styles.tabletResultName]} numberOfLines={1}>{p.name}</Text>
+                      <Text style={[styles.resultSub, layout.isTablet && styles.tabletResultSub]} numberOfLines={1}>{[p.category, p.address].filter(Boolean).join(' · ')}</Text>
                     </View>
                   </Pressable>
                 ))}
@@ -337,8 +337,8 @@ export default function NearbyScreen() {
             </View>
           ) : !searching ? (
             <View style={styles.statusRow} pointerEvents="box-none">
-              <View style={styles.statusPill}>
-                <Text style={styles.sub} numberOfLines={1}>
+              <View style={[styles.statusPill, layout.isTablet && styles.tabletPill]}>
+                <Text style={[styles.sub, layout.isTablet && styles.tabletSub]} numberOfLines={1}>
                   {spot
                     ? t('nearby.countAt', { name: spot.name, n: nearCount })
                     : me
@@ -558,10 +558,14 @@ const styles = themedStyles(() => ({
   },
   // iOS 는 lineHeight 가 있으면 글자가 잘린다 — 정해 두지 않는다
   searchInput: { flex: 1, ...typography.body, lineHeight: undefined, color: colors.text, paddingVertical: 0 },
-  tabletPanel: { width: 340, maxWidth: 340 },
-  // 태블릿 — 애플 지도 사이드 검색처럼 낮고 단정하게 (48 높이·본문 글씨는 넓은 화면에서 혼자 커 보였다)
-  tabletSearch: { height: 40, borderRadius: 20, paddingHorizontal: spacing.md },
-  tabletInput: { fontSize: 15 },
+  // 태블릿 — 폰 크기 그대로면 넓은 화면에서 너무 작아 보였다 (2026-10-05). 칸·글씨를 한 단계 키운다
+  tabletPanel: { width: 440, maxWidth: 440 },
+  tabletSearch: { height: 58, borderRadius: 29, paddingHorizontal: spacing.lg, gap: spacing.md },
+  tabletInput: { fontSize: 18 },
+  tabletPill: { borderRadius: 20, paddingHorizontal: spacing.lg, paddingVertical: 9 },
+  tabletSub: { fontSize: 15, lineHeight: 20 },
+  tabletResultName: { fontSize: 16, lineHeight: 22 },
+  tabletResultSub: { fontSize: 13, lineHeight: 18 },
   results: {
     backgroundColor: colors.surface,
     borderRadius: radius.lg,
