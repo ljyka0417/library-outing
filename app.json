@@ -4,7 +4,7 @@
     "name": "라키브",
     "//slug": "EAS 프로젝트를 가리키는 값이라 바꾸면 빌드가 다른 프로젝트로 붙는다. 표시 이름과 무관하므로 그대로 둔다.",
     "slug": "library-outing",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "//orientation": "폰은 세로, 태블릿은 회전 (2026-10-05). 아이폰은 아래 ios.infoPlist 의 UISupportedInterfaceOrientations 로 세로 고정, 아이패드는 ~ipad 로 전부 허용. 안드로이드는 앱 설정으로 폰·태블릿을 못 나눠서 app/_layout.tsx 가 화면 크기를 보고 폰만 세로로 잠근다(expo-screen-orientation).",
     "orientation": "default",
     "userInterfaceStyle": "automatic",
@@ -27,6 +27,8 @@
         "tinted": "./assets/icon-tinted.png"
       },
       "bundleIdentifier": "com.libraryouting.app",
+      "//config": "암호화는 https 통신뿐(표준 면제) — 올릴 때마다 묻는 수출 규정 질문을 건너뛴다",
+      "config": { "usesNonExemptEncryption": false },
       "infoPlist": {
         "//": "canOpenURL 로 지도앱 설치 여부를 확인하려면 iOS 는 반드시 화이트리스트 등록이 필요하다.",
         "//UISupportedInterfaceOrientations": "아이폰은 세로만 (orientation 이 default 라 그대로 두면 아이폰도 돈다).",

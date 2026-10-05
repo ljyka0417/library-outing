@@ -225,6 +225,107 @@ ${sections}
 </html>`;
 }
 
+/* ── 개인정보 처리방침 · 문의 (스토어 등록에 필요) ──────────── */
+
+/**
+ * 앱스토어·구글 플레이 모두 개인정보 처리방침 주소와 문의(지원) 주소를 요구한다.
+ * 적힌 내용은 코드에서 확인한 사실만 쓴다 (2026-10-06 기준):
+ *   - 회원가입·광고·분석 도구 없음. 즐겨찾기·방문 기록·코스·언어·화면 모드는 기기 안(AsyncStorage)에만 저장
+ *   - 내 위치는 기기 안에서 거리 계산·지도 표시에만 쓰고 서버로 보내지 않는다
+ *     (서버로 가는 것: 도서관 좌표, 검색어, 책 ISBN — src/api/*)
+ *   - 중계 서버(Cloudflare Worker)가 공공 API·카카오를 대신 불러 준다
+ * 앱 기능이 바뀌면 여기도 고친다.
+ */
+const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'ljyka0417@gmail.com';
+const POLICY_DATE = '2026년 10월 6일';
+
+const docPage = (title, body) => `<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>${title} · 라키브</title>
+<style>${CSS}
+.doc h1{font-size:22px;margin-bottom:4px}
+.doc h2{font-size:16px;margin:26px 0 8px}
+.doc p,.doc li{font-size:14.5px;color:#4A443E}
+.doc ul{padding-left:20px;margin:6px 0}
+.doc li{margin:4px 0}
+.doc .date{color:#A79E93;font-size:13px;margin-bottom:8px}
+.doc a{color:#3F8E7E}
+</style>
+</head>
+<body>
+<div class="wrap" style="max-width:720px">
+  <div class="brand"><img src="${'../dalgomi.png'}" alt=""><b>라키브</b></div>
+  <div class="card doc">
+${body}
+  </div>
+  <p class="foot">달곰이 · 라키브</p>
+</div>
+</body>
+</html>`;
+
+const privacyPage = () =>
+  docPage(
+    '개인정보 처리방침',
+    `
+    <h1>개인정보 처리방침</h1>
+    <p class="date">시행일 ${POLICY_DATE}</p>
+    <p>라키브(이하 “앱”)는 이용자의 개인정보를 소중히 여기며, 꼭 필요한 정보만 기기 안에서 사용합니다.</p>
+
+    <h2>1. 수집하는 개인정보</h2>
+    <p>앱은 <b>회원가입이 없으며</b>, 이름·전화번호·이메일 등 이용자를 알아볼 수 있는 개인정보를 수집하거나 서버에 저장하지 않습니다.</p>
+
+    <h2>2. 위치 정보</h2>
+    <ul>
+      <li>이용자가 허용한 경우에만 현재 위치를 사용합니다. 허용하지 않아도 앱의 다른 기능은 그대로 쓸 수 있습니다.</li>
+      <li>위치는 <b>기기 안에서</b> ‘내 주변’ 지도 표시와 도서관까지의 거리 계산, 코스의 가까운 도서관 정렬에만 쓰며, <b>앱 운영자의 서버나 제3자에게 보내지 않고 저장하지도 않습니다.</b></li>
+      <li>앱이 열려 있고 해당 화면을 보는 동안에만 위치를 사용하며, 백그라운드에서는 사용하지 않습니다.</li>
+    </ul>
+
+    <h2>3. 기기 안에 저장되는 정보</h2>
+    <p>즐겨찾기, 방문 기록, 최근 본 도서관, 저장한 코스, 언어·화면 모드, 달곰이 꾸미기 설정은 이용자의 기기 안에만 저장됩니다. 설정 → ‘기록 전체 삭제’ 또는 앱 삭제로 언제든 지울 수 있습니다.</p>
+
+    <h2>4. 외부 서비스 이용</h2>
+    <p>도서 대출 여부, 날씨, 대중교통 도착 정보 등을 보여 주기 위해 앱의 중계 서버(Cloudflare)를 거쳐 아래 공공·외부 서비스에 정보를 요청합니다. 이때 보내는 정보는 <b>도서관의 위치, 검색어, 책 번호(ISBN)</b>뿐이며 이용자의 위치나 개인정보는 포함되지 않습니다.</p>
+    <ul>
+      <li>도서관 정보나루(국립중앙도서관), 공공데이터포털(기상청·에어코리아·국토교통부 등), 서울 열린데이터광장, 한국문화정보원</li>
+      <li>카카오(장소·책 정보 검색)</li>
+      <li>지도 표시: iOS는 Apple 지도, Android는 Google 지도를 사용하며, 지도를 불러올 때 각 회사의 개인정보 처리방침이 적용됩니다.</li>
+    </ul>
+    <p>중계 서버는 서비스 안정성을 위해 요청 결과를 잠시(최대 며칠) 보관할 수 있으나, 이용자를 식별할 수 있는 정보는 저장하지 않습니다.</p>
+
+    <h2>5. 광고 및 분석</h2>
+    <p>앱에는 광고가 없으며, 이용 행태를 분석하거나 추적하는 도구를 사용하지 않습니다.</p>
+
+    <h2>6. 아동의 개인정보</h2>
+    <p>앱은 개인정보를 수집하지 않으므로 만 14세 미만 아동의 개인정보도 수집하지 않습니다.</p>
+
+    <h2>7. 문의</h2>
+    <p>개인정보와 관련한 문의는 아래로 연락해 주세요.<br>이메일: <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a></p>
+
+    <h2>8. 변경</h2>
+    <p>이 방침이 바뀌면 이 페이지에 시행일과 함께 알립니다.</p>`
+  );
+
+const supportPage = () =>
+  docPage(
+    '문의하기',
+    `
+    <h1>문의하기</h1>
+    <p>라키브를 이용해 주셔서 감사합니다. 앱 사용 중 궁금한 점, 잘못된 도서관 정보, 오류 신고는 아래 이메일로 보내 주세요.</p>
+    <h2>이메일</h2>
+    <p><a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a></p>
+    <h2>자주 묻는 질문</h2>
+    <ul>
+      <li><b>운영시간이 실제와 달라요.</b> 가이드북 『오늘 도서관 갈래?』 기준 정보입니다. 방문 전 도서관에 꼭 확인해 주세요. 틀린 곳을 알려 주시면 고치겠습니다.</li>
+      <li><b>내 주변 지도에 내 위치가 안 나와요.</b> 휴대폰 설정에서 위치 서비스와 라키브의 위치 권한을 켜 주세요.</li>
+      <li><b>회원가입이 필요한가요?</b> 아니요. 기록은 이 기기에만 저장됩니다.</li>
+    </ul>
+    <p style="margin-top:18px"><a href="../privacy/">개인정보 처리방침</a></p>`
+  );
+
 /* ── 앱 링크 검증 파일 ─────────────────────────────────────── */
 
 /**
@@ -271,6 +372,14 @@ for (const seed of seeds) {
   const dir = path.join(OUT, 'library', seed.id);
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, 'index.html'), libraryPage(seed), 'utf8');
+}
+
+for (const [dir, html] of [
+  ['privacy', privacyPage()],
+  ['support', supportPage()],
+]) {
+  fs.mkdirSync(path.join(OUT, dir), { recursive: true });
+  fs.writeFileSync(path.join(OUT, dir, 'index.html'), html, 'utf8');
 }
 
 // GitHub Pages 가 Jekyll 처리로 .well-known 폴더를 무시하지 않게 한다
