@@ -269,7 +269,7 @@ export default function NearbyScreen() {
         {/* 위: 검색창 (애플·구글 지도처럼) + 지금 기준 한 줄 */}
         <View style={[styles.top, { paddingHorizontal: layout.gutter }]} pointerEvents="box-none">
           {/* 태블릿은 애플 지도처럼 왼쪽 위 좁은 칸 — 폰 폭(560) 그대로 두면 화면 위를 가로질러 혼자 떠 보였다 */}
-          <View style={[styles.searchBox, layout.isTablet && styles.tabletPanel]}>
+          <View style={[styles.searchBox, layout.isTablet && styles.tabletPanel, layout.isTablet && styles.tabletSearch]}>
             <Ionicons name="search" size={18} color={colors.textMuted} />
             <TextInput
               value={query}
@@ -277,7 +277,7 @@ export default function NearbyScreen() {
               onFocus={() => setSearching(true)}
               placeholder={t('nearby.searchPlaceholder')}
               placeholderTextColor={colors.textMuted}
-              style={styles.searchInput}
+              style={[styles.searchInput, layout.isTablet && styles.tabletInput]}
               returnKeyType="search"
               onSubmitEditing={() => {
                 if (libHits[0]) pickLibrary(libHits[0].id);
@@ -558,7 +558,10 @@ const styles = themedStyles(() => ({
   },
   // iOS 는 lineHeight 가 있으면 글자가 잘린다 — 정해 두지 않는다
   searchInput: { flex: 1, ...typography.body, lineHeight: undefined, color: colors.text, paddingVertical: 0 },
-  tabletPanel: { width: 380, maxWidth: 380 },
+  tabletPanel: { width: 340, maxWidth: 340 },
+  // 태블릿 — 애플 지도 사이드 검색처럼 낮고 단정하게 (48 높이·본문 글씨는 넓은 화면에서 혼자 커 보였다)
+  tabletSearch: { height: 40, borderRadius: 20, paddingHorizontal: spacing.md },
+  tabletInput: { fontSize: 15 },
   results: {
     backgroundColor: colors.surface,
     borderRadius: radius.lg,
