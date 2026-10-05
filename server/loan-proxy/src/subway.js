@@ -77,27 +77,53 @@ function minutesOf(a) {
   return null;
 }
 
+/**
+ * 역 전광판처럼 — 노선·방향마다 이번 열차 · 다음 열차 두 대.
+ *   group  같은 방향끼리 묶는 이름 (화면이 "교대 방면" 한 덩어리로 보여 준다)
+ *   at     열차가 지금 있는 역 ("방배") · msg 는 서울시 안내 그대로("전역 출발" · "[3]번째 전역 (사당)")
+ *   express 급행·ITX · last 막차 · no 열차 번호
+ */
 async function live(env, name) {
-  return remembered(env, `subway:live:v2:${name}`, LIVE_TTL, async () => {
+  return remembered(env, `subway:live:v3:${name}`, LIVE_TTL, async () => {
     try {
       const res = await fetch(
-        `http://swopenapi.seoul.go.kr/api/subway/${encodeURIComponent(env.SEOUL_SUBWAY_KEY)}/json/realtimeStationArrival/0/30/${encodeURIComponent(name)}`
+        `http://swopenapi.seoul.go.kr/api/subway/${encodeURIComponent(env.SEOUL_SUBWAY_KEY)}/json/realtimeStationArrival/0/40/${encodeURIComponent(name)}`
       );
       if (!res.ok) return null;
       const list = (await res.json())?.realtimeArrivalList;
       if (!Array.isArray(list)) return [];
-      // 노선·방향마다 먼저 오는 열차 하나
-      const seen = new Map();
+      const groups = new Map();
       for (const a of list) {
         const line = LINE[a.subwayId] ?? '';
-        const [to, dir] = String(a.trainLineNm ?? '').split(' - ').map((s) => s.trim());
-        const key = `${a.subwayId}|${a.updnLine}|${dir ?? ''}`;
-        const min = minutesOf(a);
-        const item = { line, dir: dir || a.updnLine || '', to: to || '', min, msg: String(a.arvlMsg2 ?? '') };
-        const prev = seen.get(key);
-        if (!prev || (min ?? 999) < (prev.min ?? 999)) seen.set(key, item);
+        const [to, rawDir] = String(a.trainLineNm ?? '').split(' - ').map((x) => x.trim());
+        const dir = String(rawDir || a.updnLine || '').replace(/\s*\((급행|특급|ITX)\)\s*/g, '').trim();
+        const group = `${a.subwayId}|${a.updnLine}|${dir}`;
+        const item = {
+          group,
+          line,
+          dir,
+          to: to || '',
+          min: minutesOf(a),
+          msg: String(a.arvlMsg2 ?? ''),
+          at: String(a.arvlMsg3 ?? '').replace(/역$/, ''),
+          express: /급행|특급|ITX/.test(`${a.btrainSttus ?? ''} ${a.trainLineNm ?? ''}`),
+          last: String(a.lstcarAt ?? '') === '1',
+          no: String(a.btrainNo ?? ''),
+        };
+        if (!groups.has(group)) groups.set(group, []);
+        groups.get(group).push(item);
       }
-      return [...seen.values()].sort((x, y) => x.line.localeCompare(y.line) || (x.min ?? 999) - (y.min ?? 999)).slice(0, 8);
+      const out = [];
+      for (const trains of groups.values()) {
+        trains.sort((x, y) => (x.min ?? 999) - (y.min ?? 999));
+        out.push(...trains.slice(0, 2));
+      }
+      // 노선 차례 → 방향 → 이번 열차가 빠른 방향 먼저
+      const first = new Map();
+      for (const t of out) if (!first.has(t.group)) first.set(t.group, t.min ?? 999);
+      return out
+        .sort((x, y) => x.line.localeCompare(y.line) || first.get(x.group) - first.get(y.group) || x.group.localeCompare(y.group) || (x.min ?? 999) - (y.min ?? 999))
+        .slice(0, 16);
     } catch {
       return null;
     }
@@ -197,9 +223,19 @@ async function scheduled(env, name, lines) {
   for (const { line, id } of ids) {
     for (const ud of ['U', 'D']) {
       const tt = await timetable(env, id, day, ud);
-      // 자정 넘은 막차(25시처럼 적힌 것)도 있어 sec 그대로 비교
-      const next = tt?.find((x) => x.sec >= sec);
-      if (next) out.push({ line, dir: '', to: next.to ? `${next.to}행` : '', min: Math.round((next.sec - sec) / 60), msg: '' });
+      // 자정 넘은 막차(25시처럼 적힌 것)도 있어 sec 그대로 비교 — 방향마다 이번·다음 두 대
+      const next = (tt ?? []).filter((x) => x.sec >= sec).slice(0, 2);
+      const lastSec = tt?.length ? tt[tt.length - 1].sec : -1;
+      for (const n of next)
+        out.push({
+          group: `${id}|${ud}`,
+          line,
+          dir: '',
+          to: n.to ? `${n.to}행` : '',
+          min: Math.round((n.sec - sec) / 60),
+          msg: '',
+          last: n.sec === lastSec,
+        });
     }
   }
   return out.length ? out : [];

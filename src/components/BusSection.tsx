@@ -73,6 +73,13 @@ export function BusSection({ coords, inset = 0 }: { coords?: Coordinates; inset?
             )}
           </View>
         ))}
+        {/* 사람 아이콘이 무엇인지 — 저상버스가 하나라도 보일 때만 */}
+        {bus.stops.some((st) => st.arrivals?.some((x) => x.type?.includes('저상'))) ? (
+          <View style={styles.legend}>
+            <Ionicons name="accessibility" size={12} color={colors.primary} />
+            <Text style={styles.source}>{t('bus.lowFloor')}</Text>
+          </View>
+        ) : null}
         <View style={styles.foot}>
           <Text style={styles.source}>{t(bus.source === 'seoul' ? 'bus.sourceSeoul' : 'bus.source', { time: hhmm })}</Text>
           <Pressable onPress={() => void load()} disabled={loading} hitSlop={8} accessibilityRole="button">
@@ -155,6 +162,7 @@ const styles = themedStyles(() => ({
     color: colors.textMuted,
     paddingLeft: 32 + spacing.md,
   },
+  legend: { flexDirection: 'row', alignItems: 'center', gap: 4 },
   foot: {
     flexDirection: 'row',
     justifyContent: 'space-between',

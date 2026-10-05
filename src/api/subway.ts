@@ -14,6 +14,15 @@ export interface SubwayLive {
   /** 몇 분 뒤 (모르면 null — msg 를 그대로 보여 준다) */
   min: number | null;
   msg: string;
+  /** 같은 방향끼리 묶는 이름 */
+  group?: string;
+  /** 열차가 지금 있는 역 (실시간만) */
+  at?: string;
+  express?: boolean;
+  /** 막차 */
+  last?: boolean;
+  /** 열차 번호 */
+  no?: string;
 }
 export interface SubwayStation {
   /** "시청" (역 글자 없이) */

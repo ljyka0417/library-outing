@@ -29,6 +29,28 @@ function LinePill({ line, small }: { line: string; small?: boolean }) {
   );
 }
 
+type Train = NonNullable<SubwayStation['live']>[number];
+
+/** 역 전광판처럼 방향(group)마다 묶는다 — 서버가 이미 노선·방향 차례로 준다 */
+function boards(live: Train[]) {
+  const out: { key: string; line: string; dir: string; trains: Train[] }[] = [];
+  for (const a of live) {
+    const key = a.group ?? `${a.line}|${a.dir}|${a.to}`;
+    const last = out[out.length - 1];
+    if (last && last.key === key) last.trains.push(a);
+    else out.push({ key, line: a.line, dir: a.dir, trains: [a] });
+  }
+  return out;
+}
+
+/** 열차가 지금 어디쯤 — "전역 출발 (잠원)" · "현재 옥수" (실시간만. 시간표는 빈칸) */
+function where(a: Train, t: (k: 'subway.now', v: { at: string }) => string) {
+  if (!a.at && !a.msg) return '';
+  const positional = /전역|번째|당역|진입|도착|출발/.test(a.msg) && !/\d+분/.test(a.msg);
+  if (positional) return a.msg.replace(/\s*\(.*\)\s*$/, '') + (a.at && !a.msg.includes('당역') ? ` (${a.at})` : '');
+  return a.at ? t('subway.now', { at: a.at }) : '';
+}
+
 export function SubwaySection({ coords, inset = 0 }: { coords?: Coordinates; inset?: number }) {
   const { t } = useT();
   const [stations, setStations] = useState<SubwayStation[] | null>(null);
@@ -87,14 +109,26 @@ export function SubwaySection({ coords, inset = 0 }: { coords?: Coordinates; ins
             {s.live === null ? null : s.live.length === 0 ? (
               <Text style={styles.empty}>{t('subway.none')}</Text>
             ) : (
-              <View style={styles.list}>
-                {s.live.map((a, i) => (
-                  <View key={`${a.line}-${a.dir}-${a.to}-${i}`} style={styles.row}>
-                    <View style={styles.lineCell}>
-                      <LinePill line={a.line} />
+              <View style={styles.boards}>
+                {boards(s.live).map((b) => (
+                  <View key={b.key} style={styles.board}>
+                    <View style={styles.boardHead}>
+                      <LinePill line={b.line} />
+                      <Text style={styles.boardDir} numberOfLines={1}>
+                        {b.dir ? b.dir.replace(/방면$/, ' 방면') : b.trains[0]?.to}
+                      </Text>
                     </View>
-                    <Text style={styles.when}>{a.min === null ? a.msg : a.min <= 0 ? t('bus.soon') : t('bus.min', { n: a.min })}</Text>
-                    <Text style={styles.dir} numberOfLines={1}>{[a.to, a.dir].filter(Boolean).join(' · ')}</Text>
+                    {b.trains.map((a, i) => (
+                      <View key={i} style={styles.row}>
+                        <Text style={styles.order}>{t(i === 0 ? 'subway.this' : 'subway.next')}</Text>
+                        <Text style={styles.when}>{a.min === null ? a.msg : a.min <= 0 ? t('bus.soon') : t('bus.min', { n: a.min })}</Text>
+                        <Text style={styles.dir} numberOfLines={1}>
+                          {[b.dir ? a.to : '', where(a, t)].filter(Boolean).join(' · ')}
+                        </Text>
+                        {a.express ? <Text style={[styles.tag, styles.tagExpress]}>{t('subway.express')}</Text> : null}
+                        {a.last ? <Text style={[styles.tag, styles.tagLast]}>{t('subway.last')}</Text> : null}
+                      </View>
+                    ))}
                   </View>
                 ))}
               </View>
@@ -143,11 +177,17 @@ const styles = themedStyles(() => ({
   pillTextSmall: { fontSize: 11, lineHeight: 15 },
   // 밝은 노선색 위 흰 글자 윤곽
   pillShadow: { textShadowColor: 'rgba(0,0,0,0.35)', textShadowOffset: { width: 0, height: 0.5 }, textShadowRadius: 1.5 },
-  lineCell: { minWidth: 72 },
   right: { alignItems: 'flex-end' },
   dist: { ...typography.captionBold, color: colors.primary },
   walk: { ...typography.tiny, color: colors.textMuted },
-  list: { gap: 4, paddingLeft: 32 + spacing.md },
+  boards: { gap: spacing.sm, paddingLeft: 32 + spacing.md },
+  board: { gap: 4 },
+  boardHead: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, marginBottom: 2 },
+  boardDir: { ...typography.captionBold, color: colors.text, flexShrink: 1 },
+  order: { ...typography.tiny, color: colors.textMuted, minWidth: 28 },
+  tag: { ...typography.tiny, fontWeight: '700', paddingHorizontal: 6, borderRadius: 6, overflow: 'hidden' },
+  tagExpress: { color: colors.white, backgroundColor: '#C9536B' },
+  tagLast: { color: colors.white, backgroundColor: colors.textSub },
   row: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
   when: { ...typography.captionBold, color: colors.closed },
   dir: { ...typography.tiny, color: colors.textMuted, flex: 1 },
