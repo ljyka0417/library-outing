@@ -268,7 +268,8 @@ export default function NearbyScreen() {
 
         {/* 위: 검색창 (애플·구글 지도처럼) + 지금 기준 한 줄 */}
         <View style={[styles.top, { paddingHorizontal: layout.gutter }]} pointerEvents="box-none">
-          <View style={styles.searchBox}>
+          {/* 태블릿은 애플 지도처럼 왼쪽 위 좁은 칸 — 폰 폭(560) 그대로 두면 화면 위를 가로질러 혼자 떠 보였다 */}
+          <View style={[styles.searchBox, layout.isTablet && styles.tabletPanel]}>
             <Ionicons name="search" size={18} color={colors.textMuted} />
             <TextInput
               value={query}
@@ -293,7 +294,7 @@ export default function NearbyScreen() {
 
           {/* 보여 줄 게 있을 때만 — 한 글자일 때(장소는 두 글자부터) 빈 칸만 그려졌다 */}
           {searching && query.trim() && (libHits.length > 0 || places !== null) ? (
-            <View style={styles.results}>
+            <View style={[styles.results, layout.isTablet && styles.tabletPanel]}>
               <ScrollView keyboardShouldPersistTaps="handled" style={{ maxHeight: 360 }}>
                 {libHits.length ? <Text style={styles.resultHead}>{t('nearby.libraries')}</Text> : null}
                 {libHits.map((l) => {
@@ -341,7 +342,7 @@ export default function NearbyScreen() {
                   {spot
                     ? t('nearby.countAt', { name: spot.name, n: nearCount })
                     : me
-                      ? t('nearby.count', { n: nearCount })
+                      ? nearCount > 0 ? t('nearby.count', { n: nearCount }) : t('nearby.countNone')
                       : t('nearby.all', { n: LIBS.length })}
                 </Text>
                 {spot ? (
@@ -557,6 +558,7 @@ const styles = themedStyles(() => ({
   },
   // iOS 는 lineHeight 가 있으면 글자가 잘린다 — 정해 두지 않는다
   searchInput: { flex: 1, ...typography.body, lineHeight: undefined, color: colors.text, paddingVertical: 0 },
+  tabletPanel: { width: 380, maxWidth: 380 },
   results: {
     backgroundColor: colors.surface,
     borderRadius: radius.lg,

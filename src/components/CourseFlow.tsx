@@ -395,7 +395,7 @@ export function CourseFlow({
                 <View style={styles.hello}>
                   <View style={{ flex: 1, gap: 4 }}>
                     <Text style={styles.helloTitle}>{t('course.doneTitle')}</Text>
-                    <Text style={styles.helloSub}>{t('course.doneSub', { n: totalWalk })}</Text>
+                    <Text style={styles.helloSub}>{t('course.doneSub', { n: totalWalk, d: formatDistance(legs.reduce((a, d) => a + d, 0)) })}</Text>
                   </View>
                   <Mascot pose="faceHappy" size={86} />
                 </View>
