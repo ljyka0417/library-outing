@@ -75,7 +75,12 @@ const INSET = 8;
 export function LiquidTabBar({ state, descriptors, navigation }: TabBarProps) {
   const insets = useSafeAreaInsets();
   const bottom = Math.max(insets.bottom, TAB_BAR.minBottom);
-  const glass = useAppStore((s) => s.glassTest);
+  /*
+   * 유리 시험 스위치는 뺐다 (2026-10-05). 안드로이드에서 흐림(expo-blur)은 뒤를 흐리지 못하고 거의 투명한 막만
+   * 깔려 너무 비쳤고, 끄면 불투명한 흰 판이라 밋밋했다. 그 사이 — 애플 탭바처럼 살짝 비치는 유리판을 색으로 만든다
+   * (frost: 반투명 바탕 + 위쪽 흰 빛선 + 가는 테두리 + 넓고 옅은 그림자, 선택 칸은 맑은 렌즈).
+   */
+  const glass = false;
 
   /**
    * 칸 하나의 너비.
@@ -214,7 +219,9 @@ export function LiquidTabBar({ state, descriptors, navigation }: TabBarProps) {
           바깥은 그림자만, 안쪽은 둥글게 자르는 역할만 맡는다. */}
       <View style={[styles.shadowHost, { width: barWidth }, glass && styles.shadowHostGlass]}>
         <GestureDetector gesture={drag}>
-        <View style={[styles.row, glass && styles.rowGlass]}>
+        <View style={[styles.row, styles.frost, glass && styles.rowGlass]}>
+          {/* 위쪽 흰 빛선 — 유리 가장자리에 빛이 맺힌 것처럼 */}
+          <View pointerEvents="none" style={styles.frostShine} />
           {/* 유리를 켰을 때만 뒤가 비친다. 스위치는 저장되지 않으므로
               혹시 여기서 죽더라도 앱을 껐다 켜면 꺼진 상태로 돌아온다. */}
           {glass ? <GlassSurface /> : null}
@@ -229,7 +236,7 @@ export function LiquidTabBar({ state, descriptors, navigation }: TabBarProps) {
                 <GlassSurface variant="clear" />
               </Animated.View>
             ) : (
-              <Animated.View pointerEvents="none" style={[styles.blob, movingSize, movingStyle]} />
+              <Animated.View pointerEvents="none" style={[styles.blob, styles.lensFrost, movingSize, movingStyle]} />
             )
           ) : null}
 
@@ -291,10 +298,10 @@ const styles = themedStyles(() => ({
     borderRadius: TAB_BAR.height / 2,
     // 떠 있어 보이게 하는 그림자. 진하면 무거워 보여 옅게 깐다.
     shadowColor: '#2E2A26',
-    shadowOpacity: 0.12,
-    shadowRadius: 16,
-    shadowOffset: { width: 0, height: 6 },
-    elevation: 12,
+    shadowOpacity: currentScheme() === 'dark' ? 0.4 : 0.14,
+    shadowRadius: 24,
+    shadowOffset: { width: 0, height: 10 },
+    elevation: 10,
   },
   shadowHostGlass: {
     // 유리 위에 짙은 그림자가 겹치면 탁해 보인다
@@ -308,6 +315,25 @@ const styles = themedStyles(() => ({
     paddingHorizontal: PAD,
     borderRadius: TAB_BAR.height / 2,
     backgroundColor: colors.surface,
+  },
+  frost: {
+    backgroundColor: currentScheme() === 'dark' ? 'rgba(38,35,32,0.92)' : 'rgba(255,255,255,0.9)',
+    borderWidth: 1,
+    borderColor: currentScheme() === 'dark' ? 'rgba(255,255,255,0.10)' : 'rgba(255,255,255,0.95)',
+  },
+  frostShine: {
+    position: 'absolute',
+    left: 18,
+    right: 18,
+    top: 0,
+    height: 1,
+    backgroundColor: currentScheme() === 'dark' ? 'rgba(255,255,255,0.18)' : 'rgba(255,255,255,1)',
+  },
+  lensFrost: {
+    // 선택 칸 — 판보다 한 겹 맑은 렌즈 (민트를 아주 옅게 + 흰 테두리)
+    backgroundColor: currentScheme() === 'dark' ? 'rgba(93,187,168,0.22)' : 'rgba(79,166,149,0.14)',
+    borderWidth: 1,
+    borderColor: currentScheme() === 'dark' ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.9)',
   },
   rowGlass: {
     // 유리가 뒤를 그리므로 판 색을 비운다. 색을 남기면 불투명해져 안 비친다.

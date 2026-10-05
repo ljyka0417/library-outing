@@ -15,7 +15,6 @@ import { dataCompleteness } from '@/data/libraries.mock';
 import { hasCommonsPhotos, libraryPhotoCount } from '@/data/libraryPhotos';
 import { loanBookStatus } from '@/data/books.mock';
 import { chatIdeasStatus } from '@/utils/chatIdeas';
-import { glassSupport } from '@/components/GlassSurface';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
 import { centered, useLayout } from '@/hooks/useLayout';
 import { useT } from '@/i18n';
@@ -139,8 +138,6 @@ export default function MyPageScreen() {
         ) : null}
 
         {/* 개발용 데이터 수집 현황. __DEV__ 라 배포 빌드에는 나오지 않는다. */}
-        {__DEV__ && Platform.OS === 'ios' ? <NativeTabsTest /> : null}
-        {__DEV__ ? <GlassTest /> : null}
         {__DEV__ ? <DataStatus /> : null}
         </View>
       </ScrollView>
@@ -149,90 +146,11 @@ export default function MyPageScreen() {
 }
 
 /**
- * 애플 기본 탭바 스위치 (iOS, 개발 중에만 표시). 기본은 켜짐.
- *
- * 끄면 우리가 그린 떠 있는 알약 탭바로 돌아간다. 이 선택은 **저장된다** —
- * 기본이 켜짐이라, 저장하지 않으면 꺼 두어도 앱을 껐다 켤 때마다 되살아난다.
- * 바꾸면 탭 내비게이터가 통째로 바뀌어 홈으로 돌아간다.
- */
-function NativeTabsTest() {
-  const on = useAppStore((s) => s.nativeTabs);
-  const setOn = useAppStore((s) => s.setNativeTabs);
-
-  return (
-    <Pressable
-      onPress={() => setOn(!on)}
-      style={({ pressed }) => [styles.devBox, pressed && { opacity: 0.7 }]}
-      accessibilityRole="switch"
-      accessibilityState={{ checked: on }}
-    >
-      <View style={styles.glassRow}>
-        <Ionicons
-          name={on ? 'toggle' : 'toggle-outline'}
-          size={26}
-          color={on ? colors.primary : colors.textMuted}
-        />
-        <View style={{ flex: 1 }}>
-          <Text style={styles.devTitle}>애플 기본 탭바 {on ? '켜짐' : '꺼짐'} (기본값 켜짐)</Text>
-          <Text style={styles.devText}>iOS 26 이상에서 진짜 Liquid Glass 탭바입니다</Text>
-          <Text style={styles.devText}>
-            {on ? '끄면 우리가 그린 알약 탭바로 돌아갑니다' : '우리가 그린 알약 탭바를 쓰는 중'} ·
-            이 선택은 저장됩니다
-          </Text>
-        </View>
-      </View>
-    </Pressable>
-  );
-}
-
-/**
- * 유리 효과 시험 스위치 (개발 중에만 표시).
- *
- * 유리는 네이티브 기능이라 기기에서만 진짜 모습이 나온다. 그런데 전에
- * 바로 켜 두었다가 앱이 켜지자마자 죽어 되돌릴 방법이 없었다.
- * 그래서 앱 안에서 켜고 끄게 하고, 이 값은 **저장하지 않는다.**
- * 켜서 문제가 생겨도 앱을 껐다 켜면 꺼진 상태로 돌아온다.
- */
-function GlassTest() {
-  const glass = useAppStore((s) => s.glassTest);
-  const setGlass = useAppStore((s) => s.setGlassTest);
-
-  const support =
-    glassSupport === 'liquid'
-      ? '이 기기는 진짜 유리(Liquid Glass)를 씁니다'
-      : glassSupport === 'blur'
-        ? '이 기기는 흐림 처리로 대신합니다'
-        : '이 기기는 유리를 쓸 수 없어 반투명으로 대신합니다';
-
-  return (
-    <Pressable
-      onPress={() => setGlass(!glass)}
-      style={({ pressed }) => [styles.devBox, pressed && { opacity: 0.7 }]}
-      accessibilityRole="switch"
-      accessibilityState={{ checked: glass }}
-    >
-      <View style={styles.glassRow}>
-        <Ionicons
-          name={glass ? 'toggle' : 'toggle-outline'}
-          size={26}
-          color={glass ? colors.primary : colors.textMuted}
-        />
-        <View style={{ flex: 1 }}>
-          <Text style={styles.devTitle}>탭바 유리 효과 {glass ? '켜짐' : '꺼짐'} (시험)</Text>
-          <Text style={styles.devText}>{support}</Text>
-          <Text style={styles.devText}>앱을 껐다 켜면 다시 꺼집니다</Text>
-        </View>
-      </View>
-    </Pressable>
-  );
-}
-
-/**
  * 데이터가 얼마나 채워졌는지 한눈에 보여준다.
  * npm run geocode / enrich / collect-nearby 를 돌린 뒤 여기서 확인한다.
  */
 /** 기기에 들어간 코드를 눈으로 확인하는 표시. 새 코드를 올릴 때마다 바꾼다 */
-const BUILD_MARK = '10-05 코스 다듬기';
+const BUILD_MARK = '10-05 태블릿 회전·유리판';
 
 function DataStatus() {
   const d = dataCompleteness();
@@ -412,7 +330,6 @@ const styles = themedStyles(() => ({
     backgroundColor: colors.surfaceAlt,
     gap: 2,
   },
-  glassRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.md },
   devTitle: { ...typography.tiny, color: colors.textSub, fontWeight: '700', marginBottom: 2 },
   devText: { ...typography.tiny, color: colors.textMuted },
 }));

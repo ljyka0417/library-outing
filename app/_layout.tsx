@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { Appearance, Platform, useColorScheme } from 'react-native';
+import { Appearance, Dimensions, Platform, useColorScheme } from 'react-native';
+import * as ScreenOrientation from 'expo-screen-orientation';
 import { Stack, usePathname, useRouter, useSegments } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
@@ -71,6 +72,21 @@ export default function RootLayout() {
   const lastPath = useRef(pathname);
   const backTo = useRef<string | null>(null);
   if (hydrated && before !== scheme) backTo.current = lastPath.current;
+  /*
+   * 화면 방향 — 안드로이드 폰은 세로로 잠그고 태블릿은 돌게 둔다. 앱 설정(app.json)으로는 폰·태블릿을
+   * 못 나눠서 화면 짧은 변(600dp)으로 가른다. 세로로 고정해 두었더니 안드로이드 태블릿을 가로로 들면
+   * 가운데 좁은 세로 화면만 뜨고 양옆이 검게 비었다. iOS 는 Info.plist 로 나눠 두었다.
+   */
+  useEffect(() => {
+    if (Platform.OS !== 'android') return;
+    const { width, height } = Dimensions.get('screen');
+    const phone = Math.min(width, height) < 600;
+    void (phone
+      ? ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP)
+      : ScreenOrientation.unlockAsync()
+    ).catch(() => {});
+  }, []);
+
   useEffect(() => {
     lastPath.current = pathname;
   }, [pathname]);
