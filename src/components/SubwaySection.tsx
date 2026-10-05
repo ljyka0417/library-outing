@@ -7,6 +7,7 @@ import { useT } from '@/i18n';
 import { colors, radius, spacing, typography, themedStyles } from '@/theme';
 import { formatDistance, walkingMinutes } from '@/utils/openingHours';
 import { lineColor } from '@/utils/subwayLineColor';
+import { approach } from '@/utils/subwayOrder';
 import type { Coordinates } from '@/types';
 
 /**
@@ -47,7 +48,11 @@ function boards(live: Train[]) {
 function where(a: Train, t: (k: 'subway.now', v: { at: string }) => string) {
   if (!a.at && !a.msg) return '';
   const positional = /전역|번째|당역|진입|도착|출발/.test(a.msg) && !/\d+분/.test(a.msg);
-  if (positional) return a.msg.replace(/\s*\(.*\)\s*$/, '') + (a.at && !a.msg.includes('당역') ? ` (${a.at})` : '');
+  if (positional) {
+    const m = a.msg.replace(/\s*\(.*\)\s*$/, '');
+    // "고속터미널 진입 (고속터미널)" 처럼 역 이름이 이미 들어 있으면 괄호를 붙이지 않는다
+    return m + (a.at && !a.msg.includes('당역') && !m.includes(a.at) ? ` (${a.at})` : '');
+  }
   return a.at ? t('subway.now', { at: a.at }) : '';
 }
 
@@ -64,25 +69,63 @@ function stationsAway(a: Train): number | null {
 }
 
 /** 전광판 아래 작은 선로 — 오른쪽 끝이 이 역, 열차가 몇 정거장 전에 있는지 */
-function Track({ away, color, at, here }: { away: number; color: string; at: string; here: string }) {
-  const STOPS = 5; // 왼쪽부터 4정거장 전 … 이 역
-  const pos = STOPS - 1 - away;
+function Track({ away, color, at, here, label }: { away: number; color: string; at: string; here: string; label: string }) {
+  // 왼쪽 끝 = 4정거장 전, 오른쪽 끝 = 이 역. 열차 아이콘이 그 사이 어디쯤인지
+  const pct = Math.max(0, Math.min(1, 1 - away / 4));
   return (
     <View style={styles.track}>
-      <View style={[styles.trackLine, { backgroundColor: color }]} />
-      {Array.from({ length: STOPS }, (_, i) => (
-        <View key={i} style={styles.trackSlot}>
-          <View style={[styles.trackDot, { borderColor: color }, i === STOPS - 1 && { backgroundColor: color }]} />
-          {i === pos ? (
-            <View style={[styles.trackTrain, { backgroundColor: color }]}>
-              <Ionicons name="train" size={11} color="#FFFFFF" />
-            </View>
-          ) : null}
-          <Text style={styles.trackLabel} numberOfLines={1}>
-            {i === STOPS - 1 ? here : i === pos && away > 0 ? at : ''}
-          </Text>
+      <Text style={styles.trackEnd} numberOfLines={1}>{away > 0 ? at : ''}</Text>
+      <View style={styles.trackBar}>
+        <View style={[styles.trackLine, { backgroundColor: color }]} />
+        <View style={[styles.trackHere, { backgroundColor: color }]} />
+        <View style={[styles.trackTrain, { backgroundColor: color, left: `${pct * 100}%` }]}>
+          <Ionicons name="train" size={11} color="#FFFFFF" />
         </View>
-      ))}
+      </View>
+      <Text style={[styles.trackEnd, styles.trackHereText]} numberOfLines={1}>
+        {here}
+        {away > 0 ? <Text style={styles.trackAway}>{'  '}{label}</Text> : null}
+      </Text>
+    </View>
+  );
+}
+
+/**
+ * 전광판 선로 — 3전역 · 2전역 · 전역 · 이 역 이름과, 실시간이면 열차가 지금 어느 역에 있는지.
+ * 4정거장 이상 멀면 열차는 왼쪽 바깥에 그 역 이름과 함께. 시간표 지역은 열차 없이 역 이름만.
+ */
+function NamedTrack({ before, away, color, at, here }: { before: string[]; away?: number; color: string; at: string; here: string }) {
+  const names = [...before, here];
+  const last = names.length - 1;
+  // 열차 자리: 0 = 이 역, 1 = 전역 … (names 안의 칸 번호로)
+  const slot = away === undefined ? null : away <= last ? last - away : -1;
+  return (
+    <View style={styles.nt}>
+      {slot === -1 ? (
+        <View style={styles.ntFar}>
+          <View style={[styles.ntTrain, { backgroundColor: color }]}>
+            <Ionicons name="train" size={11} color="#FFFFFF" />
+          </View>
+          <Text style={styles.ntLabel} numberOfLines={1}>{at}</Text>
+        </View>
+      ) : null}
+      <View style={styles.ntRail}>
+        <View style={[styles.ntLine, { backgroundColor: color }]} />
+        {names.map((n, i) => (
+          <View key={`${n}-${i}`} style={styles.ntSlot}>
+            {slot === i ? (
+              <View style={[styles.ntTrain, { backgroundColor: color }]}>
+                <Ionicons name="train" size={11} color="#FFFFFF" />
+              </View>
+            ) : (
+              <View style={[styles.ntDot, { borderColor: color }, i === last && { backgroundColor: color }]} />
+            )}
+            <Text style={[styles.ntLabel, i === last && styles.ntHere]} numberOfLines={1}>
+              {n}
+            </Text>
+          </View>
+        ))}
+      </View>
     </View>
   );
 }
@@ -182,9 +225,27 @@ export function SubwaySection({ coords, inset = 0 }: { coords?: Coordinates; ins
                         </View>
                       ))}
                       {/* 이번 열차가 몇 정거장 전인지 — 실시간만 (시간표는 위치를 모른다) */}
-                      {b.trains[0] && stationsAway(b.trains[0]) !== null ? (
-                        <Track away={stationsAway(b.trains[0])!} color={lc?.bg ?? colors.primary} at={b.trains[0].at ?? ''} here={t('subway.here')} />
-                      ) : null}
+                      {(() => {
+                        const ap = approach(b.line, s.name, b.trains[0]?.at, b.toward);
+                        return ap && ap.before.length ? (
+                          <NamedTrack
+                            before={ap.before}
+                            away={ap.away}
+                            color={lc?.bg ?? colors.primary}
+                            at={b.trains[0]?.at ?? ''}
+                            here={t('subway.here')}
+                          />
+                        ) : null;
+                      })() ??
+                      (b.trains[0] && stationsAway(b.trains[0]) !== null ? (
+                        <Track
+                          away={stationsAway(b.trains[0])!}
+                          color={lc?.bg ?? colors.primary}
+                          at={b.trains[0].at ?? ''}
+                          here={t('subway.here')}
+                          label={t('bus.prev', { n: stationsAway(b.trains[0])! })}
+                        />
+                      ) : null)}
                     </View>
                   );
                 })}
@@ -238,32 +299,43 @@ const styles = themedStyles(() => ({
   dist: { ...typography.captionBold, color: colors.primary },
   walk: { ...typography.tiny, color: colors.textMuted },
   boards: { gap: spacing.sm },
-  // 승강장 전광판 — 어두운 판에 주황 글씨 (밝게·어둡게 화면 모드와 상관없이 같은 모양)
-  led: { backgroundColor: '#15181D', borderRadius: radius.md, padding: spacing.md, gap: 8 },
-  ledHead: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, paddingBottom: 6, borderBottomWidth: 1, borderBottomColor: '#2A2F36' },
-  ledDir: { ...typography.captionBold, color: '#FFFFFF', flexShrink: 1 },
-  ledSub: { ...typography.tiny, color: '#9AA3AD', flexShrink: 1 },
+  // 방향마다 한 판 — 앱 바탕과 어울리는 밝은 판(어두운 전광판은 판이 여러 개 이어지면 무거웠다)
+  led: { backgroundColor: colors.surfaceAlt, borderRadius: radius.md, padding: spacing.md, gap: 8 },
+  ledHead: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, paddingBottom: 6, borderBottomWidth: 1, borderBottomColor: colors.divider },
+  ledDir: { ...typography.captionBold, color: colors.text, flexShrink: 1 },
+  ledSub: { ...typography.tiny, color: colors.textMuted, flexShrink: 1 },
   ledRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
-  ledOrder: { ...typography.tiny, color: '#FFB547', fontWeight: '700', minWidth: 28 },
-  ledTo: { ...typography.captionBold, color: '#FFFFFF' },
-  ledExpress: { color: '#FF6B6B', fontWeight: '800' },
-  ledLast: { color: '#9AA3AD', fontWeight: '800' },
-  ledWhere: { ...typography.tiny, color: '#FFB547' },
-  ledMin: { ...typography.bodyBold, color: '#FFB547', fontVariant: ['tabular-nums'] },
-  track: { flexDirection: 'row', alignItems: 'flex-start', marginTop: 4, height: 34 },
-  trackLine: { position: 'absolute', left: '10%', right: '10%', top: 6, height: 2, opacity: 0.6 },
-  trackSlot: { flex: 1, alignItems: 'center' },
-  trackDot: { width: 10, height: 10, borderRadius: 5, borderWidth: 2, backgroundColor: '#15181D' },
+  ledOrder: { ...typography.tiny, color: colors.primary, fontWeight: '700', minWidth: 28 },
+  ledTo: { ...typography.captionBold, color: colors.text },
+  ledExpress: { color: '#D2404D', fontWeight: '800' },
+  ledLast: { color: colors.textSub, fontWeight: '800' },
+  ledWhere: { ...typography.tiny, color: colors.textSub },
+  ledMin: { ...typography.bodyBold, color: colors.closed, fontVariant: ['tabular-nums'] },
+  nt: { flexDirection: 'row', alignItems: 'flex-start', marginTop: 4, gap: 4 },
+  ntFar: { alignItems: 'center', width: 52 },
+  ntRail: { flex: 1, flexDirection: 'row' },
+  ntLine: { position: 'absolute', left: '12.5%', right: '12.5%', top: 9, height: 3, borderRadius: 2, opacity: 0.4 },
+  ntSlot: { flex: 1, alignItems: 'center', gap: 3 },
+  ntDot: { width: 12, height: 12, borderRadius: 6, borderWidth: 2.5, backgroundColor: colors.surfaceAlt, marginTop: 3 },
+  ntTrain: { width: 24, height: 20, borderRadius: 6, alignItems: 'center', justifyContent: 'center' },
+  ntLabel: { fontSize: 11, lineHeight: 14, color: colors.textSub, maxWidth: '96%' },
+  ntHere: { color: colors.text, fontWeight: '700' },
+  track: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, marginTop: 2 },
+  trackEnd: { fontSize: 11, lineHeight: 15, color: colors.textMuted, maxWidth: 88 },
+  trackHereText: { color: colors.text, fontWeight: '700' },
+  trackAway: { color: colors.textMuted, fontWeight: '400' },
+  trackBar: { flex: 1, height: 22, justifyContent: 'center' },
+  trackLine: { height: 3, borderRadius: 2, opacity: 0.45 },
+  trackHere: { position: 'absolute', right: -4, width: 10, height: 10, borderRadius: 5 },
   trackTrain: {
     position: 'absolute',
-    top: -5,
+    marginLeft: -11,
     width: 22,
     height: 20,
     borderRadius: 6,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  trackLabel: { fontSize: 10, lineHeight: 13, color: '#9AA3AD', marginTop: 4 },
   board: { gap: 4 },
   boardHead: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, marginBottom: 2 },
   boardDir: { ...typography.captionBold, color: colors.text, flexShrink: 1 },
