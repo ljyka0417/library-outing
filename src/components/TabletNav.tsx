@@ -295,7 +295,7 @@ export function TabletSidebarOverlay({ onClose }: { onClose: () => void }) {
 /** 위쪽 탭바의 고른 칸 표시가 옮겨 갈 때의 탄성. 살짝만 넘쳤다 자리 잡는다 */
 const PILL_SPRING = { damping: 26, stiffness: 320, mass: 0.9 };
 
-export function TabletTopBar({ onToggle }: { onToggle: () => void }) {
+export function TabletTopBar({ onToggle, onHeight }: { onToggle: () => void; onHeight?: (h: number) => void }) {
   const insets = useSafeAreaInsets();
   const pathname = usePathname();
   const router = useRouter();
@@ -336,6 +336,13 @@ export function TabletTopBar({ onToggle }: { onToggle: () => void }) {
     shown.value = 1;
   };
 
+  // 처음 한 번 더 — 탭바를 본문 위에 띄우고 나서 첫 칸 렌즈가 안 보이는 일이 있었다(칸 위치를 재기 전에 불려서)
+  useEffect(() => {
+    const timer = setTimeout(() => moveTo(activeIndex), 300);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     moveTo(activeIndex);
     // moveTo 는 그릴 때마다 새로 만들어지지만 하는 일은 같아서 고른 칸이 바뀔 때만 부른다
@@ -353,7 +360,13 @@ export function TabletTopBar({ onToggle }: { onToggle: () => void }) {
   }));
 
   return (
-    <View style={[styles.topStrip, { paddingTop: insets.top + spacing.sm }]}>
+    <View
+      style={[styles.topStrip, { paddingTop: insets.top + spacing.sm }]}
+      pointerEvents="box-none"
+      onLayout={(e) => onHeight?.(Math.round(e.nativeEvent.layout.height))}
+    >
+      {/* 시계 자리 — 글이 밑으로 지나가도 시계가 읽히게 바탕색 막 */}
+      <View pointerEvents="none" style={[styles.topStatus, { height: insets.top }]} />
       <View style={styles.topPill}>
         <SidebarToggle onPress={onToggle} open={false} />
         <View style={styles.topDivider} />
@@ -516,10 +529,22 @@ const styles = themedStyles(() => ({
     elevation: 12,
   },
 
+  // 본문 위에 떠 있다 (2026-10-05) — 띠 바탕을 비우고 알약만 보인다. 글은 알약 밑으로 지나간다
   topStrip: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 10,
     alignItems: 'center',
     paddingBottom: spacing.sm,
-    backgroundColor: colors.background,
+  },
+  topStatus: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: currentScheme() === 'dark' ? 'rgba(23,21,19,0.8)' : 'rgba(251,248,243,0.85)',
   },
   topPill: {
     flexDirection: 'row',

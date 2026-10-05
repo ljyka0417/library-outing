@@ -5,6 +5,7 @@ import { BlurView } from 'expo-blur';
 import { SafeAreaView as ControllerSafeAreaView } from 'react-native-screens/experimental';
 import { LayoutWidth, navKind } from '@/hooks/useLayout';
 import { useNativeTabs } from '@/hooks/useNativeTabs';
+import { useTopOverlay } from '@/hooks/useTopOverlay';
 import { currentScheme, themedStyles } from '@/theme';
 
 /** 애플 탭바(폰)가 홈 인디케이터 위로 차지하는 높이 — 알약과 그 아래위 틈 */
@@ -21,6 +22,9 @@ export function useBleed() {
   const native = useNativeTabs();
   const insets = useSafeAreaInsets();
   const { width } = useWindowDimensions();
+  // 우리가 그린 태블릿 위쪽 탭바도 본문 위에 떠 있다 — 그 밑으로도 깐다 (useTopOverlay)
+  const overTop = useTopOverlay();
+  if (!native && overTop > 0) return { on: true, top: overTop, bottom: insets.bottom + 16 };
   const on = native && navKind(width) === 'bottom';
   return { on, top: on ? insets.top : 0, bottom: on ? insets.bottom + NATIVE_BAR + 16 : 0 };
 }
@@ -78,6 +82,18 @@ export function TabScreen({
   const [width, setWidth] = useState<number | null>(null);
   const edge = useBleed();
   const full = bleed && edge.on;
+  const overTop = useTopOverlay();
+
+  // 떠 있는 태블릿 위쪽 탭바 — 보통 화면은 그만큼 내려서, 끝까지 까는 화면은 그대로(목록이 비운다)
+  if (!native && overTop > 0) {
+    return (
+      <View style={[style, { paddingTop: full || underHeader ? 0 : overTop }]} pointerEvents={overlay ? 'box-none' : 'auto'}>
+        <View style={styles.fill} pointerEvents={overlay ? 'box-none' : 'auto'}>
+          {children}
+        </View>
+      </View>
+    );
+  }
 
   if (!native) {
     return (

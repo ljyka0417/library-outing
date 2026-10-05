@@ -59,6 +59,11 @@ interface Props {
 
 export const NearbyMap = forwardRef<NearbyMapHandle, Props>(function NearbyMap({ libraries, user, selectedId, onSelect, padding, onUserPan, spot }, ref) {
   const map = useRef<MapView>(null);
+  /*
+   * 지도 여백은 지도가 준비된 뒤에만 준다. 안드로이드 구글 지도는 준비 전에 여백이 바뀌면
+   * (태블릿 위쪽 탭바 높이를 잰 직후처럼) GoogleMap 이 아직 없어 앱이 통째로 죽었다(NullPointerException).
+   */
+  const [ready, setReady] = useState(false);
 
   /*
    * 핀 모양은 한 번 찍어 고정한다(tracksViewChanges=false — 핀 127개를 계속 다시 그리면 무겁다).
@@ -82,7 +87,8 @@ export const NearbyMap = forwardRef<NearbyMapHandle, Props>(function NearbyMap({
     <MapView
       ref={map}
       style={StyleSheet.absoluteFill}
-      mapPadding={padding}
+      mapPadding={ready ? padding : undefined}
+      onMapReady={() => setReady(true)}
       onPanDrag={onUserPan}
       initialRegion={{ latitude: KOREA_CENTER.lat, longitude: KOREA_CENTER.lng, latitudeDelta: 5.5, longitudeDelta: 5.5 }}
       showsUserLocation={false}

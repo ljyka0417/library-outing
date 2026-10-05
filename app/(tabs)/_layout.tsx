@@ -14,6 +14,7 @@ import {
 } from '@/components/TabletNav';
 import { LayoutWidth, SIDEBAR_DOCK, navKind } from '@/hooks/useLayout';
 import { useNativeTabs } from '@/hooks/useNativeTabs';
+import { TopOverlayContext } from '@/hooks/useTopOverlay';
 import { useT } from '@/i18n';
 import { colors, themedStyles } from '@/theme';
 
@@ -170,6 +171,8 @@ function OurTabs() {
   }, []);
 
   const docked = nav === 'tablet' && sidebarOpen && wide;
+  // 떠 있는 위쪽 탭바의 높이 — 본문 틀(TabScreen)이 이만큼 비운다
+  const [topH, setTopH] = useState(0);
   const overlay = nav === 'tablet' && sidebarOpen && !wide;
 
   const tabs = (
@@ -205,15 +208,16 @@ function OurTabs() {
    */
   return (
     <View style={[styles.frame, docked && styles.frameRow]}>
-      {docked ? (
-        <TabletSidebar onToggle={() => setOpenChoice(false)} />
-      ) : (
-        <TabletTopBar onToggle={() => setOpenChoice(true)} />
-      )}
+      {docked ? <TabletSidebar onToggle={() => setOpenChoice(false)} /> : null}
 
-      <LayoutWidth width={docked ? width - SIDEBAR_WIDTH : width}>
-        <View style={styles.content}>{tabs}</View>
-      </LayoutWidth>
+      <TopOverlayContext.Provider value={docked ? 0 : topH}>
+        <LayoutWidth width={docked ? width - SIDEBAR_WIDTH : width}>
+          <View style={styles.content}>{tabs}</View>
+        </LayoutWidth>
+      </TopOverlayContext.Provider>
+
+      {/* 위쪽 탭바는 본문 **위에** 떠 있다 — 나중에 그려야 위에 온다 */}
+      {docked ? null : <TabletTopBar onToggle={() => setOpenChoice(true)} onHeight={setTopH} />}
 
       {overlay ? <TabletSidebarOverlay onClose={() => setOpenChoice(false)} /> : null}
     </View>

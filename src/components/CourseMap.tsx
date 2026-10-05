@@ -13,8 +13,11 @@ import type { Coordinates } from '@/types';
  */
 export function CourseMap({ stops }: { stops: { name: string; coords: Coordinates }[] }) {
   const map = useRef<MapView>(null);
+  // 지도가 준비되기 전에 맞추면 안드로이드 구글 지도가 죽을 수 있다 (NearbyMap 주석)
+  const ready = useRef(false);
   const coords = stops.map((s) => ({ latitude: s.coords.lat, longitude: s.coords.lng }));
   const fit = () =>
+    ready.current &&
     map.current?.fitToCoordinates(coords, { edgePadding: { top: 48, right: 48, bottom: 48, left: 48 }, animated: false });
 
   return (
@@ -23,7 +26,10 @@ export function CourseMap({ stops }: { stops: { name: string; coords: Coordinate
         ref={map}
         style={StyleSheet.absoluteFill}
         initialRegion={{ latitude: coords[0].latitude, longitude: coords[0].longitude, latitudeDelta: 0.01, longitudeDelta: 0.01 }}
-        onMapReady={fit}
+        onMapReady={() => {
+          ready.current = true;
+          fit();
+        }}
         onLayout={fit}
         showsPointsOfInterests={false}
         showsCompass={false}

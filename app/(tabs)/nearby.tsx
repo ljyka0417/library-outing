@@ -11,6 +11,7 @@ import { Mascot } from '@/components/Mascot';
 import { CATEGORY_MAP } from '@/data/categories';
 import { MOCK_LIBRARIES } from '@/data/libraries.mock';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
+import { useTopOverlay } from '@/hooks/useTopOverlay';
 import { useLayout, navKind } from '@/hooks/useLayout';
 import { useT, type MessageKey } from '@/i18n';
 import { libText } from '@/i18n/libraryText';
@@ -41,6 +42,8 @@ export default function NearbyScreen() {
   const tabPad = useTabBarPadding();
   const { width } = useWindowDimensions();
   const insets = useSafeAreaInsets();
+  // 태블릿 위쪽 탭바가 지도 위에 떠 있으면 그만큼 (애플 로고·법적 고지가 가리지 않게)
+  const overTop = useTopOverlay();
   const map = useRef<NearbyMapHandle>(null);
   const list = useRef<FlatList<Row>>(null);
 
@@ -243,7 +246,7 @@ export default function NearbyScreen() {
    * 애플 로고·법적 고지는 가리면 안 되므로 상태 표시줄·탭바만큼 안쪽으로.
    */
   const mapPadding = {
-    top: insets.top,
+    top: Math.max(insets.top, overTop),
     left: 0,
     right: 0,
     bottom: insets.bottom + (navKind(width) === 'bottom' ? 56 : 0),
