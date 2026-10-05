@@ -19,7 +19,10 @@ function LinePill({ line, small }: { line: string; small?: boolean }) {
   const c = lineColor(line);
   return (
     <View style={[styles.pill, small && styles.pillSmall, { backgroundColor: c?.bg ?? colors.surfaceAlt }]}>
-      <Text style={[styles.pillText, small && styles.pillTextSmall, { color: c?.fg ?? colors.textSub }]} numberOfLines={1}>
+      <Text
+        style={[styles.pillText, small && styles.pillTextSmall, { color: c?.fg ?? colors.textSub }, c?.shadow && styles.pillShadow]}
+        numberOfLines={1}
+      >
         {line}
       </Text>
     </View>
@@ -138,6 +141,8 @@ const styles = themedStyles(() => ({
   pillSmall: { paddingHorizontal: 6, paddingVertical: 1 },
   pillText: { ...typography.tiny, fontWeight: '700' },
   pillTextSmall: { fontSize: 11, lineHeight: 15 },
+  // 밝은 노선색 위 흰 글자 윤곽
+  pillShadow: { textShadowColor: 'rgba(0,0,0,0.35)', textShadowOffset: { width: 0, height: 0.5 }, textShadowRadius: 1.5 },
   lineCell: { minWidth: 72 },
   right: { alignItems: 'flex-end' },
   dist: { ...typography.captionBold, color: colors.primary },
