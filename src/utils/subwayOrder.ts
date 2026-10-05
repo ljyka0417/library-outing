@@ -25,7 +25,13 @@ export interface Approach {
  * at 은 이번 열차(먼저)·다음 열차가 지금 있는 역들. 이번 열차가 이미 이 역에 와 있으면(away 0)
  * 어느 쪽에서 왔는지 모르니 다음 열차 위치로 방향을 정한다.
  */
-export function approach(line: string, station: string, at?: string | string[], toward?: string): Approach | null {
+export function approach(
+  line: string,
+  station: string,
+  at?: string | string[],
+  toward?: string,
+  nextStop?: string
+): Approach | null {
   const ats = (Array.isArray(at) ? at : [at]).filter((x): x is string => !!x);
   const l = LINES[line];
   if (!l) return null;
@@ -47,22 +53,33 @@ export function approach(line: string, station: string, at?: string | string[], 
     };
     let from: -1 | 1 | null = null;
     let away: number | undefined;
-    ats.forEach((raw, n) => {
+    // 방향은 이번 열차 위치 → 다음 역 → 다음 열차 위치 차례로 본다
+    // (1호선은 같은 방향 묶음에 엉뚱한 열차가 섞여 와서, 다음 열차 위치는 마지막에)
+    const findSide = (raw: string): [-1 | 1, number] | null => {
       const a = norm(raw);
-      if (a === me) {
-        if (n === 0) away = 0;
-        return;
-      }
-      if (from !== null) return;
       for (const dir of [-1, 1] as const) {
         const k = side(dir, 12).indexOf(a);
-        if (k >= 0) {
-          from = dir;
-          if (n === 0) away = k + 1;
-          break;
-        }
+        if (k >= 0) return [dir, k + 1];
       }
-    });
+      return null;
+    };
+    if (ats[0] && norm(ats[0]) === me) away = 0;
+    else if (ats[0]) {
+      const hit = findSide(ats[0]);
+      if (hit) [from, away] = hit;
+    }
+    // 다음 역("서울방면")이 한쪽에 있으면 열차는 그 반대쪽에서 온다
+    if (from === null && nextStop) {
+      const nx = norm(nextStop.replace(/방면$/, ''));
+      if (side(-1, 2).includes(nx)) from = 1;
+      else if (side(1, 2).includes(nx)) from = -1;
+    }
+    for (const raw of ats.slice(1)) {
+      if (from !== null) break;
+      if (norm(raw) === me) continue;
+      const hit = findSide(raw);
+      if (hit) from = hit[0];
+    }
     if (from === null && toward && !ring) {
       // 종착역이 오른쪽 끝(번호가 큰 쪽)에 있으면 열차는 왼쪽에서 온다
       const t = norm(toward);

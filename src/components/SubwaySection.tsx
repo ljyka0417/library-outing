@@ -218,7 +218,7 @@ export function SubwaySection({ coords, inset = 0 }: { coords?: Coordinates; ins
                     first?.express ? t('subway.express') : '',
                     first?.last ? t('subway.last') : '',
                   ].filter(Boolean);
-                  const ap = first ? approach(b.line, s.name, b.trains.map((x) => x.at ?? ''), b.toward) : null;
+                  const ap = first ? approach(b.line, s.name, b.trains.map((x) => x.at ?? ''), b.toward, b.dir) : null;
                   return (
                     <View key={b.key} style={styles.dir}>
                       <Pressable

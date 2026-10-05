@@ -288,7 +288,8 @@ export default function NearbyScreen() {
             ) : null}
           </View>
 
-          {searching && query.trim() ? (
+          {/* 보여 줄 게 있을 때만 — 한 글자일 때(장소는 두 글자부터) 빈 칸만 그려졌다 */}
+          {searching && query.trim() && (libHits.length > 0 || places !== null) ? (
             <View style={styles.results}>
               <ScrollView keyboardShouldPersistTaps="handled" style={{ maxHeight: 360 }}>
                 {libHits.length ? <Text style={styles.resultHead}>{t('nearby.libraries')}</Text> : null}

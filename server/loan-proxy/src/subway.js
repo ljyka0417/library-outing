@@ -12,6 +12,7 @@
  *           실시간이 비거나 실패한 수도권 역도 시간표로 채운다.
  */
 import { remembered } from './remember.js';
+import ORDER from '../../../src/data/subwayOrder.json';
 const STATIONS_TTL = 30 * 24 * 3600;
 const LIVE_TTL = 60;
 
@@ -54,15 +55,46 @@ const DIRSETS = {
     { label: '인천·신창', set: ['인천', '동인천', '부평', '구로', '광명', '수원', '병점', '서동탄', '천안', '신창', '영등포'] },
   ],
 };
+/*
+ * 1호선은 행선지로 방향을 정하면 틀린다(시청에서 남쪽으로 가는 열차인데 '동묘앞행' 이 섞여 북쪽으로 분류).
+ * 서울시 데이터의 다음 역("서울방면")을 앱 역 순서표(src/data/subwayOrder.json)에서 찾아 끝 쪽으로 정한다.
+ */
+const ORDER_ENDS = {
+  '1호선': [
+    ['소요산·광운대', '인천·신창'], // 본선: 연천 … 청량리 … 서울역 … 구로 … 인천
+    ['소요산·광운대', '천안·신창'], // 경부선: 구로 … 천안 … 신창
+  ],
+};
+const normName = (n) =>
+  String(n ?? '').replace(/방면$/, '').replace(/역$/, '').replace(/\s*\(.*\)\s*$/, '').replace(/역$/, '').replace(/\s+/g, '').trim();
+function towardByOrder(line, station, dir) {
+  const ends = ORDER_ENDS[line];
+  const runs = ORDER.lines?.[line]?.runs;
+  if (!ends || !runs || !dir) return null;
+  const me = normName(station);
+  const next = normName(dir);
+  for (let r = 0; r < runs.length; r++) {
+    const run = runs[r].map(normName);
+    const i = run.indexOf(me);
+    const j = run.indexOf(next);
+    if (i >= 0 && j >= 0 && i !== j) return ends[r]?.[j < i ? 0 : 1] ?? null;
+  }
+  return null;
+}
 const plain = (to) => String(to ?? '').replace(/행$/, '').replace(/\s*\(.*\)$/, '').trim();
 
 /** 같은 방향(group)마다 머리말 이름 — [{ group, line, ud, tos[] }] → Map(group → "개화") */
-function towardOf(groups) {
+function towardOf(groups, station) {
   const out = new Map();
   const udTerm = new Map(); // `${line}|${ud}` → 종착역 (짝 맞추기용)
   for (const g of groups) {
     if (g.line === '2호선' && /내선|외선/.test(g.ud)) {
       out.set(g.group, `${g.ud.replace(/순환$/, '')}순환`);
+      continue;
+    }
+    const byOrder = towardByOrder(g.line, station, g.dir);
+    if (byOrder) {
+      out.set(g.group, byOrder);
       continue;
     }
     const sets = DIRSETS[g.line];
@@ -155,7 +187,7 @@ function minutesOf(a) {
  *   express 급행·ITX · last 막차 · no 열차 번호
  */
 async function live(env, name) {
-  return remembered(env, `subway:live:v6:${name}`, LIVE_TTL, async () => {
+  return remembered(env, `subway:live:v7:${name}`, LIVE_TTL, async () => {
     try {
       const res = await fetch(
         `http://swopenapi.seoul.go.kr/api/subway/${encodeURIComponent(env.SEOUL_SUBWAY_KEY)}/json/realtimeStationArrival/0/40/${encodeURIComponent(name)}`
@@ -186,7 +218,10 @@ async function live(env, name) {
         groups.get(group).push(item);
       }
       // 머리말(종착역 방면)은 그 방향 열차 전부의 행선지로 정한다
-      const toward = towardOf([...groups.entries()].map(([group, tr]) => ({ group, line: tr[0].line, ud: tr[0].ud, tos: tr.map((x) => x.to) })));
+      const toward = towardOf(
+        [...groups.entries()].map(([group, tr]) => ({ group, line: tr[0].line, ud: tr[0].ud, dir: tr[0].dir, tos: tr.map((x) => x.to) })),
+        name
+      );
       const out = [];
       for (const [group, trains] of groups.entries()) {
         trains.sort((x, y) => (x.min ?? 999) - (y.min ?? 999));
