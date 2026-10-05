@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Image, Pressable, ScrollView, Share, Text, TextInput, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -90,6 +90,8 @@ export function CourseFlow({
   const [food, setFood] = useState<NearbyPlace | null>(null);
   const [see, setSee] = useState<NearbyPlace | null>(null);
   const [savedId, setSavedId] = useState<string | null>(null);
+  // 단계가 바뀌면 맨 위로 — 아래쪽 "다음" 을 누르면 새 단계가 스크롤 아래에서 시작했다
+  const scroller = useRef<ScrollView>(null);
   const [query, setQuery] = useState('');
   const [me, setMe] = useState<Coordinates | null>(null);
 
@@ -124,6 +126,8 @@ export function CourseFlow({
         [l.name, libText(l.name, lang), l.region.sido, l.region.sigungu ?? ''].some((v) => v.replace(/\s+/g, '').toLowerCase().includes(q))
       ).slice(0, 10);
     }
+    // 위치를 알면 전부 가까운 순 (즐겨찾기는 줄에 표시만). 모르면 즐겨찾기·최근 본 곳을 앞에
+    if (me) return [...COURSE_LIBS].sort((a, b) => distanceMeters(me, a.coords!) - distanceMeters(me, b.coords!)).slice(0, 10);
     const mine = [...favorites, ...recent].filter((id, i, a) => a.indexOf(id) === i);
     const pinned = mine.map((id) => COURSE_LIBS.find((l) => l.id === id)).filter((l): l is Library => !!l);
     const rest = COURSE_LIBS.filter((l) => !mine.includes(l.id)).sort((a, b) =>
@@ -197,10 +201,15 @@ export function CourseFlow({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialSavedId]);
 
+  useEffect(() => {
+    scroller.current?.scrollTo({ y: 0, animated: false });
+  }, [step]);
+
   const stepIndex = step === 'library' ? 0 : step === 'food' ? 1 : step === 'see' ? 2 : 3;
 
   return (
     <ScrollView
+      ref={scroller}
       style={styles.safe}
       contentContainerStyle={[styles.content, { paddingTop: insetTop + spacing.md, paddingBottom: insetBottom + spacing.xxxl }]}
       showsVerticalScrollIndicator={false}
@@ -324,7 +333,7 @@ export function CourseFlow({
               <>
                 <View style={styles.hello}>
                   <View style={{ flex: 1, gap: 4 }}>
-                    <Text style={styles.helloTitle}>{t(step === 'food' ? 'course.foodTitle' : 'course.seeTitle')}</Text>
+                    <Text style={styles.helloTitle}>{t(step === 'food' ? 'course.foodTitle' : food ? 'course.seeTitle' : 'course.seeTitleNoFood')}</Text>
                     <Text style={styles.helloSub}>
                       {t(step === 'food' ? 'course.foodSub' : 'course.seeSub', { name: step === 'food' ? libName : food?.name ?? libName })}
                     </Text>
@@ -355,8 +364,14 @@ export function CourseFlow({
                         place={p}
                         on={on}
                         lang={lang}
-                        dist={t(step === 'food' ? 'course.fromLibrary' : 'course.fromFood', { d: formatDistance(d), n: walkingMinutes(d) })}
-                        onPress={() => (step === 'food' ? setFood(on ? null : p) : setSee(on ? null : p))}
+                        // 맛집을 건너뛰었으면 볼거리 거리는 도서관에서 잰다 — 글도 "도서관에서"
+                        dist={t(step === 'food' || !food ? 'course.fromLibrary' : 'course.fromFood', { d: formatDistance(d), n: walkingMinutes(d) })}
+                        onPress={() => {
+                          // 고른 곳이 바뀌면 저장해 둔 코스와 다르다 — "저장됨" 을 푼다
+                          setSavedId(null);
+                          if (step === 'food') setFood(on ? null : p);
+                          else setSee(on ? null : p);
+                        }}
                       />
                     );
                   })}

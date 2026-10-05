@@ -107,13 +107,17 @@ export function TabScreen({
       >
         <LayoutWidth width={width ?? windowWidth}>{children}</LayoutWidth>
       </View>
-      {/* 시계 자리 — 글이 밑으로 지나갈 때 겹쳐 읽히지 않게 살짝 흐린 유리 */}
+      {/* 시계 자리 — 글이 밑으로 지나갈 때 겹쳐 읽히지 않게 흐린 유리 + 바탕색 막.
+          흐림만 두었더니 코스 탭에서 "강서도서관 → 빈스&크레마" 글이 시계와 그대로 겹쳐 읽혔다 */}
       {full ? (
         <BlurView
           pointerEvents="none"
-          intensity={40}
+          intensity={60}
           tint={currentScheme() === 'dark' ? 'dark' : 'light'}
-          style={[styles.statusGlass, { height: edge.top }]}
+          style={[
+            styles.statusGlass,
+            { height: edge.top, backgroundColor: currentScheme() === 'dark' ? 'rgba(23,21,19,0.72)' : 'rgba(251,248,243,0.78)' },
+          ]}
         />
       ) : null}
     </ControllerSafeAreaView>
