@@ -44,6 +44,9 @@ function boards(live: Train[]) {
   return out;
 }
 
+const sameEnd = (to: string, toward?: string) =>
+  !!toward && to.replace(/행$/, '').replace(/\s*\(.*\)$/, '').trim() === toward;
+
 /** 열차가 지금 어디쯤 — "전역 출발 (잠원)" · "현재 옥수" (실시간만. 시간표는 빈칸) */
 function where(a: Train, t: (k: 'subway.now', v: { at: string }) => string) {
   if (!a.at && !a.msg) return '';
@@ -135,6 +138,15 @@ export function SubwaySection({ coords, inset = 0 }: { coords?: Coordinates; ins
   const [stations, setStations] = useState<SubwayStation[] | null>(null);
   const [checkedAt, setCheckedAt] = useState<Date | null>(null);
   const [loading, setLoading] = useState(false);
+  // 눌러서 펼친 방향 (역 이름 선로 · 열차 번호)
+  const [open, setOpen] = useState<Set<string>>(new Set());
+  const toggle = (k: string) =>
+    setOpen((o) => {
+      const n = new Set(o);
+      if (n.has(k)) n.delete(k);
+      else n.add(k);
+      return n;
+    });
 
   const load = useCallback(async () => {
     if (!coords) return;
@@ -191,61 +203,75 @@ export function SubwaySection({ coords, inset = 0 }: { coords?: Coordinates; ins
               <View style={styles.boards}>
                 {boards(s.live).map((b) => {
                   const lc = lineColor(b.line);
+                  const first = b.trains[0];
+                  const second = b.trains[1];
+                  const key = `${s.name}|${b.key}`;
+                  const isOpen = open.has(key);
+                  const head = b.toward
+                    ? /순환$/.test(b.toward)
+                      ? `${b.toward}${b.dir ? ` · ${b.dir.replace(/방면$/, ' 방면')}` : ''}`
+                      : t('subway.toward', { name: b.toward })
+                    : b.dir || first?.to;
+                  const sub = [
+                    first && !sameEnd(first.to, b.toward) ? first.to : '',
+                    first ? where(first, t) : '',
+                    first?.express ? t('subway.express') : '',
+                    first?.last ? t('subway.last') : '',
+                  ].filter(Boolean);
+                  const ap = first ? approach(b.line, s.name, first.at, b.toward) : null;
                   return (
-                    <View key={b.key} style={styles.led}>
-                      {/* 머리말 — 노선 색 띠 + 종착역 방면 */}
-                      <View style={styles.ledHead}>
+                    <View key={b.key} style={styles.dir}>
+                      <Pressable
+                        onPress={() => toggle(key)}
+                        style={({ pressed }) => [styles.dirRow, pressed && { opacity: 0.7 }]}
+                        accessibilityRole="button"
+                        accessibilityState={{ expanded: isOpen }}
+                      >
                         <LinePill line={b.line} />
-                        <Text style={styles.ledDir} numberOfLines={1}>
-                          {b.toward
-                            ? /순환$/.test(b.toward)
-                              ? b.toward
-                              : t('subway.toward', { name: b.toward })
-                            : b.dir || b.trains[0]?.to}
-                        </Text>
-                        {b.toward && /순환$/.test(b.toward) && b.dir ? (
-                          <Text style={styles.ledSub} numberOfLines={1}>{b.dir.replace(/방면$/, ' 방면')}</Text>
-                        ) : null}
-                      </View>
-                      {b.trains.map((a, i) => (
-                        <View key={i} style={styles.ledRow}>
-                          <Text style={styles.ledOrder}>{t(i === 0 ? 'subway.this' : 'subway.next')}</Text>
-                          <Ionicons name="train" size={15} color={lc?.bg ?? colors.primary} />
-                          <View style={{ flex: 1, minWidth: 0 }}>
-                            <Text style={styles.ledTo} numberOfLines={1}>
-                              {a.to}
-                              {a.express ? <Text style={styles.ledExpress}>{'  '}{t('subway.express')}</Text> : null}
-                              {a.last ? <Text style={styles.ledLast}>{'  '}{t('subway.last')}</Text> : null}
+                        <View style={{ flex: 1, minWidth: 0 }}>
+                          <Text style={styles.dirHead} numberOfLines={1}>{head}</Text>
+                          {sub.length ? (
+                            <Text style={styles.dirSub} numberOfLines={1}>
+                              {sub.map((x, i) => (
+                                <Text key={i} style={x === t('subway.express') ? styles.ledExpress : undefined}>
+                                  {i ? ' · ' : ''}
+                                  {x}
+                                </Text>
+                              ))}
                             </Text>
-                            <Text style={styles.ledWhere} numberOfLines={1}>
-                              {[where(a, t), a.no ? t('subway.trainNo', { no: a.no }) : ''].filter(Boolean).join(' · ')}
-                            </Text>
-                          </View>
-                          <Text style={styles.ledMin}>{a.min === null ? '' : a.min <= 0 ? t('bus.soon') : t('subway.minShort', { n: a.min })}</Text>
+                          ) : null}
                         </View>
-                      ))}
-                      {/* 이번 열차가 몇 정거장 전인지 — 실시간만 (시간표는 위치를 모른다) */}
-                      {(() => {
-                        const ap = approach(b.line, s.name, b.trains[0]?.at, b.toward);
-                        return ap && ap.before.length ? (
-                          <NamedTrack
-                            before={ap.before}
-                            away={ap.away}
-                            color={lc?.bg ?? colors.primary}
-                            at={b.trains[0]?.at ?? ''}
-                            here={t('subway.here')}
-                          />
-                        ) : null;
-                      })() ??
-                      (b.trains[0] && stationsAway(b.trains[0]) !== null ? (
-                        <Track
-                          away={stationsAway(b.trains[0])!}
-                          color={lc?.bg ?? colors.primary}
-                          at={b.trains[0].at ?? ''}
-                          here={t('subway.here')}
-                          label={t('bus.prev', { n: stationsAway(b.trains[0])! })}
-                        />
-                      ) : null)}
+                        <View style={styles.dirRight}>
+                          <Text style={styles.ledMin} numberOfLines={1}>
+                            {!first || first.min === null ? '' : first.min <= 0 ? t('bus.soon') : t('subway.minShort', { n: first.min })}
+                          </Text>
+                          {second && second.min !== null ? <Text style={styles.dirNext}>{t('bus.next', { n: second.min })}</Text> : null}
+                        </View>
+                        <Ionicons name={isOpen ? 'chevron-up' : 'chevron-down'} size={14} color={colors.textMuted} />
+                      </Pressable>
+                      {isOpen ? (
+                        <View style={styles.dirMore}>
+                          {ap && ap.before.length ? (
+                            <NamedTrack before={ap.before} away={ap.away} color={lc?.bg ?? colors.primary} at={first?.at ?? ''} here={t('subway.here')} />
+                          ) : first && stationsAway(first) !== null ? (
+                            <Track
+                              away={stationsAway(first)!}
+                              color={lc?.bg ?? colors.primary}
+                              at={first.at ?? ''}
+                              here={t('subway.here')}
+                              label={t('bus.prev', { n: stationsAway(first)! })}
+                            />
+                          ) : null}
+                          {b.trains.map((x, i) => (
+                            <Text key={i} style={styles.dirTrain} numberOfLines={1}>
+                              <Text style={styles.dirTrainOrder}>{t(i === 0 ? 'subway.this' : 'subway.next')}  </Text>
+                              {[x.to, where(x, t), x.no ? t('subway.trainNo', { no: x.no }) : '', x.express ? t('subway.express') : '', x.last ? t('subway.last') : '']
+                                .filter(Boolean)
+                                .join(' · ')}
+                            </Text>
+                          ))}
+                        </View>
+                      ) : null}
                     </View>
                   );
                 })}
@@ -298,18 +324,17 @@ const styles = themedStyles(() => ({
   right: { alignItems: 'flex-end' },
   dist: { ...typography.captionBold, color: colors.primary },
   walk: { ...typography.tiny, color: colors.textMuted },
-  boards: { gap: spacing.sm },
-  // 방향마다 한 판 — 앱 바탕과 어울리는 밝은 판(어두운 전광판은 판이 여러 개 이어지면 무거웠다)
-  led: { backgroundColor: colors.surfaceAlt, borderRadius: radius.md, padding: spacing.md, gap: 8 },
-  ledHead: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, paddingBottom: 6, borderBottomWidth: 1, borderBottomColor: colors.divider },
-  ledDir: { ...typography.captionBold, color: colors.text, flexShrink: 1 },
-  ledSub: { ...typography.tiny, color: colors.textMuted, flexShrink: 1 },
-  ledRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
-  ledOrder: { ...typography.tiny, color: colors.primary, fontWeight: '700', minWidth: 28 },
-  ledTo: { ...typography.captionBold, color: colors.text },
+  boards: { gap: 2 },
+  dir: { borderRadius: radius.sm, overflow: 'hidden' },
+  dirRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, paddingVertical: 6 },
+  dirHead: { ...typography.captionBold, color: colors.text },
+  dirSub: { ...typography.tiny, color: colors.textSub },
+  dirRight: { alignItems: 'flex-end', flexShrink: 0 },
+  dirNext: { ...typography.tiny, color: colors.textMuted },
+  dirMore: { backgroundColor: colors.surfaceAlt, borderRadius: radius.md, padding: spacing.md, gap: 6, marginBottom: 6 },
+  dirTrain: { ...typography.tiny, color: colors.textSub },
+  dirTrainOrder: { color: colors.primary, fontWeight: '700' },
   ledExpress: { color: '#D2404D', fontWeight: '800' },
-  ledLast: { color: colors.textSub, fontWeight: '800' },
-  ledWhere: { ...typography.tiny, color: colors.textSub },
   ledMin: { ...typography.bodyBold, color: colors.closed, fontVariant: ['tabular-nums'] },
   nt: { flexDirection: 'row', alignItems: 'flex-start', marginTop: 4, gap: 4 },
   ntFar: { alignItems: 'center', width: 52 },
@@ -336,17 +361,6 @@ const styles = themedStyles(() => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  board: { gap: 4 },
-  boardHead: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, marginBottom: 2 },
-  boardDir: { ...typography.captionBold, color: colors.text, flexShrink: 1 },
-  boardSub: { ...typography.tiny, color: colors.textMuted, flexShrink: 1 },
-  order: { ...typography.tiny, color: colors.textMuted, minWidth: 28 },
-  tag: { ...typography.tiny, fontWeight: '700', paddingHorizontal: 6, borderRadius: 6, overflow: 'hidden' },
-  tagExpress: { color: colors.white, backgroundColor: '#C9536B' },
-  tagLast: { color: colors.white, backgroundColor: colors.textSub },
-  row: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
-  when: { ...typography.captionBold, color: colors.closed },
-  dir: { ...typography.tiny, color: colors.textMuted, flex: 1 },
   empty: { ...typography.tiny, color: colors.textMuted, paddingLeft: 32 + spacing.md },
   foot: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: spacing.md },
   source: { ...typography.tiny, color: colors.textMuted, flex: 1 },
