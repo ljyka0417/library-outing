@@ -25,6 +25,7 @@ import { book } from './book.js';
 import { bus } from './bus.js';
 import { place } from './place.js';
 import { subway } from './subway.js';
+import { remembered } from './remember.js';
 
 const ALLOWED = new Set(LIBS);
 const MAX_BOOKS = 10;
@@ -248,7 +249,7 @@ async function search(url, env) {
   if (squash(q).length < 2) return json({ error: '검색어를 두 글자 이상 주세요' }, 400);
 
   // 같은 검색은 모두가 함께 쓰는 KV 에 하루 동안 기억한다 (KV 가 없으면 Cache API)
-  const kvSearchKey = `search:v4:${squash(q)}`;
+  const kvSearchKey = `search:v5:${squash(q)}`;
   const cache = !env.LOAN_KV && typeof caches !== 'undefined' ? caches.default : null;
   const cacheKey = new Request(`https://loan-cache.internal/search-v3/${encodeURIComponent(squash(q))}`);
   try {
@@ -298,7 +299,7 @@ async function search(url, env) {
     .sort((a, b) => b.loans - a.loans)
     .slice(0, 15);
 
-  const body = { q, books };
+  const body = { q, books: await fillCovers(env, books) };
   try {
     if (env.LOAN_KV) await env.LOAN_KV.put(kvSearchKey, JSON.stringify(body), { expirationTtl: 86400 });
     else if (cache) await cache.put(cacheKey, new Response(JSON.stringify(body), { headers: { 'Cache-Control': 'max-age=86400' } }));
@@ -318,10 +319,38 @@ export default { fetch: handle };
  * 정보나루 도서별 이용 분석(usageAnalysisList)의 "함께 대출된 도서". 같은 책의 판본은 한 권으로 묶고,
  * 물어본 책 자신(다른 판본)은 뺀다. 이 통계는 천천히 바뀌어서 모두가 함께 쓰는 KV 에 7일 기억한다.
  */
+/**
+ * 정보나루가 표지를 주지 않는 책이 많다(함께 빌린 책 줄이 빈 칸투성이였다) — 카카오 책 검색에서 표지를 찾아 채운다.
+ * 책마다 30일 기억(KV). 못 찾으면 빈칸 그대로.
+ */
+async function fillCovers(env, books, max = 15) {
+  if (!env.KAKAO_REST_KEY) return books;
+  const need = books.filter((b) => !b.coverImageUrl && b.isbns?.[0]).slice(0, max);
+  await Promise.all(
+    need.map(async (b) => {
+      const url = await remembered(env, `cover:v1:${b.isbns[0]}`, 30 * 24 * 3600, async () => {
+        try {
+          const res = await fetch(`https://dapi.kakao.com/v3/search/book?target=isbn&size=1&query=${b.isbns[0]}`, {
+            headers: { Authorization: `KakaoAK ${env.KAKAO_REST_KEY}` },
+          });
+          if (!res.ok) return null;
+          const thumb = (await res.json())?.documents?.[0]?.thumbnail;
+          // 없음도 기억해 두려고 빈 문자열
+          return { url: thumb ? String(thumb).replace(/^http:/, 'https:') : '' };
+        } catch {
+          return null;
+        }
+      });
+      if (url?.url) b.coverImageUrl = url.url;
+    })
+  );
+  return books;
+}
+
 async function related(url, env) {
   const isbn = (url.searchParams.get('isbn') ?? '').trim();
   if (!/^\d{13}$/.test(isbn)) return json({ error: 'ISBN(숫자 13자리)을 주세요' }, 400);
-  const kvKey = `related:v1:${isbn}`;
+  const kvKey = `related:v2:${isbn}`;
   try {
     const hit = env.LOAN_KV ? await env.LOAN_KV.get(kvKey, 'json') : null;
     if (hit) return json(hit, 200, { 'Cache-Control': 'no-store' });
@@ -356,7 +385,7 @@ async function related(url, env) {
     if (!g.coverImageUrl && b.bookImageURL) g.coverImageUrl = b.bookImageURL.replace(/^http:/, 'https:');
     groups.set(key, g);
   }
-  const body = { isbn, books: [...groups.values()].slice(0, 10) };
+  const body = { isbn, books: await fillCovers(env, [...groups.values()].slice(0, 10)) };
   try {
     if (env.LOAN_KV) await env.LOAN_KV.put(kvKey, JSON.stringify(body), { expirationTtl: 7 * 24 * 3600 });
   } catch {

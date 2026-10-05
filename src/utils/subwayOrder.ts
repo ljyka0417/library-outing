@@ -11,7 +11,8 @@ import ORDER from '@/data/subwayOrder.json';
 type Line = { circular: boolean; runs: string[][] };
 const LINES = (ORDER as { lines: Record<string, Line> }).lines;
 
-const norm = (n: string) => n.replace(/\s*\(.*\)\s*$/, '').replace(/역$/, '').replace(/\s+/g, '').trim();
+const norm = (n: string) =>
+  n.replace(/역$/, '').replace(/\s*\(.*\)\s*$/, '').replace(/역$/, '').replace(/\s+/g, '').trim();
 
 export interface Approach {
   /** 오는 쪽 역 이름, 먼 역부터 (최대 3개) — [3전역, 2전역, 전역] */
@@ -20,7 +21,12 @@ export interface Approach {
   away?: number;
 }
 
-export function approach(line: string, station: string, at?: string, toward?: string): Approach | null {
+/**
+ * at 은 이번 열차(먼저)·다음 열차가 지금 있는 역들. 이번 열차가 이미 이 역에 와 있으면(away 0)
+ * 어느 쪽에서 왔는지 모르니 다음 열차 위치로 방향을 정한다.
+ */
+export function approach(line: string, station: string, at?: string | string[], toward?: string): Approach | null {
+  const ats = (Array.isArray(at) ? at : [at]).filter((x): x is string => !!x);
   const l = LINES[line];
   if (!l) return null;
   const me = norm(station);
@@ -41,19 +47,22 @@ export function approach(line: string, station: string, at?: string, toward?: st
     };
     let from: -1 | 1 | null = null;
     let away: number | undefined;
-    const a = at ? norm(at) : '';
-    if (a === me) {
-      away = 0;
-    } else if (a) {
+    ats.forEach((raw, n) => {
+      const a = norm(raw);
+      if (a === me) {
+        if (n === 0) away = 0;
+        return;
+      }
+      if (from !== null) return;
       for (const dir of [-1, 1] as const) {
         const k = side(dir, 12).indexOf(a);
         if (k >= 0) {
           from = dir;
-          away = k + 1;
+          if (n === 0) away = k + 1;
           break;
         }
       }
-    }
+    });
     if (from === null && toward && !ring) {
       // 종착역이 오른쪽 끝(번호가 큰 쪽)에 있으면 열차는 왼쪽에서 온다
       const t = norm(toward);

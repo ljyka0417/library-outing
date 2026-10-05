@@ -2,7 +2,7 @@ import generated from './trend-books.generated.json';
 import type { Book } from '@/types';
 
 /**
- * 나이대별 많이 빌린 책(최근 3개월, 전국)과 이달의 키워드 — npm run collect-trend-books 로 갱신.
+ * 나이대별 많이 빌린 책(최근 3개월, 전국)과 이달의 키워드(지난달) — npm run collect-trend-books 로 갱신.
  * 앱 사용 중에는 정보나루에 묻지 않는다 (하루 500건 한도).
  */
 export type AgeKey = 'kids' | 'children' | 'teens' | '20s' | '30s' | '40s' | '50s' | '60s';
@@ -41,7 +41,7 @@ export function booksForAge(age: AgeKey, gender: GenderKey): Book[] {
 /** 자료가 있는 나이대만 */
 export const agesWithBooks = AGE_KEYS.filter((a) => (DATA.ages[a]?.all?.length ?? 0) > 0);
 
-/** 이달의 키워드 — month 는 "2026-09" (키워드를 집계한 달) */
+/** 이달의 키워드 — 정보나루는 한 달이 끝나야 그 달 키워드를 준다. month 는 "2026-09" (키워드를 집계한 달) */
 export const keywordMonth = DATA.keywords.month;
 export const keywordItems = DATA.keywords.items.map((k) => ({
   word: k.word,

@@ -640,7 +640,7 @@ const AGE_WORDS: Record<AgeKey, RegExp> = {
 const FEMALE = /여성|여자|\bwom[ae]n\b|\bfemales?\b|女性|女生|女的/;
 const MALE = /남성|남자|\bm[ae]n\b|\bmales?\b|男性|男生|男的/;
 
-/** 이달의 키워드 */
+/** 이달의 키워드 (지난달) */
 const ASK_KEYWORDS = /키워드|많이\s*찾은\s*(낱말|단어)|\bkeywords?\b|キーワード|关键词|关键字/;
 
 /** 오늘 쉬는 도서관 */
@@ -1205,7 +1205,7 @@ async function answerQuestion(
     };
   }
 
-  // "이번 달 인기 키워드" — 정보나루 이달의 키워드 (미리 모아 둔 것)
+  // "이번 달 인기 키워드" — 정보나루 지난달 키워드 (미리 모아 둔 것. 그 달 것은 달이 끝나야 나온다)
   if (ASK_KEYWORDS.test(text) && keywordItems.length) {
     const monthNum = Number(keywordMonth.slice(5, 7));
     const month = lang === 'en' ? MONTHS_EN[monthNum - 1] ?? String(monthNum) : String(monthNum);

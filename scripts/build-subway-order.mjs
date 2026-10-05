@@ -78,7 +78,8 @@ const col = (re) => head.findIndex((h) => re.test(h));
 const C = { code: col(/역번호/), name: col(/역사명/), line: col(/노선명/) };
 const num = (code) => parseInt(String(code).replace(/\D/g, ''), 10);
 // "흑석(중앙대입구)" → "흑석" (실시간 데이터·카카오 이름과 맞추려고)
-const short = (n) => String(n).replace(/\s*\(.*\)\s*$/, '').replace(/역$/, '').trim();
+// '역' 을 먼저 떼야 "쌍용(나사렛대)역" 의 괄호도 떨어진다
+const short = (n) => String(n).replace(/역$/, '').replace(/\s*\(.*\)\s*$/, '').replace(/역$/, '').trim();
 
 const out = {};
 for (const [appLine, segs] of Object.entries(SEGMENTS)) {
@@ -100,6 +101,60 @@ for (const [appLine, segs] of Object.entries(SEGMENTS)) {
   }
   if (cur.length) runs.push(cur);
   out[appLine] = { circular: CIRCULAR.has(appLine), runs: runs.map((r) => r.map((s) => s.name)) };
+}
+
+/*
+ * 1호선 — 청량리~서울역만 "1호선"(서울교통공사)이고 나머지는 경원·경부·경인·장항선(코레일)으로 나뉘어 있다.
+ * 코레일 역번호는 순서가 섞여 있어서(독산 1714 가 수원 1713 뒤) 번호 대신 **좌표**로 잇는다:
+ * 정해 둔 출발역에서 아직 안 쓴 역 가운데 가장 가까운 역을 차례로 붙인다(지선 갈래는 따로 한 줄).
+ *   본선   연천 … 창동 · 회기 … 청량리 … 서울역 · 남영 … 신도림 · 구로 · (경인선) … 인천
+ *   경부선 구로 · 가산디지털단지 … 천안 · (장항선) … 신창
+ */
+{
+  const C2 = { lat: col(/역위도/), lng: col(/역경도/) };
+  const st = (segs) =>
+    rows
+      .filter((r) => segs.includes(r[C.line]))
+      .map((r) => ({ code: r[C.code], n: num(r[C.code]), name: short(r[C.name]), lat: Number(r[C2.lat]), lng: Number(r[C2.lng]) }))
+      // 원본에 같은 역이 두 줄인 곳이 있다(주안)
+      .filter((s, i, a) => a.findIndex((x) => x.name === s.name) === i);
+  const R = 6371000;
+  const rad = Math.PI / 180;
+  const dist = (a, b) => Math.hypot((b.lng - a.lng) * rad * Math.cos(((a.lat + b.lat) / 2) * rad), (b.lat - a.lat) * rad) * R;
+  /** start 부터 가장 가까운 역을 차례로 — 다음 역이 maxGap 보다 멀면 멈춘다 */
+  const chain = (start, pool, maxGap = 6000) => {
+    const left = pool.filter((s) => s.name !== start.name);
+    const out = [];
+    let cur = start;
+    while (left.length) {
+      let bi = -1;
+      let bd = Infinity;
+      left.forEach((s, i) => {
+        const d = dist(cur, s);
+        if (d < bd) [bd, bi] = [d, i];
+      });
+      if (bd > maxGap) break;
+      cur = left.splice(bi, 1)[0];
+      out.push(cur);
+    }
+    return out;
+  };
+  const by = (list, name) => list.find((s) => s.name === name);
+  const gyeongwon = st(['경원선']).filter((s) => s.n >= 1015); // 회기 위쪽 (용산~왕십리 쪽은 경의중앙선 구간)
+  const seoulMetro = st(['1호선']).sort((a, b) => a.n - b.n); // 청량리 … 서울역
+  const gyeongbuNorth = st(['경부선']).filter((s) => s.n >= 1002 && s.n <= 1007).sort((a, b) => a.n - b.n); // 남영 … 신도림
+  const guro = by(st(['경부선']), '구로');
+  const gyeongin = st(['경인선']);
+  const gyeongbuSouth = st(['경부선']).filter((s) => s.n >= 1702 && !['광명', '서동탄'].includes(s.name));
+  const janghang = st(['장항선']);
+
+  // 역 사이가 먼 곳(전곡~연천 · 평택~성환 …)이 있어 북쪽·남쪽은 넉넉히 잇는다
+  const north = chain(seoulMetro[0], gyeongwon, 12000).reverse(); // 연천 … 회기
+  const trunk = [...north, ...seoulMetro, ...gyeongbuNorth, guro, ...chain(guro, gyeongin)];
+  const south = [guro, ...chain(guro, gyeongbuSouth, 12000)];
+  const southEnd = south[south.length - 1];
+  const toShinchang = chain(southEnd, janghang, 12000);
+  out['1호선'] = { circular: false, runs: [trunk.map((s) => s.name), [...south, ...toShinchang].map((s) => s.name)] };
 }
 
 const dest = path.join(ROOT, 'src', 'data', 'subwayOrder.json');
