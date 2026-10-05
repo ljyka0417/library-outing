@@ -194,7 +194,7 @@ export default function NearbyScreen() {
               accessibilityState={{ selected: follow }}
               hitSlop={6}
             >
-              <Ionicons name={follow ? 'locate' : 'locate-outline'} size={24} color={follow ? colors.white : colors.text} />
+              <LocateIcon on={follow} color={follow ? colors.white : colors.text} />
             </Pressable>
           </View>
           {perm === 'ask' || perm === 'denied' ? (
@@ -244,6 +244,49 @@ export default function NearbyScreen() {
           ) : null}
         </View>
       </TabScreen>
+    </View>
+  );
+}
+
+/**
+ * 내 위치 아이콘 — 얇은 동그라미 하나에 위·아래·왼쪽·오른쪽 눈금이 동그라미를 가로지르는 모양
+ * (지도 앱의 내 위치 단추). 아이콘 글꼴에는 선이 굵은 것밖에 없어서 선을 직접 그린다.
+ * 따라가는 중이면 가운데 점이 생긴다.
+ */
+function LocateIcon({ on, color }: { on: boolean; color: string }) {
+  const BOX = 28;
+  const RING = 20; // 동그라미 지름
+  const STROKE = 2;
+  const TICK = 7; // 눈금 길이 — 동그라미 선을 걸쳐 안으로 4, 밖으로 3
+  const c = BOX / 2;
+  const tick = (vertical: boolean, side: -1 | 1) => {
+    // 안쪽으로 조금 더 들어가게 (참고 그림처럼 눈금이 동그라미 밖으로 짧게 나온다)
+    const along = side < 0 ? c - RING / 2 - 3 : c + RING / 2 - 4;
+    return vertical
+      ? { position: 'absolute' as const, left: c - STROKE / 2, top: along, width: STROKE, height: TICK, borderRadius: 1, backgroundColor: color }
+      : { position: 'absolute' as const, top: c - STROKE / 2, left: along, width: TICK, height: STROKE, borderRadius: 1, backgroundColor: color };
+  };
+  return (
+    <View style={{ width: BOX, height: BOX }} pointerEvents="none">
+      <View
+        style={{
+          position: 'absolute',
+          left: c - RING / 2,
+          top: c - RING / 2,
+          width: RING,
+          height: RING,
+          borderRadius: RING / 2,
+          borderWidth: STROKE,
+          borderColor: color,
+        }}
+      />
+      <View style={tick(true, -1)} />
+      <View style={tick(true, 1)} />
+      <View style={tick(false, -1)} />
+      <View style={tick(false, 1)} />
+      {on ? (
+        <View style={{ position: 'absolute', left: c - 3.5, top: c - 3.5, width: 7, height: 7, borderRadius: 3.5, backgroundColor: color }} />
+      ) : null}
     </View>
   );
 }
