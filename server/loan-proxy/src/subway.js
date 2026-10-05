@@ -11,9 +11,9 @@
  *   그 밖   국토교통부 TAGO 지하철 시간표(DATA_GO_KR_KEY)의 다음 열차 — kind 'schedule'. 시간표는 하루 기억.
  *           실시간이 비거나 실패한 수도권 역도 시간표로 채운다.
  */
+import { remembered } from './remember.js';
 const STATIONS_TTL = 30 * 24 * 3600;
 const LIVE_TTL = 60;
-const MEM = new Map();
 
 const LINE = {
   1001: '1호선', 1002: '2호선', 1003: '3호선', 1004: '4호선', 1005: '5호선', 1006: '6호선', 1007: '7호선', 1008: '8호선', 1009: '9호선',
@@ -31,30 +31,6 @@ function meters(a, b) {
   return Math.round(2 * R * Math.asin(Math.sqrt(h)));
 }
 
-async function remembered(env, key, ttl, make) {
-  const hit = MEM.get(key);
-  if (hit && hit.until > Date.now()) return hit.value;
-  try {
-    const kv = env.LOAN_KV ? await env.LOAN_KV.get(key, 'json') : null;
-    if (kv) {
-      MEM.set(key, { until: Date.now() + Math.min(ttl, 3600) * 1000, value: kv });
-      return kv;
-    }
-  } catch {
-    // 기억을 못 읽으면 새로 묻는다
-  }
-  const value = await make();
-  if (value === null) return null;
-  MEM.set(key, { until: Date.now() + Math.min(ttl, 3600) * 1000, value });
-  if (env.LOAN_KV) {
-    try {
-      await env.LOAN_KV.put(key, JSON.stringify(value), { expirationTtl: ttl });
-    } catch {
-      // 쓰기 한도 등
-    }
-  }
-  return value;
-}
 
 async function nearStations(env, at) {
   return remembered(env, `subway:st:v2:${at.lat.toFixed(4)},${at.lng.toFixed(4)}`, STATIONS_TTL, async () => {

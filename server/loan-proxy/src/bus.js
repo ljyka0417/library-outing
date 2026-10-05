@@ -12,10 +12,10 @@
  * 도착: 1분 기억한다 (KV 의 가장 짧은 보관 시간). 그 사이엔 같은 답을 준다.
  * 하루 한도는 기능마다 1만 건이다.
  */
+import { remembered } from './remember.js';
 const BASE = 'https://apis.data.go.kr/1613000';
 const STOPS_TTL = 30 * 24 * 3600;
 const ARRIVAL_TTL = 60;
-const MEM = new Map();
 
 const keyOf = (env) => (/%/.test(env.DATA_GO_KR_KEY) ? env.DATA_GO_KR_KEY : encodeURIComponent(env.DATA_GO_KR_KEY));
 const list = (x) => (x ? (Array.isArray(x) ? x : [x]) : []);
@@ -27,30 +27,6 @@ function meters(a, b) {
   return Math.round(2 * R * Math.asin(Math.sqrt(h)));
 }
 
-async function remembered(env, key, ttl, make) {
-  const hit = MEM.get(key);
-  if (hit && hit.until > Date.now()) return hit.value;
-  try {
-    const kv = env.LOAN_KV ? await env.LOAN_KV.get(key, 'json') : null;
-    if (kv) {
-      MEM.set(key, { until: Date.now() + Math.min(ttl, 3600) * 1000, value: kv });
-      return kv;
-    }
-  } catch {
-    // 기억을 못 읽으면 새로 묻는다
-  }
-  const value = await make();
-  if (value === null) return null; // 오류는 기억하지 않는다
-  MEM.set(key, { until: Date.now() + Math.min(ttl, 3600) * 1000, value });
-  if (env.LOAN_KV) {
-    try {
-      await env.LOAN_KV.put(key, JSON.stringify(value), { expirationTtl: ttl });
-    } catch {
-      // 쓰기 한도 등 — 답에는 영향 없다
-    }
-  }
-  return value;
-}
 
 /** 근처 정류장 (같은 자리는 하나로, 시 코드·정류장 ID 는 묶어서) */
 async function nearStops(env, at) {
