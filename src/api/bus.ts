@@ -21,6 +21,14 @@ export interface BusArrival {
   next?: number;
   /** 막차 */
   last?: boolean;
+  /** 차량 번호 (주는 곳만) */
+  plate?: string;
+  /** 두 번째 버스 — 몇 정거장 전 · 저상 · 차량 번호 */
+  nextPrev?: number;
+  nextLow?: boolean;
+  nextPlate?: string;
+  /** 이 정류장 다음 정류장 — 길 어느 쪽에서 타는지 */
+  nxt?: string;
 }
 export interface BusStop {
   name: string;

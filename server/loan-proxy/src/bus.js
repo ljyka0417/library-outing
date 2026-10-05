@@ -138,13 +138,19 @@ async function seoulArrivals(env, ars) {
       toward: String(r.adirection ?? '').trim() || undefined,
       next: second ? second.min : undefined,
       last: String(r.isLast1 ?? '') === '1' || undefined,
+      // 펼쳤을 때 — 차량 번호 · 두 번째 버스 · 이 정류장 다음 정류장(길 어느 쪽인지)
+      plate: String(r.plainNo1 ?? '').trim() || undefined,
+      nextPrev: second ? second.prev : undefined,
+      nextLow: second ? r.busType2 === '1' : undefined,
+      nextPlate: String(r.plainNo2 ?? '').trim() || undefined,
+      nxt: String(r.nxtStn ?? '').trim() || undefined,
     });
   }
   return out;
 }
 
 async function arrivals(env, city, node) {
-  return remembered(env, `bus:arr:v2:${city}:${node}`, ARRIVAL_TTL, async () => {
+  return remembered(env, `bus:arr:v3:${city}:${node}`, ARRIVAL_TTL, async () => {
     try {
       if (city === 'seoul') return await seoulArrivals(env, node);
       const res = await fetch(

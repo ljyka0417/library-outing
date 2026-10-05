@@ -32,6 +32,15 @@ export function BusSection({ coords, inset = 0 }: { coords?: Coordinates; inset?
   const [bus, setBus] = useState<BusInfo | null>(null);
   const [checkedAt, setCheckedAt] = useState<Date | null>(null);
   const [loading, setLoading] = useState(false);
+  // 눌러서 펼친 노선 (두 번째 버스 · 다음 정류장)
+  const [open, setOpen] = useState<Set<string>>(new Set());
+  const toggle = (k: string) =>
+    setOpen((o) => {
+      const n = new Set(o);
+      if (n.has(k)) n.delete(k);
+      else n.add(k);
+      return n;
+    });
 
   const load = useCallback(async () => {
     if (!coords) return;
@@ -77,28 +86,60 @@ export function BusSection({ coords, inset = 0 }: { coords?: Coordinates; inset?
               <View style={styles.list}>
                 {s.arrivals.map((a) => {
                   const kc = BUS_KIND[a.kind ?? 'other'];
+                  const key = `${s.no ?? s.name}|${a.route}`;
+                  const isOpen = open.has(key);
+                  const low = a.type?.includes('저상');
+                  const sub = [a.prev > 0 ? t('bus.prev', { n: a.prev }) : '', low ? t('bus.low') : '', a.last ? t('subway.last') : ''].filter(Boolean);
                   return (
-                    <View key={a.route} style={styles.busRow}>
-                      <View style={styles.busLeft}>
+                    <View key={a.route}>
+                      <Pressable
+                        onPress={() => toggle(key)}
+                        style={({ pressed }) => [styles.busRow, pressed && { opacity: 0.7 }]}
+                        accessibilityRole="button"
+                        accessibilityState={{ expanded: isOpen }}
+                      >
                         <View style={[styles.routePill, { backgroundColor: kc.bg }]}>
                           <Text style={styles.routePillText} numberOfLines={1}>{a.route}</Text>
                         </View>
-                        {a.type?.includes('저상') ? <Ionicons name="accessibility" size={13} color={colors.primary} /> : null}
-                        {a.last ? <Text style={styles.lastTag}>{t('subway.last')}</Text> : null}
-                      </View>
-                      <View style={styles.busMid}>
-                        {/* 좁은 폰에서 '10분 뒤' 가 두 줄로 꺾이지 않게 — 시간은 줄지 않고 옆 설명이 줄어든다 */}
-                        <Text style={[styles.when, styles.noShrink]} numberOfLines={1}>{a.min <= 1 ? t('bus.soon') : t('bus.min', { n: a.min })}</Text>
-                        <Text style={styles.prev} numberOfLines={1}>
-                          {[
-                            a.toward ? t('subway.toward', { name: a.toward }) : '',
-                            a.prev > 0 ? t('bus.prev', { n: a.prev }) : '',
-                            a.next !== undefined ? t('bus.next', { n: a.next }) : '',
-                          ]
-                            .filter(Boolean)
-                            .join(' · ')}
-                        </Text>
-                      </View>
+                        <View style={{ flex: 1, minWidth: 0 }}>
+                          <Text style={styles.busHead} numberOfLines={1}>
+                            {a.toward ? t('subway.toward', { name: a.toward }) : t(`bus.kind.${a.kind ?? 'other'}` as never)}
+                          </Text>
+                          {sub.length ? (
+                            <Text style={styles.prev} numberOfLines={1}>
+                              {low ? <Ionicons name="accessibility" size={11} color={colors.primary} /> : null}
+                              {low ? ' ' : ''}
+                              {sub.join(' · ')}
+                            </Text>
+                          ) : null}
+                        </View>
+                        <View style={styles.busRight}>
+                          <Text style={[styles.when, styles.noShrink]} numberOfLines={1}>
+                            {a.min <= 1 ? t('bus.soon') : t('subway.minShort', { n: a.min })}
+                          </Text>
+                          {a.next !== undefined ? <Text style={styles.busNext}>{t('bus.next', { n: a.next })}</Text> : null}
+                        </View>
+                        <Ionicons name={isOpen ? 'chevron-up' : 'chevron-down'} size={14} color={colors.textMuted} />
+                      </Pressable>
+                      {isOpen ? (
+                        <View style={styles.busMore}>
+                          <Text style={styles.busMoreLine} numberOfLines={1}>
+                            <Text style={styles.busMoreOrder}>{t('subway.this')}  </Text>
+                            {[a.min <= 1 ? t('bus.soon') : t('bus.min', { n: a.min }), a.prev > 0 ? t('bus.prev', { n: a.prev }) : '', low ? t('bus.low') : '', a.plate ?? '']
+                              .filter(Boolean)
+                              .join(' · ')}
+                          </Text>
+                          {a.next !== undefined ? (
+                            <Text style={styles.busMoreLine} numberOfLines={1}>
+                              <Text style={styles.busMoreOrder}>{t('subway.next')}  </Text>
+                              {[t('bus.min', { n: a.next }), a.nextPrev ? t('bus.prev', { n: a.nextPrev }) : '', a.nextLow ? t('bus.low') : '', a.nextPlate ?? '']
+                                .filter(Boolean)
+                                .join(' · ')}
+                            </Text>
+                          ) : null}
+                          {a.nxt ? <Text style={styles.busMoreNote}>{t('bus.nxt', { name: a.nxt })}</Text> : null}
+                        </View>
+                      ) : null}
                     </View>
                   );
                 })}
@@ -169,34 +210,19 @@ const styles = themedStyles(() => ({
     color: colors.textMuted,
   },
   list: {
-    gap: 4,
-    paddingLeft: 32 + spacing.md,
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.sm,
+    gap: 2,
   },
   noShrink: { flexShrink: 0 },
-  busRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, paddingVertical: 1 },
-  busLeft: { flexDirection: 'row', alignItems: 'center', gap: 4, minWidth: 92 },
-  busMid: { flex: 1, minWidth: 0, flexDirection: 'row', alignItems: 'baseline', gap: spacing.sm },
+  busRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, paddingVertical: 5 },
+  busHead: { ...typography.captionBold, color: colors.text },
+  busRight: { alignItems: 'flex-end', flexShrink: 0 },
+  busNext: { ...typography.tiny, color: colors.textMuted },
+  busMore: { backgroundColor: colors.surfaceAlt, borderRadius: radius.md, padding: spacing.md, gap: 4, marginBottom: 6 },
+  busMoreLine: { ...typography.tiny, color: colors.textSub },
+  busMoreOrder: { color: colors.primary, fontWeight: '700' },
+  busMoreNote: { ...typography.tiny, color: colors.textMuted },
   routePill: { borderRadius: 6, paddingHorizontal: 7, paddingVertical: 2, maxWidth: 76 },
   routePillText: { ...typography.tiny, color: '#FFFFFF', fontWeight: '800' },
-  lastTag: {
-    ...typography.tiny,
-    fontWeight: '700',
-    color: colors.white,
-    backgroundColor: colors.textSub,
-    paddingHorizontal: 5,
-    borderRadius: 5,
-    overflow: 'hidden',
-  },
-  route: {
-    ...typography.captionBold,
-    color: colors.text,
-    minWidth: 64,
-  },
   when: {
     ...typography.captionBold,
     color: colors.closed,
