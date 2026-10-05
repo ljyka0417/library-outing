@@ -119,13 +119,14 @@ function AppleTabs() {
         <NativeTabs.Trigger.Icon sf={{ default: 'location', selected: 'location.fill' }} />
         <NativeTabs.Trigger.Label>{t('tab.nearby')}</NativeTabs.Trigger.Label>
       </NativeTabs.Trigger>
+      {/* 코스 — 오늘의 나들이 (검색 탭 자리, 2026-10-05). 검색은 홈 검색창으로 연다 */}
+      <NativeTabs.Trigger name="course" disableAutomaticContentInsets contentStyle={tabContent()}>
+        <NativeTabs.Trigger.Icon sf={{ default: 'map', selected: 'map.fill' }} />
+        <NativeTabs.Trigger.Label>{t('tab.course')}</NativeTabs.Trigger.Label>
+      </NativeTabs.Trigger>
       <NativeTabs.Trigger name="mypage" disableAutomaticContentInsets contentStyle={tabContent()}>
         <NativeTabs.Trigger.Icon sf={{ default: 'gearshape', selected: 'gearshape.fill' }} />
         <NativeTabs.Trigger.Label>{t('tab.mypage')}</NativeTabs.Trigger.Label>
-      </NativeTabs.Trigger>
-      <NativeTabs.Trigger name="search" disableAutomaticContentInsets contentStyle={tabContent()}>
-        <NativeTabs.Trigger.Icon sf={{ default: 'magnifyingglass', selected: 'magnifyingglass' }} />
-        <NativeTabs.Trigger.Label>{t('tab.search')}</NativeTabs.Trigger.Label>
       </NativeTabs.Trigger>
     </NativeTabs>
   );

@@ -57,6 +57,7 @@ export function TabScreen({
   bottomEdge = true,
   overlay = false,
   bleed = false,
+  underHeader = false,
 }: {
   style?: StyleProp<ViewStyle>;
   children: ReactNode;
@@ -69,6 +70,8 @@ export function TabScreen({
   overlay?: boolean;
   /** 화면 끝까지 깔기 — useBleed 참고. 스크롤 목록이 useBleed().top / bottom 을 비워야 한다 */
   bleed?: boolean;
+  /** 위에 쌓인 화면 머리말(뒤로가기 줄) 밑에서 시작할 때 — 상태 표시줄 자리는 머리말이 이미 비웠다 (검색) */
+  underHeader?: boolean;
 }) {
   const native = useNativeTabs();
   const { width: windowWidth } = useWindowDimensions();
@@ -78,7 +81,7 @@ export function TabScreen({
 
   if (!native) {
     return (
-      <SafeAreaView style={style} edges={['top']} pointerEvents={overlay ? 'box-none' : 'auto'}>
+      <SafeAreaView style={style} edges={underHeader ? [] : ['top']} pointerEvents={overlay ? 'box-none' : 'auto'}>
         {/* 한 겹 더 — 안전 영역은 padding 이라, 바로 안의 position:absolute 는 그걸 무시하고
             상태 표시줄 밑으로 올라간다(안드로이드 내 주변 제목이 시계와 겹쳤다) */}
         <View style={styles.fill} pointerEvents={overlay ? 'box-none' : 'auto'}>
@@ -91,7 +94,7 @@ export function TabScreen({
   return (
     <ControllerSafeAreaView
       style={style}
-      edges={{ top: !full, left: true, right: true, bottom: bottomEdge && !full }}
+      edges={{ top: !full && !underHeader, left: true, right: true, bottom: bottomEdge && !full && !underHeader }}
       pointerEvents={overlay ? 'box-none' : 'auto'}
     >
       <View

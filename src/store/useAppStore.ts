@@ -25,8 +25,24 @@ export interface Buddy {
 }
 export const DEFAULT_BUDDY: Buddy = { pose: 'hello', bg: 'mint', name: '' };
 
+/** 오늘의 나들이에서 저장한 코스 — 장소는 이름·좌표·종류만 (자료가 바뀌어도 그대로 보이게) */
+export interface CourseStop {
+  name: string;
+  coords: { lat: number; lng: number };
+  type: 'restaurant' | 'cafe' | 'culture';
+  subCategory?: string;
+}
+export interface SavedCourse {
+  id: string;
+  libraryId: string;
+  food?: CourseStop;
+  see?: CourseStop;
+  savedAt: string;
+}
+
 interface AppState {
   favorites: string[];
+  courses: SavedCourse[];
   recentLibraryIds: string[];
   visits: VisitRecord[];
   hasSeenOnboarding: boolean;
@@ -67,6 +83,8 @@ interface AppState {
   isFavorite: (libraryId: string) => boolean;
   pushRecent: (libraryId: string) => void;
   addVisit: (libraryId: string) => void;
+  saveCourse: (c: Omit<SavedCourse, 'id' | 'savedAt'>) => string;
+  removeCourse: (id: string) => void;
   completeOnboarding: () => void;
   setGlassTest: (on: boolean) => void;
   setNativeTabs: (on: boolean) => void;
@@ -84,6 +102,7 @@ export const useAppStore = create<AppState>()(
   persist(
     (set, get) => ({
       favorites: [],
+      courses: [],
       recentLibraryIds: [],
       visits: [],
       hasSeenOnboarding: false,
@@ -117,6 +136,17 @@ export const useAppStore = create<AppState>()(
           visits: [{ libraryId, visitedAt: new Date().toISOString() }, ...state.visits],
         })),
 
+      // 같은 코스(도서관·맛집·볼거리 같음)는 한 번만 — 맨 앞으로 올린다. 최대 30개
+      saveCourse: (c) => {
+        const key = (x: Omit<SavedCourse, 'id' | 'savedAt'>) => `${x.libraryId}|${x.food?.name ?? ''}|${x.see?.name ?? ''}`;
+        const id = `${Date.now()}`;
+        set((state) => ({
+          courses: [{ ...c, id, savedAt: new Date().toISOString() }, ...state.courses.filter((x) => key(x) !== key(c))].slice(0, 30),
+        }));
+        return id;
+      },
+      removeCourse: (id) => set((state) => ({ courses: state.courses.filter((x) => x.id !== id) })),
+
       completeOnboarding: () => set({ hasSeenOnboarding: true }),
 
       /**
@@ -138,7 +168,7 @@ export const useAppStore = create<AppState>()(
       setBuddy: (buddy) => set({ buddy }),
 
       resetAll: () =>
-        set({ favorites: [], recentLibraryIds: [], visits: [], hasSeenOnboarding: false }),
+        set({ favorites: [], courses: [], recentLibraryIds: [], visits: [], hasSeenOnboarding: false }),
 
       _setHydrated: () => set({ _hydrated: true }),
     }),
@@ -148,6 +178,7 @@ export const useAppStore = create<AppState>()(
       // 내부 플래그는 저장하지 않는다.
       partialize: (state) => ({
         favorites: state.favorites,
+        courses: state.courses,
         recentLibraryIds: state.recentLibraryIds,
         visits: state.visits,
         hasSeenOnboarding: state.hasSeenOnboarding,

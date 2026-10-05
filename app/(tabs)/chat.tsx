@@ -291,6 +291,7 @@ export default function ChatScreen() {
                  인사가 남는다. */
               message={item.id === 'greeting' ? { ...item, text: t('chat.greeting', { count: LIBRARY_COUNT }) } : item}
               onOpenLibrary={(id) => router.push(`/library/${id}`)}
+              onOpenCourse={(id) => router.push(id ? `/course/${id}` : '/course')}
               favorites={favorites}
               onToggleFavorite={toggleFavorite}
             />
@@ -348,11 +349,13 @@ export default function ChatScreen() {
 interface BubbleProps {
   message: Message;
   onOpenLibrary: (id: string) => void;
+  /** 코스 짜기로 — 도서관을 정했으면 그 도서관, 아니면 코스 탭 */
+  onOpenCourse: (libraryId?: string) => void;
   favorites: string[];
   onToggleFavorite: (id: string) => void;
 }
 
-function Bubble({ message, onOpenLibrary, favorites, onToggleFavorite }: BubbleProps) {
+function Bubble({ message, onOpenLibrary, onOpenCourse, favorites, onToggleFavorite }: BubbleProps) {
   const { t, lang } = useT();
   const mine = message.role === 'user';
 
@@ -404,6 +407,19 @@ function Bubble({ message, onOpenLibrary, favorites, onToggleFavorite }: BubbleP
           </ScrollView>
         ) : null}
 
+        {/* 오늘의 나들이 코스 짜기로 */}
+        {a?.course ? (
+          <Pressable
+            onPress={() => onOpenCourse(a.course?.libraryId)}
+            style={({ pressed }) => [styles.courseBtn, pressed && { opacity: 0.85 }]}
+            accessibilityRole="button"
+          >
+            <Ionicons name="map" size={18} color={colors.white} />
+            <Text style={styles.courseBtnText}>{t('bot.courseGo')}</Text>
+            <Ionicons name="chevron-forward" size={16} color={colors.white} />
+          </Pressable>
+        ) : null}
+
         {/* 주차장·공연·전시 — 누르면 지도에서 연다 */}
         {a?.spots?.map((p) => (
           <Pressable
@@ -441,6 +457,8 @@ function Bubble({ message, onOpenLibrary, favorites, onToggleFavorite }: BubbleP
 }
 
 const styles = themedStyles(() => ({
+  courseBtn: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, alignSelf: 'flex-start', backgroundColor: colors.primary, borderRadius: radius.pill, paddingHorizontal: spacing.lg, paddingVertical: 10 },
+  courseBtnText: { ...typography.captionBold, color: colors.white },
   safe: { flex: 1, backgroundColor: colors.background },
   /** 위 흰 띠. 바탕은 화면 끝까지 간다. */
   headerBar: {

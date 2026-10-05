@@ -49,6 +49,8 @@ export interface Answer {
   places?: NearbyPlace[];
   /** 주차장·공연·전시처럼 지도에서 열어 볼 곳 (이름 + 한 줄 설명) */
   spots?: Spot[];
+  /** 오늘의 나들이 코스 짜기로 가는 단추 — libraryId 가 있으면 그 도서관에서 출발 */
+  course?: { libraryId?: string };
   /** 이어서 물어볼 만한 것들 */
   suggestions?: string[];
   /** 칩이 곧 대답인 되물음("어느 지역에서 찾을까요?") — 섞지 않고 그대로 보여 준다 */
@@ -614,6 +616,8 @@ function answerBrowse(
 const ASK_TIME = /(지금|현재|오늘)\s*(몇\s*시|시간|시각)|몇\s*시야\s*\??$|몇\s*시\s*\??$|\bwhat time is it\b|\bcurrent time\b|今何時|いま何時|現在の時刻|现在几点|几点了|现在时间/;
 
 /** 도서관 근처 주차 */
+// 나들이 코스 — "서울도서관 코스 짜 줘" · "나들이 코스 추천"
+const ASK_COURSE = /코스|나들이|데이트|하루\s*일정|\b(course|outing|itinerary|day trip)\b|コース|おでかけ|お出かけ|路线|行程|出行/;
 const ASK_PARKING = /주차|\bparking\b|\bpark (my|the) car\b|駐車|停车/;
 
 /** 근처 공연·전시 ('전시관' 은 주변 볼거리 쪽이라 뺀다) */
@@ -1026,6 +1030,13 @@ async function answerQuestion(
   }
   if (ASK.help.test(text)) {
     return { text: tr('bot.help', { count: LIBRARY_COUNT }) };
+  }
+  // 나들이 코스 — 도서관을 말했으면 거기서 출발, 아니면 코스 탭으로
+  if (ASK_COURSE.test(text)) {
+    const at = findLibrary(q);
+    return at
+      ? { text: tr('bot.courseLib', { name: at.name }), course: { libraryId: at.id }, libraries: [at] }
+      : { text: tr('bot.course'), course: {}, suggestions: starterQuestions(lang, ctx.seed, ctx.avoid) };
   }
 
   // "지금 몇 시야?" — 지금 시각 + 오늘이 공휴일이면 그 이름 + 지금 문 연 도서관 수

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import Animated, {
   useAnimatedStyle,
@@ -103,7 +103,12 @@ export function LiquidTabBar({ state, descriptors, navigation }: TabBarProps) {
    *   목록을 스크롤하는 중에도 끊기지 않는다.
    *   Reanimated 는 이미 앱에 들어 있으므로 새로 깔 것도, 다시 빌드할 것도 없다.
    */
-  const slide = useSharedValue(INSET);
+  /*
+   * 처음 자리는 지금 탭 칸에서 시작한다. INSET(첫 칸)에서 시작해 움직이게 두었더니, 앱을 막 켰거나
+   * 다른 탭 주소로 바로 들어왔을 때 방울이 홈 칸에 남았다(선택된 글자색만 다른 칸) — 웹·안드로이드에서 봤다.
+   */
+  const slide = useSharedValue(state.index * itemWidth + INSET);
+  const placed = useRef(false);
   const stretch = useSharedValue(1);
   /** 탭바를 꾹 눌러 끄는 중인가. 끄는 동안에는 손가락이 위치를 정한다. */
   const dragging = useSharedValue(false);
@@ -125,6 +130,12 @@ export function LiquidTabBar({ state, descriptors, navigation }: TabBarProps) {
     if (itemWidth <= 0) return;
     // 손가락이 끌고 있는 동안에는 위치를 손가락이 정한다. 여기서 끼어들면 튄다.
     if (dragging.value) return;
+    // 처음 한 번은 움직이지 않고 그 칸에 바로 놓는다
+    if (!placed.current) {
+      placed.current = true;
+      slide.value = state.index * itemWidth + INSET;
+      return;
+    }
 
     // 살짝 물러섰다 자리잡는 정도. 더 튀면 장난스러워진다.
     slide.value = withSpring(state.index * itemWidth + INSET, {

@@ -43,9 +43,9 @@ import { categoryColors, colors, radius, spacing, themedStyles, currentScheme } 
 
 export interface TabDef {
   /** (tabs) 안의 파일 이름 */
-  name: 'index' | 'search' | 'chat' | 'nearby' | 'mypage';
+  name: 'index' | 'chat' | 'nearby' | 'course' | 'mypage';
   /** 이동할 주소 */
-  href: '/' | '/search' | '/chat' | '/nearby' | '/mypage';
+  href: '/' | '/chat' | '/nearby' | '/course' | '/mypage';
   titleKey: MessageKey;
   icon: keyof typeof Ionicons.glyphMap;
   iconOutline: keyof typeof Ionicons.glyphMap;
@@ -54,10 +54,11 @@ export interface TabDef {
 /** 탭 목록. 폰의 아래 탭바와 태블릿 메뉴가 같은 목록을 쓴다 */
 export const TABS: TabDef[] = [
   { name: 'index', href: '/', titleKey: 'tab.home', icon: 'home', iconOutline: 'home-outline' },
-  { name: 'search', href: '/search', titleKey: 'tab.search', icon: 'search', iconOutline: 'search-outline' },
   { name: 'chat', href: '/chat', titleKey: 'tab.chat', icon: 'chatbubble-ellipses', iconOutline: 'chatbubble-ellipses-outline' },
   // 즐겨찾기 자리 → 내 주변 (2026-10-04). 즐겨찾기는 설정 → 내 기록에서 본다
   { name: 'nearby', href: '/nearby', titleKey: 'tab.nearby', icon: 'navigate', iconOutline: 'navigate-outline' },
+  // 검색 자리 → 코스 (2026-10-05). 검색은 홈 검색창·주제 단추로 연다 (app/search.tsx)
+  { name: 'course', href: '/course', titleKey: 'tab.course', icon: 'map', iconOutline: 'map-outline' },
   { name: 'mypage', href: '/mypage', titleKey: 'tab.mypage', icon: 'settings', iconOutline: 'settings-outline' },
 ];
 

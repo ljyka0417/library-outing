@@ -1,6 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import { libText } from '@/i18n/libraryText';
 import { LibraryCard } from '@/components/LibraryCard';
 import { Mascot } from '@/components/Mascot';
 import { MOCK_LIBRARIES } from '@/data/libraries.mock';
@@ -19,9 +21,9 @@ import { useFavoriteToggle } from '@/components/FavoritePopup';
  *   방문 기록  "여기 다녀왔어요" 를 누른 날짜별로. 같은 날 같은 곳을 여러 번 눌렀으면 한 번만 보이고 횟수를 적는다
  *   최근 본 곳 도서관 화면을 연 차례 (최근 것부터)
  */
-type Tab = 'favorites' | 'visits' | 'recent';
-const TABS: Tab[] = ['favorites', 'visits', 'recent'];
-const TAB_LABEL = { favorites: 'my.statFavorites', visits: 'my.statVisits', recent: 'my.statRecent' } as const;
+type Tab = 'favorites' | 'visits' | 'recent' | 'courses';
+const TABS: Tab[] = ['favorites', 'visits', 'recent', 'courses'];
+const TAB_LABEL = { favorites: 'my.statFavorites', visits: 'my.statVisits', recent: 'my.statRecent', courses: 'rec.courses' } as const;
 const LOCALE: Record<Lang, string> = { ko: 'ko-KR', en: 'en-US', ja: 'ja-JP', zh: 'zh-CN' };
 
 const libById = new Map(MOCK_LIBRARIES.map((l) => [l.id, l]));
@@ -49,6 +51,8 @@ export default function RecordsScreen() {
   const favorites = useAppStore((s) => s.favorites);
   const visits = useAppStore((s) => s.visits);
   const recentIds = useAppStore((s) => s.recentLibraryIds);
+  const courses = useAppStore((s) => s.courses);
+  const removeCourse = useAppStore((s) => s.removeCourse);
   // 담으면 "즐겨찾기에 담았어요" 창이 뜬다 (FavoritePopup)
   const toggleFavorite = useFavoriteToggle();
 
@@ -75,14 +79,14 @@ export default function RecordsScreen() {
       onToggleFavorite={() => toggleFavorite(lib.id)}
     />
   );
-  const empty = (key: 'rec.emptyFavorites' | 'rec.emptyVisits' | 'rec.emptyRecent') => (
+  const empty = (key: 'rec.emptyFavorites' | 'rec.emptyVisits' | 'rec.emptyRecent' | 'rec.emptyCourses') => (
     <View style={styles.empty}>
       <Mascot size={96} pose="faceHappy" />
       <Text style={styles.emptyText}>{t(key)}</Text>
     </View>
   );
 
-  const count = { favorites: favorites.length, visits: visits.length, recent: recentIds.length };
+  const count = { favorites: favorites.length, visits: visits.length, recent: recentIds.length, courses: courses.length };
 
   return (
     <>
@@ -143,6 +147,36 @@ export default function RecordsScreen() {
           {tab === 'recent' ? (
             recentIds.length ? libsOf(recentIds).map((l) => card(l, l.id)) : empty('rec.emptyRecent')
           ) : null}
+
+          {/* 오늘의 나들이에서 저장한 코스 — 누르면 코스 확인 화면으로 */}
+          {tab === 'courses' ? (
+            courses.length ? (
+              courses.map((c) => {
+                const lib = libById.get(c.libraryId);
+                if (!lib) return null;
+                return (
+                  <Pressable
+                    key={c.id}
+                    onPress={() => router.push(`/course/${c.libraryId}?saved=${c.id}`)}
+                    style={({ pressed }) => [styles.course, pressed && { opacity: 0.85 }]}
+                  >
+                    <Ionicons name="map" size={20} color={colors.primary} />
+                    <View style={{ flex: 1, minWidth: 0, gap: 2 }}>
+                      <Text style={styles.courseTitle} numberOfLines={1}>
+                        {[libText(lib.name, lang), c.food?.name, c.see?.name].filter(Boolean).join(' → ')}
+                      </Text>
+                      <Text style={styles.courseDate}>{dayLabel(new Date(c.savedAt), lang)}</Text>
+                    </View>
+                    <Pressable onPress={() => removeCourse(c.id)} hitSlop={10} accessibilityRole="button" accessibilityLabel="delete">
+                      <Ionicons name="trash-outline" size={18} color={colors.textMuted} />
+                    </Pressable>
+                  </Pressable>
+                );
+              })
+            ) : (
+              empty('rec.emptyCourses')
+            )
+          ) : null}
         </View>
       </ScrollView>
     </>
@@ -150,6 +184,9 @@ export default function RecordsScreen() {
 }
 
 const styles = themedStyles(() => ({
+  course: { flexDirection: 'row', alignItems: 'center', gap: spacing.md, padding: spacing.md, borderRadius: radius.md, backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border },
+  courseTitle: { ...typography.bodyBold, color: colors.text },
+  courseDate: { ...typography.tiny, color: colors.textMuted },
   safe: { flex: 1, backgroundColor: colors.background },
   content: { paddingVertical: spacing.lg, paddingBottom: spacing.xxxl },
   inner: { gap: spacing.md },
