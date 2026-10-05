@@ -79,7 +79,11 @@ export function TabScreen({
   if (!native) {
     return (
       <SafeAreaView style={style} edges={['top']} pointerEvents={overlay ? 'box-none' : 'auto'}>
-        {children}
+        {/* 한 겹 더 — 안전 영역은 padding 이라, 바로 안의 position:absolute 는 그걸 무시하고
+            상태 표시줄 밑으로 올라간다(안드로이드 내 주변 제목이 시계와 겹쳤다) */}
+        <View style={styles.fill} pointerEvents={overlay ? 'box-none' : 'auto'}>
+          {children}
+        </View>
       </SafeAreaView>
     );
   }

@@ -46,7 +46,8 @@ export function CategoryIcon({
   if (art) {
     return (
       <View style={[{ width: size, height: size }, style]}>
-        <Image source={art} style={{ width: size, height: size, tintColor: color }} resizeMode="contain" />
+        {/* fadeDuration 0 — 안드로이드는 그림이 0.3초 동안 서서히 나타나는데, 지도 핀은 그 사이에 찍혀 빈 칸이 됐다 */}
+        <Image source={art} style={{ width: size, height: size, tintColor: color }} resizeMode="contain" fadeDuration={0} />
       </View>
     );
   }

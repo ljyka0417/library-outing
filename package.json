@@ -41,7 +41,8 @@
     "collect-air-stations": "node scripts/collect-air-stations.mjs",
     "collect-parking": "node scripts/collect-parking.mjs",
     "collect-more-library-photos": "node scripts/collect-more-library-photos.mjs",
-    "chat-chips": "node scripts/chat-chip-audit.mjs"
+    "chat-chips": "node scripts/chat-chip-audit.mjs",
+    "map-pins": "node scripts/make-map-pins.mjs"
   },
   "dependencies": {
     "@expo/metro-runtime": "~57.0.15",

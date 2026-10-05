@@ -46,6 +46,16 @@ export default function NearbyScreen() {
   const [me, setMe] = useState<Coordinates | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
   const centeredOnce = useRef(false);
+  /*
+   * 내 위치 따라가기. 내 위치 단추를 누르면 켜지고, 그 뒤로 걸어가면 지도가 따라온다.
+   * 지도를 손으로 끌거나 도서관을 고르면 멈춘다(보려던 곳을 빼앗지 않게). ref 는 위치 콜백이 읽는 값.
+   */
+  const [follow, setFollowState] = useState(false);
+  const following = useRef(false);
+  const setFollow = (on: boolean) => {
+    following.current = on;
+    setFollowState(on);
+  };
 
   // 처음 들어왔을 때 이미 허락했는지
   useEffect(() => {
@@ -60,16 +70,30 @@ export default function NearbyScreen() {
       if (perm !== 'granted') return;
       let sub: Location.LocationSubscription | undefined;
       let alive = true;
-      void Location.watchPositionAsync({ accuracy: Location.Accuracy.Balanced, distanceInterval: 25 }, (pos) => {
-        if (!alive) return;
+      const got = (pos: Location.LocationObject | null) => {
+        if (!alive || !pos) return;
         const c = { lat: pos.coords.latitude, lng: pos.coords.longitude };
         setMe(c);
         // 처음 한 번만 내 자리로 — 그 뒤로는 사람이 지도를 옮겨 둔 대로 둔다
-        if (!centeredOnce.current) {
+        // 우리나라 밖(해외·가상 폰 기본 위치 미국)이면 바다 한가운데로 가지 않고 전국 지도 그대로
+        const inKorea = c.lat > 33 && c.lat < 39 && c.lng > 124 && c.lng < 132;
+        if (following.current) {
+          // 처음 따라가기를 켰을 때는 동네가 보이게 확대, 그 뒤로는 확대는 두고 가운데만
+          if (!centeredOnce.current) map.current?.focus(c, 0.02);
+          else map.current?.center(c);
+          centeredOnce.current = true;
+        } else if (!centeredOnce.current && inKorea) {
           centeredOnce.current = true;
           map.current?.focus(c, 0.06);
         }
-      }).then((s) => {
+      };
+      /*
+       * 따라가기는 위치가 **바뀔 때** 알려 준다. 가만히 있거나 실내라 새 위치가 늦으면 한참 아무것도
+       * 안 와서 화면이 빈 채로 있었다(안드로이드 가상 폰에서 봤다). 마지막으로 알던 자리를 먼저 쓴다.
+       */
+      void Location.getLastKnownPositionAsync().then(got).catch(() => {});
+      // 걸으며 따라가도 어색하지 않게 10m 마다 (이 화면을 보는 동안만 켜져 있다)
+      void Location.watchPositionAsync({ accuracy: Location.Accuracy.High, distanceInterval: 10 }, got).then((s) => {
         if (alive) sub = s;
         else s.remove();
       });
@@ -83,6 +107,21 @@ export default function NearbyScreen() {
   const askPermission = async () => {
     const p = await Location.requestForegroundPermissionsAsync();
     setPerm(p.granted ? 'granted' : p.canAskAgain ? 'ask' : 'denied');
+    return p.granted;
+  };
+
+  // 내 위치 단추 — 권한이 없으면 묻고(거절했으면 설정으로), 있으면 내 자리로 가서 따라가기
+  const locateMe = async () => {
+    if (perm === 'denied') return void Linking.openSettings();
+    if (perm !== 'granted' && !(await askPermission())) return;
+    setFollow(true);
+    if (me) {
+      map.current?.focus(me, 0.02);
+      centeredOnce.current = true;
+    } else {
+      // 아직 위치를 모르면 다음에 잡히는 위치에서 확대한다 (got 이 처리)
+      centeredOnce.current = false;
+    }
   };
 
   // 가까운 순 (위치를 모르면 이름 순)
@@ -98,13 +137,15 @@ export default function NearbyScreen() {
 
   const select = (id: string, from: 'map' | 'list') => {
     setSelected(id);
+    setFollow(false);
     const i = rows.findIndex((r) => r.lib.id === id);
     const lib = rows[i]?.lib;
     if (lib?.coords) map.current?.focus(lib.coords, 0.03);
     if (from === 'map' && i >= 0) list.current?.scrollToIndex({ index: i, animated: true, viewPosition: 0 });
   };
 
-  const showCards = perm === 'granted' ? !!me : true;
+  // 위치를 아직 모를 때도 카드는 보여 준다(이름 순) — 빈 지도만 덩그러니 남지 않게
+  const showCards = true;
 
   /*
    * 지도는 화면 끝까지 — 상태 표시줄과 탭바 밑까지 깔고, 그 위에 유리 탭바·카드가 뜬다(애플 지도 앱 모양).
@@ -127,10 +168,11 @@ export default function NearbyScreen() {
         selectedId={selected}
         onSelect={(id) => select(id, 'map')}
         padding={mapPadding}
+        onUserPan={() => following.current && setFollow(false)}
       />
       <TabScreen style={styles.mapWrap} overlay>
 
-        {/* 위: 제목 + 내 위치로 */}
+        {/* 위: 제목 */}
         <View style={[styles.top, { paddingHorizontal: layout.gutter }]} pointerEvents="box-none">
           <View style={styles.titlePill}>
             <Text style={styles.title}>{t('tab.nearby')}</Text>
@@ -138,20 +180,23 @@ export default function NearbyScreen() {
               {me ? t('nearby.count', { n: nearCount }) : t('nearby.all', { n: LIBS.length })}
             </Text>
           </View>
-          {me ? (
-            <Pressable
-              onPress={() => map.current?.focus(me, 0.04)}
-              style={({ pressed }) => [styles.locate, pressed && { opacity: 0.7 }]}
-              accessibilityRole="button"
-              accessibilityLabel={t('nearby.locate')}
-            >
-              <Ionicons name="navigate" size={20} color={colors.primary} />
-            </Pressable>
-          ) : null}
         </View>
 
         {/* 아래: 위치 안내 또는 가까운 순 카드 */}
         <View style={[styles.bottom, { paddingBottom: tabPad + spacing.sm }]} pointerEvents="box-none">
+          {/* 내 위치 단추 — 카드 바로 위 오른쪽. 따라가는 중이면 민트로 채운다 */}
+          <View style={[styles.locateRow, { paddingHorizontal: layout.gutter }]} pointerEvents="box-none">
+            <Pressable
+              onPress={() => void locateMe()}
+              style={({ pressed }) => [styles.locate, follow && styles.locateOn, pressed && { opacity: 0.8 }]}
+              accessibilityRole="button"
+              accessibilityLabel={t('nearby.locate')}
+              accessibilityState={{ selected: follow }}
+              hitSlop={6}
+            >
+              <Ionicons name={follow ? 'locate' : 'locate-outline'} size={24} color={follow ? colors.white : colors.text} />
+            </Pressable>
+          </View>
           {perm === 'ask' || perm === 'denied' ? (
             <View style={[styles.permCard, { marginHorizontal: layout.gutter }]}>
               <Mascot pose="map" size={64} />
@@ -275,10 +320,12 @@ const styles = themedStyles(() => ({
   },
   title: { ...typography.bodyBold, color: colors.text },
   sub: { ...typography.tiny, color: colors.textSub },
+  locateRow: { flexDirection: 'row', justifyContent: 'flex-end' },
+  locateOn: { backgroundColor: colors.primary },
   locate: {
-    width: 46,
-    height: 46,
-    borderRadius: 23,
+    width: 52,
+    height: 52,
+    borderRadius: 26,
     backgroundColor: colors.surface,
     alignItems: 'center',
     justifyContent: 'center',
