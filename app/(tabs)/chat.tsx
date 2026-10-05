@@ -22,7 +22,7 @@ import { useAppStore } from '@/store/useAppStore';
 import { LIBRARY_COUNT } from '@/data/libraries.mock';
 import { ask, starterQuestions, type Answer } from '@/utils/assistant';
 import { useTabBarPadding } from '@/hooks/useTabBarPadding';
-import { centered, sideSpace, useLayout } from '@/hooks/useLayout';
+import { centered, useLayout } from '@/hooks/useLayout';
 import { ChipRow } from '@/components/common';
 import { useT } from '@/i18n';
 import { colors, radius, spacing, typography, themedStyles } from '@/theme';
@@ -278,7 +278,9 @@ export default function ChatScreen() {
           directionalLockEnabled
           data={messages}
           keyExtractor={(m) => m.id}
-          contentContainerStyle={[styles.list, { paddingHorizontal: sideSpace(layout, true) + layout.gutter }]}
+          /* 제목·입력칸과 같은 가운데 칸. 양옆 여백을 화면 폭으로 계산했더니 아이패드에서는 사이드바까지
+             폭에 들어가 대화만 오른쪽으로 밀리고 좁아졌다 — 칸 너비(centered)로 맞춘다 */
+          contentContainerStyle={[styles.list, centered(layout, true), { paddingHorizontal: layout.gutter }]}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
           onContentSizeChange={scrollToEnd}
@@ -303,7 +305,7 @@ export default function ChatScreen() {
         ) : null}
 
         {lastSuggestions && lastSuggestions.length > 0 && !thinking ? (
-          <View style={centered(layout, true)}>
+          <View style={[centered(layout, true), styles.suggestWrap]}>
             <ChipRow contentStyle={styles.suggestRow}>
               {lastSuggestions.map((s: string) => (
                 <Pressable key={s} onPress={() => void send(s)} style={styles.suggestChip}>
@@ -525,6 +527,8 @@ const styles = themedStyles(() => ({
   },
   thinkingText: { ...typography.caption, color: colors.textSub },
 
+  // 마지막 말풍선·카드와 칩이 붙어 카드 아래 테두리가 잘려 보였다
+  suggestWrap: { paddingTop: spacing.sm },
   suggestRow: {
     paddingBottom: spacing.sm,
     gap: spacing.sm,

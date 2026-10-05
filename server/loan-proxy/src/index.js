@@ -23,6 +23,8 @@ import { culture } from './culture.js';
 import { air } from './air.js';
 import { book } from './book.js';
 import { bus } from './bus.js';
+import { place } from './place.js';
+import { subway } from './subway.js';
 
 const ALLOWED = new Set(LIBS);
 const MAX_BOOKS = 10;
@@ -156,6 +158,8 @@ export async function handle(request, env) {
   if (url.pathname === '/air') return air(url, env, json);
   if (url.pathname === '/culture' || url.pathname === '/culture/detail') return culture(url, env, json);
   if (url.pathname === '/bus') return bus(url, env, json);
+  if (url.pathname === '/place') return place(url, env, json);
+  if (url.pathname === '/subway') return subway(url, env, json);
   // 책 소개는 카카오 키(KAKAO_REST_KEY)를 쓴다
   if (url.pathname === '/book') return book(url, env, json);
   if (!env.DATA4LIBRARY_KEY) return json({ error: '서버에 DATA4LIBRARY_KEY 가 설정되지 않았습니다' }, 500);

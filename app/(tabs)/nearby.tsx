@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { FlatList, Linking, Pressable, Text, View, useWindowDimensions } from 'react-native';
+import { AppState, FlatList, Keyboard, Linking, Platform, Pressable, ScrollView, Text, TextInput, View, useWindowDimensions } from 'react-native';
 import { useFocusEffect, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -15,6 +15,7 @@ import { useLayout, navKind } from '@/hooks/useLayout';
 import { useT, type MessageKey } from '@/i18n';
 import { libText } from '@/i18n/libraryText';
 import { distanceMeters } from '@/utils/geo';
+import { searchPlaces, type Place } from '@/api/place';
 import { formatDistance, isOpenNow, walkingMinutes } from '@/utils/openingHours';
 import { categoryColors, colors, radius, shadow, spacing, typography, themedStyles } from '@/theme';
 import type { Coordinates, Library } from '@/types';
@@ -27,7 +28,8 @@ import type { Coordinates, Library } from '@/types';
  *
  * 카드를 옆으로 넘기면 지도가 그 도서관으로 가고, 핀을 누르면 카드가 그 도서관으로 넘어간다.
  */
-type Perm = 'unknown' | 'ask' | 'denied' | 'granted';
+/** off = 휴대폰 전체 위치(아이폰 위치 서비스 · 안드로이드 위치)가 꺼져 있음 — 앱 권한과 별개 */
+type Perm = 'unknown' | 'ask' | 'denied' | 'granted' | 'off';
 const LIBS = MOCK_LIBRARIES.filter((l) => l.coords);
 /** 이 안이면 걸어서 몇 분, 밖이면 거리만 */
 const WALKABLE = 3000;
@@ -45,6 +47,39 @@ export default function NearbyScreen() {
   const [perm, setPerm] = useState<Perm>('unknown');
   const [me, setMe] = useState<Coordinates | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
+
+  /*
+   * 검색 — 위 칸에 치면 우리 도서관(이름·지역)과 카카오 장소가 함께 나온다.
+   * 장소를 고르면 그 자리(spot)가 기준이 되어 카드가 그 근처 가까운 순으로 바뀐다. X 로 내 위치 기준으로.
+   */
+  const [query, setQuery] = useState('');
+  const [searching, setSearching] = useState(false);
+  const [places, setPlaces] = useState<Place[] | null>(null);
+  const [spot, setSpot] = useState<Place | null>(null);
+  useEffect(() => {
+    const q = query.trim();
+    if (q.length < 2) {
+      setPlaces(null);
+      return;
+    }
+    let alive = true;
+    const timer = setTimeout(() => {
+      void searchPlaces(q).then((r) => alive && setPlaces(r));
+    }, 300);
+    return () => {
+      alive = false;
+      clearTimeout(timer);
+    };
+  }, [query]);
+  const libHits = useMemo(() => {
+    const q = query.replace(/\s+/g, '').toLowerCase();
+    if (!q) return [];
+    return LIBS.filter((l) =>
+      [l.name, libText(l.name, lang), l.region.sido, l.region.sigungu ?? ''].some((v) =>
+        v.replace(/\s+/g, '').toLowerCase().includes(q)
+      )
+    ).slice(0, 5);
+  }, [query, lang]);
   const centeredOnce = useRef(false);
   /*
    * 내 위치 따라가기. 내 위치 단추를 누르면 켜지고, 그 뒤로 걸어가면 지도가 따라온다.
@@ -57,12 +92,28 @@ export default function NearbyScreen() {
     setFollowState(on);
   };
 
-  // 처음 들어왔을 때 이미 허락했는지
-  useEffect(() => {
-    void Location.getForegroundPermissionsAsync().then((p) =>
-      setPerm(p.granted ? 'granted' : p.canAskAgain ? 'ask' : 'denied')
-    );
+  /*
+   * 지금 위치를 쓸 수 있는지. 휴대폰 전체 위치가 꺼져 있으면 앱 권한을 물어도 iOS 는 창 없이 거절하고
+   * 앱 설정에 「위치」 항목도 생기지 않는다 — 그래서 "라키브 위치를 켜세요" 가 아니라 휴대폰 위치를 켜라고 안내한다.
+   * 설정에서 켜고 돌아오면(앱이 다시 앞으로 오면) 다시 확인한다.
+   */
+  const checkPerm = useCallback(async () => {
+    if (!(await Location.hasServicesEnabledAsync().catch(() => true))) return setPerm('off');
+    const p = await Location.getForegroundPermissionsAsync();
+    setPerm(p.granted ? 'granted' : p.canAskAgain ? 'ask' : 'denied');
   }, []);
+  useEffect(() => {
+    void checkPerm();
+    const sub = AppState.addEventListener('change', (st) => st === 'active' && void checkPerm());
+    return () => sub.remove();
+  }, [checkPerm]);
+
+  // 휴대폰 위치 켜는 곳 — 안드로이드는 위치 설정 화면으로 바로, iOS 는 그 화면 링크가 공개되지 않아 설정 앱으로
+  const openLocationSettings = () => {
+    if (Platform.OS === 'android') {
+      void Linking.sendIntent('android.settings.LOCATION_SOURCE_SETTINGS').catch(() => Linking.openSettings());
+    } else void Linking.openSettings();
+  };
 
   // 보는 동안만 위치를 따라간다
   useFocusEffect(
@@ -105,6 +156,10 @@ export default function NearbyScreen() {
   );
 
   const askPermission = async () => {
+    if (!(await Location.hasServicesEnabledAsync().catch(() => true))) {
+      setPerm('off');
+      return false;
+    }
     const p = await Location.requestForegroundPermissionsAsync();
     setPerm(p.granted ? 'granted' : p.canAskAgain ? 'ask' : 'denied');
     return p.granted;
@@ -112,8 +167,14 @@ export default function NearbyScreen() {
 
   // 내 위치 단추 — 권한이 없으면 묻고(거절했으면 설정으로), 있으면 내 자리로 가서 따라가기
   const locateMe = async () => {
-    if (perm === 'denied') return void Linking.openSettings();
-    if (perm !== 'granted' && !(await askPermission())) return;
+    // 거절로 보여도 한 번은 다시 묻는다 — 정말 거절했으면 iOS·안드로이드가 창 없이 바로 거절을 돌려준다.
+    // (예전 설치본의 상태가 남아 단추가 곧장 설정으로만 가던 일이 있었다) 그래도 안 되면 설정으로.
+    if (perm !== 'granted' && !(await askPermission())) {
+      // 휴대폰 위치가 꺼져 있으면 아래 안내 카드가 대신 알려 준다 (앱 설정으로 보내도 켤 곳이 없다)
+      if (!(await Location.hasServicesEnabledAsync().catch(() => true))) return;
+      return void Linking.openSettings();
+    }
+    setSpot(null);
     setFollow(true);
     if (me) {
       map.current?.focus(me, 0.02);
@@ -125,11 +186,16 @@ export default function NearbyScreen() {
   };
 
   // 가까운 순 (위치를 모르면 이름 순)
+  // 기준 자리 — 검색한 장소가 있으면 거기, 없으면 내 위치
+  const origin: Coordinates | null = spot ?? me;
   const rows: Row[] = useMemo(() => {
-    const withDist = LIBS.map((l) => ({ lib: l, dist: me ? distanceMeters(me, l.coords!) : null }));
-    return me ? withDist.sort((a, b) => a.dist! - b.dist!) : withDist.sort((a, b) => a.lib.name.localeCompare(b.lib.name, 'ko'));
-  }, [me]);
-  const nearCount = me ? rows.filter((r) => r.dist! <= 5000).length : 0;
+    const withDist = LIBS.map((l) => ({ lib: l, dist: origin ? distanceMeters(origin, l.coords!) : null }));
+    return origin
+      ? withDist.sort((a, b) => a.dist! - b.dist!)
+      : withDist.sort((a, b) => a.lib.name.localeCompare(b.lib.name, 'ko'));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [origin?.lat, origin?.lng]);
+  const nearCount = origin ? rows.filter((r) => r.dist! <= 5000).length : 0;
 
   // 카드 폭 — 폰은 다음 카드가 살짝 보이게, 태블릿은 고정 폭
   const cardW = Math.min(360, width - layout.gutter * 2 - 44);
@@ -142,6 +208,30 @@ export default function NearbyScreen() {
     const lib = rows[i]?.lib;
     if (lib?.coords) map.current?.focus(lib.coords, 0.03);
     if (from === 'map' && i >= 0) list.current?.scrollToIndex({ index: i, animated: true, viewPosition: 0 });
+  };
+
+  const closeSearch = () => {
+    Keyboard.dismiss();
+    setSearching(false);
+    setQuery('');
+    setPlaces(null);
+  };
+  const pickPlace = (p: Place) => {
+    closeSearch();
+    setFollow(false);
+    setSpot(p);
+    setSelected(null);
+    map.current?.focus(p, 0.05);
+    list.current?.scrollToOffset({ offset: 0, animated: false });
+  };
+  const pickLibrary = (id: string) => {
+    closeSearch();
+    setSpot(null);
+    select(id, 'map');
+  };
+  const clearSpot = () => {
+    setSpot(null);
+    if (me) map.current?.focus(me, 0.06);
   };
 
   // 위치를 아직 모를 때도 카드는 보여 준다(이름 순) — 빈 지도만 덩그러니 남지 않게
@@ -169,17 +259,95 @@ export default function NearbyScreen() {
         onSelect={(id) => select(id, 'map')}
         padding={mapPadding}
         onUserPan={() => following.current && setFollow(false)}
+        spot={spot}
       />
       <TabScreen style={styles.mapWrap} overlay>
 
-        {/* 위: 제목 */}
+        {/* 위: 검색창 (애플·구글 지도처럼) + 지금 기준 한 줄 */}
         <View style={[styles.top, { paddingHorizontal: layout.gutter }]} pointerEvents="box-none">
-          <View style={styles.titlePill}>
-            <Text style={styles.title}>{t('tab.nearby')}</Text>
-            <Text style={styles.sub}>
-              {me ? t('nearby.count', { n: nearCount }) : t('nearby.all', { n: LIBS.length })}
-            </Text>
+          <View style={styles.searchBox}>
+            <Ionicons name="search" size={18} color={colors.textMuted} />
+            <TextInput
+              value={query}
+              onChangeText={setQuery}
+              onFocus={() => setSearching(true)}
+              placeholder={t('nearby.searchPlaceholder')}
+              placeholderTextColor={colors.textMuted}
+              style={styles.searchInput}
+              returnKeyType="search"
+              onSubmitEditing={() => {
+                if (libHits[0]) pickLibrary(libHits[0].id);
+                else if (places?.[0]) pickPlace(places[0]);
+              }}
+              accessibilityLabel={t('nearby.searchPlaceholder')}
+            />
+            {searching ? (
+              <Pressable onPress={closeSearch} hitSlop={10} accessibilityRole="button">
+                <Ionicons name="close-circle" size={20} color={colors.textMuted} />
+              </Pressable>
+            ) : null}
           </View>
+
+          {searching && query.trim() ? (
+            <View style={styles.results}>
+              <ScrollView keyboardShouldPersistTaps="handled" style={{ maxHeight: 360 }}>
+                {libHits.length ? <Text style={styles.resultHead}>{t('nearby.libraries')}</Text> : null}
+                {libHits.map((l) => {
+                  const palette = categoryColors[l.categories[0]] ?? { bg: colors.surfaceAlt, fg: colors.textSub };
+                  return (
+                    <Pressable
+                      key={l.id}
+                      onPress={() => pickLibrary(l.id)}
+                      style={({ pressed }) => [styles.resultRow, pressed && { opacity: 0.6 }]}
+                    >
+                      <View style={[styles.resultIcon, { backgroundColor: palette.bg }]}>
+                        <CategoryIcon category={CATEGORY_MAP[l.categories[0]] ?? { icon: 'library' }} size={18} color={palette.fg} />
+                      </View>
+                      <View style={{ flex: 1 }}>
+                        <Text style={styles.resultName} numberOfLines={1}>{libText(l.name, lang)}</Text>
+                        <Text style={styles.resultSub} numberOfLines={1}>{libText(l.region.sigungu ?? l.region.sido, lang)}</Text>
+                      </View>
+                    </Pressable>
+                  );
+                })}
+                {places?.length ? <Text style={styles.resultHead}>{t('nearby.places')}</Text> : null}
+                {places?.slice(0, 6).map((p) => (
+                  <Pressable
+                    key={`${p.name}-${p.lat}`}
+                    onPress={() => pickPlace(p)}
+                    style={({ pressed }) => [styles.resultRow, pressed && { opacity: 0.6 }]}
+                  >
+                    <View style={[styles.resultIcon, { backgroundColor: colors.surfaceAlt }]}>
+                      <Ionicons name="location-outline" size={18} color={colors.textSub} />
+                    </View>
+                    <View style={{ flex: 1 }}>
+                      <Text style={styles.resultName} numberOfLines={1}>{p.name}</Text>
+                      <Text style={styles.resultSub} numberOfLines={1}>{[p.category, p.address].filter(Boolean).join(' · ')}</Text>
+                    </View>
+                  </Pressable>
+                ))}
+                {!libHits.length && places && !places.length ? <Text style={styles.resultEmpty}>{t('nearby.noResult')}</Text> : null}
+                {places?.length ? <Text style={styles.resultSource}>{t('nearby.placeSource')}</Text> : null}
+              </ScrollView>
+            </View>
+          ) : !searching ? (
+            <View style={styles.statusRow} pointerEvents="box-none">
+              <View style={styles.statusPill}>
+                <Text style={styles.sub} numberOfLines={1}>
+                  {spot
+                    ? t('nearby.countAt', { name: spot.name, n: nearCount })
+                    : me
+                      ? t('nearby.count', { n: nearCount })
+                      : t('nearby.all', { n: LIBS.length })}
+                </Text>
+                {spot ? (
+                  <Pressable onPress={clearSpot} hitSlop={10} accessibilityRole="button" accessibilityLabel={t('nearby.clearPlace')}>
+                    <Ionicons name="close" size={16} color={colors.textSub} />
+                  </Pressable>
+                ) : null}
+              </View>
+            </View>
+          ) : null}
         </View>
 
         {/* 아래: 위치 안내 또는 가까운 순 카드 */}
@@ -197,14 +365,34 @@ export default function NearbyScreen() {
               <LocateIcon on={follow} color={follow ? colors.white : colors.text} />
             </Pressable>
           </View>
-          {perm === 'ask' || perm === 'denied' ? (
+          {perm === 'ask' || perm === 'denied' || perm === 'off' ? (
             <View style={[styles.permCard, { marginHorizontal: layout.gutter }]}>
               <Mascot pose="map" size={64} />
               <View style={{ flex: 1, gap: 4 }}>
-                <Text style={styles.permTitle}>{t(perm === 'ask' ? 'nearby.permTitle' : 'nearby.deniedTitle')}</Text>
-                <Text style={styles.permBody}>{t(perm === 'ask' ? 'nearby.permBody' : 'nearby.deniedBody')}</Text>
+                <Text style={styles.permTitle}>
+                  {t(
+                    perm === 'ask'
+                      ? 'nearby.permTitle'
+                      : perm === 'off'
+                        ? Platform.OS === 'ios'
+                          ? 'nearby.offTitleIos'
+                          : 'nearby.offTitleAndroid'
+                        : 'nearby.deniedTitle'
+                  )}
+                </Text>
+                <Text style={styles.permBody}>
+                  {t(
+                    perm === 'ask'
+                      ? 'nearby.permBody'
+                      : perm === 'off'
+                        ? Platform.OS === 'ios'
+                          ? 'nearby.offBodyIos'
+                          : 'nearby.offBodyAndroid'
+                        : 'nearby.deniedBody'
+                  )}
+                </Text>
                 <Pressable
-                  onPress={perm === 'ask' ? askPermission : () => void Linking.openSettings()}
+                  onPress={perm === 'ask' ? askPermission : perm === 'off' ? openLocationSettings : () => void Linking.openSettings()}
                   style={({ pressed }) => [styles.permButton, pressed && { opacity: 0.85 }]}
                 >
                   <Text style={styles.permButtonText}>{t(perm === 'ask' ? 'nearby.permButton' : 'nearby.openSettings')}</Text>
@@ -350,9 +538,53 @@ const styles = themedStyles(() => ({
     top: spacing.md,
     left: 0,
     right: 0,
+    gap: spacing.sm,
+  },
+  searchBox: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: spacing.sm,
+    backgroundColor: colors.surface,
+    borderRadius: 24,
+    paddingHorizontal: spacing.lg,
+    height: 48,
+    maxWidth: 560,
+    ...shadow.card,
+  },
+  // iOS 는 lineHeight 가 있으면 글자가 잘린다 — 정해 두지 않는다
+  searchInput: { flex: 1, ...typography.body, lineHeight: undefined, color: colors.text, paddingVertical: 0 },
+  results: {
+    backgroundColor: colors.surface,
+    borderRadius: radius.lg,
+    paddingVertical: spacing.sm,
+    maxWidth: 560,
+    ...shadow.card,
+  },
+  resultHead: {
+    ...typography.tiny,
+    color: colors.textMuted,
+    fontWeight: '700',
+    paddingHorizontal: spacing.lg,
+    paddingTop: spacing.sm,
+    paddingBottom: 4,
+  },
+  resultRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.md, paddingHorizontal: spacing.lg, paddingVertical: spacing.sm },
+  resultIcon: { width: 34, height: 34, borderRadius: 10, alignItems: 'center', justifyContent: 'center' },
+  resultName: { ...typography.captionBold, color: colors.text },
+  resultSub: { ...typography.tiny, color: colors.textSub },
+  resultEmpty: { ...typography.caption, color: colors.textMuted, padding: spacing.lg },
+  resultSource: { ...typography.tiny, color: colors.textMuted, paddingHorizontal: spacing.lg, paddingTop: spacing.sm },
+  statusRow: { flexDirection: 'row' },
+  statusPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    backgroundColor: colors.surface,
+    borderRadius: 16,
+    paddingHorizontal: spacing.md,
+    paddingVertical: 6,
+    maxWidth: '100%',
+    ...shadow.card,
   },
   titlePill: {
     backgroundColor: colors.surface,

@@ -21,6 +21,7 @@ import { BarrierFreeSection } from './BarrierFreeSection';
 import { CultureEventsSection } from './CultureEventsSection';
 import { ParkingSection } from './ParkingSection';
 import { BusSection } from './BusSection';
+import { SubwaySection } from './SubwaySection';
 import { FEATURES } from '@/config/features';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
@@ -514,6 +515,7 @@ export const LibraryDetail = memo(function LibraryDetail({
                 <BarrierFreeSection libraryId={library.id} />
                 <ParkingSection libraryId={library.id} />
                 <BusSection coords={library.coords} />
+                <SubwaySection coords={library.coords} />
               </View>
             </View>
 
@@ -540,6 +542,7 @@ export const LibraryDetail = memo(function LibraryDetail({
           <ParkingSection libraryId={library.id} inset={gutter} />
           {/* 버스로 오는 사람 — 가까운 정류장과 실시간 도착 (서울은 서울시 버스정보, 나머지는 TAGO) */}
           <BusSection coords={library.coords} inset={gutter} />
+          <SubwaySection coords={library.coords} inset={gutter} />
           {mapSection(gutter)}
           {/* 운영 프로그램은 지도 아래 */}
           {programsSection(gutter)}

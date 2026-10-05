@@ -53,9 +53,11 @@ interface Props {
   padding?: { top: number; right: number; bottom: number; left: number };
   /** 사람이 손가락으로 지도를 끌었을 때 — 따라가기를 멈춘다 */
   onUserPan?: () => void;
+  /** 검색한 장소 — 기본 빨간 핀 하나 (도서관 핀과 헷갈리지 않게 모양을 다르게) */
+  spot?: (Coordinates & { name: string }) | null;
 }
 
-export const NearbyMap = forwardRef<NearbyMapHandle, Props>(function NearbyMap({ libraries, user, selectedId, onSelect, padding, onUserPan }, ref) {
+export const NearbyMap = forwardRef<NearbyMapHandle, Props>(function NearbyMap({ libraries, user, selectedId, onSelect, padding, onUserPan, spot }, ref) {
   const map = useRef<MapView>(null);
 
   /*
@@ -119,6 +121,10 @@ export const NearbyMap = forwardRef<NearbyMapHandle, Props>(function NearbyMap({
           </Marker>
         );
       })}
+
+      {spot ? (
+        <Marker coordinate={{ latitude: spot.lat, longitude: spot.lng }} title={spot.name} zIndex={900} />
+      ) : null}
 
       {user ? (
         <Marker
