@@ -14,6 +14,7 @@ import {
 } from '@/components/TabletNav';
 import { LayoutWidth, SIDEBAR_DOCK, navKind } from '@/hooks/useLayout';
 import { useNativeTabs } from '@/hooks/useNativeTabs';
+import { useQuickActions } from '@/hooks/useQuickActions';
 import { TopOverlayContext } from '@/hooks/useTopOverlay';
 import { useT } from '@/i18n';
 import { colors, themedStyles } from '@/theme';
@@ -63,6 +64,8 @@ const TAB_TRANSITION = {
 };
 
 export default function TabsLayout() {
+  // 앱 아이콘 길게 누르기 메뉴 — 메뉴 글자를 적고, 누르면 그 화면으로
+  useQuickActions();
   // 스위치를 바꾸면 내비게이터가 통째로 바뀐다. 그때 첫 탭(홈)으로 돌아간다.
   return useNativeTabs() ? <AppleTabs /> : <OurTabs />;
 }

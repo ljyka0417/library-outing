@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Animated, Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Mascot } from './Mascot';
+import { MODAL_ORIENTATIONS } from '@/hooks/useLayout';
 import { useT } from '@/i18n';
 import { colors, radius, shadow, spacing, typography, themedStyles } from '@/theme';
 
@@ -44,7 +45,7 @@ export function VisitPopup({ visible, fresh, libraryName, count, onClose }: Prop
   };
 
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose} statusBarTranslucent>
+    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose} statusBarTranslucent supportedOrientations={MODAL_ORIENTATIONS}>
       <Pressable style={styles.backdrop} onPress={onClose} accessibilityLabel={t('visit.close')}>
         <Animated.View style={[styles.card, cardStyle]} accessibilityRole="alert">
           <Animated.View style={mascotStyle}>

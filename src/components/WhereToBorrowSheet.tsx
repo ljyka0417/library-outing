@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, Image, Modal, Pressable, ScrollView, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+import { MODAL_ORIENTATIONS } from '@/hooks/useLayout';
 import { fetchRelated, fetchWhereToBorrow, type FoundBook, type LoanStatus } from '@/api/loanStatus';
 import { fetchBookInfo, type BookInfo } from '@/api/bookInfo';
 import { openWeb } from '@/utils/mapLinks';
@@ -172,7 +173,7 @@ export function WhereToBorrowSheet({
   );
 
   return (
-    <Modal visible transparent animationType="fade" onRequestClose={onClose}>
+    <Modal visible transparent animationType="fade" onRequestClose={onClose} supportedOrientations={MODAL_ORIENTATIONS}>
       <Pressable style={styles.backdrop} onPress={onClose}>
         {/* 판 높이는 화면 안까지 — 책 소개를 펼쳐도 닫기(X)가 위로 밀려 나가지 않게. 머리는 고정, 아래만 스크롤 */}
         <Pressable style={[styles.sheet, { maxHeight: winH - insets.top - 12 }]} onPress={() => {}}>

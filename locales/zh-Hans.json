@@ -1,0 +1,5 @@
+{
+  "ios": {
+    "NSLocationWhenInUseUsageDescription": "用于在地图上显示附近的图书馆。位置信息只在设备内使用，不会发送到任何地方。"
+  }
+}

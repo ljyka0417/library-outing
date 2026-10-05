@@ -1,0 +1,5 @@
+{
+  "ios": {
+    "NSLocationWhenInUseUsageDescription": "내 주변 지도에 가까운 도서관을 보여 드리려고 현재 위치를 사용해요. 위치는 기기 안에서만 쓰고 어디에도 보내지 않아요."
+  }
+}

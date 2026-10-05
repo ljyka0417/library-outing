@@ -40,7 +40,7 @@ export default function NearbyScreen() {
   const { t, lang } = useT();
   const layout = useLayout();
   const tabPad = useTabBarPadding();
-  const { width } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
   const insets = useSafeAreaInsets();
   // 태블릿 위쪽 탭바가 지도 위에 떠 있으면 그만큼 (애플 로고·법적 고지가 가리지 않게)
   const overTop = useTopOverlay();
@@ -295,7 +295,8 @@ export default function NearbyScreen() {
           {/* 보여 줄 게 있을 때만 — 한 글자일 때(장소는 두 글자부터) 빈 칸만 그려졌다 */}
           {searching && query.trim() && (libHits.length > 0 || places !== null) ? (
             <View style={[styles.results, layout.isTablet && styles.tabletPanel]}>
-              <ScrollView keyboardShouldPersistTaps="handled" style={{ maxHeight: 360 }}>
+              {/* 작은 아이폰(SE)에서는 360 이 키보드 밑까지 내려가 아래 결과를 누를 수 없었다 — 화면 높이의 40% 까지 */}
+              <ScrollView keyboardShouldPersistTaps="handled" style={{ maxHeight: Math.min(360, Math.round(height * 0.4)) }}>
                 {libHits.length ? <Text style={styles.resultHead}>{t('nearby.libraries')}</Text> : null}
                 {libHits.map((l) => {
                   const palette = categoryColors[l.categories[0]] ?? { bg: colors.surfaceAlt, fg: colors.textSub };

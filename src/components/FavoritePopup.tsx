@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { create } from 'zustand';
 import { Mascot } from './Mascot';
+import { MODAL_ORIENTATIONS } from '@/hooks/useLayout';
 import { MOCK_LIBRARIES } from '@/data/libraries.mock';
 import { useAppStore } from '@/store/useAppStore';
 import { useT } from '@/i18n';
@@ -83,7 +84,7 @@ export function FavoritePopupHost() {
   const cardStyle = { opacity: pop.interpolate({ inputRange: [0, 0.4, 1], outputRange: [0, 1, 1] }) };
 
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={hide} statusBarTranslucent>
+    <Modal visible={visible} transparent animationType="fade" onRequestClose={hide} statusBarTranslucent supportedOrientations={MODAL_ORIENTATIONS}>
       <Pressable style={styles.backdrop} onPress={hide} accessibilityLabel={t('visit.close')}>
         <Animated.View style={[styles.card, cardStyle]} accessibilityRole="alert">
           <View>

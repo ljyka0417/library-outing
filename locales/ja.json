@@ -1,0 +1,5 @@
+{
+  "ios": {
+    "NSLocationWhenInUseUsageDescription": "近くの図書館を地図に表示するために現在地を使います。位置情報は端末の中だけで使い、どこにも送りません。"
+  }
+}

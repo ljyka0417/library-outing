@@ -7,7 +7,7 @@ import { WhereToBorrowSheet } from './WhereToBorrowSheet';
 import { loanLookupEnabled } from '@/api/loanStatus';
 import { booksForRegion, regionsWithBooks } from '@/data/regionBooks';
 import { SIDO_LIST } from '@/data/categories';
-import { bleedRow, useLayout } from '@/hooks/useLayout';
+import { bleedRow, useLayout, MODAL_ORIENTATIONS } from '@/hooks/useLayout';
 import { regionName, useT } from '@/i18n';
 import { colors, radius, spacing, typography, themedStyles } from '@/theme';
 import type { Book } from '@/types';
@@ -100,7 +100,7 @@ export function RegionBooksShelf({
       />
 
       {/* 지역 고르기 — 아래에서 올라오는 판 */}
-      <Modal visible={picking} transparent animationType="fade" onRequestClose={() => setPicking(false)}>
+      <Modal visible={picking} transparent animationType="fade" onRequestClose={() => setPicking(false)} supportedOrientations={MODAL_ORIENTATIONS}>
         <Pressable style={styles.backdrop} onPress={() => setPicking(false)}>
           <Pressable style={styles.sheet} onPress={() => {}}>
             <Text style={styles.sheetTitle}>{t('home.regionPick')}</Text>

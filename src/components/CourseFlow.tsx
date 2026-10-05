@@ -214,6 +214,9 @@ export function CourseFlow({
       contentContainerStyle={[styles.content, { paddingTop: insetTop + spacing.md, paddingBottom: insetBottom + spacing.xxxl }]}
       showsVerticalScrollIndicator={false}
       keyboardShouldPersistTaps="handled"
+      // 도서관 찾기 칸에 치는 동안 아래 결과가 키보드에 가리지 않게(아이폰) — 끌면 키보드를 내린다
+      automaticallyAdjustKeyboardInsets
+      keyboardDismissMode="on-drag"
     >
       <View style={[centered(layout, true), { paddingHorizontal: layout.gutter, gap: spacing.lg }]}>
         {/* 단계 — 도서관 · 맛집 · 볼거리 (지난 단계는 눌러서 돌아간다) */}

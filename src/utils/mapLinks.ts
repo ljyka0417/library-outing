@@ -1,6 +1,8 @@
 import { Alert, Linking, Platform } from 'react-native';
 import Constants from 'expo-constants';
 import type { Coordinates } from '@/types';
+import { translate, type MessageKey } from '@/i18n';
+import { useAppStore } from '@/store/useAppStore';
 
 /**
  * 지도앱 딥링크 유틸.
@@ -49,10 +51,17 @@ const STORE_URLS: Record<MapProvider, { ios: string; android: string }> = {
   },
 };
 
-const PROVIDER_LABEL: Record<MapProvider, string> = {
-  naver: '네이버 지도',
-  kakao: '카카오맵',
+const PROVIDER_LABEL: Record<MapProvider, MessageKey> = {
+  naver: 'map.naver',
+  kakao: 'map.kakao',
 };
+
+/*
+ * 화면 밖(훅을 못 쓰는 곳)에서 띄우는 안내창 문구 — 지금 고른 언어로.
+ * 한국어로만 적혀 있어서 영어·일본어·중국어로 보는 사람에게도 한국어 창이 떴다.
+ */
+const tr = (key: MessageKey, vars?: Record<string, string | number>) =>
+  translate(useAppStore.getState().language, key, vars);
 
 /** 앱 스킴 URL 생성 */
 function buildAppUrl(provider: MapProvider, target: MapTarget): string {
@@ -89,18 +98,14 @@ function buildWebUrl(provider: MapProvider, target: MapTarget): string {
 
 /** 스토어로 보낼지 웹으로 볼지 사용자에게 묻는다. */
 function promptFallback(provider: MapProvider, webUrl: string) {
-  const label = PROVIDER_LABEL[provider];
+  const label = tr(PROVIDER_LABEL[provider]);
   const store = Platform.OS === 'ios' ? STORE_URLS[provider].ios : STORE_URLS[provider].android;
 
-  Alert.alert(
-    `${label} 앱이 없어요`,
-    `${label} 앱이 설치되어 있지 않은 것 같아요.\n웹으로 위치를 확인하거나, 앱을 설치할 수 있어요.`,
-    [
-      { text: '취소', style: 'cancel' },
-      { text: '웹으로 보기', onPress: () => void Linking.openURL(webUrl) },
-      { text: '설치하기', onPress: () => void Linking.openURL(store) },
-    ]
-  );
+  Alert.alert(tr('map.noAppTitle', { app: label }), tr('map.noAppBody', { app: label }), [
+    { text: tr('my.cancel'), style: 'cancel' },
+    { text: tr('map.viewWeb'), onPress: () => void Linking.openURL(webUrl) },
+    { text: tr('map.install'), onPress: () => void Linking.openURL(store) },
+  ]);
 }
 
 /**
@@ -177,7 +182,7 @@ export async function callPhone(phone: string) {
   try {
     await Linking.openURL(url);
   } catch {
-    Alert.alert('전화를 걸 수 없어요', phone);
+    Alert.alert(tr('map.callFail'), phone);
   }
 }
 
@@ -186,6 +191,6 @@ export async function openWeb(url: string) {
   try {
     await Linking.openURL(url);
   } catch {
-    Alert.alert('링크를 열 수 없어요', url);
+    Alert.alert(tr('map.linkFail'), url);
   }
 }

@@ -131,7 +131,7 @@ const HomeContent = memo(function HomeContent() {
             <WeatherCard
               coords={weatherSpot.coords!}
               place={weatherSpot.place}
-              onAction={(kind) => router.push(kind === 'nature' ? '/search?category=nature' : '/search?open=1')}
+              onAction={(kind) => router.push(kind === 'nature' ? '/search?category=nature' : kind === 'browse' ? '/search' : '/search?open=1')}
             />
           </View>
         ) : null}

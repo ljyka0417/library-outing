@@ -11,7 +11,7 @@ import {
   type CultureEventDetail,
 } from '@/api/culture';
 import { useAsync } from '@/hooks/useAsync';
-import { bleedRow, useLayout } from '@/hooks/useLayout';
+import { bleedRow, useLayout, MODAL_ORIENTATIONS } from '@/hooks/useLayout';
 import { useT, type Lang, type MessageKey } from '@/i18n';
 import { colors, radius, spacing, typography, themedStyles } from '@/theme';
 import { callPhone, openGoogleMap, openKakaoMap, openWeb } from '@/utils/mapLinks';
@@ -161,7 +161,7 @@ function EventSheet({ event, libraryName, onClose }: { event: CultureEvent | nul
     ) : null;
 
   return (
-    <Modal visible transparent animationType="fade" onRequestClose={onClose}>
+    <Modal visible transparent animationType="fade" onRequestClose={onClose} supportedOrientations={MODAL_ORIENTATIONS}>
       <Pressable style={styles.backdrop} onPress={onClose}>
         <Pressable style={styles.sheet} onPress={() => {}}>
           <View style={styles.head}>

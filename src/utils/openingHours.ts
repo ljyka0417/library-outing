@@ -4,6 +4,15 @@ import { holidayName } from '@/data/holidays';
 import { holidayText, libText } from '@/i18n/libraryText';
 
 /**
+ * 한국 시각으로 옮긴 Date — getHours()·getDay() 같은 값이 서울 벽시계 시각이 된다.
+ * 도서관은 모두 한국에 있으니 운영중·휴관 판정은 기기 시간대가 아니라 한국 시각으로 한다.
+ * (해외 시간대로 둔 폰에서 보면 한밤에 "운영중" 으로 나왔다. 한국 시간대 폰은 그대로다.)
+ */
+export function koreaTime(d: Date = new Date()): Date {
+  return new Date(d.getTime() + (d.getTimezoneOffset() + 540) * 60000);
+}
+
+/**
  * "지금 운영중" 판정.
  *
  * byDay 가 비어 있는(파싱 실패한) 도서관은 판정하지 않고 null 을 반환한다.
@@ -11,6 +20,7 @@ import { holidayText, libText } from '@/i18n/libraryText';
  */
 export function isOpenNow(hours: OperatingHours | undefined, now = new Date()): boolean | null {
   if (!hours?.byDay || hours.byDay.length !== 7) return null;
+  now = koreaTime(now);
 
   const today = todayRange(hours, now).range;
   if (!today) return false; // 휴관일
@@ -25,7 +35,7 @@ export function isOpenNow(hours: OperatingHours | undefined, now = new Date()): 
  */
 export function isClosedToday(hours: OperatingHours | undefined, now = new Date()): boolean | null {
   if (!hours?.byDay || hours.byDay.length !== 7) return null;
-  return todayRange(hours, now).range === null;
+  return todayRange(hours, koreaTime(now)).range === null;
 }
 
 /**
@@ -62,7 +72,7 @@ export function todayHoursLabel(
 ): string {
   if (!hours) return translate(lang, 'hours.unknown');
   if (!hours.byDay || hours.byDay.length !== 7) return libText(hours.label, lang);
-  const { range: today, holiday } = todayRange(hours, now);
+  const { range: today, holiday } = todayRange(hours, koreaTime(now));
   if (!today) {
     return holiday ? translate(lang, 'hours.closedHoliday', { name: holidayText(holiday, lang) }) : translate(lang, 'hours.closedToday');
   }

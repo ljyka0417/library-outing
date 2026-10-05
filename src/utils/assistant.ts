@@ -2,7 +2,7 @@ import { CATEGORIES, SIDO_LIST } from '@/data/categories';
 import { LIBRARY_COUNT, LIBRARY_HOURS_COUNT, MOCK_LIBRARIES } from '@/data/libraries.mock';
 import { booksForLibrary } from '@/data/books.mock';
 import { nearbyApi } from '@/api/nearbyApi';
-import { formatDistance, isClosedToday, isOpenNow, todayHoursLabel, walkingMinutes } from './openingHours';
+import { formatDistance, isClosedToday, isOpenNow, koreaTime, todayHoursLabel, walkingMinutes } from './openingHours';
 import { parkingFor } from '@/data/parking';
 import { fetchNearbyEvents, isOngoing } from '@/api/culture';
 import { AGE_KEYS, booksForAge, keywordItems, keywordMonth, type AgeKey, type GenderKey } from '@/data/trendBooks';
@@ -381,7 +381,9 @@ async function answerAboutLibrary(
     const events = await fetchNearbyEvents(lib.coords);
     if (!events) return { text: tr('bot.eventsFailed'), libraries: cards };
     if (events.length === 0) return { text: tr('bot.eventsNone', who), libraries: cards, suggestions: more('events') };
-    const today = new Date().toISOString().slice(0, 10);
+    // toISOString 은 세계 표준시라 한국 0~9시에는 어제 날짜가 됐다 — 한국 날짜로
+    const k = koreaTime();
+    const today = `${k.getFullYear()}-${String(k.getMonth() + 1).padStart(2, '0')}-${String(k.getDate()).padStart(2, '0')}`;
     const md = (d?: string) => (d ? `${Number(d.slice(5, 7))}.${Number(d.slice(8, 10))}` : '');
     return {
       text: tr('bot.eventsFound', { ...who, n: events.length }),
@@ -577,13 +579,12 @@ function answerBrowse(
       openOnly && someHoursMissing
         ? tr('bot.browseNoneOpen', { total: LIBRARY_COUNT, known: LIBRARY_HOURS_COUNT })
         : '';
+    // 문 연 곳만 찾다 없으면 — 밤이나 휴관일이다. "도서관은 찾지 못했어요" 만으로는 고장 난 것처럼 보였다
     return {
-      text: tr('bot.browseNone', { label, labelTopic: josa(label, '은는') }) + reason,
-      suggestions: browseFollowUps(ctx, () => [
-        tr('bot.sugKids'),
-        tr('bot.sugSeoul'),
-        tr('bot.sugOpen'),
-      ]),
+      text: (openOnly ? tr('bot.browseNoneOpenNow', { label }) : tr('bot.browseNone', { label, labelTopic: josa(label, '은는') })) + reason,
+      suggestions: browseFollowUps(ctx, () =>
+        openOnly ? [tr('bot.sugKids'), tr('bot.sugSeoul')] : [tr('bot.sugKids'), tr('bot.sugSeoul'), tr('bot.sugOpen')]
+      ),
     };
   }
 
@@ -762,7 +763,7 @@ async function answerBorrow(q: string, lang: Lang): Promise<Answer> {
   if (title.replace(/\s/g, '').length < 2) return { text: tr('bot.borrowNeedTitle') };
 
   if (libScoped && !libScoped.sourceApiId) {
-    return { text: tr('bot.borrowLibUnsupported', { nameTopic: josa(libScoped.name, '은는') }), libraries: [libScoped] };
+    return { text: tr('bot.borrowLibUnsupported', { name: libScoped.name, nameTopic: josa(libScoped.name, '은는') }), libraries: [libScoped] };
   }
 
   /*
@@ -1042,7 +1043,7 @@ async function answerQuestion(
   // "지금 몇 시야?" — 지금 시각 + 오늘이 공휴일이면 그 이름 + 지금 문 연 도서관 수
   if (ASK_TIME.test(text) && !/도서관|librar|図書館|图书馆/.test(text)) {
     const now = new Date();
-    const holiday = holidayName(now);
+    const holiday = holidayName(koreaTime(now));
     const openCount = MOCK_LIBRARIES.filter((l) => isOpenNow(l.hours, now) === true).length;
     return {
       text:
@@ -1162,7 +1163,7 @@ async function answerQuestion(
     const lib = findLibrary(q);
     if (lib) {
       const info = barrierFreeFor(lib.id);
-      if (!info) return { text: tr('bot.bfUnknownLib', { nameTopic: josa(lib.name, '은는') }), libraries: [lib] };
+      if (!info) return { text: tr('bot.bfUnknownLib', { name: lib.name, nameTopic: josa(lib.name, '은는') }), libraries: [lib] };
       const lines = BF_GROUPS[want].filter((f) => info[f]).map((f) => `· ${tr(`bf.f.${f}` as MessageKey)}: ${info[f]}`);
       return {
         text: lines.length

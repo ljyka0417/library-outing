@@ -145,6 +145,10 @@ export function BookSearchPane() {
           data={books}
           keyExtractor={(b) => b.isbns[0]}
           keyboardShouldPersistTaps="handled"
+          /* 키보드가 올라와도 목록 끝까지 올려 볼 수 있게(아이폰), 목록을 끌면 키보드를 내린다.
+             그대로 두면 아래쪽 결과가 키보드 밑에 깔려 누를 수 없었다 */
+          automaticallyAdjustKeyboardInsets
+          keyboardDismissMode="on-drag"
           showsVerticalScrollIndicator={false}
           contentContainerStyle={[styles.list, { paddingHorizontal: layout.gutter, paddingBottom: tabPad }]}
           ListEmptyComponent={<EmptyState title={t('search.emptyTitle')} description={t('bookSearch.empty')} />}

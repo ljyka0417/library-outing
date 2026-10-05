@@ -9,7 +9,8 @@ import { BookSearchPane } from '@/components/BookSearchPane';
 import { loanLookupEnabled } from '@/api/loanStatus';
 import { Chip, ChipRow, EmptyState } from '@/components/common';
 import { CATEGORIES, CATEGORY_MAP, SIDO_LIST } from '@/data/categories';
-import { regionName, useT } from '@/i18n';
+import { regionName, useT, type MessageKey } from '@/i18n';
+import { libText } from '@/i18n/libraryText';
 import { libraryApi } from '@/api/libraryApi';
 import { useAsync } from '@/hooks/useAsync';
 import { useAppStore } from '@/store/useAppStore';
@@ -35,7 +36,7 @@ export default function SearchScreen() {
   const router = useRouter();
   const params = useLocalSearchParams<{ category?: string; open?: string }>();
   const layout = useLayout();
-  const { t } = useT();
+  const { t, lang } = useT();
 
   const [keyword, setKeyword] = useState('');
   const [category, setCategory] = useState<CategoryId | undefined>(
@@ -91,21 +92,39 @@ export default function SearchScreen() {
   const results = useMemo(() => {
     const list = data ?? [];
     const q = keyword.trim().toLowerCase();
-    return list.filter((lib) => {
-      if (category && !lib.categories.includes(category)) return false;
-      if (sido && lib.region.sido !== sido) return false;
-      if (q) {
-        const hay = [lib.name, lib.address, lib.specialty, lib.region.sido]
-          .filter(Boolean)
-          .join(' ')
-          .toLowerCase();
-        if (!hay.includes(q)) return false;
-      }
-      // 운영시간을 모르는 곳은 "운영중" 필터에서 빠진다 (isOpenNow 가 null).
-      if (openNow && isOpenNow(lib.hours, now) !== true) return false;
-      return true;
-    });
-  }, [data, keyword, category, sido, openNow, now]);
+    /*
+     * 검색어가 있으면 가까운 것부터 — 이름 > 지역 > 주제 > 주소.
+     * 걸러내기만 하면 "대구" 에 주소가 「해운대구」인 부산 도서관이 대구도서관보다 먼저 나왔다.
+     * 영어·일본어·중국어로 보는 사람도 찾을 수 있게 그 말로 옮긴 이름·지역·주제도 본다.
+     * 영어 이름("Daegu", "Seoul Library")은 어느 화면 언어에서든 찾힌다 — 한국어 화면으로 둔 외국인도 있다.
+     */
+    const langs = lang === 'en' ? (['en'] as const) : ([lang, 'en'] as const);
+    const rank = (lib: Library): number => {
+      if (!q) return 0;
+      const has = (...xs: (string | undefined)[]) => xs.some((x) => x?.toLowerCase().includes(q));
+      const names = [lib.name, ...langs.map((l) => libText(lib.name, l))].map((n) => n.toLowerCase());
+      if (names.some((n) => n.startsWith(q))) return 1;
+      if (names.some((n) => n.includes(q))) return 2;
+      if (has(lib.region.sido, ...langs.map((l) => regionName(l, lib.region.sido)))) return 3;
+      if (has(lib.region.sigungu, ...langs.map((l) => libText(lib.region.sigungu, l)))) return 4;
+      const cats = lib.categories.map((c) => t(`cat.${c}` as MessageKey));
+      if (has(...cats, ...lib.categories.map((c) => CATEGORY_MAP[c]?.name), lib.specialty)) return 5;
+      if (has(lib.address)) return 6;
+      return -1;
+    };
+    return list
+      .filter((lib) => {
+        if (category && !lib.categories.includes(category)) return false;
+        if (sido && lib.region.sido !== sido) return false;
+        // 운영시간을 모르는 곳은 "운영중" 필터에서 빠진다 (isOpenNow 가 null).
+        if (openNow && isOpenNow(lib.hours, now) !== true) return false;
+        return true;
+      })
+      .map((lib) => ({ lib, r: rank(lib) }))
+      .filter((x) => x.r >= 0)
+      .sort((a, b) => a.r - b.r) // 같은 칸끼리는 원래 차례 그대로 (sort 는 안정 정렬)
+      .map((x) => x.lib);
+  }, [data, keyword, category, sido, openNow, now, lang, t]);
 
   /*
    * 오른쪽 칸에 띄울 도서관.
@@ -357,6 +376,10 @@ const ResultsPane = memo(function ResultsPane({
           ]}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
+          /* 키보드가 올라와도 목록 끝까지 올려 볼 수 있게(아이폰), 목록을 끌면 키보드를 내린다.
+             그대로 두면 아래쪽 결과가 키보드 밑에 깔려 누를 수 없었다 */
+          automaticallyAdjustKeyboardInsets
+          keyboardDismissMode="on-drag"
           ListEmptyComponent={
             <EmptyState title={t('search.emptyTitle')} description={t('search.emptyBody')} />
           }

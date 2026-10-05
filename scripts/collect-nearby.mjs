@@ -52,9 +52,15 @@ for (const file of ['libraries.geocoded.json', 'libraries.enriched.json', 'libra
 }
 
 const seeds = readSeeds();
+/*
+ * --only=id1,id2 — 그 도서관들만 새로 모아 기존 파일에 끼워 넣는다(나머지는 그대로).
+ * 좌표를 나중에 채운 곳만 보탤 때 쓴다. 전체를 다시 돌리면 다른 도서관 가게 목록까지 바뀐다.
+ */
+const ONLY = (process.argv.find((a) => a.startsWith('--only=')) ?? '').slice(7).split(',').filter(Boolean);
 const targets = seeds
   .map((s) => ({ ...s, coords: merged[s.id]?.coords }))
-  .filter((s) => s.coords);
+  .filter((s) => s.coords)
+  .filter((s) => !ONLY.length || ONLY.includes(s.id));
 
 if (targets.length === 0) {
   console.error(`
@@ -133,13 +139,16 @@ for (let i = 0; i < targets.length; i++) {
 process.stdout.write('\n\n');
 
 /* ── 저장 ─────────────────────────────────────────────────── */
-const byLibrary = {};
+const OUT = path.join(ROOT, 'src/data/nearby.generated.json');
+const previous = ONLY.length && fs.existsSync(OUT) ? JSON.parse(fs.readFileSync(OUT, 'utf8')) : null;
+const byLibrary = previous ? { ...previous.byLibrary } : {};
+for (const id of ONLY) delete byLibrary[id];
 for (const p of places) {
   (byLibrary[p.libraryId] ??= []).push(p);
 }
 
 fs.writeFileSync(
-  path.join(ROOT, 'src/data/nearby.generated.json'),
+  OUT,
   JSON.stringify(
     {
       _readme: [
@@ -148,7 +157,8 @@ fs.writeFileSync(
         `수집 조건: 반경 ${RADIUS}m, 종류별 최대 ${PER_TYPE}곳, 거리순`,
         '가게는 바뀝니다. 앱 업데이트 전에 다시 돌리세요.',
       ],
-      _generatedAt: new Date().toISOString(),
+      _generatedAt: previous?._generatedAt ?? new Date().toISOString(),
+      ...(previous ? { _addedAt: { ...previous._addedAt, [ONLY.join(',')]: new Date().toISOString() } } : {}),
       _radiusMeters: RADIUS,
       byLibrary,
     },
@@ -168,7 +178,7 @@ const emptyLibs = targets.filter((t) => !byLibrary[t.id]?.length);
 console.log('─'.repeat(52));
 console.log(`API 호출 ${requests}회 → 장소 ${places.length}곳 수집`);
 for (const c of counts) console.log(`  ${c.label.padEnd(6)} ${c.n}곳`);
-console.log(`\n주변 정보가 있는 도서관 ${Object.keys(byLibrary).length} / ${targets.length}곳`);
+console.log(`\n주변 정보가 있는 도서관 ${targets.filter((t) => byLibrary[t.id]?.length).length} / ${targets.length}곳`);
 if (emptyLibs.length > 0) {
   console.log(`주변에 아무것도 없던 곳 ${emptyLibs.length}곳 (외곽 지역일 수 있습니다):`);
   for (const l of emptyLibs.slice(0, 10)) console.log(`  ${l.name} (${l.sido})`);

@@ -6,6 +6,9 @@
     "가게는 바뀝니다. 앱 업데이트 전에 다시 돌리세요."
   ],
   "_generatedAt": "2026-09-25T03:42:06.716Z",
+  "_addedAt": {
+    "nongshim-food,mangsang-beach,feb28-library,wagle-kids": "2026-10-05T14:19:33.252Z"
+  },
   "_radiusMeters": 1200,
   "byLibrary": {
     "seoul-library": [
@@ -26680,6 +26683,854 @@
         },
         "distanceMeters": 639,
         "placeUrl": "http://place.map.kakao.com/24054531"
+      }
+    ],
+    "nongshim-food": [
+      {
+        "id": "nongshim-food-restaurant-0",
+        "libraryId": "nongshim-food",
+        "type": "restaurant",
+        "name": "개성손만두 보라매농심점",
+        "subCategory": "분식",
+        "address": "서울 영등포구 여의대방로 101",
+        "coords": {
+          "lat": 37.4976998699216,
+          "lng": 126.917967312183
+        },
+        "distanceMeters": 96,
+        "placeUrl": "http://place.map.kakao.com/670903042"
+      },
+      {
+        "id": "nongshim-food-restaurant-1",
+        "libraryId": "nongshim-food",
+        "type": "restaurant",
+        "name": "천이오겹살 보라매점",
+        "subCategory": "삼겹살",
+        "address": "서울 영등포구 여의대방로 105",
+        "coords": {
+          "lat": 37.497729683929684,
+          "lng": 126.91808375832255
+        },
+        "distanceMeters": 99,
+        "placeUrl": "http://place.map.kakao.com/1226914187"
+      },
+      {
+        "id": "nongshim-food-restaurant-2",
+        "libraryId": "nongshim-food",
+        "type": "restaurant",
+        "name": "참치투어",
+        "subCategory": "참치회",
+        "address": "서울 영등포구 여의대방로 105",
+        "coords": {
+          "lat": 37.4977612457788,
+          "lng": 126.91812217316
+        },
+        "distanceMeters": 102,
+        "placeUrl": "http://place.map.kakao.com/405240740"
+      },
+      {
+        "id": "nongshim-food-restaurant-3",
+        "libraryId": "nongshim-food",
+        "type": "restaurant",
+        "name": "두부사랑",
+        "subCategory": "두부전문점",
+        "address": "서울 영등포구 여의대방로 95",
+        "coords": {
+          "lat": 37.4976470394308,
+          "lng": 126.917147496167
+        },
+        "distanceMeters": 123,
+        "placeUrl": "http://place.map.kakao.com/1460840237"
+      },
+      {
+        "id": "nongshim-food-restaurant-4",
+        "libraryId": "nongshim-food",
+        "type": "restaurant",
+        "name": "남도향",
+        "subCategory": "한식",
+        "address": "서울 영등포구 여의대방로 93-1",
+        "coords": {
+          "lat": 37.4975189894814,
+          "lng": 126.916994971741
+        },
+        "distanceMeters": 123,
+        "placeUrl": "http://place.map.kakao.com/1660624628"
+      },
+      {
+        "id": "nongshim-food-restaurant-5",
+        "libraryId": "nongshim-food",
+        "type": "restaurant",
+        "name": "명품청기와감자탕 보라매점",
+        "subCategory": "음식점",
+        "address": "서울 영등포구 여의대방로 93",
+        "coords": {
+          "lat": 37.4975288210243,
+          "lng": 126.916881874996
+        },
+        "distanceMeters": 132,
+        "placeUrl": "http://place.map.kakao.com/1618608948"
+      },
+      {
+        "id": "nongshim-food-cafe-0",
+        "libraryId": "nongshim-food",
+        "type": "cafe",
+        "name": "카페107바이HT",
+        "subCategory": "카페",
+        "address": "서울 영등포구 여의대방로 107",
+        "coords": {
+          "lat": 37.4977489045752,
+          "lng": 126.918516857461
+        },
+        "distanceMeters": 108,
+        "placeUrl": "http://place.map.kakao.com/296525989"
+      },
+      {
+        "id": "nongshim-food-cafe-1",
+        "libraryId": "nongshim-food",
+        "type": "cafe",
+        "name": "지유명차 보라매점",
+        "subCategory": "전통찻집",
+        "address": "서울 영등포구 여의대방로 93-1",
+        "coords": {
+          "lat": 37.4975189894814,
+          "lng": 126.916994971741
+        },
+        "distanceMeters": 123,
+        "placeUrl": "http://place.map.kakao.com/1233440143"
+      },
+      {
+        "id": "nongshim-food-cafe-2",
+        "libraryId": "nongshim-food",
+        "type": "cafe",
+        "name": "엔카페",
+        "subCategory": "카페",
+        "address": "서울 동작구 여의대방로 112",
+        "coords": {
+          "lat": 37.4972530471056,
+          "lng": 126.919387023336
+        },
+        "distanceMeters": 123,
+        "placeUrl": "http://place.map.kakao.com/884995066"
+      },
+      {
+        "id": "nongshim-food-cafe-3",
+        "libraryId": "nongshim-food",
+        "type": "cafe",
+        "name": "이디야커피 보라매공원점",
+        "subCategory": "이디야커피",
+        "address": "서울 동작구 여의대방로 90",
+        "coords": {
+          "lat": 37.4968087613987,
+          "lng": 126.916661026894
+        },
+        "distanceMeters": 126,
+        "placeUrl": "http://place.map.kakao.com/18855925"
+      },
+      {
+        "id": "nongshim-food-cafe-4",
+        "libraryId": "nongshim-food",
+        "type": "cafe",
+        "name": "매머드익스프레스 보라매초교점",
+        "subCategory": "매머드익스프레스",
+        "address": "서울 동작구 여의대방로 88",
+        "coords": {
+          "lat": 37.4967762397662,
+          "lng": 126.916540062375
+        },
+        "distanceMeters": 137,
+        "placeUrl": "http://place.map.kakao.com/732974100"
+      },
+      {
+        "id": "nongshim-food-cafe-5",
+        "libraryId": "nongshim-food",
+        "type": "cafe",
+        "name": "라온",
+        "subCategory": "카페",
+        "address": "서울 영등포구 여의대방로19길 4-1",
+        "coords": {
+          "lat": 37.4979516688565,
+          "lng": 126.917274947352
+        },
+        "distanceMeters": 143,
+        "placeUrl": "http://place.map.kakao.com/14516198"
+      },
+      {
+        "id": "nongshim-food-culture-0",
+        "libraryId": "nongshim-food",
+        "type": "culture",
+        "name": "농심 식문화연구",
+        "subCategory": "문화원",
+        "address": "서울 동작구 여의대방로 112",
+        "coords": {
+          "lat": 37.496604840721,
+          "lng": 126.918827951967
+        },
+        "distanceMeters": 69,
+        "placeUrl": "http://place.map.kakao.com/11539152"
+      },
+      {
+        "id": "nongshim-food-culture-1",
+        "libraryId": "nongshim-food",
+        "type": "culture",
+        "name": "시립보라매청소년센터 다이나믹홀",
+        "subCategory": "공연장,연극극장",
+        "address": "서울 동작구 여의대방로20길 61",
+        "coords": {
+          "lat": 37.493874995836705,
+          "lng": 126.92180378902933
+        },
+        "distanceMeters": 464,
+        "placeUrl": "http://place.map.kakao.com/17558231"
+      },
+      {
+        "id": "nongshim-food-culture-2",
+        "libraryId": "nongshim-food",
+        "type": "culture",
+        "name": "아트마트",
+        "subCategory": "전시관",
+        "address": "서울 동작구 여의대방로24길 65",
+        "coords": {
+          "lat": 37.498493137413,
+          "lng": 126.923923884482
+        },
+        "distanceMeters": 547,
+        "placeUrl": "http://place.map.kakao.com/1697613523"
+      }
+    ],
+    "mangsang-beach": [
+      {
+        "id": "mangsang-beach-restaurant-0",
+        "libraryId": "mangsang-beach",
+        "type": "restaurant",
+        "name": "소르르",
+        "subCategory": "한식",
+        "address": "강원특별자치도 동해시 망상길 42",
+        "coords": {
+          "lat": 37.5909171285503,
+          "lng": 129.08926591148
+        },
+        "distanceMeters": 37,
+        "placeUrl": "http://place.map.kakao.com/2044930327"
+      },
+      {
+        "id": "mangsang-beach-restaurant-1",
+        "libraryId": "mangsang-beach",
+        "type": "restaurant",
+        "name": "빵명장 망상해수욕장점",
+        "subCategory": "제과,베이커리",
+        "address": "강원특별자치도 동해시 동해대로 6270-13",
+        "coords": {
+          "lat": 37.5928417778155,
+          "lng": 129.08959597346
+        },
+        "distanceMeters": 178,
+        "placeUrl": "http://place.map.kakao.com/2083212588"
+      },
+      {
+        "id": "mangsang-beach-restaurant-2",
+        "libraryId": "mangsang-beach",
+        "type": "restaurant",
+        "name": "페리카나 망상점",
+        "subCategory": "페리카나",
+        "address": "강원특별자치도 동해시 동해대로 6270-20",
+        "coords": {
+          "lat": 37.59279387034551,
+          "lng": 129.09041880541332
+        },
+        "distanceMeters": 194,
+        "placeUrl": "http://place.map.kakao.com/9503274"
+      },
+      {
+        "id": "mangsang-beach-restaurant-3",
+        "libraryId": "mangsang-beach",
+        "type": "restaurant",
+        "name": "피아노",
+        "subCategory": "이탈리안",
+        "address": "강원특별자치도 동해시 동해대로 6270-18",
+        "coords": {
+          "lat": 37.59261343803302,
+          "lng": 129.09078961400553
+        },
+        "distanceMeters": 196,
+        "placeUrl": "http://place.map.kakao.com/16627709"
+      },
+      {
+        "id": "mangsang-beach-restaurant-4",
+        "libraryId": "mangsang-beach",
+        "type": "restaurant",
+        "name": "잉걸",
+        "subCategory": "양식",
+        "address": "강원특별자치도 동해시 동해대로 6270-18",
+        "coords": {
+          "lat": 37.59260403307093,
+          "lng": 129.09081199280294
+        },
+        "distanceMeters": 196,
+        "placeUrl": "http://place.map.kakao.com/225543136"
+      },
+      {
+        "id": "mangsang-beach-restaurant-5",
+        "libraryId": "mangsang-beach",
+        "type": "restaurant",
+        "name": "돼지네",
+        "subCategory": "삼겹살",
+        "address": "강원특별자치도 동해시 동해대로 6270-20",
+        "coords": {
+          "lat": 37.5927412210448,
+          "lng": 129.090593940248
+        },
+        "distanceMeters": 197,
+        "placeUrl": "http://place.map.kakao.com/1426900364"
+      },
+      {
+        "id": "mangsang-beach-cafe-0",
+        "libraryId": "mangsang-beach",
+        "type": "cafe",
+        "name": "공방카페마들렌",
+        "subCategory": "카페",
+        "address": "강원특별자치도 동해시 동해대로 6267",
+        "coords": {
+          "lat": 37.591475400023455,
+          "lng": 129.0889237858545
+        },
+        "distanceMeters": 49,
+        "placeUrl": "http://place.map.kakao.com/26774311"
+      },
+      {
+        "id": "mangsang-beach-cafe-1",
+        "libraryId": "mangsang-beach",
+        "type": "cafe",
+        "name": "망상향커피",
+        "subCategory": "카페",
+        "address": "강원특별자치도 동해시 동해대로 6270-20",
+        "coords": {
+          "lat": 37.59274786839415,
+          "lng": 129.0904729911979
+        },
+        "distanceMeters": 192,
+        "placeUrl": "http://place.map.kakao.com/1754612916"
+      },
+      {
+        "id": "mangsang-beach-cafe-2",
+        "libraryId": "mangsang-beach",
+        "type": "cafe",
+        "name": "지구인커피",
+        "subCategory": "커피전문점",
+        "address": "강원특별자치도 동해시 동해대로 6270-16",
+        "coords": {
+          "lat": 37.592373921898975,
+          "lng": 129.09108857676352
+        },
+        "distanceMeters": 195,
+        "placeUrl": "http://place.map.kakao.com/2087188381"
+      },
+      {
+        "id": "mangsang-beach-cafe-3",
+        "libraryId": "mangsang-beach",
+        "type": "cafe",
+        "name": "메가MGC커피 동해망상해변점",
+        "subCategory": "메가MGC커피",
+        "address": "강원특별자치도 동해시 동해대로 6270-18",
+        "coords": {
+          "lat": 37.59268607084451,
+          "lng": 129.09075768380808
+        },
+        "distanceMeters": 200,
+        "placeUrl": "http://place.map.kakao.com/1297570346"
+      },
+      {
+        "id": "mangsang-beach-cafe-4",
+        "libraryId": "mangsang-beach",
+        "type": "cafe",
+        "name": "빙스퐁 망상점",
+        "subCategory": "카페",
+        "address": "강원특별자치도 동해시 동해대로 6270-27",
+        "coords": {
+          "lat": 37.59342903619046,
+          "lng": 129.08949918957964
+        },
+        "distanceMeters": 243,
+        "placeUrl": "http://place.map.kakao.com/24998073"
+      },
+      {
+        "id": "mangsang-beach-cafe-5",
+        "libraryId": "mangsang-beach",
+        "type": "cafe",
+        "name": "A&A 본점",
+        "subCategory": "카페",
+        "address": "강원특별자치도 동해시 동해대로 6270-27",
+        "coords": {
+          "lat": 37.5934460434188,
+          "lng": 129.089505325881
+        },
+        "distanceMeters": 245,
+        "placeUrl": "http://place.map.kakao.com/482160642"
+      },
+      {
+        "id": "mangsang-beach-culture-0",
+        "libraryId": "mangsang-beach",
+        "type": "culture",
+        "name": "망상미술관 제2전시관",
+        "subCategory": "전시관",
+        "address": "강원특별자치도 동해시 동해대로 6281",
+        "coords": {
+          "lat": 37.5919348656727,
+          "lng": 129.087343780612
+        },
+        "distanceMeters": 197,
+        "placeUrl": "http://place.map.kakao.com/1387332359"
+      },
+      {
+        "id": "mangsang-beach-culture-1",
+        "libraryId": "mangsang-beach",
+        "type": "culture",
+        "name": "동해산업기술센터",
+        "subCategory": "전시관",
+        "address": "강원특별자치도 동해시 동해대로 6270-53",
+        "coords": {
+          "lat": 37.5947493390963,
+          "lng": 129.086463509375
+        },
+        "distanceMeters": 468,
+        "placeUrl": "http://place.map.kakao.com/26109215"
+      },
+      {
+        "id": "mangsang-beach-culture-2",
+        "libraryId": "mangsang-beach",
+        "type": "culture",
+        "name": "망상컨벤션센터",
+        "subCategory": "전시관",
+        "address": "강원특별자치도 동해시 동해대로 6314",
+        "coords": {
+          "lat": 37.59594697401729,
+          "lng": 129.0846560826378
+        },
+        "distanceMeters": 670,
+        "placeUrl": "http://place.map.kakao.com/7867298"
+      }
+    ],
+    "feb28-library": [
+      {
+        "id": "feb28-library-restaurant-0",
+        "libraryId": "feb28-library",
+        "type": "restaurant",
+        "name": "스플쌤 스윗플라워떡케이크",
+        "subCategory": "떡,한과",
+        "address": "대구 중구 2.28길 7",
+        "coords": {
+          "lat": 35.8583983872896,
+          "lng": 128.59075335783533
+        },
+        "distanceMeters": 41,
+        "placeUrl": "http://place.map.kakao.com/1632638020"
+      },
+      {
+        "id": "feb28-library-restaurant-1",
+        "libraryId": "feb28-library",
+        "type": "restaurant",
+        "name": "맛난빵달달할인마트 명덕역점",
+        "subCategory": "제과,베이커리",
+        "address": "대구 중구 명덕로 지하 185",
+        "coords": {
+          "lat": 35.8579524645902,
+          "lng": 128.591150707242
+        },
+        "distanceMeters": 84,
+        "placeUrl": "http://place.map.kakao.com/2106311047"
+      },
+      {
+        "id": "feb28-library-restaurant-2",
+        "libraryId": "feb28-library",
+        "type": "restaurant",
+        "name": "주주뱅크 명덕점",
+        "subCategory": "호프,요리주점",
+        "address": "대구 중구 중앙대로 269",
+        "coords": {
+          "lat": 35.8575144372621,
+          "lng": 128.59061171288
+        },
+        "distanceMeters": 90,
+        "placeUrl": "http://place.map.kakao.com/12996650"
+      },
+      {
+        "id": "feb28-library-restaurant-3",
+        "libraryId": "feb28-library",
+        "type": "restaurant",
+        "name": "한솥도시락 명덕네거리점",
+        "subCategory": "한솥도시락",
+        "address": "대구 중구 중앙대로 269",
+        "coords": {
+          "lat": 35.8574964191234,
+          "lng": 128.590611352854
+        },
+        "distanceMeters": 92,
+        "placeUrl": "http://place.map.kakao.com/17820177"
+      },
+      {
+        "id": "feb28-library-restaurant-4",
+        "libraryId": "feb28-library",
+        "type": "restaurant",
+        "name": "뮤즈치킨",
+        "subCategory": "치킨",
+        "address": "대구 중구 중앙대로 280",
+        "coords": {
+          "lat": 35.8580896324658,
+          "lng": 128.591544212508
+        },
+        "distanceMeters": 113,
+        "placeUrl": "http://place.map.kakao.com/17082824"
+      },
+      {
+        "id": "feb28-library-restaurant-5",
+        "libraryId": "feb28-library",
+        "type": "restaurant",
+        "name": "와플칸 남산점",
+        "subCategory": "와플칸",
+        "address": "대구 중구 중앙대로 282",
+        "coords": {
+          "lat": 35.85832230737828,
+          "lng": 128.59159867869323
+        },
+        "distanceMeters": 115,
+        "placeUrl": "http://place.map.kakao.com/1343227168"
+      },
+      {
+        "id": "feb28-library-cafe-0",
+        "libraryId": "feb28-library",
+        "type": "cafe",
+        "name": "카페 271",
+        "subCategory": "카페",
+        "address": "대구 중구 중앙대로 271",
+        "coords": {
+          "lat": 35.8576738901087,
+          "lng": 128.590683531295
+        },
+        "distanceMeters": 76,
+        "placeUrl": "http://place.map.kakao.com/1655656491"
+      },
+      {
+        "id": "feb28-library-cafe-1",
+        "libraryId": "feb28-library",
+        "type": "cafe",
+        "name": "메이커피",
+        "subCategory": "카페",
+        "address": "대구 중구 중앙대로 267",
+        "coords": {
+          "lat": 35.8574455883772,
+          "lng": 128.590366803817
+        },
+        "distanceMeters": 94,
+        "placeUrl": "http://place.map.kakao.com/946635772"
+      },
+      {
+        "id": "feb28-library-cafe-2",
+        "libraryId": "feb28-library",
+        "type": "cafe",
+        "name": "백암다례원 부설 다휴",
+        "subCategory": "카페",
+        "address": "대구 중구 중앙대로 289-24",
+        "coords": {
+          "lat": 35.85963281444189,
+          "lng": 128.59042378695935
+        },
+        "distanceMeters": 148,
+        "placeUrl": "http://place.map.kakao.com/1243256394"
+      },
+      {
+        "id": "feb28-library-cafe-3",
+        "libraryId": "feb28-library",
+        "type": "cafe",
+        "name": "카페봄봄 명덕점",
+        "subCategory": "카페봄봄",
+        "address": "대구 중구 중앙대로 291",
+        "coords": {
+          "lat": 35.8592438630092,
+          "lng": 128.591486479594
+        },
+        "distanceMeters": 149,
+        "placeUrl": "http://place.map.kakao.com/1721579883"
+      },
+      {
+        "id": "feb28-library-cafe-4",
+        "libraryId": "feb28-library",
+        "type": "cafe",
+        "name": "차휴",
+        "subCategory": "전통찻집",
+        "address": "대구 중구 중앙대로 289-24",
+        "coords": {
+          "lat": 35.8596372017493,
+          "lng": 128.590432730623
+        },
+        "distanceMeters": 149,
+        "placeUrl": "http://place.map.kakao.com/2132824167"
+      },
+      {
+        "id": "feb28-library-cafe-5",
+        "libraryId": "feb28-library",
+        "type": "cafe",
+        "name": "차당",
+        "subCategory": "카페",
+        "address": "대구 중구 중앙대로58길 15",
+        "coords": {
+          "lat": 35.8574818876798,
+          "lng": 128.591980384692
+        },
+        "distanceMeters": 175,
+        "placeUrl": "http://place.map.kakao.com/381365064"
+      },
+      {
+        "id": "feb28-library-culture-0",
+        "libraryId": "feb28-library",
+        "type": "culture",
+        "name": "2.28민주운동기념회관",
+        "subCategory": "기념관",
+        "address": "대구 중구 2.28길 9",
+        "coords": {
+          "lat": 35.8583429503405,
+          "lng": 128.590380303936
+        },
+        "distanceMeters": 7,
+        "placeUrl": "http://place.map.kakao.com/24976939"
+      },
+      {
+        "id": "feb28-library-culture-1",
+        "libraryId": "feb28-library",
+        "type": "culture",
+        "name": "공간리상춘",
+        "subCategory": "전시관",
+        "address": "대구 중구 명덕로35길 26",
+        "coords": {
+          "lat": 35.8578782711809,
+          "lng": 128.588517942244
+        },
+        "distanceMeters": 168,
+        "placeUrl": "http://place.map.kakao.com/893379718"
+      },
+      {
+        "id": "feb28-library-culture-2",
+        "libraryId": "feb28-library",
+        "type": "culture",
+        "name": "대구아트센터",
+        "subCategory": "공연장,연극극장",
+        "address": "대구 남구 명덕로 164-2",
+        "coords": {
+          "lat": 35.856599013620425,
+          "lng": 128.58814925802753
+        },
+        "distanceMeters": 271,
+        "placeUrl": "http://place.map.kakao.com/1928181491"
+      },
+      {
+        "id": "feb28-library-culture-3",
+        "libraryId": "feb28-library",
+        "type": "culture",
+        "name": "갤러리 반달마루",
+        "subCategory": "전시관",
+        "address": "대구 중구 중앙대로 309",
+        "coords": {
+          "lat": 35.8608883491145,
+          "lng": 128.592242242546
+        },
+        "distanceMeters": 336,
+        "placeUrl": "http://place.map.kakao.com/613849165"
+      },
+      {
+        "id": "feb28-library-culture-4",
+        "libraryId": "feb28-library",
+        "type": "culture",
+        "name": "플뤼겔하우스",
+        "subCategory": "공연장,연극극장",
+        "address": "대구 남구 중앙대로 244-1",
+        "coords": {
+          "lat": 35.8551924388044,
+          "lng": 128.590932822574
+        },
+        "distanceMeters": 348,
+        "placeUrl": "http://place.map.kakao.com/1002519563"
+      },
+      {
+        "id": "feb28-library-culture-5",
+        "libraryId": "feb28-library",
+        "type": "culture",
+        "name": "스테이지엠",
+        "subCategory": "공연장,연극극장",
+        "address": "대구 남구 중앙대로49길 23",
+        "coords": {
+          "lat": 35.85528758251617,
+          "lng": 128.58919129350036
+        },
+        "distanceMeters": 348,
+        "placeUrl": "http://place.map.kakao.com/822216409"
+      }
+    ],
+    "wagle-kids": [
+      {
+        "id": "wagle-kids-restaurant-0",
+        "libraryId": "wagle-kids",
+        "type": "restaurant",
+        "name": "부자집식육점식당",
+        "subCategory": "육류,고기",
+        "address": "대구 동구 숙천로2길 3",
+        "coords": {
+          "lat": 35.876215455000924,
+          "lng": 128.75588997942572
+        },
+        "distanceMeters": 149,
+        "placeUrl": "http://place.map.kakao.com/1380636670"
+      },
+      {
+        "id": "wagle-kids-restaurant-1",
+        "libraryId": "wagle-kids",
+        "type": "restaurant",
+        "name": "안심농장직영식육식당",
+        "subCategory": "육류,고기",
+        "address": "대구 동구 대경로 1",
+        "coords": {
+          "lat": 35.87568570338985,
+          "lng": 128.75569781316077
+        },
+        "distanceMeters": 192,
+        "placeUrl": "http://place.map.kakao.com/10065017"
+      },
+      {
+        "id": "wagle-kids-restaurant-2",
+        "libraryId": "wagle-kids",
+        "type": "restaurant",
+        "name": "두손에담다",
+        "subCategory": "떡,한과",
+        "address": "대구 동구 메디밸리로12길 29",
+        "coords": {
+          "lat": 35.8759276803428,
+          "lng": 128.751654130275
+        },
+        "distanceMeters": 328,
+        "placeUrl": "http://place.map.kakao.com/115880029"
+      },
+      {
+        "id": "wagle-kids-restaurant-3",
+        "libraryId": "wagle-kids",
+        "type": "restaurant",
+        "name": "왕진짜장",
+        "subCategory": "중국요리",
+        "address": "경북 경산시 하양읍 대경로 35",
+        "coords": {
+          "lat": 35.8771142781436,
+          "lng": 128.758879368391
+        },
+        "distanceMeters": 361,
+        "placeUrl": "http://place.map.kakao.com/1494958351"
+      },
+      {
+        "id": "wagle-kids-restaurant-4",
+        "libraryId": "wagle-kids",
+        "type": "restaurant",
+        "name": "아띠맘마",
+        "subCategory": "떡,한과",
+        "address": "대구 동구 메디밸리로8길 4-17",
+        "coords": {
+          "lat": 35.8754776247352,
+          "lng": 128.750878042855
+        },
+        "distanceMeters": 413,
+        "placeUrl": "http://place.map.kakao.com/470452660"
+      },
+      {
+        "id": "wagle-kids-restaurant-5",
+        "libraryId": "wagle-kids",
+        "type": "restaurant",
+        "name": "복돼지부자막창",
+        "subCategory": "곱창,막창",
+        "address": "대구 동구 메디밸리로8길 4-12",
+        "coords": {
+          "lat": 35.875181980463,
+          "lng": 128.750388801558
+        },
+        "distanceMeters": 468,
+        "placeUrl": "http://place.map.kakao.com/493759967"
+      },
+      {
+        "id": "wagle-kids-cafe-0",
+        "libraryId": "wagle-kids",
+        "type": "cafe",
+        "name": "레이틀리92",
+        "subCategory": "카페",
+        "address": "대구 동구 초례로 6",
+        "coords": {
+          "lat": 35.8755459256553,
+          "lng": 128.75243515264
+        },
+        "distanceMeters": 293,
+        "placeUrl": "http://place.map.kakao.com/1609745020"
+      },
+      {
+        "id": "wagle-kids-cafe-1",
+        "libraryId": "wagle-kids",
+        "type": "cafe",
+        "name": "이크에크",
+        "subCategory": "카페",
+        "address": "대구 동구 메디밸리로10길 15",
+        "coords": {
+          "lat": 35.8762602451019,
+          "lng": 128.750723652411
+        },
+        "distanceMeters": 392,
+        "placeUrl": "http://place.map.kakao.com/1535039116"
+      },
+      {
+        "id": "wagle-kids-cafe-2",
+        "libraryId": "wagle-kids",
+        "type": "cafe",
+        "name": "카페 앤",
+        "subCategory": "카페",
+        "address": "대구 동구 메디밸리로8길 4-6",
+        "coords": {
+          "lat": 35.8751373433499,
+          "lng": 128.749927229234
+        },
+        "distanceMeters": 507,
+        "placeUrl": "http://place.map.kakao.com/347442955"
+      },
+      {
+        "id": "wagle-kids-cafe-3",
+        "libraryId": "wagle-kids",
+        "type": "cafe",
+        "name": "더리터 대구혁신점",
+        "subCategory": "더리터",
+        "address": "대구 동구 메디밸리로 19",
+        "coords": {
+          "lat": 35.87413134011648,
+          "lng": 128.7494566942052
+        },
+        "distanceMeters": 602,
+        "placeUrl": "http://place.map.kakao.com/1832066986"
+      },
+      {
+        "id": "wagle-kids-cafe-4",
+        "libraryId": "wagle-kids",
+        "type": "cafe",
+        "name": "카페봄봄 대림점",
+        "subCategory": "카페봄봄",
+        "address": "대구 동구 메디밸리로 5-25",
+        "coords": {
+          "lat": 35.87432088508769,
+          "lng": 128.7489404895785
+        },
+        "distanceMeters": 630,
+        "placeUrl": "http://place.map.kakao.com/1539740107"
+      },
+      {
+        "id": "wagle-kids-cafe-5",
+        "libraryId": "wagle-kids",
+        "type": "cafe",
+        "name": "카페게이트 대구혁신점",
+        "subCategory": "카페게이트",
+        "address": "대구 동구 메디밸리로 13",
+        "coords": {
+          "lat": 35.87384303176198,
+          "lng": 128.74926767090722
+        },
+        "distanceMeters": 635,
+        "placeUrl": "http://place.map.kakao.com/1768478468"
       }
     ]
   }

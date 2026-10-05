@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Mascot, type MascotPose } from './Mascot';
 import { fetchWeather, WEATHER_ICON, weatherEnabled, weatherMood, type Weather, type WeatherMood } from '@/api/weather';
 import { AIR_COLOR, airEnabled, airIsBad, fetchAir, stationName, type Air } from '@/api/air';
 import { useT, type MessageKey } from '@/i18n';
+import { MOCK_LIBRARIES } from '@/data/libraries.mock';
+import { useNow } from '@/hooks/useNow';
+import { isOpenNow, koreaTime } from '@/utils/openingHours';
 import { colors, radius, spacing, typography, themedStyles } from '@/theme';
 import type { Coordinates } from '@/types';
 
@@ -33,12 +36,20 @@ export function WeatherCard({
   coords: Coordinates;
   /** 어디 날씨인지 (도서관 이름이나 지역) */
   place: string;
-  /** 권하는 쪽으로 가기 — 맑은 날은 'nature', 그 밖엔 'indoor' */
-  onAction: (kind: 'nature' | 'indoor') => void;
+  /** 권하는 쪽으로 가기 — 맑은 날은 'nature', 그 밖엔 'indoor', 문 연 곳이 하나도 없으면(밤·휴관일) 'browse' */
+  onAction: (kind: 'nature' | 'indoor' | 'browse') => void;
 }) {
   const { t, lang } = useT();
   const [w, setW] = useState<Weather | null>(null);
   const [air, setAir] = useState<Air | null>(null);
+  /*
+   * 밤·휴관일 — 문 연 도서관이 하나도 없으면 "산책하기 좋은 날이에요" · "지금 문 연 도서관 보기" 가
+   * 맞지 않는다(누르면 빈 목록이 떴다). 그때는 내일 갈 곳을 고르자고 한다. 밤에는 해 대신 달 아이콘.
+   */
+  const now = useNow();
+  const anyOpen = useMemo(() => MOCK_LIBRARIES.some((l) => isOpenNow(l.hours, now) === true), [now]);
+  const hour = koreaTime(now).getHours();
+  const night = hour >= 19 || hour < 6;
   const key = `${coords.lat},${coords.lng}`;
 
   useEffect(() => {
@@ -59,14 +70,17 @@ export function WeatherCard({
   if (!w) return null;
   const mood = weatherMood(w);
   const badAir = airIsBad(air);
-  const kind = mood === 'nice' && !badAir ? 'nature' : 'indoor';
+  const kind = !anyOpen ? 'browse' : mood === 'nice' && !badAir ? 'nature' : 'indoor';
+  const icon =
+    night && w.condition === 'clear' ? 'moon' : night && w.condition === 'partly' ? 'cloudy-night' : WEATHER_ICON[w.condition];
+  const tip: MessageKey = badAir ? 'air.tip.bad' : !anyOpen ? 'weather.tip.closed' : (`weather.tip.${mood}` as MessageKey);
   const sky = t(`weather.${w.condition}` as MessageKey);
 
   return (
     <View style={styles.card}>
       <View style={{ flex: 1 }}>
         <View style={styles.top}>
-          <Ionicons name={WEATHER_ICON[w.condition]} size={18} color={colors.primary} />
+          <Ionicons name={icon} size={18} color={colors.primary} />
           <Text style={styles.now} numberOfLines={1}>
             {t('weather.now', { place, temp: w.temp !== undefined ? String(Math.round(w.temp)) : '–', sky })}
           </Text>
@@ -80,17 +94,17 @@ export function WeatherCard({
             })}
           </Text>
         ) : null}
-        <Text style={styles.tip}>{badAir ? t('air.tip.bad') : t(`weather.tip.${mood}` as MessageKey)}</Text>
+        <Text style={styles.tip}>{t(tip)}</Text>
         <Pressable
           onPress={() => onAction(kind)}
           style={({ pressed }) => [styles.action, pressed && { opacity: 0.7 }]}
           accessibilityRole="button"
         >
-          <Text style={styles.actionText}>{t(kind === 'nature' ? 'weather.goNature' : 'weather.goIndoor')}</Text>
+          <Text style={styles.actionText}>{t(kind === 'nature' ? 'weather.goNature' : kind === 'browse' ? 'weather.goBrowse' : 'weather.goIndoor')}</Text>
           <Ionicons name="chevron-forward" size={14} color={colors.primary} />
         </Pressable>
       </View>
-      <Mascot pose={badAir ? 'reading' : POSE[mood]} size={72} />
+      <Mascot pose={badAir || !anyOpen ? 'reading' : POSE[mood]} size={72} />
     </View>
   );
 }

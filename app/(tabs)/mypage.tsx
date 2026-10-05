@@ -39,6 +39,11 @@ export default function MyPageScreen() {
     .filter(Boolean) as string[];
 
   const confirmReset = () => {
+    // 웹의 Alert 는 아무 창도 띄우지 않는다(react-native-web) — 눌러도 반응이 없었다. 브라우저 확인 창으로
+    if (Platform.OS === 'web') {
+      if (typeof window !== 'undefined' && window.confirm(`${t('my.resetTitle')}\n${t('my.resetBody')}`)) resetAll();
+      return;
+    }
     Alert.alert(t('my.resetTitle'), t('my.resetBody'), [
       { text: t('my.cancel'), style: 'cancel' },
       { text: t('my.delete'), style: 'destructive', onPress: resetAll },
@@ -94,8 +99,8 @@ export default function MyPageScreen() {
 
         <View style={styles.card}>
           <Text style={styles.cardTitle}>{t('my.settings')}</Text>
-          <MenuRow icon="notifications-outline" label={t('my.notifications')} comingSoon />
-          <MenuRow icon="person-add-outline" label={t('my.login')} comingSoon />
+          {/* 알림·로그인 동기화 줄은 뺐다 — 누를 수 없는 "준비중" 메뉴는 앱 심사에서 미완성 앱으로 걸린다 (애플 2.1).
+              만들면 MenuRow 로 다시 넣는다 (comingSoon 은 그때 쓰도록 남겨 둔다) */}
           {/* 화면 모드 — 시스템 · 밝게 · 어둡게 */}
           <View style={styles.menuRow}>
             <Ionicons name="contrast-outline" size={18} color={colors.textSub} />
@@ -150,7 +155,7 @@ export default function MyPageScreen() {
  * npm run geocode / enrich / collect-nearby 를 돌린 뒤 여기서 확인한다.
  */
 /** 기기에 들어간 코드를 눈으로 확인하는 표시. 새 코드를 올릴 때마다 바꾼다 */
-const BUILD_MARK = '10-05 태블릿 검색창 크게';
+const BUILD_MARK = '10-06 앱 아이콘 길게 누르기 메뉴';
 
 function DataStatus() {
   const d = dataCompleteness();

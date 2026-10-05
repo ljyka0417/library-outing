@@ -1,0 +1,5 @@
+{
+  "ios": {
+    "NSLocationWhenInUseUsageDescription": "Your location is used to show nearby libraries on the map. It stays on your device and is never sent anywhere."
+  }
+}

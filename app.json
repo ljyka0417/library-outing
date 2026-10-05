@@ -78,10 +78,29 @@
       "output": "single",
       "favicon": "./assets/favicon.png"
     },
+    "//locales": "iOS 권한 안내창(위치)도 폰 언어로 — 앱은 4개 국어인데 이 창만 한국어로 떴다. 바꾸면 네이티브 다시 빌드(prebuild) 해야 한다.",
+    "locales": {
+      "ko": "./locales/ko.json",
+      "en": "./locales/en.json",
+      "ja": "./locales/ja.json",
+      "zh-Hans": "./locales/zh-Hans.json"
+    },
+    "//quickActions": "앱 아이콘을 길게 누르면 뜨는 메뉴(알라딘처럼). 아이폰은 SF Symbols 를 쓰고, 안드로이드 아이콘만 그림이 필요하다 (node scripts/make-quick-action-icons.mjs). 메뉴 글자·차례는 src/hooks/useQuickActions.ts",
     "plugins": [
       "expo-router",
       "expo-asset",
       "expo-screen-orientation",
+      [
+        "expo-quick-actions",
+        {
+          "androidIcons": {
+          "qa_search": { "foregroundImage": "./assets/quick-actions/search.png", "backgroundColor": "#E3F1ED" },
+          "qa_nearby": { "foregroundImage": "./assets/quick-actions/nearby.png", "backgroundColor": "#E3F1ED" },
+          "qa_course": { "foregroundImage": "./assets/quick-actions/course.png", "backgroundColor": "#E3F1ED" },
+          "qa_chat": { "foregroundImage": "./assets/quick-actions/chat.png", "backgroundColor": "#E3F1ED" }
+          }
+        }
+      ],
       [
         "expo-location",
         {

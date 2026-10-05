@@ -57,6 +57,7 @@
     "expo-glass-effect": "~57.0.2",
     "expo-linking": "~57.0.9",
     "expo-location": "~57.0.20",
+    "expo-quick-actions": "^6.0.2",
     "expo-router": "~57.0.19",
     "expo-screen-orientation": "~57.0.2",
     "expo-splash-screen": "~57.0.8",
@@ -74,6 +75,7 @@
     "zustand": "^5.0.2"
   },
   "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
     "@types/react": "~19.2.4",
     "eas-cli": "^23.2.0",
     "pngjs": "^7.0.0",

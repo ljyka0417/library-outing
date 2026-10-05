@@ -270,7 +270,11 @@ export default function ChatScreen() {
       <View ref={kavRef} style={{ flex: 1 }} onLayout={measureKav} collapsable={false}>
       <KeyboardAvoidingView
         style={{ flex: 1 }}
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        /*
+         * 안드로이드도 padding. 화면 끝까지 그리는(edge-to-edge) 지금 안드로이드는 키보드가 올라와도
+         * 창을 줄여 주지 않아서(예전 adjustResize), 입력칸이 키보드 밑에 통째로 깔렸다.
+         */
+        behavior={Platform.OS === 'web' ? undefined : 'padding'}
         keyboardVerticalOffset={kavTop}
       >
         <FlatList

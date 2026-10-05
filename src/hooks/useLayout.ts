@@ -34,6 +34,18 @@ import { useWindowDimensions } from 'react-native';
  * 폰과 섞이지 않는다.
  */
 
+/**
+ * 띄우는 창(Modal)이 허락하는 화면 방향. iOS 의 Modal 은 따로 말하지 않으면 **세로만** 허락해서,
+ * 가로로 든 아이패드에서 창을 열면 화면이 세로로 돌아가거나 창이 옆으로 누워 뜰 수 있다.
+ * 아이폰은 Info.plist 가 세로로만 묶어 두었으니 여기서 넓혀도 그대로 세로다.
+ */
+export const MODAL_ORIENTATIONS: ('portrait' | 'portrait-upside-down' | 'landscape-left' | 'landscape-right')[] = [
+  'portrait',
+  'portrait-upside-down',
+  'landscape-left',
+  'landscape-right',
+];
+
 /** 이 폭부터 태블릿 배치 */
 const TABLET = 600;
 /** 이 폭 미만이면 좁은 폰 (아이폰 SE 1세대, 옛 갤럭시) */

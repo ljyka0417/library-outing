@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { MODAL_ORIENTATIONS } from '@/hooks/useLayout';
 import { LANGUAGES, useT } from '@/i18n';
 import { Flag } from './Flag';
 import { useAppStore } from '@/store/useAppStore';
@@ -40,6 +41,7 @@ export function LanguageButton() {
         transparent
         animationType="fade"
         onRequestClose={() => setOpen(false)}
+        supportedOrientations={MODAL_ORIENTATIONS}
       >
         {/* 바깥을 눌러도 닫힌다 */}
         <Pressable style={styles.backdrop} onPress={() => setOpen(false)}>
